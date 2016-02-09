@@ -584,30 +584,33 @@ def parse_show_ip_bgp(raw_result):
     :param str raw_result: vtysh raw result string.
     :rtype: dict
     :return: The parsed result of the show ip bgp command in a \
-        list of dictionaries of the form:
+        dictionary of the form:
 
      ::
 
-        [
-            {
-                'route_status': '*>',
-                'network': '10.2.0.2/32',
-                'next_hop': '20.1.1.1',
-                'metric': 0,
-                'locprf': 0,
-                'weight': 0,
-                'path': '65000 64100 i'
-            },
-            {
-                'route_status': '*',
-                'network': '10.2.0.2/32',
-                'next_hop': '20.1.1.10',
-                'metric': 0,
-                'locprf': 0,
-                'weight': 0,
-                'path': '65000 64100 i'
-            }
-        ]
+        {
+            'total_entries': 2,
+            'routes': [
+                {
+                    'route_status': '*>',
+                    'network': '10.2.0.2/32',
+                    'next_hop': '20.1.1.1',
+                    'metric': 0,
+                    'locprf': 0,
+                    'weight': 0,
+                    'path': '65000 64100 i'
+                },
+                {
+                    'route_status': '*',
+                    'network': '10.2.0.2/32',
+                    'next_hop': '20.1.1.10',
+                    'metric': 0,
+                    'locprf': 0,
+                    'weight': 0,
+                    'path': '65000 64100 i'
+                }
+            ]
+        }
     """
 
     routes_re = (
@@ -616,7 +619,12 @@ def parse_show_ip_bgp(raw_result):
         r'(?P<weight>\d+)\s+(?P<path>.*)\w?\s*'
     )
 
-    result = []
+    total_entries_re = (
+        r'Total number of entries (?P<total_entries>\d+)'
+    )
+
+    result = {}
+    result['routes'] = []
     for line in raw_result.splitlines():
         re_result = re.search(routes_re, line)
         if re_result:
@@ -624,7 +632,12 @@ def parse_show_ip_bgp(raw_result):
             for key, value in partial.items():
                 if value and value.isdigit():
                     partial[key] = int(value)
-            result.append(partial)
+            result['routes'].append(partial)
+
+        re_result = re.search(total_entries_re, line)
+        if re_result:
+            partial = re_result.groupdict()
+            result['total_entries'] = int(partial['total_entries'])
 
     return result
 

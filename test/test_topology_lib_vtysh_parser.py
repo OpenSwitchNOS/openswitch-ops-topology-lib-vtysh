@@ -580,62 +580,66 @@ Total number of entries 6
 
     result = parse_show_ip_bgp(raw_result)
 
-    expected = [
-        {
-            'path': 'i',
-            'metric': 0,
-            'weight': 32768,
-            'network': '10.1.0.10/32',
-            'locprf': 0,
-            'next_hop': '0.0.0.0',
-            'route_status': '*>'
-        },
-        {
-            'path': 'i',
-            'metric': 0,
-            'weight': 32768,
-            'network': '10.1.0.14/32',
-            'locprf': 0,
-            'next_hop': '0.0.0.0',
-            'route_status': '*>'
-        },
-        {
-            'path': '65000 64100 i',
-            'metric': 0,
-            'weight': 0,
-            'network': '10.2.0.10/32',
-            'locprf': 0,
-            'next_hop': '20.1.1.1',
-            'route_status': '*>'
-        },
-        {
-            'path': '65000 64100 i',
-            'metric': 0,
-            'weight': 0,
-            'network': '10.2.0.10/32',
-            'locprf': 0,
-            'next_hop': '20.1.1.10',
-            'route_status': '*'
-        },
-        {
-            'path': '65000 64100 i',
-            'metric': 0,
-            'weight': 0,
-            'network': '10.2.0.14/32',
-            'locprf': 0,
-            'next_hop': '20.1.1.1',
-            'route_status': '*>'
-        },
-        {
-            'path': '65000 64100 i',
-            'metric': 0,
-            'weight': 0,
-            'network': '10.2.0.14/32',
-            'locprf': 0,
-            'next_hop': '20.1.1.10',
-            'route_status': '*'
-        }
-    ]
+    expected = {
+        'total_entries': 6,
+        'routes': [
+            {
+                'path': 'i',
+                'metric': 0,
+                'weight': 32768,
+                'network': '10.1.0.10/32',
+                'locprf': 0,
+                'next_hop': '0.0.0.0',
+                'route_status': '*>'
+            },
+
+            {
+                'path': 'i',
+                'metric': 0,
+                'weight': 32768,
+                'network': '10.1.0.14/32',
+                'locprf': 0,
+                'next_hop': '0.0.0.0',
+                'route_status': '*>'
+            },
+            {
+                'path': '65000 64100 i',
+                'metric': 0,
+                'weight': 0,
+                'network': '10.2.0.10/32',
+                'locprf': 0,
+                'next_hop': '20.1.1.1',
+                'route_status': '*>'
+            },
+            {
+                'path': '65000 64100 i',
+                'metric': 0,
+                'weight': 0,
+                'network': '10.2.0.10/32',
+                'locprf': 0,
+                'next_hop': '20.1.1.10',
+                'route_status': '*'
+            },
+            {
+                'path': '65000 64100 i',
+                'metric': 0,
+                'weight': 0,
+                'network': '10.2.0.14/32',
+                'locprf': 0,
+                'next_hop': '20.1.1.1',
+                'route_status': '*>'
+            },
+            {
+                'path': '65000 64100 i',
+                'metric': 0,
+                'weight': 0,
+                'network': '10.2.0.14/32',
+                'locprf': 0,
+                'next_hop': '20.1.1.10',
+                'route_status': '*'
+            }
+        ]
+    }
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff
