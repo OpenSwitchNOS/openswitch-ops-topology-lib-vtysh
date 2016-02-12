@@ -701,11 +701,82 @@ def parse_show_ip_bgp(raw_result):
     return result
 
 
+def parse_show_sflow(raw_result):
+    """
+    Parse the 'show sflow' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show sflow command in a \
+       dictionary of the form:
+
+     ::
+
+            {
+                '1': { 'sflow': 'enabled',
+                       'collector_ip_port_vrf': 'NOT_SET',
+                       'agent_interface': 'NOT_SET',
+                       'agent_address_family': 'NOT_SET',
+                       'sampling_rate': '4096'
+                       'polling_interval': '30'
+                       'header_size': '128'
+                       'max_datagram_size': '1400'
+                       'number_of_samples': '0'
+                     },
+                '2': {
+                       'sflow': 'enabled',
+                       'collector_ip_port_vrf': '',
+                       'agent_interface': '',
+                       'agent_address_family': '',
+                       'sampling_rate': '4096'
+                       'polling_interval': '30'
+                       'header_size': '128'
+                       'max_datagram_size': '1400'
+                       'number_of_samples': '0'
+                      },
+            }
+    """
+
+    sflow_info_re = (
+         r'\s*sFlow\s*Configuration\s*'
+         r'\s*-----------------------------------------\s*'
+         r'\s*sFlow\s*(?P<sflow>\S+)\s*'
+         r'Collector\sIP/Port/Vrf\s*(?P<collector>.+)'
+         r'Agent\sInterface\s*(?P<agent_interface>\d+)\s*'
+         r'Agent\sAddress\sFamily\s*(?P<address_family>ipv4|ipv6|NOT SET)\s*'
+         r'Sampling\sRate\s*(?P<sampling_rate>NOT SET|\d+)\s*'
+         r'Polling\sInterval\s*(?P<polling_interval>\d+)\s*'
+         r'Header\sSize\s*(?P<header_size>\d+)\s*'
+         r'Max\sDatagram\sSize\s*(?P<max_datagram_size>\d+)\s*'
+         r'Number\sof\sSamples\s*(?P<number_of_samples>\d+)\s*'
+    )
+
+    re_result = re.match(sflow_info_re, raw_result, re.DOTALL)
+    assert re_result
+
+    result = re_result.groupdict()
+    for key, value in result.items():
+        if value and value.isdigit():
+            result[key] = int(value)
+    if str(result['collector']) != 'NOT SET':
+        count = result['collector'].count('\n')
+        result['collector'] = \
+            result['collector'].split('\n', count-1)
+        result['collector'] = \
+            [x.strip(' \n') for x in result['collector']]
+        for i in range(0, count):
+            result['collector'][i] = \
+                result['collector'][i].split('/', 2)
+            result['collector'][i] = \
+                dict(zip(['ip', 'port', 'vrf'], result['collector'][i]))
+
+    return result
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
     'parse_show_lacp_configuration', 'parse_show_lldp_neighbor_info',
     'parse_show_lldp_statistics', 'parse_show_ip_bgp_summary',
     'parse_show_ip_bgp_neighbors', 'parse_show_ip_bgp',
-    'parse_show_udld_interface'
+    'parse_show_udld_interface', 'parse_show_sflow'
 ]

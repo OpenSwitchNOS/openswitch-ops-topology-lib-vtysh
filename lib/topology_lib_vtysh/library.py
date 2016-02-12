@@ -443,7 +443,7 @@ class Configure(ContextManager):
         assert not result
 
     def sflow_agent_interface(
-            self, portlbl):
+            self, portlbl, address_family=''):
         """
         Set sFlow agent interface
 
@@ -451,38 +451,16 @@ class Configure(ContextManager):
 
         ::
 
-            # sflow agent-interface {port}
+            # sflow agent-interface {port} {address_family}
 
         :param portlbl: Valid L3 interface name.
+        :param address_family: Optional, IPv4 or IPv6 (Default : IPv4).
+
         """
         port = self.enode.ports.get(portlbl, portlbl)
 
         cmd = (
-            'sflow agent-interface {port}'
-        )
-        result = self.enode(cmd.format(**locals()), shell='vtysh')
-
-        assert not result
-
-    def sflow_agent_interface_agent_address_family(
-            self, portlbl, address_family):
-        """
-        Set sFlow agent interface and address family
-
-        This function runs the following vtysh command:
-
-        ::
-
-            # sflow agent-interface {port} agent-address-family {address_family}  # noqa
-
-        :param portlbl: Valid L3 interface name.
-        :param address_family: IPv4 or IPv6 (Default : IPv4).
-        """
-        port = self.enode.ports.get(portlbl, portlbl)
-
-        cmd = (
-            'sflow agent-interface {port} agent-address-family '
-            '{address_family}'
+            'sflow agent-interface {port} {address_family}'
         )
         result = self.enode(cmd.format(**locals()), shell='vtysh')
 
@@ -3770,6 +3748,29 @@ def clear_udld_statistics_interface(
     assert not result
 
 
+def show_sflow(
+        enode):
+    """
+    Show sflow information
+
+    This function runs the following vtysh command:
+
+    ::
+
+         # show sflow
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_sflow`
+    """
+
+    cmd = (
+        'show sflow'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_show_sflow(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -3790,6 +3791,7 @@ __all__ = [
     'show_ip_bgp_summary',
     'show_ip_bgp_neighbors',
     'show_ip_bgp',
+    'show_sflow',
     'show_udld_interface',
     'clear_udld_statistics',
     'clear_udld_statistics_interface'
