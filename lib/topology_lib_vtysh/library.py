@@ -3490,7 +3490,7 @@ def show_interface(
 
 
 def show_vlan(
-        enode):
+        enode, vlanid=''):
     """
     Show VLAN configuration.
 
@@ -3498,14 +3498,15 @@ def show_vlan(
 
     ::
 
-        # show vlan
+        # show vlan {vlanid}
 
+    :param vlanid: Vlan ID number.
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_vlan`
     """
 
     cmd = (
-        'show vlan'
+        'show vlan {vlanid}'
     )
     result = enode(cmd.format(**locals()), shell='vtysh')
 
