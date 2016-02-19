@@ -3743,6 +3743,29 @@ def show_ip_bgp(
     return parse_show_ip_bgp(result)
 
 
+def show_ip_route(
+        enode):
+    """
+    Show Routing Table.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip route
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_route`
+    """
+
+    cmd = (
+        'show ip route'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_show_ip_route(result)
+
+
 def show_udld_interface(
         enode, portlbl):
     """
@@ -3905,6 +3928,7 @@ __all__ = [
     'show_ip_bgp_summary',
     'show_ip_bgp_neighbors',
     'show_ip_bgp',
+    'show_ip_route',
     'show_udld_interface',
     'show_rib',
     'clear_udld_statistics',

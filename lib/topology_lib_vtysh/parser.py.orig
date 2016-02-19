@@ -1032,6 +1032,8 @@ def parse_show_rib(raw_result):
     return result
 
 
+<<<<<<< HEAD
+=======
 def parse_show_ip_route(raw_result):
     """
     Parse the 'show ip route' command raw output.
@@ -1139,6 +1141,7 @@ def parse_show_ip_route(raw_result):
     return result
 
 
+>>>>>>> Syncing patch with master to avoid conflict
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
@@ -1146,6 +1149,10 @@ __all__ = [
     'parse_show_lldp_statistics', 'parse_show_ip_bgp_summary',
     'parse_show_ip_bgp_neighbors', 'parse_show_ip_bgp',
     'parse_show_udld_interface', 'parse_ping_repetitions',
+<<<<<<< HEAD
+    'parse_ping6_repetitions', 'parse_show_rib'
+=======
     'parse_ping6_repetitions', 'parse_show_rib', 'parse_show_ip_route'
+>>>>>>> Syncing patch with master to avoid conflict
 
 ]
