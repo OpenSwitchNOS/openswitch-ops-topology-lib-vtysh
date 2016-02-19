@@ -1032,6 +1032,176 @@ def parse_show_rib(raw_result):
     return result
 
 
+def parse_show_running_config(raw_result):
+    """
+    Parse the 'show running-config' command raw output.
+    This parser currently returns only BGP section of the show-running
+    command, please review the doc/developer.rst file to get more information
+    on adding new sections.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show vlan command in a
+              dictionary of the form:
+
+     ::
+
+         {
+            'bgp':
+                {'64001':
+                    {'networks': ['10.240.1.2/32',
+                                '10.240.10.2/32',
+                                '10.240.9.2/32'],
+                    'router_id': '2.0.0.1'},
+                '64002':
+                    {'networks': ['11.240.1.2/32',
+                                '11.240.10.2/32',
+                                '11.240.9.2/32'],
+                    'router_id': '3.0.0.1'}
+                }
+        }
+    """
+
+    result = {}
+
+    # Only the bgp section is captured
+    bgp_section_re = r'router bgp.*(?=!)'
+    re_bgp_section = re.findall(bgp_section_re, raw_result, re.DOTALL)
+    as_number_re = r'router bgp\s+(\d+)'
+    router_id_re = r'\s+bgp router-id\s+(.*)'
+    network_re = r'\s+network\s+(.*)'
+    re_as_number = None
+    result['bgp'] = {}
+    if re_bgp_section:
+        for line in re_bgp_section[0].splitlines():
+            re_result = re.match(as_number_re, line)
+            if re_result:
+                re_as_number = re_result.group(1)
+                result['bgp'][re_as_number] = {}
+
+            re_result = re.match(router_id_re, line)
+            if re_result:
+                result['bgp'][re_as_number]['router_id'] = re_result.group(1)
+
+            re_result = re.match(network_re, line)
+            if re_result:
+                network = re_result.group(1)
+                if 'networks' not in result['bgp'][re_as_number].keys():
+                    result['bgp'][re_as_number]['networks'] = []
+                    result['bgp'][re_as_number]['networks'].append(network)
+                else:
+                    result['bgp'][re_as_number]['networks'].append(network)
+
+    return result
+
+
+def parse_show_ip_route(raw_result):
+    """
+    Parse the 'show ip route' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: list
+    :return: The parsed result of the show ip route command in a \
+        list of dictionaries of the form:
+
+     ::
+
+        [
+            {
+                'id': '140.0.0.0',
+                'prefix': '30',
+                'next_hops': [
+                    {
+                        'via': '10.10.0.2',
+                        'distance': '20',
+                        'from': 'bgp',
+                        'metric': '0'
+                    }
+                ]
+            },
+            {
+                'id': '10.10.0.0',
+                'prefix': '24',
+                'next_hops': [
+                    {
+                        'via': '1',
+                        'distance': '0',
+                        'from': 'connected',
+                        'metric': '0'
+                    }
+                ]
+            },
+            {
+                'id': '193.0.0.2',
+                'prefix': '32',
+                'next_hops': [
+                    {
+                        'via': '50.0.0.2',
+                        'distance': '1',
+                        'from': 'static',
+                        'metric': '0'
+                    },
+                    {
+                        'via': '56.0.0.3',
+                        'distance': '1',
+                        'from': 'static',
+                        'metric': '0'
+                    }
+                ]
+            }
+        ]
+    """
+
+    ipv4_network_re = (
+        r'(?P<network>\d+\.\d+\.\d+\.\d+)/(?P<prefix>\d+)'
+    )
+
+    ipv4_nexthop_re = (
+        r'via\s+(?P<via>(?:\d+\.\d+\.\d+\.\d+|\d+)),\s+'
+        r'\[(?P<distance>\d+)/(?P<metric>\d+)\],\s+(?P<from>\S+)'
+    )
+
+    result = []
+
+    lines = raw_result.splitlines()
+    line_index = 0
+
+    while line_index < len(lines):
+        re_result = re.search(ipv4_network_re, lines[line_index])
+
+        if re_result:
+            network = {}
+            partial = re_result.groupdict()
+
+            network['id'] = partial['network']
+            network['prefix'] = partial['prefix']
+
+            network['next_hops'] = []
+            check_for_next_hops = True
+
+            line_index += 1
+
+            while (check_for_next_hops and line_index < len(lines)):
+                re_result = re.search(
+                    ipv4_nexthop_re,
+                    lines[line_index]
+                    )
+
+                if re_result:
+                    partial = re_result.groupdict()
+
+                    network['next_hops'].append(partial)
+                    line_index += 1
+                else:
+                    check_for_next_hops = False
+
+            result.append(network)
+        else:
+            line_index += 1
+
+    return result
+
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
@@ -1039,6 +1209,6 @@ __all__ = [
     'parse_show_lldp_statistics', 'parse_show_ip_bgp_summary',
     'parse_show_ip_bgp_neighbors', 'parse_show_ip_bgp',
     'parse_show_udld_interface', 'parse_ping_repetitions',
-    'parse_ping6_repetitions', 'parse_show_rib'
-
+    'parse_ping6_repetitions', 'parse_show_rib', 'parse_show_ip_route',
+    'parse_show_running_config'
 ]
