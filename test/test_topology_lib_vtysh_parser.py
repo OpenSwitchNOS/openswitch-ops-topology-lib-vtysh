@@ -34,7 +34,8 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_ip_bgp_neighbors,
                                        parse_show_ip_bgp,
                                        parse_ping_repetitions,
-                                       parse_ping6_repetitions
+                                       parse_ping6_repetitions,
+                                       parse_show_ip_ecmp
                                        )
 
 
@@ -687,6 +688,36 @@ round-trip min/avg/max/stddev = 0.411/0.411/0.411/0.000 ms
         'received': 1,
         'errors': 0,
         'packet_loss': 0
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_ip_ecmp():
+    raw_result = """\
+ECMP Configuration
+---------------------
+
+ECMP Status        : Enabled
+Resilient Hashing  : Disabled
+
+ECMP Load Balancing by
+------------------------
+Source IP          : Enabled
+Destination IP     : Disabled
+Source Port        : Enabled
+Destination Port   : Disabled
+"""
+    result = parse_show_ip_ecmp(raw_result)
+
+    expected = {
+        'global_status': True,
+        'resilient': False,
+        'src_ip': True,
+        'dest_ip': False,
+        'src_port': True,
+        'dest_port': False
     }
 
     ddiff = DeepDiff(result, expected)
