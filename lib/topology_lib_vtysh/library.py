@@ -2911,6 +2911,53 @@ class ConfigRouterBgp(ContextManager):
 
         assert not result
 
+    def neighbor_advertisement_interval(
+            self, ip, interval):
+        """
+        Sets the advertisement interval for route updates for a specified
+        neighbor with an IPv4 or IPv6 address
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # neighbor {ip} advertisement-interval {interval}
+
+        :param ip: <A.B.C.D> Neighbor IPv4 or IPv6 address
+        :param interval: <0-600> The time interval for sending BGP routing
+            updates in seconds
+        """
+
+        cmd = (
+            'neighbor {ip} advertisement-interval {interval}'
+        )
+        result = self.enode(cmd.format(**locals()), shell='vtysh')
+
+        assert not result
+
+    def no_neighbor_advertisement_interval(
+            self, ip, interval):
+        """
+        Deletes the advertisement intervalfor a configured BGP peer
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no neighbor {ip} advertisement-interval {interval}
+
+        :param ip: <A.B.C.D> Neighbor IPv4 or IPv6 address
+        :param interval: <0-600> The time interval for sending BGP routing
+            updates in seconds
+        """
+
+        cmd = (
+            'no neighbor {ip} advertisement-interval {interval}'
+        )
+        result = self.enode(cmd.format(**locals()), shell='vtysh')
+
+        assert not result
+
     def neighbor_remote_as(
             self, ip, asn):
         """

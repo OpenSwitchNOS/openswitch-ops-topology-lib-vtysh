@@ -1475,6 +1475,39 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
+                'command': 'neighbor {ip} advertisement-interval {interval}',
+                'doc': 'Sets the advertisement interval for route updates '
+                       'for a specified neighbor with an IPv4 or IPv6 address',
+                'arguments': [
+                    {
+                        'name': 'ip',
+                        'doc': '<A.B.C.D> Neighbor IPv4 or IPv6 address',
+                    },
+                    {
+                        'name': 'interval',
+                        'doc': '<0-600> The time interval for sending '
+                               'BGP routing updates in seconds',
+                    },
+                ],
+            },
+            {
+                'command': 'no neighbor {ip} advertisement-interval'
+                           ' {interval}',
+                'doc': 'Deletes the advertisement interval'
+                       'for a configured BGP peer',
+                'arguments': [
+                    {
+                        'name': 'ip',
+                        'doc': '<A.B.C.D> Neighbor IPv4 or IPv6 address',
+                    },
+                    {
+                        'name': 'interval',
+                        'doc': '<0-600> The time interval for sending '
+                               'BGP routing updates in seconds',
+                    },
+                ],
+            },
+            {
                 'command': 'neighbor {ip} remote-as {asn}',
                 'doc': 'Configures a BGP neighbor',
                 'arguments': [
