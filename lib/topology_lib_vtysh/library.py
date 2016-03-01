@@ -3257,6 +3257,55 @@ class ConfigRouterBgp(ContextManager):
 
         assert not result
 
+    def neighbor_prefix_list(
+            self, peer, prefix_name, filter_direction=''):
+        """
+        Applies a prefix-list to the neighbor to filter updates to and from the
+        neighbor
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # neighbor {peer} prefix-list {prefix_name} {filter_direction}
+
+        :param peer: <A.B.C.D|X:X::X:X|WORD> peer IPv4/IPv6 address or
+            neighbor tag
+        :param prefix_name: <WORD> The name of a prefix list
+        :param filter_direction: <in|out> Filters incoming/outgoing routes
+        """
+
+        cmd = (
+            'neighbor {peer} prefix-list {prefix_name} {filter_direction}'
+        )
+        result = self.enode(cmd.format(**locals()), shell='vtysh')
+
+        assert not result
+
+    def no_neighbor_prefix_list(
+            self, peer, prefix_name, filter_direction=''):
+        """
+        Remove a prefix-list filter from the neighbor
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no neighbor {peer} prefix-list {prefix_name} {filter_direction}
+
+        :param peer: <A.B.C.D|X:X::X:X|WORD> peer IPv4/IPv6 address or
+            neighbor tag
+        :param prefix_name: <WORD> The name of a prefix list
+        :param filter_direction: <in|out> Filters incoming/outgoing routes
+        """
+
+        cmd = (
+            'no neighbor {peer} prefix-list {prefix_name} {filter_direction}'
+        )
+        result = self.enode(cmd.format(**locals()), shell='vtysh')
+
+        assert not result
+
     def neighbor_description(
             self, ip, text):
         """
@@ -4080,7 +4129,11 @@ def show_rib(
 def show_ip_ecmp(
         enode):
     """
-    ECMP Configuration
+    Show ECMP Configuration
+
+    This function runs the following vtysh command:
+
+    ::
 
         # show ip ecmp
 
