@@ -451,16 +451,15 @@ class Configure(ContextManager):
 
         ::
 
-            # sflow agent-interface {port} {address_family}
+            # sflow agent-interface {portlbl} {address_family}
 
         :param portlbl: Valid L3 interface name.
         :param address_family: Optional, IPv4 or IPv6 (Default : IPv4).
-
         """
         port = self.enode.ports.get(portlbl, portlbl)
 
         cmd = (
-            'sflow agent-interface {port} {address_family}'
+            'sflow agent-interface {portlbl} {address_family}'
         )
         result = self.enode(cmd.format(**locals()), shell='vtysh')
 
@@ -3679,6 +3678,29 @@ def show_ip_bgp(
     return parse_show_ip_bgp(result)
 
 
+def show_sflow(
+        enode):
+    """
+    Show sFlow information.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show sflow
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_sflow`
+    """
+
+    cmd = (
+        'show sflow'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_show_sflow(result)
+
+
 def show_udld_interface(
         enode, portlbl):
     """
@@ -3748,27 +3770,54 @@ def clear_udld_statistics_interface(
     assert not result
 
 
-def show_sflow(
-        enode):
+def ping_repetitions(
+        enode, destination, count):
     """
-    Show sflow information
+    Send IPv4 ping
 
     This function runs the following vtysh command:
 
     ::
 
-         # show sflow
+        # ping {destination} repetitions {count}
 
+    :param destination: <A.B.C.D> IPv4 address.
+    :param count: Number of packets to send.
     :return: A dictionary as returned by
-     :func:`topology_lib_vtysh.parser.parse_show_sflow`
+     :func:`topology_lib_vtysh.parser.parse_ping_repetitions`
     """
 
     cmd = (
-        'show sflow'
+        'ping {destination} repetitions {count}'
     )
     result = enode(cmd.format(**locals()), shell='vtysh')
 
-    return parse_show_sflow(result)
+    return parse_ping_repetitions(result)
+
+
+def ping6_repetitions(
+        enode, destination, count):
+    """
+    Send IPv6 ping
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # ping6 {destination} repetitions {count}
+
+    :param destination: <X:X::X:X> IPv6 address.
+    :param count: Number of packets to send.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_ping6_repetitions`
+    """
+
+    cmd = (
+        'ping6 {destination} repetitions {count}'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_ping6_repetitions(result)
 
 
 __all__ = [
@@ -3794,5 +3843,7 @@ __all__ = [
     'show_sflow',
     'show_udld_interface',
     'clear_udld_statistics',
-    'clear_udld_statistics_interface'
+    'clear_udld_statistics_interface',
+    'ping_repetitions',
+    'ping6_repetitions'
 ]

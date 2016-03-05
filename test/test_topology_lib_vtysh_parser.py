@@ -32,7 +32,10 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_lldp_statistics,
                                        parse_show_ip_bgp_summary,
                                        parse_show_ip_bgp_neighbors,
-                                       parse_show_ip_bgp
+                                       parse_show_ip_bgp,
+                                       parse_ping_repetitions,
+                                       parse_ping6_repetitions,
+                                       parse_show_sflow
                                        )
 
 
@@ -642,6 +645,126 @@ Total number of entries 6
             'route_status': '*'
         }
     ]
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_ping_repetitions():
+    raw_result = """\
+PING 10.0.0.9 (10.0.0.9): 100 data bytes
+108 bytes from 10.0.0.9: icmp_seq=0 ttl=64 time=1.040 ms
+--- 10.0.0.9 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 1.040/1.040/1.040/0.000 ms
+    """
+
+    result = parse_ping_repetitions(raw_result)
+
+    expected = {
+        'transmitted': 1,
+        'received': 1,
+        'errors': 0,
+        'packet_loss': 0
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_ping6_repetitions():
+    raw_result = """\
+PING 2000::2 (2000::2): 100 data bytes
+108 bytes from 2000::2: icmp_seq=0 ttl=64 time=0.411 ms
+--- 2000::2 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 0.411/0.411/0.411/0.000 ms
+    """
+
+    result = parse_ping6_repetitions(raw_result)
+
+    expected = {
+        'transmitted': 1,
+        'received': 1,
+        'errors': 0,
+        'packet_loss': 0
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_sflow():
+    raw_result = """\
+sFlow Configuration
+-----------------------------------------
+sFlow                         enabled
+Collector IP/Port/Vrf         10.10.11.2/6343/vrf_default
+Agent Interface               2
+Agent Address Family          ipv4
+Sampling Rate                 20
+Polling Interval              30
+Header Size                   128
+Max Datagram Size             1400
+Number of Samples             10
+    """
+
+    result = parse_show_sflow(raw_result)
+
+    expected = {
+        'sflow': 'enabled',
+        'collector': [
+            {
+                'ip': '10.10.11.2',
+                'port': '6343',
+                'vrf': 'vrf_default'
+            }
+        ],
+        'agent_interface': '2',
+        'agent_address_family': 'ipv4',
+        'sampling_rate': 20,
+        'polling_interval': 30,
+        'header_size': 128,
+        'max_datagram_size': 1400,
+        'number_of_samples': 10
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+    raw_result = """\
+sFlow Configuration
+-----------------------------------------
+sFlow                         disabled
+Collector IP/Port/Vrf         10.10.11.2/6344/vrf_mgmt
+Agent Interface               NOT SET
+Agent Address Family          ipv6
+Sampling Rate                 20
+Polling Interval              30
+Header Size                   128
+Max Datagram Size             1400
+Number of Samples             20
+    """
+
+    result = parse_show_sflow(raw_result)
+
+    expected = {
+        'sflow': 'disabled',
+        'collector': [
+            {
+                'ip': '10.10.11.2',
+                'port': '6344',
+                'vrf': 'vrf_mgmt'
+            }
+        ],
+        'agent_interface': 'NOT SET',
+        'agent_address_family': 'ipv6',
+        'sampling_rate': 20,
+        'polling_interval': 30,
+        'header_size': 128,
+        'max_datagram_size': 1400,
+        'number_of_samples': 20
+    }
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff
