@@ -713,27 +713,26 @@ def parse_show_sflow(raw_result):
      ::
 
             {
-                '1': { 'sflow': 'enabled',
-                       'collector_ip_port_vrf': 'NOT_SET',
-                       'agent_interface': 'NOT_SET',
-                       'agent_address_family': 'NOT_SET',
-                       'sampling_rate': '4096'
-                       'polling_interval': '30'
-                       'header_size': '128'
-                       'max_datagram_size': '1400'
-                       'number_of_samples': '0'
-                     },
-                '2': {
-                       'sflow': 'enabled',
-                       'collector_ip_port_vrf': '',
-                       'agent_interface': '',
-                       'agent_address_family': '',
-                       'sampling_rate': '4096'
-                       'polling_interval': '30'
-                       'header_size': '128'
-                       'max_datagram_size': '1400'
-                       'number_of_samples': '0'
-                      },
+                'sflow': 'enabled',
+                'collector':[
+                    {
+                        'ip': '10.10.11.2',
+                        'port': '6343',
+                        'vrf': 'vrf_default'
+                    },
+                    {
+                        'ip': '10.10.12.2',
+                        'port': '6344',
+                        'vrf': 'vrf_default'
+                    }
+                ],
+                'agent_interface': '3',
+                'agent_address_family': 'ipv4',
+                'sampling_rate': 20,
+                'polling_interval': 30,
+                'header_size': 128,
+                'max_datagram_size': 1400,
+                'number_of_samples': 10
             }
     """
 
@@ -742,9 +741,9 @@ def parse_show_sflow(raw_result):
          r'\s*-----------------------------------------\s*'
          r'\s*sFlow\s*(?P<sflow>\S+)\s*'
          r'Collector\sIP/Port/Vrf\s*(?P<collector>.+)'
-         r'Agent\sInterface\s*(?P<agent_interface>\d+)\s*'
-         r'Agent\sAddress\sFamily\s*(?P<address_family>ipv4|ipv6|NOT SET)\s*'
-         r'Sampling\sRate\s*(?P<sampling_rate>NOT SET|\d+)\s*'
+         r'Agent\sInterface\s*(?P<agent_interface>.+)'
+         r'Agent\sAddress\sFamily\s*(?P<agent_address_family>Not set|ipv4|ipv6)\s*'  # noqa
+         r'Sampling\sRate\s*(?P<sampling_rate>\d+)\s*'
          r'Polling\sInterval\s*(?P<polling_interval>\d+)\s*'
          r'Header\sSize\s*(?P<header_size>\d+)\s*'
          r'Max\sDatagram\sSize\s*(?P<max_datagram_size>\d+)\s*'
@@ -758,7 +757,8 @@ def parse_show_sflow(raw_result):
     for key, value in result.items():
         if value and value.isdigit():
             result[key] = int(value)
-    if str(result['collector']) != 'NOT SET':
+    result['agent_interface'] = result['agent_interface'].strip()
+    if str(result['collector']) != 'Not set':
         count = result['collector'].count('\n')
         result['collector'] = \
             result['collector'].split('\n', count-1)
@@ -772,11 +772,91 @@ def parse_show_sflow(raw_result):
 
     return result
 
+
+def parse_ping_repetitions(raw_result):
+    """
+    Parse the 'ping' command raw output.
+
+    :param str raw_result: ping raw result string.
+    :rtype: dict
+    :return: The parsed result of the ping command in a \
+        list of dictionaries of the form:
+
+     ::
+
+        {
+            'transmitted': 0,
+            'received': 0,
+            'errors': 0,
+            'packet_loss': 0
+        }
+    """
+
+    ping_re = (
+        r'^(?P<transmitted>\d+) packets transmitted, '
+        r'(?P<received>\d+) packets received,'
+        r'( \+(?P<errors>\d+) errors,)? '
+        r'(?P<packet_loss>\d+)% packet loss$'
+    )
+
+    result = {}
+    for line in raw_result.splitlines():
+        re_result = re.search(ping_re, line)
+        if re_result:
+            for key, value in re_result.groupdict().items():
+                if value is None:
+                    result[key] = 0
+                elif value.isdigit():
+                    result[key] = int(value)
+
+    return result
+
+
+def parse_ping6_repetitions(raw_result):
+    """
+    Parse the 'ping6' command raw output.
+
+    :param str raw_result: ping6 raw result string.
+    :rtype: dict
+    :return: The parsed result of the ping6 command in a \
+        list of dictionaries of the form:
+
+     ::
+
+        {
+            'transmitted': 0,
+            'received': 0,
+            'errors': 0,
+            'packet_loss': 0
+        }
+    """
+
+    ping_re = (
+        r'^(?P<transmitted>\d+) packets transmitted, '
+        r'(?P<received>\d+) packets received,'
+        r'( \+(?P<errors>\d+) errors,)? '
+        r'(?P<packet_loss>\d+)% packet loss$'
+    )
+
+    result = {}
+    for line in raw_result.splitlines():
+        re_result = re.search(ping_re, line)
+        if re_result:
+            for key, value in re_result.groupdict().items():
+                if value is None:
+                    result[key] = 0
+                elif value.isdigit():
+                    result[key] = int(value)
+
+    return result
+
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
     'parse_show_lacp_configuration', 'parse_show_lldp_neighbor_info',
     'parse_show_lldp_statistics', 'parse_show_ip_bgp_summary',
     'parse_show_ip_bgp_neighbors', 'parse_show_ip_bgp',
-    'parse_show_udld_interface', 'parse_show_sflow'
+    'parse_show_udld_interface', 'parse_ping_repetitions',
+    'parse_ping6_repetitions', 'parse_show_sflow'
 ]
