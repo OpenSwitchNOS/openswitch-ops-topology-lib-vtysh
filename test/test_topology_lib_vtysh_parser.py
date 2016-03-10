@@ -45,7 +45,8 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_ntp_authentication_key,
                                        parse_show_ntp_statistics,
                                        parse_show_ntp_status,
-                                       parse_show_ntp_trusted_keys
+                                       parse_show_ntp_trusted_keys,
+                                       parse_show_dhcp_server
                                        )
 
 
@@ -1369,6 +1370,91 @@ Trusted-keys
     expected = {
         '10': {'key_id': '10'},
         '11': {'key_id': '11'}
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_dhcp_server():
+    raw_result = """\
+DHCP dynamic IP allocation configuration
+----------------------------------------
+Name              Start IP Address                              End IP A\
+ddress                                Netmask          Broadcast        \
+Prefix-len  Lease time(min)  Static  Set tag          Match tags
+------------------------------------------------------------------------\
+------------------------------------------------------------------------\
+----------------------------------------------------------------
+CLIENTS-VLAN60    192.168.60.10                                 192.168.\
+60.250                                255.255.255.0    192.168.60.255   \
+*           1440             False   *                *
+
+
+DHCP static IP allocation configuration
+---------------------------------------
+DHCP static host is not configured.
+
+
+DHCP options configuration
+--------------------------
+Option Number  Option Name       Option Value          ipv6   Match tags
+------------------------------------------------------------------------
+15             *                 tigerlab.ntl.com      False  *
+*              Router            192.168.60.254        False  *
+6              *                 10.100.205.200        False  *
+
+
+DHCP Match configuration
+------------------------
+DHCP match is not configured.
+
+
+DHCP BOOTP configuration
+------------------------
+DHCP BOOTP is not configured.
+    """
+
+    result = parse_show_dhcp_server(raw_result)
+
+    expected = {
+        'pools': [
+            {
+                'pool_name': 'CLIENTS-VLAN60',
+                'start_ip': '192.168.60.10',
+                'end_ip': '192.168.60.250',
+                'netmask': '255.255.255.0',
+                'broadcast': '192.168.60.255',
+                'prefix_len': '*',
+                'lease_time': '1440',
+                'static_bind': 'False',
+                'set_tag': '*',
+                'match_tag': '*'
+            }
+        ],
+        'options': [
+            {
+                'option_number': '15',
+                'option_name': '*',
+                'option_value': 'tigerlab.ntl.com',
+                'ipv6_option': 'False',
+                'match_tags': '*'
+            },
+            {
+                'option_number': '*',
+                'option_name': 'Router',
+                'option_value': '192.168.60.254',
+                'ipv6_option': 'False',
+                'match_tags': '*'
+            },
+            {
+                'option_number': '6',
+                'option_name': '*',
+                'option_value': '10.100.205.200',
+                'ipv6_option': 'False',
+                'match_tags': '*'
+            }
+        ]
     }
 
     ddiff = DeepDiff(result, expected)

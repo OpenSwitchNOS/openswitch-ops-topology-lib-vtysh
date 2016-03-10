@@ -1635,6 +1635,89 @@ def parse_show_ntp_trusted_keys(raw_result):
     return result
 
 
+def parse_show_dhcp_server(raw_result):
+    """
+    Parse the 'show dhcp-server' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show ntp trusted-keys command \
+        in a dictionary of the form:
+
+     ::
+
+        {
+            'pools': [
+                {
+                    'pool_name': 'CLIENTS-VLAN60',
+                    'start_ip': '192.168.60.10',
+                    'end_ip': '192.168.60.250',
+                    'netmask': '255.255.255.0',
+                    'broadcast': '192.168.60.255',
+                    'prefix_len': '*',
+                    'lease_time': '1440',
+                    'static_bind': 'False',
+                    'set_tag': '*',
+                    'match_tag': '*'
+                }
+            ],
+            'options': [
+                {
+                    'option_number': '15',
+                    'option_name': '*',
+                    'option_value': 'tigerlab.ntl.com',
+                    'ipv6_option': 'False',
+                    'match_tags': '*'
+                },
+                {
+                    'option_number': '*',
+                    'option_name': 'Router',
+                    'option_value': '192.168.60.254',
+                    'ipv6_option': 'False',
+                    'match_tags': '*'
+                },
+             ]
+        }
+    """
+
+    dhcp_dynamic_re = (
+        r'(?P<pool_name>[\w_\-]+)'
+        r'\s+(?P<start_ip>[\d\.:]+)'
+        r'\s+(?P<end_ip>[\d\.:]+)'
+        r'\s+(?P<netmask>[\d\.*]+)'
+        r'\s+(?P<broadcast>[\d\.*]+)'
+        r'\s+(?P<prefix_len>[\w\*/]+)'
+        r'\s+(?P<lease_time>[\d]+)'
+        r'\s+(?P<static_bind>True|False)'
+        r'\s+(?P<set_tag>[\w\*]+)'
+        r'\s+(?P<match_tag>[\w\*]+)'
+    )
+
+    dhcp_options_re = (
+        r'\n(?P<option_number>[\d\*]+)'
+        r'\s+(?P<option_name>[\w\*]+)'
+        r'\s+(?P<option_value>[\w_\-\.]+)'
+        r'\s+(?P<ipv6_option>True|False)'
+        r'\s+(?P<match_tags>[\w\*]+)'
+    )
+
+    result = {}
+    pools_list = []
+    options_list = []
+    for output in re.finditer(dhcp_dynamic_re, raw_result):
+        dhcp_dynamic = output.groupdict()
+        pools_list.append(dhcp_dynamic)
+    result['pools'] = pools_list
+
+    for output in re.finditer(dhcp_options_re, raw_result):
+        dhcp_options = output.groupdict()
+        options_list.append(dhcp_options)
+    result['options'] = options_list
+
+    assert result
+    return result
+
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
@@ -1647,5 +1730,5 @@ __all__ = [
     'parse_show_ipv6_route', 'parse_show_ipv6_bgp', 'parse_show_ip_ecmp',
     'parse_show_ntp_associations', 'parse_show_ntp_authentication_key',
     'parse_show_ntp_statistics', 'parse_show_ntp_status',
-    'parse_show_ntp_trusted_keys'
+    'parse_show_ntp_trusted_keys', 'parse_show_dhcp_server'
 ]

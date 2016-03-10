@@ -4859,6 +4859,29 @@ def show_ntp_trusted_keys(
     return parse_show_ntp_trusted_keys(result)
 
 
+def show_dhcp_server(
+        enode):
+    """
+    Display DHCP Server Configuration
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show dhcp-server
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_dhcp_server`
+    """
+
+    cmd = (
+        'show dhcp-server'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_show_dhcp_server(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -4895,5 +4918,6 @@ __all__ = [
     'show_ntp_authentication_key',
     'show_ntp_statistics',
     'show_ntp_status',
-    'show_ntp_trusted_keys'
+    'show_ntp_trusted_keys',
+    'show_dhcp_server'
 ]
