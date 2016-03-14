@@ -413,6 +413,7 @@ def parse_show_lldp_neighbor_info(raw_result):
                 'neighbor_chassis_name': None,
                 'neighbor_chassis_description': '',
                 'neighbor_chassis_id': None,
+                'neighbor_mgmt_address': '',
                 'chassis_capabilities_available': '',
                 'chassis_capabilities_enabled': '',
                 'neighbor_port_id': '',
@@ -429,6 +430,7 @@ def parse_show_lldp_neighbor_info(raw_result):
         r'Neighbor Chassis-Name\s+:\s*(?P<neighbor_chassis_name>\S+)?\s*'
         r'Neighbor Chassis-Description\s+:\s*'
         r'(?P<neighbor_chassis_description>.*)\s*'
+        r'Neighbor Management-Address\s+:\s*(?P<neighbor_mgmt_address>.*)\s*'
         r'Neighbor Chassis-ID\s+:\s*(?P<neighbor_chassis_id>[0-9a-f:]+)?\s*'
         r'Chassis Capabilities Available\s*:\s*'
         r'(?P<chassis_capabilities_available>.*)?\s*'

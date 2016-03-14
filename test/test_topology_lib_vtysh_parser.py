@@ -336,6 +336,7 @@ Neighbor entries dropped       : 0
 Neighbor entries age-out       : 0
 Neighbor Chassis-Name          :
 Neighbor Chassis-Description   :
+Neighbor Management-Address    :
 Neighbor Chassis-ID            :
 Chassis Capabilities Available :
 Chassis Capabilities Enabled   :
@@ -353,6 +354,7 @@ TTL                            :
         'neighbor_entries_age_out': 0,
         'neighbor_chassis_name': None,
         'neighbor_chassis_description': '',
+        'neighbor_mgmt_address': '',
         'neighbor_chassis_id': None,
         'chassis_capabilities_available': '',
         'chassis_capabilities_enabled': '',
