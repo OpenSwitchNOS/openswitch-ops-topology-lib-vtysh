@@ -264,6 +264,12 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Display DHCP server configuration.',
                 'arguments': [],
                 'returns': True
+            },
+            {
+                'command': 'show show tftp-server',
+                'doc': 'Display tftp server configuration.',
+                'arguments': [],
+                'returns': True
             }
         ]
     }),
@@ -2278,9 +2284,31 @@ VTYSH_SPEC = OrderedDict([
                 ],
             }
         ]
-    },
-    )
-])
+    }),
+    ('config_tftp_server', {
+        'doc': 'tftp-server configuration.',
+        'arguments': [
+            {
+                'name': 'tftp-server',
+                'doc': 'Enable/Disable tftp server.'
+            }
+        ],
+        'pre_commands': ['config terminal'],
+        'post_commands': ['end'],
+        'commands': [
+            {
+                'command': 'enable',
+                'doc': 'Enable tftp server.',
+                'arguments': [],
+            },
+            {
+                'command': 'no enable',
+                'doc': 'Disable tftp server.',
+                'arguments': [],
+            }
+        ]
+    })
+    ])
 
 """VTYSH Specification as a Python dictionary"""
 

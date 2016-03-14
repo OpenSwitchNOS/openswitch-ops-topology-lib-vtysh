@@ -1760,6 +1760,45 @@ def parse_show_dhcp_server(raw_result):
     return result
 
 
+def parse_show_tftp_server(raw_result):
+    """
+    Parse the 'show tftp-server' command raw output.
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show tftp-server\
+        in a dictionary of the form:
+
+    ::
+
+        {
+            'tftp_server' : 'Enabled',
+            'tftp_server_secure_mode' : 'Enabled',
+            'tftp_server_file_path' : '/tmp/'
+        }
+    """
+
+    show_tfpt_server_re = (
+        r'\s*TFTP server configuration\s*-*\s*'
+        r'TFTP server\s*: (?P<tftp_server>\S+)\s*'
+        r'TFTP server secure mode\s*: (?P<tftp_server_secure_mode>\S+)\s*'
+        r'TFTP server file path\s*: (?P<tftp_server_file_path>\S+\s*\S*)'
+        )
+
+    re_result = re.match(show_tfpt_server_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    for key, value in result.items():
+        if value is not None:
+            if key == 'tftp_server':
+                if value == 'Enabled':
+                    result[key] = True
+                elif value == 'Disabled':
+                    result[key] = False
+
+    return result
+
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
@@ -1773,5 +1812,6 @@ __all__ = [
     'parse_show_ntp_associations', 'parse_show_ntp_authentication_key',
     'parse_show_ntp_statistics', 'parse_show_ntp_status',
     'parse_show_ntp_trusted_keys',
-    'parse_show_dhcp_server_leases', 'parse_show_dhcp_server'
+    'parse_show_dhcp_server_leases', 'parse_show_dhcp_server',
+    'parse_show_tftp_server'
 ]

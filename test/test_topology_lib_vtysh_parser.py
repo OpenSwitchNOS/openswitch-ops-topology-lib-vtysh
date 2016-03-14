@@ -47,7 +47,8 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_ntp_status,
                                        parse_show_ntp_trusted_keys,
                                        parse_show_dhcp_server_leases,
-                                       parse_show_dhcp_server
+                                       parse_show_dhcp_server,
+                                       parse_show_tftp_server
                                        )
 
 
@@ -1488,6 +1489,28 @@ DHCP BOOTP is not configured.
             }
         ]
     }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_tftp_server():
+    raw_result = """\
+TFTP server configuration
+-------------------------
+TFTP server : Enabled
+TFTP server secure mode : Disabled
+TFTP server file path : Not configured
+    """
+
+    result = parse_show_tftp_server(raw_result)
+    print(result)
+
+    expected = {
+        'tftp_server': True,
+        'tftp_server_secure_mode': 'Disabled',
+        'tftp_server_file_path': 'Not configured'
+        }
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff

@@ -4249,6 +4249,91 @@ class ConfigVlan(ContextManager):
         assert not result
 
 
+class ConfigTftpServer(ContextManager):
+    """
+    tftp-server configuration.
+
+    pre_commands:
+
+    ::
+
+            ['config terminal']
+
+    post_commands:
+
+    ::
+
+            ['end']
+    """
+    def __init__(self, enode, tftp_server):
+        self.enode = enode
+        self.tftp_server = tftp_server
+
+    def __enter__(self):
+        commands = """\
+            config terminal
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+        return self
+
+    def __exit__(self, type, value, traceback):
+        commands = """\
+            end
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+    def enable(
+            self):
+        """
+        Enable tftp server.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # enable
+
+        """
+
+        cmd = (
+            'enable'
+        )
+        result = self.enode(cmd.format(**locals()), shell='vtysh')
+
+        assert not result
+
+    def no_enable(
+            self):
+        """
+        Disable tftp server.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no enable
+
+        """
+
+        cmd = (
+            'no enable'
+        )
+        result = self.enode(cmd.format(**locals()), shell='vtysh')
+
+        assert not result
+
+
 def show_interface(
         enode, portlbl):
     """
@@ -4905,6 +4990,29 @@ def show_dhcp_server(
     return parse_show_dhcp_server(result)
 
 
+def show_show_tftp_server(
+        enode):
+    """
+    Display tftp server configuration.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show show tftp-server
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_show_tftp_server`
+    """
+
+    cmd = (
+        'show show tftp-server'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_show_show_tftp_server(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -4916,6 +5024,7 @@ __all__ = [
     'ConfigInterfaceMgmt',
     'ConfigRouterBgp',
     'ConfigVlan',
+    'ConfigTftpServer',
     'show_interface',
     'show_vlan',
     'show_lacp_interface',
@@ -4943,5 +5052,6 @@ __all__ = [
     'show_ntp_status',
     'show_ntp_trusted_keys',
     'show_dhcp_server_leases',
-    'show_dhcp_server'
+    'show_dhcp_server',
+    'show_show_tftp_server'
 ]
