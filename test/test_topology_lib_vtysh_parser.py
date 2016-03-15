@@ -737,7 +737,7 @@ sFlow Configuration
 -----------------------------------------
 sFlow                         disabled
 Collector IP/Port/Vrf         10.10.11.2/6344/vrf_mgmt
-Agent Interface               NOT SET
+Agent Interface               Not set
 Agent Address Family          ipv6
 Sampling Rate                 20
 Polling Interval              30
@@ -757,7 +757,7 @@ Number of Samples             20
                 'vrf': 'vrf_mgmt'
             }
         ],
-        'agent_interface': 'NOT SET',
+        'agent_interface': 'Not set',
         'agent_address_family': 'ipv6',
         'sampling_rate': 20,
         'polling_interval': 30,
