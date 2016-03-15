@@ -136,8 +136,8 @@ Interface 7 is down (Administratively down)
         'tx_dropped': 0,
         'tx_errors': 0,
         'tx_packets': 0,
-        'ipv4': None,
-        'ipv6': None
+        'ipv4': None
+
     }
 
     ddiff = DeepDiff(result, expected)
@@ -191,67 +191,11 @@ Interface 1 is up
         'tx_dropped': 0,
         'tx_errors': 0,
         'tx_packets': 0,
-        'ipv4': '20.1.1.2/30',
-        'ipv6': None
+        'ipv4': '20.1.1.2/30'
     }
 
     ddiff2 = DeepDiff(result2, expected2)
     assert not ddiff2
-
-    raw_result3 = """\
-
-Interface 1 is up
- Admin state is up
- Hardware: Ethernet, MAC Address: 70:72:cf:75:25:70
- IPv6 address 2002::1/64
- MTU 0
- Full-duplex
- Speed 1000 Mb/s
- Auto-Negotiation is turned on
- Input flow-control is off, output flow-control is off
- RX
-            0 input packets              0 bytes
-            0 input error                0 dropped
-            0 CRC/FCS
- TX
-            0 output packets             0 bytes
-            0 input error                0 dropped
-            0 collision
-    """
-
-    result3 = parse_show_interface(raw_result3)
-
-    expected3 = {
-        'admin_state': 'up',
-        'autonegotiation': True,
-        'conection_type': 'Full-duplex',
-        'hardware': 'Ethernet',
-        'input_flow_control': False,
-        'interface_state': 'up',
-        'mac_address': '70:72:cf:75:25:70',
-        'mtu': 0,
-        'output_flow_control': False,
-        'port': 1,
-        'rx_crc_fcs': 0,
-        'rx_dropped': 0,
-        'rx_bytes': 0,
-        'rx_error': 0,
-        'rx_packets': 0,
-        'speed': 1000,
-        'speed_unit': 'Mb/s',
-        'state_description': None,
-        'state_information': None,
-        'tx_bytes': 0,
-        'tx_collisions': 0,
-        'tx_dropped': 0,
-        'tx_errors': 0,
-        'tx_packets': 0,
-        'ipv4': None,
-        'ipv6': '2002::1/64'
-    }
-
-    ddiff3 = DeepDiff(result3, expected3)
-    assert not ddiff3
 
 
 def test_parse_show_lacp_interface():
@@ -393,6 +337,7 @@ Neighbor entries age-out       : 0
 Neighbor Chassis-Name          :
 Neighbor Chassis-Description   :
 Neighbor Chassis-ID            :
+Neighbor Management-Address    :
 Chassis Capabilities Available :
 Chassis Capabilities Enabled   :
 Neighbor Port-ID               :
@@ -408,11 +353,12 @@ TTL                            :
         'neighbor_entries_dropped': 0,
         'neighbor_entries_age_out': 0,
         'neighbor_chassis_name': None,
-        'neighbor_chassis_description': '',
+        'neighbor_chassis_description': None,
         'neighbor_chassis_id': None,
-        'chassis_capabilities_available': '',
-        'chassis_capabilities_enabled': '',
-        'neighbor_port_id': '',
+        'neighbor_mgmt_address': None,
+        'chassis_capabilities_available': None,
+        'chassis_capabilities_enabled': None,
+        'neighbor_port_id': None,
         'ttl': None
     }
     ddiff = DeepDiff(result, expected)
