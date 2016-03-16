@@ -4579,6 +4579,29 @@ def show_ipv6_route(
     return parse_show_ipv6_route(result)
 
 
+def show_sflow(
+        enode):
+    """
+    Show sFlow information.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show sflow
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_sflow`
+    """
+
+    cmd = (
+        'show sflow'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_show_sflow(result)
+
+
 def show_udld_interface(
         enode, portlbl):
     """
@@ -4930,6 +4953,7 @@ __all__ = [
     'show_running_config',
     'show_ip_route',
     'show_ipv6_route',
+    'show_sflow',
     'show_udld_interface',
     'show_rib',
     'show_ip_ecmp',
