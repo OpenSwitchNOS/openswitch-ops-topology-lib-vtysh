@@ -502,6 +502,36 @@ def parse_show_lldp_statistics(raw_result):
     return result
 
 
+def parse_show_sftp_server(raw_result):
+    """
+    Parse the 'show sftp server' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show sftp command in a \
+        list of dictionaries of the form:
+     ::
+
+        {
+             'status' : 'Enabled',
+             'ServerName' : 'SFTP server'
+        }
+     """
+    sftp_status_re = (
+        r'((?P<ServerName>\w+\s+\w+)\s+:\s+(?P<status>\w+))'
+    )
+    result = {}
+    re_result = re.search(sftp_status_re, raw_result)
+    assert re_result
+    if re_result:
+        for key, value in re_result.groupdict().items():
+            if value is None:
+                result[key] = "No Match found"
+            else:
+                result[key] = value
+    return result
+
+
 def parse_show_ip_bgp_summary(raw_result):
     """
     Parse the 'show ip bgp summary' command raw output.

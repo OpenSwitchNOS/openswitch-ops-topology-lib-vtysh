@@ -113,6 +113,13 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
+                'command': 'show sftp server',
+                'doc': 'Show sftp server configuration.',
+                'arguments': [],
+                'returns': True
+
+            },
+            {
                 'command': 'show ip bgp summary',
                 'doc': 'Show bgp neighbors information summary.',
                 'arguments': [],
@@ -714,6 +721,16 @@ VTYSH_SPEC = OrderedDict([
             {
                 'command': 'no ip ecmp load-balance resilient disable',
                 'doc': 'Disable resilient hashing for load balancing',
+                'arguments': [],
+            },
+            {
+                'command': 'sftp server enable',
+                'doc': 'Enable sftp server.',
+                'arguments': [],
+            },
+            {
+                'command': 'no sftp server enable',
+                'doc': 'Disable sftp server.',
                 'arguments': [],
             },
             {
