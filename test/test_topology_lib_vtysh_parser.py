@@ -103,6 +103,12 @@ VLAN    Name      Status   Reason         Reserved       Ports
     ddiff = DeepDiff(result, expected)
     assert not ddiff
 
+    raw_result = """\
+VLAN 9 has not been configured
+    """
+    result = parse_show_vlan(raw_result)
+    assert result is None
+
 
 def test_parse_show_interface():
     raw_result = """\
@@ -1306,42 +1312,174 @@ No ipv6 rib entries
 
 def test_parse_show_running_config():
     raw_result = """\
-    Current configuration:
+Current configuration:
 !
 !
 !
-router bgp 64001
-     bgp router-id 2.0.0.1
-     network 10.240.0.2/32
-     network 10.240.1.2/32
-     network 10.240.2.2/32
-     network 10.240.3.2/32
-     network 10.240.4.2/32
+!
+!
+router bgp 6400
+     bgp router-id 7.7.7.7
+     network 10.1.0.0/24
+     network 10.1.1.0/24
+     timers bgp 90 30
+     neighbor 10.1.11.100 remote-as 11
+     neighbor 10.1.12.100 remote-as 12
+!
+router ospf
+    router-id 7.7.7.7
+    network 10.1.11.100/24 area 10.1.0.0
+    network 10.1.12.100/24 area 10.1.0.0
+vlan 1
+    no shutdown
+vlan 8
+    no shutdown
+vlan 10
+    no shutdown
+vlan 11
+    no shutdown
+vlan 12
+    no shutdown
+interface vlan10
+    no shutdown
+    ip address 10.1.10.1/24
+interface vlan12
+    no shutdown
+    ip address 10.1.12.1/24
+interface vlan11
+    no shutdown
+    ip address 10.1.11.1/24
+interface 1
+    no shutdown
+    no routing
+    vlan access 8
+interface 2
+    no shutdown
+    no routing
+    vlan access 8
+interface 7
+    no shutdown
+    ip address 100.1.1.100/24
+interface 35
+    no shutdown
+    speed 1000
+    mtu 1518
+    flowcontrol receive on
+    flowcontrol send on
+    autonegotiation off
+    lacp port-id 2
+    lacp port-priority 3
+    no routing
+    vlan trunk native 8
+    vlan trunk allowed 12
+interface 50
+    no shutdown
+    mtu 1518
+    flowcontrol receive on
+    flowcontrol send on
+    autonegotiation off
+    no routing
+    vlan trunk allowed 10
+    vlan trunk allowed 11
+    vlan trunk allowed 12
 interface loopback 2
     ip address 10.0.0.1/24
     ipv6 address 2001::2/64
-!
+interface mgmt
+    ip static 1.1.1.1/24
+    nameserver 2.2.2.2
 """
 
     result = parse_show_running_config(raw_result)
 
     expected = {
-        'bgp':
-        {'64001':
-               {'networks': ['10.240.0.2/32',
-                             '10.240.1.2/32',
-                             '10.240.2.2/32',
-                             '10.240.3.2/32',
-                             '10.240.4.2/32'],
-                'router_id': '2.0.0.1'}
-         },
-        'loopback':
-        {'interface loopback 2':
-         {'ipv4_address': '10.0.0.1/24',
-          'ipv6_address': '2001::2/64'},
-
-         }
-    }
+        'interface': {
+            '50': {
+                'admin': 'up',
+                'routing': 'no',
+                'vlan': [
+                    {'mode': 'trunk', 'type': 'allowed', 'vlanid': '10'},
+                    {'mode': 'trunk', 'type': 'allowed', 'vlanid': '11'},
+                    {'mode': 'trunk', 'type': 'allowed', 'vlanid': '12'}
+                    ],
+                'autonegotiation': 'off',
+                'flowcontrol': {'receive': 'on', 'send': 'on'},
+                'mtu': '1518'
+                },
+            'vlan10': {
+                'admin': 'up',
+                'ipv4': '10.1.10.1/24'
+                },
+            '2': {
+                'admin': 'up',
+                'routing': 'no',
+                'vlan': [{'mode': 'access', 'vlanid': '8'}]
+                },
+            'mgmt': {'static': '1.1.1.1/24', 'nameserver': '2.2.2.2'},
+            'vlan11': {
+                'admin': 'up',
+                'ipv4': '10.1.11.1/24'
+                },
+            'vlan12': {
+                'admin': 'up',
+                'ipv4': '10.1.12.1/24'
+                },
+            '35': {
+                'admin': 'up',
+                'routing': 'no',
+                'lacp': {'priority': '3', 'port-id': '2'},
+                'vlan': [
+                    {'mode': 'trunk', 'type': 'native', 'vlanid': '8'},
+                    {'mode': 'trunk', 'type': 'allowed', 'vlanid': '12'}
+                    ],
+                'autonegotiation': 'off',
+                'speed': '1000',
+                'flowcontrol': {'receive': 'on', 'send': 'on'},
+                'mtu': '1518'
+                },
+            '1': {
+                'admin': 'up',
+                'routing': 'no',
+                'vlan': [{'mode': 'access', 'vlanid': '8'}]
+                },
+            '7': {'admin': 'up', 'ipv4': '100.1.1.100/24'},
+            'loopback 2': {
+                'ipv4': '10.0.0.1/24',
+                'ipv6': '2001::2/64'
+                }
+        },
+        'ospf': {
+            'router-id': '7.7.7.7',
+            'networks': [
+                {'network': '10.1.11.100/24', 'area': '10.1.0.0'},
+                {'network': '10.1.12.100/24', 'area': '10.1.0.0'}
+            ]
+        },
+        'vlan': {
+            '8': {'admin': 'up', 'vlanid': '8'},
+            '10': {'admin': 'up', 'vlanid': '10'},
+            '12': {'admin': 'up', 'vlanid': '12'},
+            '1': {'admin': 'up', 'vlanid': '1'},
+            '11': {'admin': 'up', 'vlanid': '11'}
+        },
+        'bgp': {
+            '6400': {
+                'router_id': '7.7.7.7',
+                'neighbors': [
+                    {'remote-as': '11', 'ip': '10.1.11.100'},
+                    {'remote-as': '12', 'ip': '10.1.12.100'}
+                    ],
+                'networks': ['10.1.0.0/24', '10.1.1.0/24'],
+                'timers_bgp': [' 90', ' 30']
+                }
+            },
+        'loopback': {
+            'interface loopback 2': {
+                'ipv4_address': '10.0.0.1/24',
+                'ipv6_address': '2001::2/64'
+                }
+            }
+        }
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff
