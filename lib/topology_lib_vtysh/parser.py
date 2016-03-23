@@ -186,7 +186,8 @@ def parse_show_vlan(raw_result):
     :param str raw_result: vtysh raw result string.
     :rtype: dict
     :return: The parsed result of the show vlan command in a \
-        dictionary of the form:
+        dictionary of the form. Returns None if no vlan found or \
+        empty dictionary:
 
      ::
 
@@ -214,15 +215,24 @@ def parse_show_vlan(raw_result):
         r'(?P<reason>\S+)\s*(?P<reserved>\(\w+\))?\s*(?P<ports>[\w ,]*)'
     )
 
-    result = {}
-    for line in raw_result.splitlines():
-        re_result = re.search(vlan_re, line)
-        if re_result:
-            partial = re_result.groupdict()
-            partial['ports'] = partial['ports'].split(', ')
-            result[partial['vlan_id']] = partial
+    no_vlan_re = (r'\s*VLAN\s+\d+\s+has\s+not\s+been\s+configured\s*')
 
-    return result
+    result = {}
+
+    if re.match(no_vlan_re, raw_result, re.IGNORECASE):
+        return None
+    else:
+        for line in raw_result.splitlines():
+            re_result = re.search(vlan_re, line)
+            if re_result:
+                partial = re_result.groupdict()
+                partial['ports'] = partial['ports'].split(', ')
+                result[partial['vlan_id']] = partial
+
+        if result == {}:
+            return None
+        else:
+            return result
 
 
 def parse_show_lacp_interface(raw_result):
@@ -1101,9 +1111,9 @@ def parse_show_rib(raw_result):
 def parse_show_running_config(raw_result):
     """
     Parse the 'show running-config' command raw output.
-    This parser currently returns only BGP section of the show-running
-    command, please review the doc/developer.rst file to get more information
-    on adding new sections.
+    This parser currently returns only BGP, OSPF, vlan and interface section
+    of the show-running command, please review the doc/developer.rst file to
+    get more information on adding new sections.
 
     :param str raw_result: vtysh raw result string.
     :rtype: dict
@@ -1112,30 +1122,96 @@ def parse_show_running_config(raw_result):
 
      ::
 
-         {
-            'bgp':
-                {'64001':
-                    {'networks': ['10.240.1.2/32',
-                                '10.240.10.2/32',
-                                '10.240.9.2/32'],
-                    'router_id': '2.0.0.1'},
-                '64002':
-                    {'networks': ['11.240.1.2/32',
-                                '11.240.10.2/32',
-                                '11.240.9.2/32'],
-                    'router_id': '3.0.0.1'}
+        {
+        'interface': {
+            '50': {
+                'admin': 'up',
+                'routing': 'no',
+                'vlan': [
+                    {'mode': 'trunk', 'type': 'allowed', 'vlanid': '10'},
+                    {'mode': 'trunk', 'type': 'allowed', 'vlanid': '11'},
+                    {'mode': 'trunk', 'type': 'allowed', 'vlanid': '12'}
+                    ],
+                'autonegotiation': 'off',
+                'flowcontrol': {'receive': 'on', 'send': 'on'},
+                'mtu': '1518'
+                },
+            'vlan10': {
+                'admin': 'up',
+                'ipv4': '10.1.10.1/24'
+                },
+            '2': {
+                'admin': 'up',
+                'routing': 'no',
+                'vlan': [{'mode': 'access', 'vlanid': '8'}]
+                },
+            'mgmt': {'static': '1.1.1.1/24', 'nameserver': '2.2.2.2'},
+            'vlan11': {
+                'admin': 'up',
+                'ipv4': '10.1.11.1/24'
+                },
+            'vlan12': {
+                'admin': 'up',
+                'ipv4': '10.1.12.1/24'
+                },
+            '35': {
+                'admin': 'up',
+                'routing': 'no',
+                'lacp': {'priority': '3', 'port-id': '2'},
+                'vlan': [
+                    {'mode': 'trunk', 'type': 'native', 'vlanid': '8'},
+                    {'mode': 'trunk', 'type': 'allowed', 'vlanid': '12'}
+                    ],
+                'autonegotiation': 'off',
+                'speed': '1000',
+                'flowcontrol': {'receive': 'on', 'send': 'on'},
+                'mtu': '1518'
+                },
+            '1': {
+                'admin': 'up',
+                'routing': 'no',
+                'vlan': [{'mode': 'access', 'vlanid': '8'}]
+                },
+            '7': {'admin': 'up', 'ipv4': '100.1.1.100/24'}
+        },
+        'ospf': {
+            'router-id': '7.7.7.7',
+            'networks': [
+                {'network': '10.1.11.100/24', 'area': '10.1.0.0'},
+                {'network': '10.1.12.100/24', 'area': '10.1.0.0'}
+            ]
+        },
+        'vlan': {
+            '8': {'admin': 'up', 'vlanid': '8'},
+            '10': {'admin': 'up', 'vlanid': '10'},
+            '12': {'admin': 'up', 'vlanid': '12'},
+            '1': {'admin': 'up', 'vlanid': '1'},
+            '11': {'admin': 'up', 'vlanid': '11'}
+        },
+        'bgp': {
+            '6400': {
+                'router_id': '7.7.7.7',
+                'neighbors': [
+                    {'remote-as': '11', 'ip': '10.1.11.100'},
+                    {'remote-as': '12', 'ip': '10.1.12.100'}
+                    ],
+                'networks': ['10.1.0.0/24', '10.1.1.0/24'],
+                'timers_bgp': [' 90', ' 30']
                 }
+            }
         }
     """
 
     result = {}
 
-    # Only the bgp section is captured
+# bgp Section
     bgp_section_re = r'router bgp.*(?=!)'
     re_bgp_section = re.findall(bgp_section_re, raw_result, re.DOTALL)
     as_number_re = r'router bgp\s+(\d+)'
     router_id_re = r'\s+bgp router-id\s+(.*)'
     network_re = r'\s+network\s+(.*)'
+    neighbour_re = r'\s+neighbor\s+(\S+)\s+(\S+)\s+(\d+)'
+    timers_re = r'\s+timers bgp(\s+\d+)(\s+\d+)'
     re_as_number = None
     result['bgp'] = {}
     if re_bgp_section:
@@ -1157,6 +1233,248 @@ def parse_show_running_config(raw_result):
                     result['bgp'][re_as_number]['networks'].append(network)
                 else:
                     result['bgp'][re_as_number]['networks'].append(network)
+
+            re_result = re.match(timers_re, line)
+            if re_result:
+                timers = [re_result.group(1), re_result.group(2)]
+                if 'timers_bgp' not in result['bgp'][re_as_number].keys():
+                    result['bgp'][re_as_number]['timers_bgp'] = timers
+                else:
+                    result['bgp'][re_as_number]['timers_bgp'] = timers
+
+            re_result = re.match(neighbour_re, line)
+            if re_result:
+                ip = re_result.group(1)
+                neighbors = {'ip': ip, 'remote-as': re_result.group(3)}
+                if 'neighbors' not in result['bgp'][re_as_number].keys():
+                    result['bgp'][re_as_number]['neighbors'] = []
+                    result['bgp'][re_as_number]['neighbors'].append(neighbors)
+                else:
+                    result['bgp'][re_as_number]['neighbors'].append(neighbors)
+
+    # ospf Section
+    ospf_section_re = r'router ospf(\n\s+.*)*'
+    re_ospf_section = re.findall(ospf_section_re, raw_result, re.DOTALL)
+    router_id_re = r'\s+router-id\s+(.*)'
+    network_re = r'\s+network\s+(\d.+)\s+(area)\s+(\d.+)'
+    max_metric_re = r'\s+max-metric router-lsa on-startup\s+(\d+)\s+'
+    result['ospf'] = {}
+    if re_ospf_section:
+        for line in re_ospf_section[0].splitlines():
+            re_result = re.match(router_id_re, line)
+            if re_result:
+                if 'router-id' not in result['ospf'].keys():
+                    result['ospf']['router-id'] = re_result.group(1)
+
+            re_result = re.match(network_re, line)
+            if re_result:
+                area_id = re_result.group(3)
+                network = {'network': re_result.group(1), 'area': area_id}
+                if 'networks' not in result['ospf'].keys():
+                    result['ospf']['networks'] = []
+                    result['ospf']['networks'].append(network)
+                else:
+                    result['ospf']['networks'].append(network)
+
+            re_result = re.match(max_metric_re, line)
+            if re_result:
+                if 'max_lsa_startup' not in result['ospf'].keys():
+                    result['ospf']['max_lsa_startup'] = re_result.group(1)
+                else:
+                    result['ospf']['max_lsa_startup'] = re_result.group(1)
+
+    # vlan Section
+    vlan_section_re = r'vlan\s+(\d+)\n(.*)'
+    re_vlan_section = re.findall(vlan_section_re, raw_result)
+    result['vlan'] = {}
+    if re_vlan_section:
+        for vlan_info in re_vlan_section:
+            if "no shutdown" in vlan_info[1]:
+                vlan_state = 'up'
+            else:
+                vlan_state = 'down'
+            vlan = {'vlanid': vlan_info[0], 'admin': vlan_state}
+            if vlan_info[0] not in result['vlan'].keys():
+                result['vlan'][vlan_info[0]] = vlan
+            else:
+                result['vlan'][vlan_info[0]] = vlan
+
+    # interface Section
+    if_section_re = r'\s+int\w+(?:\s+\S+.*)*'
+    re_interface_section = re.findall(if_section_re, raw_result, re.DOTALL)
+    interface_vlan_re = r'\interface\s(vlan\d+)'
+    interface_port_re = r'interface\s(\d+)'
+    interface_mgmt_re = r'interface\smgmt'
+    interface_lag_re = r'\s+interface\slag\s(\d+)'
+    duplex_half_re = r'\s+duplex\shalf'
+    ipv4_re = r'\s+ip address\s(\d.+)'
+    stat_ip_re = r'\s+ip static\s(\S+)'
+    nameserver_re = r'\s+nameserver\s(\S+)'
+    ipv6_re = r'\s+ipv6 address\s(\S+)'
+    lacp_re = r'\s+lacp\sport-(\w+)\s(\d+)'
+    lag_re = r'\s+lag\s(\d+)'
+    mtu_re = r'\s+mtu\s(\w+)'
+    speed_re = r'\s+speed\s(\w+)'
+    vrf_re = r'\s+vrf attach\s(\w+)'
+    flow_ctl_re = r'\s+flowcontrol\s(\w+)\s(\w+)'
+    no_shut_re = r'\s+no shutdown'
+    no_routing_re = r'\s+no routing'
+    no_lldp_re = r'\sno lldp\s(\w+)'
+    vlan_trunk_re = r'\s+vlan trunk\s(\w+)\s(\d+)'
+    vlan_access_re = r'\s+vlan access\s(\d+)'
+    autoneg_re = r'\s+autonego\w+\s(\w+)'
+
+    result['interface'] = {}
+    if re_interface_section:
+        port = None
+        for line in re_interface_section[0].splitlines():
+
+            # Check if interface is vlan
+            if re.match(interface_vlan_re, line):
+                re_result = re.match(interface_vlan_re, line)
+                port = re_result.group(1)
+                if port not in result['interface'].keys():
+                    result['interface'][port] = {}
+
+            # Check if interface is port
+            elif re.match(interface_port_re, line):
+                re_result = re.match(interface_port_re, line)
+                port = re_result.group(1)
+                if port not in result['interface'].keys():
+                    result['interface'][port] = {}
+
+            # Check if interface is mgmt or lag
+            elif re.match(interface_lag_re, line):
+                if 'lag' not in result['interface'].keys():
+                    result['interface']['lag'] = {}
+                    re_result = re.match(interface_lag_re, line)
+                    port = re_result.group(1)
+                    if port not in result['interface']['lag'].keys():
+                        result['interface']['lag'][port] = {}
+
+            elif re.match(interface_mgmt_re, line):
+                if 'mgmt' not in result['interface'].keys():
+                    result['interface']['mgmt'] = {}
+
+            # Match nameserver
+            re_result = re.match(nameserver_re, line)
+            if re_result:
+                if 'nameserver' not in result['interface']['mgmt'].keys():
+                    result['interface']['mgmt']['nameserver'] =\
+                     re_result.group(1)
+
+            # Match mgmt static ip
+            re_result = re.match(stat_ip_re, line)
+            if re_result:
+                if 'static' not in result['interface']['mgmt'].keys():
+                    result['interface']['mgmt']['static'] =\
+                     re_result.group(1)
+
+            # Match autonegotiation
+            re_result = re.match(autoneg_re, line)
+            if re_result:
+                result['interface'][port]['autonegotiation'] =\
+                 re_result.group(1)
+
+            # Match ipv4
+            re_result = re.match(ipv4_re, line)
+            if re_result:
+                result['interface'][port]['ipv4'] = re_result.group(1)
+
+            # Match ipv6
+            re_result = re.match(ipv6_re, line)
+            if re_result:
+                result['interface'][port]['ipv6'] = re_result.group(1)
+
+            # Match admin state
+            re_result = re.match(no_shut_re, line)
+            if re_result:
+                result['interface'][port]['admin'] = 'up'
+
+            # Match routing
+            re_result = re.match(no_routing_re, line)
+            if re_result:
+                result['interface'][port]['routing'] = 'no'
+
+            # Match duplex rate
+            re_result = re.match(duplex_half_re, line)
+            if re_result:
+                result['interface'][port]['duplex'] = 'half'
+
+            # Match lag
+            re_result = re.match(lag_re, line)
+            if re_result:
+                result['interface'][port]['lag'] = re_result.group(1)
+
+            # Match lldp
+            re_result = re.match(no_lldp_re, line)
+            if re_result:
+                rx_tx = re_result.group(1)
+                if 'lldp' not in result['interface'][port].keys():
+                    result['interface'][port]['lldp'] = {}
+                    result['interface'][port]['lldp'][rx_tx] = 'down'
+                else:
+                    result['interface'][port]['lldp'][rx_tx] = 'down'
+
+            # Match mtu
+            re_result = re.match(mtu_re, line)
+            if re_result:
+                result['interface'][port]['mtu'] = re_result.group(1)
+
+            # Match speed
+            re_result = re.match(speed_re, line)
+            if re_result:
+                result['interface'][port]['speed'] = re_result.group(1)
+
+            # Match flowcontrol
+            re_result = re.match(flow_ctl_re, line)
+            if re_result:
+                rx_or_tx = re_result.group(1)
+                if 'flowcontrol' not in result['interface'][port].keys():
+                    result['interface'][port]['flowcontrol'] = {}
+                    result['interface'][port]['flowcontrol'][rx_or_tx] = 'on'
+                else:
+                    result['interface'][port]['flowcontrol'][rx_or_tx] = 'on'
+
+            # Match vrf
+            re_result = re.match(vrf_re, line)
+            if re_result:
+                result['interface'][port]['vrf'] = re_result.group(1)
+
+            # Match vlan trunk
+            re_result = re.match(vlan_trunk_re, line)
+            if re_result:
+                mtype = re_result.group(1)
+                vlanid = re_result.group(2)
+                vlan_info = {'mode': 'trunk', 'type': mtype, 'vlanid': vlanid}
+                if 'vlan' not in result['interface'][port].keys():
+                    result['interface'][port]['vlan'] = []
+                    result['interface'][port]['vlan'].append(vlan_info)
+                else:
+                    result['interface'][port]['vlan'].append(vlan_info)
+
+            # Match vlan access
+            re_result = re.match(vlan_access_re, line)
+            if re_result:
+                vlan_access_info = {'mode': 'access',
+                                    'vlanid': re_result.group(1)}
+                if 'vlan' not in result['interface'][port].keys():
+                    result['interface'][port]['vlan'] = []
+                    result['interface'][port]['vlan'].append(vlan_access_info)
+                else:
+                    result['interface'][port]['vlan'].append(vlan_access_info)
+
+            # Match lacp
+            re_result = re.match(lacp_re, line)
+            if re_result:
+                if 'lacp' not in result['interface'][port].keys():
+                    result['interface'][port]['lacp'] = {}
+                if re_result.group(1) == 'id':
+                    result['interface'][port]['lacp']['port-id'] =\
+                        re_result.group(2)
+                elif re_result.group(1) == 'priority':
+                    result['interface'][port]['lacp']['priority'] =\
+                        re_result.group(2)
 
     return result
 
