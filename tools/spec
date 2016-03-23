@@ -853,6 +853,71 @@ VTYSH_SPEC = OrderedDict([
                         'doc': 'WORD  NTP Key Number between 1-65534',
                     }
                 ],
+            },
+            {
+                'command': 'logging {remote_host} {transport} {severity}',
+                'doc': 'Configure Syslog Server',
+                'arguments': [
+                    {
+                        'name': 'remote_host',
+                        'doc': 'IPv4 or IPv6 or Host name of syslog server',
+                    },
+                    {
+                        'name': 'transport',
+                        'doc': (
+                            'Optional : '
+                            'Transport protocol and port used to send syslog.'
+                            '  Currently we support only tcp and udp.  '
+                            'Example tcp 1049'
+                        ),
+                        'optional': True
+                    },
+                    {
+                        'name': 'severity',
+                        'doc': (
+                            'Optional : '
+                            'Filter syslog messages using severity.'
+                            '  Only messages with severity higher than or'
+                            ' equal to the specified severity will be sent'
+                            ' to the remote host.  '
+                            'Example severity debug'
+                        ),
+                        'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'no logging {remote_host} {transport} {severity}',
+                'doc': 'Remove Syslog Server Configuration',
+                'arguments': [
+                    {
+                        'name': 'remote_host',
+                        'doc': 'IPv4 or IPv6 or Host name of syslog server',
+                    },
+                    {
+                        'name': 'transport',
+                        'doc': (
+                            'Optional : '
+                            'Transport protocol and port used to send syslog. '
+                            '  Currently we support only tcp and udp.  '
+                            'Example tcp 1049'
+                        ),
+                        'optional': True
+                    },
+                    {
+                        'name': 'severity',
+                        'doc': (
+                            'Optional : '
+                            'Filter syslog messages using severity.'
+                            '  Only messages with severity higher than or'
+                            ' equal to the specified severity will be sent'
+                            ' to the remote host.  '
+                            'Example severity debug'
+                        ),
+                        'optional': True
+                    }
+
+                ],
             }
         ]
     }),
