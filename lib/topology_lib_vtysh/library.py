@@ -1158,6 +1158,58 @@ class Configure(ContextManager):
 
         assert not result
 
+    def logging(
+            self, remote_host, transport='', severity=''):
+        """
+        Configure Syslog Server
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # logging {remote_host} {transport} {severity}
+
+        :param remote_host: IPv4 or IPv6 or Host name of syslog server
+        :param transport: Optional : Transport protocol and port used to send
+            syslog.   Currently we support only tcp and udp.  Example tcp 1049
+        :param severity: OptionalFilter syslog messages using severity.Only
+            messages with severity higher than or equal to the specified severity
+            will be sent to the remote host.  Example severity debug
+        """
+
+        cmd = (
+            'logging {remote_host} {transport} {severity}'
+        )
+        result = self.enode(cmd.format(**locals()), shell='vtysh')
+
+        assert not result
+
+    def no_logging(
+            self, remote_host, transport='', severity=''):
+        """
+        Remove Syslog Server Configuration
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no logging {remote_host} {transport} {severity}
+
+        :param remote_host: IPv4 or IPv6 or Host name of syslog server
+        :param transport: Optional : Transport protocol and port used to send
+            syslog.   Currently we support only tcp and udp.  Example tcp 1049
+        :param severity: OptionalFilter syslog messages using severity.Only
+            messages with severity higher than or equal to the specified severity
+            will be sent to the remote host.  Example severity debug
+        """
+
+        cmd = (
+            'no logging {remote_host} {transport} {severity}'
+        )
+        result = self.enode(cmd.format(**locals()), shell='vtysh')
+
+        assert not result
+
 
 class RouteMap(ContextManager):
     """
