@@ -48,8 +48,7 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_ntp_trusted_keys,
                                        parse_show_dhcp_server_leases,
                                        parse_show_dhcp_server,
-                                       parse_show_sflow,
-                                       parse_show_sflow_interface
+                                       parse_show_sflow
                                        )
 
 
@@ -937,12 +936,11 @@ Total number of entries 6
 
 def test_parse_ping_repetitions():
     raw_result = """\
-PING 10.0.0.2 (10.0.0.2) 100(128) bytes of data.
-108 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=0.213 ms
-
---- 10.0.0.2 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 0.213/0.213/0.213/0.000 ms
+PING 10.0.0.9 (10.0.0.9): 100 data bytes
+108 bytes from 10.0.0.9: icmp_seq=0 ttl=64 time=1.040 ms
+--- 10.0.0.9 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 1.040/1.040/1.040/0.000 ms
     """
 
     result = parse_ping_repetitions(raw_result)
@@ -960,12 +958,11 @@ rtt min/avg/max/mdev = 0.213/0.213/0.213/0.000 ms
 
 def test_parse_ping6_repetitions():
     raw_result = """\
-PING 2000::2 (2000::2) 100(128) bytes of data.
-108 bytes from 2000::2: icmp_seq=1 ttl=64 time=0.465 ms
-
+PING 2000::2 (2000::2): 100 data bytes
+108 bytes from 2000::2: icmp_seq=0 ttl=64 time=0.411 ms
 --- 2000::2 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 0.465/0.465/0.465/0.000 ms
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 0.411/0.411/0.411/0.000 ms
     """
 
     result = parse_ping6_repetitions(raw_result)
@@ -1734,48 +1731,6 @@ Number of Samples             20
         'polling_interval': 30,
         'header_size': 128,
         'max_datagram_size': 1400,
-        'number_of_samples': 20
-    }
-
-    ddiff = DeepDiff(result, expected)
-    assert not ddiff
-
-
-def test_parse_show_sflow_interface():
-    raw_result = """\
-sFlow Configuration - Interface 1
------------------------------------------
-sFlow                         enabled
-Sampling Rate                 20
-Number of Samples             10
-    """
-
-    result = parse_show_sflow_interface(raw_result)
-
-    expected = {
-        'interface': 1,
-        'sflow': 'enabled',
-        'sampling_rate': 20,
-        'number_of_samples': 10
-    }
-
-    ddiff = DeepDiff(result, expected)
-    assert not ddiff
-
-    raw_result = """\
-sFlow Configuration - Interface 1
------------------------------------------
-sFlow                         disabled
-Sampling Rate                 20
-Number of Samples             20
-    """
-
-    result = parse_show_sflow_interface(raw_result)
-
-    expected = {
-        'interface': 1,
-        'sflow': 'disabled',
-        'sampling_rate': 20,
         'number_of_samples': 20
     }
 
