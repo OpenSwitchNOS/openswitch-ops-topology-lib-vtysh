@@ -926,6 +926,46 @@ class Configure(ContextManager):
 
         assert not result
 
+    def sftp_server_enable(
+            self):
+        """
+        Enable sftp server.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # sftp server enable
+
+        """
+
+        cmd = (
+            'sftp server enable'
+        )
+        result = self.enode(cmd.format(**locals()), shell='vtysh')
+
+        assert not result
+
+    def no_sftp_server_enable(
+            self):
+        """
+        Disable sftp server.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no sftp server enable
+
+        """
+
+        cmd = (
+            'no sftp server enable'
+        )
+        result = self.enode(cmd.format(**locals()), shell='vtysh')
+
+        assert not result
+
     def ntp_server(
             self, host):
         """
@@ -4548,6 +4588,29 @@ def show_lldp_statistics(
     return parse_show_lldp_statistics(result)
 
 
+def show_sftp_server(
+        enode):
+    """
+    Show sftp server configuration.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show sftp server
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_sftp_server`
+    """
+
+    cmd = (
+        'show sftp server'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_show_sftp_server(result)
+
+
 def show_ip_bgp_summary(
         enode):
     """
@@ -5101,6 +5164,7 @@ __all__ = [
     'show_lacp_configuration',
     'show_lldp_neighbor_info',
     'show_lldp_statistics',
+    'show_sftp_server',
     'show_ip_bgp_summary',
     'show_ip_bgp_neighbors',
     'show_ip_bgp',

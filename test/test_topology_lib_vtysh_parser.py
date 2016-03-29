@@ -49,7 +49,8 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_dhcp_server_leases,
                                        parse_show_dhcp_server,
                                        parse_show_sflow,
-                                       parse_show_sflow_interface
+                                       parse_show_sflow_interface,
+                                       parse_show_sftp_server
                                        )
 
 
@@ -531,6 +532,23 @@ Total TLVs unrecognized : 0
         'total_packets_received': 0,
         'total_packets_received_and_discarded': 0,
         'total_tlvs_unrecognized': 0
+    }
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_sftp_server():
+    raw_result = """\
+SFTP server configuration
+-------------------------
+SFTP server : Enabled
+"""
+
+    result = parse_show_sftp_server(raw_result)
+
+    expected = {
+        'status': 'Enabled',
+        'ServerName': 'SFTP server'
     }
     ddiff = DeepDiff(result, expected)
     assert not ddiff
