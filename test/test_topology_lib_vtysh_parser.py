@@ -50,6 +50,7 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_dhcp_server,
                                        parse_show_sflow,
                                        parse_show_sflow_interface,
+                                       parse_show_interface_loopback,
                                        parse_show_sftp_server
                                        )
 
@@ -1175,6 +1176,9 @@ router bgp 64001
      network 10.240.2.2/32
      network 10.240.3.2/32
      network 10.240.4.2/32
+interface loopback 2
+    ip address 10.0.0.1/24
+    ipv6 address 2001::2/64
 !
 """
 
@@ -1182,15 +1186,21 @@ router bgp 64001
 
     expected = {
         'bgp':
-            {'64001':
-                {'networks': ['10.240.0.2/32',
-                              '10.240.1.2/32',
-                              '10.240.2.2/32',
-                              '10.240.3.2/32',
-                              '10.240.4.2/32'],
-                 'router_id': '2.0.0.1'}
-             }
-        }
+        {'64001':
+               {'networks': ['10.240.0.2/32',
+                             '10.240.1.2/32',
+                             '10.240.2.2/32',
+                             '10.240.3.2/32',
+                             '10.240.4.2/32'],
+                'router_id': '2.0.0.1'}
+         },
+        'loopback':
+        {'interface loopback 2':
+         {'ipv4_address': '10.0.0.1/24',
+          'ipv6_address': '2001::2/64'},
+
+         }
+    }
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff
@@ -1753,6 +1763,27 @@ Number of Samples             20
         'header_size': 128,
         'max_datagram_size': 1400,
         'number_of_samples': 20
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_interface_loopback():
+    raw_result = """
+ Interface lo2 is up
+ Admin state is up
+ Hardware: Loopback
+ IPv4 address 10.0.0.1/24
+ IPv6 address 2001::2/64
+     """
+
+    result = parse_show_interface_loopback(raw_result)
+    expected = {
+        'lo2':
+        {'AdminState': 'up',
+         'ipv6_address': '2001::2/64',
+         'ipv4_address': '10.0.0.1/24'}
     }
 
     ddiff = DeepDiff(result, expected)

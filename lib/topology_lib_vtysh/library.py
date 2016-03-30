@@ -28,6 +28,7 @@ from .parser import *  # noqa
 
 
 class ContextManager(object):
+
     """
     This class defines a context manager object.
 
@@ -47,6 +48,7 @@ class ContextManager(object):
 
 
 class Configure(ContextManager):
+
     """
     Configuration terminal
 
@@ -62,6 +64,7 @@ class Configure(ContextManager):
 
             ['end']
     """
+
     def __init__(self, enode):
         self.enode = enode
 
@@ -126,6 +129,27 @@ class Configure(ContextManager):
 
         cmd = (
             'no interface lag {lag_id}'
+        )
+        result = self.enode(cmd.format(**locals()), shell='vtysh')
+
+        assert not result
+
+    def no_interface_loopback(
+            self, loopback_id):
+        """
+        Delete a L3 loopback interface
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no interface loopback {loopback_id}
+
+        :param loopback_id: Loopback interface identifier.
+        """
+
+        cmd = (
+            'no interface loopback {loopback_id}'
         )
         result = self.enode(cmd.format(**locals()), shell='vtysh')
 
@@ -1252,6 +1276,7 @@ class Configure(ContextManager):
 
 
 class RouteMap(ContextManager):
+
     """
     Route-map configuration
 
@@ -1267,6 +1292,7 @@ class RouteMap(ContextManager):
 
             ['end']
     """
+
     def __init__(self, enode, routemap_name, permission, seq):
         self.enode = enode
         self.routemap_name = routemap_name
@@ -1470,6 +1496,7 @@ class RouteMap(ContextManager):
 
 
 class ConfigInterface(ContextManager):
+
     """
     Interface configuration.
 
@@ -1485,6 +1512,7 @@ class ConfigInterface(ContextManager):
 
             ['end']
     """
+
     def __init__(self, enode, portlbl):
         self.enode = enode
         self.port = enode.ports.get(portlbl, portlbl)
@@ -2237,6 +2265,7 @@ class ConfigInterface(ContextManager):
 
 
 class ConfigInterfaceVlan(ContextManager):
+
     """
     VLAN configuration.
 
@@ -2252,6 +2281,7 @@ class ConfigInterfaceVlan(ContextManager):
 
             ['end']
     """
+
     def __init__(self, enode, vlan_id):
         self.enode = enode
         self.vlan_id = vlan_id
@@ -2491,6 +2521,7 @@ class ConfigInterfaceVlan(ContextManager):
 
 
 class ConfigInterfaceLoopback(ContextManager):
+
     """
     Loopback interface configuration.
 
@@ -2506,6 +2537,7 @@ class ConfigInterfaceLoopback(ContextManager):
 
             ['end']
     """
+
     def __init__(self, enode, loopback_id):
         self.enode = enode
         self.loopback_id = loopback_id
@@ -2621,6 +2653,7 @@ class ConfigInterfaceLoopback(ContextManager):
 
 
 class ConfigInterfaceLag(ContextManager):
+
     """
     Configure link-aggregation parameters.
 
@@ -2636,6 +2669,7 @@ class ConfigInterfaceLag(ContextManager):
 
             ['end']
     """
+
     def __init__(self, enode, lag):
         self.enode = enode
         self.lag = lag
@@ -3281,6 +3315,7 @@ class ConfigInterfaceLag(ContextManager):
 
 
 class ConfigInterfaceMgmt(ContextManager):
+
     """
     Configure management interface.
 
@@ -3296,6 +3331,7 @@ class ConfigInterfaceMgmt(ContextManager):
 
             ['end']
     """
+
     def __init__(self, enode):
         self.enode = enode
 
@@ -3476,6 +3512,7 @@ class ConfigInterfaceMgmt(ContextManager):
 
 
 class ConfigRouterBgp(ContextManager):
+
     """
     BGP configuration.
 
@@ -3491,6 +3528,7 @@ class ConfigRouterBgp(ContextManager):
 
             ['end']
     """
+
     def __init__(self, enode, asn):
         self.enode = enode
         self.asn = asn
@@ -4292,6 +4330,7 @@ class ConfigRouterBgp(ContextManager):
 
 
 class ConfigVlan(ContextManager):
+
     """
     VLAN configuration.
 
@@ -4307,6 +4346,7 @@ class ConfigVlan(ContextManager):
 
             ['end']
     """
+
     def __init__(self, enode, vlan_id):
         self.enode = enode
         self.vlan_id = vlan_id
@@ -5146,6 +5186,30 @@ def show_dhcp_server(
     return parse_show_dhcp_server(result)
 
 
+def show_interface_loopback(
+        enode, loopback_int=''):
+    """
+    Show loopback interfaces on ops
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show interface loopback {loopback_int}
+
+    :param loopback_int: Loopback interface id.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_interface_loopback`
+    """
+
+    cmd = (
+        'show interface loopback {loopback_int}'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_show_interface_loopback(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -5187,5 +5251,6 @@ __all__ = [
     'show_ntp_status',
     'show_ntp_trusted_keys',
     'show_dhcp_server_leases',
-    'show_dhcp_server'
+    'show_dhcp_server',
+    'show_interface_loopback'
 ]

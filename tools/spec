@@ -288,7 +288,19 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Display DHCP server configuration.',
                 'arguments': [],
                 'returns': True
-            }
+            },
+            {
+                'command': 'show interface loopback {loopback_int}',
+                'doc': 'Show loopback interfaces on ops',
+                'arguments': [
+                    {
+                        'name': 'loopback_int',
+                        'doc': 'Loopback interface id.',
+                        'optional': True
+                    }
+                ],
+                'returns': True
+            },
         ]
     }),
     ('configure', {
@@ -314,6 +326,16 @@ VTYSH_SPEC = OrderedDict([
                     {
                         'name': 'lag_id',
                         'doc': 'link-aggregation identifier.',
+                    },
+                ],
+            },
+            {
+                'command': 'no interface loopback {loopback_id}',
+                'doc': 'Delete a L3 loopback interface',
+                'arguments': [
+                    {
+                        'name': 'loopback_id',
+                        'doc': 'Loopback interface identifier.',
                     },
                 ],
             },

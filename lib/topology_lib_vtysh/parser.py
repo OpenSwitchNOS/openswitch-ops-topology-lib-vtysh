@@ -22,7 +22,6 @@ Parse vtysh commands with output to a python dictionary.
 from __future__ import unicode_literals, absolute_import
 from __future__ import print_function, division
 
-
 import re
 
 
@@ -176,6 +175,65 @@ def parse_show_udld_interface(raw_result):
             # The interface may be a digit (e.g '1') or string ('fast0/1')
             if value.isdigit() and key != 'interface':
                 result[key] = int(value)
+    return result
+
+
+def parse_show_interface_loopback(raw_result):
+    """
+    Parse the 'show interface loopback' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show interface loopback command in a \
+        dictionary of the form:
+
+     ::
+
+      'lo2':
+          {'AdminState': 'up',
+           'ipv6_address': '2001::2/64',
+           'ipv4_address': '10.0.0.1/24'},
+      'lo4':
+          {'AdminState': 'up',
+           'ipv6_address': '2002::1/64',
+           'ipv4_address': '192.168.1.1/24'}
+
+    """
+    result = {}
+    loopback_list = []
+    show_loopback_id = re.compile('lo[0-9]+', re.DOTALL)
+    loopback_list = show_loopback_id.findall(raw_result)
+    print(loopback_list)
+    if loopback_list:
+        looplist = re.split(r'Interface lo[0-9]+', raw_result)
+        looplist.remove(looplist[0])
+    else:
+        looplist = None
+    if looplist:
+        for loopback in looplist:
+            loopback_id = loopback_list.pop(0)
+            result[loopback_id] = {}
+            loopback = loopback.replace("\n", "")
+            admin_state = re.match(r".*Admin state is ([a-z]+).*", loopback)
+            if admin_state:
+                result[loopback_id]['AdminState'] = admin_state.group(1)
+            else:
+                result[loopback_id]['AdminState'] = None
+            loopback_ipv4ip = re.match(
+                r'.*IPv4 address\s+(\d+.\d+.\d+.\d+\/\d+).*',
+                loopback)
+            if loopback_ipv4ip:
+                loopback_ipv4_ip = loopback_ipv4ip.group(1)
+                result[loopback_id]['ipv4_address'] = loopback_ipv4_ip
+            else:
+                result[loopback_id]['ipv4_address'] = None
+            loopback_ipv6add = re.match(r'.*IPv6 address\s+(.*)', loopback)
+            if loopback_ipv6add:
+                loopback_ipv6 = loopback_ipv6add.group(1)
+                loopback_ipv6 = loopback_ipv6.strip()
+                result[loopback_id]['ipv6_address'] = loopback_ipv6
+            else:
+                result[loopback_id]['ipv6_address'] = None
     return result
 
 
@@ -1090,7 +1148,7 @@ def parse_show_rib(raw_result):
                         re_result = re.search(
                             ipv4_nexthop_re,
                             lines[line_index]
-                            )
+                        )
 
                         if re_result:
                             partial = re_result.groupdict()
@@ -1141,7 +1199,7 @@ def parse_show_rib(raw_result):
                         re_result = re.search(
                             ipv6_nexthop_re,
                             lines[line_index]
-                            )
+                        )
 
                         if re_result:
                             partial = re_result.groupdict()
@@ -1192,6 +1250,16 @@ def parse_show_running_config(raw_result):
                                 '11.240.9.2/32'],
                     'router_id': '3.0.0.1'}
                 }
+
+             'loopback':
+                {'interface loopback 2':
+                    {'ipv4_address': '10.0.0.1/24',
+                     'ipv6_address': '2001::2/64'},
+
+                'interface loopback 3':
+                    {'ipv4_address': '192.168.10.1/24',
+                     'ipv6_address': '2002::1/64'},
+                }
         }
     """
 
@@ -1225,6 +1293,27 @@ def parse_show_running_config(raw_result):
                 else:
                     result['bgp'][re_as_number]['networks'].append(network)
 
+    # Parsing loopback configurations in show run
+    result['loopback'] = {}
+    show_loopback_id = re.compile('interface loopback\s+[0-9]+', re.DOTALL)
+    loopback_list = show_loopback_id.findall(raw_result)
+    if loopback_list:
+        config_lines = raw_result.splitlines()
+        for config in config_lines:
+            config = config.strip()
+            if re.match('.*interface loopback.*', config):
+                loopback = loopback_list.pop(0)
+                result['loopback'][loopback] = {}
+            loopback_ipv4_ip = re.match(
+                r'.*ip address\s+(\d+.\d+.\d+.\d+\/\d+).*',
+                config)
+            if loopback_ipv4_ip:
+                loopback_ipv4_ip = loopback_ipv4_ip.group(1)
+                result['loopback'][loopback]['ipv4_address'] = loopback_ipv4_ip
+            loopback_ipv6 = re.match(r'.*ipv6 address\s+(.*)', config)
+            if loopback_ipv6:
+                loopback_ipv6 = loopback_ipv6.group(1)
+                result['loopback'][loopback]['ipv6_address'] = loopback_ipv6
     return result
 
 
@@ -1318,7 +1407,7 @@ def parse_show_ip_route(raw_result):
                 re_result = re.search(
                     ipv4_nexthop_re,
                     lines[line_index]
-                    )
+                )
 
                 if re_result:
                     partial = re_result.groupdict()
@@ -1425,7 +1514,7 @@ def parse_show_ipv6_route(raw_result):
                 re_result = re.search(
                     ipv6_nexthop_re,
                     lines[line_index]
-                    )
+                )
 
                 if re_result:
                     partial = re_result.groupdict()
@@ -1901,7 +1990,7 @@ def parse_show_sflow(raw_result):
     if str(result['collector']) != 'Not set':
         count = result['collector'].count('\n')
         result['collector'] = \
-            result['collector'].split('\n', count-1)
+            result['collector'].split('\n', count - 1)
         result['collector'] = \
             [x.strip(' \n') for x in result['collector']]
         for i in range(0, count):
@@ -1923,6 +2012,7 @@ __all__ = [
     'parse_ping6_repetitions', 'parse_show_rib',
     'parse_show_running_config', 'parse_show_ip_route',
     'parse_show_ipv6_route', 'parse_show_ipv6_bgp', 'parse_show_ip_ecmp',
+    'parse_show_interface_loopback',
     'parse_show_ntp_associations', 'parse_show_ntp_authentication_key',
     'parse_show_ntp_statistics', 'parse_show_ntp_status',
     'parse_show_ntp_trusted_keys', 'parse_show_sflow',
