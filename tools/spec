@@ -288,6 +288,103 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Display DHCP server configuration.',
                 'arguments': [],
                 'returns': True
+            },
+            {
+                'command': 'show vlog config',
+                'doc': 'Display vlog config.',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show vlog {sub_command}',
+                'doc': 'Show vlog sub command.',
+                'arguments': [
+                    {
+                        'name': 'sub_command',
+                        'doc':  'sub command'
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show vlog config daemon {daemon_name}',
+                'doc': 'Display vlog config for ops-daemons.',
+                'arguments': [
+                    {
+                        'name': 'daemon_name',
+                        'doc': 'daemon name'
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show vlog config feature {feature_name}',
+                'doc': 'Display vlog config for feature',
+                'arguments': [
+                    {
+                        'name': 'feature_name',
+                        'doc': 'feature name'
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show vlog config list',
+                'doc': 'Display vlog config for supported features list',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show vlog daemon {daemon_name}',
+                'doc': 'Display vlogs for ops-daemon',
+                'arguments': [
+                    {
+                        'name': 'daemon_name',
+                        'doc': 'daemon name'
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show vlog severity {severity_level}',
+                'doc': 'Display vlogs for severity level',
+                'arguments': [
+                    {
+                        'name': 'severity_level',
+                        'doc': 'severity level'
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show vlog daemon {daemonname} severity {severity}',
+                'doc': 'Display vlogs for ops-daemon with severity',
+                'arguments': [
+                    {
+                        'name': 'daemonname',
+                        'doc': 'daemon name'
+                    },
+                    {
+                        'name': 'severity',
+                        'doc': 'severity level'
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show vlog severity {severity} daemon {daemonname}',
+                'doc': 'Display vlogs for severity with ops-daemon',
+                'arguments': [
+                    {
+                        'name': 'severity',
+                        'doc': 'severity level'
+                    },
+                    {
+                        'name': 'daemonname',
+                        'doc': 'daemon name'
+                    }
+                ],
+                'returns': True
             }
         ]
     }),
@@ -934,6 +1031,42 @@ VTYSH_SPEC = OrderedDict([
                         'optional': True
                     }
 
+                ],
+            },
+            {
+                'command': 'vlog daemon {daemon} {destination} {severity}',
+                'doc': 'Configure the daemon',
+                'arguments': [
+                    {
+                        'name': 'daemon',
+                        'doc': 'daemon name',
+                    },
+                    {
+                        'name': 'destination',
+                        'doc': 'configure the log level of destination',
+                    },
+                    {
+                        'name': 'severity',
+                        'doc': 'severity level'
+                    }
+                ],
+            },
+            {
+                'command': 'vlog feature {feature} {destination} {severity}',
+                'doc': 'Configure the feature',
+                'arguments': [
+                    {
+                        'name': 'feature',
+                        'doc': 'feature name',
+                    },
+                    {
+                        'name': 'destination',
+                        'doc': 'configure the log level of destination',
+                    },
+                    {
+                        'name': 'severity',
+                        'doc': 'severity level'
+                    }
                 ],
             }
         ]
