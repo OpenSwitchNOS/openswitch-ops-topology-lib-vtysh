@@ -2002,6 +2002,324 @@ def parse_show_sflow(raw_result):
     return result
 
 
+def parse_show_spanning_tree(raw_result):
+    """
+    Parse the 'show spanning-tree' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show spanning-tree \
+       command in a dictionary of the form:
+
+     ::
+
+        {
+            'spanning_tree': 'Enabled',
+            'root_priority': '10',
+            'root_mac_address': '70:72:cf:3e:b7:27',
+            'root_hello': '4',
+            'root_max_age': '17',
+            'root_forward_delay': '14',
+            'bridge_mac_address': '70:72:cf:3e:b7:27',
+            'bridge_priority': '10',
+            'bridge_hello': '4',
+            'bridge_max_age': '17',
+            'bridge_forward_delay': '14',
+            '1':
+            {
+                   'priority': '8',
+                   'cost': '0',
+                   'type': 'point_to_point',
+                   'role': 'disabled_port',
+                   'State': 'Blocking'
+            },
+            '2':
+            {
+                   'priority': '8',
+                   'cost': '0',
+                   'type': 'point_to_point',
+                   'role': 'disabled_port',
+                   'State': 'Blocking'
+            },
+            'error' : 'No MSTP common instance record found'
+        }
+    """
+
+    mst_zero_config = (
+        r'\s*Spanning\s*tree\s*status:\s*(?P<spanning_tree>.+)\s*\n'
+        r'\s*Root\s*ID\s*Priority\s*:\s*(?P<root_priority>[0-9]*)\s*\n'
+        r'\s*MAC-Address\s*:\s*(?P<root_mac_address>[^ ]+)\s*\n'
+        r'\s*This\s*bridge\s*is\s*the\s*root\s*\n'
+        r'\s*Hello\s*time\(in\s*seconds\):\s*(?P<root_hello>[0-9]+)'
+        r'\s*Max\s*Age\(in\s*seconds\):\s*(?P<root_max_age>[0-9]+)'
+        r'\s*Forward\s*Delay\(in\s*seconds\):(?P<root_forward_delay>[0-9]+)'
+        r'\s*\n*'
+        r'\s*Bridge\s*ID \s*Priority\s*:\s*(?P<bridge_priority>[0-9]*)\s*\n'
+        r'\s*MAC-Address\s*:\s*(?P<bridge_mac_address>[^ ]+)\s*\n'
+        r'\s*Hello\s*time\(in\s*seconds\):\s*(?P<bridge_hello>[0-9]+)'
+        r'\s*Max\s*Age\(in\s*seconds\):\s*(?P<bridge_max_age>[0-9]+)'
+        r'\s*Forward\s*Delay\(in\s*seconds\):(?P<bridge_forward_delay>[0-9]+)'
+    )
+
+    mst_port_state = (
+        r'(?P<Port>[^ ]+)\s*(?P<role>[^ ]+)\s*(?P<State>[^ ]+)'
+        r'\s*(?P<cost>[0-9]+)\s*(?P<priority>[0-9]+)\s*(?P<type>[^ ]+)'
+    )
+
+    error = [
+        r'No\s*MSTP\s*common\s*instance\s*record\s*found',
+        r'No\s*record\s*found\.',
+        r'\s*Spanning-tree\s*is\s*disabled'
+    ]
+
+    result = {}
+    for error_str in error:
+        re_result = re.search(error_str, raw_result)
+
+        if (re_result):
+            result['error'] = str(raw_result)
+            return result
+
+    re_result = re.search(mst_zero_config, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+
+    pattern_found = False
+    for line in raw_result.splitlines():
+        if (pattern_found is True):
+            re_result = re.search(mst_port_state, line)
+            partial = re_result.groupdict()
+            port = partial['Port']
+            del partial['Port']
+            result[port] = partial
+        else:
+            re_result = re.search('-+\s*-+', line)
+            if (re_result):
+                pattern_found = True
+
+    return result
+
+
+def parse_show_spanning_tree_mst(raw_result):
+    """
+    Parse the 'show spanning-tree mst' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show spanning-tree mst \
+       command in a dictionary of the form:
+
+     ::
+
+        {
+            'MST0':
+            {
+                   'vlan_mapped': '3,4,2,1',
+                   'bridge_address': '70:72:cf:9d:b9:08',
+                   'bridge_priority': '10',
+                   'operational_hello': '2',
+                   'operational_forward_delay': '15',
+                   'operational_max_age': '20',
+                   'operational_tx_holdcount': '6',
+                   'Configured_hello': '4',
+                   'Configuredl_forward_delay': '14',
+                   'Configured_max_age': '17',
+                   'Configured_tx_holdcount': '9',
+                   '1' : {
+                       'priority': '8',
+                       'cost': '0',
+                       'type': 'point_to_point',
+                       'role': 'disabled_port',
+                       'State': 'Blocking'
+                   },
+                   '2' : {
+                       'priority': '8',
+                       'cost': '0',
+                       'type': 'point_to_point',
+                       'role': 'disabled_port',
+                       'State': 'Blocking'
+                   }
+            },
+            'MST1':
+            {
+                   'vlan_mapped': '2,1',
+                   'bridge_address': '70:72:cf:9d:b9:08',
+                   'bridge_priority': '8'
+                   'root_address': '',
+                   'root_priority': '8',
+                   'Port': '0',
+                   'cost': '20000',
+                   'rem_hops': '0',
+                   '1' : {
+                       'priority': '8',
+                       'cost': '0',
+                       'type': 'point_to_point',
+                       'role': 'disabled_port',
+                       'State': 'Blocking'
+                   },
+                   '2' : {
+                       'priority': '8',
+                       'cost': '0',
+                       'type': 'point_to_point',
+                       'role': 'disabled_port',
+                       'State': 'Blocking'
+                   }
+            },
+            'error' : 'No MSTP common instance record found'
+        }
+    """
+
+    root_mst_conf_re = (
+        r'\s*(?P<mst>MST[0-9]+)\s*\n'
+        r'\s*vlans\s*mapped:\s*(?P<vlan_mapped>[^ ]*)\s*\n'
+        r'\s*Bridge\s*address\s*:\s*(?P<bridge_address>[^ ]*)'
+        r'\s*priority\s*:\s*(?P<bridge_priority>[0-9]*)\s*\n'
+        r'\s*Root\s*this\s*switch\s*for\s*the\s*CIST\s*\n'
+        r'\s*Operational\s*Hello\s*time\(in\s*seconds\)\s*:'
+        r'\s*(?P<operational_hello>[0-9]+)\s*'
+        r'\s*Forward\s*delay\(in\s*seconds\)\s*:'
+        r'\s*(?P<operational_forward_delay>[0-9]+)\s*'
+        r'\s*Max-age\s*\(in\s*seconds\)\s*:'
+        r'\s*(?P<operational_max_age>[0-9]+)\s*'
+        r'\s*txHoldCount\s*\(in\s*pps\)\s*:'
+        r'\s*(?P<operational_tx_holdcount>[0-9]+)\s*\n'
+        r'\s*Configured\s*Hello\s*time\(in\s*seconds\)\s*:'
+        r'\s*(?P<Configured_hello>[0-9]+)\s*'
+        r'\s*Forward\s*delay\(in\s*seconds\)\s*:'
+        r'\s*(?P<Configuredl_forward_delay>[0-9]+)\s*'
+        r'\s*Max-age\s*\(in\s*seconds\)\s*:'
+        r'\s*(?P<Configured_max_age>[0-9]+)\s*'
+        r'\s*txHoldCount\s*\(in\s*pps\)\s*:'
+        r'\s*(?P<Configured_tx_holdcount>[0-9]+)\s*\n'
+    )
+
+    mst_conf_re = (
+        r'\s*(?P<mst>MST[0-9]+)\s*\n'
+        r'\s*vlans\s*mapped:\s*(?P<vlan_mapped>[^ ]*)\s*\n'
+        r'\s*Bridge\s*address\s*:\s*(?P<bridge_address>[^ ]*)'
+        r'\s*priority\s*:\s*(?P<bridge_priority>[0-9]*)\s*\n'
+        r'\s*Root\s*address\s*:\s*(?P<root_address>.*)\s*'
+        r'\s*priority\s*:\s*(?P<root_priority>[0-9]*)\s*\n'
+        r'\s*Port\s*:\s*(?P<Port>[^ ]+)\s*,'
+        r'\s*Cost\s*:\s*(?P<cost>[0-9]+)\s*,'
+        r'\s*Rem\s*Hops\s*:\s*(?P<rem_hops>[0-9]+)\s*\n'
+    )
+
+    mst_port_state = (
+        r'\s*(?P<Port>[^ ]+)\s*(?P<role>[^ ]+)\s*(?P<State>[^ ]+)'
+        r'\s*(?P<cost>[0-9]+)\s*(?P<priority>[0-9]+)\s*(?P<type>[^ ]+)\s*'
+    )
+
+    error = [
+        r'No\s*MSTP\s*common\s*instance\s*record\s*found',
+        r'No\s*record\s*found\.',
+        r'\s*Spanning-tree\s*is\s*disabled'
+    ]
+
+    result = {}
+    for error_str in error:
+        re_result = re.search(error_str, raw_result)
+
+        if (re_result):
+            result['error'] = str(raw_result)
+            return result
+
+    out = {}
+    result_list = raw_result.split("####")
+    for string in result_list:
+        if 'CIST' in string:
+            re_result = re.search(root_mst_conf_re, string)
+            partial = re_result.groupdict()
+        elif 'MST' in string:
+            re_result = re.search(mst_conf_re, string)
+            partial = re_result.groupdict()
+        else:
+            continue
+        pattern_found = False
+        for line in string.splitlines():
+            if (pattern_found is True and len(line.strip()) != 0):
+                re_result = re.search(mst_port_state, line)
+                port_detail = re_result.groupdict()
+                port = port_detail['Port']
+                del port_detail['Port']
+                partial[port] = port_detail
+            else:
+                re_result = re.search('-+\s*-+', line)
+                if (re_result):
+                    pattern_found = True
+
+        mst = partial['mst']
+        del partial['mst']
+        out[mst] = partial
+
+    return out
+
+
+def parse_show_spanning_tree_mst_config(raw_result):
+    """
+    Parse the 'show spanning-tree mst-config' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show spanning-tree \
+       mst-config command in a dictionary of the form:
+     ::
+
+        {
+            'mst_config_id': '70:72:cf:d9:2c:f6',
+            'mst_config_revision': '8'
+            'no_instances': '2',
+            'instance_vlan':
+                {'1': ['1','2'],
+                '2': ['3','4']}
+        }
+    """
+    mst_conf_re = (
+        r'\s*MST\s*config\s*ID\s*:\s*(?P<mst_config_id>[^ ]+)\s*\n'
+        r'\s*MST\s*config\s*revision\s*:'
+        r'\s*(?P<mst_config_revision>[0-9]+)\s*\n'
+        r'\s*Number\s*of\s*instances\s*:\s*(?P<no_instances>[0-9]+)\s*\n'
+    )
+
+    instance_re = (
+        r'(?P<instance>^[0-9]+)\s*(?P<vlan>.+)\s*'
+    )
+
+    error = [
+        r'No\s*record\s*found\.',
+        r'\s*Spanning-tree\s*is\s*disabled'
+    ]
+
+    instance = {}
+    result = {}
+
+    for error_str in error:
+        re_result = re.search(error_str, raw_result)
+
+        if (re_result):
+            result['error'] = str(raw_result)
+            return result
+
+    re_result = re.search(mst_conf_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+
+    for line in raw_result.splitlines():
+        re_result = re.search(instance_re, line)
+        if re_result:
+            partial = re_result.groupdict()
+            instance[partial['instance']] = partial['vlan'].split(',')
+
+    result['instance_vlan'] = instance
+
+    return result
+
+
+def parse_show_running_config_spanning_tree(raw_result):
+    return raw_result
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
@@ -2017,5 +2335,7 @@ __all__ = [
     'parse_show_ntp_statistics', 'parse_show_ntp_status',
     'parse_show_ntp_trusted_keys', 'parse_show_sflow',
     'parse_show_dhcp_server_leases', 'parse_show_dhcp_server',
-    'parse_show_sflow_interface', 'parse_show_sftp_server'
+    'parse_show_sflow_interface', 'parse_show_sftp_server',
+    'parse_show_spanning_tree', 'parse_show_spanning_tree_mst_config',
+    'parse_show_spanning_tree_mst', 'parse_show_running_config_spanning_tree'
 ]
