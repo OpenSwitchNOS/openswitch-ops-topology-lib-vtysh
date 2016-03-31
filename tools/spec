@@ -144,6 +144,30 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
+                'command': 'show ip ospf neighbor detail',
+                'doc': 'Show ospf neighbor detail information.',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show ip ospf neighbor',
+                'doc': 'Show ospf neighbor information.',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show ip ospf interface',
+                'doc': 'Show ospf interface detail.',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show ip ospf',
+                'doc': 'Show ospf detail.',
+                'arguments': [],
+                'returns': True
+            },
+            {
                 'command': 'show running-config',
                 'doc': 'Show running-config information.',
                 'arguments': [],
@@ -1273,6 +1297,26 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
+                'command': 'ip ospf dead-interval {dead_timer}',
+                'doc': 'Configure ospf dead_timer',
+                'arguments': [
+                    {
+                        'name': 'dead_timer',
+                        'doc': '<1-65535>  dead_timer range',
+                    },
+                ],
+            },
+            {
+                'command': 'ip ospf hello-interval {hello_timer}',
+                'doc': 'Configure ospf hello_timer',
+                'arguments': [
+                    {
+                        'name': 'hello_timer',
+                        'doc': '<1-65535>  hello_timer range',
+                    },
+                ],
+            },
+            {
                 'command': 'lacp port-priority {port_priority}',
                 'doc': 'Set port priority is used in LACP negotiation.',
                 'arguments': [
@@ -1850,6 +1894,68 @@ VTYSH_SPEC = OrderedDict([
                 'command': 'ip dhcp',
                 'doc': 'Set the mode as dhcp.',
                 'arguments': [],
+            },
+        ]
+    }),
+    ('config_router_ospf', {
+        'doc': 'OSPF configuration.',
+        'arguments': [],
+        'pre_commands': ['config terminal', 'router ospf'],
+        'post_commands': ['end'],
+        'commands': [
+            {
+                'command': 'router-id {id}',
+                'doc': 'Specifies the OSPF router-ID for a OSPF Router',
+                'arguments': [
+                    {
+                        'name': 'id',
+                        'doc': '<A.B.C.D> IPv4 address',
+                    },
+                ],
+            },
+            {
+                'command': 'no router-id {id}',
+                'doc': 'Specifies the OSPF router-ID for a OSPF Router',
+                'arguments': [
+                    {
+                        'name': 'id',
+                        'doc': '<A.B.C.D> IPv4 address',
+                    },
+                ],
+            },
+            {
+                'command': 'max-metric router-lsa',
+                'doc': 'Configures the router as stub router',
+                'arguments': [],
+            },
+            {
+                'command': 'network {network} area {area}',
+                'doc': 'Adds the announcement network for OSPF',
+                'arguments': [
+                    {
+                        'name': 'network',
+                        'doc': '<A.B.C.D/M> IPv4 address with the prefix len',
+                    },
+                    {
+                        'name': 'area',
+                        'doc': '<0-4228250625 | A.B.C.D> Area-id range'
+                    }
+                ],
+            },
+            {
+                'command': 'no network {network} area {area}',
+                'doc': 'Removes the announcement network for OSPF',
+                'arguments': [
+                    {
+                        'name': 'network',
+                        'doc': '<A.B.C.D/M> IPv4 address'
+                                ' with the prefix length',
+                    },
+                    {
+                        'name': 'area',
+                        'doc': '<0-4228250625 | A.B.C.D> Area-id range'
+                    }
+                ],
             },
         ]
     }),

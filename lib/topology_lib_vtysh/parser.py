@@ -749,6 +749,7 @@ def parse_show_ip_bgp_neighbors(raw_result):
                    'bgp_peer_uptime': 221
 
              }
+        }
     """
 
     neighbor_re = (
@@ -889,6 +890,265 @@ def parse_show_ipv6_bgp(raw_result):
                     partial[key] = int(value)
             result.append(partial)
 
+    return result
+
+
+def parse_show_ip_ospf_neighbor_detail(raw_result):
+    """
+    Parse the 'show ip ospf neighbor detail' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show ip ospf neighbor detail command \
+        in a dictionary of the form:
+
+     ::
+
+        {
+            '2.2.2.2': {'Neighbor': '2.2.2.2',
+                'dead_timer': '30.763s',
+                'area': '0.0.0.0',
+                'time': '9.240s',
+                'state_change': 1,
+                'interface_address': '10.10.10.2',
+                'priority': 1,
+                'link_req_list': 0,
+                'state': 'Init',
+                'admin_state': 'up',
+                'db_summary_list': 0,
+                'BDR': '0.0.0.0',
+                'interface': 1,
+                'link_retrans_list': 0,
+                'DR': '0.0.0.0',
+                'options': 0
+
+            }
+        }
+    """
+
+    neighbor_re = (
+                    r'\s*Neighbor (?P<Neighbor>[^,]+),\s*interface address '
+                    '(?P<interface_address>[0-255.]+).*'
+                    r'\s*[\w ]+area (?P<area>[0-255.]+) via interface '
+                    '(?P<interface>\d+).*'
+                    r'\s*[\w ]+priority is (?P<priority>\d+), State is '
+                    '(?P<state>\S+), (?P<state_change>\d+)[\w ]+.*'
+                    r'\s*Neighbor is (?P<admin_state>\w+) for '
+                    '(?P<hello_timer>[\d.]+s).*'
+                    r'\s*DR is (?P<DR>[0-255.]+),BDR is '
+                    '(?P<BDR>[0-255.]+).*'
+                    r'\s*Options (?P<options>\d+).*'
+                    r'\s*Dead timer due in (?P<dead_timer>[\d.]+s).*'
+                    r'\s*Database Summary List (?P<db_summary_list>\d+).*'
+                    r'\s*Link State Request List (?P<link_req_list>\d+).*'
+                    r'\s*Link State Retransmission List '
+                    '(?P<link_retrans_list>\d+)'
+    )
+
+    result = {}
+    for re_result in re.finditer(neighbor_re, raw_result):
+        partial = re_result.groupdict()
+        for key, value in partial.items():
+            if value and value.isdigit():
+                partial[key] = int(value)
+        result[partial['Neighbor']] = partial
+    return result
+
+
+def parse_show_ip_ospf_neighbor(raw_result):
+    """
+    Parse the 'show ip ospf neighbor' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show ip ospf neighbor command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+            'neighbor_id': '2.2.2.2',
+            'priority': '1',
+            'state': 'Full/Backup',
+            'dead_time': '31.396s',
+            'address': '10.0.1.1',
+            'interface': '1:10.0.1.2/24',
+            'rxmtl': '0',
+            'rqstl': '0',
+            'dbsml': '0'
+        }
+    """
+
+    neighbor_re = (
+                    r'(?P<neighbor_id>[^ ]+)\s*(?P<priority>[^ ]+)\s*'
+                    '(?P<state>[^ ]+)'
+                    r'\s*(?P<dead_time>[^ ]+)\s*(?P<address>[^ ]+)\s*'
+                    '(?P<interface>[^ ]+)'
+                    r'\s*(?P<rxmtl>[^ ]+)\s*(?P<rqstl>[^ ]+)\s*(?P<dbsml>[^ ])'
+    )
+
+    result = {}
+    pattern_found = False
+    for line in raw_result.splitlines():
+        if (pattern_found is True):
+            re_result = re.search(neighbor_re, line)
+            if (re_result):
+                result = re_result.groupdict()
+        else:
+            re_result = re.search('-+\s*-+', line)
+            if (re_result):
+                pattern_found = True
+
+    return result
+
+
+def parse_show_ip_ospf_interface(raw_result):
+
+    """
+    Parse the 'show ip ospf interface' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show ip ospf interface command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+           'router_id': '2.2.2.2',
+           'priority': '1',
+           'Area_id': '0.0.0.1',
+           'cost': '10',
+           'retransmit_time': '5',
+           'neighbor_count': '1',
+           'wait_time': '40',
+           'state': '<DR >',
+           'Designated Router (ID)': '2.2.2.2',
+           'DR_Interface_address': '10.10.10.1',
+           'Backup Designated Router (ID)': '1.1.1.1',
+           'BDR_Interface_address': '10.10.10.2',
+           'hello_due_time': '7.717s',
+           'Adjacent_neigbhor_count': '1',
+           'internet_address': '10.10.10.2/24',
+           'dead_timer': '40',
+           'hello_timer': '10',
+           'transmit_delay': '1'
+        }
+    """
+
+    show_ip_ospf_int_re = (
+                r'\s*Interface (?P<Interface_id>\d) BW '
+                '(?P<bandwidth>\d+) Mbps.*'
+                r'\s*Internet address (?P<internet_address>[0-255.]+\S+) '
+                'Area (?P<Area_id>[0-255.]+).*'
+                r'\s*Router ID : (?P<router_id>[0-255.]+), Network Type '
+                '(?P<network_type>\S+), Cost: (?P<cost>\d+).*'
+                r'\s*Transmit Delay is (?P<transmit_delay>\d) sec, State '
+                '(?P<state>\S+\s*\S+), Priority (?P<priority>\d)\s*'
+                r'[\S ]+\(ID\)\s*'
+                '(?P<Designated_router>[0-255.]+),\s*Interface Address '
+                '(?P<DR_Interface_address>[0-255.]+).*')
+
+    show_ip_ospf_int_re1 = (
+                r'\s*Hello (?P<hello_timer>\d+) Dead (?P<dead_timer>\d+) '
+                'wait (?P<wait_time>\d+) Retransmit '
+                '(?P<retransmit_time>\d+).*'
+                r'\s*Hello due in\s*(?P<hello_due_time>\S+).*'
+                r'\Neighbor Count is\s*(?P<neighbor_count>\d),\s*Adjacent '
+                'neighbor count is\s*(?P<Adjacent_neigbhor_count>\d)'
+                 )
+
+    bdr_re = (
+                r'\s*Backup Designated Router \(ID\) '
+                '(?P<Backup_designated_router>[0-255.]+),\s*Interface '
+                'Address (?P<BDR_Interface_address>[0-255.]+).*'
+             )
+
+    error_no_record = (
+                     r'No\s*backup\s*designated\.*')
+
+    result = {}
+
+    re_result = re.search(show_ip_ospf_int_re, raw_result, re.DOTALL)
+    if (re_result):
+        result = re_result.groupdict()
+
+    re_result = re.search(show_ip_ospf_int_re1, raw_result, re.DOTALL)
+    if (re_result):
+        result1 = re_result.groupdict()
+        result.update(result1)
+
+    re_result = re.search(error_no_record, raw_result, re.DOTALL)
+    if (re_result):
+        return result
+
+    re_result = re.search(bdr_re, raw_result, re.DOTALL)
+    if (re_result):
+        result1 = re_result.groupdict()
+        result.update(result1)
+
+    return result
+
+
+def parse_show_ip_ospf(raw_result):
+
+    """
+    Parse the 'show ip ospf' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show ip ospf interface command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+
+           'external_lsa': '0',
+           'authentication_type': 'no authentication',
+           'Area_id': '0.0.0.1',
+           'no_of_lsa': '9',
+           'interface_count': '1',
+           'opaque_link': '0',
+           'opaque_area': '0',
+           'abr_summary_lsa': '0',
+           'router_lsa': '5',
+           'asbr_summary_lsa': '0',
+           'nssa_lsa': '0',
+           'fully_adj_neighbors': '1',
+           'network_lsa': '4',
+           'router': '2.2.2.2',
+           'opaque_lsa': '0',
+           'active_interfaces': '1',
+           'no_of_area': '1'
+
+        }
+    """
+
+    pattern = (
+           r'[\S ]+Router\s*ID:\s*(?P<router>[0-255.]+).*'
+           r'[\S ]+external\s*LSA\s*(?P<external_lsa>\d+).*'
+           r'[\S ]+opaque\s*AS\s*LSA\s*(?P<opaque_lsa>\d+).*'
+           r'[\S ]+router:\s*(?P<no_of_area>\d+).*'
+           r'\s*Area\s*ID:\s*(?P<Area_id>[0-255.]+).*'
+           r'[\S ]+area:\s*Total:\s*(?P<interface_count>\d+),\s*Active:'
+           '(?P<active_interfaces>\d+).*'
+           r'[\S ]+area:\s*(?P<fully_adj_neighbors>\d+).*'
+           r'[\S ]+Area\s*has\s*(?P<authentication_type>[\S ]+).*'
+           r'[\S ]+Number\s*of\s*LSA\s*(?P<no_of_lsa>\d+).*'
+           r'[\S ]+Number\s*of\s*router\s*LSA\s*(?P<router_lsa>\d+).*'
+           r'[\S ]+Number\s*of\s*network\s*LSA\s*(?P<network_lsa>\d+).*'
+           r'[\S ]+Number\s*of\s*ABR\s*summary\s*LSA\s*'
+           '(?P<abr_summary_lsa>\d+).*'
+           r'[\S ]+Number\s*of\s*ASBR\s*summary\sLSA\s*'
+           '(?P<asbr_summary_lsa>\d+).*'
+           r'[\S ]+Number\s*of\s*NSSA\s*LSA\s*(?P<nssa_lsa>\d+).*'
+           r'[\S ]+Number\s*of\s*opaque\s*link\s*(?P<opaque_link>\d+).*'
+           r'[\S ]+Number\s*of\s*opaque\s*area\s*(?P<opaque_area>\d+).*'
+          )
+    re_result = re.match(pattern, raw_result, re.DOTALL)
+    if(re_result):
+        result = re_result.groupdict()
     return result
 
 
@@ -2017,5 +2277,7 @@ __all__ = [
     'parse_show_ntp_statistics', 'parse_show_ntp_status',
     'parse_show_ntp_trusted_keys', 'parse_show_sflow',
     'parse_show_dhcp_server_leases', 'parse_show_dhcp_server',
-    'parse_show_sflow_interface', 'parse_show_sftp_server'
+    'parse_show_sflow_interface', 'parse_show_sftp_server',
+    'parse_show_ip_ospf_neighbor_detail', 'parse_show_ip_ospf_interface',
+    'parse_show_ip_ospf', 'parse_show_ip_ospf_neighbor'
 ]

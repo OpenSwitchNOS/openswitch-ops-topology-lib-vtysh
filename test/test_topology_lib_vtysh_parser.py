@@ -51,7 +51,11 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_sflow,
                                        parse_show_sflow_interface,
                                        parse_show_interface_loopback,
-                                       parse_show_sftp_server
+                                       parse_show_sftp_server,
+                                       parse_show_ip_ospf_neighbor_detail,
+                                       parse_show_ip_ospf_neighbor,
+                                       parse_show_ip_ospf,
+                                       parse_show_ip_ospf_interface
                                        )
 
 
@@ -1827,6 +1831,169 @@ Number of Samples             20
         'sampling_rate': 20,
         'number_of_samples': 20
     }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_ip_ospf_interface():
+
+    raw_result = """Interface 1 BW 1000 Mbps  <up,BROADCAST,up >
+    Internet address 10.10.10.2/24 Area 0.0.0.1
+    MTU mismatch detection: enabled
+    Router ID : 2.2.2.2, Network Type <BROADCAST>, Cost: 10
+    Transmit Delay is 1 sec, State <DR >, Priority 1
+    Designated Router (ID) 2.2.2.2,  Interface Address 10.10.10.2
+    Backup Designated Router (ID) 10.10.10.1,  Interface Address 10.10.10.1
+    Multicast group memberships: OSPFAllRouters OSPFDesignatedRouters
+    Timer intervals configured, Hello 10 Dead 40 wait 40 Retransmit 5
+    Hello due in  7.717s
+    Neighbor Count is 1, Adjacent neighbor count is 1"""
+
+    result = parse_show_ip_ospf_interface(raw_result)
+    expected = {
+        'router_id': '2.2.2.2',
+        'wait_time': '40',
+        'Area_id': '0.0.0.1',
+        'network_type': '<BROADCAST>',
+        'cost': '10',
+        'Backup_designated_router': '10.10.10.1',
+        'retransmit_time': '5',
+        'neighbor_count': '1',
+        'bandwidth': '1000',
+        'Interface_id': '1',
+        'BDR_Interface_address': '10.10.10.1',
+        'state': '<DR >',
+        'hello_due_time': '7.717s',
+        'Designated_router': '2.2.2.2',
+        'Adjacent_neigbhor_count': '1',
+        'internet_address': '10.10.10.2/24',
+        'DR_Interface_address': '10.10.10.2',
+        'dead_timer': '40',
+        'hello_timer': '10',
+        'transmit_delay': '1',
+        'priority': '1'
+              }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_ip_ospf_neighbor_detail():
+    raw_result = """Neighbor 2.2.2.2,  interface address 10.10.10.2
+    In the area 0.0.0.0 via interface 1
+    Neighbor priority is 1, State is 2-Way, 1 state changes
+    Neighbor is up for 9.240s
+    DR is 2.2.2.2,BDR is 1.1.1.1
+    Options 0  *|-|-|-|-|-|-|*
+    Dead timer due in 30.763s
+    Database Summary List 0
+    Link State Request List 0
+    Link State Retransmission List 0
+    """
+
+    result = parse_show_ip_ospf_neighbor_detail(raw_result)
+    expected = {
+        '2.2.2.2': {
+             'dead_timer': '30.763s',
+             'area': '0.0.0.0',
+             'hello_timer': '9.240s',
+             'state_change': 1,
+             'interface_address': '10.10.10.2',
+             'priority': 1,
+             'link_req_list': 0,
+             'state': '2-Way',
+             'admin_state': 'up',
+             'db_summary_list': 0,
+             'Neighbor': '2.2.2.2',
+             'BDR': '1.1.1.1',
+             'interface': 1,
+             'link_retrans_list': 0,
+             'DR': '2.2.2.2',
+             'options': 0}
+             }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_ip_ospf():
+
+    raw_result = """OSPF Routing Process, Router ID:  2.2.2.2
+                   This implementation conforms to RFC2328
+                   RFC1583 Compatibility flag is disabled
+                   Opaque Capability flag is disabled
+                   Stub router advertisement is configured administratively
+                   Initial SPF scheduling delay 200 millisec(s)
+                   Minimum hold time between consecutive SPFs 1000 millisec(s)
+                   Maximum hold time between consecutive SPFs 10000 millisec(s)
+                   Hold time multiplier is currently 1
+                   Number of external LSA 0. Checksum Sum 0x00000000
+                   Number of opaque AS LSA 0. Checksum Sum 0x00000000
+                   Number of areas attached to this router: 1
+                   All adjacency changes are not logged
+                   Area ID:  0.0.0.1
+                     Number of interfaces in this area: Total: 1, Active:1
+                     Number of fully adjacent neighbors in this area: 1
+                     Area has no authentication
+                     SPF algorithm last executed ago: 1m58s
+                     SPF algorithm executed 15 times
+                     Number of LSA 9
+                     Number of router LSA 5. Checksum Sum 0x00018980
+                     Number of network LSA 4. Checksum Sum 0x000091d3
+                     Number of ABR summary LSA 0. Checksum Sum 0x00000000
+                     Number of ASBR summary LSA 0. Checksum Sum 0x00000000
+                     Number of NSSA LSA 0. Checksum Sum 0x00000000
+                     Number of opaque link 0. Checksum Sum 0x00000000
+                     Number of opaque area 0. Checksum Sum 0x00000000"""
+
+    result = parse_show_ip_ospf(raw_result)
+    expected = {
+           'external_lsa': '0',
+           'authentication_type': 'no authentication',
+           'Area_id': '0.0.0.1',
+           'no_of_lsa': '9',
+           'interface_count': '1',
+           'opaque_link': '0',
+           'opaque_area': '0',
+           'abr_summary_lsa': '0',
+           'router_lsa': '5',
+           'asbr_summary_lsa': '0',
+           'nssa_lsa': '0',
+           'fully_adj_neighbors': '1',
+           'network_lsa': '4',
+           'router': '2.2.2.2',
+           'opaque_lsa': '0',
+           'active_interfaces': '1',
+           'no_of_area': '1'
+              }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_ip_ospf_neighbor():
+
+    raw_result = """\
+
+    Neighbor ID Pri State    Dead Time Address    Interface  RXmtL RqstL DBsmL
+----------------------------------------------------------------------------------------------------
+2.2.2.2     1 Full/Backup   31.396s 10.0.1.1   1:10.0.1.2/24    0  0  0
+
+    """
+
+    result = parse_show_ip_ospf_neighbor(raw_result)
+    expected = {
+           'neighbor_id': '2.2.2.2',
+           'priority': '1',
+           'state': 'Full/Backup',
+           'dead_time': '31.396s',
+           'address': '10.0.1.1',
+           'interface': '1:10.0.1.2/24',
+           'rxmtl': '0',
+           'rqstl': '0',
+           'dbsml': '0'
+              }
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff

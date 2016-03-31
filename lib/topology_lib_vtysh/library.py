@@ -28,7 +28,6 @@ from .parser import *  # noqa
 
 
 class ContextManager(object):
-
     """
     This class defines a context manager object.
 
@@ -48,7 +47,6 @@ class ContextManager(object):
 
 
 class Configure(ContextManager):
-
     """
     Configuration terminal
 
@@ -64,7 +62,6 @@ class Configure(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode):
         self.enode = enode
 
@@ -1276,7 +1273,6 @@ class Configure(ContextManager):
 
 
 class RouteMap(ContextManager):
-
     """
     Route-map configuration
 
@@ -1292,7 +1288,6 @@ class RouteMap(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode, routemap_name, permission, seq):
         self.enode = enode
         self.routemap_name = routemap_name
@@ -1496,7 +1491,6 @@ class RouteMap(ContextManager):
 
 
 class ConfigInterface(ContextManager):
-
     """
     Interface configuration.
 
@@ -1512,7 +1506,6 @@ class ConfigInterface(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode, portlbl):
         self.enode = enode
         self.port = enode.ports.get(portlbl, portlbl)
@@ -1977,6 +1970,48 @@ class ConfigInterface(ContextManager):
 
         assert not result
 
+    def ip_ospf_dead_interval(
+            self, dead_timer):
+        """
+        Configure ospf dead_timer
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip ospf dead-interval {dead_timer}
+
+        :param dead_timer: <1-65535>  dead_timer range
+        """
+
+        cmd = (
+            'ip ospf dead-interval {dead_timer}'
+        )
+        result = self.enode(cmd.format(**locals()), shell='vtysh')
+
+        assert not result
+
+    def ip_ospf_hello_interval(
+            self, hello_timer):
+        """
+        Configure ospf hello_timer
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip ospf hello-interval {hello_timer}
+
+        :param hello_timer: <1-65535>  hello_timer range
+        """
+
+        cmd = (
+            'ip ospf hello-interval {hello_timer}'
+        )
+        result = self.enode(cmd.format(**locals()), shell='vtysh')
+
+        assert not result
+
     def lacp_port_priority(
             self, port_priority):
         """
@@ -2265,7 +2300,6 @@ class ConfigInterface(ContextManager):
 
 
 class ConfigInterfaceVlan(ContextManager):
-
     """
     VLAN configuration.
 
@@ -2281,7 +2315,6 @@ class ConfigInterfaceVlan(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode, vlan_id):
         self.enode = enode
         self.vlan_id = vlan_id
@@ -2521,7 +2554,6 @@ class ConfigInterfaceVlan(ContextManager):
 
 
 class ConfigInterfaceLoopback(ContextManager):
-
     """
     Loopback interface configuration.
 
@@ -2537,7 +2569,6 @@ class ConfigInterfaceLoopback(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode, loopback_id):
         self.enode = enode
         self.loopback_id = loopback_id
@@ -2653,7 +2684,6 @@ class ConfigInterfaceLoopback(ContextManager):
 
 
 class ConfigInterfaceLag(ContextManager):
-
     """
     Configure link-aggregation parameters.
 
@@ -2669,7 +2699,6 @@ class ConfigInterfaceLag(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode, lag):
         self.enode = enode
         self.lag = lag
@@ -3315,7 +3344,6 @@ class ConfigInterfaceLag(ContextManager):
 
 
 class ConfigInterfaceMgmt(ContextManager):
-
     """
     Configure management interface.
 
@@ -3331,7 +3359,6 @@ class ConfigInterfaceMgmt(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode):
         self.enode = enode
 
@@ -3511,8 +3538,158 @@ class ConfigInterfaceMgmt(ContextManager):
         assert not result
 
 
-class ConfigRouterBgp(ContextManager):
+class ConfigRouterOspf(ContextManager):
+    """
+    OSPF configuration.
 
+    pre_commands:
+
+    ::
+
+            ['config terminal', 'router ospf']
+
+    post_commands:
+
+    ::
+
+            ['end']
+    """
+    def __init__(self, enode):
+        self.enode = enode
+
+    def __enter__(self):
+        commands = """\
+            config terminal
+            router ospf
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+        return self
+
+    def __exit__(self, type, value, traceback):
+        commands = """\
+            end
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+    def router_id(
+            self, id):
+        """
+        Specifies the OSPF router-ID for a OSPF Router
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # router-id {id}
+
+        :param id: <A.B.C.D> IPv4 address
+        """
+
+        cmd = (
+            'router-id {id}'
+        )
+        result = self.enode(cmd.format(**locals()), shell='vtysh')
+
+        assert not result
+
+    def no_router_id(
+            self, id):
+        """
+        Specifies the OSPF router-ID for a OSPF Router
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no router-id {id}
+
+        :param id: <A.B.C.D> IPv4 address
+        """
+
+        cmd = (
+            'no router-id {id}'
+        )
+        result = self.enode(cmd.format(**locals()), shell='vtysh')
+
+        assert not result
+
+    def max_metric_router_lsa(
+            self):
+        """
+        Configures the router as stub router
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # max-metric router-lsa
+
+        """
+
+        cmd = (
+            'max-metric router-lsa'
+        )
+        result = self.enode(cmd.format(**locals()), shell='vtysh')
+
+        assert not result
+
+    def network_area(
+            self, network, area):
+        """
+        Adds the announcement network for OSPF
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # network {network} area {area}
+
+        :param network: <A.B.C.D/M> IPv4 address with the prefix len
+        :param area: <0-4228250625 | A.B.C.D> Area-id range
+        """
+
+        cmd = (
+            'network {network} area {area}'
+        )
+        result = self.enode(cmd.format(**locals()), shell='vtysh')
+
+        assert not result
+
+    def no_network_area(
+            self, network, area):
+        """
+        Removes the announcement network for OSPF
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no network {network} area {area}
+
+        :param network: <A.B.C.D/M> IPv4 address with the prefix length
+        :param area: <0-4228250625 | A.B.C.D> Area-id range
+        """
+
+        cmd = (
+            'no network {network} area {area}'
+        )
+        result = self.enode(cmd.format(**locals()), shell='vtysh')
+
+        assert not result
+
+
+class ConfigRouterBgp(ContextManager):
     """
     BGP configuration.
 
@@ -3528,7 +3705,6 @@ class ConfigRouterBgp(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode, asn):
         self.enode = enode
         self.asn = asn
@@ -4330,7 +4506,6 @@ class ConfigRouterBgp(ContextManager):
 
 
 class ConfigVlan(ContextManager):
-
     """
     VLAN configuration.
 
@@ -4346,7 +4521,6 @@ class ConfigVlan(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode, vlan_id):
         self.enode = enode
         self.vlan_id = vlan_id
@@ -4741,6 +4915,98 @@ def show_ipv6_bgp(
     result = enode(cmd.format(**locals()), shell='vtysh')
 
     return parse_show_ipv6_bgp(result)
+
+
+def show_ip_ospf_neighbor_detail(
+        enode):
+    """
+    Show ospf neighbor detail information.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip ospf neighbor detail
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_ospf_neighbor_detail`
+    """
+
+    cmd = (
+        'show ip ospf neighbor detail'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_show_ip_ospf_neighbor_detail(result)
+
+
+def show_ip_ospf_neighbor(
+        enode):
+    """
+    Show ospf neighbor information.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip ospf neighbor
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_ospf_neighbor`
+    """
+
+    cmd = (
+        'show ip ospf neighbor'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_show_ip_ospf_neighbor(result)
+
+
+def show_ip_ospf_interface(
+        enode):
+    """
+    Show ospf interface detail.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip ospf interface
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_ospf_interface`
+    """
+
+    cmd = (
+        'show ip ospf interface'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_show_ip_ospf_interface(result)
+
+
+def show_ip_ospf(
+        enode):
+    """
+    Show ospf detail.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip ospf
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_ospf`
+    """
+
+    cmd = (
+        'show ip ospf'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_show_ip_ospf(result)
 
 
 def show_running_config(
@@ -5219,6 +5485,7 @@ __all__ = [
     'ConfigInterfaceLoopback',
     'ConfigInterfaceLag',
     'ConfigInterfaceMgmt',
+    'ConfigRouterOspf',
     'ConfigRouterBgp',
     'ConfigVlan',
     'show_interface',
@@ -5233,6 +5500,10 @@ __all__ = [
     'show_ip_bgp_neighbors',
     'show_ip_bgp',
     'show_ipv6_bgp',
+    'show_ip_ospf_neighbor_detail',
+    'show_ip_ospf_neighbor',
+    'show_ip_ospf_interface',
+    'show_ip_ospf',
     'show_running_config',
     'show_ip_route',
     'show_ipv6_route',
