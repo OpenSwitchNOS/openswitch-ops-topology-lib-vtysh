@@ -28,7 +28,6 @@ from .parser import *  # noqa
 
 
 class ContextManager(object):
-
     """
     This class defines a context manager object.
 
@@ -48,7 +47,6 @@ class ContextManager(object):
 
 
 class Configure(ContextManager):
-
     """
     Configuration terminal
 
@@ -64,7 +62,6 @@ class Configure(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode):
         self.enode = enode
 
@@ -1274,9 +1271,54 @@ class Configure(ContextManager):
 
         assert not result
 
+    def vlog_daemon(
+            self, daemon, destination, severity):
+        """
+        Configure the daemon
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # vlog daemon {daemon} {destination} {severity}
+
+        :param daemon: daemon name
+        :param destination: configure the log level of destination
+        :param severity: severity level
+        """
+
+        cmd = (
+            'vlog daemon {daemon} {destination} {severity}'
+        )
+        result = self.enode(cmd.format(**locals()), shell='vtysh')
+
+        assert not result
+
+    def vlog_feature(
+            self, feature, destination, severity):
+        """
+        Configure the feature
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # vlog feature {feature} {destination} {severity}
+
+        :param feature: feature name
+        :param destination: configure the log level of destination
+        :param severity: severity level
+        """
+
+        cmd = (
+            'vlog feature {feature} {destination} {severity}'
+        )
+        result = self.enode(cmd.format(**locals()), shell='vtysh')
+
+        assert not result
+
 
 class RouteMap(ContextManager):
-
     """
     Route-map configuration
 
@@ -1292,7 +1334,6 @@ class RouteMap(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode, routemap_name, permission, seq):
         self.enode = enode
         self.routemap_name = routemap_name
@@ -1496,7 +1537,6 @@ class RouteMap(ContextManager):
 
 
 class ConfigInterface(ContextManager):
-
     """
     Interface configuration.
 
@@ -1512,7 +1552,6 @@ class ConfigInterface(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode, portlbl):
         self.enode = enode
         self.port = enode.ports.get(portlbl, portlbl)
@@ -2265,7 +2304,6 @@ class ConfigInterface(ContextManager):
 
 
 class ConfigInterfaceVlan(ContextManager):
-
     """
     VLAN configuration.
 
@@ -2281,7 +2319,6 @@ class ConfigInterfaceVlan(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode, vlan_id):
         self.enode = enode
         self.vlan_id = vlan_id
@@ -2521,7 +2558,6 @@ class ConfigInterfaceVlan(ContextManager):
 
 
 class ConfigInterfaceLoopback(ContextManager):
-
     """
     Loopback interface configuration.
 
@@ -2537,7 +2573,6 @@ class ConfigInterfaceLoopback(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode, loopback_id):
         self.enode = enode
         self.loopback_id = loopback_id
@@ -2653,7 +2688,6 @@ class ConfigInterfaceLoopback(ContextManager):
 
 
 class ConfigInterfaceLag(ContextManager):
-
     """
     Configure link-aggregation parameters.
 
@@ -2669,7 +2703,6 @@ class ConfigInterfaceLag(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode, lag):
         self.enode = enode
         self.lag = lag
@@ -3315,7 +3348,6 @@ class ConfigInterfaceLag(ContextManager):
 
 
 class ConfigInterfaceMgmt(ContextManager):
-
     """
     Configure management interface.
 
@@ -3331,7 +3363,6 @@ class ConfigInterfaceMgmt(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode):
         self.enode = enode
 
@@ -3512,7 +3543,6 @@ class ConfigInterfaceMgmt(ContextManager):
 
 
 class ConfigRouterBgp(ContextManager):
-
     """
     BGP configuration.
 
@@ -3528,7 +3558,6 @@ class ConfigRouterBgp(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode, asn):
         self.enode = enode
         self.asn = asn
@@ -4330,7 +4359,6 @@ class ConfigRouterBgp(ContextManager):
 
 
 class ConfigVlan(ContextManager):
-
     """
     VLAN configuration.
 
@@ -4346,7 +4374,6 @@ class ConfigVlan(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode, vlan_id):
         self.enode = enode
         self.vlan_id = vlan_id
@@ -5186,6 +5213,53 @@ def show_dhcp_server(
     return parse_show_dhcp_server(result)
 
 
+def show_vlog_config(
+        enode):
+    """
+    Display vlog config.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show vlog config
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_vlog_config`
+    """
+
+    cmd = (
+        'show vlog config'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_show_vlog_config(result)
+
+
+def show_vlog(
+        enode, sub_command):
+    """
+    Show vlog sub command.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show vlog {sub_command}
+
+    :param sub_command: sub command
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_vlog`
+    """
+
+    cmd = (
+        'show vlog {sub_command}'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_show_vlog(result)
+
+
 def show_interface_loopback(
         enode, loopback_int=''):
     """
@@ -5208,6 +5282,175 @@ def show_interface_loopback(
     result = enode(cmd.format(**locals()), shell='vtysh')
 
     return parse_show_interface_loopback(result)
+
+
+def show_vlog_config_daemon(
+        enode, daemon_name):
+    """
+    Display vlog config for ops-daemons.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show vlog config daemon {daemon_name}
+
+    :param daemon_name: daemon name
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_vlog_config_daemon`
+    """
+
+    cmd = (
+        'show vlog config daemon {daemon_name}'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_show_vlog_config_daemon(result)
+
+
+def show_vlog_config_feature(
+        enode, feature_name):
+    """
+    Display vlog config for feature
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show vlog config feature {feature_name}
+
+    :param feature_name: feature name
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_vlog_config_feature`
+    """
+
+    cmd = (
+        'show vlog config feature {feature_name}'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_show_vlog_config_feature(result)
+
+
+def show_vlog_config_list(
+        enode):
+    """
+    Display vlog config for supported features list
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show vlog config list
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_vlog_config_list`
+    """
+
+    cmd = (
+        'show vlog config list'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_show_vlog_config_list(result)
+
+
+def show_vlog_daemon(
+        enode, daemon_name):
+    """
+    Display vlogs for ops-daemon
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show vlog daemon {daemon_name}
+
+    :param daemon_name: daemon name
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_vlog_daemon`
+    """
+
+    cmd = (
+        'show vlog daemon {daemon_name}'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_show_vlog_daemon(result)
+
+
+def show_vlog_severity(
+        enode, severity_level):
+    """
+    Display vlogs for severity level
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show vlog severity {severity_level}
+
+    :param severity_level: severity level
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_vlog_severity`
+    """
+
+    cmd = (
+        'show vlog severity {severity_level}'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_show_vlog_severity(result)
+
+
+def show_vlog_daemon_severity(
+        enode, daemonname, severity):
+    """
+    Display vlogs for ops-daemon with severity
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show vlog daemon {daemonname} severity {severity}
+
+    :param daemonname: daemon name
+    :param severity: severity level
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_vlog_daemon_severity`
+    """
+
+    cmd = (
+        'show vlog daemon {daemonname} severity {severity}'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_show_vlog_daemon_severity(result)
+
+
+def show_vlog_severity_daemon(
+        enode, severity, daemonname):
+    """
+    Display vlogs for severity with ops-daemon
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show vlog severity {severity} daemon {daemonname}
+
+    :param severity: severity level
+    :param daemonname: daemon name
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_vlog_severity_daemon`
+    """
+
+    cmd = (
+        'show vlog severity {severity} daemon {daemonname}'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_show_vlog_severity_daemon(result)
 
 
 __all__ = [
@@ -5252,5 +5495,14 @@ __all__ = [
     'show_ntp_trusted_keys',
     'show_dhcp_server_leases',
     'show_dhcp_server',
-    'show_interface_loopback'
+    'show_vlog_config',
+    'show_vlog',
+    'show_interface_loopback',
+    'show_vlog_config_daemon',
+    'show_vlog_config_feature',
+    'show_vlog_config_list',
+    'show_vlog_daemon',
+    'show_vlog_severity',
+    'show_vlog_daemon_severity',
+    'show_vlog_severity_daemon'
 ]

@@ -50,8 +50,17 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_dhcp_server,
                                        parse_show_sflow,
                                        parse_show_sflow_interface,
+                                       parse_show_sftp_server,
                                        parse_show_interface_loopback,
-                                       parse_show_sftp_server
+                                       parse_show_vlog_config,
+                                       parse_show_vlog_config_feature,
+                                       parse_show_vlog_config_daemon,
+                                       parse_show_vlog_config_list,
+                                       parse_show_vlog_daemon,
+                                       parse_show_vlog_severity,
+                                       parse_show_vlog_daemon_severity,
+                                       parse_show_vlog_severity_daemon,
+                                       parse_show_vlog
                                        )
 
 
@@ -1827,6 +1836,166 @@ Number of Samples             20
         'sampling_rate': 20,
         'number_of_samples': 20
     }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_vlog_config():
+    raw_result = """\
+=================================================
+Feature         Daemon          Syslog     File
+=================================================
+lldp            ops-lldpd       INFO       INFO
+
+lacp            ops-lacpd       INFO       INFO
+
+fand            ops-fand        INFO       INFO
+    """
+
+    result = parse_show_vlog_config(raw_result)
+
+    expected = True
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_vlog_config_daemon():
+    raw_result = """\
+======================================
+Daemon              Syslog     File
+======================================
+ops-lldpd           INFO       INFO
+    """
+
+    result = parse_show_vlog_config_daemon(raw_result)
+
+    expected = False
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_vlog_config_feature():
+    raw_result = """\
+========================================
+Feature               Syslog     File
+========================================
+lacp                  INFO       INFO
+    """
+
+    result = parse_show_vlog_config_feature(raw_result)
+
+    expected = False
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_vlog_config_list():
+    raw_result = """\
+=============================================
+Features          Description
+=============================================
+lldp              Link Layer Discovery
+lacp              Link Aggregation Con
+fand              System Fan
+    """
+
+    result = parse_show_vlog_config_list(raw_result)
+
+    expected = True
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_vlog_daemon():
+    raw_result = """\
+---------------------------------------------------
+show vlog
+-----------------------------------------------------
+ovs|00005|ops_ledd|INFO|ops-ledd (OpenSwitch ledd) 2.5.0
+    """
+
+    result = parse_show_vlog_daemon(raw_result)
+
+    expected = True
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_vlog_severity():
+    raw_result = """\
+---------------------------------------------------
+show vlog
+-----------------------------------------------------
+ovs-vswitchd-sim|ovs|00004|fatal_signal|WARN|terminating with signal 15\
+(Terminated)
+
+ovsdb-server|ovs|00002|fatal_signal|WARN|terminating with signal 15\
+(Terminated)
+
+ops-sysd|ovs|00005|ovsdb_if|ERR|Failed to commit the transaction. rc =7
+
+ops-sysd|ovs|00006|ovsdb_if|ERR|Failed to commit the transaction. rc = 7
+
+ops-pmd|ovs|00007|plug|WARN|Failed to read module disable register: 54 (2)
+
+ops-pmd|ovs|00008|plug|WARN|Failed to read module disable register: 52 (2)
+    .....
+    """
+
+    result = parse_show_vlog_severity(raw_result)
+
+    expected = True
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_vlog_daemon_severity():
+    raw_result = """\
+---------------------------------------------------
+show vlog
+-----------------------------------------------------
+ovs|00006|ops_portd|INFO|ops-portd (ops-portd) 2.5.0
+    """
+
+    result = parse_show_vlog_daemon_severity(raw_result)
+
+    expected = True
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_vlog_severity_daemon():
+    raw_result = """\
+---------------------------------------------------
+show vlog
+-----------------------------------------------------
+ovs|00006|ops_portd|INFO|ops-portd (ops-portd) 2.5.0
+    """
+
+    result = parse_show_vlog_severity_daemon(raw_result)
+
+    expected = True
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_vlog():
+    raw_result = """\
+%Unknown command
+    """
+
+    result = parse_show_vlog(raw_result)
+
+    expected = True
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff

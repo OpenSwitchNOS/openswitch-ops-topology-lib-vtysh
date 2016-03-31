@@ -2002,6 +2002,206 @@ def parse_show_sflow(raw_result):
     return result
 
 
+def parse_show_vlog_config(raw_result):
+    """
+    Parse the 'show vlog config' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :return: The parsed result of the show vlog config command.
+            : True on Success or False on Failure.
+    """
+    show_vlog_config_re = (
+            r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
+            )
+    re_result = {}
+    for line in raw_result.splitlines():
+        re_result = re.search(show_vlog_config_re, raw_result)
+        if re_result is None:
+            assert False
+        else:
+            if "Feature" and "Daemon" and "Syslog" in line:
+                return True
+    return False
+
+
+def parse_show_vlog_config_daemon(raw_result):
+    """
+    Parse the 'show vlog config daemon' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :return: The parsed result of the show vlog config daemon command.
+            : True on success or False on Failure.
+    """
+    show_config_daemon_re = (
+            r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
+            )
+    re_result = {}
+    for line in raw_result.splitlines():
+        re_result = re.search(show_config_daemon_re, raw_result)
+        if re_result is None:
+            assert False
+        else:
+            if "ops-lldpd" and "WARN" in line:
+                return True
+    return False
+
+
+def parse_show_vlog_config_feature(raw_result):
+    """
+    Parse the 'show vlog config feature' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :return: The parsed result of the show vlog config feature command.
+            : True on success or False on Failure.
+    """
+    show_config_feature_re = (
+            r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
+            )
+    re_result = {}
+    for line in raw_result.splitlines():
+        re_result = re.search(show_config_feature_re, raw_result)
+        if re_result is None:
+            assert False
+        else:
+            if "lacp" and "ERR" in line:
+                return True
+    return False
+
+
+def parse_show_vlog_config_list(raw_result):
+    """
+    Parse the 'show vlog config list' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :return: The parsed result of the show vlog config list command.
+            : True on success or False on Failure.
+    """
+    show_config_list_re = (
+            r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
+            )
+    re_result = {}
+    for line in raw_result.splitlines():
+        re_result = re.search(show_config_list_re, raw_result)
+        if re_result is None:
+            assert False
+        else:
+            if "Features" and "Description" in line:
+                return True
+    return False
+
+
+def parse_show_vlog_daemon(raw_result):
+    """
+    Parse the 'show vlog daemon' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :return: The parsed result of the show vlog daemon command.
+            : True on success or False on Failure.
+    """
+    show_daemon_re = (
+            r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
+            )
+    re_result = {}
+    for line in raw_result.splitlines():
+        re_result = re.search(show_daemon_re, raw_result)
+        if re_result is None:
+            assert False
+        else:
+            if "ops-ledd (OpenSwitch ledd)" in line:
+                return True
+            else:
+                if "No match for the filter provided" in line:
+                    return False
+    return False
+
+
+def parse_show_vlog_severity(raw_result):
+    """
+    Parse the 'show vlog severity' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :return: The parsed result of the show vlog severity command.
+            : True on success or False on Failure.
+    """
+    show_severity_re = (
+            r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
+            )
+    re_result = {}
+    for line in raw_result.splitlines():
+        re_result = re.search(show_severity_re, raw_result)
+        if re_result is None:
+            assert False
+        else:
+            if "WARN" in line:
+                return True
+            else:
+                if "Unknown command" in line:
+                    return False
+    return False
+
+
+def parse_show_vlog_daemon_severity(raw_result):
+    """
+    Parse the 'show vlog daemon {daemon} severity {severity}' command output
+
+    :param str raw_result: vtysh raw result string.
+    :return: The parsed result of the show vlog daemon {daemon} severity \
+            {severity} command.
+            : True on success or False on Failure.
+    """
+    daemon_severity_re = (
+            r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
+            )
+    re_result = {}
+    for line in raw_result.splitlines():
+        re_result = re.search(daemon_severity_re, raw_result)
+        if re_result is None:
+            assert False
+        else:
+            if "INFO" and "(ops-portd)" in line:
+                return True
+            else:
+                if "No match for the filter provided" in line:
+                    return False
+    return False
+
+
+def parse_show_vlog_severity_daemon(raw_result):
+    """
+    Parse the 'show vlog severity {severity} daemon {daemon}' command output
+
+    :param str raw_result: vtysh raw result string.
+    :return: The parsed result of the show vlog severity {severity} daemon \
+            {daemon} command.
+            : True on success or False on Failure.
+    """
+    return parse_show_vlog_daemon_severity(raw_result)
+
+
+def parse_show_vlog(raw_result):
+    """
+    Parse the 'show vlog {sub-command}' command raw output
+
+    :param str raw_result: vtysh raw result string.
+    :return: True or False.
+    """
+    vlog_re = (
+            r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
+            )
+    re_result = {}
+    for line in raw_result.splitlines():
+        re_result = re.search(vlog_re, raw_result)
+        if re_result is None:
+            assert False
+        else:
+            if "ovs" in line:
+                return False
+            else:
+                if "Unknown command" in line:
+                    return True
+    return False
+
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
@@ -2011,11 +2211,16 @@ __all__ = [
     'parse_show_udld_interface', 'parse_ping_repetitions',
     'parse_ping6_repetitions', 'parse_show_rib',
     'parse_show_running_config', 'parse_show_ip_route',
-    'parse_show_ipv6_route', 'parse_show_ipv6_bgp', 'parse_show_ip_ecmp',
-    'parse_show_interface_loopback',
+    'parse_show_ipv6_route', 'parse_show_ipv6_bgp',
+    'parse_show_ip_ecmp', 'parse_show_interface_loopback',
     'parse_show_ntp_associations', 'parse_show_ntp_authentication_key',
     'parse_show_ntp_statistics', 'parse_show_ntp_status',
     'parse_show_ntp_trusted_keys', 'parse_show_sflow',
     'parse_show_dhcp_server_leases', 'parse_show_dhcp_server',
-    'parse_show_sflow_interface', 'parse_show_sftp_server'
+    'parse_show_sflow_interface', 'parse_show_sftp_server',
+    'parse_show_vlog_config', 'parse_show_vlog_config_feature',
+    'parse_show_vlog_config_daemon', 'parse_show_vlog_config_list',
+    'parse_show_vlog_daemon', 'parse_show_vlog_severity',
+    'parse_show_vlog_daemon_severity', 'parse_show_vlog_severity_daemon',
+    'parse_show_vlog'
 ]
