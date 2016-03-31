@@ -586,7 +586,7 @@ def parse_show_lldp_statistics(raw_result):
 
     )
 
-    re_result = re.match(neighbor_info_re, raw_result)
+    re_result = re.search(neighbor_info_re, raw_result)
     assert re_result
 
     result = re_result.groupdict()
