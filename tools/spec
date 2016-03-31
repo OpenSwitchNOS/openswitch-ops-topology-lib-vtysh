@@ -290,6 +290,11 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
+                'command': 'copy running-config startup-config',
+                'doc': 'copies running config to startup config',
+                'arguments': []
+            },
+            {
                 'command': 'show interface loopback {loopback_int}',
                 'doc': 'Show loopback interfaces on ops',
                 'arguments': [

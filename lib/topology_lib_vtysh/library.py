@@ -28,7 +28,6 @@ from .parser import *  # noqa
 
 
 class ContextManager(object):
-
     """
     This class defines a context manager object.
 
@@ -48,7 +47,6 @@ class ContextManager(object):
 
 
 class Configure(ContextManager):
-
     """
     Configuration terminal
 
@@ -64,7 +62,6 @@ class Configure(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode):
         self.enode = enode
 
@@ -1276,7 +1273,6 @@ class Configure(ContextManager):
 
 
 class RouteMap(ContextManager):
-
     """
     Route-map configuration
 
@@ -1292,7 +1288,6 @@ class RouteMap(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode, routemap_name, permission, seq):
         self.enode = enode
         self.routemap_name = routemap_name
@@ -1496,7 +1491,6 @@ class RouteMap(ContextManager):
 
 
 class ConfigInterface(ContextManager):
-
     """
     Interface configuration.
 
@@ -1512,7 +1506,6 @@ class ConfigInterface(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode, portlbl):
         self.enode = enode
         self.port = enode.ports.get(portlbl, portlbl)
@@ -2265,7 +2258,6 @@ class ConfigInterface(ContextManager):
 
 
 class ConfigInterfaceVlan(ContextManager):
-
     """
     VLAN configuration.
 
@@ -2281,7 +2273,6 @@ class ConfigInterfaceVlan(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode, vlan_id):
         self.enode = enode
         self.vlan_id = vlan_id
@@ -2521,7 +2512,6 @@ class ConfigInterfaceVlan(ContextManager):
 
 
 class ConfigInterfaceLoopback(ContextManager):
-
     """
     Loopback interface configuration.
 
@@ -2537,7 +2527,6 @@ class ConfigInterfaceLoopback(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode, loopback_id):
         self.enode = enode
         self.loopback_id = loopback_id
@@ -2653,7 +2642,6 @@ class ConfigInterfaceLoopback(ContextManager):
 
 
 class ConfigInterfaceLag(ContextManager):
-
     """
     Configure link-aggregation parameters.
 
@@ -2669,7 +2657,6 @@ class ConfigInterfaceLag(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode, lag):
         self.enode = enode
         self.lag = lag
@@ -3315,7 +3302,6 @@ class ConfigInterfaceLag(ContextManager):
 
 
 class ConfigInterfaceMgmt(ContextManager):
-
     """
     Configure management interface.
 
@@ -3331,7 +3317,6 @@ class ConfigInterfaceMgmt(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode):
         self.enode = enode
 
@@ -3512,7 +3497,6 @@ class ConfigInterfaceMgmt(ContextManager):
 
 
 class ConfigRouterBgp(ContextManager):
-
     """
     BGP configuration.
 
@@ -3528,7 +3512,6 @@ class ConfigRouterBgp(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode, asn):
         self.enode = enode
         self.asn = asn
@@ -4330,7 +4313,6 @@ class ConfigRouterBgp(ContextManager):
 
 
 class ConfigVlan(ContextManager):
-
     """
     VLAN configuration.
 
@@ -4346,7 +4328,6 @@ class ConfigVlan(ContextManager):
 
             ['end']
     """
-
     def __init__(self, enode, vlan_id):
         self.enode = enode
         self.vlan_id = vlan_id
@@ -5186,6 +5167,27 @@ def show_dhcp_server(
     return parse_show_dhcp_server(result)
 
 
+def copy_running_config_startup_config(
+        enode):
+    """
+    copies running config to startup config
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # copy running-config startup-config
+
+    """
+
+    cmd = (
+        'copy running-config startup-config'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    assert not result
+
+
 def show_interface_loopback(
         enode, loopback_int=''):
     """
@@ -5252,5 +5254,6 @@ __all__ = [
     'show_ntp_trusted_keys',
     'show_dhcp_server_leases',
     'show_dhcp_server',
+    'copy_running_config_startup_config',
     'show_interface_loopback'
 ]
