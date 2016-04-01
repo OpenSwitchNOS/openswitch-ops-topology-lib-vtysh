@@ -84,7 +84,6 @@ def determine_exception(output):
     :rtype: VtyshException subclass.
     :return: The corresponding exception class for given message.
     """
-    output = output.lower()  # recommended
     for exc, matches in VTYSH_EXCEPTIONS.items():
         for expression in matches:
             if match(expression, output):

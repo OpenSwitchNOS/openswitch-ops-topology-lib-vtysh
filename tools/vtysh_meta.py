@@ -44,6 +44,17 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
+                'command': 'show interface {port} subinterface',
+                'doc': 'Show subinterfaces configured on this interface',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'Label that identifies interface.',
+                    },
+                ],
+                'returns': True
+            },
+            {
                 'command': 'show vlan',
                 'doc': 'Show VLAN configuration.',
                 'arguments': [
@@ -1541,6 +1552,93 @@ VTYSH_SPEC = OrderedDict([
             },
         ]
     }),
+    ('config_subinterface', {
+        'doc': 'Sub-Interface configuration.',
+        'arguments': [
+            {
+                'name': 'portlbl',
+                'doc': 'Label that identifies a physical interface.'
+            },
+            {
+                'name': 'subintlbl',
+                'doc': 'Label that identifies a subinterface.'
+            }
+        ],
+        'pre_commands': ['config terminal', 'interface {port}.{subint}'],
+        'post_commands': ['end'],
+        'commands': [
+            {
+                'command': 'ip address {ipv4}',
+                'doc': 'Set IP address',
+                'arguments': [
+                    {
+                        'name': 'ipv4',
+                        'doc': 'A.B.C.D/M Subinterface IP address.',
+                    },
+                ],
+            },
+            {
+                'command': 'no ip address {ipv4}',
+                'doc': 'Unset IP address',
+                'arguments': [
+                    {
+                        'name': 'ipv4',
+                        'doc': 'A.B.C.D/M Subinterface IP address.',
+                    },
+                ],
+            },
+            {
+                'command': 'ipv6 address {ipv6}',
+                'doc': 'Set IPv6 address',
+                'arguments': [
+                    {
+                        'name': 'ipv6',
+                        'doc': 'X:X::X:X/M  Subinterface IPv6 address',
+                    },
+                ],
+            },
+            {
+                'command': 'no ipv6 address {ipv6}',
+                'doc': 'Unset IPv6 address',
+                'arguments': [
+                    {
+                        'name': 'ipv6',
+                        'doc': 'X:X::X:X/M  Subinterface IPv6 address',
+                    },
+                ],
+            },
+            {
+                'command': 'encapsulation dot1Q {vlan_id}',
+                'doc': 'Set encapsulation type for a subinterface',
+                'arguments': [
+                    {
+                        'name': 'vlan_id',
+                        'doc': '<1-4094>  VLAN identifier.',
+                    },
+                ],
+            },
+            {
+                'command': 'no encapsulation dot1Q {vlan_id}',
+                'doc': 'Unset encapsulation type for a subinterface',
+                'arguments': [
+                    {
+                        'name': 'vlan_id',
+                        'doc': '<1-4094>  VLAN identifier.',
+                    },
+                ],
+            },
+            {
+                'command': 'shutdown',
+                'doc': 'Enable a subinterface.',
+                'arguments': [],
+            },
+            {
+                'command': 'no shutdown',
+                'doc': 'Disable a subinterface.',
+                'arguments': [],
+            },
+        ]
+    }),
     ('config_interface_vlan', {
         'doc': 'VLAN configuration.',
         'arguments': [
@@ -2653,7 +2751,7 @@ VTYSH_EXCEPTIONS_SPEC = OrderedDict([
     (
         'UnknownCommandException',
         [
-            'Unknown command',
+            'Unknown command', '% Unknown command.'
         ]
     ), (
         'IncompleteCommandException',

@@ -158,12 +158,17 @@ class Configure(ContextManager):
         :param loopback_id: Loopback interface identifier.
         """
 
-        cmd = (
+        cmd = [
             'no interface loopback {loopback_id}'
-        )
-        result = self.enode(cmd.format(**locals()), shell='vtysh')
+        ]
 
-        assert not result
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
 
     def ip_route(
             self, ipv4, next_hop, metric=''):
@@ -1193,12 +1198,17 @@ class Configure(ContextManager):
 
         """
 
-        cmd = (
+        cmd = [
             'sftp server enable'
-        )
-        result = self.enode(cmd.format(**locals()), shell='vtysh')
+        ]
 
-        assert not result
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
 
     def no_sftp_server_enable(
             self):
@@ -1213,12 +1223,17 @@ class Configure(ContextManager):
 
         """
 
-        cmd = (
+        cmd = [
             'no sftp server enable'
-        )
-        result = self.enode(cmd.format(**locals()), shell='vtysh')
+        ]
 
-        assert not result
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
 
     def ntp_server(
             self, host):
@@ -1516,7 +1531,7 @@ class Configure(ContextManager):
 
         ::
 
-            # logging {remote_host} {transport} {severity}
+            # logging {remote_host}
 
         :param remote_host: IPv4 or IPv6 or Host name of syslog server
         :param transport: Optional : Transport protocol and port used to send
@@ -1526,12 +1541,31 @@ class Configure(ContextManager):
             severity will be sent to the remote host.  Example severity debug
         """
 
-        cmd = (
-            'logging {remote_host} {transport} {severity}'
-        )
-        result = self.enode(cmd.format(**locals()), shell='vtysh')
+        cmd = [
+            'logging {remote_host}'
+        ]
 
-        assert not result
+        if transport:
+            cmd.append(
+                '{}{{transport}}{}'.format(
+                    '', ''
+                )
+            )
+
+        if severity:
+            cmd.append(
+                '{}{{severity}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
 
     def no_logging(
             self, remote_host, transport='', severity=''):
@@ -1542,7 +1576,7 @@ class Configure(ContextManager):
 
         ::
 
-            # no logging {remote_host} {transport} {severity}
+            # no logging {remote_host}
 
         :param remote_host: IPv4 or IPv6 or Host name of syslog server
         :param transport: Optional : Transport protocol and port used to send
@@ -1552,12 +1586,31 @@ class Configure(ContextManager):
             severity will be sent to the remote host.  Example severity debug
         """
 
-        cmd = (
-            'no logging {remote_host} {transport} {severity}'
-        )
-        result = self.enode(cmd.format(**locals()), shell='vtysh')
+        cmd = [
+            'no logging {remote_host}'
+        ]
 
-        assert not result
+        if transport:
+            cmd.append(
+                '{}{{transport}}{}'.format(
+                    '', ''
+                )
+            )
+
+        if severity:
+            cmd.append(
+                '{}{{severity}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
 
     def vlog_daemon(
             self, daemon, destination, severity):
@@ -1575,12 +1628,17 @@ class Configure(ContextManager):
         :param severity: severity level
         """
 
-        cmd = (
+        cmd = [
             'vlog daemon {daemon} {destination} {severity}'
-        )
-        result = self.enode(cmd.format(**locals()), shell='vtysh')
+        ]
 
-        assert not result
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
 
     def vlog_feature(
             self, feature, destination, severity):
@@ -1598,12 +1656,17 @@ class Configure(ContextManager):
         :param severity: severity level
         """
 
-        cmd = (
+        cmd = [
             'vlog feature {feature} {destination} {severity}'
-        )
-        result = self.enode(cmd.format(**locals()), shell='vtysh')
+        ]
 
-        assert not result
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
 
 
 class RouteMap(ContextManager):
@@ -2484,12 +2547,17 @@ class ConfigInterface(ContextManager):
         :param dead_timer: <1-65535>  dead_timer range
         """
 
-        cmd = (
+        cmd = [
             'ip ospf dead-interval {dead_timer}'
-        )
-        result = self.enode(cmd.format(**locals()), shell='vtysh')
+        ]
 
-        assert not result
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
 
     def ip_ospf_hello_interval(
             self, hello_timer):
@@ -2505,12 +2573,17 @@ class ConfigInterface(ContextManager):
         :param hello_timer: <1-65535>  hello_timer range
         """
 
-        cmd = (
+        cmd = [
             'ip ospf hello-interval {hello_timer}'
-        )
-        result = self.enode(cmd.format(**locals()), shell='vtysh')
+        ]
 
-        assert not result
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
 
     def lacp_port_priority(
             self, port_priority):
@@ -2858,6 +2931,259 @@ class ConfigInterface(ContextManager):
 
         cmd = [
             'no sflow enable'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+
+class ConfigSubinterface(ContextManager):
+    """
+    Sub-Interface configuration.
+
+    pre_commands:
+
+    ::
+
+            ['config terminal', 'interface {port}.{subint}']
+
+    post_commands:
+
+    ::
+
+            ['end']
+    """
+    def __init__(self, enode, portlbl, subintlbl):
+        self.enode = enode
+        self.port = enode.ports.get(portlbl, portlbl)
+        self.subintlbl = subintlbl
+
+    def __enter__(self):
+        commands = """\
+            config terminal
+            interface {port}.{subint}
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+        return self
+
+    def __exit__(self, type, value, traceback):
+        commands = """\
+            end
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+    def ip_address(
+            self, ipv4):
+        """
+        Set IP address
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip address {ipv4}
+
+        :param ipv4: A.B.C.D/M Subinterface IP address.
+        """
+
+        cmd = [
+            'ip address {ipv4}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ip_address(
+            self, ipv4):
+        """
+        Unset IP address
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ip address {ipv4}
+
+        :param ipv4: A.B.C.D/M Subinterface IP address.
+        """
+
+        cmd = [
+            'no ip address {ipv4}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ipv6_address(
+            self, ipv6):
+        """
+        Set IPv6 address
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ipv6 address {ipv6}
+
+        :param ipv6: X:X::X:X/M  Subinterface IPv6 address
+        """
+
+        cmd = [
+            'ipv6 address {ipv6}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ipv6_address(
+            self, ipv6):
+        """
+        Unset IPv6 address
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ipv6 address {ipv6}
+
+        :param ipv6: X:X::X:X/M  Subinterface IPv6 address
+        """
+
+        cmd = [
+            'no ipv6 address {ipv6}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def encapsulation_dot1_q(
+            self, vlan_id):
+        """
+        Set encapsulation type for a subinterface
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # encapsulation dot1Q {vlan_id}
+
+        :param vlan_id: <1-4094>  VLAN identifier.
+        """
+
+        cmd = [
+            'encapsulation dot1Q {vlan_id}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_encapsulation_dot1_q(
+            self, vlan_id):
+        """
+        Unset encapsulation type for a subinterface
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no encapsulation dot1Q {vlan_id}
+
+        :param vlan_id: <1-4094>  VLAN identifier.
+        """
+
+        cmd = [
+            'no encapsulation dot1Q {vlan_id}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def shutdown(
+            self):
+        """
+        Enable a subinterface.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # shutdown
+
+        """
+
+        cmd = [
+            'shutdown'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_shutdown(
+            self):
+        """
+        Disable a subinterface.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no shutdown
+
+        """
+
+        cmd = [
+            'no shutdown'
         ]
 
         result = self.enode(
@@ -4435,12 +4761,17 @@ class ConfigRouterOspf(ContextManager):
         :param id: <A.B.C.D> IPv4 address
         """
 
-        cmd = (
+        cmd = [
             'router-id {id}'
-        )
-        result = self.enode(cmd.format(**locals()), shell='vtysh')
+        ]
 
-        assert not result
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
 
     def no_router_id(
             self, id):
@@ -4456,12 +4787,17 @@ class ConfigRouterOspf(ContextManager):
         :param id: <A.B.C.D> IPv4 address
         """
 
-        cmd = (
+        cmd = [
             'no router-id {id}'
-        )
-        result = self.enode(cmd.format(**locals()), shell='vtysh')
+        ]
 
-        assert not result
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
 
     def max_metric_router_lsa(
             self):
@@ -4476,12 +4812,17 @@ class ConfigRouterOspf(ContextManager):
 
         """
 
-        cmd = (
+        cmd = [
             'max-metric router-lsa'
-        )
-        result = self.enode(cmd.format(**locals()), shell='vtysh')
+        ]
 
-        assert not result
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
 
     def network_area(
             self, network, area):
@@ -4498,12 +4839,17 @@ class ConfigRouterOspf(ContextManager):
         :param area: <0-4228250625 | A.B.C.D> Area-id range
         """
 
-        cmd = (
+        cmd = [
             'network {network} area {area}'
-        )
-        result = self.enode(cmd.format(**locals()), shell='vtysh')
+        ]
 
-        assert not result
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
 
     def no_network_area(
             self, network, area):
@@ -4520,12 +4866,17 @@ class ConfigRouterOspf(ContextManager):
         :param area: <0-4228250625 | A.B.C.D> Area-id range
         """
 
-        cmd = (
+        cmd = [
             'no network {network} area {area}'
-        )
-        result = self.enode(cmd.format(**locals()), shell='vtysh')
+        ]
 
-        assert not result
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
 
 
 class ConfigRouterBgp(ContextManager):
@@ -5477,7 +5828,7 @@ class ConfigRouterBgp(ContextManager):
 
         ::
 
-            # neighbor {ip_or_group} peer-group {group}
+            # neighbor {ip_or_group} peer-group
 
         :param ip_or_group: <A.B.C.D> Neighbor IPv4 address<X:X::X:X> Neighbor
             IPv6 address<WORD> Neighbor group
@@ -5485,7 +5836,7 @@ class ConfigRouterBgp(ContextManager):
         """
 
         cmd = [
-            'neighbor {ip_or_group} peer-group {group}'
+            'neighbor {ip_or_group} peer-group'
         ]
 
         if group:
@@ -5512,7 +5863,7 @@ class ConfigRouterBgp(ContextManager):
 
         ::
 
-            # no neighbor {ip_or_group} peer-group {group}
+            # no neighbor {ip_or_group} peer-group
 
         :param ip_or_group: <A.B.C.D> Neighbor IPv4 address<X:X::X:X> Neighbor
             IPv6 address<WORD> Neighbor group
@@ -5520,7 +5871,7 @@ class ConfigRouterBgp(ContextManager):
         """
 
         cmd = [
-            'no neighbor {ip_or_group} peer-group {group}'
+            'no neighbor {ip_or_group} peer-group'
         ]
 
         if group:
@@ -5769,6 +6120,36 @@ def show_interface(
     return parse_show_interface(result)
 
 
+def show_interface_subinterface(
+        enode, portlbl):
+    """
+    Show subinterfaces configured on this interface
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show interface {port} subinterface
+
+    :param portlbl: Label that identifies interface.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_interface_subinterface`
+    """
+
+    cmd = [
+        'show interface {port} subinterface'
+    ]
+
+    port = enode.ports.get(portlbl, portlbl)
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_interface_subinterface(result)
+
+
 def show_vlan(
         enode, vlanid=''):
     """
@@ -5968,10 +6349,14 @@ def show_sftp_server(
      :func:`topology_lib_vtysh.parser.parse_show_sftp_server`
     """
 
-    cmd = (
+    cmd = [
         'show sftp server'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
     )
-    result = enode(cmd.format(**locals()), shell='vtysh')
 
     return parse_show_sftp_server(result)
 
@@ -6099,10 +6484,14 @@ def show_ip_ospf_neighbor_detail(
      :func:`topology_lib_vtysh.parser.parse_show_ip_ospf_neighbor_detail`
     """
 
-    cmd = (
+    cmd = [
         'show ip ospf neighbor detail'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
     )
-    result = enode(cmd.format(**locals()), shell='vtysh')
 
     return parse_show_ip_ospf_neighbor_detail(result)
 
@@ -6122,10 +6511,14 @@ def show_ip_ospf_neighbor(
      :func:`topology_lib_vtysh.parser.parse_show_ip_ospf_neighbor`
     """
 
-    cmd = (
+    cmd = [
         'show ip ospf neighbor'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
     )
-    result = enode(cmd.format(**locals()), shell='vtysh')
 
     return parse_show_ip_ospf_neighbor(result)
 
@@ -6145,10 +6538,14 @@ def show_ip_ospf_interface(
      :func:`topology_lib_vtysh.parser.parse_show_ip_ospf_interface`
     """
 
-    cmd = (
+    cmd = [
         'show ip ospf interface'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
     )
-    result = enode(cmd.format(**locals()), shell='vtysh')
 
     return parse_show_ip_ospf_interface(result)
 
@@ -6168,10 +6565,14 @@ def show_ip_ospf(
      :func:`topology_lib_vtysh.parser.parse_show_ip_ospf`
     """
 
-    cmd = (
+    cmd = [
         'show ip ospf'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
     )
-    result = enode(cmd.format(**locals()), shell='vtysh')
 
     return parse_show_ip_ospf(result)
 
@@ -6715,10 +7116,14 @@ def show_vlog_config(
      :func:`topology_lib_vtysh.parser.parse_show_vlog_config`
     """
 
-    cmd = (
+    cmd = [
         'show vlog config'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
     )
-    result = enode(cmd.format(**locals()), shell='vtysh')
 
     return parse_show_vlog_config(result)
 
@@ -6739,10 +7144,14 @@ def show_vlog(
      :func:`topology_lib_vtysh.parser.parse_show_vlog`
     """
 
-    cmd = (
+    cmd = [
         'show vlog {sub_command}'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
     )
-    result = enode(cmd.format(**locals()), shell='vtysh')
 
     return parse_show_vlog(result)
 
@@ -6756,17 +7165,28 @@ def show_interface_loopback(
 
     ::
 
-        # show interface loopback {loopback_int}
+        # show interface loopback
 
     :param loopback_int: Loopback interface id.
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_interface_loopback`
     """
 
-    cmd = (
-        'show interface loopback {loopback_int}'
+    cmd = [
+        'show interface loopback'
+    ]
+
+    if loopback_int:
+        cmd.append(
+            '{}{{loopback_int}}{}'.format(
+                '', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
     )
-    result = enode(cmd.format(**locals()), shell='vtysh')
 
     return parse_show_interface_loopback(result)
 
@@ -6787,10 +7207,14 @@ def show_vlog_config_daemon(
      :func:`topology_lib_vtysh.parser.parse_show_vlog_config_daemon`
     """
 
-    cmd = (
+    cmd = [
         'show vlog config daemon {daemon_name}'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
     )
-    result = enode(cmd.format(**locals()), shell='vtysh')
 
     return parse_show_vlog_config_daemon(result)
 
@@ -6811,10 +7235,14 @@ def show_vlog_config_feature(
      :func:`topology_lib_vtysh.parser.parse_show_vlog_config_feature`
     """
 
-    cmd = (
+    cmd = [
         'show vlog config feature {feature_name}'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
     )
-    result = enode(cmd.format(**locals()), shell='vtysh')
 
     return parse_show_vlog_config_feature(result)
 
@@ -6834,10 +7262,14 @@ def show_vlog_config_list(
      :func:`topology_lib_vtysh.parser.parse_show_vlog_config_list`
     """
 
-    cmd = (
+    cmd = [
         'show vlog config list'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
     )
-    result = enode(cmd.format(**locals()), shell='vtysh')
 
     return parse_show_vlog_config_list(result)
 
@@ -6858,10 +7290,14 @@ def show_vlog_daemon(
      :func:`topology_lib_vtysh.parser.parse_show_vlog_daemon`
     """
 
-    cmd = (
+    cmd = [
         'show vlog daemon {daemon_name}'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
     )
-    result = enode(cmd.format(**locals()), shell='vtysh')
 
     return parse_show_vlog_daemon(result)
 
@@ -6882,10 +7318,14 @@ def show_vlog_severity(
      :func:`topology_lib_vtysh.parser.parse_show_vlog_severity`
     """
 
-    cmd = (
+    cmd = [
         'show vlog severity {severity_level}'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
     )
-    result = enode(cmd.format(**locals()), shell='vtysh')
 
     return parse_show_vlog_severity(result)
 
@@ -6907,10 +7347,14 @@ def show_vlog_daemon_severity(
      :func:`topology_lib_vtysh.parser.parse_show_vlog_daemon_severity`
     """
 
-    cmd = (
+    cmd = [
         'show vlog daemon {daemonname} severity {severity}'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
     )
-    result = enode(cmd.format(**locals()), shell='vtysh')
 
     return parse_show_vlog_daemon_severity(result)
 
@@ -6932,10 +7376,14 @@ def show_vlog_severity_daemon(
      :func:`topology_lib_vtysh.parser.parse_show_vlog_severity_daemon`
     """
 
-    cmd = (
+    cmd = [
         'show vlog severity {severity} daemon {daemonname}'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
     )
-    result = enode(cmd.format(**locals()), shell='vtysh')
 
     return parse_show_vlog_severity_daemon(result)
 
@@ -6945,6 +7393,7 @@ __all__ = [
     'Configure',
     'RouteMap',
     'ConfigInterface',
+    'ConfigSubinterface',
     'ConfigInterfaceVlan',
     'ConfigInterfaceLoopback',
     'ConfigInterfaceLag',
@@ -6953,6 +7402,7 @@ __all__ = [
     'ConfigRouterBgp',
     'ConfigVlan',
     'show_interface',
+    'show_interface_subinterface',
     'show_vlan',
     'show_lacp_interface',
     'show_lacp_aggregates',

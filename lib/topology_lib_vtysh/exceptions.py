@@ -55,6 +55,7 @@ class UnknownCommandException(VtyshException):
 
     ::
         Unknown command
+        % Unknown command.
 
     """
 
@@ -74,7 +75,8 @@ VTYSH_EXCEPTIONS = OrderedDict([
     (
         UnknownCommandException,
         [
-            'Unknown command', '% Unknown command.'
+            'Unknown command',
+            '% Unknown command.',
         ]
     ),
     (
