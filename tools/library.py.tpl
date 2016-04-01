@@ -128,7 +128,7 @@ class {{ context_name|objectize }}(ContextManager):
         {% endfor -%}
         {%- if 'returns' in command.keys() and command.returns -%}
         :return: A dictionary as returned by
-         :func:`topology_lib_vtysh.parser.{{ 'parse_%s'|format(command.command|methodize) }}`
+         :func:`topology_lib_vtysh.parser.{{ 'parse_%s_%s'|format(context_name|methodize, command.command|methodize) }}`
         {% endif -%}
         """{% if command.command|length > 66%}  # noqa{% endif %}
 
@@ -157,7 +157,7 @@ class {{ context_name|objectize }}(ContextManager):
         )
 
         {% if 'returns' in command.keys() and command.returns -%}
-        {{ 'return parse_%s(result)'|format(command.command|methodize) }}
+        {{ 'return parse_%s_%s(result)'|format(context_name|methodize, command.command|methodize) }}
         {%- else -%}
         if result:
             raise determine_exception(result)(result)
