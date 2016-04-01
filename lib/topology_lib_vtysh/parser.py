@@ -118,6 +118,108 @@ def parse_show_interface(raw_result):
     return result
 
 
+def parse_show_interface_subinterface(raw_result):
+    """
+    Parse the 'show interface <port> subinterface' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show interface command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+            '1': {'admin_state': 'down',
+                  'encapsulation_dot1q': 102,
+                  'hardware': 'Ethernet',
+                  'input_flow_control': False,
+                  'interface_state': 'down',
+                  'mac_address': '70:72:cf:d7:d3:dd',
+                  'output_flow_control': False,
+                  'parent_interface': 2,
+                  'port': 2,
+                  'rx_mcast_packets': 0,
+                  'rx_mcast_bytes': 0,
+                  'rx_ucast_packets': 0,
+                  'rx_ucast_bytes': 0,
+                  'state_description': 'Administratively down',
+                  'state_information': 'admin_down',
+                  'subinterface': 1,
+                  'tx_mcast_packets': 0,
+                  'tx_mcast_bytes': 0,
+                  'tx_ucast_packets': 0,
+                  'tx_ucast_bytes': 0,
+                  'ipv4': '20.1.1.2/30'},
+            '2': {'admin_state': 'up',
+                  'encapsulation_dot1q': 102,
+                  'hardware': 'Ethernet',
+                  'input_flow_control': False,
+                  'interface_state': 'down',
+                  'mac_address': '70:72:cf:d7:d3:dd',
+                  'output_flow_control': False,
+                  'parent_interface': 2,
+                  'port': 2,
+                  'rx_mcast_packets': 0,
+                  'rx_mcast_bytes': 0,
+                  'rx_ucast_packets': 0,
+                  'rx_ucast_bytes': 0,
+                  'state_description': 'Administratively down',
+                  'state_information': 'admin_down',
+                  'subinterface': 2,
+                  'tx_mcast_packets': 0,
+                  'tx_mcast_bytes': 0,
+                  'tx_ucast_packets': 0,
+                  'tx_ucast_bytes': 0,
+                  'ipv4': '20.1.1.2/30'}
+        }
+    """
+
+    show_re = (
+        r'\s*Interface (?P<port>\d+)\.(?P<subinterface>\d+) is'
+        r'\s*(?P<interface_state>\S+)\.(\s*)'
+        r'(\((?P<state_description>.*)\))?\s*'
+        r'Admin state is (?P<admin_state>\S+)\s+'
+        r'(State information: (?P<state_information>\S+))?\s*'
+        r'Parent interface is (?P<parent_interface>\d+)\s*'
+        r'Encapsulation dot1Q (?P<encapsulation_dot1q>\d+)\s*'
+        r'Hardware: (?P<hardware>\S+), MAC Address: (?P<mac_address>\S+)\s+'
+        r'(IPv4 address (?P<ipv4>\S+))?\s*'
+        r'(IPv6 address (?P<ipv6>\S+))?\s*'
+        r'Input flow-control is (?P<input_flow_control>\w+),\s+'
+        r'output flow-control is (?P<output_flow_control>\w+)\s+'
+        r'RX\s+'
+        r'\s*L3:'
+        r'\s*ucast:\s+(?P<rx_ucast_packets>\d+) packets,\s*'
+        r'(?P<rx_ucast_bytes>\d+) bytes'
+        r'\s*mcast:\s+(?P<rx_mcast_packets>\d+) packets,\s+'
+        r'(?P<rx_mcast_bytes>\d+) bytes\s+'
+        r'TX\s+'
+        r'\s*L3:'
+        r'\s*ucast:\s+(?P<tx_ucast_packets>\d+) packets,\s+'
+        r'(?P<tx_ucast_bytes>\d+) bytes'
+        r'\s*mcast:\s+(?P<tx_mcast_packets>\d+) packets,\s+'
+        r'(?P<tx_mcast_bytes>\d+) bytes\s*'
+    )
+    subint_list = raw_result.split("\n\n")
+    result = {}
+    for subint in subint_list:
+        if subint != "":
+            re_result = re.match(show_re, subint)
+            assert re_result
+            subint_result = re_result.groupdict()
+            for key, value in subint_result.items():
+                if value is not None:
+                    if value.isdigit():
+                        subint_result[key] = int(value)
+                    elif value == 'on':
+                        subint_result[key] = True
+                    elif value == 'off':
+                        subint_result[key] = False
+            result[subint_result['subinterface']] = subint_result
+    return result
+
+
 def parse_show_udld_interface(raw_result):
     """
     Parse the 'show udld interface {intf}' command raw output.
@@ -2465,6 +2567,7 @@ def parse_show_vlog(raw_result):
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
+    'parse_show_interface_subinterface',
     'parse_show_lacp_configuration', 'parse_show_lldp_neighbor_info',
     'parse_show_lldp_statistics', 'parse_show_ip_bgp_summary',
     'parse_show_ip_bgp_neighbors', 'parse_show_ip_bgp',
