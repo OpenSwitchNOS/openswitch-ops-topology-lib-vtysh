@@ -1029,22 +1029,22 @@ def parse_show_ip_ospf_neighbor_detail(raw_result):
     """
 
     neighbor_re = (
-                    r'\s*Neighbor (?P<Neighbor>[^,]+),\s*interface address '
-                    '(?P<interface_address>[0-255.]+).*'
-                    r'\s*[\w ]+area (?P<area>[0-255.]+) via interface '
-                    '(?P<interface>\d+).*'
-                    r'\s*[\w ]+priority is (?P<priority>\d+), State is '
-                    '(?P<state>\S+), (?P<state_change>\d+)[\w ]+.*'
-                    r'\s*Neighbor is (?P<admin_state>\w+) for '
-                    '(?P<hello_timer>[\d.]+s).*'
-                    r'\s*DR is (?P<DR>[0-255.]+),BDR is '
-                    '(?P<BDR>[0-255.]+).*'
-                    r'\s*Options (?P<options>\d+).*'
-                    r'\s*Dead timer due in (?P<dead_timer>[\d.]+s).*'
-                    r'\s*Database Summary List (?P<db_summary_list>\d+).*'
-                    r'\s*Link State Request List (?P<link_req_list>\d+).*'
-                    r'\s*Link State Retransmission List '
-                    '(?P<link_retrans_list>\d+)'
+        r'\s*Neighbor (?P<Neighbor>[^,]+),\s*interface address '
+        '(?P<interface_address>[0-255.]+).*'
+        r'\s*[\w ]+area (?P<area>[0-255.]+) via interface '
+        '(?P<interface>\d+).*'
+        r'\s*[\w ]+priority is (?P<priority>\d+), State is '
+        '(?P<state>\S+), (?P<state_change>\d+)[\w ]+.*'
+        r'\s*Neighbor is (?P<admin_state>\w+) for '
+        '(?P<hello_timer>[\d.]+s).*'
+        r'\s*DR is (?P<DR>[0-255.]+),BDR is '
+        '(?P<BDR>[0-255.]+).*'
+        r'\s*Options (?P<options>\d+).*'
+        r'\s*Dead timer due in (?P<dead_timer>[\d.]+s).*'
+        r'\s*Database Summary List (?P<db_summary_list>\d+).*'
+        r'\s*Link State Request List (?P<link_req_list>\d+).*'
+        r'\s*Link State Retransmission List '
+        '(?P<link_retrans_list>\d+)'
     )
 
     result = {}
@@ -1082,11 +1082,11 @@ def parse_show_ip_ospf_neighbor(raw_result):
     """
 
     neighbor_re = (
-                    r'(?P<neighbor_id>[^ ]+)\s*(?P<priority>[^ ]+)\s*'
-                    '(?P<state>[^ ]+)'
-                    r'\s*(?P<dead_time>[^ ]+)\s*(?P<address>[^ ]+)\s*'
-                    '(?P<interface>[^ ]+)'
-                    r'\s*(?P<rxmtl>[^ ]+)\s*(?P<rqstl>[^ ]+)\s*(?P<dbsml>[^ ])'
+        r'(?P<neighbor_id>[^ ]+)\s*(?P<priority>[^ ]+)\s*'
+        '(?P<state>[^ ]+)'
+        r'\s*(?P<dead_time>[^ ]+)\s*(?P<address>[^ ]+)\s*'
+        '(?P<interface>[^ ]+)'
+        r'\s*(?P<rxmtl>[^ ]+)\s*(?P<rqstl>[^ ]+)\s*(?P<dbsml>[^ ])'
     )
 
     result = {}
@@ -1105,7 +1105,6 @@ def parse_show_ip_ospf_neighbor(raw_result):
 
 
 def parse_show_ip_ospf_interface(raw_result):
-
     """
     Parse the 'show ip ospf interface' command raw output.
 
@@ -1139,35 +1138,35 @@ def parse_show_ip_ospf_interface(raw_result):
     """
 
     show_ip_ospf_int_re = (
-                r'\s*Interface (?P<Interface_id>\d) BW '
-                '(?P<bandwidth>\d+) Mbps.*'
-                r'\s*Internet address (?P<internet_address>[0-255.]+\S+) '
-                'Area (?P<Area_id>[0-255.]+).*'
-                r'\s*Router ID : (?P<router_id>[0-255.]+), Network Type '
-                '(?P<network_type>\S+), Cost: (?P<cost>\d+).*'
-                r'\s*Transmit Delay is (?P<transmit_delay>\d) sec, State '
-                '(?P<state>\S+\s*\S+), Priority (?P<priority>\d)\s*'
-                r'[\S ]+\(ID\)\s*'
-                '(?P<Designated_router>[0-255.]+),\s*Interface Address '
-                '(?P<DR_Interface_address>[0-255.]+).*')
+        r'\s*Interface (?P<Interface_id>\d) BW '
+        '(?P<bandwidth>\d+) Mbps.*'
+        r'\s*Internet address (?P<internet_address>[0-255.]+\S+) '
+        'Area (?P<Area_id>[0-255.]+).*'
+        r'\s*Router ID : (?P<router_id>[0-255.]+), Network Type '
+        '(?P<network_type>\S+), Cost: (?P<cost>\d+).*'
+        r'\s*Transmit Delay is (?P<transmit_delay>\d) sec, State '
+        '(?P<state>\S+\s*\S+), Priority (?P<priority>\d)\s*'
+        r'[\S ]+\(ID\)\s*'
+        '(?P<Designated_router>[0-255.]+),\s*Interface Address '
+        '(?P<DR_Interface_address>[0-255.]+).*')
 
     show_ip_ospf_int_re1 = (
-                r'\s*Hello (?P<hello_timer>\d+) Dead (?P<dead_timer>\d+) '
-                'wait (?P<wait_time>\d+) Retransmit '
-                '(?P<retransmit_time>\d+).*'
-                r'\s*Hello due in\s*(?P<hello_due_time>\S+).*'
-                r'\Neighbor Count is\s*(?P<neighbor_count>\d),\s*Adjacent '
-                'neighbor count is\s*(?P<Adjacent_neigbhor_count>\d)'
-                 )
+        r'\s*Hello (?P<hello_timer>\d+) Dead (?P<dead_timer>\d+) '
+        'wait (?P<wait_time>\d+) Retransmit '
+        '(?P<retransmit_time>\d+).*'
+        r'\s*Hello due in\s*(?P<hello_due_time>\S+).*'
+        r'\Neighbor Count is\s*(?P<neighbor_count>\d),\s*Adjacent '
+        'neighbor count is\s*(?P<Adjacent_neigbhor_count>\d)'
+    )
 
     bdr_re = (
-                r'\s*Backup Designated Router \(ID\) '
-                '(?P<Backup_designated_router>[0-255.]+),\s*Interface '
-                'Address (?P<BDR_Interface_address>[0-255.]+).*'
-             )
+        r'\s*Backup Designated Router \(ID\) '
+        '(?P<Backup_designated_router>[0-255.]+),\s*Interface '
+        'Address (?P<BDR_Interface_address>[0-255.]+).*'
+    )
 
     error_no_record = (
-                     r'No\s*backup\s*designated\.*')
+        r'No\s*backup\s*designated\.*')
 
     result = {}
 
@@ -1193,7 +1192,6 @@ def parse_show_ip_ospf_interface(raw_result):
 
 
 def parse_show_ip_ospf(raw_result):
-
     """
     Parse the 'show ip ospf' command raw output.
 
@@ -1228,26 +1226,26 @@ def parse_show_ip_ospf(raw_result):
     """
 
     pattern = (
-           r'[\S ]+Router\s*ID:\s*(?P<router>[0-255.]+).*'
-           r'[\S ]+external\s*LSA\s*(?P<external_lsa>\d+).*'
-           r'[\S ]+opaque\s*AS\s*LSA\s*(?P<opaque_lsa>\d+).*'
-           r'[\S ]+router:\s*(?P<no_of_area>\d+).*'
-           r'\s*Area\s*ID:\s*(?P<Area_id>[0-255.]+).*'
-           r'[\S ]+area:\s*Total:\s*(?P<interface_count>\d+),\s*Active:'
-           '(?P<active_interfaces>\d+).*'
-           r'[\S ]+area:\s*(?P<fully_adj_neighbors>\d+).*'
-           r'[\S ]+Area\s*has\s*(?P<authentication_type>[\S ]+).*'
-           r'[\S ]+Number\s*of\s*LSA\s*(?P<no_of_lsa>\d+).*'
-           r'[\S ]+Number\s*of\s*router\s*LSA\s*(?P<router_lsa>\d+).*'
-           r'[\S ]+Number\s*of\s*network\s*LSA\s*(?P<network_lsa>\d+).*'
-           r'[\S ]+Number\s*of\s*ABR\s*summary\s*LSA\s*'
-           '(?P<abr_summary_lsa>\d+).*'
-           r'[\S ]+Number\s*of\s*ASBR\s*summary\sLSA\s*'
-           '(?P<asbr_summary_lsa>\d+).*'
-           r'[\S ]+Number\s*of\s*NSSA\s*LSA\s*(?P<nssa_lsa>\d+).*'
-           r'[\S ]+Number\s*of\s*opaque\s*link\s*(?P<opaque_link>\d+).*'
-           r'[\S ]+Number\s*of\s*opaque\s*area\s*(?P<opaque_area>\d+).*'
-          )
+        r'[\S ]+Router\s*ID:\s*(?P<router>[0-255.]+).*'
+        r'[\S ]+external\s*LSA\s*(?P<external_lsa>\d+).*'
+        r'[\S ]+opaque\s*AS\s*LSA\s*(?P<opaque_lsa>\d+).*'
+        r'[\S ]+router:\s*(?P<no_of_area>\d+).*'
+        r'\s*Area\s*ID:\s*(?P<Area_id>[0-255.]+).*'
+        r'[\S ]+area:\s*Total:\s*(?P<interface_count>\d+),\s*Active:'
+        '(?P<active_interfaces>\d+).*'
+        r'[\S ]+area:\s*(?P<fully_adj_neighbors>\d+).*'
+        r'[\S ]+Area\s*has\s*(?P<authentication_type>[\S ]+).*'
+        r'[\S ]+Number\s*of\s*LSA\s*(?P<no_of_lsa>\d+).*'
+        r'[\S ]+Number\s*of\s*router\s*LSA\s*(?P<router_lsa>\d+).*'
+        r'[\S ]+Number\s*of\s*network\s*LSA\s*(?P<network_lsa>\d+).*'
+        r'[\S ]+Number\s*of\s*ABR\s*summary\s*LSA\s*'
+        '(?P<abr_summary_lsa>\d+).*'
+        r'[\S ]+Number\s*of\s*ASBR\s*summary\sLSA\s*'
+        '(?P<asbr_summary_lsa>\d+).*'
+        r'[\S ]+Number\s*of\s*NSSA\s*LSA\s*(?P<nssa_lsa>\d+).*'
+        r'[\S ]+Number\s*of\s*opaque\s*link\s*(?P<opaque_link>\d+).*'
+        r'[\S ]+Number\s*of\s*opaque\s*area\s*(?P<opaque_area>\d+).*'
+    )
     re_result = re.match(pattern, raw_result, re.DOTALL)
     if(re_result):
         result = re_result.groupdict()
@@ -1657,6 +1655,7 @@ def parse_show_running_config(raw_result):
 
     # Parsing loopback configurations in show run
     result['loopback'] = {}
+    loopback = None
     show_loopback_id = re.compile('interface loopback\s+[0-9]+', re.DOTALL)
     loopback_list = show_loopback_id.findall(raw_result)
     if loopback_list:
@@ -1666,16 +1665,21 @@ def parse_show_running_config(raw_result):
             if re.match('.*interface loopback.*', config):
                 loopback = loopback_list.pop(0)
                 result['loopback'][loopback] = {}
-            loopback_ipv4_ip = re.match(
-                r'.*ip address\s+(\d+.\d+.\d+.\d+\/\d+).*',
-                config)
-            if loopback_ipv4_ip:
-                loopback_ipv4_ip = loopback_ipv4_ip.group(1)
-                result['loopback'][loopback]['ipv4_address'] = loopback_ipv4_ip
-            loopback_ipv6 = re.match(r'.*ipv6 address\s+(.*)', config)
-            if loopback_ipv6:
-                loopback_ipv6 = loopback_ipv6.group(1)
-                result['loopback'][loopback]['ipv6_address'] = loopback_ipv6
+            if loopback in result['loopback']:
+                loopback_ipv4_ip = re.match(
+                    r'.*ip address\s+(\d+.\d+.\d+.\d+\/\d+).*',
+                    config)
+                if 'ipv4_address' not in result['loopback'][loopback]:
+                    if loopback_ipv4_ip:
+                        loopback_ipv4_ip = loopback_ipv4_ip.group(1)
+                        result['loopback'][loopback][
+                            'ipv4_address'] = loopback_ipv4_ip
+                loopback_ipv6 = re.match(r'.*ipv6 address\s+(.*)', config)
+                if 'ipv6_address' not in result['loopback'][loopback]:
+                    if loopback_ipv6:
+                        loopback_ipv6 = loopback_ipv6.group(1)
+                        result['loopback'][loopback][
+                            'ipv6_address'] = loopback_ipv6
     return result
 
 
@@ -2373,8 +2377,8 @@ def parse_show_vlog_config(raw_result):
             : True on Success or False on Failure.
     """
     show_vlog_config_re = (
-            r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
-            )
+        r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
+    )
     re_result = {}
     for line in raw_result.splitlines():
         re_result = re.search(show_vlog_config_re, raw_result)
@@ -2395,8 +2399,8 @@ def parse_show_vlog_config_daemon(raw_result):
             : True on success or False on Failure.
     """
     show_config_daemon_re = (
-            r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
-            )
+        r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
+    )
     re_result = {}
     for line in raw_result.splitlines():
         re_result = re.search(show_config_daemon_re, raw_result)
@@ -2417,8 +2421,8 @@ def parse_show_vlog_config_feature(raw_result):
             : True on success or False on Failure.
     """
     show_config_feature_re = (
-            r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
-            )
+        r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
+    )
     re_result = {}
     for line in raw_result.splitlines():
         re_result = re.search(show_config_feature_re, raw_result)
@@ -2439,8 +2443,8 @@ def parse_show_vlog_config_list(raw_result):
             : True on success or False on Failure.
     """
     show_config_list_re = (
-            r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
-            )
+        r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
+    )
     re_result = {}
     for line in raw_result.splitlines():
         re_result = re.search(show_config_list_re, raw_result)
@@ -2461,8 +2465,8 @@ def parse_show_vlog_daemon(raw_result):
             : True on success or False on Failure.
     """
     show_daemon_re = (
-            r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
-            )
+        r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
+    )
     re_result = {}
     for line in raw_result.splitlines():
         re_result = re.search(show_daemon_re, raw_result)
@@ -2486,8 +2490,8 @@ def parse_show_vlog_severity(raw_result):
             : True on success or False on Failure.
     """
     show_severity_re = (
-            r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
-            )
+        r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
+    )
     re_result = {}
     for line in raw_result.splitlines():
         re_result = re.search(show_severity_re, raw_result)
@@ -2512,8 +2516,8 @@ def parse_show_vlog_daemon_severity(raw_result):
             : True on success or False on Failure.
     """
     daemon_severity_re = (
-            r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
-            )
+        r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
+    )
     re_result = {}
     for line in raw_result.splitlines():
         re_result = re.search(daemon_severity_re, raw_result)
@@ -2548,8 +2552,8 @@ def parse_show_vlog(raw_result):
     :return: True or False.
     """
     vlog_re = (
-            r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
-            )
+        r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
+    )
     re_result = {}
     for line in raw_result.splitlines():
         re_result = re.search(vlog_re, raw_result)
