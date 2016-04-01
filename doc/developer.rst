@@ -130,6 +130,48 @@ in these situations:
 1. Commands that return output need to have the ``returns: True`` parameter.
 2. Optional command arguments need to have an ``optional: True`` parameter.
 
+Some commands that have optional arguments may have certain arguments that are
+prefixed of suffixed by a certain word. The ``prefix`` and ``suffix`` options
+for those arguments can be used like this:
+
+::
+
+   {
+       'command': 'some command',
+       'doc': 'A command that does something.',
+       'arguments': [
+           {
+               'name': 'some_argument',
+               'doc': 'Some argument for the command',
+               'prefix': 'some_prefix_for_the_argument ',
+               'suffix': ' some_suffix_for_the_argument',
+               'optional': True
+           },
+       ],
+   },
+
+So, if you run a test case like this one:
+
+::
+
+    TOPOLOGY = """
+    [type=openswitch] ops1
+    """
+
+
+    def test_prefix(topology):
+        ops1 = topology.get('ops1')
+
+        with ops1.libs.vtysh.Configure() as ctx:
+            ctx.some_command('some_argument_value')
+
+You'll find a line similar to this one in your test logs:
+
+::
+
+   [ops1].send_command('some command some_prefix_for_the_argument some_argument_value some_suffix_for_the_argument', shell='vtysh') ::
+
+
 Collisions between commands
 ...........................
 
@@ -194,3 +236,23 @@ identify the output of a command::
             'Command incomplete',
         ]
     )
+
+To assert that the proper exception was raised, you can use the ``pytest``
+``raises`` feautre like this:
+
+::
+
+   from pytest import raises
+   from topology_lib_vtysh.exceptions import UnknownCommandException
+
+   TOPOLOGY = """
+   [type=openswitch] ops1
+   """
+
+
+   def test_prefix(topology):
+       ops1 = topology.get('ops1')
+
+       with raises(UnknownCommandException):
+           with ops1.libs.vtysh.ConfigVlan('8') as ctx:
+               ctx.description('some wrong description')
