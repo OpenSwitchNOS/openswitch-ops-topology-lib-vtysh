@@ -24,6 +24,7 @@ from __future__ import unicode_literals
 from deepdiff import DeepDiff
 
 from topology_lib_vtysh.parser import (parse_show_interface,
+                                       parse_show_interface_subinterface,
                                        parse_show_vlan,
                                        parse_show_lacp_interface,
                                        parse_show_lacp_aggregates,
@@ -362,6 +363,133 @@ Interface 1 is up
 
     ddiff4 = DeepDiff(result4, expected4)
     assert not ddiff4
+
+
+def test_parse_show_interface_subinterface():
+    raw_result = """\
+Interface 2.2 is up.
+(Administratively down)
+ Admin state is down
+ Parent interface is 2
+ Encapsulation dot1Q 102
+ Hardware: Ethernet, MAC Address: 48:0f:cf:af:f1:cd
+ IPv4 address 12.0.0.1/24
+ Input flow-control is off, output flow-control is off
+ RX
+       L3:
+            ucast: 233 packets, 3434 bytes
+            mcast: 0 packets, 0 bytes
+ TX
+       L3:
+            ucast: 0 packets, 0 bytes
+            mcast: 0 packets, 0 bytes
+
+Interface 2.1 is up.
+ Admin state is down
+ Parent interface is 2
+ Encapsulation dot1Q 101
+ Hardware: Ethernet, MAC Address: 48:0f:cf:af:f1:cd
+ IPv4 address 11.0.0.1/24
+ Input flow-control is on, output flow-control is off
+ RX
+       L3:
+            ucast: 34 packets, 544 bytes
+            mcast: 54 packets, 345 bytes
+ TX
+       L3:
+            ucast: 232 packets, 434434 bytes
+            mcast: 23 packets, 2344 bytes
+
+Interface 2.3 is up.
+(Administratively down)
+ Admin state is down
+ Parent interface is 2
+ Encapsulation dot1Q 103
+ Hardware: Ethernet, MAC Address: 48:0f:cf:af:f1:cd
+ IPv4 address 13.0.0.1/24
+ Input flow-control is off, output flow-control is off
+ RX
+       L3:
+            ucast: 555 packets, 234234 bytes
+            mcast: 342 packets, 23432 bytes
+ TX
+       L3:
+            ucast: 4433 packets, 2342342 bytes
+            mcast: 545555 packets, 334234232 bytes
+
+"""
+    result = parse_show_interface_subinterface(raw_result)
+
+    expected = {
+            2: {'admin_state': 'down',
+                'encapsulation_dot1q': 102,
+                'hardware': 'Ethernet',
+                'input_flow_control': False,
+                'interface_state': 'up',
+                'mac_address': '48:0f:cf:af:f1:cd',
+                'output_flow_control': False,
+                'parent_interface': 2,
+                'port': 2,
+                'rx_mcast_packets': 0,
+                'rx_mcast_bytes': 0,
+                'rx_ucast_packets': 233,
+                'rx_ucast_bytes': 3434,
+                'state_description': 'Administratively down',
+                'state_information': None,
+                'subinterface': 2,
+                'tx_mcast_packets': 0,
+                'tx_mcast_bytes': 0,
+                'tx_ucast_packets': 0,
+                'tx_ucast_bytes': 0,
+                'ipv6': None,
+                'ipv4': '12.0.0.1/24'},
+            1: {'admin_state': 'down',
+                'encapsulation_dot1q': 101,
+                'hardware': 'Ethernet',
+                'input_flow_control': True,
+                'interface_state': 'up',
+                'mac_address': '48:0f:cf:af:f1:cd',
+                'output_flow_control': False,
+                'parent_interface': 2,
+                'port': 2,
+                'rx_mcast_packets': 54,
+                'rx_mcast_bytes': 345,
+                'rx_ucast_packets': 34,
+                'rx_ucast_bytes': 544,
+                'state_description': None,
+                'state_information': None,
+                'subinterface': 1,
+                'tx_mcast_packets': 23,
+                'tx_mcast_bytes': 2344,
+                'tx_ucast_packets': 232,
+                'tx_ucast_bytes': 434434,
+                'ipv6': None,
+                'ipv4': '11.0.0.1/24'},
+            3: {'admin_state': 'down',
+                'encapsulation_dot1q': 103,
+                'hardware': 'Ethernet',
+                'input_flow_control': False,
+                'interface_state': 'up',
+                'mac_address': '48:0f:cf:af:f1:cd',
+                'output_flow_control': False,
+                'parent_interface': 2,
+                'port': 2,
+                'rx_mcast_packets': 342,
+                'rx_mcast_bytes': 23432,
+                'rx_ucast_packets': 555,
+                'rx_ucast_bytes': 234234,
+                'state_description': 'Administratively down',
+                'state_information': None,
+                'subinterface': 3,
+                'tx_mcast_packets': 545555,
+                'tx_mcast_bytes': 334234232,
+                'tx_ucast_packets': 4433,
+                'tx_ucast_bytes': 2342342,
+                'ipv6': None,
+                'ipv4': '13.0.0.1/24'}
+        }
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
 
 
 def test_parse_show_lacp_interface():
