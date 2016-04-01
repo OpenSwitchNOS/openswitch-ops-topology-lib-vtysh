@@ -1560,7 +1560,7 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Label that identifies a physical interface.'
             },
             {
-                'name': 'subintlbl',
+                'name': 'subint',
                 'doc': 'Label that identifies a subinterface.'
             }
         ],

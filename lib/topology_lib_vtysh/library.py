@@ -2958,10 +2958,10 @@ class ConfigSubinterface(ContextManager):
 
             ['end']
     """
-    def __init__(self, enode, portlbl, subintlbl):
+    def __init__(self, enode, portlbl, subint):
         self.enode = enode
         self.port = enode.ports.get(portlbl, portlbl)
-        self.subintlbl = subintlbl
+        self.subint = subint
 
     def __enter__(self):
         commands = """\
