@@ -411,6 +411,11 @@ VTYSH_SPEC = OrderedDict([
                     }
                 ],
                 'returns': True
+            },
+            {
+                'command': 'copy running-config startup-config',
+                'doc': 'copies running config to startup config',
+                'arguments': []
             }
         ]
     }),
