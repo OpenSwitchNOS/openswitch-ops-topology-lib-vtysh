@@ -315,6 +315,12 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
+                'command': 'show mac-address-table',
+                'doc': 'Display L2 MAC address table information.',
+                'arguments': [],
+                'returns': True
+            },
+            {
                 'command': 'show vlog config',
                 'doc': 'Display vlog config.',
                 'arguments': [],
