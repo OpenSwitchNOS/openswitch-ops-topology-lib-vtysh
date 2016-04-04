@@ -220,6 +220,58 @@ def parse_show_interface_subinterface(raw_result):
     return result
 
 
+def parse_show_mac_address_table(raw_result):
+    """
+    Parse the 'show mac-address table' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show mac-address-table command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+            ':00:00:00:00:00:01': { 'vlan_id': '1',
+                                    'from': 'dynamic',
+                                    'port': '1'
+            },
+            ':00:00:00:00:00:02': { 'vlan_id': '2',
+                                    'from': 'dynamic',
+                                    'port': '2'
+            }
+
+        }
+    """
+    table_global = (
+        r'\s*MAC\s*age-time\s*:\s*(?P<age_time>[0-9]+)'
+        r'\s*seconds\s*\n'
+        r'\s*Number\s*of\s*MAC\s*addresses\s*:'
+        r'\s*(?P<no_mac_address>[0-9]+)\s*\n'
+    )
+    mac_entry = (
+        r'(?P<mac>:([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2})\s*'
+        r'(?P<vlan_id>[0-9]+)\s*'
+        r'(?P<from>[- a-zA-Z]+)\s*(?P<port>\w+)'
+    )
+
+    result = {}
+    re_result = re.search(table_global, raw_result)
+    if re_result:
+        result = re_result.groupdict()
+
+    for line in raw_result.splitlines():
+        mac_result = re.search(mac_entry, line)
+        if mac_result:
+            partial = mac_result.groupdict()
+            partial['from'] = partial['from'].strip()
+            mac = partial['mac']
+            del partial['mac']
+            result[mac] = partial
+
+    return result
+
+
 def parse_show_udld_interface(raw_result):
     """
     Parse the 'show udld interface {intf}' command raw output.
@@ -2983,5 +3035,6 @@ __all__ = [
     'parse_show_vlog',
     'parse_show_ip_ospf_neighbor_detail', 'parse_show_ip_ospf_interface',
     'parse_show_ip_ospf', 'parse_show_ip_ospf_neighbor',
-    'parse_show_startup_config'
+    'parse_show_startup_config',
+    'parse_show_mac_address_table'
 ]
