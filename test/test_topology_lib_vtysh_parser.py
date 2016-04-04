@@ -67,11 +67,13 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_ip_ospf,
                                        parse_show_ip_ospf_interface,
                                        parse_show_startup_config,
+                                       parse_show_mac_address_table,
                                        parse_show_tftp_server,
                                        parse_enable,
                                        parse_no_enable,
                                        parse_path,
                                        parse_no_path
+>>>>>>> 434b9fd... chg: dev: parser added for L2mac CT
                                        )
 
 
@@ -195,6 +197,45 @@ VLAN 9 has not been configured
     """
     result = parse_show_vlan(raw_result)
     assert result is None
+
+
+def test_parse_show_mac_address_table():
+    raw_result = """\
+
+MAC age-time            : 300 seconds
+Number of MAC addresses : 2
+
+MAC Address          VLAN     Type       Port
+--------------------------------------------------
+:00:00:00:00:00:01   1        dynamic    1
+:00:00:00:00:00:02   2        dynamic    2
+    """
+
+    result = parse_show_mac_address_table(raw_result)
+
+    expected = {
+         'age_time': '300',
+         'no_mac_address': '2',
+         ':00:00:00:00:00:01': {
+                              'vlan_id': '1',
+                              'from': 'dynamic',
+                              'port': '1'
+         },
+         ':00:00:00:00:00:02': {
+                              'vlan_id': '2',
+                              'from': 'dynamic',
+                              'port': '2'
+         }
+     }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+    raw_result = """\
+No MAC entries found
+    """
+    result = parse_show_mac_address_table(raw_result)
+    assert not result
 
 
 def test_parse_show_interface():
