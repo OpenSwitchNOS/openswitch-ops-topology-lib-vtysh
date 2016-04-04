@@ -7388,6 +7388,32 @@ def show_vlog_severity_daemon(
     return parse_show_vlog_severity_daemon(result)
 
 
+def copy_running_config_startup_config(
+        enode):
+    """
+    copies running config to startup config
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # copy running-config startup-config
+
+    """
+
+    cmd = [
+        'copy running-config startup-config'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -7446,5 +7472,6 @@ __all__ = [
     'show_vlog_daemon',
     'show_vlog_severity',
     'show_vlog_daemon_severity',
-    'show_vlog_severity_daemon'
+    'show_vlog_severity_daemon',
+    'copy_running_config_startup_config'
 ]
