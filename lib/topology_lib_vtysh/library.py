@@ -7252,6 +7252,33 @@ def show_dhcp_server(
     return parse_show_dhcp_server(result)
 
 
+def show_mac_address_table(
+        enode):
+    """
+    Display L2 MAC address table information.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show mac-address-table
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_mac_address_table`
+    """
+
+    cmd = [
+        'show mac-address-table'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_mac_address_table(result)
+
+
 def show_vlog_config(
         enode):
     """
@@ -7669,6 +7696,7 @@ __all__ = [
     'show_ntp_trusted_keys',
     'show_dhcp_server_leases',
     'show_dhcp_server',
+    'show_mac_address_table',
     'show_vlog_config',
     'show_vlog',
     'show_interface_loopback',
