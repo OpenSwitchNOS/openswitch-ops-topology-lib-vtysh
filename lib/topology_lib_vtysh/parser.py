@@ -1831,7 +1831,7 @@ def parse_show_running_config(raw_result):
     interface_vlan_re = r'\interface\s(vlan\d+)'
     interface_port_re = r'interface\s(\d+)'
     interface_mgmt_re = r'interface\smgmt'
-    interface_lag_re = r'\s+interface\slag\s(\d+)'
+    interface_lag_re = r'\s*interface\slag\s(\d+)'
     duplex_half_re = r'\s+duplex\shalf'
     ipv4_re = r'\s+ip address\s(\d.+)'
     stat_ip_re = r'\s+ip static\s(\S+)'
@@ -1855,6 +1855,9 @@ def parse_show_running_config(raw_result):
     if re_interface_section:
         port = None
         for line in re_interface_section[0].splitlines():
+            # Check for blank line
+            if line == '':
+                continue
 
             # Check if interface is vlan
             if re.match(interface_vlan_re, line):
@@ -1914,12 +1917,20 @@ def parse_show_running_config(raw_result):
             # Match ipv4
             re_result = re.match(ipv4_re, line)
             if re_result:
-                result['interface'][port]['ipv4'] = re_result.group(1)
+                if result['interface'].get('lag'):
+                    result['interface']['lag'][port]['ipv4'] = \
+                        re_result.group(1)
+                else:
+                    result['interface'][port]['ipv4'] = re_result.group(1)
 
             # Match ipv6
             re_result = re.match(ipv6_re, line)
             if re_result:
-                result['interface'][port]['ipv6'] = re_result.group(1)
+                if result['interface'].get('lag'):
+                    result['interface']['lag'][port]['ipv6'] = \
+                        re_result.group(1)
+                else:
+                    result['interface'][port]['ipv6'] = re_result.group(1)
 
             # Match admin state
             re_result = re.match(no_shut_re, line)
