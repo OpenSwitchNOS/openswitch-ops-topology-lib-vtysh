@@ -65,7 +65,8 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_ip_ospf_neighbor_detail,
                                        parse_show_ip_ospf_neighbor,
                                        parse_show_ip_ospf,
-                                       parse_show_ip_ospf_interface
+                                       parse_show_ip_ospf_interface,
+                                       parse_show_startup_config
                                        )
 
 
@@ -1388,6 +1389,8 @@ interface loopback 2
 interface mgmt
     ip static 1.1.1.1/24
     nameserver 2.2.2.2
+sftp-server
+    enable
 """
 
     result = parse_show_running_config(raw_result)
@@ -1478,6 +1481,9 @@ interface mgmt
                 'ipv4_address': '10.0.0.1/24',
                 'ipv6_address': '2001::2/64'
                 }
+            },
+        'sftp-server': {
+            'status': 'enable'
             }
         }
 
@@ -2429,6 +2435,32 @@ def test_parse_show_ip_ospf_neighbor():
            'rqstl': '0',
            'dbsml': '0'
               }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_startup_config():
+
+    raw_result = """\
+Startup configuration:
+!
+!
+!
+!
+!
+vlan 1
+    no shutdown
+sftp-server
+    enable
+"""
+
+    result = parse_show_startup_config(raw_result)
+    expected = {
+            'sftp-server': {
+               'status': 'enable'
+            }
+    }
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff

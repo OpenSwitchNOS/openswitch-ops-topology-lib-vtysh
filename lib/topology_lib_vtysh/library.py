@@ -7414,6 +7414,33 @@ def copy_running_config_startup_config(
         raise determine_exception(result)(result)
 
 
+def show_startup_config(
+        enode):
+    """
+    Show startup-config information.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show startup-config
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_startup_config`
+    """
+
+    cmd = [
+        'show startup-config'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_startup_config(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -7473,5 +7500,6 @@ __all__ = [
     'show_vlog_severity',
     'show_vlog_daemon_severity',
     'show_vlog_severity_daemon',
-    'copy_running_config_startup_config'
+    'copy_running_config_startup_config',
+    'show_startup_config'
 ]

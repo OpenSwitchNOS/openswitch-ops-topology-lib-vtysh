@@ -1697,7 +1697,12 @@ def parse_show_running_config(raw_result):
                 'ipv4_address': '192.168.10.1/24',
                 'ipv6_address': '2002::1/64'
                 }
-            }
+            },
+         'sftp-server':
+                {
+                    'status':'enable'
+                }
+
         }
     """
 
@@ -2022,6 +2027,17 @@ def parse_show_running_config(raw_result):
                     result['interface'][port]['lacp']['priority'] =\
                         re_result.group(2)
 
+    # sftp-server section
+    result['sftp-server'] = {}
+    sftp_server_re = r'(\s+sftp-server\s+)'
+    sftp_status_re = r'(\s+(?P<status>enable)\s*)'
+    re_server = re.search(sftp_server_re, raw_result)
+    re_server_status = re.search(sftp_status_re, raw_result)
+    if re_server:
+        result_status = re_server_status.groupdict()
+        for key, value in result_status.items():
+            if value is not None:
+                result['sftp-server'][key] = value
     return result
 
 
@@ -2910,6 +2926,39 @@ def parse_show_vlog(raw_result):
     return False
 
 
+def parse_show_startup_config(raw_result):
+    """
+    Parse the 'show startup-config' command raw output.
+    This parser currently returns only sftp-server section
+    of the show-startup command.
+    Followed the same rule as per running config library parser.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show running-config
+        command in a dictionary of the form:
+
+     ::
+        {
+        'sftp-server': {
+        'status':'enable'}
+        }
+    """
+    result = {}
+
+    # sftp server is covered
+    result['sftp-server'] = {}
+    sftp_server_re = r'(\s+sftp-server\s+)'
+    sftp_status_re = r'(\s+(?P<status>enable)\s*)'
+    re_server = re.search(sftp_server_re, raw_result)
+    re_server_status = re.search(sftp_status_re, raw_result)
+    if re_server:
+        result_status = re_server_status.groupdict()
+        for key, value in result_status.items():
+            if value is not None:
+                result['sftp-server'][key] = value
+    return result
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
@@ -2933,5 +2982,6 @@ __all__ = [
     'parse_show_vlog_daemon_severity', 'parse_show_vlog_severity_daemon',
     'parse_show_vlog',
     'parse_show_ip_ospf_neighbor_detail', 'parse_show_ip_ospf_interface',
-    'parse_show_ip_ospf', 'parse_show_ip_ospf_neighbor'
+    'parse_show_ip_ospf', 'parse_show_ip_ospf_neighbor',
+    'parse_show_startup_config'
 ]
