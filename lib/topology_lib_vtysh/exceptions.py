@@ -71,6 +71,17 @@ class IncompleteCommandException(VtyshException):
     """
 
 
+class NotValidLAG(VtyshException):
+    """
+    This is a typed exception that will be raised when any of the following
+    regular expressions match the output of a command:
+
+    ::
+        Specified LAG port doesn't exist.
+
+    """
+
+
 VTYSH_EXCEPTIONS = OrderedDict([
     (
         UnknownCommandException,
@@ -83,6 +94,12 @@ VTYSH_EXCEPTIONS = OrderedDict([
         IncompleteCommandException,
         [
             'Command incomplete',
+        ]
+    ),
+    (
+        NotValidLAG,
+        [
+            'Specified LAG port doesn't exist.',
         ]
     ),
 ])
@@ -108,6 +125,7 @@ __all__ = [
     'UnknownVtyshException',
     'UnknownCommandException',
     'IncompleteCommandException',
+    'NotValidLAG',
     'VTYSH_EXCEPTIONS',
     'determine_exception'
 ]
