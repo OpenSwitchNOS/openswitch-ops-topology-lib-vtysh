@@ -2818,6 +2818,11 @@ VTYSH_EXCEPTIONS_SPEC = OrderedDict([
         [
             'Command incomplete',
         ]
+    ), (
+        'NotValidLAG',
+        [
+            'Specified LAG port doesn\'t exist.',
+        ]
     )
 ])
 """Vtysh Exceptions specification as a Python dictionary"""
