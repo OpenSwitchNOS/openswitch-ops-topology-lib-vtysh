@@ -66,8 +66,94 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_ip_ospf_neighbor,
                                        parse_show_ip_ospf,
                                        parse_show_ip_ospf_interface,
-                                       parse_show_startup_config
+                                       parse_show_startup_config,
+                                       parse_show_tftp_server,
+                                       parse_enable,
+                                       parse_no_enable,
+                                       parse_path,
+                                       parse_no_path
                                        )
+
+
+def test_parse_show_tftp_server():
+    raw_result = """\
+TFTP server configuration
+-------------------------
+TFTP server : Enabled
+TFTP server secure mode : Disabled
+TFTP server file path : /etc/ssl/certs/
+    """
+
+    result = parse_show_tftp_server(raw_result)
+    print(result)
+    expected = {
+        'tftp_server': True,
+        'tftp_server_secure_mode': False,
+        'tftp_server_file_path': '/etc/ssl/certs/'
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_enable():
+    raw_result = """\
+TFTP server is enabled successfully
+    """
+
+    result = parse_enable(raw_result)
+
+    expected = {
+        'result': True
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_no_enable():
+    raw_result = """\
+TFTP server is disabled successfully
+    """
+
+    result = parse_no_enable(raw_result)
+
+    expected = {
+        'result': True
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_path():
+    raw_result = """\
+TFTP server path is added successfully
+    """
+
+    result = parse_path(raw_result)
+
+    expected = {
+        'result': True
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_no_path():
+    raw_result = """\
+TFTP server path is deleted successfully
+    """
+
+    result = parse_no_path(raw_result)
+
+    expected = {
+        'result': True
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
 
 
 def test_parse_show_vlan():

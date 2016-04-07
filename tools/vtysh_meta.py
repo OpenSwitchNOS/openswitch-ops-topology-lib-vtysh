@@ -433,6 +433,12 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Show startup-config information.',
                 'arguments': [],
                 'returns': True
+            },
+            {
+                'command': 'show tftp-server',
+                'doc': 'Display TFTP-Server configuration.',
+                'arguments': [],
+                'returns': True
             }
         ]
     }),
@@ -2749,6 +2755,49 @@ VTYSH_SPEC = OrderedDict([
                         'doc': 'VLAN description.',
                     }
                 ],
+            }
+        ]
+    },
+    ),
+    ('config_tftp_server', {
+        'doc': 'tftp-server configuration.',
+        'arguments': [],
+        'pre_commands': ['config terminal', 'tftp-server'],
+        'post_commands': ['end'],
+        'commands': [
+            {
+                'command': 'enable',
+                'doc': 'Enable tftp server.',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'no enable',
+                'doc': 'Disable tftp server.',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'path {path}',
+                'doc': 'Set Path of tftp-server',
+                'arguments': [
+                    {
+                        'name': 'path',
+                        'doc': 'path of the directory'
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'no path {path}',
+                'doc': 'Unset path to tftp server.',
+                'arguments': [
+                    {
+                        'name': 'path',
+                        'doc': 'path of the directory'
+                    }
+                ],
+                'returns': True
             }
         ]
     },

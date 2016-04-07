@@ -6090,6 +6090,157 @@ class ConfigVlan(ContextManager):
             raise determine_exception(result)(result)
 
 
+class ConfigTftpServer(ContextManager):
+    """
+    tftp-server configuration.
+
+    pre_commands:
+
+    ::
+
+            ['config terminal', 'tftp-server']
+
+    post_commands:
+
+    ::
+
+            ['end']
+    """
+    def __init__(self, enode):
+        self.enode = enode
+
+    def __enter__(self):
+        commands = """\
+            config terminal
+            tftp-server
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+        return self
+
+    def __exit__(self, type, value, traceback):
+        commands = """\
+            end
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+    def enable(
+            self):
+        """
+        Enable tftp server.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # enable
+
+        :return: A dictionary as returned by
+         :func:`topology_lib_vtysh.parser.parse_enable`
+        """
+
+        cmd = [
+            'enable'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        return parse_enable(result)
+
+    def no_enable(
+            self):
+        """
+        Disable tftp server.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no enable
+
+        :return: A dictionary as returned by
+         :func:`topology_lib_vtysh.parser.parse_no_enable`
+        """
+
+        cmd = [
+            'no enable'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        return parse_no_enable(result)
+
+    def path(
+            self, path):
+        """
+        Set Path of tftp-server
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # path {path}
+
+        :param path: path of the directory
+        :return: A dictionary as returned by
+         :func:`topology_lib_vtysh.parser.parse_path`
+        """
+
+        cmd = [
+            'path {path}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        return parse_path(result)
+
+    def no_path(
+            self, path):
+        """
+        Unset path to tftp server.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no path {path}
+
+        :param path: path of the directory
+        :return: A dictionary as returned by
+         :func:`topology_lib_vtysh.parser.parse_no_path`
+        """
+
+        cmd = [
+            'no path {path}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        return parse_no_path(result)
+
+
 def show_interface(
         enode, portlbl):
     """
@@ -7441,6 +7592,33 @@ def show_startup_config(
     return parse_show_startup_config(result)
 
 
+def show_tftp_server(
+        enode):
+    """
+    Display TFTP-Server configuration.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show tftp-server
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_tftp_server`
+    """
+
+    cmd = [
+        'show tftp-server'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_tftp_server(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -7454,6 +7632,7 @@ __all__ = [
     'ConfigRouterOspf',
     'ConfigRouterBgp',
     'ConfigVlan',
+    'ConfigTftpServer',
     'show_interface',
     'show_interface_subinterface',
     'show_vlan',
@@ -7501,5 +7680,6 @@ __all__ = [
     'show_vlog_daemon_severity',
     'show_vlog_severity_daemon',
     'copy_running_config_startup_config',
-    'show_startup_config'
+    'show_startup_config',
+    'show_tftp_server'
 ]

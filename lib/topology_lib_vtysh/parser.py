@@ -2959,6 +2959,182 @@ def parse_show_startup_config(raw_result):
                 result['sftp-server'][key] = value
     return result
 
+
+def parse_show_tftp_server(raw_result):
+
+    """
+    Parse the 'show tftp-server' command raw output.
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show tftp-server\
+        in a dictionary of the form:
+
+    ::
+
+        {
+            'tftp_server' : 'Enabled',
+            'tftp_server_secure_mode' : 'Enabled',
+            'tftp_server_file_path' : '/tmp/'
+        }
+    """
+
+    show_tfpt_server_re = (
+        r'\s*TFTP server configuration\s*-*\s*'
+        r'TFTP server\s*:\s+(?P<tftp_server>\S+)\s*'
+        r'TFTP server secure mode\s*:\s+(?P<tftp_server_secure_mode>\S+)\s*'
+        r'TFTP server file path\s*:\s+(?P<tftp_server_file_path>\S+)'
+        )
+
+    re_result = re.match(show_tfpt_server_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    for key, value in result.items():
+        if value is not None:
+            if key == 'tftp_server' or key == 'tftp_server_secure_mode':
+                if value == 'Enabled':
+                    result[key] = True
+                elif value == 'Disabled':
+                    result[key] = False
+
+    return result
+
+
+def parse_enable(raw_result):
+    """
+    Parse the 'enable' command raw output in tftp-server context
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the 'enable' in tftp-server\
+        context:
+
+    ::
+
+        {
+            '\s*TFTP server is enabled successfully\s*-*\s*'
+        }
+    """
+
+    enable_tfpt_server_re = (
+        r'TFTP server is\s(?P<result>\S*)\s*'
+        )
+
+    re_result = re.match(enable_tfpt_server_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    for key, value in result.items():
+        if value is not None:
+            if key == 'result':
+                if value == 'already' or value == 'enabled':
+                    result[key] = True
+                else:
+                    result[key] = False
+
+    return result
+
+
+def parse_no_enable(raw_result):
+    """
+    Parse the 'no enable' command raw output in tftp-server context
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the 'no enable' in tftp-server\
+        context:
+
+    ::
+
+        {
+            '\s*TFTP server is enabled successfully\s*-*\s*'
+        }
+    """
+
+    enable_tfpt_server_re = (
+        r'TFTP server is\s(?P<result>\S*)\s*'
+        )
+
+    re_result = re.match(enable_tfpt_server_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    for key, value in result.items():
+        if value is not None:
+            if key == 'result':
+                if value == 'already' or value == 'disabled':
+                    result[key] = True
+                else:
+                    result[key] = False
+
+    return result
+
+
+def parse_path(raw_result):
+    """
+    Parse the 'path {path}' command raw output in tftp-server context
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the 'no enable' in tftp-server\
+        context:
+
+    ::
+
+        {
+            'TFTP server path is added successfully'
+        }
+    """
+
+    enable_tfpt_server_re = (
+        r'TFTP server path is\s(?P<result>\S*)\s*'
+        )
+
+    re_result = re.match(enable_tfpt_server_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    for key, value in result.items():
+        if value is not None:
+            if key == 'result':
+                if value == 'added':
+                    result[key] = True
+                else:
+                    result[key] = False
+
+    return result
+
+
+def parse_no_path(raw_result):
+    """
+    Parse the 'no path {path}' command raw output in tftp-server context
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the 'no enable' in tftp-server\
+        context:
+
+    ::
+
+        {
+            'TFTP server path is deleted successfully'
+        }
+    """
+
+    enable_tfpt_server_re = (
+        r'TFTP server path is\s(?P<result>\S*)\s*'
+        )
+
+    re_result = re.match(enable_tfpt_server_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    for key, value in result.items():
+        if value is not None:
+            if key == 'result':
+                if value == 'deleted':
+                    result[key] = True
+                else:
+                    result[key] = False
+
+    return result
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
@@ -2983,5 +3159,7 @@ __all__ = [
     'parse_show_vlog',
     'parse_show_ip_ospf_neighbor_detail', 'parse_show_ip_ospf_interface',
     'parse_show_ip_ospf', 'parse_show_ip_ospf_neighbor',
-    'parse_show_startup_config'
+    'parse_show_startup_config',
+    'parse_show_tftp_server', 'parse_enable', 'parse_no_enable', 'parse_path',
+    'parse_no_path'
 ]
