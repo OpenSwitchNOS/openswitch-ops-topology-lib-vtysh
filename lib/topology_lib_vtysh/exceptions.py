@@ -99,7 +99,7 @@ VTYSH_EXCEPTIONS = OrderedDict([
     (
         NotValidLAG,
         [
-            'Specified LAG port doesn't exist.',
+            'Specified LAG port doesn\'t exist.',
         ]
     ),
 ])
