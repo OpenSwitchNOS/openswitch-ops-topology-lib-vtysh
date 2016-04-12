@@ -73,7 +73,7 @@ setup(
         'Vtysh Communication Library for Topology'
     ),
     long_description=read('README.rst'),
-    url='https://github-sc-p.corp.hp.com/hpe-networking/topology_lib_vtysh',
+    url='https://git.openswitch.net/openswitch/ops-topology-lib-vtysh',
     keywords='topology_lib_vtysh',
 
     classifiers=[

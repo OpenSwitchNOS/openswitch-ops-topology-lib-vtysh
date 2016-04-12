@@ -8,7 +8,7 @@ Vtysh Communication Library for Topology
 Documentation
 =============
 
-    https://github-sc-p.corp.hp.com/hpe-networking/topology_lib_vtysh
+    https://git.openswitch.net/openswitch/ops-topology-lib-vtysh
 
 
 Changelog
