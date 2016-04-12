@@ -72,7 +72,8 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_config_tftp_server_enable,
                                        parse_config_tftp_server_no_enable,
                                        parse_config_tftp_server_path,
-                                       parse_config_tftp_server_no_path
+                                       parse_config_tftp_server_no_path,
+                                       parse_show_interface_lag
                                        )
 
 
@@ -621,6 +622,54 @@ Interface 2.3 is up.
                 'ipv6': None,
                 'ipv4': '13.0.0.1/24'}
         }
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_interface_lag():
+    raw_result = """\
+Aggregate-name lag1
+ Aggregated-interfaces : 2 1
+ Aggregation-key : 1
+ IPv4 address 10.1.1.1/24
+ IPv4 address 10.1.1.2/24 secondary
+ IPv6 address 2001::1/12
+ IPv6 address 2001::2/12 secondary
+ Speed 0 Mb/s
+ RX
+            0 input packets              0 bytes
+            0 input error                0 dropped
+            0 CRC/FCS
+ TX
+            0 output packets             0 bytes
+            0 input error                0 dropped
+            0 collision
+"""
+
+    result = parse_show_interface_lag(raw_result)
+
+    expected = {
+        'lag_name': 'lag1',
+        'aggregated_interfaces': '2 1',
+        'agg_key': 1,
+        'ipv4': '10.1.1.1/24',
+        'ipv4_secondary': '10.1.1.2/24',
+        'ipv6': '2001::1/12',
+        'ipv6_secondary': '2001::2/12',
+        'speed': 0,
+        'speed_unit': 'Mb/s',
+        'rx_crc_fcs': 0,
+        'rx_dropped': 0,
+        'rx_bytes': 0,
+        'rx_error': 0,
+        'rx_packets': 0,
+        'tx_bytes': 0,
+        'tx_collisions': 0,
+        'tx_dropped': 0,
+        'tx_errors': 0,
+        'tx_packets': 0,
+    }
+
     ddiff = DeepDiff(result, expected)
     assert not ddiff
 

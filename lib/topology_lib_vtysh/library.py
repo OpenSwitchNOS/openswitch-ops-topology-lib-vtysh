@@ -6930,8 +6930,10 @@ def show_interface(
         (' '.join(cmd)).format(**locals()),
         shell='vtysh'
     )
-
-    return parse_show_interface(result)
+    if 'lag' in portlbl:
+        return parse_show_interface_lag(result)
+    else:
+        return parse_show_interface(result)
 
 
 def show_interface_subinterface(
