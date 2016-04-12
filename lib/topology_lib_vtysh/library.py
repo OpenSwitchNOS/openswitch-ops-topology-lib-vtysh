@@ -6146,7 +6146,7 @@ class ConfigTftpServer(ContextManager):
             # enable
 
         :return: A dictionary as returned by
-         :func:`topology_lib_vtysh.parser.parse_enable`
+         :func:`topology_lib_vtysh.parser.parse_config_tftp_server_enable`
         """
 
         cmd = [
@@ -6158,7 +6158,7 @@ class ConfigTftpServer(ContextManager):
             shell='vtysh'
         )
 
-        return parse_enable(result)
+        return parse_config_tftp_server_enable(result)
 
     def no_enable(
             self):
@@ -6172,7 +6172,7 @@ class ConfigTftpServer(ContextManager):
             # no enable
 
         :return: A dictionary as returned by
-         :func:`topology_lib_vtysh.parser.parse_no_enable`
+         :func:`topology_lib_vtysh.parser.parse_config_tftp_server_no_enable`
         """
 
         cmd = [
@@ -6184,7 +6184,7 @@ class ConfigTftpServer(ContextManager):
             shell='vtysh'
         )
 
-        return parse_no_enable(result)
+        return parse_config_tftp_server_no_enable(result)
 
     def path(
             self, path):
@@ -6199,7 +6199,7 @@ class ConfigTftpServer(ContextManager):
 
         :param path: path of the directory
         :return: A dictionary as returned by
-         :func:`topology_lib_vtysh.parser.parse_path`
+         :func:`topology_lib_vtysh.parser.parse_config_tftp_server_path`
         """
 
         cmd = [
@@ -6211,7 +6211,7 @@ class ConfigTftpServer(ContextManager):
             shell='vtysh'
         )
 
-        return parse_path(result)
+        return parse_config_tftp_server_path(result)
 
     def no_path(
             self, path):
@@ -6226,7 +6226,7 @@ class ConfigTftpServer(ContextManager):
 
         :param path: path of the directory
         :return: A dictionary as returned by
-         :func:`topology_lib_vtysh.parser.parse_no_path`
+         :func:`topology_lib_vtysh.parser.parse_config_tftp_server_no_path`
         """
 
         cmd = [
@@ -6238,7 +6238,7 @@ class ConfigTftpServer(ContextManager):
             shell='vtysh'
         )
 
-        return parse_no_path(result)
+        return parse_config_tftp_server_no_path(result)
 
 
 def show_interface(

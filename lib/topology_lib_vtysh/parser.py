@@ -3052,7 +3052,7 @@ def parse_show_tftp_server(raw_result):
     return result
 
 
-def parse_enable(raw_result):
+def parse_config_tftp_server_enable(raw_result):
     """
     Parse the 'enable' command raw output in tftp-server context
     :param str raw_result: vtysh raw result string.
@@ -3086,7 +3086,7 @@ def parse_enable(raw_result):
     return result
 
 
-def parse_no_enable(raw_result):
+def parse_config_tftp_server_no_enable(raw_result):
     """
     Parse the 'no enable' command raw output in tftp-server context
     :param str raw_result: vtysh raw result string.
@@ -3120,7 +3120,7 @@ def parse_no_enable(raw_result):
     return result
 
 
-def parse_path(raw_result):
+def parse_config_tftp_server_path(raw_result):
     """
     Parse the 'path {path}' command raw output in tftp-server context
     :param str raw_result: vtysh raw result string.
@@ -3154,7 +3154,7 @@ def parse_path(raw_result):
     return result
 
 
-def parse_no_path(raw_result):
+def parse_config_tftp_server_no_path(raw_result):
     """
     Parse the 'no path {path}' command raw output in tftp-server context
     :param str raw_result: vtysh raw result string.
@@ -3213,6 +3213,7 @@ __all__ = [
     'parse_show_ip_ospf', 'parse_show_ip_ospf_neighbor',
     'parse_show_startup_config',
     'parse_show_mac_address_table',
-    'parse_show_tftp_server', 'parse_enable', 'parse_no_enable', 'parse_path',
-    'parse_no_path'
+    'parse_show_tftp_server', 'parse_config_tftp_server_enable',
+    'parse_config_tftp_server_no_enable', 'parse_config_tftp_server_path',
+    'parse_config_tftp_server_no_path'
 ]

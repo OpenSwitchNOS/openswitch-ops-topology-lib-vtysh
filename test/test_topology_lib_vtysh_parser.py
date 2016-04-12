@@ -69,10 +69,10 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_startup_config,
                                        parse_show_mac_address_table,
                                        parse_show_tftp_server,
-                                       parse_enable,
-                                       parse_no_enable,
-                                       parse_path,
-                                       parse_no_path
+                                       parse_config_tftp_server_enable,
+                                       parse_config_tftp_server_no_enable,
+                                       parse_config_tftp_server_path,
+                                       parse_config_tftp_server_no_path
                                        )
 
 
@@ -97,12 +97,12 @@ TFTP server file path : /etc/ssl/certs/
     assert not ddiff
 
 
-def test_parse_enable():
+def test_parse_config_tftp_server_enable():
     raw_result = """\
 TFTP server is enabled successfully
     """
 
-    result = parse_enable(raw_result)
+    result = parse_config_tftp_server_enable(raw_result)
 
     expected = {
         'result': True
@@ -112,12 +112,12 @@ TFTP server is enabled successfully
     assert not ddiff
 
 
-def test_parse_no_enable():
+def test_parse_config_tftp_server_no_enable():
     raw_result = """\
 TFTP server is disabled successfully
     """
 
-    result = parse_no_enable(raw_result)
+    result = parse_config_tftp_server_no_enable(raw_result)
 
     expected = {
         'result': True
@@ -127,12 +127,12 @@ TFTP server is disabled successfully
     assert not ddiff
 
 
-def test_parse_path():
+def test_parse_config_tftp_server_path():
     raw_result = """\
 TFTP server path is added successfully
     """
 
-    result = parse_path(raw_result)
+    result = parse_config_tftp_server_path(raw_result)
 
     expected = {
         'result': True
@@ -142,12 +142,12 @@ TFTP server path is added successfully
     assert not ddiff
 
 
-def test_parse_no_path():
+def test_parse_config_tftp_server_no_path():
     raw_result = """\
 TFTP server path is deleted successfully
     """
 
-    result = parse_no_path(raw_result)
+    result = parse_config_tftp_server_no_path(raw_result)
 
     expected = {
         'result': True

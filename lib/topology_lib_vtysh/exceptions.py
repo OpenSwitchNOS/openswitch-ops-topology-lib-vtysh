@@ -77,7 +77,7 @@ class NotValidLAG(VtyshException):
     regular expressions match the output of a command:
 
     ::
-        Specified LAG port doesn't exist.
+        Specified LAG port does not exist.
 
     """
 
@@ -99,7 +99,7 @@ VTYSH_EXCEPTIONS = OrderedDict([
     (
         NotValidLAG,
         [
-            'Specified LAG port doesn\'t exist.',
+            'Specified LAG port does not exist.',
         ]
     ),
 ])
