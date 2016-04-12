@@ -6930,7 +6930,6 @@ def show_interface(
         (' '.join(cmd)).format(**locals()),
         shell='vtysh'
     )
-
     return parse_show_interface(result)
 
 
