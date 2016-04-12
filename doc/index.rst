@@ -25,7 +25,7 @@ Documentation
 Development
 ===========
 
-- `Project repository. <https://github-sc-p.corp.hp.com/hpe-networking/topology_lib_vtysh>`_
+- `Project repository. <https://git.openswitch.net/openswitch/ops-topology-lib-vtysh>`_
 
 
 License

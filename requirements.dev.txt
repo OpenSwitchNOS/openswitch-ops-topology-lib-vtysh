@@ -8,3 +8,4 @@ sphinxcontrib-plantuml
 autoapi
 deepdiff
 inflection
+ipdb
