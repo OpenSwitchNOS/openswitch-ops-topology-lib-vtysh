@@ -118,6 +118,84 @@ def parse_show_interface(raw_result):
     return result
 
 
+def parse_show_interface_lag(raw_result):
+    """
+    Parse the 'show interface' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show interface command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+            'admin_state': 'down',
+            'autonegotiation': True,
+            'conection_type': 'Half-duplex',
+            'hardware': 'Ethernet',
+            'input_flow_control': False,
+            'interface_state': 'down',
+            'mac_address': '70:72:cf:d7:d3:dd',
+            'mtu': 0,
+            'output_flow_control': False,
+            'port': 7,
+            'rx_crc_fcs': 0,
+            'rx_dropped': 0,
+            'rx_bytes': 0,
+            'rx_error': 0,
+            'rx_packets': 0,
+            'speed': 0,
+            'speed_unit': 'Mb/s',
+            'state_description': 'Administratively down',
+            'state_information': 'admin_down',
+            'tx_bytes': 0,
+            'tx_collisions': 0,
+            'tx_dropped': 0,
+            'tx_errors': 0,
+            'tx_packets': 0
+            'ipv4': '20.1.1.2/30'
+        }
+    """
+
+    show_re = (
+        r'Aggregate-name\s(?P<lag_name>\w*)\s*'
+        r'Aggregated-interfaces\s\:\s(?P<aggregated_interfaces>(\d\s)*)\s*'
+        r'Aggregation-key\s:\s(?P<agg_key>\d*)\s*'
+        r'(IPv4\saddress\s(?P<ipv4>\S+))?\s*'
+        r'(IPv4\saddress\s(?P<ipv4_secondary>\S+) secondary)*\s*'
+        r'(IPv6\saddress\s(?P<ipv6>\S+))?\s*'
+        r'(IPv6\saddress\s(?P<ipv6_secondary>\S+))* secondary\s*'
+        r'Speed\s(?P<speed>\d+)\s(?P<speed_unit>\S+)\s*'
+        r'RX\s*'
+        r'(?P<rx_packets>\d+) input packets\s+'
+        r'(?P<rx_bytes>\d+) bytes\s+'
+        r'(?P<rx_error>\d+) input error\s+'
+        r'(?P<rx_dropped>\d+) dropped\s+'
+        r'(?P<rx_crc_fcs>\d+) CRC/FCS\s+'
+        r'TX\s+'
+        r'(?P<tx_packets>\d+) output packets\s+'
+        r'(?P<tx_bytes>\d+) bytes\s+'
+        r'(?P<tx_errors>\d+) input error\s+'
+        r'(?P<tx_dropped>\d+) dropped\s+'
+        r'(?P<tx_collisions>\d+) collision'
+    )
+
+    re_result = re.match(show_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    for key, value in result.items():
+        if value is not None:
+            if value.isdigit():
+                result[key] = int(value)
+            elif value == 'on':
+                result[key] = True
+            elif value == 'off':
+                result[key] = False
+    return result
+
+
 def parse_show_interface_subinterface(raw_result):
     """
     Parse the 'show interface <port> subinterface' command raw output.
@@ -3215,5 +3293,5 @@ __all__ = [
     'parse_show_mac_address_table',
     'parse_show_tftp_server', 'parse_config_tftp_server_enable',
     'parse_config_tftp_server_no_enable', 'parse_config_tftp_server_path',
-    'parse_config_tftp_server_no_path'
+    'parse_config_tftp_server_no_path', 'parse_show_interface_lag'
 ]
