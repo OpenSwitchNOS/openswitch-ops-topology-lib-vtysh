@@ -2807,7 +2807,510 @@ VTYSH_SPEC = OrderedDict([
             }
         ]
     },
-    )
+    ),
+    (
+        'config_dhcp_server', {
+            'doc': 'DHCP server configuration.',
+            'arguments': [],
+            'pre_commands': ['config terminal', 'dhcp-server'],
+            'post_commands': ['end'],
+            'commands': [
+                {
+                    'command': (
+                               'range {range_name} start-ip-address {start_ip}'
+                               ' end-ip-address {end_ip}'
+                               ' netmask {subnet_mask}'
+                               ),
+                    'doc': 'Sets DHCP dynamic configuration.',
+                    'arguments': [
+                        {
+                            'name': 'range_name',
+                            'doc': (
+                                   'DHCP range name. '
+                                   'String of maximum length 15 chars'
+                            ),
+                        },
+                        {
+                            'name': 'start_ip',
+                            'doc': (
+                                '<A.B.C.D> Start range IPv4 address or '
+                                '<X:X::X:X> Start range IPv6 address'
+                            ),
+                        },
+                        {
+                            'name': 'end_ip',
+                            'doc': (
+                                '<A.B.C.D> End range IPv4 address or '
+                                '<X:X::X:X> End range IPv6 address'
+                            ),
+                        },
+                        {
+                            'name': 'subnet_mask',
+                            'doc': '<A.B.C.D> Range netmask address',
+                            'prefix': ' netmask ',
+                            'optional': True
+                        },
+                        {
+                            'name': 'broadcast_address',
+                            'doc': '<A.B.C.D> Range broadcast address',
+                            'optional': True,
+                            'prefix': ' broadcast '
+                        },
+                        {
+                            'name': 'tag_name',
+                            'doc': (
+                                'Match tags list. '
+                                'Each tag length must be less than 15 chars.'
+                            ),
+                            'optional': True,
+                            'prefix': ' match tags '
+                        },
+                        {
+                            'name': 'set_name',
+                            'doc': (
+                                'Tag set name. '
+                                'Length must be less than 15 chars.'
+                            ),
+                            'optional': True,
+                            'prefix': ' set tag '
+                        },
+                        {
+                            'name': 'prefix_len_value',
+                            'doc': (
+                                'IPV6 prefix length. '
+                                '<64 - 128> Configurable range.'
+                            ),
+                            'optional': True,
+                            'prefix': ' prefix-len '
+                        },
+                        {
+                            'name': 'lease_duration_value',
+                            'doc': (
+                                'Range lease duration. '
+                                'Default value is 60 min.'
+                            ),
+                            'optional': True,
+                            'prefix': ' lease-duration '
+                        },
+                    ],
+                },
+                {
+                    'command': (
+                                'no range {range_name} '
+                                'start-ip-address {start_ip} '
+                                'end-ip-address {end_ip} '
+                               ),
+                    'doc': 'Removes DHCP dynamic configuration.',
+                    'arguments': [
+                        {
+                            'name': 'range_name',
+                            'doc': (
+                                    'DHCP range name. '
+                                    'String of maximum length 15 chars'
+                            ),
+                        },
+                        {
+                            'name': 'start_ip',
+                            'doc': (
+                                '<A.B.C.D> Start range IPv4 address or '
+                                '<X:X::X:X> Start range IPv6 address'
+                            ),
+                        },
+                        {
+                            'name': 'end_ip',
+                            'doc': (
+                                '<A.B.C.D> End range IPv4 address or '
+                                '<X:X::X:X> End range IPv6 address'
+                            ),
+                        },
+                        {
+                            'name': 'subnet_mask',
+                            'doc': '<A.B.C.D> Range netmask address',
+                            'optional': True,
+                            'prefix': ' netmask '
+                        },
+                        {
+                            'name': 'broadcast_address',
+                            'doc': '<A.B.C.D> Range broadcast address',
+                            'optional': True,
+                            'prefix': ' broadcast '
+                        },
+                        {
+                            'name': 'tag_name',
+                            'doc': (
+                                'Match tags list. '
+                                'Each tag length must be less than 15 chars.'
+                            ),
+                            'optional': True,
+                            'prefix': ' match tags '
+                        },
+                        {
+                            'name': 'set_name',
+                            'doc': (
+                                'Tag set name. '
+                                'Length must be less than 15 chars.'
+                            ),
+                            'optional': True,
+                            'prefix': ' set tag '
+                        },
+                        {
+                            'name': 'prefix_len_value',
+                            'doc': (
+                                'IPV6 prefix length. '
+                                '<64 - 128> Configurable range.'
+                            ),
+                            'optional': True,
+                            'prefix': ' prefix-len '
+                        },
+                        {
+                            'name': 'lease_duration_value',
+                            'doc': (
+                                'Range lease duration. '
+                                'Default value is 60 min.'
+                            ),
+                            'optional': True,
+                            'prefix': ' lease-duration '
+                        },
+                    ],
+                },
+                {
+                    'command': (
+                                'static {ip_address}'
+                               ),
+                    'doc': 'Sets DHCP dynamic configuration.',
+                    'arguments': [
+                        {
+                            'name': 'ip_address',
+                            'doc': (
+                                '<A.B.C.D> IPv4 address or '
+                                '<X:X::X:X> IPv6 address'
+                            ),
+                        },
+                        {
+                            'name': 'mac_address',
+                            'doc': (
+                                '<XX:XX:XX:XX:XX:XX> MAC address or '
+                                '<XX-XX-XX-XX-XX-XX> MAC address'
+                                'Client MAC addresses'
+                            ),
+                            'optional': True,
+                            'prefix': ' match-mac-addresses '
+                        },
+                        {
+                            'name': 'hostname',
+                            'doc': (
+                                'Client hostname. '
+                                'Length must be less than 15 chars.'
+                            ),
+                            'optional': True,
+                            'prefix': ' match-client-hostname '
+                        },
+                        {
+                            'name': 'client_id',
+                            'doc': (
+                                'Client id. '
+                                'Length must be less than 15 chars.'
+                            ),
+                            'optional': True,
+                            'prefix': ' match-client-id '
+                        },
+                        {
+                            'name': 'set_tag_names',
+                            'doc': (
+                                'Set tag list names. '
+                                'Each tag length must be less than 15 chars.'
+                            ),
+                            'optional': True,
+                            'prefix': ' set tags '
+                        },
+                        {
+                            'name': 'lease_duration_value',
+                            'doc': (
+                                'Range lease duration. '
+                                'Default value is 60 min.'
+                            ),
+                            'optional': True,
+                            'prefix': ' lease-duration '
+                        },
+                    ],
+                },
+                {
+                    'command': (
+                                'no static {ip_address}'
+                               ),
+                    'doc': 'Removes DHCP dynamic configuration.',
+                    'arguments': [
+                        {
+                            'name': 'ip_address',
+                            'doc': (
+                                '<A.B.C.D> IPv4 address or '
+                                '<X:X::X:X> IPv6 address'
+                            ),
+                        },
+                        {
+                            'name': 'mac_address',
+                            'doc': (
+                                '<XX:XX:XX:XX:XX:XX> MAC address or '
+                                '<XX-XX-XX-XX-XX-XX> MAC address'
+                                'Client MAC addresses'
+                            ),
+                            'optional': True,
+                            'prefix': ' match-mac-addresses '
+                        },
+                        {
+                            'name': 'hostname',
+                            'doc': (
+                                'Client hostname '
+                                'Length must be less than 15 chars.'
+                            ),
+                            'optional': True,
+                            'prefix': ' match-client-hostname '
+                        },
+                        {
+                            'name': 'client_id',
+                            'doc': (
+                                'Client id. '
+                                'Length must be less than 15 chars.'
+                            ),
+                            'optional': True,
+                            'prefix': ' match-client-id '
+                        },
+                        {
+                            'name': 'set_tag_names',
+                            'doc': (
+                                'Set tag list names. '
+                                'Each tag length must be less than 15 chars.'
+                            ),
+                            'optional': True,
+                            'prefix': ' set tags '
+                        },
+                        {
+                            'name': 'lease_duration_value',
+                            'doc': (
+                                'Range lease duration. '
+                                'Default value is 60 min.'
+                            ),
+                            'optional': True,
+                            'prefix': ' lease-duration '
+                        },
+                    ],
+                },
+                {
+                    'command': (
+                                'option set'
+                               ),
+                    'doc': (
+                        'Sets DHCP configuration values using an option name.'
+                    ),
+                    'arguments': [
+                        {
+                            'name': 'set_name',
+                            'doc': 'DHCP option name',
+                            'prefix': ' option-name ',
+                            'optional': True
+                        },
+                        {
+                            'name': 'option-number',
+                            'doc': 'DHCP option number',
+                            'prefix': ' option-number ',
+                            'optional': True
+                        },
+                        {
+                            'name': 'option_value',
+                            'doc': 'DHCP option value',
+                            'prefix': ' option-value ',
+                            'optional': True
+                        },
+                        {
+                            'name': 'tag_name',
+                            'doc': (
+                                'Match tags list. '
+                                'Each tag length must be less than 15 chars.'
+                            ),
+                            'optional': True,
+                            'prefix': ' match tags'
+                        },
+                        {
+                            'name': 'ipv6',
+                            'doc': (
+                                'Enable ipv6 for the set.'
+                            ),
+                            'optional': True,
+                        },
+                    ],
+                },
+                {
+                    'command': (
+                               'no option set'
+                               ),
+                    'doc': (
+                            'Removes DHCP configuration '
+                            'values using an option name.'
+                           ),
+                    'arguments': [
+                        {
+                            'name': 'set_name',
+                            'doc': 'DHCP option name',
+                            'prefix': ' option-name ',
+                            'optional': True
+                        },
+                        {
+                            'name': 'option-number',
+                            'doc': 'DHCP option number',
+                            'prefix': ' option-number ',
+                            'optional': True
+                        },
+                        {
+                            'name': 'option_value',
+                            'doc': 'DHCP option value',
+                            'prefix': ' option-value ',
+                            'optional': True
+                        },
+                        {
+                            'name': 'tag_name',
+                            'doc': (
+                                'Match tags list. '
+                                'Each tag length must be less than 15 chars.'
+                            ),
+                            'optional': True,
+                            'prefix': ' match-tags ',
+                        },
+                        {
+                            'name': 'ipv6',
+                            'doc': (
+                                'Enable ipv6 for the set.'
+                            ),
+                            'optional': True,
+                        },
+                    ],
+                },
+                {
+                    'command': (
+                                'match set tag {tag_name}'
+                               ),
+                    'doc': (
+                        'Sets DHCP match configuration using an option name.'
+                    ),
+                    'arguments': [
+                        {
+                            'name': 'tag_name',
+                            'doc': (
+                                'DHCP match tag name'
+                                'Length must be less than 15 chars.'
+                            ),
+                        },
+                        {
+                            'name': 'option_number',
+                            'doc': (
+                                'DHCP option number. '
+                                '<0 - 255> Configurable range.'
+                            ),
+                            'prefix': ' match-option-number ',
+                            'optional': True
+                        },
+                        {
+                            'name': 'option_name',
+                            'doc': (
+                                'DHCP option name. '
+                                'Length must be less than 15 chars.'
+                            ),
+                            'prefix': ' match-option-name ',
+                            'optional': True
+                        },
+                        {
+                            'name': 'option_value',
+                            'doc': 'DHCP option value',
+                            'optional': True,
+                            'prefix': ' match-option-value '
+                        },
+                    ],
+                },
+                {
+                    'command': (
+                                'no match set tag {tag_name}'
+                               ),
+                    'doc': (
+                            'Removes DHCP match configuration '
+                            'using an option name.'
+                            ),
+                    'arguments': [
+                        {
+                            'name': 'tag_name',
+                            'doc': (
+                                'DHCP match tag name'
+                                'Length must be less than 15 chars.'
+                            ),
+                        },
+                        {
+                            'name': 'option_name',
+                            'doc': (
+                                'DHCP option name. '
+                                'Length must be less than 15 chars.'
+                            ),
+                            'prefix': ' match-option-name ',
+                            'optional': True
+                        },
+                        {
+                            'name': 'option_number',
+                            'doc': (
+                                'DHCP option number. '
+                                '<0 - 255> Configurable range.'
+                            ),
+                            'prefix': ' match-option-number ',
+                            'optional': True
+                        },
+                        {
+                            'name': 'option_value',
+                            'doc': 'DHCP option value',
+                            'optional': True,
+                            'prefix': ' match-option-value '
+                        },
+                    ],
+                },
+                {
+                    'command': (
+                        'boot set file {file_name}'
+                    ),
+                    'doc': 'Sets DHCP bootp options.',
+                    'arguments': [
+                        {
+                            'name': 'file_name',
+                            'doc': 'DHCP boot file name'
+                        },
+                        {
+                            'name': 'tag_name',
+                            'doc': (
+                                'DHCP match tag name. '
+                                'Length must be less than 15 chars.'
+                            ),
+                            'optional': True,
+                            'prefix': ' match tag '
+                        },
+                    ],
+                },
+                {
+                    'command': (
+                        'no boot set file {file_name}'
+                    ),
+                    'doc': 'Removes bootp options.',
+                    'arguments': [
+                        {
+                            'name': 'file_name',
+                            'doc': 'DHCP boot file name'
+                        },
+                        {
+                            'name': 'tag_name',
+                            'doc': (
+                                'DHCP match tag name. '
+                                'Length must be less than 15 chars.'
+                            ),
+                            'optional': True,
+                            'prefix': ' match tag '
+                        },
+                    ],
+                }
+            ]
+        },)
 ])
 
 """Vtysh Specification as a Python dictionary"""

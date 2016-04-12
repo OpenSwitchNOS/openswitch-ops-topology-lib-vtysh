@@ -6241,6 +6241,669 @@ class ConfigTftpServer(ContextManager):
         return parse_config_tftp_server_no_path(result)
 
 
+class ConfigDhcpServer(ContextManager):
+    """
+    DHCP server configuration.
+
+    pre_commands:
+
+    ::
+
+            ['config terminal', 'dhcp-server']
+
+    post_commands:
+
+    ::
+
+            ['end']
+    """
+    def __init__(self, enode):
+        self.enode = enode
+
+    def __enter__(self):
+        commands = """\
+            config terminal
+            dhcp-server
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+        return self
+
+    def __exit__(self, type, value, traceback):
+        commands = """\
+            end
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+    def range_start_ip_address_end_ip_address_netmask(
+            self, range_name, start_ip, end_ip, subnet_mask='',
+            broadcast_address='', tag_name='', set_name='',
+            prefix_len_value='', lease_duration_value=''):
+        """
+        Sets DHCP dynamic configuration.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # range {range_name} start-ip-address {start_ip} end-ip-address {end_ip} netmask {subnet_mask}  # noqa
+
+        :param range_name: DHCP range name. String of maximum length 15 chars
+        :param start_ip: <A.B.C.D> Start range IPv4 address or <X:X::X:X>
+            Start range IPv6 address
+        :param end_ip: <A.B.C.D> End range IPv4 address or <X:X::X:X> End
+            range IPv6 address
+        :param subnet_mask: <A.B.C.D> Range netmask address
+        :param broadcast_address: <A.B.C.D> Range broadcast address
+        :param tag_name: Match tags list. Each tag length must be less than 15
+            chars.
+        :param set_name: Tag set name. Length must be less than 15 chars.
+        :param prefix_len_value: IPV6 prefix length. <64 - 128> Configurable
+            range.
+        :param lease_duration_value: Range lease duration. Default value is 60
+            min.
+        """  # noqa
+
+        cmd = [
+            'range {range_name} start-ip-address {start_ip} end-ip-address {end_ip} netmask {subnet_mask}'  # noqa
+        ]
+
+        if subnet_mask:
+            cmd.append(
+                '{}{{subnet_mask}}{}'.format(
+                    ' netmask ', ''
+                )
+            )
+
+        if broadcast_address:
+            cmd.append(
+                '{}{{broadcast_address}}{}'.format(
+                    ' broadcast ', ''
+                )
+            )
+
+        if tag_name:
+            cmd.append(
+                '{}{{tag_name}}{}'.format(
+                    ' match tags ', ''
+                )
+            )
+
+        if set_name:
+            cmd.append(
+                '{}{{set_name}}{}'.format(
+                    ' set tag ', ''
+                )
+            )
+
+        if prefix_len_value:
+            cmd.append(
+                '{}{{prefix_len_value}}{}'.format(
+                    ' prefix-len ', ''
+                )
+            )
+
+        if lease_duration_value:
+            cmd.append(
+                '{}{{lease_duration_value}}{}'.format(
+                    ' lease-duration ', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_range_start_ip_address_end_ip_address(
+            self, range_name, start_ip, end_ip, subnet_mask='',
+            broadcast_address='', tag_name='', set_name='',
+            prefix_len_value='', lease_duration_value=''):
+        """
+        Removes DHCP dynamic configuration.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no range {range_name} start-ip-address {start_ip} end-ip-address {end_ip}   # noqa
+
+        :param range_name: DHCP range name. String of maximum length 15 chars
+        :param start_ip: <A.B.C.D> Start range IPv4 address or <X:X::X:X>
+            Start range IPv6 address
+        :param end_ip: <A.B.C.D> End range IPv4 address or <X:X::X:X> End
+            range IPv6 address
+        :param subnet_mask: <A.B.C.D> Range netmask address
+        :param broadcast_address: <A.B.C.D> Range broadcast address
+        :param tag_name: Match tags list. Each tag length must be less than 15
+            chars.
+        :param set_name: Tag set name. Length must be less than 15 chars.
+        :param prefix_len_value: IPV6 prefix length. <64 - 128> Configurable
+            range.
+        :param lease_duration_value: Range lease duration. Default value is 60
+            min.
+        """  # noqa
+
+        cmd = [
+            'no range {range_name} start-ip-address {start_ip} end-ip-address {end_ip} '  # noqa
+        ]
+
+        if subnet_mask:
+            cmd.append(
+                '{}{{subnet_mask}}{}'.format(
+                    ' netmask ', ''
+                )
+            )
+
+        if broadcast_address:
+            cmd.append(
+                '{}{{broadcast_address}}{}'.format(
+                    ' broadcast ', ''
+                )
+            )
+
+        if tag_name:
+            cmd.append(
+                '{}{{tag_name}}{}'.format(
+                    ' match tags ', ''
+                )
+            )
+
+        if set_name:
+            cmd.append(
+                '{}{{set_name}}{}'.format(
+                    ' set tag ', ''
+                )
+            )
+
+        if prefix_len_value:
+            cmd.append(
+                '{}{{prefix_len_value}}{}'.format(
+                    ' prefix-len ', ''
+                )
+            )
+
+        if lease_duration_value:
+            cmd.append(
+                '{}{{lease_duration_value}}{}'.format(
+                    ' lease-duration ', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def static(
+            self, ip_address, mac_address='', hostname='',
+            client_id='', set_tag_names='',
+            lease_duration_value=''):
+        """
+        Sets DHCP dynamic configuration.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # static {ip_address}
+
+        :param ip_address: <A.B.C.D> IPv4 address or <X:X::X:X> IPv6 address
+        :param mac_address: <XX:XX:XX:XX:XX:XX> MAC address or <XX-XX-XX-XX-
+            XX-XX> MAC addressClient MAC addresses
+        :param hostname: Client hostname. Length must be less than 15 chars.
+        :param client_id: Client id. Length must be less than 15 chars.
+        :param set_tag_names: Set tag list names. Each tag length must be less
+            than 15 chars.
+        :param lease_duration_value: Range lease duration. Default value is 60
+            min.
+        """
+
+        cmd = [
+            'static {ip_address}'
+        ]
+
+        if mac_address:
+            cmd.append(
+                '{}{{mac_address}}{}'.format(
+                    ' match-mac-addresses ', ''
+                )
+            )
+
+        if hostname:
+            cmd.append(
+                '{}{{hostname}}{}'.format(
+                    ' match-client-hostname ', ''
+                )
+            )
+
+        if client_id:
+            cmd.append(
+                '{}{{client_id}}{}'.format(
+                    ' match-client-id ', ''
+                )
+            )
+
+        if set_tag_names:
+            cmd.append(
+                '{}{{set_tag_names}}{}'.format(
+                    ' set tags ', ''
+                )
+            )
+
+        if lease_duration_value:
+            cmd.append(
+                '{}{{lease_duration_value}}{}'.format(
+                    ' lease-duration ', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_static(
+            self, ip_address, mac_address='', hostname='',
+            client_id='', set_tag_names='',
+            lease_duration_value=''):
+        """
+        Removes DHCP dynamic configuration.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no static {ip_address}
+
+        :param ip_address: <A.B.C.D> IPv4 address or <X:X::X:X> IPv6 address
+        :param mac_address: <XX:XX:XX:XX:XX:XX> MAC address or <XX-XX-XX-XX-
+            XX-XX> MAC addressClient MAC addresses
+        :param hostname: Client hostname Length must be less than 15 chars.
+        :param client_id: Client id. Length must be less than 15 chars.
+        :param set_tag_names: Set tag list names. Each tag length must be less
+            than 15 chars.
+        :param lease_duration_value: Range lease duration. Default value is 60
+            min.
+        """
+
+        cmd = [
+            'no static {ip_address}'
+        ]
+
+        if mac_address:
+            cmd.append(
+                '{}{{mac_address}}{}'.format(
+                    ' match-mac-addresses ', ''
+                )
+            )
+
+        if hostname:
+            cmd.append(
+                '{}{{hostname}}{}'.format(
+                    ' match-client-hostname ', ''
+                )
+            )
+
+        if client_id:
+            cmd.append(
+                '{}{{client_id}}{}'.format(
+                    ' match-client-id ', ''
+                )
+            )
+
+        if set_tag_names:
+            cmd.append(
+                '{}{{set_tag_names}}{}'.format(
+                    ' set tags ', ''
+                )
+            )
+
+        if lease_duration_value:
+            cmd.append(
+                '{}{{lease_duration_value}}{}'.format(
+                    ' lease-duration ', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def option_set(
+            self, set_name='', option_number='', option_value='',
+            tag_name='', ipv6=''):
+        """
+        Sets DHCP configuration values using an option name.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # option set
+
+        :param set_name: DHCP option name
+        :param option-number: DHCP option number
+        :param option_value: DHCP option value
+        :param tag_name: Match tags list. Each tag length must be less than 15
+            chars.
+        :param ipv6: Enable ipv6 for the set.
+        """
+
+        cmd = [
+            'option set'
+        ]
+
+        if set_name:
+            cmd.append(
+                '{}{{set_name}}{}'.format(
+                    ' option-name ', ''
+                )
+            )
+
+        if option-number:
+            cmd.append(
+                '{}{{option-number}}{}'.format(
+                    ' option-number ', ''
+                )
+            )
+
+        if option_value:
+            cmd.append(
+                '{}{{option_value}}{}'.format(
+                    ' option-value ', ''
+                )
+            )
+
+        if tag_name:
+            cmd.append(
+                '{}{{tag_name}}{}'.format(
+                    ' match tags', ''
+                )
+            )
+
+        if ipv6:
+            cmd.append(
+                '{}{{ipv6}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_option_set(
+            self, set_name='', option_number='', option_value='',
+            tag_name='', ipv6=''):
+        """
+        Removes DHCP configuration values using an option name.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no option set
+
+        :param set_name: DHCP option name
+        :param option-number: DHCP option number
+        :param option_value: DHCP option value
+        :param tag_name: Match tags list. Each tag length must be less than 15
+            chars.
+        :param ipv6: Enable ipv6 for the set.
+        """
+
+        cmd = [
+            'no option set'
+        ]
+
+        if set_name:
+            cmd.append(
+                '{}{{set_name}}{}'.format(
+                    ' option-name ', ''
+                )
+            )
+
+        if option-number:
+            cmd.append(
+                '{}{{option-number}}{}'.format(
+                    ' option-number ', ''
+                )
+            )
+
+        if option_value:
+            cmd.append(
+                '{}{{option_value}}{}'.format(
+                    ' option-value ', ''
+                )
+            )
+
+        if tag_name:
+            cmd.append(
+                '{}{{tag_name}}{}'.format(
+                    ' match-tags ', ''
+                )
+            )
+
+        if ipv6:
+            cmd.append(
+                '{}{{ipv6}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def match_set_tag(
+            self, tag_name, option_number='', option_name='',
+            option_value=''):
+        """
+        Sets DHCP match configuration using an option name.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # match set tag {tag_name}
+
+        :param tag_name: DHCP match tag nameLength must be less than 15 chars.
+        :param option_number: DHCP option number. <0 - 255> Configurable
+            range.
+        :param option_name: DHCP option name. Length must be less than 15
+            chars.
+        :param option_value: DHCP option value
+        """
+
+        cmd = [
+            'match set tag {tag_name}'
+        ]
+
+        if option_number:
+            cmd.append(
+                '{}{{option_number}}{}'.format(
+                    ' match-option-number ', ''
+                )
+            )
+
+        if option_name:
+            cmd.append(
+                '{}{{option_name}}{}'.format(
+                    ' match-option-name ', ''
+                )
+            )
+
+        if option_value:
+            cmd.append(
+                '{}{{option_value}}{}'.format(
+                    ' match-option-value ', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_match_set_tag(
+            self, tag_name, option_name='', option_number='',
+            option_value=''):
+        """
+        Removes DHCP match configuration using an option name.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no match set tag {tag_name}
+
+        :param tag_name: DHCP match tag nameLength must be less than 15 chars.
+        :param option_name: DHCP option name. Length must be less than 15
+            chars.
+        :param option_number: DHCP option number. <0 - 255> Configurable
+            range.
+        :param option_value: DHCP option value
+        """
+
+        cmd = [
+            'no match set tag {tag_name}'
+        ]
+
+        if option_name:
+            cmd.append(
+                '{}{{option_name}}{}'.format(
+                    ' match-option-name ', ''
+                )
+            )
+
+        if option_number:
+            cmd.append(
+                '{}{{option_number}}{}'.format(
+                    ' match-option-number ', ''
+                )
+            )
+
+        if option_value:
+            cmd.append(
+                '{}{{option_value}}{}'.format(
+                    ' match-option-value ', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def boot_set_file(
+            self, file_name, tag_name=''):
+        """
+        Sets DHCP bootp options.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # boot set file {file_name}
+
+        :param file_name: DHCP boot file name
+        :param tag_name: DHCP match tag name. Length must be less than 15
+            chars.
+        """
+
+        cmd = [
+            'boot set file {file_name}'
+        ]
+
+        if tag_name:
+            cmd.append(
+                '{}{{tag_name}}{}'.format(
+                    ' match tag ', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_boot_set_file(
+            self, file_name, tag_name=''):
+        """
+        Removes bootp options.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no boot set file {file_name}
+
+        :param file_name: DHCP boot file name
+        :param tag_name: DHCP match tag name. Length must be less than 15
+            chars.
+        """
+
+        cmd = [
+            'no boot set file {file_name}'
+        ]
+
+        if tag_name:
+            cmd.append(
+                '{}{{tag_name}}{}'.format(
+                    ' match tag ', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+
 def show_interface(
         enode, portlbl):
     """
@@ -7660,6 +8323,7 @@ __all__ = [
     'ConfigRouterBgp',
     'ConfigVlan',
     'ConfigTftpServer',
+    'ConfigDhcpServer',
     'show_interface',
     'show_interface_subinterface',
     'show_vlan',
