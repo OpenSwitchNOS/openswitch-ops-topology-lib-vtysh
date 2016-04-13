@@ -3187,6 +3187,40 @@ def parse_config_tftp_server_no_path(raw_result):
 
     return result
 
+
+def parse_show_snmp_agent_port(raw_result):
+
+    """
+    Parse the 'show snmp agent-port' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show snmp agent-port \
+       command in a dictionary of the form
+
+    ::
+
+        {
+            'SNMP agent port': '677'
+        }
+    """
+    snmp_agent_port_re = (
+        r'\s*SNMP\s*agent\sport\s*(?P<agent_port>.+)'
+        )
+
+    re_result = re.match(snmp_agent_port_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    for key, value in result.items():
+        if value and value.isdigit():
+            result[key] = True
+        else:
+            result[key] = False
+
+    return result
+
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
@@ -3215,5 +3249,6 @@ __all__ = [
     'parse_show_mac_address_table',
     'parse_show_tftp_server', 'parse_config_tftp_server_enable',
     'parse_config_tftp_server_no_enable', 'parse_config_tftp_server_path',
-    'parse_config_tftp_server_no_path'
+    'parse_config_tftp_server_no_path', 'parse_enable', 'parse_no_enable', 'parse_path',
+    'parse_no_path', 'parse_show_snmp_agent_port'
 ]

@@ -1668,6 +1668,65 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def snmp_server_agent_port(
+            self, port_num):
+        """
+        Configure SNMP agent port
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # snmp-server agent-port {port_num}
+
+        :param port_num: UDP port on which the SNMP agent listens
+        """
+
+        cmd = [
+            'snmp-server agent-port {port_num}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_snmp_server_agent_port(
+            self, port_num=''):
+        """
+        Unonfigure SNMP agent port
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no snmp-server agent-port {port_num}
+
+        :param port_num: UDP port on which the SNMP agent listens
+        """
+
+        cmd = [
+            'no snmp-server agent-port {port_num}'
+        ]
+
+        if port_num:
+            cmd.append(
+                '{}{{port_num}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
 
 class RouteMap(ContextManager):
     """
@@ -8309,6 +8368,33 @@ def show_tftp_server(
     return parse_show_tftp_server(result)
 
 
+def show_snmp_agent_port(
+        enode):
+    """
+    Display SNMP agent port configuration.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show snmp agent-port
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_snmp_agent_port`
+    """
+
+    cmd = [
+        'show snmp agent-port'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_snmp_agent_port(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -8373,5 +8459,6 @@ __all__ = [
     'show_vlog_severity_daemon',
     'copy_running_config_startup_config',
     'show_startup_config',
-    'show_tftp_server'
+    'show_tftp_server',
+    'show_snmp_agent_port'
 ]

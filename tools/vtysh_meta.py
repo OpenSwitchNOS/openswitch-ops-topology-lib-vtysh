@@ -445,6 +445,12 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Display TFTP-Server configuration.',
                 'arguments': [],
                 'returns': True
+            },
+            {
+                'command': 'show snmp agent-port',
+                'doc': 'Display SNMP agent port configuration.',
+                'arguments': [],
+                'returns': True
             }
         ]
     }),
@@ -1136,6 +1142,27 @@ VTYSH_SPEC = OrderedDict([
                     {
                         'name': 'severity',
                         'doc': 'severity level'
+                    }
+                ],
+            },
+            {
+                'command': 'snmp-server agent-port {port_num}',
+                'doc': 'Configure SNMP agent port',
+                'arguments': [
+                    {
+                         'name': 'port_num',
+                         'doc': 'UDP port on which the SNMP agent listens'
+                    }
+                ],
+            },
+            {
+                'command': 'no snmp-server agent-port {port_num}',
+                'doc': 'Unonfigure SNMP agent port',
+                'arguments': [
+                    {
+                         'name': 'port_num',
+                         'doc': 'UDP port on which the SNMP agent listens',
+                         'optional': True
                     }
                 ],
             }
