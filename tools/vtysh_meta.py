@@ -445,7 +445,35 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Display TFTP-Server configuration.',
                 'arguments': [],
                 'returns': True
-            }
+            },
+            {
+                'command': 'no mirror session {name}',
+                'doc': 'Delete a mirroring session.',
+                'arguments': [
+                    {
+                        'name': 'name',
+                        'doc': (
+                            'Up to 64 letters, numbers, underscores, dashes, '
+                            'or periods.'
+                        )
+                    }
+                ]
+            },
+            {
+                'command': 'show mirror {name}',
+                'doc': 'Show mirroring session information.',
+                'arguments': [
+                    {
+                        'name': 'name',
+                        'doc': (
+                            'Up to 64 letters, numbers, underscores, dashes, '
+                            'or periods.'
+                        ),
+                        'optional': True
+                    }
+                ],
+                'returns': True
+            },
         ]
     }),
     ('configure', {
@@ -3309,7 +3337,81 @@ VTYSH_SPEC = OrderedDict([
                     ],
                 }
             ]
-        },)
+        },
+    ),
+    ('config_mirror_session', {
+        'doc': 'Mirror session configuration.',
+        'arguments': [
+            {
+                'name': 'name',
+                'doc': (
+                    'Up to 64 letters, numbers, underscores, dashes, '
+                    'or periods.'
+                )
+            }
+        ],
+        'pre_commands': ['config terminal', 'mirror session {name}'],
+        'post_commands': ['end'],
+        'commands': [
+            {
+                'command': 'destination interface',
+                'doc': 'Set the destination interface.',
+                'arguments': [
+                    {
+                        'name': 'interface',
+                        'doc': 'Ethernet interface or LAG'
+                    }
+                ]
+            },
+            {
+                'command': 'no destination interface',
+                'doc': (
+                    'Un-set the destination interface and '
+                    'shutdown the session.'
+                ),
+                'arguments': []
+            },
+            {
+                'command': 'shutdown',
+                'doc': 'Shutdown the mirroring session.',
+                'arguments': []
+            },
+            {
+                'command': 'no shutdown',
+                'doc': 'Activate the mirroring session.',
+                'arguments': []
+            },
+            {
+                'command': 'source interface',
+                'doc': 'Assign a source interface.',
+                'arguments': [
+                    {
+                        'name': 'interface',
+                        'doc': 'Ethernet interface or LAG'
+                    },
+                    {
+                        'name': 'direction',
+                        'doc': (
+                            '<both | rx | tx>'
+                        ),
+                    }
+                ]
+            },
+            {
+                'command': 'no source interface',
+                'doc': (
+                    'Remove a source interface from the session.'
+                ),
+                'arguments': [
+                    {
+                        'name': 'interface',
+                        'doc': 'Ethernet interface or LAG'
+                    }
+                ]
+            }
+        ]
+    },
+    )
 ])
 
 """Vtysh Specification as a Python dictionary"""

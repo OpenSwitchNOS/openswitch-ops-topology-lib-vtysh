@@ -3261,6 +3261,98 @@ def parse_config_tftp_server_no_path(raw_result):
 
     return result
 
+
+def parse_show_mirror(raw_result):
+    """
+    Parse the 'show mirror' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show mirror command in a \
+        dictionary of the form. Returns None if no mirror found:
+
+    for 'show mirror':
+
+     ::
+
+        {
+            'My_Session_1': {'name': 'My_Session_1',
+                             'status': 'active'},
+            'Other-Session-2': {'name': 'Other-Session-2',
+                                'status': 'shutdown'}
+        }
+
+    for 'show mirror <name>':
+
+     ::
+
+        {
+            'name': 'My_Session_1',
+            'status': 'active',
+            'source': [{'type': 'interface',
+                        'id:' '2',
+                        'direction': 'both'},
+                       {'type': 'interface',
+                        'id:' '3',
+                        'direction': 'rx'}],
+            'destination': {'type': 'interface',
+                            'id:' '1'},
+            'output_packets': '123456789'
+            'output_bytes': '8912345678'
+        }
+    """
+
+    mirror_list_header_re = (r'\s*name\s+status')
+    mirror_list_re = (r'^\s*(?!name|-+\s)(?P<name>\S+)\s+(?P<status>\S+)')
+    mirror_re = (
+        r'\s*Mirror\sSession:\s+(?P<name>\S+)\s*'
+        r'\s*Status:\s+(?P<status>\w+)(?:\s|.)*'
+        r'\s*Output\sPackets:\s+(?P<output_packets>\d+)\s*'
+        r'\s*Output\sBytes:\s+(?P<output_bytes>\d+)'
+    )
+    mirror_sorce_re = (
+        r'Source:\s+(?P<type>\w+)\s+(?P<id>\w+)\s+(?P<direction>\w+)'
+    )
+    mirror_destination_re = (
+        r'Destination:\s+(?P<type>\w+)\s+(?P<id>\S+)'
+    )
+
+    result = {}
+
+    if re.match(mirror_list_header_re, raw_result, re.IGNORECASE):
+        for line in raw_result.splitlines():
+            re_result = re.search(mirror_list_re, line)
+            if re_result:
+                partial = re_result.groupdict()
+                result[partial['name']] = partial
+    else:
+        re_result = re.match(mirror_re, raw_result)
+        assert re_result
+        result = re_result.groupdict()
+        for key, value in result.items():
+            if value and value.isdigit():
+                result[key] = int(value)
+
+        result['source'] = []
+        for line in raw_result.splitlines():
+            re_result = re.search(mirror_sorce_re, line)
+            if re_result:
+                partial = re_result.groupdict()
+                result['source'].append(partial)
+
+        result['destination'] = []
+        for line in raw_result.splitlines():
+            re_result = re.search(mirror_destination_re, line)
+            if re_result:
+                partial = re_result.groupdict()
+                result['destination'] = partial
+
+    if result == {}:
+        return None
+    else:
+        return result
+
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
@@ -3289,5 +3381,6 @@ __all__ = [
     'parse_show_mac_address_table',
     'parse_show_tftp_server', 'parse_config_tftp_server_enable',
     'parse_config_tftp_server_no_enable', 'parse_config_tftp_server_path',
-    'parse_config_tftp_server_no_path', 'parse_show_interface_lag'
+    'parse_config_tftp_server_no_path', 'parse_show_interface_lag',
+    'parse_show_mirror'
 ]
