@@ -6904,6 +6904,206 @@ class ConfigDhcpServer(ContextManager):
             raise determine_exception(result)(result)
 
 
+class ConfigMirrorSession(ContextManager):
+    """
+    Mirror session configuration.
+
+    pre_commands:
+
+    ::
+
+            ['config terminal', 'mirror session {name}']
+
+    post_commands:
+
+    ::
+
+            ['end']
+    """
+    def __init__(self, enode, name):
+        self.enode = enode
+        self.name = name
+
+    def __enter__(self):
+        commands = """\
+            config terminal
+            mirror session {name}
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+        return self
+
+    def __exit__(self, type, value, traceback):
+        commands = """\
+            end
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+    def destination_interface(
+            self, interface):
+        """
+        Set the destination interface.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # destination interface
+
+        :param interface: Ethernet interface or LAG
+        """
+
+        cmd = [
+            'destination interface'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_destination_interface(
+            self):
+        """
+        Un-set the destination interface and shutdown the session.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no destination interface
+
+        """
+
+        cmd = [
+            'no destination interface'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def shutdown(
+            self):
+        """
+        Shutdown the mirroring session.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # shutdown
+
+        """
+
+        cmd = [
+            'shutdown'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_shutdown(
+            self):
+        """
+        Activate the mirroring session.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no shutdown
+
+        """
+
+        cmd = [
+            'no shutdown'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def source_interface(
+            self, interface, direction):
+        """
+        Assign a source interface.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # source interface
+
+        :param interface: Ethernet interface or LAG
+        :param direction: <both | rx | tx>
+        """
+
+        cmd = [
+            'source interface'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_source_interface(
+            self, interface):
+        """
+        Remove a source interface from the session.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no source interface
+
+        :param interface: Ethernet interface or LAG
+        """
+
+        cmd = [
+            'no source interface'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+
 def show_interface(
         enode, portlbl):
     """
@@ -8309,6 +8509,68 @@ def show_tftp_server(
     return parse_show_tftp_server(result)
 
 
+def no_mirror_session(
+        enode, name):
+    """
+    Delete a mirroring session.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # no mirror session {name}
+
+    :param name: Up to 64 letters, numbers, underscores, dashes, or periods.
+    """
+
+    cmd = [
+        'no mirror session {name}'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def show_mirror(
+        enode, name=''):
+    """
+    Show mirroring session information.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show mirror {name}
+
+    :param name: Up to 64 letters, numbers, underscores, dashes, or periods.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_mirror`
+    """
+
+    cmd = [
+        'show mirror {name}'
+    ]
+
+    if name:
+        cmd.append(
+            '{}{{name}}{}'.format(
+                '', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_mirror(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -8324,6 +8586,7 @@ __all__ = [
     'ConfigVlan',
     'ConfigTftpServer',
     'ConfigDhcpServer',
+    'ConfigMirrorSession',
     'show_interface',
     'show_interface_subinterface',
     'show_vlan',
@@ -8373,5 +8636,7 @@ __all__ = [
     'show_vlog_severity_daemon',
     'copy_running_config_startup_config',
     'show_startup_config',
-    'show_tftp_server'
+    'show_tftp_server',
+    'no_mirror_session',
+    'show_mirror'
 ]
