@@ -72,7 +72,8 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_config_tftp_server_enable,
                                        parse_config_tftp_server_no_enable,
                                        parse_config_tftp_server_path,
-                                       parse_config_tftp_server_no_path
+                                       parse_config_tftp_server_no_path,
+                                       parse_show_mirror
                                        )
 
 
@@ -2586,6 +2587,66 @@ sftp-server
             'sftp-server': {
                'status': 'enable'
             }
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_mirror():
+
+    raw_result = """\
+ name                                                            status
+ --------------------------------------------------------------- --------------
+ My_Session_1                                                    active
+ Other-Session-2                                                 shutdown
+"""
+
+    result = parse_show_mirror(raw_result)
+    expected = {
+        'My_Session_1': {
+            'name': 'My_Session_1',
+            'status': 'active'
+        },
+        'Other-Session-2': {
+            'name': 'Other-Session-2',
+            'status': 'shutdown'
+        }
+    }
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+    raw_result = """\
+ Mirror Session: My_Session_1
+ Status: active
+ Source: interface 2 both
+ Source: interface 3 rx
+ Destination: interface 1
+ Output Packets: 123456789
+ Output Bytes: 8912345678
+"""
+
+    result = parse_show_mirror(raw_result)
+    expected = {
+        'name': 'My_Session_1',
+        'status': 'active',
+        'source': [
+            {
+                'type': 'interface',
+                'id': '2',
+                'direction': 'both'
+            },
+            {
+                'type': 'interface',
+                'id': '3',
+                'direction': 'rx'
+            }],
+        'destination': {
+            'type': 'interface',
+            'id': '1'
+        },
+        'output_packets': 123456789,
+        'output_bytes': 8912345678
     }
 
     ddiff = DeepDiff(result, expected)
