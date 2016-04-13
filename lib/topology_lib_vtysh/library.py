@@ -6285,7 +6285,7 @@ class ConfigDhcpServer(ContextManager):
             shell='vtysh'
         )
 
-    def range_start_ip_address_end_ip_address_netmask(
+    def range_start_ip_address_end_ip_address(
             self, range_name, start_ip, end_ip, subnet_mask='',
             broadcast_address='', tag_name='', set_name='',
             prefix_len_value='', lease_duration_value=''):
@@ -6296,7 +6296,7 @@ class ConfigDhcpServer(ContextManager):
 
         ::
 
-            # range {range_name} start-ip-address {start_ip} end-ip-address {end_ip} netmask {subnet_mask}  # noqa
+            # range {range_name} start-ip-address {start_ip} end-ip-address {end_ip}  # noqa
 
         :param range_name: DHCP range name. String of maximum length 15 chars
         :param start_ip: <A.B.C.D> Start range IPv4 address or <X:X::X:X>
@@ -6315,7 +6315,7 @@ class ConfigDhcpServer(ContextManager):
         """  # noqa
 
         cmd = [
-            'range {range_name} start-ip-address {start_ip} end-ip-address {end_ip} netmask {subnet_mask}'  # noqa
+            'range {range_name} start-ip-address {start_ip} end-ip-address {end_ip}'  # noqa
         ]
 
         if subnet_mask:
@@ -6930,6 +6930,7 @@ def show_interface(
         (' '.join(cmd)).format(**locals()),
         shell='vtysh'
     )
+
     return parse_show_interface(result)
 
 

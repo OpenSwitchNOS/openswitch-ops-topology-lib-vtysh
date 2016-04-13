@@ -2819,7 +2819,6 @@ VTYSH_SPEC = OrderedDict([
                     'command': (
                                'range {range_name} start-ip-address {start_ip}'
                                ' end-ip-address {end_ip}'
-                               ' netmask {subnet_mask}'
                                ),
                     'doc': 'Sets DHCP dynamic configuration.',
                     'arguments': [
