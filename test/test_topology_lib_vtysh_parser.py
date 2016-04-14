@@ -40,6 +40,8 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_rib,
                                        parse_ping_repetitions,
                                        parse_ping6_repetitions,
+                                       parse_ping,
+                                       parse_ping6,
                                        parse_show_running_config,
                                        parse_show_ip_ecmp,
                                        parse_show_ntp_associations,
@@ -215,19 +217,19 @@ MAC Address          VLAN     Type       Port
     result = parse_show_mac_address_table(raw_result)
 
     expected = {
-         'age_time': '300',
-         'no_mac_address': '2',
-         ':00:00:00:00:00:01': {
-                              'vlan_id': '1',
-                              'from': 'dynamic',
-                              'port': '1'
-         },
-         ':00:00:00:00:00:02': {
-                              'vlan_id': '2',
-                              'from': 'dynamic',
-                              'port': '2'
-         }
-     }
+        'age_time': '300',
+        'no_mac_address': '2',
+        ':00:00:00:00:00:01': {
+            'vlan_id': '1',
+            'from': 'dynamic',
+            'port': '1'
+        },
+        ':00:00:00:00:00:02': {
+            'vlan_id': '2',
+            'from': 'dynamic',
+            'port': '2'
+        }
+    }
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff
@@ -556,73 +558,73 @@ Interface 2.3 is up.
     result = parse_show_interface_subinterface(raw_result)
 
     expected = {
-            2: {'admin_state': 'down',
-                'encapsulation_dot1q': 102,
-                'hardware': 'Ethernet',
-                'input_flow_control': False,
-                'interface_state': 'up',
-                'mac_address': '48:0f:cf:af:f1:cd',
-                'output_flow_control': False,
-                'parent_interface': 2,
-                'port': 2,
-                'rx_mcast_packets': 0,
-                'rx_mcast_bytes': 0,
-                'rx_ucast_packets': 233,
-                'rx_ucast_bytes': 3434,
-                'state_description': 'Administratively down',
-                'state_information': None,
-                'subinterface': 2,
-                'tx_mcast_packets': 0,
-                'tx_mcast_bytes': 0,
-                'tx_ucast_packets': 0,
-                'tx_ucast_bytes': 0,
-                'ipv6': None,
-                'ipv4': '12.0.0.1/24'},
-            1: {'admin_state': 'down',
-                'encapsulation_dot1q': 101,
-                'hardware': 'Ethernet',
-                'input_flow_control': True,
-                'interface_state': 'up',
-                'mac_address': '48:0f:cf:af:f1:cd',
-                'output_flow_control': False,
-                'parent_interface': 2,
-                'port': 2,
-                'rx_mcast_packets': 54,
-                'rx_mcast_bytes': 345,
-                'rx_ucast_packets': 34,
-                'rx_ucast_bytes': 544,
-                'state_description': None,
-                'state_information': None,
-                'subinterface': 1,
-                'tx_mcast_packets': 23,
-                'tx_mcast_bytes': 2344,
-                'tx_ucast_packets': 232,
-                'tx_ucast_bytes': 434434,
-                'ipv6': None,
-                'ipv4': '11.0.0.1/24'},
-            3: {'admin_state': 'down',
-                'encapsulation_dot1q': 103,
-                'hardware': 'Ethernet',
-                'input_flow_control': False,
-                'interface_state': 'up',
-                'mac_address': '48:0f:cf:af:f1:cd',
-                'output_flow_control': False,
-                'parent_interface': 2,
-                'port': 2,
-                'rx_mcast_packets': 342,
-                'rx_mcast_bytes': 23432,
-                'rx_ucast_packets': 555,
-                'rx_ucast_bytes': 234234,
-                'state_description': 'Administratively down',
-                'state_information': None,
-                'subinterface': 3,
-                'tx_mcast_packets': 545555,
-                'tx_mcast_bytes': 334234232,
-                'tx_ucast_packets': 4433,
-                'tx_ucast_bytes': 2342342,
-                'ipv6': None,
-                'ipv4': '13.0.0.1/24'}
-        }
+        2: {'admin_state': 'down',
+            'encapsulation_dot1q': 102,
+            'hardware': 'Ethernet',
+            'input_flow_control': False,
+            'interface_state': 'up',
+            'mac_address': '48:0f:cf:af:f1:cd',
+            'output_flow_control': False,
+            'parent_interface': 2,
+            'port': 2,
+            'rx_mcast_packets': 0,
+            'rx_mcast_bytes': 0,
+            'rx_ucast_packets': 233,
+            'rx_ucast_bytes': 3434,
+            'state_description': 'Administratively down',
+            'state_information': None,
+            'subinterface': 2,
+            'tx_mcast_packets': 0,
+            'tx_mcast_bytes': 0,
+            'tx_ucast_packets': 0,
+            'tx_ucast_bytes': 0,
+            'ipv6': None,
+            'ipv4': '12.0.0.1/24'},
+        1: {'admin_state': 'down',
+            'encapsulation_dot1q': 101,
+            'hardware': 'Ethernet',
+            'input_flow_control': True,
+            'interface_state': 'up',
+            'mac_address': '48:0f:cf:af:f1:cd',
+            'output_flow_control': False,
+            'parent_interface': 2,
+            'port': 2,
+            'rx_mcast_packets': 54,
+            'rx_mcast_bytes': 345,
+            'rx_ucast_packets': 34,
+            'rx_ucast_bytes': 544,
+            'state_description': None,
+            'state_information': None,
+            'subinterface': 1,
+            'tx_mcast_packets': 23,
+            'tx_mcast_bytes': 2344,
+            'tx_ucast_packets': 232,
+            'tx_ucast_bytes': 434434,
+            'ipv6': None,
+            'ipv4': '11.0.0.1/24'},
+        3: {'admin_state': 'down',
+            'encapsulation_dot1q': 103,
+            'hardware': 'Ethernet',
+            'input_flow_control': False,
+            'interface_state': 'up',
+            'mac_address': '48:0f:cf:af:f1:cd',
+            'output_flow_control': False,
+            'parent_interface': 2,
+            'port': 2,
+            'rx_mcast_packets': 342,
+            'rx_mcast_bytes': 23432,
+            'rx_ucast_packets': 555,
+            'rx_ucast_bytes': 234234,
+            'state_description': 'Administratively down',
+            'state_information': None,
+            'subinterface': 3,
+            'tx_mcast_packets': 545555,
+            'tx_mcast_bytes': 334234232,
+            'tx_ucast_packets': 4433,
+            'tx_ucast_bytes': 2342342,
+            'ipv6': None,
+            'ipv4': '13.0.0.1/24'}
+    }
     ddiff = DeepDiff(result, expected)
     assert not ddiff
 
@@ -1325,6 +1327,62 @@ rtt min/avg/max/mdev = 0.465/0.465/0.465/0.000 ms
     assert not ddiff
 
 
+def test_parse_ping():
+    raw_result = """\
+    PATTERN: 0xabcd
+    PING 10.1.1.1 (10.1.1.1) 100(128) bytes of data.
+    108 bytes from 10.1.1.1: icmp_seq=1 ttl=64 time=0.037 ms
+    108 bytes from 10.1.1.1: icmp_seq=2 ttl=64 time=0.028 ms
+
+    --- 10.1.1.1 ping statistics ---
+    2 packets transmitted, 2 received, 0% packet loss, time 999ms
+    rtt min/avg/max/mdev = 0.028/0.032/0.037/0.007 ms
+    """
+
+    result = parse_ping(raw_result)
+
+    expected = {
+        'transmitted': 2,
+        'received': 2,
+        'errors': 'No match found',
+        'loss_pc': 0,
+        'datagram_size': 100,
+        'time': 999,
+        'data': 'abcd',
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_ping6():
+    raw_result = """\
+    PATTERN: 0xabcd
+    PING 1001::1(1001::1) 100 data bytes
+    108 bytes from 1001::1: icmp_seq=1 ttl=64 time=0.043 ms
+    108 bytes from 1001::1: icmp_seq=2 ttl=64 time=0.071 ms
+
+    --- 1001::1 ping statistics ---
+    2 packets transmitted, 2 received, 0% packet loss, time 1000ms
+    rtt min/avg/max/mdev = 0.043/0.057/0.071/0.014 ms
+    """
+
+    result = parse_ping6(raw_result)
+
+    expected = {
+        'transmitted': 2,
+        'received': 2,
+        'errors': 'No match found',
+        'loss_pc': 0,
+        'time': 1000,
+        'datagram_size': 100,
+        'data': 'abcd'
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
 def test_parse_show_rib():
     raw_result = """
 Displaying ipv4 rib entries
@@ -1581,29 +1639,29 @@ sftp-server
                     {'mode': 'trunk', 'type': 'allowed', 'vlanid': '10'},
                     {'mode': 'trunk', 'type': 'allowed', 'vlanid': '11'},
                     {'mode': 'trunk', 'type': 'allowed', 'vlanid': '12'}
-                    ],
+                ],
                 'autonegotiation': 'off',
                 'flowcontrol': {'receive': 'on', 'send': 'on'},
                 'mtu': '1518'
-                },
+            },
             'vlan10': {
                 'admin': 'up',
                 'ipv4': '10.1.10.1/24'
-                },
+            },
             '2': {
                 'admin': 'up',
                 'routing': 'no',
                 'vlan': [{'mode': 'access', 'vlanid': '8'}]
-                },
+            },
             'mgmt': {'static': '1.1.1.1/24', 'nameserver': '2.2.2.2'},
             'vlan11': {
                 'admin': 'up',
                 'ipv4': '10.1.11.1/24'
-                },
+            },
             'vlan12': {
                 'admin': 'up',
                 'ipv4': '10.1.12.1/24'
-                },
+            },
             '35': {
                 'admin': 'up',
                 'routing': 'no',
@@ -1611,22 +1669,22 @@ sftp-server
                 'vlan': [
                     {'mode': 'trunk', 'type': 'native', 'vlanid': '8'},
                     {'mode': 'trunk', 'type': 'allowed', 'vlanid': '12'}
-                    ],
+                ],
                 'autonegotiation': 'off',
                 'speed': '1000',
                 'flowcontrol': {'receive': 'on', 'send': 'on'},
                 'mtu': '1518'
-                },
+            },
             '1': {
                 'admin': 'up',
                 'routing': 'no',
                 'vlan': [{'mode': 'access', 'vlanid': '8'}]
-                },
+            },
             '7': {'admin': 'up', 'ipv4': '100.1.1.100/24'},
             'loopback 2': {
                 'ipv4': '10.0.0.1/24',
                 'ipv6': '2001::2/64'
-                }
+            }
         },
         'ospf': {
             'router-id': '7.7.7.7',
@@ -1648,21 +1706,21 @@ sftp-server
                 'neighbors': [
                     {'remote-as': '11', 'ip': '10.1.11.100'},
                     {'remote-as': '12', 'ip': '10.1.12.100'}
-                    ],
+                ],
                 'networks': ['10.1.0.0/24', '10.1.1.0/24'],
                 'timers_bgp': [' 90', ' 30']
-                }
-            },
+            }
+        },
         'loopback': {
             'interface loopback 2': {
                 'ipv4_address': '10.0.0.1/24',
                 'ipv6_address': '2001::2/64'
-                }
-            },
+            }
+        },
         'sftp-server': {
             'status': 'enable'
-            }
         }
+    }
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff
@@ -2491,7 +2549,7 @@ def test_parse_show_ip_ospf_interface():
         'hello_timer': '10',
         'transmit_delay': '1',
         'priority': '1'
-              }
+    }
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff
@@ -2513,23 +2571,23 @@ def test_parse_show_ip_ospf_neighbor_detail():
     result = parse_show_ip_ospf_neighbor_detail(raw_result)
     expected = {
         '2.2.2.2': {
-             'dead_timer': '30.763s',
-             'area': '0.0.0.0',
-             'hello_timer': '9.240s',
-             'state_change': 1,
-             'interface_address': '10.10.10.2',
-             'priority': 1,
-             'link_req_list': 0,
-             'state': '2-Way',
-             'admin_state': 'up',
-             'db_summary_list': 0,
-             'Neighbor': '2.2.2.2',
-             'BDR': '1.1.1.1',
-             'interface': 1,
-             'link_retrans_list': 0,
-             'DR': '2.2.2.2',
-             'options': 0}
-             }
+            'dead_timer': '30.763s',
+            'area': '0.0.0.0',
+            'hello_timer': '9.240s',
+            'state_change': 1,
+            'interface_address': '10.10.10.2',
+            'priority': 1,
+            'link_req_list': 0,
+            'state': '2-Way',
+            'admin_state': 'up',
+            'db_summary_list': 0,
+            'Neighbor': '2.2.2.2',
+            'BDR': '1.1.1.1',
+            'interface': 1,
+            'link_retrans_list': 0,
+            'DR': '2.2.2.2',
+            'options': 0}
+    }
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff
@@ -2567,24 +2625,24 @@ def test_parse_show_ip_ospf():
 
     result = parse_show_ip_ospf(raw_result)
     expected = {
-           'external_lsa': '0',
-           'authentication_type': 'no authentication',
-           'Area_id': '0.0.0.1',
-           'no_of_lsa': '9',
-           'interface_count': '1',
-           'opaque_link': '0',
-           'opaque_area': '0',
-           'abr_summary_lsa': '0',
-           'router_lsa': '5',
-           'asbr_summary_lsa': '0',
-           'nssa_lsa': '0',
-           'fully_adj_neighbors': '1',
-           'network_lsa': '4',
-           'router': '2.2.2.2',
-           'opaque_lsa': '0',
-           'active_interfaces': '1',
-           'no_of_area': '1'
-              }
+        'external_lsa': '0',
+        'authentication_type': 'no authentication',
+        'Area_id': '0.0.0.1',
+        'no_of_lsa': '9',
+        'interface_count': '1',
+        'opaque_link': '0',
+        'opaque_area': '0',
+        'abr_summary_lsa': '0',
+        'router_lsa': '5',
+        'asbr_summary_lsa': '0',
+        'nssa_lsa': '0',
+        'fully_adj_neighbors': '1',
+        'network_lsa': '4',
+        'router': '2.2.2.2',
+        'opaque_lsa': '0',
+        'active_interfaces': '1',
+        'no_of_area': '1'
+    }
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff
@@ -2602,16 +2660,16 @@ def test_parse_show_ip_ospf_neighbor():
 
     result = parse_show_ip_ospf_neighbor(raw_result)
     expected = {
-           'neighbor_id': '2.2.2.2',
-           'priority': '1',
-           'state': 'Full/Backup',
-           'dead_time': '31.396s',
-           'address': '10.0.1.1',
-           'interface': '1:10.0.1.2/24',
-           'rxmtl': '0',
-           'rqstl': '0',
-           'dbsml': '0'
-              }
+        'neighbor_id': '2.2.2.2',
+        'priority': '1',
+        'state': 'Full/Backup',
+        'dead_time': '31.396s',
+        'address': '10.0.1.1',
+        'interface': '1:10.0.1.2/24',
+        'rxmtl': '0',
+        'rqstl': '0',
+        'dbsml': '0'
+    }
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff
@@ -2634,9 +2692,9 @@ sftp-server
 
     result = parse_show_startup_config(raw_result)
     expected = {
-            'sftp-server': {
-               'status': 'enable'
-            }
+        'sftp-server': {
+            'status': 'enable'
+        }
     }
 
     ddiff = DeepDiff(result, expected)

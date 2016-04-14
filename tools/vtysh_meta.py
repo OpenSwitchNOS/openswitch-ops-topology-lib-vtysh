@@ -273,6 +273,191 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
+                'command': 'ping {destination}',
+                'doc': 'Send IPv4 ping',
+                'arguments': [
+                    {
+                        'name': 'destination',
+                        'doc': '<A.B.C.D> IPv4 address.'
+                    },
+                    {
+                        'name': 'count',
+                        'doc': 'Number of packets to send.',
+                        'prefix': 'repetitions ',
+                        'optional': True
+                    },
+                    {
+                        'name': 'size',
+                        'doc': 'Size of packets to send.',
+                        'prefix': 'datagram-size ',
+                        'optional': True
+                    },
+                    {
+                        'name': 'data',
+                        'doc': 'Data to be filled in each packet.',
+                        'prefix': 'data-fill ',
+                        'optional': True
+                    },
+                    {
+                        'name': 'interval',
+                        'doc': 'Time interval between ping requests.',
+                        'prefix': 'interval ',
+                        'optional': True
+                    },
+                    {
+                        'name': 'timeout',
+                        'doc': 'Max time to wait for ping reply.',
+                        'prefix': 'timeout ',
+                        'optional': True
+                    },
+                    {
+                        'name': 'tos',
+                        'doc': (
+                            'Type of service to be placed'
+                            ' in each probe.'
+                        ),
+                        'prefix': 'tos ',
+                        'optional': True
+                    },
+                    {
+                        'name': 'ip_option',
+                        'doc': 'Ip-option.',
+                        'prefix': 'ip-option ',
+                        'optional': True
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'ping6 {destination}',
+                'doc': 'Send IPv6 ping',
+                'arguments': [
+                    {
+                        'name': 'destination',
+                        'doc': '<X:X::X:X> IPv6 address.'
+                    },
+                    {
+                        'name': 'count',
+                        'doc': 'Number of packets to send.',
+                        'prefix': 'repetitions ',
+                        'optional': True
+                    },
+                    {
+                        'name': 'size',
+                        'doc': 'Size of packets to send.',
+                        'prefix': 'datagram-size ',
+                        'optional': True
+                    },
+                    {
+                        'name': 'data',
+                        'doc': 'Data to be filled in each packet.',
+                        'prefix': 'data-fill ',
+                        'optional': True
+                    },
+                    {
+                        'name': 'interval',
+                        'doc': 'Time interval between ping requests.',
+                        'prefix': 'interval ',
+                        'optional': True
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'traceroute {destination}',
+                'doc': 'Send IPv4 traceroute',
+                'arguments': [
+                    {
+                        'name': 'destination',
+                        'doc': '<A.B.C.D> IPv4 address.',
+                    },
+                    {
+                        'name': 'min_ttl',
+                        'doc': (
+                            'Minimum number of hops to'
+                            ' reach the destination <1-255>.'
+                        ),
+                        'prefix': 'minttl ',
+                        'optional': True
+                    },
+                    {
+                        'name': 'max_ttl',
+                        'doc': (
+                            'Maximum number of hops to'
+                            ' reach the destination <1-255>.'
+                        ),
+                        'prefix': 'maxttl ',
+                        'optional': True
+                    },
+                    {
+                        'name': 'dst_port',
+                        'doc': 'Destination port <1-34000>.',
+                        'prefix': 'dstport ',
+                        'optional': True
+                    },
+                    {
+                        'name': 'time_out',
+                        'doc': 'Traceroute timeout in seconds <1-60>.',
+                        'prefix': 'timeout ',
+                        'optional': True
+                    },
+                    {
+                        'name': 'probes',
+                        'doc': 'Number of Probes <1-5>.',
+                        'prefix': 'probes ',
+                        'optional': True
+                    },
+                    {
+                        'name': 'ip_option_source',
+                        'doc': 'Source for loose source route record.',
+                        'prefix': 'ip-option loosesourceroute ',
+                        'optional': True
+                    }
+
+                ],
+                'returns': True
+            },
+            {
+                'command': 'traceroute6 {destination}',
+                'doc': 'Send IPv6 traceroute',
+                'arguments': [
+                    {
+                        'name': 'destination',
+                        'doc': '<X:X::X:X> IPv6 address.',
+                    },
+                    {
+                        'name': 'max_ttl',
+                        'doc': (
+                            'Maximum number of hops to'
+                            ' reach the destination <1-255>.'
+                        ),
+                        'prefix': 'maxttl ',
+                        'optional': True
+                    },
+                    {
+                        'name': 'dst_port',
+                        'doc': 'Destination port <1-34000>.',
+                        'prefix': 'dstport ',
+                        'optional': True
+                    },
+                    {
+                        'name': 'time_out',
+                        'doc': 'Traceroute timeout in seconds <1-60>.',
+                        'prefix': 'timeout ',
+                        'optional': True
+                    },
+                    {
+                        'name': 'probes',
+                        'doc': 'Number of Probes <1-5>.',
+                        'prefix': 'probes ',
+                        'optional': True
+                    }
+
+                ],
+                'returns': True
+
+            },
+            {
                 'command': 'show ntp associations',
                 'doc': 'Show NTP Association summary.',
                 'arguments': [],
@@ -332,7 +517,7 @@ VTYSH_SPEC = OrderedDict([
                 'arguments': [
                     {
                         'name': 'sub_command',
-                        'doc':  'sub command'
+                        'doc': 'sub command'
                     }
                 ],
                 'returns': True
@@ -2845,16 +3030,16 @@ VTYSH_SPEC = OrderedDict([
             'commands': [
                 {
                     'command': (
-                               'range {range_name} start-ip-address {start_ip}'
-                               ' end-ip-address {end_ip}'
-                               ),
+                        'range {range_name} start-ip-address {start_ip}'
+                        ' end-ip-address {end_ip}'
+                    ),
                     'doc': 'Sets DHCP dynamic configuration.',
                     'arguments': [
                         {
                             'name': 'range_name',
                             'doc': (
-                                   'DHCP range name. '
-                                   'String of maximum length 15 chars'
+                                'DHCP range name. '
+                                'String of maximum length 15 chars'
                             ),
                         },
                         {
@@ -2923,10 +3108,10 @@ VTYSH_SPEC = OrderedDict([
                 },
                 {
                     'command': (
-                                'no range {range_name} '
-                                'start-ip-address {start_ip} '
-                                'end-ip-address {end_ip} '
-                               ),
+                        'no range {range_name} '
+                        'start-ip-address {start_ip} '
+                        'end-ip-address {end_ip} '
+                    ),
                     'doc': 'Removes DHCP dynamic configuration.',
                     'arguments': [
                         {
@@ -3002,8 +3187,8 @@ VTYSH_SPEC = OrderedDict([
                 },
                 {
                     'command': (
-                                'static {ip_address}'
-                               ),
+                        'static {ip_address}'
+                    ),
                     'doc': 'Sets DHCP dynamic configuration.',
                     'arguments': [
                         {
@@ -3063,8 +3248,8 @@ VTYSH_SPEC = OrderedDict([
                 },
                 {
                     'command': (
-                                'no static {ip_address}'
-                               ),
+                        'no static {ip_address}'
+                    ),
                     'doc': 'Removes DHCP dynamic configuration.',
                     'arguments': [
                         {
@@ -3124,8 +3309,8 @@ VTYSH_SPEC = OrderedDict([
                 },
                 {
                     'command': (
-                                'option set'
-                               ),
+                        'option set'
+                    ),
                     'doc': (
                         'Sets DHCP configuration values using an option name.'
                     ),
@@ -3168,12 +3353,12 @@ VTYSH_SPEC = OrderedDict([
                 },
                 {
                     'command': (
-                               'no option set'
-                               ),
+                        'no option set'
+                    ),
                     'doc': (
-                            'Removes DHCP configuration '
-                            'values using an option name.'
-                           ),
+                        'Removes DHCP configuration '
+                        'values using an option name.'
+                    ),
                     'arguments': [
                         {
                             'name': 'set_name',
@@ -3213,8 +3398,8 @@ VTYSH_SPEC = OrderedDict([
                 },
                 {
                     'command': (
-                                'match set tag {tag_name}'
-                               ),
+                        'match set tag {tag_name}'
+                    ),
                     'doc': (
                         'Sets DHCP match configuration using an option name.'
                     ),
@@ -3254,12 +3439,12 @@ VTYSH_SPEC = OrderedDict([
                 },
                 {
                     'command': (
-                                'no match set tag {tag_name}'
-                               ),
+                        'no match set tag {tag_name}'
+                    ),
                     'doc': (
-                            'Removes DHCP match configuration '
-                            'using an option name.'
-                            ),
+                        'Removes DHCP match configuration '
+                        'using an option name.'
+                    ),
                     'arguments': [
                         {
                             'name': 'tag_name',

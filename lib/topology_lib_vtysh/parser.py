@@ -117,6 +117,8 @@ def parse_show_interface(raw_result):
                 result[key] = True
             elif value == 'off':
                 result[key] = False
+            else:
+                result[key] = value
     return result
 
 
@@ -1466,6 +1468,456 @@ def parse_ping6_repetitions(raw_result):
     return result
 
 
+def parse_ping(raw_result):
+    """
+    Parse the 'ping' command raw output.
+
+    :param str raw_result: ping raw result string.
+    :rtype: dict
+    :return: The parsed result of the ping command in a \
+        list of dictionaries of the form:
+
+     ::
+
+        {
+            'transmitted': 0,
+            'received': 0,
+            'errors': 0,
+            'packet_loss': 0
+        }
+    """
+
+    ping_re1 = (
+        r'\s*(?P<transmitted>\d+)\s+packets transmitted,'
+        r'\s+(?P<received>\d+)\s+received,'
+        r'(\s+\+(?P<errors>\d+)\s+errors,)?'
+        r'\s+(?P<loss_pc>\d+)% packet loss,'
+        r'\s+time\s+(?P<time>\d+)ms'
+    )
+
+    ping_re2 = (
+        r'(.*\s+(?P<datagram_size>\d+)\(\d+\))\s+bytes of data.'
+    )
+
+    ping_re3 = (
+        r'(\s*RR:\s+(?P<record_route>(\d+.\d+.\d+.\d+)))'
+    )
+
+    ping_re4 = (
+        r'((\s*TS:\s+(?P<time_stamp>\d+))\s+absolute*)'
+    )
+
+    ping_re5 = (
+        r'(\s*TS:\s+(?P<Route_address>(\d+.\d+.\d+.\d+))'
+        r'\s+(?P<timestamp>\d+)\s+absolute*)'
+    )
+    ping_re6 = (
+        r'\s*PATTERN:\s+0x(?P<data>([a-fA-F0-9]+))'
+    )
+
+    result = {}
+    re_result1 = re.search(ping_re1, raw_result)
+    if re_result1:
+        for key, value in re_result1.groupdict().items():
+            if value is None:
+                result[key] = "No match found"
+            elif value.isdigit():
+                result[key] = int(value)
+            else:
+                result[key] = value
+
+    re_result2 = re.search(ping_re2, raw_result)
+    if re_result2:
+        for key, value in re_result2.groupdict().items():
+            if value is None:
+                result[key] = "No match found"
+            elif value.isdigit():
+                result[key] = int(value)
+            else:
+                result[key] = value
+
+    re_result3 = re.search(ping_re3, raw_result)
+    if re_result3:
+        for key, value in re_result3.groupdict().items():
+            if value is None:
+                result[key] = "No match found"
+            elif value.isdigit():
+                result[key] = int(value)
+            else:
+                result[key] = value
+
+    re_result4 = re.search(ping_re4, raw_result)
+    if re_result4:
+        for key, value in re_result4.groupdict().items():
+            if value is None:
+                result[key] = "No match found"
+            elif value.isdigit():
+                result[key] = int(value)
+            else:
+                result[key] = value
+    re_result5 = re.search(ping_re5, raw_result)
+    if re_result5:
+        for key, value in re_result5.groupdict().items():
+            if value is None:
+                result[key] = "No match found"
+            elif value.isdigit():
+                result[key] = int(value)
+            else:
+                result[key] = value
+    re_result6 = re.search(ping_re6, raw_result)
+    if re_result6:
+        for key, value in re_result6.groupdict().items():
+            if value is None:
+                result[key] = "No match found"
+            elif value.isdigit():
+                result[key] = int(value)
+            else:
+                result[key] = value
+    return result
+
+
+def parse_ping6(raw_result):
+    """
+    Parse the 'ping6' command raw output.
+
+    :param str raw_result: ping6 raw result string.
+    :rtype: dict
+    :return: The parsed result of the ping6 command in a \
+        list of dictionaries of the form:
+
+     ::
+
+        {
+            'transmitted': 0,
+            'received': 0,
+            'errors': 0,
+            'packet_loss': 0
+        }
+    """
+    ping_re1 = (
+        r'\s*(?P<transmitted>\d+)\s+packets transmitted,'
+        r'\s+(?P<received>\d+)\s+received,'
+        r'(\s+\+(?P<errors>\d+)\s+errors,)?'
+        r'\s+(?P<loss_pc>\d+)% packet loss,'
+        r'\s+time\s+(?P<time>\d+)ms'
+    )
+
+    ping_re2 = (
+        r'(.*\s+(?P<datagram_size>\d+))\s+data bytes*'
+    )
+    ping_re3 = (
+        r'\s*PATTERN:\s+0x(?P<data>([a-fA-F0-9]+))'
+    )
+
+    result = {}
+    re_result1 = re.search(ping_re1, raw_result)
+    if re_result1:
+        for key, value in re_result1.groupdict().items():
+            if value is None:
+                result[key] = "No match found"
+            elif value.isdigit():
+                result[key] = int(value)
+            else:
+                result[key] = value
+    re_result2 = re.search(ping_re2, raw_result)
+    if re_result2:
+        for key, value in re_result2.groupdict().items():
+            if value is None:
+                result[key] = "No match found"
+            elif value.isdigit():
+                result[key] = int(value)
+            else:
+                result[key] = value
+    re_result3 = re.search(ping_re3, raw_result)
+    if re_result3:
+        for key, value in re_result3.groupdict().items():
+            if value is None:
+                result[key] = "No match found"
+            elif value.isdigit():
+                result[key] = int(value)
+            else:
+                result[key] = value
+    re_result3 = re.search(ping_re3, raw_result)
+    if re_result3:
+        for key, value in re_result3.groupdict().items():
+            if value is None:
+                result[key] = "No match found"
+            elif value.isdigit():
+                result[key] = int(value)
+            else:
+                result[key] = value
+
+    return result
+
+
+def parse_traceroute(raw_result):
+    """
+    Parse the 'traceroute' command raw output.
+
+    :param str raw_result: traceroute raw result string.
+    :rtype: dict
+    :return: The parsed result of the traceroute command in a \
+        list of dictionaries of the form:
+
+     ::
+
+        {1: {'time_stamp2': '0.189',
+             'time_stamp3': '0.141',
+             'time_stamp1': '0.217',
+             'hop_num': 1,
+             'int_hop': '50.1.1.4'
+            },
+         2: {'time_stamp2': '0.144',
+             'time_stamp3': '0.222',
+             'time_stamp1': '0.216',
+             'hop_num': 2,
+             'int_hop': '40.1.1.3'
+            },
+         'probe': 3,
+         'min_ttl': 1,
+         'dest_addr': '10.1.1.10',
+         'max_ttl': 30,
+         'time_out': 3
+         }
+
+    """
+    traceroute_re1 = (
+        r'(.*\s+(?P<dst_unreachable>!H)\s*?.*)'
+    )
+
+    traceroute_re2 = (
+        r'(\s*(?P<hop_number>\d+)\s+(?P<hop_timeout>(\*\s+)+))'
+    )
+
+    
+    traceroute_re3 = (
+        r'.*\s*(?P<network_unreachable>(Network is unreachable))\s*'
+    )
+
+    traceroute_re4 = (
+        r'\s*traceroute to\s+(?P<dest_addr>(\d+.\d+.\d+.\d+))\s+'
+    )
+
+    traceroute_re5 = (
+        r'.*\s+(?P<min_ttl>\d+)\s+hops min,'
+        r'.*\s+(?P<max_ttl>\d+)\s+hops max,'
+        r'.*\s+(?P<time_out>\d+)\s+sec. timeout,'
+        r'.*\s+(?P<probe>\d+)\s+probes'
+    )
+
+    traceroute_re6 = (
+        r'(\s*(?P<hop_num>\d+)\s+(?P<int_hop>(\d+.\d+.\d+.\d+))\s+'
+        r'(?P<time_stamp1>(\d+.\d+))ms\s+'
+        r'((?P<time_stamp2>(\d+.\d+))ms\s+)?'
+        r'((?P<time_stamp3>(\d+.\d+))ms\s+)?'
+        r'((?P<time_stamp4>(\d+.\d+))ms\s+)?'
+        r'((?P<time_stamp5>(\d+.\d+))ms\s*)?.*)'
+    )
+
+    result = {}
+    re_result1 = re.search(traceroute_re1, raw_result)
+    if re_result1:
+        for key, value in re_result1.groupdict().items():
+            if value is None:
+                result[key] = 'No match found'
+            elif value.isdigit():
+                result[key] = int(value)
+            else:
+                result[key] = value
+        return result
+
+    re_result2 = re.search(traceroute_re2, raw_result)
+    if re_result2:
+        for key, value in re_result2.groupdict().items():
+            if value is None:
+                result[key] = 'No match found'
+            elif value.isdigit():
+                result[key] = int(value)
+            else:
+                result[key] = value
+        return result
+
+    re_result3 = re.search(traceroute_re3, raw_result)
+    if re_result3:
+        for key, value in re_result3.groupdict().items():
+            if value is None:
+                result[key] = 'No match found'
+            elif value.isdigit():
+                result[key] = int(value)
+            else:
+                result[key] = value
+        return result
+
+    raw_result_lines = raw_result.splitlines()
+    length = len(raw_result_lines)
+    re_result4 = re.search(traceroute_re4, raw_result)
+    if re_result4:
+        for key, value in re_result4.groupdict().items():
+            if value is None:
+                result[key] = "No match found"
+            elif value.isdigit():
+                result[key] = int(value)
+            else:
+                result[key] = value
+    re_result5 = re.search(traceroute_re5, raw_result)
+    if re_result5:
+        for key, value in re_result5.groupdict().items():
+            if value is None:
+                result[key] = "No match found"
+            elif value.isdigit():
+                result[key] = int(value)
+            else:
+                result[key] = value
+    for hop_num in range(1, length):
+        result[hop_num] = {}
+        re_result6 = re.search(traceroute_re6, raw_result_lines[hop_num])
+        if re_result6:
+            for key, value in re_result6.groupdict().items():
+                if value is None:
+                    result[hop_num][key] = "No match found"
+                elif value.isdigit():
+                    result[hop_num][key] = int(value)
+                else:
+                    result[hop_num][key] = value
+
+    return result
+
+
+def parse_traceroute6(raw_result):
+    """
+    Parse the 'traceroute6' command raw output.
+
+    :param str raw_result: traceroute6 raw result string.
+    :rtype: dict
+    :return: The parsed result of the traceroute6 command in a \
+        list of dictionaries of the form:
+
+     ::
+
+        {1: {'time_stamp2': '0.189',
+             'time_stamp3': '0.141',
+             'time_stamp1': '0.217',
+             'hop_num': 1,
+             'int_hop': '(5001::4)'
+            },
+         2: {'time_stamp2': '0.144',
+             'time_stamp3': '0.222',
+             'time_stamp1': '0.216',
+             'hop_num': 2,
+             'int_hop': '(4001::3)'
+            },
+         'probe': 3,
+         'min_ttl': 1,
+         'dest_addr': '1001::10',
+         'source_addr': '5001::4',
+         'max_ttl': 30,
+         'time_out': 3
+         }
+
+    """
+    traceroute6_re1 = (
+        r'(.*\s+(?P<dst_unreachable>!H)\s*?.*)'
+    )
+
+    traceroute6_re2 = (
+        r'(\s*(?P<hop_number>\d+)\s+(?P<hop_timeout>(\*\s+)+))'
+    )
+
+    traceroute6_re3 = (
+        r'.*\s*(?P<network_unreachable>(Network is unreachable))\s*'
+    )
+
+    traceroute6_re4 = (
+        r'\s*traceroute to\s+(?P<dest_addr>\S+)\s+'
+        r'.*\s+from (?P<source_addr>\S+),\s+'
+    )
+
+    traceroute6_re5 = (
+        r'.*\s+(?P<max_ttl>\d+)\s+hops max,'
+        r'.*\s+(?P<time_out>\d+)\s+sec. timeout,'
+        r'.*\s+(?P<probe>\d+)\s+probes'
+    )
+
+    traceroute6_re6 = (
+        r'(\s*(?P<hop_num>\d+)\s+(?P<int_hop>\S+)\s+'
+        r'(?P<time_stamp1>(\d+.\d+)) ms\s+'
+        r'((?P<time_stamp2>(\d+.\d+)) ms\s+)?'
+        r'((?P<time_stamp3>(\d+.\d+)) ms\s+)?'
+        r'((?P<time_stamp4>(\d+.\d+)) ms\s+)?'
+        r'((?P<time_stamp5>(\d+.\d+)) ms\s*)?.*)'
+    )
+
+    result = {}
+    re_result1 = re.search(traceroute6_re1, raw_result)
+    if re_result1:
+        for key, value in re_result1.groupdict().items():
+            if value is None:
+                result[key] = 'No match found'
+            elif value.isdigit():
+                result[key] = int(value)
+            else:
+                result[key] = value
+        return result
+
+    re_result2 = re.search(traceroute6_re2, raw_result)
+    if re_result2:
+        for key, value in re_result2.groupdict().items():
+            if value is None:
+                result[key] = 'No match found'
+            elif value.isdigit():
+                result[key] = int(value)
+            else:
+                result[key] = value
+        return result
+
+    re_result3 = re.search(traceroute6_re3, raw_result)
+    if re_result3:
+        for key, value in re_result3.groupdict().items():
+            if value is None:
+                result[key] = 'No match found'
+            elif value.isdigit():
+                result[key] = int(value)
+            else:
+                result[key] = value
+        return result
+
+    raw_result_lines = raw_result.splitlines()
+    length = len(raw_result_lines)
+    re_result4 = re.search(traceroute6_re4, raw_result)
+    if re_result4:
+        for key, value in re_result4.groupdict().items():
+            if value is None:
+                result[key] = "No match found"
+            elif value.isdigit():
+                result[key] = int(value)
+            else:
+                result[key] = value
+
+    re_result5 = re.search(traceroute6_re5, raw_result)
+    if re_result5:
+        for key, value in re_result5.groupdict().items():
+            if value is None:
+                result[key] = "No match found"
+            elif value.isdigit():
+                result[key] = int(value)
+            else:
+                result[key] = value
+
+    for hop_num in range(1, length):
+        result[hop_num] = {}
+        re_result6 = re.search(traceroute6_re6, raw_result_lines[hop_num])
+        if re_result6:
+            for key, value in re_result6.groupdict().items():
+                if value is None:
+                    result[hop_num][key] = "No match found"
+                elif value.isdigit():
+                    result[hop_num][key] = int(value)
+                else:
+                    result[hop_num][key] = value
+
+    return result
+
+
 def parse_show_rib(raw_result):
     """
     Parse the 'show rib' command raw output.
@@ -2030,20 +2482,20 @@ def parse_show_running_config(raw_result):
             if re_result:
                 if 'nameserver' not in result['interface']['mgmt'].keys():
                     result['interface']['mgmt']['nameserver'] =\
-                     re_result.group(1)
+                        re_result.group(1)
 
             # Match mgmt static ip
             re_result = re.match(stat_ip_re, line)
             if re_result:
                 if 'static' not in result['interface']['mgmt'].keys():
                     result['interface']['mgmt']['static'] =\
-                     re_result.group(1)
+                        re_result.group(1)
 
             # Match autonegotiation
             re_result = re.match(autoneg_re, line)
             if re_result:
                 result['interface'][port]['autonegotiation'] =\
-                 re_result.group(1)
+                    re_result.group(1)
 
             # Match ipv4
             re_result = re.match(ipv4_re, line)
@@ -3087,7 +3539,6 @@ def parse_show_startup_config(raw_result):
 
 
 def parse_show_tftp_server(raw_result):
-
     """
     Parse the 'show tftp-server' command raw output.
     :param str raw_result: vtysh raw result string.
@@ -3109,7 +3560,7 @@ def parse_show_tftp_server(raw_result):
         r'TFTP server\s*:\s+(?P<tftp_server>\S+)\s*'
         r'TFTP server secure mode\s*:\s+(?P<tftp_server_secure_mode>\S+)\s*'
         r'TFTP server file path\s*:\s+(?P<tftp_server_file_path>\S+)'
-        )
+    )
 
     re_result = re.match(show_tfpt_server_re, raw_result)
     assert re_result
@@ -3143,7 +3594,7 @@ def parse_config_tftp_server_enable(raw_result):
 
     enable_tfpt_server_re = (
         r'TFTP server is\s(?P<result>\S*)\s*'
-        )
+    )
 
     re_result = re.match(enable_tfpt_server_re, raw_result)
     assert re_result
@@ -3177,7 +3628,7 @@ def parse_config_tftp_server_no_enable(raw_result):
 
     enable_tfpt_server_re = (
         r'TFTP server is\s(?P<result>\S*)\s*'
-        )
+    )
 
     re_result = re.match(enable_tfpt_server_re, raw_result)
     assert re_result
@@ -3211,7 +3662,7 @@ def parse_config_tftp_server_path(raw_result):
 
     enable_tfpt_server_re = (
         r'TFTP server path is\s(?P<result>\S*)\s*'
-        )
+    )
 
     re_result = re.match(enable_tfpt_server_re, raw_result)
     assert re_result
@@ -3245,7 +3696,7 @@ def parse_config_tftp_server_no_path(raw_result):
 
     enable_tfpt_server_re = (
         r'TFTP server path is\s(?P<result>\S*)\s*'
-        )
+    )
 
     re_result = re.match(enable_tfpt_server_re, raw_result)
     assert re_result
@@ -3374,7 +3825,8 @@ __all__ = [
     'parse_show_vlog_config_daemon', 'parse_show_vlog_config_list',
     'parse_show_vlog_daemon', 'parse_show_vlog_severity',
     'parse_show_vlog_daemon_severity', 'parse_show_vlog_severity_daemon',
-    'parse_show_vlog',
+    'parse_show_vlog', 'parse_ping', 'parse_ping6',
+    'parse_traceroute', 'parse_traceroute6',
     'parse_show_ip_ospf_neighbor_detail', 'parse_show_ip_ospf_interface',
     'parse_show_ip_ospf', 'parse_show_ip_ospf_neighbor',
     'parse_show_startup_config',
