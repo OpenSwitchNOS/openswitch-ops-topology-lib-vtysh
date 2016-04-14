@@ -78,7 +78,10 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_config_tftp_server_path,
                                        parse_config_tftp_server_no_path,
                                        parse_show_interface_lag,
-                                       parse_show_mirror
+                                       parse_show_mirror,
+                                       parse_show_snmp_community,
+                                       parse_show_snmp_system,
+                                       parse_show_snmp_trap
                                        )
 
 
@@ -2897,5 +2900,64 @@ lo1024      --        loopback     routed       up       auto      --
         }
     ]
 
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_snmp_community():
+    raw_result = """\
+---------------------
+SNMP communities
+---------------------
+public
+private
+community1
+community2"""
+    result = parse_show_snmp_community(raw_result)
+    expected = ['public', 'private', 'community1', 'community2']
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_snmp_system():
+    raw_result = """\
+SNMP system information
+-----------------------
+System description : OpenSwitchsystem
+System location : Bangalore
+System contact :  xyz@id.com"""
+    result = parse_show_snmp_system(raw_result)
+    expected = {
+        'system_description': 'OpenSwitchsystem',
+        'system_location': 'Bangalore',
+        'system_contact': 'xyz@id.com'
+    }
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_snmp_trap():
+    raw_result = """\
+------------------------------------------------------------------
+Host              Port        Type           Version        SecName
+-------------------------------------------------------------------
+20.2.2.2          455         inform         v2c            testcom
+10.1.1.1          162         trap           v1             public"""
+
+    result = parse_show_snmp_trap(raw_result)
+    expected = {
+        '20.2.2.2': {
+            'Port': '455',
+            'Type': 'inform',
+            'Version': 'v2c',
+            'SecName': 'testcom'
+        },
+        '10.1.1.1': {
+            'Port': '162',
+            'Type': 'trap',
+            'Version': 'v1',
+            'SecName': 'public'
+        }
+    }
     ddiff = DeepDiff(result, expected)
     assert not ddiff
