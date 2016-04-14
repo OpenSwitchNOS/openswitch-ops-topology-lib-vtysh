@@ -474,8 +474,6 @@ VTYSH_SPEC = OrderedDict([
                 ],
                 'returns': True
             },
-<<<<<<< HEAD
-=======
             {
                 'command': 'show snmp community',
                 'doc': 'Display SNMP configured community names.',
@@ -495,7 +493,6 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             }
 
->>>>>>> 8c817d2... chg: usr: Added snmp libraries
         ]
     }),
     ('configure', {
@@ -1190,27 +1187,6 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'snmp-server agent-port {port_num}',
-                'doc': 'Configure SNMP agent port',
-                'arguments': [
-                    {
-                         'name': 'port_num',
-                         'doc': 'UDP port on which the SNMP agent listens'
-                    }
-                ],
-            },
-            {
-                'command': 'no snmp-server agent-port {port_num}',
-                'doc': 'Unconfigure SNMP agent port',
-                'arguments': [
-                    {
-                         'name': 'port_num',
-                         'doc': 'UDP port on which the SNMP agent listens',
-                         'optional': True
-                    }
-                ],
-            },
-            {
                 'command': 'snmp-server community {community_name}',
                 'doc': 'Configure SNMP community names',
                 'arguments': [
@@ -1221,7 +1197,7 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'no snmp-server community {community_name}',
+                'command': 'no snmp-server community',
                 'doc': 'Unconfigure SNMP community names',
                 'arguments': [
                     {
@@ -1242,7 +1218,7 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'no snmp-server system-contact {system_contact}',
+                'command': 'no snmp-server system-contact',
                 'doc': 'Unconfigure SNMP contact information',
                 'arguments': [
                     {
@@ -1263,7 +1239,7 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'no snmp-server system-location {system_location}',
+                'command': 'no snmp-server system-location',
                 'doc': 'Unconfigure SNMP location information',
                 'arguments': [
                     {
@@ -1285,8 +1261,7 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'no snmp-server system-description\
-                {system_description}',
+                'command': 'no snmp-server system-description',
                 'doc': 'Unconfigure SNMP system description',
                 'arguments': [
                     {
@@ -1298,8 +1273,7 @@ VTYSH_SPEC = OrderedDict([
             },
             {
                 'command': 'snmp-server host {host_ip_address} trap version \
-                            {snmp_version} {community} {community-name} \
-                            {port} {snmp-port}} ',
+                            {snmp_version}',
                 'doc': 'Configure SNMP server information for trap receiver',
                 'arguments': [
                     {
@@ -1336,8 +1310,7 @@ VTYSH_SPEC = OrderedDict([
             },
             {
                 'command': 'no snmp-server host {host_ip_address} trap \
-                            version {snmp_version} {community} \
-                            {community-name} {port} {snmp-port}} ',
+                            version {snmp_version}',
                 'doc': 'Unconfigure SNMP server information for trap receiver',
                 'arguments': [
                     {
@@ -1375,8 +1348,7 @@ VTYSH_SPEC = OrderedDict([
             },
             {
                 'command': 'snmp-server inform {host_ip_address} trap version \
-                            {snmp_version} {community} {community-name} {port}\
-                            {snmp-port}}',
+                            {snmp_version}',
                 'doc': 'Configure SNMP server information for notifications',
                 'arguments': [
                     {
@@ -1413,8 +1385,7 @@ VTYSH_SPEC = OrderedDict([
             },
             {
                 'command': 'no snmp-server inform {host_ip_address} trap\
-                            version {snmp_version} {community}\
-                            {community-name} {port} {snmp-port}} ',
+                            version {snmp_version}',
                 'doc': 'Unconfigure SNMP server information for notifications',
                 'arguments': [
                     {

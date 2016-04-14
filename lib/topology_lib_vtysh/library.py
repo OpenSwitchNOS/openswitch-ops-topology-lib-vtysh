@@ -1668,65 +1668,6 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
-    def snmp_server_agent_port(
-            self, port_num):
-        """
-        Configure SNMP agent port
-
-        This function runs the following vtysh command:
-
-        ::
-
-            # snmp-server agent-port {port_num}
-
-        :param port_num: UDP port on which the SNMP agent listens
-        """
-
-        cmd = [
-            'snmp-server agent-port {port_num}'
-        ]
-
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
-        )
-
-        if result:
-            raise determine_exception(result)(result)
-
-    def no_snmp_server_agent_port(
-            self, port_num=''):
-        """
-        Unconfigure SNMP agent port
-
-        This function runs the following vtysh command:
-
-        ::
-
-            # no snmp-server agent-port {port_num}
-
-        :param port_num: UDP port on which the SNMP agent listens
-        """
-
-        cmd = [
-            'no snmp-server agent-port {port_num}'
-        ]
-
-        if port_num:
-            cmd.append(
-                '{}{{port_num}}{}'.format(
-                    '', ''
-                )
-            )
-
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
-        )
-
-        if result:
-            raise determine_exception(result)(result)
-
     def snmp_server_community(
             self, community_name):
         """
@@ -9111,24 +9052,6 @@ def show_mirror(
     )
 
     return parse_show_mirror(result)
-    
-
-def show_snmp_agent_port(
-        enode):
-    """
-    Display SNMP agent port configuration.
-
-        # show snmp agent-port
-
-    :return: A dictionary as returned by
-     :func:`topology_lib_vtysh.parser.parse_show_snmp_agent_port`
-    """
-
-    cmd = [
-        'show snmp agent-port'
-    ]
-
-    return parse_show_snmp_agent_port(result)
 
 
 def show_snmp_community(
@@ -9278,14 +9201,10 @@ __all__ = [
     'copy_running_config_startup_config',
     'show_startup_config',
     'show_tftp_server',
-<<<<<<< HEAD
     'no_mirror_session',
     'show_mirror',
-    'show_snmp_agent_port'
-=======
     'show_snmp_agent_port',
     'show_snmp_community',
     'show_snmp_system',
     'show_snmp_trap'
->>>>>>> 8c817d2... chg: usr: Added snmp libraries
 ]

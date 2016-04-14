@@ -3353,39 +3353,6 @@ def parse_show_mirror(raw_result):
         return result
 
 
-def parse_show_snmp_agent_port(raw_result):
-
-    """
-    Parse the 'show snmp agent-port' command raw output.
-
-    :param str raw_result: vtysh raw result string.
-    :rtype: dict
-    :return: The parsed result of the show snmp agent-port \
-       command in a dictionary of the form
-
-    ::
-
-        {
-            'SNMP agent port': '677'
-        }
-    """
-    snmp_agent_port_re = (
-        r'\s*SNMP\s*agent\sport\s*(?P<agent_port>.+)'
-        )
-
-    re_result = re.match(snmp_agent_port_re, raw_result)
-    assert re_result
-
-    result = re_result.groupdict()
-    for key, value in result.items():
-        if value and value.isdigit():
-            result[key] = True
-        else:
-            result[key] = False
-
-    return result
-
-
 def parse_show_snmp_community(raw_result):
 
     """
@@ -3405,21 +3372,22 @@ def parse_show_snmp_community(raw_result):
 
         }
     """
-    snmp_community_name_re = (
-        r'\s*snmp\-server\s*community\s*(?P<community_name>.+)'
-        )
-
-    re_result = re.match(snmp_community_name_re, raw_result)
-    assert re_result
-
-    result = re_result.groupdict()
-    for key, value in result.items():
-        if value and value.isdigit():
-            result[key] = True
+    community_string = []
+    pattern_found = 0
+    result = []
+    for line in raw_result.splitline():
+        if pattern_found == 2:
+            community_string.append(line)
         else:
-            result[key] = False
-
-    return result
+            res = re.match(r'\s*-+\s*', line)
+            if res:
+                pattern_found = pattern_found + 1
+                res = None
+    result['community_string'] = res
+    if result == {}:
+        return None
+    else:
+        return result
 
 
 def parse_show_snmp_system(raw_result):
@@ -3452,11 +3420,6 @@ def parse_show_snmp_system(raw_result):
     assert re_result
 
     result = re_result.groupdict()
-    for key, value in result.items():
-        if value and value.isdigit():
-            result[key] = True
-        else:
-            result[key] = False
 
     return result
 
@@ -3480,25 +3443,22 @@ def parse_show_trap(raw_result):
             ------------------------------------------------------------------'
         }
     """
-    snmp_trap_re = (
-        r'\s*snmp\-server\s*host\s*(?P<host-ip-address>\d+\.\d+\.\d+\.\d+)'
-        '\s*trap\s*version\s*(?P<snmp-version>v\d)(?P<snmp-community>\w)'
-        '\s*(?P<snmp-port>\d+)\s*'
-        r'\s*snmp\-server\s*host\s*(?P<host-ip-address>)\s*inform\s*version'
-        '\s*(?P<snmp-version>.+)'
-        )
-
-    re_result = re.match(snmp_trap_re, raw_result)
-    assert re_result
-
-    result = re_result.groupdict()
-    for key, value in result.items():
-        if value and value.isdigit():
-            result[key] = True
+    host_ip_address = []
+    pattern_found = 0
+    result = []
+    for line in raw_result.splitline():
+        if pattern_found == 2:
+            host_ip_address.append(line)
         else:
-            result[key] = False
-
-    return result
+            res = re.match(r'\s*-+\s*', line)
+            if res:
+                pattern_found = pattern_found + 1
+                res = None
+    result['host_ip_address'] = res
+    if result == {}:
+        return None
+    else:
+        return result
 
 
 __all__ = [
@@ -3529,14 +3489,8 @@ __all__ = [
     'parse_show_mac_address_table',
     'parse_show_tftp_server', 'parse_config_tftp_server_enable',
     'parse_config_tftp_server_no_enable', 'parse_config_tftp_server_path',
-<<<<<<< HEAD
     'parse_config_tftp_server_no_path', 'parse_show_interface_lag',
     'parse_show_mirror',
-    'parse_config_tftp_server_no_path', 'parse_enable', 'parse_no_enable', 'parse_path',
-    'parse_no_path', 'parse_show_snmp_agent_port'
-=======
-    'parse_config_tftp_server_no_path', 'parse_show_snmp_agent_port',
-    'parse_show_snmp_community', 'parse_show_snmp_system',
-    'parse_show_trap'
->>>>>>> 8c817d2... chg: usr: Added snmp libraries
+    'parse_config_tftp_server_no_path', 'parse_show_snmp_community',
+    'parse_show_snmp_system', 'parse_show_trap'
 ]
