@@ -3353,6 +3353,123 @@ def parse_show_mirror(raw_result):
         return result
 
 
+def parse_show_snmp_community(raw_result):
+
+    """
+    Parse the 'show snmp community' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show snmp community\
+       command in a dictionary of the form
+
+    ::
+
+        {
+            '---------------------
+             SNMP communities
+             ---------------------
+             public
+             private
+             community1
+             community2'
+
+        }
+    """
+    pattern_found = 0
+    result = []
+    res = 0
+    for line in raw_result.splitline():
+        if pattern_found == 2:
+            result.append(line)
+        else:
+            res = re.match(r'\s*-+\s*', line)
+            if res:
+                pattern_found = pattern_found + 1
+    for line in result.splitline():
+        res = re.split(r'\s+', line)
+    if res == {}:
+        return None
+    else:
+        return res
+
+
+def parse_show_snmp_system(raw_result):
+
+    """
+    Parse the 'show snmp system' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show snmp system\
+       command in a dictionary of the form
+
+    ::
+
+        {
+            'SNMP system information
+             ---------------------'
+
+        }
+    """
+    snmp_system_re = (
+        r'\s*SNMP system information\s*'
+        r'\s*-*\s*'
+        r'\s*System\description\s\:\s*(?P<system-description>.+)'
+        r'\s*System\location\s\:\s*(?P<system-location>.+)'
+        r'\s*System\contact\s\:\s*(?P<system-contact>.+)'
+        )
+
+    re_result = re.match(snmp_system_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+
+    return result
+
+
+def parse_show_trap(raw_result):
+
+    """
+    Parse the 'show snmp trap' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show snmp trap\
+       command in a dictionary of the form
+
+    ::
+
+        {
+            'show snmp trap
+            ------------------------------------------------------------------
+            Host              Port        Type           Version        SecName
+            ------------------------------------------------------------------
+            20.2.2.2          455         inform         v2c            testcom
+            10.1.1.1          162         trap           v1             public'
+        }
+    """
+    pattern_found = 0
+    result = []
+    output = {}
+    res = 0
+    for line in raw_result.splitline():
+        if pattern_found == 2:
+            result.append(line)
+        else:
+            res = re.match(r'\s*-+\s*', line)
+            if res:
+                pattern_found = pattern_found + 1
+    for line in result.splitline():
+        res = re.split(r'\s+', line)
+        output[res[0]] = {'Port': res[1], 'Type': res[2], 'Version': res[3],
+                          'SecName': res[4]}
+    if output == {}:
+        return None
+    else:
+        return output
+
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
@@ -3382,5 +3499,7 @@ __all__ = [
     'parse_show_tftp_server', 'parse_config_tftp_server_enable',
     'parse_config_tftp_server_no_enable', 'parse_config_tftp_server_path',
     'parse_config_tftp_server_no_path', 'parse_show_interface_lag',
-    'parse_show_mirror'
+    'parse_show_mirror',
+    'parse_config_tftp_server_no_path', 'parse_show_snmp_community',
+    'parse_show_snmp_system', 'parse_show_trap'
 ]
