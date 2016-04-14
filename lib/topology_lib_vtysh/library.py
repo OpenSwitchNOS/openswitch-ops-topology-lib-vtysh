@@ -7926,6 +7926,289 @@ def ping6_repetitions(
     return parse_ping6_repetitions(result)
 
 
+def ping(
+        enode, destination, count='', size='', data='', interval='',
+        timeout='', tos='', ip_option=''):
+    """
+    Send IPv4 ping
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # ping {destination}
+
+    :param destination: <A.B.C.D> IPv4 address.
+    :param count: Number of packets to send.
+    :param size: Size of packets to send.
+    :param data: Data to be filled in each packet.
+    :param interval: Time interval between ping requests.
+    :param timeout: Max time to wait for ping reply.
+    :param tos: Type of service to be placed in each probe.
+    :param ip_option: Ip-option.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_ping`
+    """
+
+    cmd = [
+        'ping {destination}'
+    ]
+
+    if count:
+        cmd.append(
+            '{}{{count}}{}'.format(
+                'repetitions ', ''
+            )
+        )
+
+    if size:
+        cmd.append(
+            '{}{{size}}{}'.format(
+                'datagram-size ', ''
+            )
+        )
+
+    if data:
+        cmd.append(
+            '{}{{data}}{}'.format(
+                'data-fill ', ''
+            )
+        )
+
+    if interval:
+        cmd.append(
+            '{}{{interval}}{}'.format(
+                'interval ', ''
+            )
+        )
+
+    if timeout:
+        cmd.append(
+            '{}{{timeout}}{}'.format(
+                'timeout ', ''
+            )
+        )
+
+    if tos:
+        cmd.append(
+            '{}{{tos}}{}'.format(
+                'tos ', ''
+            )
+        )
+
+    if ip_option:
+        cmd.append(
+            '{}{{ip_option}}{}'.format(
+                'ip-option ', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_ping(result)
+
+
+def ping6(
+        enode, destination, count='', size='', data='', interval=''):
+    """
+    Send IPv6 ping
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # ping6 {destination}
+
+    :param destination: <X:X::X:X> IPv6 address.
+    :param count: Number of packets to send.
+    :param size: Size of packets to send.
+    :param data: Data to be filled in each packet.
+    :param interval: Time interval between ping requests.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_ping6`
+    """
+
+    cmd = [
+        'ping6 {destination}'
+    ]
+
+    if count:
+        cmd.append(
+            '{}{{count}}{}'.format(
+                'repetitions ', ''
+            )
+        )
+
+    if size:
+        cmd.append(
+            '{}{{size}}{}'.format(
+                'datagram-size ', ''
+            )
+        )
+
+    if data:
+        cmd.append(
+            '{}{{data}}{}'.format(
+                'data-fill ', ''
+            )
+        )
+
+    if interval:
+        cmd.append(
+            '{}{{interval}}{}'.format(
+                'interval ', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_ping6(result)
+
+
+def traceroute(
+        enode, destination, min_ttl='', max_ttl='', dst_port='',
+        time_out='', probes='', ip_option_source=''):
+    """
+    Send IPv4 traceroute
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # traceroute {destination}
+
+    :param destination: <A.B.C.D> IPv4 address.
+    :param min_ttl: Minimum number of hops to reach the destination <1-255>.
+    :param max_ttl: Maximum number of hops to reach the destination <1-255>.
+    :param dst_port: Destination port <1-34000>.
+    :param time_out: Traceroute timeout in seconds <1-60>.
+    :param probes: Number of Probes <1-5>.
+    :param ip_option_source: Source for loose source route record.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_traceroute`
+    """
+
+    cmd = [
+        'traceroute {destination}'
+    ]
+
+    if min_ttl:
+        cmd.append(
+            '{}{{min_ttl}}{}'.format(
+                'minttl ', ''
+            )
+        )
+
+    if max_ttl:
+        cmd.append(
+            '{}{{max_ttl}}{}'.format(
+                'maxttl ', ''
+            )
+        )
+
+    if dst_port:
+        cmd.append(
+            '{}{{dst_port}}{}'.format(
+                'dstport ', ''
+            )
+        )
+
+    if time_out:
+        cmd.append(
+            '{}{{time_out}}{}'.format(
+                'timeout ', ''
+            )
+        )
+
+    if probes:
+        cmd.append(
+            '{}{{probes}}{}'.format(
+                'probes ', ''
+            )
+        )
+
+    if ip_option_source:
+        cmd.append(
+            '{}{{ip_option_source}}{}'.format(
+                'ip-option loosesourceroute ', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_traceroute(result)
+
+
+def traceroute6(
+        enode, destination, max_ttl='', dst_port='', time_out='',
+        probes=''):
+    """
+    Send IPv6 traceroute
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # traceroute6 {destination}
+
+    :param destination: <X:X::X:X> IPv6 address.
+    :param max_ttl: Maximum number of hops to reach the destination <1-255>.
+    :param dst_port: Destination port <1-34000>.
+    :param time_out: Traceroute timeout in seconds <1-60>.
+    :param probes: Number of Probes <1-5>.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_traceroute6`
+    """
+
+    cmd = [
+        'traceroute6 {destination}'
+    ]
+
+    if max_ttl:
+        cmd.append(
+            '{}{{max_ttl}}{}'.format(
+                'maxttl ', ''
+            )
+        )
+
+    if dst_port:
+        cmd.append(
+            '{}{{dst_port}}{}'.format(
+                'dstport ', ''
+            )
+        )
+
+    if time_out:
+        cmd.append(
+            '{}{{time_out}}{}'.format(
+                'timeout ', ''
+            )
+        )
+
+    if probes:
+        cmd.append(
+            '{}{{probes}}{}'.format(
+                'probes ', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_traceroute6(result)
+
+
 def show_ntp_associations(
         enode):
     """
@@ -8616,6 +8899,10 @@ __all__ = [
     'clear_udld_statistics_interface',
     'ping_repetitions',
     'ping6_repetitions',
+    'ping',
+    'ping6',
+    'traceroute',
+    'traceroute6',
     'show_ntp_associations',
     'show_ntp_authentication_key',
     'show_ntp_statistics',
