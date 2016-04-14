@@ -474,6 +474,28 @@ VTYSH_SPEC = OrderedDict([
                 ],
                 'returns': True
             },
+<<<<<<< HEAD
+=======
+            {
+                'command': 'show snmp community',
+                'doc': 'Display SNMP configured community names.',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show snmp system',
+                'doc': 'Display SNMP system information.',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show snmp trap',
+                'doc': 'Display SNMP host information of trap receivers.',
+                'arguments': [],
+                'returns': True
+            }
+
+>>>>>>> 8c817d2... chg: usr: Added snmp libraries
         ]
     }),
     ('configure', {
@@ -1164,6 +1186,267 @@ VTYSH_SPEC = OrderedDict([
                     {
                         'name': 'severity',
                         'doc': 'severity level'
+                    }
+                ],
+            },
+            {
+                'command': 'snmp-server agent-port {port_num}',
+                'doc': 'Configure SNMP agent port',
+                'arguments': [
+                    {
+                         'name': 'port_num',
+                         'doc': 'UDP port on which the SNMP agent listens'
+                    }
+                ],
+            },
+            {
+                'command': 'no snmp-server agent-port {port_num}',
+                'doc': 'Unconfigure SNMP agent port',
+                'arguments': [
+                    {
+                         'name': 'port_num',
+                         'doc': 'UDP port on which the SNMP agent listens',
+                         'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'snmp-server community {community_name}',
+                'doc': 'Configure SNMP community names',
+                'arguments': [
+                    {
+                         'name': 'community_name',
+                         'doc': 'Configured Community names'
+                    }
+                ],
+            },
+            {
+                'command': 'no snmp-server community {community_name}',
+                'doc': 'Unconfigure SNMP community names',
+                'arguments': [
+                    {
+                         'name': 'community_name',
+                         'doc': 'Unconfigured community names',
+                         'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'snmp-server system-contact {system_contact}',
+                'doc': 'Configure SNMP system contact information',
+                'arguments': [
+                    {
+                         'name': 'system_contact',
+                         'doc': 'Configured System contact information'
+                    }
+                ],
+            },
+            {
+                'command': 'no snmp-server system-contact {system_contact}',
+                'doc': 'Unconfigure SNMP contact information',
+                'arguments': [
+                    {
+                         'name': 'system_contact',
+                         'doc': 'Unconfigure system contact information',
+                         'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'snmp-server system-location {system_location}',
+                'doc': 'Configure SNMP system location information',
+                'arguments': [
+                    {
+                         'name': 'system_location',
+                         'doc': 'Configured System location information'
+                    }
+                ],
+            },
+            {
+                'command': 'no snmp-server system-location {system_location}',
+                'doc': 'Unconfigure SNMP location information',
+                'arguments': [
+                    {
+                         'name': 'system_location',
+                         'doc': 'Unconfigure system location information',
+                         'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'snmp-server system-description\
+                {system_description}',
+                'doc': 'Configure SNMP system description',
+                'arguments': [
+                    {
+                         'name': 'system_description',
+                         'doc': 'Configured System description'
+                    }
+                ],
+            },
+            {
+                'command': 'no snmp-server system-description\
+                {system_description}',
+                'doc': 'Unconfigure SNMP system description',
+                'arguments': [
+                    {
+                         'name': 'system_desription',
+                         'doc': 'Unconfigure system description',
+                         'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'snmp-server host {host_ip_address} trap version \
+                            {snmp_version} {community} {community-name} \
+                            {port} {snmp-port}} ',
+                'doc': 'Configure SNMP server information for trap receiver',
+                'arguments': [
+                    {
+                         'name': 'host_ip_address',
+                         'doc': 'Configured host ip address for trap receiver'
+                    },
+                    {
+                         'name': 'snmp_version',
+                         'doc': 'Configured snmp version for receiver'
+                    },
+                    {
+                         'name': 'community',
+                         'doc': 'Configured snmp community name for trap \
+                                 receiver',
+                         'optional': True
+                    },
+                    {
+                         'name': 'community-name',
+                         'doc': 'Configured snmp community name for trap \
+                                 receiver',
+                         'optional': True
+                    },
+                    {
+                         'name': 'port',
+                         'doc': 'Configured snmp port for trap receiver',
+                         'optional': True
+                    },
+                    {
+                         'name': 'snmp-port',
+                         'doc': 'Configured snmp port for trap receiver',
+                         'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'no snmp-server host {host_ip_address} trap \
+                            version {snmp_version} {community} \
+                            {community-name} {port} {snmp-port}} ',
+                'doc': 'Unconfigure SNMP server information for trap receiver',
+                'arguments': [
+                    {
+                         'name': 'host_ip_address',
+                         'doc': 'Unconfigured host ip address for trap \
+                                 receiver'
+                    },
+                    {
+                         'name': 'snmp_version',
+                         'doc': 'Unconfigured snmp version for receiver'
+                    },
+                    {
+                         'name': 'community',
+                         'doc': 'Unconfigured snmp community name for trap \
+                                 receiver',
+                         'optional': True
+                    },
+                    {
+                         'name': 'community-name',
+                         'doc': 'Unconfigured snmp community name for trap \
+                                 receiver',
+                         'optional': True
+                    },
+                    {
+                         'name': 'port',
+                         'doc': 'Unconfigured snmp port for trap receiver',
+                         'optional': True
+                    },
+                    {
+                         'name': 'snmp-port',
+                         'doc': 'Unconfigured snmp port for trap receiver',
+                         'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'snmp-server inform {host_ip_address} trap version \
+                            {snmp_version} {community} {community-name} {port}\
+                            {snmp-port}}',
+                'doc': 'Configure SNMP server information for notifications',
+                'arguments': [
+                    {
+                         'name': 'host_ip_address',
+                         'doc': 'Configured host ip address for notifications'
+                    },
+                    {
+                         'name': 'snmp_version',
+                         'doc': 'Configured snmp version for notifications'
+                    },
+                    {
+                         'name': 'community',
+                         'doc': 'Configured snmp community name for \
+                                 notifications',
+                         'optional': True
+                    },
+                    {
+                         'name': 'community-name',
+                         'doc': 'Configured snmp community name for \
+                                 notifications',
+                         'optional': True
+                    },
+                    {
+                         'name': 'port',
+                         'doc': 'Configured snmp port for notifications',
+                         'optional': True
+                    },
+                    {
+                         'name': 'snmp-port',
+                         'doc': 'Configured snmp port for notifications',
+                         'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'no snmp-server inform {host_ip_address} trap\
+                            version {snmp_version} {community}\
+                            {community-name} {port} {snmp-port}} ',
+                'doc': 'Unconfigure SNMP server information for notifications',
+                'arguments': [
+                    {
+                         'name': 'host_ip_address',
+                         'doc': 'Unconfigured host ip address for \
+                                 notifications'
+                    },
+                    {
+                         'name': 'snmp_version',
+                         'doc': 'Unconfigured snmp version for notifications'
+                    },
+                    {
+                         'name': 'community',
+                         'doc': 'Unconfigured snmp community name for \
+                                 notifications',
+                         'optional': True
+                    },
+                    {
+                         'name': 'community-name',
+                         'doc': 'Unconfigured snmp community name for \
+                                 notifications',
+                         'optional': True
+                    },
+                    {
+                         'name': 'port',
+                         'doc': 'Unconfigured snmp port for notifications',
+                         'optional': True
+                    },
+                    {
+                         'name': 'snmp-port',
+                         'doc': 'Unconfigured snmp port for notifications',
+                         'optional': True
                     }
                 ],
             }

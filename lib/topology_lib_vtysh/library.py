@@ -1668,6 +1668,548 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def snmp_server_agent_port(
+            self, port_num):
+        """
+        Configure SNMP agent port
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # snmp-server agent-port {port_num}
+
+        :param port_num: UDP port on which the SNMP agent listens
+        """
+
+        cmd = [
+            'snmp-server agent-port {port_num}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_snmp_server_agent_port(
+            self, port_num=''):
+        """
+        Unconfigure SNMP agent port
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no snmp-server agent-port {port_num}
+
+        :param port_num: UDP port on which the SNMP agent listens
+        """
+
+        cmd = [
+            'no snmp-server agent-port {port_num}'
+        ]
+
+        if port_num:
+            cmd.append(
+                '{}{{port_num}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def snmp_server_community(
+            self, community_name):
+        """
+        Configure SNMP community names
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # snmp-server community {community_name}
+
+        :param community_name: Configured Community names
+        """
+
+        cmd = [
+            'snmp-server community {community_name}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_snmp_server_community(
+            self, community_name=''):
+        """
+        Unconfigure SNMP community names
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no snmp-server community {community_name}
+
+        :param community_name: Unconfigured community names
+        """
+
+        cmd = [
+            'no snmp-server community {community_name}'
+        ]
+
+        if community_name:
+            cmd.append(
+                '{}{{community_name}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def snmp_server_system_contact(
+            self, system_contact):
+        """
+        Configure SNMP system contact information
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # snmp-server system-contact {system_contact}
+
+        :param system_contact: Configured System contact information
+        """
+
+        cmd = [
+            'snmp-server system-contact {system_contact}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_snmp_server_system_contact(
+            self, system_contact=''):
+        """
+        Unconfigure SNMP contact information
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no snmp-server system-contact {system_contact}
+
+        :param system_contact: Unconfigure system contact information
+        """
+
+        cmd = [
+            'no snmp-server system-contact {system_contact}'
+        ]
+
+        if system_contact:
+            cmd.append(
+                '{}{{system_contact}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def snmp_server_system_location(
+            self, system_location):
+        """
+        Configure SNMP system location information
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # snmp-server system-location {system_location}
+
+        :param system_location: Configured System location information
+        """
+
+        cmd = [
+            'snmp-server system-location {system_location}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_snmp_server_system_location(
+            self, system_location=''):
+        """
+        Unconfigure SNMP location information
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no snmp-server system-location {system_location}
+
+        :param system_location: Unconfigure system location information
+        """
+
+        cmd = [
+            'no snmp-server system-location {system_location}'
+        ]
+
+        if system_location:
+            cmd.append(
+                '{}{{system_location}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def snmp_server_system_description(
+            self, system_description):
+        """
+        Configure SNMP system description
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # snmp-server system-description {system_description}
+
+        :param system_description: Configured System description
+        """
+
+        cmd = [
+            'snmp-server system-description {system_description}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_snmp_server_system_description(
+            self, system_desription=''):
+        """
+        Unconfigure SNMP system description
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no snmp-server system-description {system_description}
+
+        :param system_desription: Unconfigure system description
+        """
+
+        cmd = [
+            'no snmp-server system-description {system_description}'
+        ]
+
+        if system_desription:
+            cmd.append(
+                '{}{{system_desription}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def snmp_server_host_trap_version(
+            self, host_ip_address, snmp_version, community='',
+            community_name='', port='', snmp_port=''):
+        """
+        Configure SNMP server information for trap receiver
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # snmp-server host {host_ip_address} trap version                             {snmp_version} {community} {community-name}                             {port} {snmp-port}}   # noqa
+
+        :param host_ip_address: Configured host ip address for trap receiver
+        :param snmp_version: Configured snmp version for receiver
+        :param community: Configured snmp community name for trap receiver
+        :param community-name: Configured snmp community name for trap
+            receiver
+        :param port: Configured snmp port for trap receiver
+        :param snmp-port: Configured snmp port for trap receiver
+        """  # noqa
+
+        cmd = [
+            'snmp-server host {host_ip_address} trap version                             {snmp_version} {community} {community-name}                             {port} {snmp-port}} '  # noqa
+        ]
+
+        if community:
+            cmd.append(
+                '{}{{community}}{}'.format(
+                    '', ''
+                )
+            )
+
+        if community-name:
+            cmd.append(
+                '{}{{community-name}}{}'.format(
+                    '', ''
+                )
+            )
+
+        if port:
+            cmd.append(
+                '{}{{port}}{}'.format(
+                    '', ''
+                )
+            )
+
+        if snmp-port:
+            cmd.append(
+                '{}{{snmp-port}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_snmp_server_host_trap_version(
+            self, host_ip_address, snmp_version, community='',
+            community_name='', port='', snmp_port=''):
+        """
+        Unconfigure SNMP server information for trap receiver
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no snmp-server host {host_ip_address} trap                             version {snmp_version} {community}                             {community-name} {port} {snmp-port}}   # noqa
+
+        :param host_ip_address: Unconfigured host ip address for trap receiver
+        :param snmp_version: Unconfigured snmp version for receiver
+        :param community: Unconfigured snmp community name for trap receiver
+        :param community-name: Unconfigured snmp community name for trap
+            receiver
+        :param port: Unconfigured snmp port for trap receiver
+        :param snmp-port: Unconfigured snmp port for trap receiver
+        """  # noqa
+
+        cmd = [
+            'no snmp-server host {host_ip_address} trap                             version {snmp_version} {community}                             {community-name} {port} {snmp-port}} '  # noqa
+        ]
+
+        if community:
+            cmd.append(
+                '{}{{community}}{}'.format(
+                    '', ''
+                )
+            )
+
+        if community-name:
+            cmd.append(
+                '{}{{community-name}}{}'.format(
+                    '', ''
+                )
+            )
+
+        if port:
+            cmd.append(
+                '{}{{port}}{}'.format(
+                    '', ''
+                )
+            )
+
+        if snmp-port:
+            cmd.append(
+                '{}{{snmp-port}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def snmp_server_inform_trap_version(
+            self, host_ip_address, snmp_version, community='',
+            community_name='', port='', snmp_port=''):
+        """
+        Configure SNMP server information for notifications
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # snmp-server inform {host_ip_address} trap version                             {snmp_version} {community} {community-name} {port}                             {snmp-port}}   # noqa
+
+        :param host_ip_address: Configured host ip address for notifications
+        :param snmp_version: Configured snmp version for notifications
+        :param community: Configured snmp community name for
+            notifications
+        :param community-name: Configured snmp community name for
+            notifications
+        :param port: Configured snmp port for notifications
+        :param snmp-port: Configured snmp port for notifications
+        """  # noqa
+
+        cmd = [
+            'snmp-server inform {host_ip_address} trap version                             {snmp_version} {community} {community-name} {port}                             {snmp-port}} '  # noqa
+        ]
+
+        if community:
+            cmd.append(
+                '{}{{community}}{}'.format(
+                    '', ''
+                )
+            )
+
+        if community-name:
+            cmd.append(
+                '{}{{community-name}}{}'.format(
+                    '', ''
+                )
+            )
+
+        if port:
+            cmd.append(
+                '{}{{port}}{}'.format(
+                    '', ''
+                )
+            )
+
+        if snmp-port:
+            cmd.append(
+                '{}{{snmp-port}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_snmp_server_inform_trap_version(
+            self, host_ip_address, snmp_version, community='',
+            community_name='', port='', snmp_port=''):
+        """
+        Unconfigure SNMP server information for notifications
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no snmp-server inform {host_ip_address} trap                             version {snmp_version} {community}                             {community-name} {port} {snmp-port}}   # noqa
+
+        :param host_ip_address: Unconfigured host ip address for 
+            otifications
+        :param snmp_version: Unconfigured snmp version for notifications
+        :param community: Unconfigured snmp community name for
+            notifications
+        :param community-name: Unconfigured snmp community name for
+            notifications
+        :param port: Unconfigured snmp port for notifications
+        :param snmp-port: Unconfigured snmp port for notifications
+        """  # noqa
+
+        cmd = [
+            'no snmp-server inform {host_ip_address} trap                             version {snmp_version} {community}                             {community-name} {port} {snmp-port}} '  # noqa
+        ]
+
+        if community:
+            cmd.append(
+                '{}{{community}}{}'.format(
+                    '', ''
+                )
+            )
+
+        if community-name:
+            cmd.append(
+                '{}{{community-name}}{}'.format(
+                    '', ''
+                )
+            )
+
+        if port:
+            cmd.append(
+                '{}{{port}}{}'.format(
+                    '', ''
+                )
+            )
+
+        if snmp-port:
+            cmd.append(
+                '{}{{snmp-port}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
 
 class RouteMap(ContextManager):
     """
@@ -8569,6 +9111,105 @@ def show_mirror(
     )
 
     return parse_show_mirror(result)
+    
+
+def show_snmp_agent_port(
+        enode):
+    """
+    Display SNMP agent port configuration.
+
+        # show snmp agent-port
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_snmp_agent_port`
+    """
+
+    cmd = [
+        'show snmp agent-port'
+    ]
+
+    return parse_show_snmp_agent_port(result)
+
+
+def show_snmp_community(
+        enode):
+    """
+    Display SNMP configured community names.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show snmp community
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_snmp_community`
+    """
+
+    cmd = [
+        'show snmp community'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_snmp_community(result)
+
+
+def show_snmp_system(
+        enode):
+    """
+    Display SNMP system information.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show snmp system
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_snmp_system`
+    """
+
+    cmd = [
+        'show snmp system'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_snmp_system(result)
+
+
+def show_snmp_trap(
+        enode):
+    """
+    Display SNMP host information of trap receivers.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show snmp trap
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_snmp_trap`
+    """
+
+    cmd = [
+        'show snmp trap'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_snmp_trap(result)
 
 
 __all__ = [
@@ -8637,6 +9278,14 @@ __all__ = [
     'copy_running_config_startup_config',
     'show_startup_config',
     'show_tftp_server',
+<<<<<<< HEAD
     'no_mirror_session',
-    'show_mirror'
+    'show_mirror',
+    'show_snmp_agent_port'
+=======
+    'show_snmp_agent_port',
+    'show_snmp_community',
+    'show_snmp_system',
+    'show_snmp_trap'
+>>>>>>> 8c817d2... chg: usr: Added snmp libraries
 ]
