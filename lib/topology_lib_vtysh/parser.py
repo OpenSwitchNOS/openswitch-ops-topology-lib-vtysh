@@ -589,13 +589,18 @@ def parse_show_lacp_interface(raw_result):
         r'(?P<local_system_id>([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2})?\s*\|'
         r'\s*(?P<remote_system_id>([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2})?\s+'
         r'System-priority\s*\|\s*(?P<local_system_priority>\d*)?\s*\|'
-        r'\s*(?P<remote_system_priority>\d*)?\s+'
+        r'\s*(?P<remote_system_priority>\d*)?\s*'
     )
 
     re_result = re.search(lacp_re, raw_result)
     assert re_result
 
     result = re_result.groupdict()
+
+    if result['local_system_id'] is None:
+        result['local_system_id'] = ''
+    if result['remote_system_id'] is None:
+        result['remote_system_id'] = ''
 
     for state in ['local_state', 'remote_state']:
         tmp_dict = {
@@ -2030,20 +2035,20 @@ def parse_show_running_config(raw_result):
             if re_result:
                 if 'nameserver' not in result['interface']['mgmt'].keys():
                     result['interface']['mgmt']['nameserver'] =\
-                     re_result.group(1)
+                        re_result.group(1)
 
             # Match mgmt static ip
             re_result = re.match(stat_ip_re, line)
             if re_result:
                 if 'static' not in result['interface']['mgmt'].keys():
                     result['interface']['mgmt']['static'] =\
-                     re_result.group(1)
+                        re_result.group(1)
 
             # Match autonegotiation
             re_result = re.match(autoneg_re, line)
             if re_result:
                 result['interface'][port]['autonegotiation'] =\
-                 re_result.group(1)
+                    re_result.group(1)
 
             # Match ipv4
             re_result = re.match(ipv4_re, line)
@@ -3087,7 +3092,6 @@ def parse_show_startup_config(raw_result):
 
 
 def parse_show_tftp_server(raw_result):
-
     """
     Parse the 'show tftp-server' command raw output.
     :param str raw_result: vtysh raw result string.
@@ -3109,7 +3113,7 @@ def parse_show_tftp_server(raw_result):
         r'TFTP server\s*:\s+(?P<tftp_server>\S+)\s*'
         r'TFTP server secure mode\s*:\s+(?P<tftp_server_secure_mode>\S+)\s*'
         r'TFTP server file path\s*:\s+(?P<tftp_server_file_path>\S+)'
-        )
+    )
 
     re_result = re.match(show_tfpt_server_re, raw_result)
     assert re_result
@@ -3143,7 +3147,7 @@ def parse_config_tftp_server_enable(raw_result):
 
     enable_tfpt_server_re = (
         r'TFTP server is\s(?P<result>\S*)\s*'
-        )
+    )
 
     re_result = re.match(enable_tfpt_server_re, raw_result)
     assert re_result
@@ -3177,7 +3181,7 @@ def parse_config_tftp_server_no_enable(raw_result):
 
     enable_tfpt_server_re = (
         r'TFTP server is\s(?P<result>\S*)\s*'
-        )
+    )
 
     re_result = re.match(enable_tfpt_server_re, raw_result)
     assert re_result
@@ -3211,7 +3215,7 @@ def parse_config_tftp_server_path(raw_result):
 
     enable_tfpt_server_re = (
         r'TFTP server path is\s(?P<result>\S*)\s*'
-        )
+    )
 
     re_result = re.match(enable_tfpt_server_re, raw_result)
     assert re_result
@@ -3245,7 +3249,7 @@ def parse_config_tftp_server_no_path(raw_result):
 
     enable_tfpt_server_re = (
         r'TFTP server path is\s(?P<result>\S*)\s*'
-        )
+    )
 
     re_result = re.match(enable_tfpt_server_re, raw_result)
     assert re_result
