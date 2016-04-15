@@ -277,10 +277,11 @@ def parse_show_interface_subinterface(raw_result):
         r'\s*mcast:\s+(?P<tx_mcast_packets>\d+) packets,\s+'
         r'(?P<tx_mcast_bytes>\d+) bytes\s*'
     )
-    subint_list = raw_result.split("\n\n")
+    subint_list = raw_result.split("Interface")
     result = {}
     for subint in subint_list:
         if subint != "":
+            subint = "Interface{}".format(subint)
             re_result = re.match(show_re, subint)
             assert re_result
             subint_result = re_result.groupdict()
