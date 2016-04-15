@@ -591,13 +591,18 @@ def parse_show_lacp_interface(raw_result):
         r'(?P<local_system_id>([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2})?\s*\|'
         r'\s*(?P<remote_system_id>([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2})?\s+'
         r'System-priority\s*\|\s*(?P<local_system_priority>\d*)?\s*\|'
-        r'\s*(?P<remote_system_priority>\d*)?\s+'
+        r'\s*(?P<remote_system_priority>\d*)?\s*'
     )
 
     re_result = re.search(lacp_re, raw_result)
     assert re_result
 
     result = re_result.groupdict()
+
+    if result['local_system_id'] is None:
+        result['local_system_id'] = ''
+    if result['remote_system_id'] is None:
+        result['remote_system_id'] = ''
 
     for state in ['local_state', 'remote_state']:
         tmp_dict = {
