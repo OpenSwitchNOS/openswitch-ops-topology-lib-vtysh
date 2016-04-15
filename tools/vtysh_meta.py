@@ -682,6 +682,12 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Display SNMP host information of trap receivers.',
                 'arguments': [],
                 'returns': True
+            },
+            {
+                'command': 'diag-dump lacp basic',
+                'doc': 'Displays diagnostic information for LACP',
+                'arguments': [],
+                'returns': True
             }
 
         ]

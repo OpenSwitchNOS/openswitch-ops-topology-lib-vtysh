@@ -9445,6 +9445,29 @@ def show_snmp_trap(
     return parse_show_snmp_trap(result)
 
 
+def diag_dump_lacp_basic(
+        enode):
+    """
+    Diagnostic Information for LACP.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # diag-dump lacp basic
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_diag_dump_lacp_basic`
+    """
+
+    cmd = (
+        'diag-dump lacp basic'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_diag_dump_lacp_basic(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -9520,5 +9543,6 @@ __all__ = [
     'show_mirror',
     'show_snmp_community',
     'show_snmp_system',
-    'show_snmp_trap'
+    'show_snmp_trap',
+    'diag_dump_lacp_basic'
 ]
