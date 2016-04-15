@@ -8854,6 +8854,29 @@ def show_mirror(
     return parse_show_mirror(result)
 
 
+def diag_dump_lacp_basic(
+        enode):
+    """
+    Diagnostic Information for LACP.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # diag-dump lacp basic
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_diag_dump_lacp_basic`
+    """
+
+    cmd = (
+        'diag-dump lacp basic'
+    )
+    result = enode(cmd.format(**locals()), shell='vtysh')
+
+    return parse_diag_dump_lacp_basic(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -8925,5 +8948,6 @@ __all__ = [
     'show_startup_config',
     'show_tftp_server',
     'no_mirror_session',
-    'show_mirror'
+    'show_mirror',
+    'diag_dump_lacp_basic'
 ]

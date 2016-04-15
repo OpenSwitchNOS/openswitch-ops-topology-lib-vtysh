@@ -3800,6 +3800,255 @@ def parse_show_mirror(raw_result):
         return result
 
 
+def parse_diag_dump_lacp_basic(raw_result):
+    """
+    Parse the 'diag-dump lacp basic' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the getlacpinterfaces in a dictionary of the
+       form:
+
+     ::
+
+         {
+            'Interfaces':
+                {
+                    Return of parse_diag_dump_lacp_basic_interfaces
+                }
+            'Counters':
+                {
+                    Return of parse_diag_dump_lacp_basic_counters
+                }
+            'State':
+                {
+                    Return of parse_diag_dump_lacp_basic_counters
+                }
+        }
+    """
+    result_block = raw_result.split('\n\n')
+    result = {}
+    for block in result_block:
+        if block.split('\n')[0] == 'LAG interfaces: ':
+            result['Interfaces'] = parse_diag_dump_lacp_basic_interfaces(block)
+        elif block.split('\n')[0] == 'LACP PDUs counters: ':
+            block = '\n'.join(block.split('\n')[1:])
+            result['Counters'] = parse_diag_dump_lacp_basic_counters(block)
+        elif block.split('\n')[0] == 'LACP state: ':
+            block = '\n'.join(block.split('\n')[1:])
+            result['State'] = parse_diag_dump_lacp_basic_state(block)
+    return result
+
+
+def parse_diag_dump_lacp_basic_counters(raw_result):
+    """
+    Parse the 'diag-dump lacp basic' command raw output related to LACP
+    counters.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the getlacpcounters in a dictionary of the
+             form:
+
+     ::
+
+         {
+            'lag':
+                {'interface':
+                    {'lacp_pdus_sent': 0,
+                    'marker_response_pdus_sent': 0,
+                    'lacp_pdus_received' : 0,
+                    'marker_pdus_received' : 0},
+                'interface':
+                    {'lacp_pdus_sent': 0,
+                    'marker_response_pdus_sent': 0,
+                    'lacp_pdus_received' : 0,
+                    'marker_pdus_received' : 0},
+                }
+        }
+    """
+
+    getlacpcounters_re = (
+        r'Interface: (?P<interface>\d+)\s*'
+        r'lacp_pdus_sent: (?P<lacp_pdus_sent>\d+)\s*'
+        r'marker_response_pdus_sent: (?P<marker_response_pdus_sent>\d+)\s*'
+        r'lacp_pdus_received: (?P<lacp_pdus_received>\d+)\s*'
+        r'marker_pdus_received: (?P<marker_pdus_received>\d+)\s*'
+    )
+
+    result = {}
+    result_interface = {}
+
+    lag_block = raw_result.split('LAG lag')
+    for block in lag_block:
+        lag_id = block.split(':\n')[0]
+        if lag_id:
+            for re_partial in re.finditer(getlacpcounters_re, block):
+                interface = re_partial.groupdict()
+                interface_number = interface['interface']
+                del interface['interface']
+                for key, value in interface.items():
+                    if value is None:
+                        interface[key] = 0
+                    elif value.isdigit():
+                        interface[key] = int(value)
+                result_interface[interface_number] = interface
+            result[lag_id] = result_interface
+            result_interface = {}
+    return result
+
+
+def parse_diag_dump_lacp_basic_state(raw_result):
+    """
+    Parse the 'diag-dump lacp basic' command raw output related to LACP
+    state.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the getlacpstate in a dictionary of the
+             form:
+
+     ::
+
+         {
+            'lag':
+                {'interface':
+                    { 'actor_oper_port_state':
+                        {'lacp_activity': 0,
+                        'time_out': 0,
+                        'aggregation' : 0,
+                        'sync' : 0
+                        'collecting': 0,
+                        'distributing' : 0,
+                        'defaulted' : 0,
+                        'expired' : 0},
+                    'partner_oper_port_state':
+                        {'lacp_activity': 0,
+                        'time_out': 0,
+                        'aggregation' : 0,
+                        'sync' : 0
+                        'collecting': 0,
+                        'distributing' : 0,
+                        'defaulted' : 0,
+                        'expired' : 0},
+                    'lacp_control':
+                        {'begin': 0,
+                        'actor_churn': 0,
+                        'partner_churn' : 0,
+                        'ready_n' : 0
+                        'selected': 0,
+                        'port_moved' : 0,
+                        'ntt' : 0,
+                        'port_enabled' : 0},
+                    }
+                }
+        }
+    """
+
+    getlacpstate_actor_re = (
+        r'Interface: (?P<interface>\d+)\s*'
+        r'actor_oper_port_state\s*'
+        r'lacp_activity:(?P<a_lacp_activity>\S+) time_out:(?P<a_time_out>' +
+        '\S+) aggregation:(?P<a_aggregation>\S+) sync:(?P<a_sync>\S+) ' +
+        'collecting:(?P<a_collecting>\S+) distributing:(?P<a_distributing>' +
+        '\S+) defaulted:(?P<a_defaulted>\S+) expired:(?P<a_expired>\S+)\s+'
+        r'partner_oper_port_state\s*'
+        r'lacp_activity:(?P<p_lacp_activity>\S+) time_out:(?P<p_time_out>' +
+        '\S+) aggregation:(?P<p_aggregation>\S+) sync:(?P<p_sync>\S+) ' +
+        'collecting:(?P<p_collecting>\S+) distributing:(?P<p_distributing>' +
+        '\S+) defaulted:(?P<p_defaulted>\S+) expired:(?P<p_expired>\S+)\s+'
+        r'lacp_control\s*'
+        r'begin:(?P<begin>\S+) actor_churn:(?P<actor_churn>\S+) ' +
+        'partner_churn:(?P<partner_churn>\S+) ready_n:(?P<ready_n>\S+) ' +
+        'selected:(?P<selected>\S+) port_moved:(?P<port_moved>\S+) ' +
+        'ntt:(?P<ntt>\S+) port_enabled:(?P<port_enabled>\S+)\s'
+    )
+    actor_data_keys = ['a_lacp_activity', 'a_time_out', 'a_aggregation',
+                       'a_sync', 'a_collecting', 'a_distributing',
+                       'a_defaulted', 'a_expired']
+    partner_data_keys = ['p_lacp_activity', 'p_time_out', 'p_aggregation',
+                         'p_sync', 'p_collecting', 'p_distributing',
+                         'p_defaulted', 'p_expired']
+    lacp_control_keys = ['begin', 'actor_churn', 'partner_churn', 'ready_n',
+                         'selected', 'port_moved', 'ntt', 'port_enabled']
+    result = {}
+    actor_dict = {}
+    partner_dict = {}
+    lacp_control_dict = {}
+    interface_data_dict = {}
+    interface_dict = {}
+
+    lag_block = raw_result.split('LAG lag')
+    for block in lag_block:
+        lag_id = block.split(':\n')[0]
+        if lag_id:
+            for re_partial in re.finditer(getlacpstate_actor_re, block):
+                interface_data = re_partial.groupdict()
+                for key, value in interface_data.items():
+                    if value.isdigit():
+                        interface_data[key] = int(value)
+                for key_actor, key_partner, key_lacp_control in\
+                        zip(actor_data_keys, partner_data_keys,
+                            lacp_control_keys):
+                        actor_dict[key_actor[2:]] = interface_data[key_actor]
+                        partner_dict[key_partner[2:]] =\
+                            interface_data[key_partner]
+                        lacp_control_dict[key_lacp_control] =\
+                            interface_data[key_lacp_control]
+                interface_data_dict['actor_oper_port_state'] = actor_dict
+                interface_data_dict['partner_oper_port_state'] = partner_dict
+                interface_data_dict['lacp_control'] = lacp_control_dict
+                actor_dict = {}
+                partner_dict = {}
+                lacp_control_dict = {}
+                interface_dict[interface_data['interface']] =\
+                    interface_data_dict
+                interface_data_dict = {}
+            result[lag_id] = interface_dict
+            interface_dict = {}
+    return result
+
+
+def parse_diag_dump_lacp_basic_interfaces(raw_result):
+    """
+    Parse the 'diag-dump lacp basic' command raw output related to LACP
+    interfaces.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the getlacpinterfaces in a dictionary of the
+             form:
+
+     ::
+
+         {
+            'lag':
+                {'configured_members': [1, 2],
+                 'eligible_members': [1, 2],
+                 'participant_members': [1, 2],
+                }
+        }
+    """
+
+    getlacpcounters_re = (
+        r'Port lag(?P<lag_number>\d+):\s*'
+        r'configured_members\s+:[ ]?(?P<configured_interfaces>[\w \-]*)\s*'
+        r'eligible_members\s+:[ ]?(?P<eligible_interfaces>[\w \-]*)\s*'
+        r'participant_members\s+:[ ]?(?P<participant_interfaces>[\w \-]*)\s*'
+    )
+    result = {}
+
+    for re_partial in re.finditer(getlacpcounters_re, raw_result):
+        lag = re_partial.groupdict()
+        lag_id = lag['lag_number']
+        del lag['lag_number']
+        lag['configured_interfaces'] = lag['configured_interfaces'].split()
+        lag['eligible_interfaces'] = lag['eligible_interfaces'].split()
+        lag['participant_interfaces'] = lag['participant_interfaces'].split()
+        result[lag_id] = lag
+    return result
+
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
@@ -3830,5 +4079,5 @@ __all__ = [
     'parse_show_tftp_server', 'parse_config_tftp_server_enable',
     'parse_config_tftp_server_no_enable', 'parse_config_tftp_server_path',
     'parse_config_tftp_server_no_path', 'parse_show_interface_lag',
-    'parse_show_mirror'
+    'parse_show_mirror', 'parse_diag_dump_lacp_basic'
 ]
