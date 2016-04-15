@@ -523,6 +523,7 @@ Interface 2.2 is up.
             mcast: 0 packets, 0 bytes
 
 Interface 2.1 is up.
+
  Admin state is down
  Parent interface is 2
  Encapsulation dot1Q 101
