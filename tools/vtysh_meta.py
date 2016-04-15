@@ -535,6 +535,12 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
+                'command': 'show interface loopback brief',
+                'doc': 'Display information for L3 loopback interfaces',
+                'arguments': [],
+                'returns': True
+            },
+            {
                 'command': 'show vlog config daemon {daemon_name}',
                 'doc': 'Display vlog config for ops-daemons.',
                 'arguments': [
@@ -3617,6 +3623,12 @@ VTYSH_EXCEPTIONS_SPEC = OrderedDict([
         'NotValidLAG',
         [
             'Specified LAG port does not exist.',
+        ]
+    ), (
+        'DuplicateLoopbackIPException',
+        [
+            'IP address is already assigned to interface. [A-Za-z0-9]+\
+             as primary.',
         ]
     )
 ])

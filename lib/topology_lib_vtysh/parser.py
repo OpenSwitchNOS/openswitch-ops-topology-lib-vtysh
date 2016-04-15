@@ -433,7 +433,6 @@ def parse_show_interface_loopback(raw_result):
     loopback_list = []
     show_loopback_id = re.compile('lo[0-9]+', re.DOTALL)
     loopback_list = show_loopback_id.findall(raw_result)
-    print(loopback_list)
     if loopback_list:
         looplist = re.split(r'Interface lo[0-9]+', raw_result)
         looplist.remove(looplist[0])
@@ -464,6 +463,60 @@ def parse_show_interface_loopback(raw_result):
                 result[loopback_id]['ipv6_address'] = loopback_ipv6
             else:
                 result[loopback_id]['ipv6_address'] = None
+    return result
+
+
+def parse_show_interface_loopback_brief(raw_result):
+    """
+    Parse the 'show interface loopback brief' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show interface loopback brief \
+        command in a list of dictionaries of the form:
+     ::
+
+      [
+       {
+         'ports': '',
+         'speed': '--',
+         'mode': 'routed',
+         'reason': 'auto',
+         'vlan': '--',
+         'type': 'loopback',
+         'loopback_int': 'lo4',
+         'status': 'up'
+       },
+
+       {
+         'ports': '',
+         'speed': '--',
+         'mode': 'routed',
+         'reason': 'auto',
+         'vlan': '--',
+         'type': 'loopback',
+         'loopback_int': 'lo1024',
+         'status': 'up'
+       }
+      ]
+
+    """
+    result = {}
+    loopback_re = (
+        r'(?P<loopback_int>\S+)\s+(?P<vlan>--)\s+(?P<type>loopback)\s+'
+        r'(?P<mode>routed)\s+(?P<status>up)\s+'
+        r'(?P<reason>auto)\s*(?P<speed>--)?\s*(?P<ports>.*)'
+    )
+
+    result = []
+    for line in raw_result.splitlines():
+        re_result = re.search(loopback_re, line)
+        if re_result:
+            loopback_match = re_result.groupdict()
+            for key, value in loopback_match.items():
+                if value and value.isdigit():
+                    loopback_match[key] = int(value)
+            result.append(loopback_match)
     return result
 
 
@@ -3815,8 +3868,9 @@ __all__ = [
     'parse_show_vlog_config_daemon', 'parse_show_vlog_config_list',
     'parse_show_vlog_daemon', 'parse_show_vlog_severity',
     'parse_show_vlog_daemon_severity', 'parse_show_vlog_severity_daemon',
-    'parse_show_vlog', 'parse_ping', 'parse_ping6',
+    'parse_ping', 'parse_ping6',
     'parse_traceroute', 'parse_traceroute6',
+    'parse_show_vlog', 'parse_show_interface_loopback_brief',
     'parse_show_ip_ospf_neighbor_detail', 'parse_show_ip_ospf_interface',
     'parse_show_ip_ospf', 'parse_show_ip_ospf_neighbor',
     'parse_show_startup_config',
