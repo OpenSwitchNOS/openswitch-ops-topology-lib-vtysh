@@ -56,6 +56,7 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_sflow_interface,
                                        parse_show_sftp_server,
                                        parse_show_interface_loopback,
+                                       parse_show_interface_loopback_brief,
                                        parse_show_vlog_config,
                                        parse_show_vlog_config_feature,
                                        parse_show_vlog_config_daemon,
@@ -2832,6 +2833,45 @@ def test_parse_show_mirror():
         'output_packets': 123456789,
         'output_bytes': 8912345678
     }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_interface_loopback_brief():
+    raw_result = """\
+--------------------------------------------------------------------------------
+Ethernet      VLAN       Type       Mode     Status      Reason       Speed    Port
+Interface                                                           (Mb/s)   Ch#
+--------------------------------------------------------------------------------
+
+lo4         --        loopback     routed       up       auto      --
+lo1024      --        loopback     routed       up       auto      --
+     """  # noqa
+
+    result = parse_show_interface_loopback_brief(raw_result)
+    expected = [
+        {
+            'ports': '',
+            'speed': '--',
+            'mode': 'routed',
+            'reason': 'auto',
+            'vlan': '--',
+            'type': 'loopback',
+            'loopback_int': 'lo4',
+            'status': 'up'
+        },
+        {
+            'ports': '',
+            'speed': '--',
+            'mode': 'routed',
+            'reason': 'auto',
+            'vlan': '--',
+            'type': 'loopback',
+            'loopback_int': 'lo1024',
+            'status': 'up'
+        }
+    ]
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff
