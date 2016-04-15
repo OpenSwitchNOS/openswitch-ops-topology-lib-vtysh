@@ -332,7 +332,7 @@ VTYSH_SPEC = OrderedDict([
                 'arguments': [
                     {
                         'name': 'sub_command',
-                        'doc':  'sub command'
+                        'doc': 'sub command'
                     }
                 ],
                 'returns': True
@@ -347,6 +347,12 @@ VTYSH_SPEC = OrderedDict([
                         'optional': True
                     }
                 ],
+                'returns': True
+            },
+            {
+                'command': 'show interface loopback brief',
+                'doc': 'Display information for L3 loopback interfaces',
+                'arguments': [],
                 'returns': True
             },
             {
@@ -2845,16 +2851,16 @@ VTYSH_SPEC = OrderedDict([
             'commands': [
                 {
                     'command': (
-                               'range {range_name} start-ip-address {start_ip}'
-                               ' end-ip-address {end_ip}'
-                               ),
+                        'range {range_name} start-ip-address {start_ip}'
+                        ' end-ip-address {end_ip}'
+                    ),
                     'doc': 'Sets DHCP dynamic configuration.',
                     'arguments': [
                         {
                             'name': 'range_name',
                             'doc': (
-                                   'DHCP range name. '
-                                   'String of maximum length 15 chars'
+                                'DHCP range name. '
+                                'String of maximum length 15 chars'
                             ),
                         },
                         {
@@ -2923,10 +2929,10 @@ VTYSH_SPEC = OrderedDict([
                 },
                 {
                     'command': (
-                                'no range {range_name} '
-                                'start-ip-address {start_ip} '
-                                'end-ip-address {end_ip} '
-                               ),
+                        'no range {range_name} '
+                        'start-ip-address {start_ip} '
+                        'end-ip-address {end_ip} '
+                    ),
                     'doc': 'Removes DHCP dynamic configuration.',
                     'arguments': [
                         {
@@ -3002,8 +3008,8 @@ VTYSH_SPEC = OrderedDict([
                 },
                 {
                     'command': (
-                                'static {ip_address}'
-                               ),
+                        'static {ip_address}'
+                    ),
                     'doc': 'Sets DHCP dynamic configuration.',
                     'arguments': [
                         {
@@ -3063,8 +3069,8 @@ VTYSH_SPEC = OrderedDict([
                 },
                 {
                     'command': (
-                                'no static {ip_address}'
-                               ),
+                        'no static {ip_address}'
+                    ),
                     'doc': 'Removes DHCP dynamic configuration.',
                     'arguments': [
                         {
@@ -3124,8 +3130,8 @@ VTYSH_SPEC = OrderedDict([
                 },
                 {
                     'command': (
-                                'option set'
-                               ),
+                        'option set'
+                    ),
                     'doc': (
                         'Sets DHCP configuration values using an option name.'
                     ),
@@ -3168,12 +3174,12 @@ VTYSH_SPEC = OrderedDict([
                 },
                 {
                     'command': (
-                               'no option set'
-                               ),
+                        'no option set'
+                    ),
                     'doc': (
-                            'Removes DHCP configuration '
-                            'values using an option name.'
-                           ),
+                        'Removes DHCP configuration '
+                        'values using an option name.'
+                    ),
                     'arguments': [
                         {
                             'name': 'set_name',
@@ -3213,8 +3219,8 @@ VTYSH_SPEC = OrderedDict([
                 },
                 {
                     'command': (
-                                'match set tag {tag_name}'
-                               ),
+                        'match set tag {tag_name}'
+                    ),
                     'doc': (
                         'Sets DHCP match configuration using an option name.'
                     ),
@@ -3254,12 +3260,12 @@ VTYSH_SPEC = OrderedDict([
                 },
                 {
                     'command': (
-                                'no match set tag {tag_name}'
-                               ),
+                        'no match set tag {tag_name}'
+                    ),
                     'doc': (
-                            'Removes DHCP match configuration '
-                            'using an option name.'
-                            ),
+                        'Removes DHCP match configuration '
+                        'using an option name.'
+                    ),
                     'arguments': [
                         {
                             'name': 'tag_name',
@@ -3432,6 +3438,12 @@ VTYSH_EXCEPTIONS_SPEC = OrderedDict([
         'NotValidLAG',
         [
             'Specified LAG port does not exist.',
+        ]
+    ), (
+        'DuplicateLoopbackIPException',
+        [
+            'IP address is already assigned to interface. [A-Za-z0-9]+\
+             as primary.',
         ]
     )
 ])

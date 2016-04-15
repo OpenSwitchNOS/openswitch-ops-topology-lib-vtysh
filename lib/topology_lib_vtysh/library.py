@@ -8232,6 +8232,33 @@ def show_interface_loopback(
     return parse_show_interface_loopback(result)
 
 
+def show_interface_loopback_brief(
+        enode):
+    """
+    Display information for L3 loopback interfaces
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show interface loopback brief
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_interface_loopback_brief`
+    """
+
+    cmd = [
+        'show interface loopback brief'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_interface_loopback_brief(result)
+
+
 def show_vlog_config_daemon(
         enode, daemon_name):
     """
@@ -8627,6 +8654,7 @@ __all__ = [
     'show_vlog_config',
     'show_vlog',
     'show_interface_loopback',
+    'show_interface_loopback_brief',
     'show_vlog_config_daemon',
     'show_vlog_config_feature',
     'show_vlog_config_list',
