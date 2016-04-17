@@ -252,6 +252,9 @@ Interface 7 is down (Administratively down)
  Hardware: Ethernet, MAC Address: 70:72:cf:d7:d3:dd
  MTU 0
  Half-duplex
+ qos trust none
+ qos queue-profile default
+ qos schedule-profile default
  Speed 0 Mb/s
  Auto-Negotiation is turned on
  Input flow-control is off, output flow-control is off
@@ -279,6 +282,9 @@ Interface 7 is down (Administratively down)
         'mtu': 0,
         'output_flow_control': False,
         'port': 7,
+        'qos_trust': 'none',
+        'qos_queue_profile': 'default',
+        'qos_schedule_profile': 'default',
         'rx_crc_fcs': 0,
         'rx_dropped': 0,
         'rx_bytes': 0,
@@ -316,6 +322,9 @@ Interface 1 is up
  IPv4 address 20.1.1.2/30
  MTU 0
  Full-duplex
+ qos trust none
+ qos queue-profile default
+ qos schedule-profile default
  Speed 1000 Mb/s
  Auto-Negotiation is turned on
  Input flow-control is off, output flow-control is off
@@ -342,6 +351,9 @@ Interface 1 is up
         'mtu': 0,
         'output_flow_control': False,
         'port': 1,
+        'qos_trust': 'none',
+        'qos_queue_profile': 'default',
+        'qos_schedule_profile': 'default',
         'rx_crc_fcs': 0,
         'rx_dropped': 0,
         'rx_bytes': 0,
@@ -379,6 +391,9 @@ Interface 1 is up
  IPv6 address 2002::1/64
  MTU 0
  Full-duplex
+ qos trust none
+ qos queue-profile default
+ qos schedule-profile default
  Speed 1000 Mb/s
  Auto-Negotiation is turned on
  Input flow-control is off, output flow-control is off
@@ -405,6 +420,9 @@ Interface 1 is up
         'mtu': 0,
         'output_flow_control': False,
         'port': 1,
+        'qos_trust': 'none',
+        'qos_queue_profile': 'default',
+        'qos_schedule_profile': 'default',
         'rx_crc_fcs': 0,
         'rx_dropped': 0,
         'rx_bytes': 0,
@@ -442,6 +460,9 @@ Interface 1 is up
  IPv6 address 2002::1/64
  MTU 0
  Full-duplex
+ qos trust none
+ qos queue-profile default
+ qos schedule-profile default
  Speed 1000 Mb/s
  Auto-Negotiation is turned on
  Input flow-control is off, output flow-control is off
@@ -474,6 +495,9 @@ Interface 1 is up
         'mtu': 0,
         'output_flow_control': False,
         'port': 1,
+        'qos_trust': 'none',
+        'qos_queue_profile': 'default',
+        'qos_schedule_profile': 'default',
         'rx_crc_fcs': 0,
         'rx_dropped': 0,
         'rx_bytes': 0,
