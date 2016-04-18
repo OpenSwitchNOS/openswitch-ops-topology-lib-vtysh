@@ -657,6 +657,7 @@ Aggregate-name lag1
         'lag_name': 'lag1',
         'aggregated_interfaces': '2 1',
         'agg_key': 1,
+        'agg_mode': None,
         'ipv4': '10.1.1.1/24',
         'ipv4_secondary': '10.1.1.2/24',
         'ipv6': '2001::1/12',
