@@ -257,6 +257,267 @@ Interface 7 is down (Administratively down)
  Hardware: Ethernet, MAC Address: 70:72:cf:d7:d3:dd
  MTU 0
  Half-duplex
+ Speed 0 Mb/s
+ Auto-Negotiation is turned on
+ Input flow-control is off, output flow-control is off
+ RX
+            0 input packets              0 bytes
+            0 input error                0 dropped
+            0 CRC/FCS
+ TX
+            0 output packets             0 bytes
+            0 input error                0 dropped
+            0 collision
+
+    """
+
+    result = parse_show_interface(raw_result)
+
+    expected = {
+        'admin_state': 'down',
+        'autonegotiation': True,
+        'conection_type': 'Half-duplex',
+        'hardware': 'Ethernet',
+        'input_flow_control': False,
+        'interface_state': 'down',
+        'mac_address': '70:72:cf:d7:d3:dd',
+        'mtu': 0,
+        'output_flow_control': False,
+        'port': 7,
+        'rx_crc_fcs': 0,
+        'rx_dropped': 0,
+        'rx_bytes': 0,
+        'rx_error': 0,
+        'rx_packets': 0,
+        'rx_l3_ucast_packets': None,
+        'rx_l3_ucast_bytes': None,
+        'rx_l3_mcast_packets': None,
+        'rx_l3_mcast_bytes': None,
+        'speed': 0,
+        'speed_unit': 'Mb/s',
+        'state_description': 'Administratively down',
+        'state_information': 'admin_down',
+        'tx_bytes': 0,
+        'tx_collisions': 0,
+        'tx_dropped': 0,
+        'tx_errors': 0,
+        'tx_packets': 0,
+        'tx_l3_ucast_packets': None,
+        'tx_l3_ucast_bytes': None,
+        'tx_l3_mcast_packets': None,
+        'tx_l3_mcast_bytes': None,
+        'ipv4': None,
+        'ipv6': None
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+    raw_result2 = """\
+
+Interface 1 is up
+ Admin state is up
+ Hardware: Ethernet, MAC Address: 70:72:cf:75:25:70
+ IPv4 address 20.1.1.2/30
+ MTU 0
+ Full-duplex
+ Speed 1000 Mb/s
+ Auto-Negotiation is turned on
+ Input flow-control is off, output flow-control is off
+ RX
+            0 input packets              0 bytes
+            0 input error                0 dropped
+            0 CRC/FCS
+ TX
+            0 output packets             0 bytes
+            0 input error                0 dropped
+            0 collision
+    """
+
+    result2 = parse_show_interface(raw_result2)
+
+    expected2 = {
+        'admin_state': 'up',
+        'autonegotiation': True,
+        'conection_type': 'Full-duplex',
+        'hardware': 'Ethernet',
+        'input_flow_control': False,
+        'interface_state': 'up',
+        'mac_address': '70:72:cf:75:25:70',
+        'mtu': 0,
+        'output_flow_control': False,
+        'port': 1,
+        'rx_crc_fcs': 0,
+        'rx_dropped': 0,
+        'rx_bytes': 0,
+        'rx_error': 0,
+        'rx_packets': 0,
+        'rx_l3_ucast_packets': None,
+        'rx_l3_ucast_bytes': None,
+        'rx_l3_mcast_packets': None,
+        'rx_l3_mcast_bytes': None,
+        'speed': 1000,
+        'speed_unit': 'Mb/s',
+        'state_description': None,
+        'state_information': None,
+        'tx_bytes': 0,
+        'tx_collisions': 0,
+        'tx_dropped': 0,
+        'tx_errors': 0,
+        'tx_packets': 0,
+        'tx_l3_ucast_packets': None,
+        'tx_l3_ucast_bytes': None,
+        'tx_l3_mcast_packets': None,
+        'tx_l3_mcast_bytes': None,
+        'ipv4': '20.1.1.2/30',
+        'ipv6': None
+    }
+
+    ddiff2 = DeepDiff(result2, expected2)
+    assert not ddiff2
+
+    raw_result3 = """\
+
+Interface 1 is up
+ Admin state is up
+ Hardware: Ethernet, MAC Address: 70:72:cf:75:25:70
+ IPv6 address 2002::1/64
+ MTU 0
+ Full-duplex
+ Speed 1000 Mb/s
+ Auto-Negotiation is turned on
+ Input flow-control is off, output flow-control is off
+ RX
+            0 input packets              0 bytes
+            0 input error                0 dropped
+            0 CRC/FCS
+ TX
+            0 output packets             0 bytes
+            0 input error                0 dropped
+            0 collision
+    """
+
+    result3 = parse_show_interface(raw_result3)
+
+    expected3 = {
+        'admin_state': 'up',
+        'autonegotiation': True,
+        'conection_type': 'Full-duplex',
+        'hardware': 'Ethernet',
+        'input_flow_control': False,
+        'interface_state': 'up',
+        'mac_address': '70:72:cf:75:25:70',
+        'mtu': 0,
+        'output_flow_control': False,
+        'port': 1,
+        'rx_crc_fcs': 0,
+        'rx_dropped': 0,
+        'rx_bytes': 0,
+        'rx_error': 0,
+        'rx_packets': 0,
+        'rx_l3_ucast_packets': None,
+        'rx_l3_ucast_bytes': None,
+        'rx_l3_mcast_packets': None,
+        'rx_l3_mcast_bytes': None,
+        'speed': 1000,
+        'speed_unit': 'Mb/s',
+        'state_description': None,
+        'state_information': None,
+        'tx_bytes': 0,
+        'tx_collisions': 0,
+        'tx_dropped': 0,
+        'tx_errors': 0,
+        'tx_packets': 0,
+        'tx_l3_ucast_packets': None,
+        'tx_l3_ucast_bytes': None,
+        'tx_l3_mcast_packets': None,
+        'tx_l3_mcast_bytes': None,
+        'ipv4': None,
+        'ipv6': '2002::1/64'
+    }
+
+    ddiff3 = DeepDiff(result3, expected3)
+    assert not ddiff3
+
+    raw_result4 = """\
+
+Interface 1 is up
+ Admin state is up
+ Hardware: Ethernet, MAC Address: 70:72:cf:75:25:70
+ IPv6 address 2002::1/64
+ MTU 0
+ Full-duplex
+ Speed 1000 Mb/s
+ Auto-Negotiation is turned on
+ Input flow-control is off, output flow-control is off
+ RX
+            0 input packets              0 bytes
+            0 input error                0 dropped
+            0 CRC/FCS
+       L3:
+            ucast: 0 packets, 0 bytes
+            mcast: 0 packets, 0 bytes
+ TX
+            0 output packets             0 bytes
+            0 input error                0 dropped
+            0 collision
+       L3:
+            ucast: 0 packets, 0 bytes
+            mcast: 0 packets, 0 bytes
+    """
+
+    result4 = parse_show_interface(raw_result4)
+
+    expected4 = {
+        'admin_state': 'up',
+        'autonegotiation': True,
+        'conection_type': 'Full-duplex',
+        'hardware': 'Ethernet',
+        'input_flow_control': False,
+        'interface_state': 'up',
+        'mac_address': '70:72:cf:75:25:70',
+        'mtu': 0,
+        'output_flow_control': False,
+        'port': 1,
+        'rx_crc_fcs': 0,
+        'rx_dropped': 0,
+        'rx_bytes': 0,
+        'rx_error': 0,
+        'rx_packets': 0,
+        'rx_l3_ucast_packets': 0,
+        'rx_l3_ucast_bytes': 0,
+        'rx_l3_mcast_packets': 0,
+        'rx_l3_mcast_bytes': 0,
+        'speed': 1000,
+        'speed_unit': 'Mb/s',
+        'state_description': None,
+        'state_information': None,
+        'tx_bytes': 0,
+        'tx_collisions': 0,
+        'tx_dropped': 0,
+        'tx_errors': 0,
+        'tx_packets': 0,
+        'tx_l3_ucast_packets': 0,
+        'tx_l3_ucast_bytes': 0,
+        'tx_l3_mcast_packets': 0,
+        'tx_l3_mcast_bytes': 0,
+        'ipv4': None,
+        'ipv6': '2002::1/64'
+    }
+
+    ddiff4 = DeepDiff(result4, expected4)
+    assert not ddiff4
+
+
+def test_parse_show_interface_qos():
+    raw_result = """\
+
+Interface 7 is down (Administratively down)
+ Admin state is down
+ State information: admin_down
+ Hardware: Ethernet, MAC Address: 70:72:cf:d7:d3:dd
+ MTU 0
+ Half-duplex
  qos trust none
  qos queue-profile default
  qos schedule-profile default
