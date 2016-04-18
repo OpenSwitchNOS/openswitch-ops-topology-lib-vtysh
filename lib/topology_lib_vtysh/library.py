@@ -885,6 +885,31 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def no_router_ospf(
+            self):
+        """
+        Removes the OSPF Router
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no router ospf
+
+        """
+
+        cmd = [
+            'no router ospf'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def ip_ecmp_disable(
             self):
         """
@@ -2201,6 +2226,185 @@ class ConfigInterface(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def ip_ospf_authentication_message_digest(
+            self):
+        """
+        Configure OSPF MD5 authentication
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip ospf authentication message-digest
+
+        """
+
+        cmd = [
+            'ip ospf authentication message-digest'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ip_ospf_authentication(
+            self):
+        """
+        Configure OSPF text authentication
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip ospf authentication
+
+        """
+
+        cmd = [
+            'ip ospf authentication'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ip_ospf_authentication(
+            self):
+        """
+        Remove OSPF text authentication
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ip ospf authentication
+
+        """
+
+        cmd = [
+            'no ip ospf authentication'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ip_ospf_message_digest_key_md5(
+            self, key_id, password_key):
+        """
+        Configuring MD5 authentication with encryption
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip ospf message-digest-key {key_id} md5 {password_key}
+
+        :param key_id: <1-255> key_id range
+        :param password_key: OSPF password key
+        """
+
+        cmd = [
+            'ip ospf message-digest-key {key_id} md5 {password_key}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ip_ospf_message_digest_key(
+            self, key_id):
+        """
+        Removing MD5 authentication with encryption
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ip ospf message-digest-key {key_id}
+
+        :param key_id: <1-255> key_id range
+        """
+
+        cmd = [
+            'no ip ospf message-digest-key {key_id}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ip_ospf_authentication_key(
+            self, auth_key):
+        """
+        Configuring text authentication with encryption
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip ospf authentication-key {auth_key}
+
+        :param auth_key: Text authentication Authorization key
+        """
+
+        cmd = [
+            'ip ospf authentication-key {auth_key}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ip_ospf_authentication_key(
+            self):
+        """
+        Removing text authentication with encryption
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ip ospf authentication-key
+
+        """
+
+        cmd = [
+            'no ip ospf authentication-key'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def routing(
             self):
         """
@@ -2570,11 +2774,37 @@ class ConfigInterface(ContextManager):
 
             # ip ospf hello-interval {hello_timer}
 
-        :param hello_timer: <1-65535>  hello_timer range
+        :param hello_timer: <10-30>  hello interval range
         """
 
         cmd = [
             'ip ospf hello-interval {hello_timer}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ip_ospf_priority(
+            self, ospf_priority):
+        """
+        Configure ospf priority
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip ospf priority {ospf_priority}
+
+        :param ospf_priority: <0-255>  . The range is 0 to 255
+        """
+
+        cmd = [
+            'ip ospf priority {ospf_priority}'
         ]
 
         result = self.enode(
@@ -4774,21 +5004,298 @@ class ConfigRouterOspf(ContextManager):
             raise determine_exception(result)(result)
 
     def no_router_id(
-            self, id):
+            self):
         """
-        Specifies the OSPF router-ID for a OSPF Router
+        unconfigure router-ID for a OSPF Router
 
         This function runs the following vtysh command:
 
         ::
 
-            # no router-id {id}
+            # no router-id
 
-        :param id: <A.B.C.D> IPv4 address
         """
 
         cmd = [
-            'no router-id {id}'
+            'no router-id'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def redistribute_static(
+            self):
+        """
+        Redistributes the static routes in router
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # redistribute static
+
+        """
+
+        cmd = [
+            'redistribute static'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_redistribute_static(
+            self):
+        """
+        Removes redistributed the static routes in router
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no redistribute static
+
+        """
+
+        cmd = [
+            'no redistribute static'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def redistribute_connected(
+            self):
+        """
+        Redistributes the connected routes in router
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # redistribute connected
+
+        """
+
+        cmd = [
+            'redistribute connected'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_redistribute_connected(
+            self):
+        """
+        Removes redistributed the connected routes in router
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no redistribute connected
+
+        """
+
+        cmd = [
+            'no redistribute connected'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def redistribute_bgp(
+            self):
+        """
+        Redistributes the routes learned from BGP
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # redistribute bgp
+
+        """
+
+        cmd = [
+            'redistribute bgp'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_redistribute_bgp(
+            self):
+        """
+        Removes redistributed the routes learned from BGP
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no redistribute bgp
+
+        """
+
+        cmd = [
+            'no redistribute bgp'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def default_information_originate_always(
+            self):
+        """
+        Redistributes default routes in router
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # default-information originate always
+
+        """
+
+        cmd = [
+            'default-information originate always'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_default_information_originate_always(
+            self):
+        """
+        Remove redistributed default routes in router
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no default-information originate always
+
+        """
+
+        cmd = [
+            'no default-information originate always'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def area_authentication_message_digest(
+            self, area_id):
+        """
+        Configures MD5 authentication over area
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # area {area_id} authentication message-digest
+
+        :param area_id: <0-4294967295> area range
+        """
+
+        cmd = [
+            'area {area_id} authentication message-digest'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def area_authentication(
+            self, area_id):
+        """
+        Configures text authentication over area
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # area {area_id} authentication
+
+        :param area_id: <0-4294967295> area range
+        """
+
+        cmd = [
+            'area {area_id} authentication'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_area_authentication(
+            self, area_id):
+        """
+        Removes authentication over area
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no area {area_id} authentication
+
+        :param area_id: <0-4294967295> area range
+        """
+
+        cmd = [
+            'no area {area_id} authentication'
         ]
 
         result = self.enode(
@@ -4814,6 +5321,136 @@ class ConfigRouterOspf(ContextManager):
 
         cmd = [
             'max-metric router-lsa'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def max_metric_router_lsa_on_startup(
+            self, time):
+        """
+        Configures the router as stub router on startup
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # max-metric router-lsa on-startup {time}
+
+        :param time: <5-86400> seconds
+        """
+
+        cmd = [
+            'max-metric router-lsa on-startup {time}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def area_nssa(
+            self, area_id):
+        """
+        Configures area as NSSA
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # area {area_id} nssa
+
+        :param area_id: <0-4294967295> area range
+        """
+
+        cmd = [
+            'area {area_id} nssa'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def area_nssa_no_summary(
+            self, area_id):
+        """
+        Configures area as NSSA (Totally stubby)
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # area {area_id} nssa no-summary
+
+        :param area_id: <0-4294967295> area range
+        """
+
+        cmd = [
+            'area {area_id} nssa no-summary'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def area_stub(
+            self, area_id):
+        """
+        Configures area as stubby
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # area {area_id} stub
+
+        :param area_id: <0-4294967295> area range
+        """
+
+        cmd = [
+            'area {area_id} stub'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def area_stub_no_summary(
+            self, area_id):
+        """
+        Configures area as Totally stubby
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # area {area_id} stub no-summary
+
+        :param area_id: <0-4294967295> area range
+        """
+
+        cmd = [
+            'area {area_id} stub no-summary'
         ]
 
         result = self.enode(
