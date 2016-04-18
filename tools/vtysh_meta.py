@@ -1076,6 +1076,11 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
+                'command': 'no router ospf',
+                'doc': 'Removes the OSPF Router',
+                'arguments': [],
+            },
+            {
                 'command': 'ip ecmp disable',
                 'doc': 'Completely disable ECMP',
                 'arguments': [],
@@ -1573,6 +1578,61 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
+                'command': 'ip ospf authentication message-digest',
+                'doc': 'Configure OSPF MD5 authentication',
+                'arguments': [],
+            },
+            {
+                'command': 'ip ospf authentication',
+                'doc': 'Configure OSPF text authentication',
+                'arguments': [],
+            },
+            {
+                'command': 'no ip ospf authentication',
+                'doc': 'Remove OSPF text authentication',
+                'arguments': [],
+            },
+            {
+                'command': 'ip ospf message-digest-key {key_id}'
+                           ' md5 {password_key}',
+                'doc': 'Configuring MD5 authentication with encryption',
+                'arguments': [
+                    {
+                        'name': 'key_id',
+                        'doc': '<1-255> key_id range',
+                    },
+                    {
+                        'name': 'password_key',
+                        'doc': 'OSPF password key'
+                    }
+                ],
+            },
+            {
+                'command': 'no ip ospf message-digest-key {key_id}',
+                'doc': 'Removing MD5 authentication with encryption',
+                'arguments': [
+                    {
+                        'name': 'key_id',
+                        'doc': '<1-255> key_id range',
+                    },
+                ],
+            },
+            {
+                'command': 'ip ospf authentication-key {auth_key}',
+                'doc': 'Configuring text authentication with encryption',
+                'arguments': [
+                    {
+                        'name': 'auth_key',
+                        'doc': 'Text authentication Authorization key'
+                    }
+                ],
+            },
+            {
+                'command': 'no ip ospf authentication-key',
+                'doc': 'Removing text authentication with encryption',
+                'arguments': [],
+            },
+            {
                 'command': 'routing',
                 'doc': 'Configure interface as L3.',
                 'arguments': [],
@@ -1688,7 +1748,17 @@ VTYSH_SPEC = OrderedDict([
                 'arguments': [
                     {
                         'name': 'hello_timer',
-                        'doc': '<1-65535>  hello_timer range',
+                        'doc': '<10-30>  hello interval range',
+                    },
+                ],
+            },
+            {
+                'command': 'ip ospf priority {ospf_priority}',
+                'doc': 'Configure ospf priority',
+                'arguments': [
+                    {
+                        'name': 'ospf_priority',
+                        'doc': '<0-255>  . The range is 0 to 255',
                     },
                 ],
             },
@@ -2375,12 +2445,77 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'no router-id {id}',
-                'doc': 'Specifies the OSPF router-ID for a OSPF Router',
+                'command': 'no router-id',
+                'doc': 'unconfigure router-ID for a OSPF Router',
+                'arguments': [],
+            },
+            {
+                'command': 'redistribute static',
+                'doc': 'Redistributes the static routes in router',
+                'arguments': [],
+            },
+            {
+                'command': 'no redistribute static',
+                'doc': 'Removes redistributed the static routes in router',
+                'arguments': [],
+            },
+            {
+                'command': 'redistribute connected',
+                'doc': 'Redistributes the connected routes in router',
+                'arguments': [],
+            },
+            {
+                'command': 'no redistribute connected',
+                'doc': 'Removes redistributed the connected routes in router',
+                'arguments': [],
+            },
+            {
+                'command': 'redistribute bgp',
+                'doc': 'Redistributes the routes learned from BGP',
+                'arguments': [],
+            },
+            {
+                'command': 'no redistribute bgp',
+                'doc': 'Removes redistributed the routes learned from BGP',
+                'arguments': [],
+            },
+            {
+                'command': 'default-information originate always',
+                'doc': 'Redistributes default routes in router',
+                'arguments': [],
+            },
+            {
+                'command': 'no default-information originate always',
+                'doc': 'Remove redistributed default routes in router',
+                'arguments': [],
+            },
+            {
+                'command': 'area {area_id} authentication message-digest',
+                'doc': 'Configures MD5 authentication over area',
                 'arguments': [
                     {
-                        'name': 'id',
-                        'doc': '<A.B.C.D> IPv4 address',
+                        'name': 'area_id',
+                        'doc': '<0-4294967295> area range',
+                    },
+                ],
+            },
+            {
+                'command': 'area {area_id} authentication',
+                'doc': 'Configures text authentication over area',
+                'arguments': [
+                    {
+                        'name': 'area_id',
+                        'doc': '<0-4294967295> area range',
+                    },
+                ],
+            },
+            {
+                'command': 'no area {area_id} authentication',
+                'doc': 'Removes authentication over area',
+                'arguments': [
+                    {
+                        'name': 'area_id',
+                        'doc': '<0-4294967295> area range',
                     },
                 ],
             },
@@ -2388,6 +2523,56 @@ VTYSH_SPEC = OrderedDict([
                 'command': 'max-metric router-lsa',
                 'doc': 'Configures the router as stub router',
                 'arguments': [],
+            },
+            {
+                'command': 'max-metric router-lsa on-startup {time}',
+                'doc': 'Configures the router as stub router on startup',
+                'arguments': [
+                    {
+                        'name': 'time',
+                        'doc': '<5-86400> seconds',
+                    },
+                ],
+            },
+            {
+                'command': 'area {area_id} nssa',
+                'doc': 'Configures area as NSSA',
+                'arguments': [
+                    {
+                        'name': 'area_id',
+                        'doc': '<0-4294967295> area range',
+                    },
+                ],
+            },
+            {
+                'command': 'area {area_id} nssa no-summary',
+                'doc': 'Configures area as NSSA (Totally stubby)',
+                'arguments': [
+                    {
+                        'name': 'area_id',
+                        'doc': '<0-4294967295> area range',
+                    },
+                ],
+            },
+            {
+                'command': 'area {area_id} stub',
+                'doc': 'Configures area as stubby',
+                'arguments': [
+                    {
+                        'name': 'area_id',
+                        'doc': '<0-4294967295> area range',
+                    },
+                ],
+            },
+            {
+                'command': 'area {area_id} stub no-summary',
+                'doc': 'Configures area as Totally stubby',
+                'arguments': [
+                    {
+                        'name': 'area_id',
+                        'doc': '<0-4294967295> area range',
+                    },
+                ],
             },
             {
                 'command': 'network {network} area {area}',
