@@ -1397,7 +1397,8 @@ def parse_show_ip_ospf_neighbor(raw_result):
         if (pattern_found is True):
             re_result = re.search(neighbor_re, line)
             if (re_result):
-                result = re_result.groupdict()
+                partial = re_result.groupdict()
+                result[partial['neighbor_id']] = partial
         else:
             re_result = re.search('-+\s*-+', line)
             if (re_result):
@@ -1494,6 +1495,7 @@ def parse_show_ip_ospf_interface(raw_result):
 
 
 def parse_show_ip_ospf(raw_result):
+
     """
     Parse the 'show ip ospf' command raw output.
 
@@ -1505,53 +1507,83 @@ def parse_show_ip_ospf(raw_result):
      ::
 
         {
-
-           'external_lsa': '0',
-           'authentication_type': 'no authentication',
-           'Area_id': '0.0.0.1',
-           'no_of_lsa': '9',
-           'interface_count': '1',
-           'opaque_link': '0',
-           'opaque_area': '0',
-           'abr_summary_lsa': '0',
-           'router_lsa': '5',
-           'asbr_summary_lsa': '0',
-           'nssa_lsa': '0',
-           'fully_adj_neighbors': '1',
-           'network_lsa': '4',
-           'router': '2.2.2.2',
-           'opaque_lsa': '0',
-           'active_interfaces': '1',
-           'no_of_area': '1'
-
+            'router_id': '2.2.2.2',
+            'no_of_area': '1',
+            '0.0.0.0':
+                {
+                    'network_checksum': '0x00000000',
+                    'no_of_active_interfaces': 1,
+                    'area_id': '0.0.0.0',
+                    'router_checksum': '0x00008d77',
+                    'opaque_link_checksum': '0x00000000',
+                    'opaque_link': 0,
+                    'opaque_area': 0,
+                    'abr_summary_lsa': 0,
+                    'no_of_lsa': 2,
+                    'asbr_summary_lsa': 0,
+                    'no_of_interfaces': 1,
+                    'opaque_area_checksum': '0x00000000',
+                    'authentication_type': 'no authentication',
+                    'nssa_checksum': '0x00000000',
+                    'router_lsa': 2,
+                    'abr_checksum': '0x00000000',
+                    'network_lsa': 0,
+                    'asbr_checksum': '0x00000000',
+                    'nssa_lsa': 0
+                }
         }
     """
 
-    pattern = (
-        r'[\S ]+Router\s*ID:\s*(?P<router>[0-255.]+).*'
-        r'[\S ]+external\s*LSA\s*(?P<external_lsa>\d+).*'
-        r'[\S ]+opaque\s*AS\s*LSA\s*(?P<opaque_lsa>\d+).*'
+    router_re = (
+        r'[\S ]+Router\s*ID:\s*(?P<router_id>[\S]+).*'
         r'[\S ]+router:\s*(?P<no_of_area>\d+).*'
-        r'\s*Area\s*ID:\s*(?P<Area_id>[0-255.]+).*'
-        r'[\S ]+area:\s*Total:\s*(?P<interface_count>\d+),\s*Active:'
-        '(?P<active_interfaces>\d+).*'
-        r'[\S ]+area:\s*(?P<fully_adj_neighbors>\d+).*'
-        r'[\S ]+Area\s*has\s*(?P<authentication_type>[\S ]+).*'
-        r'[\S ]+Number\s*of\s*LSA\s*(?P<no_of_lsa>\d+).*'
-        r'[\S ]+Number\s*of\s*router\s*LSA\s*(?P<router_lsa>\d+).*'
-        r'[\S ]+Number\s*of\s*network\s*LSA\s*(?P<network_lsa>\d+).*'
-        r'[\S ]+Number\s*of\s*ABR\s*summary\s*LSA\s*'
-        '(?P<abr_summary_lsa>\d+).*'
-        r'[\S ]+Number\s*of\s*ASBR\s*summary\sLSA\s*'
-        '(?P<asbr_summary_lsa>\d+).*'
-        r'[\S ]+Number\s*of\s*NSSA\s*LSA\s*(?P<nssa_lsa>\d+).*'
-        r'[\S ]+Number\s*of\s*opaque\s*link\s*(?P<opaque_link>\d+).*'
-        r'[\S ]+Number\s*of\s*opaque\s*area\s*(?P<opaque_area>\d+).*'
     )
-    re_result = re.match(pattern, raw_result, re.DOTALL)
-    if(re_result):
-        result = re_result.groupdict()
-    return result
+
+    area_re = (
+        r':\s*(?P<area_id>[0-255.]+).*'
+        r'[\S ]+area:\s*Total:\s*(?P<no_of_interfaces>\d+),\s*Active:'
+        '\s*?(?P<no_of_active_interfaces>\d+).*'
+        r'[\S ]+Area\s*has\s*(?P<authentication_type>[\S ]+).*'
+        r'[\S ]+LSA\s*(?P<no_of_lsa>\d+).*'
+        r'[\S ]+router\s*LSA\s*(?P<router_lsa>\d+)[\S ]+Sum\s*'
+        '(?P<router_checksum>[\S]+).*'
+        r'[\S ]+network\s*LSA\s*(?P<network_lsa>\d+)[\S ]+Sum\s*'
+        '(?P<network_checksum>[\S]+).*'
+        r'[\S ]+ABR\s*summary\s*LSA\s*(?P<abr_summary_lsa>\d+)'
+        '[\S ]+Sum\s*(?P<abr_checksum>[\S]+).*'
+        r'[\S ]+ASBR\s*summary\s*LSA\s*(?P<asbr_summary_lsa>\d+)'
+        '[\S ]+Sum\s*(?P<asbr_checksum>[\S]+).*'
+        r'[\S ]+NSSA\s*LSA\s*(?P<nssa_lsa>\d+)[\S ]+Sum\s*'
+        '(?P<nssa_checksum>[\S]+).*'
+        r'[\S ]+opaque\s*link\s*(?P<opaque_link>\d+)[\S ]+Sum\s*'
+        '(?P<opaque_link_checksum>[\S]+).*'
+        r'[\S ]+opaque\s*area\s*(?P<opaque_area>\d+)[\S ]+Sum\s*'
+        '(?P<opaque_area_checksum>[\S]+).*'
+        )
+
+    result = {}
+    result_area = {}
+    lines = []
+    output = raw_result.split('Area ID')
+    if(output):
+        no_of_instance = len(output)
+        for i in range(0, no_of_instance):
+            if i == 0:
+                re_result = re.match(router_re, output[i], re.DOTALL)
+                if(re_result):
+                    result = re_result.groupdict()
+            if i <= int(result['no_of_area']):
+                re_result = re.match(area_re, output[i], re.DOTALL)
+                if(re_result):
+                    partial = re_result.groupdict()
+                    areas = partial['area_id']
+                    lines.append(areas)
+                    for key, value in partial.items():
+                        if value and value.isdigit():
+                            partial[key] = int(value)
+                            result_area[partial['area_id']] = partial
+                    result.update(result_area)
+        return result
 
 
 def parse_ping_repetitions(raw_result):

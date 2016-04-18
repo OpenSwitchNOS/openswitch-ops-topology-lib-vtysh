@@ -3026,53 +3026,58 @@ def test_parse_show_ip_ospf_neighbor_detail():
 def test_parse_show_ip_ospf():
 
     raw_result = """OSPF Routing Process, Router ID:  2.2.2.2
-                   This implementation conforms to RFC2328
-                   RFC1583 Compatibility flag is disabled
-                   Opaque Capability flag is disabled
-                   Stub router advertisement is configured administratively
-                   Initial SPF scheduling delay 200 millisec(s)
-                   Minimum hold time between consecutive SPFs 1000 millisec(s)
-                   Maximum hold time between consecutive SPFs 10000 millisec(s)
-                   Hold time multiplier is currently 1
-                   Number of external LSA 0. Checksum Sum 0x00000000
-                   Number of opaque AS LSA 0. Checksum Sum 0x00000000
-                   Number of areas attached to this router: 1
-                   All adjacency changes are not logged
-                   Area ID:  0.0.0.1
-                     Number of interfaces in this area: Total: 1, Active:1
-                     Number of fully adjacent neighbors in this area: 1
-                     Area has no authentication
-                     SPF algorithm last executed ago: 1m58s
-                     SPF algorithm executed 15 times
-                     Number of LSA 9
-                     Number of router LSA 5. Checksum Sum 0x00018980
-                     Number of network LSA 4. Checksum Sum 0x000091d3
-                     Number of ABR summary LSA 0. Checksum Sum 0x00000000
-                     Number of ASBR summary LSA 0. Checksum Sum 0x00000000
-                     Number of NSSA LSA 0. Checksum Sum 0x00000000
-                     Number of opaque link 0. Checksum Sum 0x00000000
-                     Number of opaque area 0. Checksum Sum 0x00000000"""
+                 This implementation conforms to RFC2328
+                 RFC1583 Compatibility flag is disabled
+                 Opaque Capability flag is disabled
+                 Stub router advertisement is configured administratively
+                 Initial SPF scheduling delay 200 millisec(s)
+                 Minimum hold time between consecutive SPFs 1000 millisec(s)
+                 Maximum hold time between consecutive SPFs 10000 millisec(s)
+                 Hold time multiplier is currently 1
+                 Number of external LSA 0. Checksum Sum 0x00000000
+                 Number of opaque AS LSA 0. Checksum Sum 0x00000000
+                 Number of areas attached to this router: 1
+                 All adjacency changes are not logged
+                 Area ID:  0.0.0.0 (Backbone)
+                   Number of interfaces in this area: Total: 1, Active:1
+                   Number of fully adjacent neighbors in this area: 0
+                   Area has no authentication
+                   SPF algorithm last executed ago: 11.354s
+                   SPF algorithm executed 1 times
+                   Number of LSA 2
+                   Number of router LSA 2. Checksum Sum 0x00008d77
+                   Number of network LSA 0. Checksum Sum 0x00000000
+                   Number of ABR summary LSA 0. Checksum Sum 0x00000000
+                   Number of ASBR summary LSA 0. Checksum Sum 0x00000000
+                   Number of NSSA LSA 0. Checksum Sum 0x00000000
+                   Number of opaque link 0. Checksum Sum 0x00000000
+                   Number of opaque area 0. Checksum Sum 0x00000000"""
 
     result = parse_show_ip_ospf(raw_result)
     expected = {
-        'external_lsa': '0',
-        'authentication_type': 'no authentication',
-        'Area_id': '0.0.0.1',
-        'no_of_lsa': '9',
-        'interface_count': '1',
-        'opaque_link': '0',
-        'opaque_area': '0',
-        'abr_summary_lsa': '0',
-        'router_lsa': '5',
-        'asbr_summary_lsa': '0',
-        'nssa_lsa': '0',
-        'fully_adj_neighbors': '1',
-        'network_lsa': '4',
-        'router': '2.2.2.2',
-        'opaque_lsa': '0',
-        'active_interfaces': '1',
-        'no_of_area': '1'
-    }
+         'router_id': '2.2.2.2',
+         'no_of_area': '1',
+         '0.0.0.0': {
+             'network_checksum': '0x00000000',
+             'no_of_active_interfaces': 1,
+             'area_id': '0.0.0.0',
+             'router_checksum': '0x00008d77',
+             'opaque_link_checksum': '0x00000000',
+             'opaque_link': 0,
+             'opaque_area': 0,
+             'abr_summary_lsa': 0,
+             'no_of_lsa': 2,
+             'asbr_summary_lsa': 0,
+             'no_of_interfaces': 1,
+             'opaque_area_checksum': '0x00000000',
+             'authentication_type': 'no authentication',
+             'nssa_checksum': '0x00000000',
+             'router_lsa': 2,
+             'abr_checksum': '0x00000000',
+             'network_lsa': 0,
+             'asbr_checksum': '0x00000000',
+             'nssa_lsa': 0}
+             }
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff
@@ -3090,15 +3095,17 @@ def test_parse_show_ip_ospf_neighbor():
 
     result = parse_show_ip_ospf_neighbor(raw_result)
     expected = {
-        'neighbor_id': '2.2.2.2',
-        'priority': '1',
-        'state': 'Full/Backup',
-        'dead_time': '31.396s',
-        'address': '10.0.1.1',
-        'interface': '1:10.0.1.2/24',
-        'rxmtl': '0',
-        'rqstl': '0',
-        'dbsml': '0'
+        '2.2.2.2': {
+           'neighbor_id': '2.2.2.2',
+           'priority': '1',
+           'state': 'Full/Backup',
+           'dead_time': '31.396s',
+           'address': '10.0.1.1',
+           'interface': '1:10.0.1.2/24',
+           'rxmtl': '0',
+           'rqstl': '0',
+           'dbsml': '0'
+              }
     }
 
     ddiff = DeepDiff(result, expected)
