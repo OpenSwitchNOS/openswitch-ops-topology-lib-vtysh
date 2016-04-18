@@ -2329,11 +2329,42 @@ def parse_show_running_config(raw_result):
                 'ipv4_address': '192.168.10.1/24',
                 'ipv6_address': '2002::1/64'
                 }
-            },
-         'sftp-server':
-                {
+        },
+         'sftp-server': {
                     'status':'enable'
+        },
+        'ip_routes': {
+            '10.1.1.3':
+                {
+                    'via': '1',
+                    'prefix': '32',
+                    'network': '10.1.1.3'
+                },
+            '10.1.1.1':
+                {
+                    'via': '140.1.1.1',
+                    'prefix': '32',
+                    'network': '10.1.1.1'
+                },
+            '10.1.1.2':
+                {
+                    'via': '140.1.1.1',
+                    'prefix': '32',
+                    'network': '10.1.1.2'
                 }
+            '2020::2':
+                {
+                     'network': '2020::2',
+                     'prefix': '128',
+                     'via': '1'
+                },
+            '2020::3':
+                {
+                    'network': '2020::3',
+                    'prefix': '128',
+                    'via': '1'
+                }
+        }
 
         }
     """
@@ -2670,6 +2701,25 @@ def parse_show_running_config(raw_result):
         for key, value in result_status.items():
             if value is not None:
                 result['sftp-server'][key] = value
+
+    # IP Routes section capture regex
+    result['ip_routes'] = {}
+    ip_routes_section_re = r'ipv?6? route.*'
+    re_ip_routes_section = re.findall(ip_routes_section_re, raw_result,
+                                      re.DOTALL)
+    if re_ip_routes_section:
+        ip_route_re = (
+            r'ipv?6? route\s(?P<network>.*)'
+            r'/(?P<prefix>\d+)\s'
+            r'(?P<via>(?:.*))'
+            )
+        for line in re_ip_routes_section[0].splitlines():
+            re_result = re.match(ip_route_re, line)
+            partial = re_result.groupdict()
+            for key, value in partial.items():
+                partial[key] = value
+            result['ip_routes'][partial['network']] = partial
+
     return result
 
 
