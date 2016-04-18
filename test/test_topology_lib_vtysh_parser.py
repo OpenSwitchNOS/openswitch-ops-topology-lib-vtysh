@@ -1730,6 +1730,10 @@ interface mgmt
     nameserver 2.2.2.2
 sftp-server
     enable
+ipv6 route 2020::3/128 1
+ip route 140.1.1.10/32 1
+ip route 140.1.1.30/32 1
+ipv6 route 2020::2/128 1
 """
 
     result = parse_show_running_config(raw_result)
@@ -1823,6 +1827,28 @@ sftp-server
         },
         'sftp-server': {
             'status': 'enable'
+        },
+        'ip_routes': {
+            '2020::2': {
+                    'via': '1',
+                    'prefix': '128',
+                    'network': '2020::2',
+            },
+            '2020::3': {
+                    'via': '1',
+                    'prefix': '128',
+                    'network': '2020::3',
+            },
+            '140.1.1.10': {
+                    'via': '1',
+                    'prefix': '32',
+                    'network': '140.1.1.10',
+            },
+            '140.1.1.30': {
+                    'via': '1',
+                    'prefix': '32',
+                    'network': '140.1.1.30',
+            }
         }
     }
 
