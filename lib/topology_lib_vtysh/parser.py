@@ -729,7 +729,7 @@ def parse_show_lacp_aggregates(raw_result):
         lag['fallback'] = lag['fallback'] == 'True'
         result[lag['name']] = lag
 
-    assert result
+    assert result is not None
 
     return result
 
