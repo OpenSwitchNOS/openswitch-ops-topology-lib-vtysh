@@ -137,6 +137,7 @@ def parse_show_interface_lag(raw_result):
             'lag_name': 'lag1',
             'aggregated_interfaces': '2 1',
             'agg_key': 1,
+            'agg_mode': 'active'
             'ipv4': '10.1.1.1/24',
             'ipv4_secondary': '10.1.1.2/24',
             'ipv6': '2001::1/12',
@@ -157,9 +158,10 @@ def parse_show_interface_lag(raw_result):
     """
 
     show_re = (
-        r'\s+Aggregate-name\s(?P<lag_name>\w*)\s*'
+        r'\s*Aggregate-name\s(?P<lag_name>\w*)\s*'
         r'Aggregated-interfaces\s\:\s(?P<aggregated_interfaces>(\d\s)*)\s*'
         r'Aggregation-key\s:\s(?P<agg_key>\d*)\s*'
+        r'(Aggregate mode\s:\s(?P<agg_mode>\S+))?\s*'
         r'(IPv4\saddress\s(?P<ipv4>\S+))?\s*'
         r'(IPv4\saddress\s(?P<ipv4_secondary>\S+) secondary)?\s*'
         r'(IPv6\saddress\s(?P<ipv6>\S+))?\s*'
@@ -672,7 +674,7 @@ def parse_show_lacp_aggregates(raw_result):
         lag['fallback'] = lag['fallback'] == 'True'
         result[lag['name']] = lag
 
-    assert result
+    assert result is not None
 
     return result
 
