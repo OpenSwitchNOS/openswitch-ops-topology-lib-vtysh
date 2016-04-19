@@ -4273,6 +4273,50 @@ def parse_diag_dump_lacp_basic_interfaces(raw_result):
     return result
 
 
+def parse_show_snmpv3_users(raw_result):
+
+    """
+    Parse the 'show snmpv3 users' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show snmpv3 users\
+       command in a dictionary of the form
+
+    ::
+
+        {
+            'user1':{'AuthMode':'md5',
+                       'PrivMode':'des'
+            },
+            'user2':{'AuthMode':'md5',
+                       'PrivMode':'(null)'
+            },
+            'user3':{'AuthMode':'none',
+                       'PrivMode':'none'
+            }
+        }
+    """
+    pattern_found = 0
+    result = []
+    output = {}
+    res = 0
+    for line in raw_result.splitlines():
+        if pattern_found == 2:
+            result.append(line)
+        else:
+            res = re.match(r'\s*-+\s*', line)
+            if res:
+                pattern_found = pattern_found + 1
+    for line in result:
+        res = re.split(r'\s+', line)
+        output[res[0]] = {'AuthMode': res[1], 'PrivMode': res[2]}
+    if output == {}:
+        return None
+    else:
+        return output
+
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
@@ -4307,5 +4351,5 @@ __all__ = [
     'parse_show_mirror',
     'parse_config_tftp_server_no_path', 'parse_show_snmp_community',
     'parse_show_snmp_system', 'parse_show_snmp_trap',
-    'parse_diag_dump_lacp_basic'
+    'parse_diag_dump_lacp_basic', 'parse_show_snmpv3_users'
 ]

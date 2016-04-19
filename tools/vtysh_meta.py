@@ -688,7 +688,13 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Displays diagnostic information for LACP',
                 'arguments': [],
                 'returns': True
-            }
+            },
+            {
+                'command': 'show snmpv3 users',
+                'doc': 'Display SNMPV3 users.',
+                'arguments': [],
+                'returns': True
+            },
 
         ]
     }),
@@ -1617,7 +1623,129 @@ VTYSH_SPEC = OrderedDict([
                          'optional': True
                     }
                 ],
-            }
+            },
+            {
+                'command': 'snmpv3 user {user-name}',
+                'doc': 'Configure SNMPv3 user name',
+                'arguments': [
+                    {
+                         'name': 'user-name',
+                         'doc': 'Configured user-name for SNMPv3'
+                    }
+                ],
+            },
+            {
+                'command': 'no snmpv3 username {user-name}',
+                'doc': 'Unconfigure SNMPv3 user name',
+                'arguments': [
+                    {
+                         'name': 'user-name',
+                         'doc': 'Unconfigured SNMPv3 user name'
+                    }
+                ],
+            },
+            {
+                'command': 'snmpv3 user {user-name} auth {auth-protocol} \
+                            auth-pass {auth-password}',
+                'doc': 'Configure SNMPv3 user name with auth protocol and \
+                        password',
+                'arguments': [
+                    {
+                         'name': 'user-name',
+                         'doc': 'Configured user-name for SNMPv3'
+                    },
+                    {
+                         'name': 'auth-protocol',
+                         'doc': 'Configured auth protocol for SNMPv3 user'
+                    },
+                    {
+                         'name': 'auth-password',
+                         'doc': 'Configured auth password for SNMPv3 user'
+                    }
+
+                ],
+            },
+            {
+                'command': 'no snmpv3 user {user-name} auth {auth-protocol} \
+                            auth-pass {auth-password}',
+                'doc': 'Unconfigure SNMPv3 user name with auth protocol and \
+                        password',
+                'arguments': [
+                    {
+                         'name': 'user-name',
+                         'doc': 'Unconfigured user-name for SNMPv3'
+                    },
+                    {
+                         'name': 'auth-protocol',
+                         'doc': 'Unconfigured auth protocol for SNMPv3 user'
+                    },
+                    {
+                         'name': 'auth-password',
+                         'doc': 'Unconfigured auth password for SNMPv3 user'
+                    }
+
+                ],
+            },
+            {
+                'command': 'snmpv3 user {user-name} auth {auth-protocol} \
+                            auth-pass {auth-password} priv {priv-protocol} \
+                            priv-pass {priv-password}',
+                'doc': 'Configure SNMPv3 user name with auth protocol and \
+                        password',
+                'arguments': [
+                    {
+                         'name': 'user-name',
+                         'doc': 'Configured user-name for SNMPv3'
+                    },
+                    {
+                         'name': 'auth-protocol',
+                         'doc': 'Configured auth protocol for SNMPv3 user'
+                    },
+                    {
+                         'name': 'auth-password',
+                         'doc': 'Configured auth password for SNMPv3 user'
+                    },
+                    {
+                         'name': 'priv-protocol',
+                         'doc': 'Configured priv protocol for SNMPv3 user'
+                    },
+                    {
+                         'name': 'priv-password',
+                         'doc': 'Configured priv password for SNMPv3 user'
+                    }
+
+                ],
+            },
+            {
+                'command': 'no snmpv3 user {user-name} auth {auth-protocol} \
+                            auth-pass {auth-password} priv {priv-protocol} \
+                            priv-pass {priv-password}',
+                'doc': 'Unconfigure SNMPv3 user name with auth protocol and \
+                        password',
+                'arguments': [
+                    {
+                         'name': 'user-name',
+                         'doc': 'Unconfigured user-name for SNMPv3'
+                    },
+                    {
+                         'name': 'auth-protocol',
+                         'doc': 'Unconfigured auth protocol for SNMPv3 user'
+                    },
+                    {
+                         'name': 'auth-password',
+                         'doc': 'Unconfigured auth password for SNMPv3 user'
+                    },
+                    {
+                         'name': 'priv-protocol',
+                         'doc': 'Unconfigured priv protocol for SNMPv3 user'
+                    },
+                    {
+                         'name': 'priv-password',
+                         'doc': 'Unconfigured priv password for SNMPv3 user'
+                    }
+
+                ],
+            },
         ]
     }),
     ('route_map', {

@@ -31,20 +31,17 @@ from collections import OrderedDict
 
 
 class VtyshException(Exception):
-
     """
     Base exception class for vtysh shell errors.
 
     :param str output: The shell output that triggered this exception.
     """
-
     def __init__(self, output):
         super(VtyshException, self).__init__()
         self.output = output
 
 
 class UnknownVtyshException(VtyshException):
-
     """
     Generic exception raised when the specific exception could not be
     determined.
@@ -52,7 +49,6 @@ class UnknownVtyshException(VtyshException):
 
 
 class UnknownCommandException(VtyshException):
-
     """
     This is a typed exception that will be raised when any of the following
     regular expressions match the output of a command:
@@ -65,7 +61,6 @@ class UnknownCommandException(VtyshException):
 
 
 class IncompleteCommandException(VtyshException):
-
     """
     This is a typed exception that will be raised when any of the following
     regular expressions match the output of a command:
@@ -77,7 +72,6 @@ class IncompleteCommandException(VtyshException):
 
 
 class NotValidLAG(VtyshException):
-
     """
     This is a typed exception that will be raised when any of the following
     regular expressions match the output of a command:
@@ -89,14 +83,12 @@ class NotValidLAG(VtyshException):
 
 
 class DuplicateLoopbackIPException(VtyshException):
-
     """
     This is a typed exception that will be raised when any of the following
     regular expressions match the output of a command:
 
     ::
-        IP address is already assigned to interface. [A-Za-z0-9]+
-        as primary.
+        IP address is already assigned to interface. [A-Za-z0-9]+  as primary.
 
     """
 
@@ -124,8 +116,8 @@ VTYSH_EXCEPTIONS = OrderedDict([
     (
         DuplicateLoopbackIPException,
         [
-            'IP address is already assigned to interface. [A-Za-z0-9]+\
-             as primary.',
+            'IP address is already assigned to interface.[A-Za-z0-9]+ as\
+             primary.',
         ]
     ),
 ])

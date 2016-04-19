@@ -82,7 +82,8 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_snmp_community,
                                        parse_show_snmp_system,
                                        parse_show_snmp_trap,
-                                       parse_diag_dump_lacp_basic
+                                       parse_diag_dump_lacp_basic,
+                                       parse_show_snmpv3_users
                                        )
 
 
@@ -3198,6 +3199,34 @@ Host              Port        Type           Version        SecName
             'Type': 'trap',
             'Version': 'v1',
             'SecName': 'public'
+        }
+    }
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_snmpv3_users():
+    raw_result = """\
+--------------------------------------
+User           AuthMode  PrivMode
+--------------------------------------
+user1          md5       des
+user2          md5       (null)
+user3          none      none"""
+
+    result = parse_show_snmpv3_users(raw_result)
+    expected = {
+        'user1': {
+            'AuthMode': 'md5',
+            'PrivMode': 'des'
+        },
+        'user2': {
+            'AuthMode': 'md5',
+            'PrivMode': '(null)'
+        },
+        'user3': {
+            'AuthMode': 'none',
+            'PrivMode': 'none'
         }
     }
     ddiff = DeepDiff(result, expected)
