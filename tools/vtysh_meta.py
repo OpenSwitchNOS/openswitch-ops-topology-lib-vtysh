@@ -695,6 +695,12 @@ VTYSH_SPEC = OrderedDict([
                 'arguments': [],
                 'returns': True
             },
+            {
+                'command': 'show core-dump',
+                'doc': 'Display core dumps present',
+                'arguments': [],
+                'returns': True
+            },
 
         ]
     }),

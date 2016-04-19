@@ -3781,6 +3781,90 @@ def parse_show_tftp_server(raw_result):
     return result
 
 
+def parse_show_core_dump(raw_result):
+    """
+     Parse the show core-dump output
+     If no core dump present in the system, it will display the following
+     message
+
+     'No core dumps are present'
+
+     When core dumps are available they are presented in a table as below
+    ==========================================================================
+    Daemon Name     | Instance ID | Crash Reason         | Timestamp
+    ==========================================================================
+    WDqL7iiBU9Bo      12605         Segmentation fault     2016-04-19 08:58:25
+    Y5ePlcDIKd7HhkZ   10979         Segmentation fault     2016-04-19 08:45:10
+    dPbIXm8nvmxDhEB   11520         Segmentation fault     2016-04-19 08:49:34
+    ops-fand          404           Segmentation fault     2016-04-19 06:04:59
+    ops-fand          1316          Segmentation fault     2016-04-19 06:07:52
+    ops-lldpd         394           Segmentation fault     2016-04-19 06:05:06
+    ops-lldpd         715           Illegal instruction    2016-04-19 06:05:15
+    ops-snmpd         406           Segmentation fault     2016-04-19 06:26:05
+    kernel                                                 2016-04-19 06:03:35
+    ==========================================================================
+    Total number of core dumps : 9
+    ==========================================================================
+
+    Output will be of the given format below:
+
+    {
+        0:{
+            'instance_id': 1202,
+            'timestamp': '2016-04-19 08:12:11',
+            'crash_reason': 'Segmentation Fault',
+            'daemone_name': 'ops-fand'
+        }
+    }
+    """
+
+    show_re = (
+        r'\s*(?P<daemon_name>\S+)'
+        r'\s*(?P<instance_id>\S+)'
+        r'\s*(?P<crash_reason>.{1,30})'
+        r'\s*(?P<timestamp>[0-9\s:-]{18,20})'
+        )
+
+    show_re_kernel = (
+        r'\s*(?P<daemon_name>\S+)'
+        r'\s*(?P<timestamp>[0-9\s:-]{18,20})'
+        )
+    if "No core dumps are present" in raw_result:
+        return {}
+
+    result = {}
+    core_dump_count = 0
+    coredumps = raw_result.splitlines()
+    for line in coredumps:
+        if("Total number of core dumps" in line):
+            break
+        elif("=====" in line or "Crash Reason" in line):
+            continue
+        else:
+            if "kernel" in line:
+                re_result = re.match(show_re_kernel, line)
+            else:
+                re_result = re.match(show_re, line)
+
+            assert re_result
+
+            coredump_result = re_result.groupdict()
+
+            if "kernel" in line:
+                coredump_result['crash_reason'] = 'unknown'
+                coredump_result['instance_id'] = '1'
+
+            for key, value in coredump_result.items():
+                if value is not None:
+                    if value.isdigit():
+                        coredump_result[key] = int(value)
+                    else:
+                        coredump_result[key] = value.strip()
+            result[core_dump_count] = coredump_result
+            core_dump_count += 1
+    return result
+
+
 def parse_config_tftp_server_enable(raw_result):
     """
     Parse the 'enable' command raw output in tftp-server context
