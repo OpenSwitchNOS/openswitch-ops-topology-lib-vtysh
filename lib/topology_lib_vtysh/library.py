@@ -9778,6 +9778,33 @@ def show_snmpv3_users(
     return parse_show_snmpv3_users(result)
 
 
+def show_core_dump(
+        enode):
+    """
+    Display core dumps present
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show core-dump
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_core_dump`
+    """
+
+    cmd = [
+        'show core-dump'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_core_dump(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -9855,5 +9882,6 @@ __all__ = [
     'show_snmp_system',
     'show_snmp_trap',
     'diag_dump_lacp_basic',
-    'show_snmpv3_users'
+    'show_snmpv3_users',
+    'show_core_dump'
 ]

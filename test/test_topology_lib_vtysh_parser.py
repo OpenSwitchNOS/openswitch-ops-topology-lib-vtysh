@@ -73,6 +73,7 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_startup_config,
                                        parse_show_mac_address_table,
                                        parse_show_tftp_server,
+                                       parse_show_core_dump,
                                        parse_config_tftp_server_enable,
                                        parse_config_tftp_server_no_enable,
                                        parse_config_tftp_server_path,
@@ -104,6 +105,41 @@ TFTP server file path : /etc/ssl/certs/
         'tftp_server_file_path': '/etc/ssl/certs/'
     }
 
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_core_dump():
+    raw_result = """\
+==============================================================================
+Daemon Name     | Instance ID | Crash Reason                  | Timestamp
+===========================================================================
+ops-fand      2300          Illegal instruction            2016-04-19 06:10:06
+kernel                                                     2016-04-19 06:09:56
+==============================================================================
+Total number of core dumps : 2
+==============================================================================
+
+        """
+    result = parse_show_core_dump(raw_result)
+    expected = {
+        0: {'instance_id': 2300,
+            'timestamp': '2016-04-19 06:10:06',
+            'crash_reason': 'Illegal instruction',
+            'daemon_name': 'ops-fand'},
+        1: {'instance_id': 1,
+            'timestamp': '2016-04-19 06:09:56',
+            'crash_reason': 'unknown',
+            'daemon_name': 'kernel'},
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+    raw_result = "No core dumps are present"
+    result = parse_show_core_dump(raw_result)
+
+    expected = {}
     ddiff = DeepDiff(result, expected)
     assert not ddiff
 

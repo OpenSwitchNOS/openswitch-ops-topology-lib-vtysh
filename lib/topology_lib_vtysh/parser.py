@@ -3781,6 +3781,73 @@ def parse_show_tftp_server(raw_result):
     return result
 
 
+def parse_show_core_dump(raw_result):
+    """
+    Parse the show core-dump output
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show core-dump\
+        in a dictionary of the form:
+
+    ::
+
+        {
+            0:{
+                'instance_id': 1202,
+                'timestamp': '2016-04-19 08:12:11',
+                'crash_reason': 'Segmentation Fault',
+                'daemon_name': 'ops-fand'
+            }
+        }
+    """
+
+    show_re = (
+        r'\s*(?P<daemon_name>\S+)'
+        r'\s*(?P<instance_id>\S+)'
+        r'\s*(?P<crash_reason>.{1,30})'
+        r'\s*(?P<timestamp>[0-9\s:-]{18,20})'
+        )
+
+    show_re_kernel = (
+        r'\s*(?P<daemon_name>\S+)'
+        r'\s*(?P<timestamp>[0-9\s:-]{18,20})'
+        )
+    if "No core dumps are present" in raw_result:
+        return {}
+
+    result = {}
+    core_dump_count = 0
+    coredumps = raw_result.splitlines()
+    for line in coredumps:
+        if("Total number of core dumps" in line):
+            break
+        elif("=====" in line or "Crash Reason" in line):
+            continue
+        else:
+            if "kernel" in line:
+                re_result = re.match(show_re_kernel, line)
+            else:
+                re_result = re.match(show_re, line)
+
+            assert re_result
+
+            coredump_result = re_result.groupdict()
+
+            if "kernel" in line:
+                coredump_result['crash_reason'] = 'unknown'
+                coredump_result['instance_id'] = '1'
+
+            for key, value in coredump_result.items():
+                if value is not None:
+                    if value.isdigit():
+                        coredump_result[key] = int(value)
+                    else:
+                        coredump_result[key] = value.strip()
+            result[core_dump_count] = coredump_result
+            core_dump_count += 1
+    return result
+
+
 def parse_config_tftp_server_enable(raw_result):
     """
     Parse the 'enable' command raw output in tftp-server context
@@ -4445,7 +4512,8 @@ __all__ = [
     'parse_show_ip_ospf', 'parse_show_ip_ospf_neighbor',
     'parse_show_startup_config',
     'parse_show_mac_address_table',
-    'parse_show_tftp_server', 'parse_config_tftp_server_enable',
+    'parse_show_tftp_server', 'parse_show_core_dump',
+    'parse_config_tftp_server_enable',
     'parse_config_tftp_server_no_enable', 'parse_config_tftp_server_path',
     'parse_config_tftp_server_no_path', 'parse_show_interface_lag',
     'parse_show_mirror',
