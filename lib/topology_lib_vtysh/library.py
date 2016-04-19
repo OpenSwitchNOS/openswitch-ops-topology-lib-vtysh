@@ -614,6 +614,108 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def sflow_header_size(
+            self, size):
+        """
+        Set sFlow header-size size.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # sflow header-size {size}
+
+        :param size: <64-256>  The size is 64 to 256.
+        """
+
+        cmd = [
+            'sflow header-size {size}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_sflow_header_size(
+            self):
+        """
+        Unset sFlow header-size
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no sflow header-size
+
+        """
+
+        cmd = [
+            'no sflow header-size'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def sflow_max_datagram_size(
+            self, size):
+        """
+        Set sFlow max-datagram-size size.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # sflow max-datagram-size {size}
+
+        :param size: <1-9000>  The size is 1 to 9000.
+        """
+
+        cmd = [
+            'sflow max-datagram-size {size}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_sflow_max_datagram_size(
+            self):
+        """
+        Unset sFlow max-datagram-size
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no sflow max-datagram-size
+
+        """
+
+        cmd = [
+            'no sflow max-datagram-size'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def no_sflow_sampling(
             self):
         """

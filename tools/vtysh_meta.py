@@ -999,6 +999,36 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
+                'command': 'sflow header-size {size}',
+                'doc': 'Set sFlow header-size size.',
+                'arguments': [
+                    {
+                        'name': 'size',
+                        'doc': '<64-256>  The size is 64 to 256.',
+                    }
+                ],
+            },
+            {
+                'command': 'no sflow header-size',
+                'doc': 'Unset sFlow header-size',
+                'arguments': [],
+            },
+            {
+                'command': 'sflow max-datagram-size {size}',
+                'doc': 'Set sFlow max-datagram-size size.',
+                'arguments': [
+                    {
+                        'name': 'size',
+                        'doc': '<1-9000>  The size is 1 to 9000.',
+                    }
+                ],
+            },
+            {
+                'command': 'no sflow max-datagram-size',
+                'doc': 'Unset sFlow max-datagram-size',
+                'arguments': [],
+            },
+            {
                 'command': 'no sflow sampling',
                 'doc': 'Reset sFlow sampling rate to default.',
                 'arguments': [],
