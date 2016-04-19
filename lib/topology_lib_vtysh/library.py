@@ -588,6 +588,108 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def sflow_header_size(
+            self, size):
+        """
+        Set sFlow header-size size.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # sflow header-size {size}
+
+        :param size: <64-256>  The size is 64 to 256.
+        """
+
+        cmd = [
+            'sflow header-size {size}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_sflow_header_size(
+            self):
+        """
+        Unset sFlow header-size
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no sflow header-size
+
+        """
+
+        cmd = [
+            'no sflow header-size'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def sflow_max_datagram_size(
+            self, size):
+        """
+        Set sFlow max-datagram-size size.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # sflow max-datagram-size {size}
+
+        :param size: <1-9000>  The size is 1 to 9000.
+        """
+
+        cmd = [
+            'sflow max-datagram-size {size}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_sflow_max_datagram_size(
+            self):
+        """
+        Unset sFlow max-datagram-size
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no sflow max-datagram-size
+
+        """
+
+        cmd = [
+            'no sflow max-datagram-size'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def sflow_sampling(
             self, rate):
         """
@@ -1703,13 +1805,13 @@ class Configure(ContextManager):
 
         ::
 
-            # no snmp-server community {community_name}
+            # no snmp-server community
 
         :param community_name: Unconfigured community names
         """
 
         cmd = [
-            'no snmp-server community {community_name}'
+            'no snmp-server community'
         ]
 
         if community_name:
@@ -1762,13 +1864,13 @@ class Configure(ContextManager):
 
         ::
 
-            # no snmp-server system-contact {system_contact}
+            # no snmp-server system-contact
 
         :param system_contact: Unconfigure system contact information
         """
 
         cmd = [
-            'no snmp-server system-contact {system_contact}'
+            'no snmp-server system-contact'
         ]
 
         if system_contact:
@@ -1821,13 +1923,13 @@ class Configure(ContextManager):
 
         ::
 
-            # no snmp-server system-location {system_location}
+            # no snmp-server system-location
 
         :param system_location: Unconfigure system location information
         """
 
         cmd = [
-            'no snmp-server system-location {system_location}'
+            'no snmp-server system-location'
         ]
 
         if system_location:
@@ -1854,13 +1956,13 @@ class Configure(ContextManager):
 
         ::
 
-            # snmp-server system-description {system_description}
+            # snmp-server system-description                {system_description}  # noqa
 
         :param system_description: Configured System description
         """
 
         cmd = [
-            'snmp-server system-description {system_description}'
+            'snmp-server system-description                {system_description}'  # noqa
         ]
 
         result = self.enode(
@@ -1880,13 +1982,13 @@ class Configure(ContextManager):
 
         ::
 
-            # no snmp-server system-description {system_description}
+            # no snmp-server system-description
 
         :param system_desription: Unconfigure system description
         """
 
         cmd = [
-            'no snmp-server system-description {system_description}'
+            'no snmp-server system-description'
         ]
 
         if system_desription:
@@ -1914,11 +2016,12 @@ class Configure(ContextManager):
 
         ::
 
-            # snmp-server host {host_ip_address} trap version                             {snmp_version} {community} {community-name}                             {port} {snmp-port}}   # noqa
+            # snmp-server host {host_ip_address} trap version                             {snmp_version}  # noqa
 
         :param host_ip_address: Configured host ip address for trap receiver
         :param snmp_version: Configured snmp version for receiver
-        :param community: Configured snmp community name for trap receiver
+        :param community: Configured snmp community name for trap
+            receiver
         :param community-name: Configured snmp community name for trap
             receiver
         :param port: Configured snmp port for trap receiver
@@ -1926,7 +2029,7 @@ class Configure(ContextManager):
         """  # noqa
 
         cmd = [
-            'snmp-server host {host_ip_address} trap version                             {snmp_version} {community} {community-name}                             {port} {snmp-port}} '  # noqa
+            'snmp-server host {host_ip_address} trap version                             {snmp_version}'  # noqa
         ]
 
         if community:
@@ -1975,11 +2078,13 @@ class Configure(ContextManager):
 
         ::
 
-            # no snmp-server host {host_ip_address} trap                             version {snmp_version} {community}                             {community-name} {port} {snmp-port}}   # noqa
+            # no snmp-server host {host_ip_address} trap                             version {snmp_version}  # noqa
 
-        :param host_ip_address: Unconfigured host ip address for trap receiver
+        :param host_ip_address: Unconfigured host ip address for trap
+            receiver
         :param snmp_version: Unconfigured snmp version for receiver
-        :param community: Unconfigured snmp community name for trap receiver
+        :param community: Unconfigured snmp community name for trap
+            receiver
         :param community-name: Unconfigured snmp community name for trap
             receiver
         :param port: Unconfigured snmp port for trap receiver
@@ -1987,7 +2092,7 @@ class Configure(ContextManager):
         """  # noqa
 
         cmd = [
-            'no snmp-server host {host_ip_address} trap                             version {snmp_version} {community}                             {community-name} {port} {snmp-port}} '  # noqa
+            'no snmp-server host {host_ip_address} trap                             version {snmp_version}'  # noqa
         ]
 
         if community:
@@ -2036,7 +2141,7 @@ class Configure(ContextManager):
 
         ::
 
-            # snmp-server inform {host_ip_address} trap version                             {snmp_version} {community} {community-name} {port}                             {snmp-port}}   # noqa
+            # snmp-server inform {host_ip_address} trap version                             {snmp_version}  # noqa
 
         :param host_ip_address: Configured host ip address for notifications
         :param snmp_version: Configured snmp version for notifications
@@ -2049,7 +2154,7 @@ class Configure(ContextManager):
         """  # noqa
 
         cmd = [
-            'snmp-server inform {host_ip_address} trap version                             {snmp_version} {community} {community-name} {port}                             {snmp-port}} '  # noqa
+            'snmp-server inform {host_ip_address} trap version                             {snmp_version}'  # noqa
         ]
 
         if community:
@@ -2098,10 +2203,10 @@ class Configure(ContextManager):
 
         ::
 
-            # no snmp-server inform {host_ip_address} trap                             version {snmp_version} {community}                             {community-name} {port} {snmp-port}}   # noqa
+            # no snmp-server inform {host_ip_address} trap                            version {snmp_version}  # noqa
 
-        :param host_ip_address: Unconfigured host ip address for 
-            otifications
+        :param host_ip_address: Unconfigured host ip address for
+            notifications
         :param snmp_version: Unconfigured snmp version for notifications
         :param community: Unconfigured snmp community name for
             notifications
@@ -2112,7 +2217,7 @@ class Configure(ContextManager):
         """  # noqa
 
         cmd = [
-            'no snmp-server inform {host_ip_address} trap                             version {snmp_version} {community}                             {community-name} {port} {snmp-port}} '  # noqa
+            'no snmp-server inform {host_ip_address} trap                            version {snmp_version}'  # noqa
         ]
 
         if community:
@@ -2142,6 +2247,180 @@ class Configure(ContextManager):
                     '', ''
                 )
             )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def snmpv3_user(
+            self, user_name):
+        """
+        Configure SNMPv3 user name
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # snmpv3 user {user-name}
+
+        :param user-name: Configured user-name for SNMPv3
+        """
+
+        cmd = [
+            'snmpv3 user {user-name}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_snmpv3_username(
+            self, user_name):
+        """
+        Unconfigure SNMPv3 user name
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no snmpv3 username {user-name}
+
+        :param user-name: Unconfigured SNMPv3 user name
+        """
+
+        cmd = [
+            'no snmpv3 username {user-name}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def snmpv3_user_auth_auth_pass(
+            self, user_name, auth_protocol, auth_password):
+        """
+        Configure SNMPv3 user name with auth protocol and
+        password
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # snmpv3 user {user-name} auth {auth-protocol}                             auth-pass {auth-password}  # noqa
+
+        :param user-name: Configured user-name for SNMPv3
+        :param auth-protocol: Configured auth protocol for SNMPv3 user
+        :param auth-password: Configured auth password for SNMPv3 user
+        """  # noqa
+
+        cmd = [
+            'snmpv3 user {user-name} auth {auth-protocol}                             auth-pass {auth-password}'  # noqa
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_snmpv3_user_auth_auth_pass(
+            self, user_name, auth_protocol, auth_password):
+        """
+        Unconfigure SNMPv3 user name with auth protocol and
+        password
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no snmpv3 user {user-name} auth {auth-protocol}                             auth-pass {auth-password}  # noqa
+
+        :param user-name: Unconfigured user-name for SNMPv3
+        :param auth-protocol: Unconfigured auth protocol for SNMPv3 user
+        :param auth-password: Unconfigured auth password for SNMPv3 user
+        """  # noqa
+
+        cmd = [
+            'no snmpv3 user {user-name} auth {auth-protocol}                             auth-pass {auth-password}'  # noqa
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def snmpv3_user_auth_auth_pass_priv_priv_pass(
+            self, user_name, auth_protocol, auth_password,
+            priv_protocol, priv_password):
+        """
+        Configure SNMPv3 user name with auth protocol and
+        password
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # snmpv3 user {user-name} auth {auth-protocol}                             auth-pass {auth-password} priv {priv-protocol}                             priv-pass {priv-password}  # noqa
+
+        :param user-name: Configured user-name for SNMPv3
+        :param auth-protocol: Configured auth protocol for SNMPv3 user
+        :param auth-password: Configured auth password for SNMPv3 user
+        :param priv-protocol: Configured priv protocol for SNMPv3 user
+        :param priv-password: Configured priv password for SNMPv3 user
+        """  # noqa
+
+        cmd = [
+            'snmpv3 user {user-name} auth {auth-protocol}                             auth-pass {auth-password} priv {priv-protocol}                             priv-pass {priv-password}'  # noqa
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_snmpv3_user_auth_auth_pass_priv_priv_pass(
+            self, user_name, auth_protocol, auth_password,
+            priv_protocol, priv_password):
+        """
+        Unconfigure SNMPv3 user name with auth protocol and
+        password
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no snmpv3 user {user-name} auth {auth-protocol}                             auth-pass {auth-password} priv {priv-protocol}                             priv-pass {priv-password}  # noqa
+
+        :param user-name: Unconfigured user-name for SNMPv3
+        :param auth-protocol: Unconfigured auth protocol for SNMPv3 user
+        :param auth-password: Unconfigured auth password for SNMPv3 user
+        :param priv-protocol: Unconfigured priv protocol for SNMPv3 user
+        :param priv-password: Unconfigured priv password for SNMPv3 user
+        """  # noqa
+
+        cmd = [
+            'no snmpv3 user {user-name} auth {auth-protocol}                             auth-pass {auth-password} priv {priv-protocol}                             priv-pass {priv-password}'  # noqa
+        ]
 
         result = self.enode(
             (' '.join(cmd)).format(**locals()),
@@ -9448,7 +9727,7 @@ def show_snmp_trap(
 def diag_dump_lacp_basic(
         enode):
     """
-    Diagnostic Information for LACP.
+    Displays diagnostic information for LACP
 
     This function runs the following vtysh command:
 
@@ -9460,12 +9739,43 @@ def diag_dump_lacp_basic(
      :func:`topology_lib_vtysh.parser.parse_diag_dump_lacp_basic`
     """
 
-    cmd = (
+    cmd = [
         'diag-dump lacp basic'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
     )
-    result = enode(cmd.format(**locals()), shell='vtysh')
 
     return parse_diag_dump_lacp_basic(result)
+
+
+def show_snmpv3_users(
+        enode):
+    """
+    Display SNMPV3 users.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show snmpv3 users
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_snmpv3_users`
+    """
+
+    cmd = [
+        'show snmpv3 users'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_snmpv3_users(result)
 
 
 __all__ = [
@@ -9544,5 +9854,6 @@ __all__ = [
     'show_snmp_community',
     'show_snmp_system',
     'show_snmp_trap',
-    'diag_dump_lacp_basic'
+    'diag_dump_lacp_basic',
+    'show_snmpv3_users'
 ]
