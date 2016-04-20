@@ -2917,7 +2917,7 @@ def parse_show_ip_route(raw_result):
     )
 
     ipv4_nexthop_re = (
-        r'via\s+(?P<via>(?:\d+\.\d+\.\d+\.\d+|\d+)),\s+'
+        r'via\s+(?P<via>(?:\d+\.\d+\.\d+\.\d+|[a-z0-9]+)),\s+'
         r'\[(?P<distance>\d+)/(?P<metric>\d+)\],\s+(?P<from>\S+)'
     )
 

@@ -1744,7 +1744,7 @@ def test_parse_traceroute():
         'dest_addr': '10.1.1.10',
         'max_ttl': 30,
         'time_out': 3
-        }
+    }
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff
@@ -1781,7 +1781,7 @@ def test_parse_traceroute6():
         'time_out': 3,
         'probe': 5,
         'source_addr': '5001::5'
-        }
+    }
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff
@@ -2130,24 +2130,24 @@ ipv6 route 2020::2/128 1
         },
         'ip_routes': {
             '2020::2': {
-                    'via': '1',
-                    'prefix': '128',
-                    'network': '2020::2',
+                'via': '1',
+                'prefix': '128',
+                'network': '2020::2',
             },
             '2020::3': {
-                    'via': '1',
-                    'prefix': '128',
-                    'network': '2020::3',
+                'via': '1',
+                'prefix': '128',
+                'network': '2020::3',
             },
             '140.1.1.10': {
-                    'via': '1',
-                    'prefix': '32',
-                    'network': '140.1.1.10',
+                'via': '1',
+                'prefix': '32',
+                'network': '140.1.1.10',
             },
             '140.1.1.30': {
-                    'via': '1',
-                    'prefix': '32',
-                    'network': '140.1.1.30',
+                'via': '1',
+                'prefix': '32',
+                'network': '140.1.1.30',
             }
         }
     }
@@ -2201,6 +2201,8 @@ Displaying ipv4 routes selected for forwarding
 193.0.0.2/32,  2 unicast next-hops
     via  50.0.0.2,  [1/0],  static
     via  56.0.0.3,  [1/0],  static
+10.1.64.0/18,  1 unicast next-hops
+        via  lo2,  [0/0],  connected
     """
 
     result = parse_show_ip_route(raw_result)
@@ -2256,6 +2258,18 @@ Displaying ipv4 routes selected for forwarding
                     'via': '56.0.0.3',
                     'distance': '1',
                     'from': 'static',
+                    'metric': '0'
+                }
+            ]
+        },
+        {
+            'id': '10.1.64.0',
+            'prefix': '18',
+            'next_hops': [
+                {
+                    'via': 'lo2',
+                    'distance': '0',
+                    'from': 'connected',
                     'metric': '0'
                 }
             ]
@@ -3055,29 +3069,29 @@ def test_parse_show_ip_ospf():
 
     result = parse_show_ip_ospf(raw_result)
     expected = {
-         'router_id': '2.2.2.2',
-         'no_of_area': '1',
-         '0.0.0.0': {
-             'network_checksum': '0x00000000',
-             'no_of_active_interfaces': 1,
-             'area_id': '0.0.0.0',
-             'router_checksum': '0x00008d77',
-             'opaque_link_checksum': '0x00000000',
-             'opaque_link': 0,
-             'opaque_area': 0,
-             'abr_summary_lsa': 0,
-             'no_of_lsa': 2,
-             'asbr_summary_lsa': 0,
-             'no_of_interfaces': 1,
-             'opaque_area_checksum': '0x00000000',
-             'authentication_type': 'no authentication',
-             'nssa_checksum': '0x00000000',
-             'router_lsa': 2,
-             'abr_checksum': '0x00000000',
-             'network_lsa': 0,
-             'asbr_checksum': '0x00000000',
-             'nssa_lsa': 0}
-             }
+        'router_id': '2.2.2.2',
+        'no_of_area': '1',
+        '0.0.0.0': {
+            'network_checksum': '0x00000000',
+            'no_of_active_interfaces': 1,
+            'area_id': '0.0.0.0',
+            'router_checksum': '0x00008d77',
+            'opaque_link_checksum': '0x00000000',
+            'opaque_link': 0,
+            'opaque_area': 0,
+            'abr_summary_lsa': 0,
+            'no_of_lsa': 2,
+            'asbr_summary_lsa': 0,
+            'no_of_interfaces': 1,
+            'opaque_area_checksum': '0x00000000',
+            'authentication_type': 'no authentication',
+            'nssa_checksum': '0x00000000',
+            'router_lsa': 2,
+            'abr_checksum': '0x00000000',
+            'network_lsa': 0,
+            'asbr_checksum': '0x00000000',
+            'nssa_lsa': 0}
+    }
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff
@@ -3096,16 +3110,16 @@ def test_parse_show_ip_ospf_neighbor():
     result = parse_show_ip_ospf_neighbor(raw_result)
     expected = {
         '2.2.2.2': {
-           'neighbor_id': '2.2.2.2',
-           'priority': '1',
-           'state': 'Full/Backup',
-           'dead_time': '31.396s',
-           'address': '10.0.1.1',
-           'interface': '1:10.0.1.2/24',
-           'rxmtl': '0',
-           'rqstl': '0',
-           'dbsml': '0'
-              }
+            'neighbor_id': '2.2.2.2',
+            'priority': '1',
+            'state': 'Full/Backup',
+            'dead_time': '31.396s',
+            'address': '10.0.1.1',
+            'interface': '1:10.0.1.2/24',
+            'rxmtl': '0',
+            'rqstl': '0',
+            'dbsml': '0'
+        }
     }
 
     ddiff = DeepDiff(result, expected)
@@ -3321,91 +3335,91 @@ Diagnostic dump captured for feature lacp
                     'marker_response_pdus_sent': 0,
                     'lacp_pdus_received': 0,
                     'lacp_pdus_sent': 0
-                 },
+                },
                 '3': {
-                     'marker_pdus_received': 0,
-                     'marker_response_pdus_sent': 0,
-                     'lacp_pdus_received': 0,
-                     'lacp_pdus_sent': 0
-                 }
-             }
-         },
+                    'marker_pdus_received': 0,
+                    'marker_response_pdus_sent': 0,
+                    'lacp_pdus_received': 0,
+                    'lacp_pdus_sent': 0
+                }
+            }
+        },
         'State': {
-             '10': {
-                 2: {
-                     'partner_oper_port_state': {
-                         'distributing': 0,
-                         'expired': 0,
-                         'time_out': 0,
-                         'aggregation': 1,
-                         'sync': 0,
-                         'lacp_activity': 0,
-                         'defaulted': 0,
-                         'collecting': 0
-                     },
-                     'actor_oper_port_state': {
-                         'distributing': 0,
-                         'expired': 0,
-                         'time_out': 1,
-                         'aggregation': 1,
-                         'sync': 0,
-                         'lacp_activity': 1,
-                         'defaulted': 1,
-                         'collecting': 0
-                     },
-                     'lacp_control': {
-                         'port_enabled': 0,
-                         'partner_churn': 0,
-                         'actor_churn': 0,
-                         'selected': 0,
-                         'ready_n': 0,
-                         'ntt': 0,
-                         'begin': 0,
-                         'port_moved': 0
-                     }
-                 },
-                 3: {
-                     'partner_oper_port_state': {
-                         'distributing': 0,
-                         'expired': 0,
-                         'time_out': 0,
-                         'aggregation': 1,
-                         'sync': 0,
-                         'lacp_activity': 0,
-                         'defaulted': 0,
-                         'collecting': 0
-                     },
-                     'actor_oper_port_state': {
-                         'distributing': 0,
-                         'expired': 0,
-                         'time_out': 1,
-                         'aggregation': 1,
-                         'sync': 0,
-                         'lacp_activity': 1,
-                         'defaulted': 1,
-                         'collecting': 0
-                     },
-                     'lacp_control': {
-                         'port_enabled': 0,
-                         'partner_churn': 0,
-                         'actor_churn': 0,
-                         'selected': 0,
-                         'ready_n': 0,
-                         'ntt': 0,
-                         'begin': 0,
-                         'port_moved': 0
-                     }
-                 }
-             }
-         },
+            '10': {
+                2: {
+                    'partner_oper_port_state': {
+                        'distributing': 0,
+                        'expired': 0,
+                        'time_out': 0,
+                        'aggregation': 1,
+                        'sync': 0,
+                        'lacp_activity': 0,
+                        'defaulted': 0,
+                        'collecting': 0
+                    },
+                    'actor_oper_port_state': {
+                        'distributing': 0,
+                        'expired': 0,
+                        'time_out': 1,
+                        'aggregation': 1,
+                        'sync': 0,
+                        'lacp_activity': 1,
+                        'defaulted': 1,
+                        'collecting': 0
+                    },
+                    'lacp_control': {
+                        'port_enabled': 0,
+                        'partner_churn': 0,
+                        'actor_churn': 0,
+                        'selected': 0,
+                        'ready_n': 0,
+                        'ntt': 0,
+                        'begin': 0,
+                        'port_moved': 0
+                    }
+                },
+                3: {
+                    'partner_oper_port_state': {
+                        'distributing': 0,
+                        'expired': 0,
+                        'time_out': 0,
+                        'aggregation': 1,
+                        'sync': 0,
+                        'lacp_activity': 0,
+                        'defaulted': 0,
+                        'collecting': 0
+                    },
+                    'actor_oper_port_state': {
+                        'distributing': 0,
+                        'expired': 0,
+                        'time_out': 1,
+                        'aggregation': 1,
+                        'sync': 0,
+                        'lacp_activity': 1,
+                        'defaulted': 1,
+                        'collecting': 0
+                    },
+                    'lacp_control': {
+                        'port_enabled': 0,
+                        'partner_churn': 0,
+                        'actor_churn': 0,
+                        'selected': 0,
+                        'ready_n': 0,
+                        'ntt': 0,
+                        'begin': 0,
+                        'port_moved': 0
+                    }
+                }
+            }
+        },
         'Interfaces': {
-             '10': {
-                 'eligible_interfaces': ['3', '2'],
-                 'configured_interfaces': ['3', '2'],
-                 'participant_interfaces': []
-             }
-         }
-     }
+            '10': {
+                'eligible_interfaces': ['3', '2'],
+                'configured_interfaces': ['3', '2'],
+                'participant_interfaces': []
+            }
+        }
+    }
 
     ddiff = DeepDiff(result, expected1)
     assert not ddiff
