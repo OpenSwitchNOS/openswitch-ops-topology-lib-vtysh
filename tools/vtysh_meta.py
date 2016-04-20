@@ -44,18 +44,7 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
-                'command': 'show interface {port} subinterface',
-                'doc': 'Show subinterfaces configured on this interface',
-                'arguments': [
-                    {
-                        'name': 'portlbl',
-                        'doc': 'Label that identifies interface.',
-                    },
-                ],
-                'returns': True
-            },
-            {
-                'command': 'show vlan',
+                'command': 'show vlan {vlanid}',
                 'doc': 'Show VLAN configuration.',
                 'arguments': [
                     {
@@ -79,7 +68,7 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
-                'command': 'show lacp aggregates',
+                'command': 'show lacp aggregates {lag}',
                 'doc': 'Show LACP aggregates.',
                 'arguments': [
                     {
@@ -114,13 +103,6 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
-                'command': 'show sftp server',
-                'doc': 'Show sftp server configuration.',
-                'arguments': [],
-                'returns': True
-
-            },
-            {
                 'command': 'show ip bgp summary',
                 'doc': 'Show bgp neighbors information summary.',
                 'arguments': [],
@@ -145,30 +127,6 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
-                'command': 'show ip ospf neighbor detail',
-                'doc': 'Show ospf neighbor detail information.',
-                'arguments': [],
-                'returns': True
-            },
-            {
-                'command': 'show ip ospf neighbor',
-                'doc': 'Show ospf neighbor information.',
-                'arguments': [],
-                'returns': True
-            },
-            {
-                'command': 'show ip ospf interface',
-                'doc': 'Show ospf interface detail.',
-                'arguments': [],
-                'returns': True
-            },
-            {
-                'command': 'show ip ospf',
-                'doc': 'Show ospf detail.',
-                'arguments': [],
-                'returns': True
-            },
-            {
                 'command': 'show running-config',
                 'doc': 'Show running-config information.',
                 'arguments': [],
@@ -184,23 +142,6 @@ VTYSH_SPEC = OrderedDict([
                 'command': 'show ipv6 route',
                 'doc': 'Display the routing table.',
                 'arguments': [],
-                'returns': True
-            },
-            {
-                'command': 'show sflow',
-                'doc': 'Show sFlow information.',
-                'arguments': [],
-                'returns': True
-            },
-            {
-                'command': 'show sflow interface {port}',
-                'doc': 'Show sFlow information for the interface.',
-                'arguments': [
-                    {
-                        'name': 'portlbl',
-                        'doc': 'Label that identifies interface.',
-                    }
-                ],
                 'returns': True
             },
             # TODO: Add support for the show udld (shows all interfaces) cmd
@@ -273,191 +214,6 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
-                'command': 'ping {destination}',
-                'doc': 'Send IPv4 ping',
-                'arguments': [
-                    {
-                        'name': 'destination',
-                        'doc': '<A.B.C.D> IPv4 address.'
-                    },
-                    {
-                        'name': 'count',
-                        'doc': 'Number of packets to send.',
-                        'prefix': 'repetitions ',
-                        'optional': True
-                    },
-                    {
-                        'name': 'size',
-                        'doc': 'Size of packets to send.',
-                        'prefix': 'datagram-size ',
-                        'optional': True
-                    },
-                    {
-                        'name': 'data',
-                        'doc': 'Data to be filled in each packet.',
-                        'prefix': 'data-fill ',
-                        'optional': True
-                    },
-                    {
-                        'name': 'interval',
-                        'doc': 'Time interval between ping requests.',
-                        'prefix': 'interval ',
-                        'optional': True
-                    },
-                    {
-                        'name': 'timeout',
-                        'doc': 'Max time to wait for ping reply.',
-                        'prefix': 'timeout ',
-                        'optional': True
-                    },
-                    {
-                        'name': 'tos',
-                        'doc': (
-                            'Type of service to be placed'
-                            ' in each probe.'
-                        ),
-                        'prefix': 'tos ',
-                        'optional': True
-                    },
-                    {
-                        'name': 'ip_option',
-                        'doc': 'Ip-option.',
-                        'prefix': 'ip-option ',
-                        'optional': True
-                    }
-                ],
-                'returns': True
-            },
-            {
-                'command': 'ping6 {destination}',
-                'doc': 'Send IPv6 ping',
-                'arguments': [
-                    {
-                        'name': 'destination',
-                        'doc': '<X:X::X:X> IPv6 address.'
-                    },
-                    {
-                        'name': 'count',
-                        'doc': 'Number of packets to send.',
-                        'prefix': 'repetitions ',
-                        'optional': True
-                    },
-                    {
-                        'name': 'size',
-                        'doc': 'Size of packets to send.',
-                        'prefix': 'datagram-size ',
-                        'optional': True
-                    },
-                    {
-                        'name': 'data',
-                        'doc': 'Data to be filled in each packet.',
-                        'prefix': 'data-fill ',
-                        'optional': True
-                    },
-                    {
-                        'name': 'interval',
-                        'doc': 'Time interval between ping requests.',
-                        'prefix': 'interval ',
-                        'optional': True
-                    }
-                ],
-                'returns': True
-            },
-            {
-                'command': 'traceroute {destination}',
-                'doc': 'Send IPv4 traceroute',
-                'arguments': [
-                    {
-                        'name': 'destination',
-                        'doc': '<A.B.C.D> IPv4 address.',
-                    },
-                    {
-                        'name': 'min_ttl',
-                        'doc': (
-                            'Minimum number of hops to'
-                            ' reach the destination <1-255>.'
-                        ),
-                        'prefix': 'minttl ',
-                        'optional': True
-                    },
-                    {
-                        'name': 'max_ttl',
-                        'doc': (
-                            'Maximum number of hops to'
-                            ' reach the destination <1-255>.'
-                        ),
-                        'prefix': 'maxttl ',
-                        'optional': True
-                    },
-                    {
-                        'name': 'dst_port',
-                        'doc': 'Destination port <1-34000>.',
-                        'prefix': 'dstport ',
-                        'optional': True
-                    },
-                    {
-                        'name': 'time_out',
-                        'doc': 'Traceroute timeout in seconds <1-60>.',
-                        'prefix': 'timeout ',
-                        'optional': True
-                    },
-                    {
-                        'name': 'probes',
-                        'doc': 'Number of Probes <1-5>.',
-                        'prefix': 'probes ',
-                        'optional': True
-                    },
-                    {
-                        'name': 'ip_option_source',
-                        'doc': 'Source for loose source route record.',
-                        'prefix': 'ip-option loosesourceroute ',
-                        'optional': True
-                    }
-
-                ],
-                'returns': True
-            },
-            {
-                'command': 'traceroute6 {destination}',
-                'doc': 'Send IPv6 traceroute',
-                'arguments': [
-                    {
-                        'name': 'destination',
-                        'doc': '<X:X::X:X> IPv6 address.',
-                    },
-                    {
-                        'name': 'max_ttl',
-                        'doc': (
-                            'Maximum number of hops to'
-                            ' reach the destination <1-255>.'
-                        ),
-                        'prefix': 'maxttl ',
-                        'optional': True
-                    },
-                    {
-                        'name': 'dst_port',
-                        'doc': 'Destination port <1-34000>.',
-                        'prefix': 'dstport ',
-                        'optional': True
-                    },
-                    {
-                        'name': 'time_out',
-                        'doc': 'Traceroute timeout in seconds <1-60>.',
-                        'prefix': 'timeout ',
-                        'optional': True
-                    },
-                    {
-                        'name': 'probes',
-                        'doc': 'Number of Probes <1-5>.',
-                        'prefix': 'probes ',
-                        'optional': True
-                    }
-
-                ],
-                'returns': True
-
-            },
-            {
                 'command': 'show ntp associations',
                 'doc': 'Show NTP Association summary.',
                 'arguments': [],
@@ -498,210 +254,7 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Display DHCP server configuration.',
                 'arguments': [],
                 'returns': True
-            },
-            {
-                'command': 'show mac-address-table',
-                'doc': 'Display L2 MAC address table information.',
-                'arguments': [],
-                'returns': True
-            },
-            {
-                'command': 'show vlog config',
-                'doc': 'Display vlog config.',
-                'arguments': [],
-                'returns': True
-            },
-            {
-                'command': 'show vlog {sub_command}',
-                'doc': 'Show vlog sub command.',
-                'arguments': [
-                    {
-                        'name': 'sub_command',
-                        'doc': 'sub command'
-                    }
-                ],
-                'returns': True
-            },
-            {
-                'command': 'show interface loopback',
-                'doc': 'Show loopback interfaces on ops',
-                'arguments': [
-                    {
-                        'name': 'loopback_int',
-                        'doc': 'Loopback interface id.',
-                        'optional': True
-                    }
-                ],
-                'returns': True
-            },
-            {
-                'command': 'show interface loopback brief',
-                'doc': 'Display information for L3 loopback interfaces',
-                'arguments': [],
-                'returns': True
-            },
-            {
-                'command': 'show vlog config daemon {daemon_name}',
-                'doc': 'Display vlog config for ops-daemons.',
-                'arguments': [
-                    {
-                        'name': 'daemon_name',
-                        'doc': 'daemon name'
-                    }
-                ],
-                'returns': True
-            },
-            {
-                'command': 'show vlog config feature {feature_name}',
-                'doc': 'Display vlog config for feature',
-                'arguments': [
-                    {
-                        'name': 'feature_name',
-                        'doc': 'feature name'
-                    }
-                ],
-                'returns': True
-            },
-            {
-                'command': 'show vlog config list',
-                'doc': 'Display vlog config for supported features list',
-                'arguments': [],
-                'returns': True
-            },
-            {
-                'command': 'show vlog daemon {daemon_name}',
-                'doc': 'Display vlogs for ops-daemon',
-                'arguments': [
-                    {
-                        'name': 'daemon_name',
-                        'doc': 'daemon name'
-                    }
-                ],
-                'returns': True
-            },
-            {
-                'command': 'show vlog severity {severity_level}',
-                'doc': 'Display vlogs for severity level',
-                'arguments': [
-                    {
-                        'name': 'severity_level',
-                        'doc': 'severity level'
-                    }
-                ],
-                'returns': True
-            },
-            {
-                'command': 'show vlog daemon {daemonname} severity {severity}',
-                'doc': 'Display vlogs for ops-daemon with severity',
-                'arguments': [
-                    {
-                        'name': 'daemonname',
-                        'doc': 'daemon name'
-                    },
-                    {
-                        'name': 'severity',
-                        'doc': 'severity level'
-                    }
-                ],
-                'returns': True
-            },
-            {
-                'command': 'show vlog severity {severity} daemon {daemonname}',
-                'doc': 'Display vlogs for severity with ops-daemon',
-                'arguments': [
-                    {
-                        'name': 'severity',
-                        'doc': 'severity level'
-                    },
-                    {
-                        'name': 'daemonname',
-                        'doc': 'daemon name'
-                    }
-                ],
-                'returns': True
-            },
-            {
-                'command': 'copy running-config startup-config',
-                'doc': 'copies running config to startup config',
-                'arguments': []
-            },
-            {
-                'command': 'show startup-config',
-                'doc': 'Show startup-config information.',
-                'arguments': [],
-                'returns': True
-            },
-            {
-                'command': 'show tftp-server',
-                'doc': 'Display TFTP-Server configuration.',
-                'arguments': [],
-                'returns': True
-            },
-            {
-                'command': 'no mirror session {name}',
-                'doc': 'Delete a mirroring session.',
-                'arguments': [
-                    {
-                        'name': 'name',
-                        'doc': (
-                            'Up to 64 letters, numbers, underscores, dashes, '
-                            'or periods.'
-                        )
-                    }
-                ]
-            },
-            {
-                'command': 'show mirror {name}',
-                'doc': 'Show mirroring session information.',
-                'arguments': [
-                    {
-                        'name': 'name',
-                        'doc': (
-                            'Up to 64 letters, numbers, underscores, dashes, '
-                            'or periods.'
-                        ),
-                        'optional': True
-                    }
-                ],
-                'returns': True
-            },
-            {
-                'command': 'show snmp community',
-                'doc': 'Display SNMP configured community names.',
-                'arguments': [],
-                'returns': True
-            },
-            {
-                'command': 'show snmp system',
-                'doc': 'Display SNMP system information.',
-                'arguments': [],
-                'returns': True
-            },
-            {
-                'command': 'show snmp trap',
-                'doc': 'Display SNMP host information of trap receivers.',
-                'arguments': [],
-                'returns': True
-            },
-            {
-                'command': 'diag-dump lacp basic',
-                'doc': 'Displays diagnostic information for LACP',
-                'arguments': [],
-                'returns': True
-            },
-            {
-                'command': 'show snmpv3 users',
-                'doc': 'Display SNMPV3 users.',
-                'arguments': [],
-                'returns': True
-            },
-            {
-                'command': 'show core-dump',
-                'doc': 'Display core dumps present',
-                'arguments': [],
-                'returns': True
-            },
-
+            }
         ]
     }),
     ('configure', {
@@ -731,17 +284,7 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'no interface loopback {loopback_id}',
-                'doc': 'Delete a L3 loopback interface',
-                'arguments': [
-                    {
-                        'name': 'loopback_id',
-                        'doc': 'Loopback interface identifier.',
-                    },
-                ],
-            },
-            {
-                'command': 'ip route {ipv4} {next_hop}',
+                'command': 'ip route {ipv4} {next_hop} {metric}',
                 'doc': 'Configure static routes',
                 'arguments': [
                     {
@@ -760,7 +303,7 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'no ip route {ipv4} {next_hop}',
+                'command': 'no ip route {ipv4} {next_hop} {metric}',
                 'doc': 'Un-configure static routes',
                 'arguments': [
                     {
@@ -927,7 +470,7 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'ipv6 route {ipv6} {next_hop}',
+                'command': 'ipv6 route {ipv6} {next_hop} {metric}',
                 'doc': 'Configure static routes',
                 'arguments': [
                     {
@@ -946,7 +489,7 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'no ipv6 route {ipv6} {next_hop}',
+                'command': 'no ipv6 route {ipv6} {next_hop} {metric}',
                 'doc': 'Un-configure static routes',
                 'arguments': [
                     {
@@ -1005,60 +548,28 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'sflow header-size {size}',
-                'doc': 'Set sFlow header-size size.',
-                'arguments': [
-                    {
-                        'name': 'size',
-                        'doc': '<64-256>  The size is 64 to 256.',
-                    }
-                ],
-            },
-            {
-                'command': 'no sflow header-size',
-                'doc': 'Unset sFlow header-size',
-                'arguments': [],
-            },
-            {
-                'command': 'sflow max-datagram-size {size}',
-                'doc': 'Set sFlow max-datagram-size size.',
-                'arguments': [
-                    {
-                        'name': 'size',
-                        'doc': '<1-9000>  The size is 1 to 9000.',
-                    }
-                ],
-            },
-            {
-                'command': 'no sflow max-datagram-size',
-                'doc': 'Unset sFlow max-datagram-size',
-                'arguments': [],
-            },
-            {
                 'command': 'no sflow sampling',
                 'doc': 'Reset sFlow sampling rate to default.',
                 'arguments': [],
             },
             {
-                'command': 'sflow polling {interval}',
-                'doc': 'Set sFlow polling interval.',
+                'command': (
+                    'sflow agent-interface {port}'
+                ),
+                'doc': 'Set sFlow agent interface',
                 'arguments': [
                     {
-                        'name': 'interval',
-                        'doc': '<0-3600>  The range is 0 to 3600.',
+                        'name': 'portlbl',
+                        'doc': 'Valid L3 interface name.',
                     }
                 ],
             },
             {
-                'command': 'no sflow polling',
-                'doc': 'Reset sFlow polling interval to default.',
-                'arguments': [],
-            },
-            {
                 'command': (
-                    'sflow agent-interface {portlbl}'
+                    'sflow agent-interface {port} '
+                    'agent-address-family {address_family}'
                 ),
-                'doc': 'Set sFlow agent interface',
+                'doc': 'Set sFlow agent interface and address family',
                 'arguments': [
                     {
                         'name': 'portlbl',
@@ -1066,8 +577,7 @@ VTYSH_SPEC = OrderedDict([
                     },
                     {
                         'name': 'address_family',
-                        'doc': 'Optional, IPv4 or IPv6 (Default : IPv4).',
-                        'optional': True
+                        'doc': 'IPv4 or IPv6 (Default : IPv4).',
                     }
                 ],
             },
@@ -1143,11 +653,6 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'no router ospf',
-                'doc': 'Removes the OSPF Router',
-                'arguments': [],
-            },
-            {
                 'command': 'ip ecmp disable',
                 'doc': 'Completely disable ECMP',
                 'arguments': [],
@@ -1205,16 +710,6 @@ VTYSH_SPEC = OrderedDict([
             {
                 'command': 'no ip ecmp load-balance resilient disable',
                 'doc': 'Disable resilient hashing for load balancing',
-                'arguments': [],
-            },
-            {
-                'command': 'sftp server enable',
-                'doc': 'Enable sftp server.',
-                'arguments': [],
-            },
-            {
-                'command': 'no sftp server enable',
-                'doc': 'Disable sftp server.',
                 'arguments': [],
             },
             {
@@ -1330,463 +825,44 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'logging {remote_host}',
-                'doc': 'Configure Syslog Server',
+                'command': 'access-list ip {access_list}',
+                'doc': 'Configure access list.',
                 'arguments': [
                     {
-                        'name': 'remote_host',
-                        'doc': 'IPv4 or IPv6 or Host name of syslog server',
+                        'name': 'access_list',
+                        'doc': 'Access List Name.',
                     },
-                    {
-                        'name': 'transport',
-                        'doc': (
-                            'Optional : '
-                            'Transport protocol and port used to send syslog.'
-                            '  Currently we support only tcp and udp.  '
-                            'Example tcp 1049'
-                        ),
-                        'optional': True
-                    },
-                    {
-                        'name': 'severity',
-                        'doc': (
-                            'Optional : '
-                            'Filter syslog messages using severity.'
-                            '  Only messages with severity higher than or'
-                            ' equal to the specified severity will be sent'
-                            ' to the remote host.  '
-                            'Example severity debug'
-                        ),
-                        'optional': True
-                    }
                 ],
             },
             {
-                'command': 'no logging {remote_host}',
-                'doc': 'Remove Syslog Server Configuration',
+                'command': 'no access-list ip {access_list}',
+                'doc': 'Unconfigure access list.',
                 'arguments': [
                     {
-                        'name': 'remote_host',
-                        'doc': 'IPv4 or IPv6 or Host name of syslog server',
+                        'name': 'access_list',
+                        'doc': 'Access List Name.',
                     },
-                    {
-                        'name': 'transport',
-                        'doc': (
-                            'Optional : '
-                            'Transport protocol and port used to send syslog. '
-                            '  Currently we support only tcp and udp.  '
-                            'Example tcp 1049'
-                        ),
-                        'optional': True
-                    },
-                    {
-                        'name': 'severity',
-                        'doc': (
-                            'Optional : '
-                            'Filter syslog messages using severity.'
-                            '  Only messages with severity higher than or'
-                            ' equal to the specified severity will be sent'
-                            ' to the remote host.  '
-                            'Example severity debug'
-                        ),
-                        'optional': True
-                    }
-
                 ],
             },
             {
-                'command': 'vlog daemon {daemon} {destination} {severity}',
-                'doc': 'Configure the daemon',
+                'command': 'access-list ip {access_list} resequence'
+                           ' {begin} {end}',
+                'doc': 'Resequence ACL Lists.',
                 'arguments': [
                     {
-                        'name': 'daemon',
-                        'doc': 'daemon name',
+                        'name': 'access_list',
+                        'doc': 'Access List Name.',
                     },
                     {
-                        'name': 'destination',
-                        'doc': 'configure the log level of destination',
+                        'name': 'begin',
+                        'doc': 'beginning index of access list',
                     },
                     {
-                        'name': 'severity',
-                        'doc': 'severity level'
-                    }
+                        'name': 'end',
+                        'doc': 'end index of access list',
+                    },
                 ],
-            },
-            {
-                'command': 'vlog feature {feature} {destination} {severity}',
-                'doc': 'Configure the feature',
-                'arguments': [
-                    {
-                        'name': 'feature',
-                        'doc': 'feature name',
-                    },
-                    {
-                        'name': 'destination',
-                        'doc': 'configure the log level of destination',
-                    },
-                    {
-                        'name': 'severity',
-                        'doc': 'severity level'
-                    }
-                ],
-            },
-            {
-                'command': 'snmp-server community {community_name}',
-                'doc': 'Configure SNMP community names',
-                'arguments': [
-                    {
-                         'name': 'community_name',
-                         'doc': 'Configured Community names'
-                    }
-                ],
-            },
-            {
-                'command': 'no snmp-server community',
-                'doc': 'Unconfigure SNMP community names',
-                'arguments': [
-                    {
-                         'name': 'community_name',
-                         'doc': 'Unconfigured community names',
-                         'optional': True
-                    }
-                ],
-            },
-            {
-                'command': 'snmp-server system-contact {system_contact}',
-                'doc': 'Configure SNMP system contact information',
-                'arguments': [
-                    {
-                         'name': 'system_contact',
-                         'doc': 'Configured System contact information'
-                    }
-                ],
-            },
-            {
-                'command': 'no snmp-server system-contact',
-                'doc': 'Unconfigure SNMP contact information',
-                'arguments': [
-                    {
-                         'name': 'system_contact',
-                         'doc': 'Unconfigure system contact information',
-                         'optional': True
-                    }
-                ],
-            },
-            {
-                'command': 'snmp-server system-location {system_location}',
-                'doc': 'Configure SNMP system location information',
-                'arguments': [
-                    {
-                         'name': 'system_location',
-                         'doc': 'Configured System location information'
-                    }
-                ],
-            },
-            {
-                'command': 'no snmp-server system-location',
-                'doc': 'Unconfigure SNMP location information',
-                'arguments': [
-                    {
-                         'name': 'system_location',
-                         'doc': 'Unconfigure system location information',
-                         'optional': True
-                    }
-                ],
-            },
-            {
-                'command': 'snmp-server system-description\
-                {system_description}',
-                'doc': 'Configure SNMP system description',
-                'arguments': [
-                    {
-                         'name': 'system_description',
-                         'doc': 'Configured System description'
-                    }
-                ],
-            },
-            {
-                'command': 'no snmp-server system-description',
-                'doc': 'Unconfigure SNMP system description',
-                'arguments': [
-                    {
-                         'name': 'system_desription',
-                         'doc': 'Unconfigure system description',
-                         'optional': True
-                    }
-                ],
-            },
-            {
-                'command': 'snmp-server host {host_ip_address} trap version \
-                            {snmp_version}',
-                'doc': 'Configure SNMP server information for trap receiver',
-                'arguments': [
-                    {
-                         'name': 'host_ip_address',
-                         'doc': 'Configured host ip address for trap receiver'
-                    },
-                    {
-                         'name': 'snmp_version',
-                         'doc': 'Configured snmp version for receiver'
-                    },
-                    {
-                         'name': 'community',
-                         'doc': 'Configured snmp community name for trap \
-                                 receiver',
-                         'optional': True
-                    },
-                    {
-                         'name': 'community-name',
-                         'doc': 'Configured snmp community name for trap \
-                                 receiver',
-                         'optional': True
-                    },
-                    {
-                         'name': 'port',
-                         'doc': 'Configured snmp port for trap receiver',
-                         'optional': True
-                    },
-                    {
-                         'name': 'snmp-port',
-                         'doc': 'Configured snmp port for trap receiver',
-                         'optional': True
-                    }
-                ],
-            },
-            {
-                'command': 'no snmp-server host {host_ip_address} trap \
-                            version {snmp_version}',
-                'doc': 'Unconfigure SNMP server information for trap receiver',
-                'arguments': [
-                    {
-                         'name': 'host_ip_address',
-                         'doc': 'Unconfigured host ip address for trap \
-                                 receiver'
-                    },
-                    {
-                         'name': 'snmp_version',
-                         'doc': 'Unconfigured snmp version for receiver'
-                    },
-                    {
-                         'name': 'community',
-                         'doc': 'Unconfigured snmp community name for trap \
-                                 receiver',
-                         'optional': True
-                    },
-                    {
-                         'name': 'community-name',
-                         'doc': 'Unconfigured snmp community name for trap \
-                                 receiver',
-                         'optional': True
-                    },
-                    {
-                         'name': 'port',
-                         'doc': 'Unconfigured snmp port for trap receiver',
-                         'optional': True
-                    },
-                    {
-                         'name': 'snmp-port',
-                         'doc': 'Unconfigured snmp port for trap receiver',
-                         'optional': True
-                    }
-                ],
-            },
-            {
-                'command': 'snmp-server inform {host_ip_address} trap version \
-                            {snmp_version}',
-                'doc': 'Configure SNMP server information for notifications',
-                'arguments': [
-                    {
-                         'name': 'host_ip_address',
-                         'doc': 'Configured host ip address for notifications'
-                    },
-                    {
-                         'name': 'snmp_version',
-                         'doc': 'Configured snmp version for notifications'
-                    },
-                    {
-                         'name': 'community',
-                         'doc': 'Configured snmp community name for \
-                                 notifications',
-                         'optional': True
-                    },
-                    {
-                         'name': 'community-name',
-                         'doc': 'Configured snmp community name for \
-                                 notifications',
-                         'optional': True
-                    },
-                    {
-                         'name': 'port',
-                         'doc': 'Configured snmp port for notifications',
-                         'optional': True
-                    },
-                    {
-                         'name': 'snmp-port',
-                         'doc': 'Configured snmp port for notifications',
-                         'optional': True
-                    }
-                ],
-            },
-            {
-                'command': 'no snmp-server inform {host_ip_address} trap\
-                            version {snmp_version}',
-                'doc': 'Unconfigure SNMP server information for notifications',
-                'arguments': [
-                    {
-                         'name': 'host_ip_address',
-                         'doc': 'Unconfigured host ip address for \
-                                 notifications'
-                    },
-                    {
-                         'name': 'snmp_version',
-                         'doc': 'Unconfigured snmp version for notifications'
-                    },
-                    {
-                         'name': 'community',
-                         'doc': 'Unconfigured snmp community name for \
-                                 notifications',
-                         'optional': True
-                    },
-                    {
-                         'name': 'community-name',
-                         'doc': 'Unconfigured snmp community name for \
-                                 notifications',
-                         'optional': True
-                    },
-                    {
-                         'name': 'port',
-                         'doc': 'Unconfigured snmp port for notifications',
-                         'optional': True
-                    },
-                    {
-                         'name': 'snmp-port',
-                         'doc': 'Unconfigured snmp port for notifications',
-                         'optional': True
-                    }
-                ],
-            },
-            {
-                'command': 'snmpv3 user {user-name}',
-                'doc': 'Configure SNMPv3 user name',
-                'arguments': [
-                    {
-                         'name': 'user-name',
-                         'doc': 'Configured user-name for SNMPv3'
-                    }
-                ],
-            },
-            {
-                'command': 'no snmpv3 username {user-name}',
-                'doc': 'Unconfigure SNMPv3 user name',
-                'arguments': [
-                    {
-                         'name': 'user-name',
-                         'doc': 'Unconfigured SNMPv3 user name'
-                    }
-                ],
-            },
-            {
-                'command': 'snmpv3 user {user-name} auth {auth-protocol} \
-                            auth-pass {auth-password}',
-                'doc': 'Configure SNMPv3 user name with auth protocol and \
-                        password',
-                'arguments': [
-                    {
-                         'name': 'user-name',
-                         'doc': 'Configured user-name for SNMPv3'
-                    },
-                    {
-                         'name': 'auth-protocol',
-                         'doc': 'Configured auth protocol for SNMPv3 user'
-                    },
-                    {
-                         'name': 'auth-password',
-                         'doc': 'Configured auth password for SNMPv3 user'
-                    }
-
-                ],
-            },
-            {
-                'command': 'no snmpv3 user {user-name} auth {auth-protocol} \
-                            auth-pass {auth-password}',
-                'doc': 'Unconfigure SNMPv3 user name with auth protocol and \
-                        password',
-                'arguments': [
-                    {
-                         'name': 'user-name',
-                         'doc': 'Unconfigured user-name for SNMPv3'
-                    },
-                    {
-                         'name': 'auth-protocol',
-                         'doc': 'Unconfigured auth protocol for SNMPv3 user'
-                    },
-                    {
-                         'name': 'auth-password',
-                         'doc': 'Unconfigured auth password for SNMPv3 user'
-                    }
-
-                ],
-            },
-            {
-                'command': 'snmpv3 user {user-name} auth {auth-protocol} \
-                            auth-pass {auth-password} priv {priv-protocol} \
-                            priv-pass {priv-password}',
-                'doc': 'Configure SNMPv3 user name with auth protocol and \
-                        password',
-                'arguments': [
-                    {
-                         'name': 'user-name',
-                         'doc': 'Configured user-name for SNMPv3'
-                    },
-                    {
-                         'name': 'auth-protocol',
-                         'doc': 'Configured auth protocol for SNMPv3 user'
-                    },
-                    {
-                         'name': 'auth-password',
-                         'doc': 'Configured auth password for SNMPv3 user'
-                    },
-                    {
-                         'name': 'priv-protocol',
-                         'doc': 'Configured priv protocol for SNMPv3 user'
-                    },
-                    {
-                         'name': 'priv-password',
-                         'doc': 'Configured priv password for SNMPv3 user'
-                    }
-
-                ],
-            },
-            {
-                'command': 'no snmpv3 user {user-name} auth {auth-protocol} \
-                            auth-pass {auth-password} priv {priv-protocol} \
-                            priv-pass {priv-password}',
-                'doc': 'Unconfigure SNMPv3 user name with auth protocol and \
-                        password',
-                'arguments': [
-                    {
-                         'name': 'user-name',
-                         'doc': 'Unconfigured user-name for SNMPv3'
-                    },
-                    {
-                         'name': 'auth-protocol',
-                         'doc': 'Unconfigured auth protocol for SNMPv3 user'
-                    },
-                    {
-                         'name': 'auth-password',
-                         'doc': 'Unconfigured auth password for SNMPv3 user'
-                    },
-                    {
-                         'name': 'priv-protocol',
-                         'doc': 'Unconfigured priv protocol for SNMPv3 user'
-                    },
-                    {
-                         'name': 'priv-password',
-                         'doc': 'Unconfigured priv password for SNMPv3 user'
-                    }
-
-                ],
-            },
+            }
         ]
     }),
     ('route_map', {
@@ -1848,7 +924,7 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'no match ip address prefix-list',
+                'command': 'no match ip address prefix-list {prefix_name}',
                 'doc': 'Unset prefix-list',
                 'arguments': [
                     {
@@ -1869,7 +945,7 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'no set metric',
+                'command': 'no set metric {metric}',
                 'doc': 'Unset metric',
                 'arguments': [
                     {
@@ -1894,7 +970,7 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'no set community',
+                'command': 'no set community {community}',
                 'doc': 'Unset community',
                 'arguments': [
                     {
@@ -2002,61 +1078,6 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'ip ospf authentication message-digest',
-                'doc': 'Configure OSPF MD5 authentication',
-                'arguments': [],
-            },
-            {
-                'command': 'ip ospf authentication',
-                'doc': 'Configure OSPF text authentication',
-                'arguments': [],
-            },
-            {
-                'command': 'no ip ospf authentication',
-                'doc': 'Remove OSPF text authentication',
-                'arguments': [],
-            },
-            {
-                'command': 'ip ospf message-digest-key {key_id}'
-                           ' md5 {password_key}',
-                'doc': 'Configuring MD5 authentication with encryption',
-                'arguments': [
-                    {
-                        'name': 'key_id',
-                        'doc': '<1-255> key_id range',
-                    },
-                    {
-                        'name': 'password_key',
-                        'doc': 'OSPF password key'
-                    }
-                ],
-            },
-            {
-                'command': 'no ip ospf message-digest-key {key_id}',
-                'doc': 'Removing MD5 authentication with encryption',
-                'arguments': [
-                    {
-                        'name': 'key_id',
-                        'doc': '<1-255> key_id range',
-                    },
-                ],
-            },
-            {
-                'command': 'ip ospf authentication-key {auth_key}',
-                'doc': 'Configuring text authentication with encryption',
-                'arguments': [
-                    {
-                        'name': 'auth_key',
-                        'doc': 'Text authentication Authorization key'
-                    }
-                ],
-            },
-            {
-                'command': 'no ip ospf authentication-key',
-                'doc': 'Removing text authentication with encryption',
-                'arguments': [],
-            },
-            {
                 'command': 'routing',
                 'doc': 'Configure interface as L3.',
                 'arguments': [],
@@ -2157,36 +1178,6 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'ip ospf dead-interval {dead_timer}',
-                'doc': 'Configure ospf dead_timer',
-                'arguments': [
-                    {
-                        'name': 'dead_timer',
-                        'doc': '<1-65535>  dead_timer range',
-                    },
-                ],
-            },
-            {
-                'command': 'ip ospf hello-interval {hello_timer}',
-                'doc': 'Configure ospf hello_timer',
-                'arguments': [
-                    {
-                        'name': 'hello_timer',
-                        'doc': '<10-30>  hello interval range',
-                    },
-                ],
-            },
-            {
-                'command': 'ip ospf priority {ospf_priority}',
-                'doc': 'Configure ospf priority',
-                'arguments': [
-                    {
-                        'name': 'ospf_priority',
-                        'doc': '<0-255>  . The range is 0 to 255',
-                    },
-                ],
-            },
-            {
                 'command': 'lacp port-priority {port_priority}',
                 'doc': 'Set port priority is used in LACP negotiation.',
                 'arguments': [
@@ -2277,101 +1268,24 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'sflow enable',
-                'doc': 'Enable sflow feature on interface',
-                'arguments': [],
-            },
-            {
-                'command': 'no sflow enable',
-                'doc': 'Disable sflow feature on interface',
-                'arguments': [],
-            },
-        ]
-    }),
-    ('config_subinterface', {
-        'doc': 'Sub-Interface configuration.',
-        'arguments': [
-            {
-                'name': 'portlbl',
-                'doc': 'Label that identifies a physical interface.'
-            },
-            {
-                'name': 'subint',
-                'doc': 'Label that identifies a subinterface.'
-            }
-        ],
-        'pre_commands': ['config terminal', 'interface {port}.{subint}'],
-        'post_commands': ['end'],
-        'commands': [
-            {
-                'command': 'ip address {ipv4}',
-                'doc': 'Set IP address',
+                'command': 'apply access-list ip {acl_name} in',
+                'doc': 'Apply ACL on interface',
                 'arguments': [
                     {
-                        'name': 'ipv4',
-                        'doc': 'A.B.C.D/M Subinterface IP address.',
-                    },
+                        'name': 'acl_name',
+                        'doc': 'Access-list name'
+                    }
                 ],
             },
             {
-                'command': 'no ip address {ipv4}',
-                'doc': 'Unset IP address',
+                'command': 'no apply access-list ip {acl_name} in',
+                'doc': 'Apply no ACL on interface',
                 'arguments': [
                     {
-                        'name': 'ipv4',
-                        'doc': 'A.B.C.D/M Subinterface IP address.',
-                    },
+                        'name': 'acl_name',
+                        'doc': 'Access-list name'
+                    }
                 ],
-            },
-            {
-                'command': 'ipv6 address {ipv6}',
-                'doc': 'Set IPv6 address',
-                'arguments': [
-                    {
-                        'name': 'ipv6',
-                        'doc': 'X:X::X:X/M  Subinterface IPv6 address',
-                    },
-                ],
-            },
-            {
-                'command': 'no ipv6 address {ipv6}',
-                'doc': 'Unset IPv6 address',
-                'arguments': [
-                    {
-                        'name': 'ipv6',
-                        'doc': 'X:X::X:X/M  Subinterface IPv6 address',
-                    },
-                ],
-            },
-            {
-                'command': 'encapsulation dot1Q {vlan_id}',
-                'doc': 'Set encapsulation type for a subinterface',
-                'arguments': [
-                    {
-                        'name': 'vlan_id',
-                        'doc': '<1-4094>  VLAN identifier.',
-                    },
-                ],
-            },
-            {
-                'command': 'no encapsulation dot1Q {vlan_id}',
-                'doc': 'Unset encapsulation type for a subinterface',
-                'arguments': [
-                    {
-                        'name': 'vlan_id',
-                        'doc': '<1-4094>  VLAN identifier.',
-                    },
-                ],
-            },
-            {
-                'command': 'shutdown',
-                'doc': 'Enable a subinterface.',
-                'arguments': [],
-            },
-            {
-                'command': 'no shutdown',
-                'doc': 'Disable a subinterface.',
-                'arguments': [],
             },
         ]
     }),
@@ -2751,11 +1665,6 @@ VTYSH_SPEC = OrderedDict([
                 'arguments': [],
             },
             {
-                'command': 'hash l4-src-dst',
-                'doc': 'Base the hash on l4-src-dst.',
-                'arguments': [],
-            },
-            {
                 'command': 'lacp rate fast',
                 'doc': 'Set LACP heartbeats are requested at the rate '
                        'of one per second.',
@@ -2816,7 +1725,8 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'nameserver {primary_nameserver}',
+                'command': 'nameserver {primary_nameserver} '
+                           '{secondary_nameserver}',
                 'doc': 'Configure the nameserver',
                 'arguments': [
                     {
@@ -2831,7 +1741,8 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'no nameserver {primary_nameserver}',
+                'command': 'no nameserver {primary_nameserver} '
+                           '{secondary_nameserver}',
                 'doc': 'Configure the nameserver',
                 'arguments': [
                     {
@@ -2849,183 +1760,6 @@ VTYSH_SPEC = OrderedDict([
                 'command': 'ip dhcp',
                 'doc': 'Set the mode as dhcp.',
                 'arguments': [],
-            },
-        ]
-    }),
-    ('config_router_ospf', {
-        'doc': 'OSPF configuration.',
-        'arguments': [],
-        'pre_commands': ['config terminal', 'router ospf'],
-        'post_commands': ['end'],
-        'commands': [
-            {
-                'command': 'router-id {id}',
-                'doc': 'Specifies the OSPF router-ID for a OSPF Router',
-                'arguments': [
-                    {
-                        'name': 'id',
-                        'doc': '<A.B.C.D> IPv4 address',
-                    },
-                ],
-            },
-            {
-                'command': 'no router-id',
-                'doc': 'unconfigure router-ID for a OSPF Router',
-                'arguments': [],
-            },
-            {
-                'command': 'redistribute static',
-                'doc': 'Redistributes the static routes in router',
-                'arguments': [],
-            },
-            {
-                'command': 'no redistribute static',
-                'doc': 'Removes redistributed the static routes in router',
-                'arguments': [],
-            },
-            {
-                'command': 'redistribute connected',
-                'doc': 'Redistributes the connected routes in router',
-                'arguments': [],
-            },
-            {
-                'command': 'no redistribute connected',
-                'doc': 'Removes redistributed the connected routes in router',
-                'arguments': [],
-            },
-            {
-                'command': 'redistribute bgp',
-                'doc': 'Redistributes the routes learned from BGP',
-                'arguments': [],
-            },
-            {
-                'command': 'no redistribute bgp',
-                'doc': 'Removes redistributed the routes learned from BGP',
-                'arguments': [],
-            },
-            {
-                'command': 'default-information originate always',
-                'doc': 'Redistributes default routes in router',
-                'arguments': [],
-            },
-            {
-                'command': 'no default-information originate always',
-                'doc': 'Remove redistributed default routes in router',
-                'arguments': [],
-            },
-            {
-                'command': 'area {area_id} authentication message-digest',
-                'doc': 'Configures MD5 authentication over area',
-                'arguments': [
-                    {
-                        'name': 'area_id',
-                        'doc': '<0-4294967295> area range',
-                    },
-                ],
-            },
-            {
-                'command': 'area {area_id} authentication',
-                'doc': 'Configures text authentication over area',
-                'arguments': [
-                    {
-                        'name': 'area_id',
-                        'doc': '<0-4294967295> area range',
-                    },
-                ],
-            },
-            {
-                'command': 'no area {area_id} authentication',
-                'doc': 'Removes authentication over area',
-                'arguments': [
-                    {
-                        'name': 'area_id',
-                        'doc': '<0-4294967295> area range',
-                    },
-                ],
-            },
-            {
-                'command': 'max-metric router-lsa',
-                'doc': 'Configures the router as stub router',
-                'arguments': [],
-            },
-            {
-                'command': 'max-metric router-lsa on-startup {time}',
-                'doc': 'Configures the router as stub router on startup',
-                'arguments': [
-                    {
-                        'name': 'time',
-                        'doc': '<5-86400> seconds',
-                    },
-                ],
-            },
-            {
-                'command': 'area {area_id} nssa',
-                'doc': 'Configures area as NSSA',
-                'arguments': [
-                    {
-                        'name': 'area_id',
-                        'doc': '<0-4294967295> area range',
-                    },
-                ],
-            },
-            {
-                'command': 'area {area_id} nssa no-summary',
-                'doc': 'Configures area as NSSA (Totally stubby)',
-                'arguments': [
-                    {
-                        'name': 'area_id',
-                        'doc': '<0-4294967295> area range',
-                    },
-                ],
-            },
-            {
-                'command': 'area {area_id} stub',
-                'doc': 'Configures area as stubby',
-                'arguments': [
-                    {
-                        'name': 'area_id',
-                        'doc': '<0-4294967295> area range',
-                    },
-                ],
-            },
-            {
-                'command': 'area {area_id} stub no-summary',
-                'doc': 'Configures area as Totally stubby',
-                'arguments': [
-                    {
-                        'name': 'area_id',
-                        'doc': '<0-4294967295> area range',
-                    },
-                ],
-            },
-            {
-                'command': 'network {network} area {area}',
-                'doc': 'Adds the announcement network for OSPF',
-                'arguments': [
-                    {
-                        'name': 'network',
-                        'doc': '<A.B.C.D/M> IPv4 address with the prefix len',
-                    },
-                    {
-                        'name': 'area',
-                        'doc': '<0-4228250625 | A.B.C.D> Area-id range'
-                    }
-                ],
-            },
-            {
-                'command': 'no network {network} area {area}',
-                'doc': 'Removes the announcement network for OSPF',
-                'arguments': [
-                    {
-                        'name': 'network',
-                        'doc': '<A.B.C.D/M> IPv4 address'
-                                ' with the prefix length',
-                    },
-                    {
-                        'name': 'area',
-                        'doc': '<0-4228250625 | A.B.C.D> Area-id range'
-                    }
-                ],
             },
         ]
     }),
@@ -3130,7 +1864,7 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'no timers bgp',
+                'command': 'no timers bgp {keepalive} {hold}',
                 'doc': 'Sets the default values for keepalive interval and '
                        'hold time for a BGP router',
                 'arguments': [
@@ -3224,7 +1958,8 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'neighbor {peer} prefix-list {prefix_name}',
+                'command': 'neighbor {peer} prefix-list {prefix_name} '
+                           '{filter_direction}',
                 'doc': 'Applies a prefix-list to the neighbor to filter '
                        'updates to and from the neighbor',
                 'arguments': [
@@ -3245,7 +1980,8 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'no neighbor {peer} prefix-list {prefix_name}',
+                'command': 'no neighbor {peer} prefix-list {prefix_name} '
+                           '{filter_direction}',
                 'doc': 'Remove a prefix-list filter from the neighbor',
                 'arguments': [
                     {
@@ -3280,7 +2016,7 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'no neighbor {ip} description',
+                'command': 'no neighbor {ip} description {text}',
                 'doc': 'Removes a BGP neighbor',
                 'arguments': [
                     {
@@ -3349,7 +2085,7 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'no neighbor {ip} timers',
+                'command': 'no neighbor {ip} timers {keepalive} {hold}',
                 'doc': 'Sets the default values for keepalive interval '
                        'and hold time for a specific BGP peer',
                 'arguments': [
@@ -3374,7 +2110,7 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'neighbor {ip} allowas-in',
+                'command': 'neighbor {ip} allowas-in {val}',
                 'doc': 'Specifies an allow-as-in occurrence number '
                        'for an AS to be in the AS path',
                 'arguments': [
@@ -3393,7 +2129,7 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'no neighbor {ip} allowas-in',
+                'command': 'no neighbor {ip} allowas-in {val}',
                 'doc': 'Clears the allow-as-in occurrence number for '
                        'an AS to be in the AS path',
                 'arguments': [
@@ -3480,7 +2216,7 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'neighbor {ip_or_group} peer-group',
+                'command': 'neighbor {ip_or_group} peer-group {group}',
                 'doc': 'Assigns a neighbor to a peer-group',
                 'arguments': [
                     {
@@ -3502,7 +2238,7 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'no neighbor {ip_or_group} peer-group',
+                'command': 'no neighbor {ip_or_group} peer-group {group}',
                 'doc': 'Removes the neighbor from the peer-group',
                 'arguments': [
                     {
@@ -3593,625 +2329,119 @@ VTYSH_SPEC = OrderedDict([
         ]
     },
     ),
-    ('config_tftp_server', {
-        'doc': 'tftp-server configuration.',
-        'arguments': [],
-        'pre_commands': ['config terminal', 'tftp-server'],
-        'post_commands': ['end'],
-        'commands': [
-            {
-                'command': 'enable',
-                'doc': 'Enable tftp server.',
-                'arguments': [],
-                'returns': True
-            },
-            {
-                'command': 'no enable',
-                'doc': 'Disable tftp server.',
-                'arguments': [],
-                'returns': True
-            },
-            {
-                'command': 'path {path}',
-                'doc': 'Set Path of tftp-server',
-                'arguments': [
-                    {
-                        'name': 'path',
-                        'doc': 'path of the directory'
-                    }
-                ],
-                'returns': True
-            },
-            {
-                'command': 'no path {path}',
-                'doc': 'Unset path to tftp server.',
-                'arguments': [
-                    {
-                        'name': 'path',
-                        'doc': 'path of the directory'
-                    }
-                ],
-                'returns': True
-            }
-        ]
-    },
-    ),
-    (
-        'config_dhcp_server', {
-            'doc': 'DHCP server configuration.',
-            'arguments': [],
-            'pre_commands': ['config terminal', 'dhcp-server'],
-            'post_commands': ['end'],
-            'commands': [
-                {
-                    'command': (
-                        'range {range_name} start-ip-address {start_ip}'
-                        ' end-ip-address {end_ip}'
-                    ),
-                    'doc': 'Sets DHCP dynamic configuration.',
-                    'arguments': [
-                        {
-                            'name': 'range_name',
-                            'doc': (
-                                'DHCP range name. '
-                                'String of maximum length 15 chars'
-                            ),
-                        },
-                        {
-                            'name': 'start_ip',
-                            'doc': (
-                                '<A.B.C.D> Start range IPv4 address or '
-                                '<X:X::X:X> Start range IPv6 address'
-                            ),
-                        },
-                        {
-                            'name': 'end_ip',
-                            'doc': (
-                                '<A.B.C.D> End range IPv4 address or '
-                                '<X:X::X:X> End range IPv6 address'
-                            ),
-                        },
-                        {
-                            'name': 'subnet_mask',
-                            'doc': '<A.B.C.D> Range netmask address',
-                            'prefix': ' netmask ',
-                            'optional': True
-                        },
-                        {
-                            'name': 'broadcast_address',
-                            'doc': '<A.B.C.D> Range broadcast address',
-                            'optional': True,
-                            'prefix': ' broadcast '
-                        },
-                        {
-                            'name': 'tag_name',
-                            'doc': (
-                                'Match tags list. '
-                                'Each tag length must be less than 15 chars.'
-                            ),
-                            'optional': True,
-                            'prefix': ' match tags '
-                        },
-                        {
-                            'name': 'set_name',
-                            'doc': (
-                                'Tag set name. '
-                                'Length must be less than 15 chars.'
-                            ),
-                            'optional': True,
-                            'prefix': ' set tag '
-                        },
-                        {
-                            'name': 'prefix_len_value',
-                            'doc': (
-                                'IPV6 prefix length. '
-                                '<64 - 128> Configurable range.'
-                            ),
-                            'optional': True,
-                            'prefix': ' prefix-len '
-                        },
-                        {
-                            'name': 'lease_duration_value',
-                            'doc': (
-                                'Range lease duration. '
-                                'Default value is 60 min.'
-                            ),
-                            'optional': True,
-                            'prefix': ' lease-duration '
-                        },
-                    ],
-                },
-                {
-                    'command': (
-                        'no range {range_name} '
-                        'start-ip-address {start_ip} '
-                        'end-ip-address {end_ip} '
-                    ),
-                    'doc': 'Removes DHCP dynamic configuration.',
-                    'arguments': [
-                        {
-                            'name': 'range_name',
-                            'doc': (
-                                    'DHCP range name. '
-                                    'String of maximum length 15 chars'
-                            ),
-                        },
-                        {
-                            'name': 'start_ip',
-                            'doc': (
-                                '<A.B.C.D> Start range IPv4 address or '
-                                '<X:X::X:X> Start range IPv6 address'
-                            ),
-                        },
-                        {
-                            'name': 'end_ip',
-                            'doc': (
-                                '<A.B.C.D> End range IPv4 address or '
-                                '<X:X::X:X> End range IPv6 address'
-                            ),
-                        },
-                        {
-                            'name': 'subnet_mask',
-                            'doc': '<A.B.C.D> Range netmask address',
-                            'optional': True,
-                            'prefix': ' netmask '
-                        },
-                        {
-                            'name': 'broadcast_address',
-                            'doc': '<A.B.C.D> Range broadcast address',
-                            'optional': True,
-                            'prefix': ' broadcast '
-                        },
-                        {
-                            'name': 'tag_name',
-                            'doc': (
-                                'Match tags list. '
-                                'Each tag length must be less than 15 chars.'
-                            ),
-                            'optional': True,
-                            'prefix': ' match tags '
-                        },
-                        {
-                            'name': 'set_name',
-                            'doc': (
-                                'Tag set name. '
-                                'Length must be less than 15 chars.'
-                            ),
-                            'optional': True,
-                            'prefix': ' set tag '
-                        },
-                        {
-                            'name': 'prefix_len_value',
-                            'doc': (
-                                'IPV6 prefix length. '
-                                '<64 - 128> Configurable range.'
-                            ),
-                            'optional': True,
-                            'prefix': ' prefix-len '
-                        },
-                        {
-                            'name': 'lease_duration_value',
-                            'doc': (
-                                'Range lease duration. '
-                                'Default value is 60 min.'
-                            ),
-                            'optional': True,
-                            'prefix': ' lease-duration '
-                        },
-                    ],
-                },
-                {
-                    'command': (
-                        'static {ip_address}'
-                    ),
-                    'doc': 'Sets DHCP dynamic configuration.',
-                    'arguments': [
-                        {
-                            'name': 'ip_address',
-                            'doc': (
-                                '<A.B.C.D> IPv4 address or '
-                                '<X:X::X:X> IPv6 address'
-                            ),
-                        },
-                        {
-                            'name': 'mac_address',
-                            'doc': (
-                                '<XX:XX:XX:XX:XX:XX> MAC address or '
-                                '<XX-XX-XX-XX-XX-XX> MAC address'
-                                'Client MAC addresses'
-                            ),
-                            'optional': True,
-                            'prefix': ' match-mac-addresses '
-                        },
-                        {
-                            'name': 'hostname',
-                            'doc': (
-                                'Client hostname. '
-                                'Length must be less than 15 chars.'
-                            ),
-                            'optional': True,
-                            'prefix': ' match-client-hostname '
-                        },
-                        {
-                            'name': 'client_id',
-                            'doc': (
-                                'Client id. '
-                                'Length must be less than 15 chars.'
-                            ),
-                            'optional': True,
-                            'prefix': ' match-client-id '
-                        },
-                        {
-                            'name': 'set_tag_names',
-                            'doc': (
-                                'Set tag list names. '
-                                'Each tag length must be less than 15 chars.'
-                            ),
-                            'optional': True,
-                            'prefix': ' set tags '
-                        },
-                        {
-                            'name': 'lease_duration_value',
-                            'doc': (
-                                'Range lease duration. '
-                                'Default value is 60 min.'
-                            ),
-                            'optional': True,
-                            'prefix': ' lease-duration '
-                        },
-                    ],
-                },
-                {
-                    'command': (
-                        'no static {ip_address}'
-                    ),
-                    'doc': 'Removes DHCP dynamic configuration.',
-                    'arguments': [
-                        {
-                            'name': 'ip_address',
-                            'doc': (
-                                '<A.B.C.D> IPv4 address or '
-                                '<X:X::X:X> IPv6 address'
-                            ),
-                        },
-                        {
-                            'name': 'mac_address',
-                            'doc': (
-                                '<XX:XX:XX:XX:XX:XX> MAC address or '
-                                '<XX-XX-XX-XX-XX-XX> MAC address'
-                                'Client MAC addresses'
-                            ),
-                            'optional': True,
-                            'prefix': ' match-mac-addresses '
-                        },
-                        {
-                            'name': 'hostname',
-                            'doc': (
-                                'Client hostname '
-                                'Length must be less than 15 chars.'
-                            ),
-                            'optional': True,
-                            'prefix': ' match-client-hostname '
-                        },
-                        {
-                            'name': 'client_id',
-                            'doc': (
-                                'Client id. '
-                                'Length must be less than 15 chars.'
-                            ),
-                            'optional': True,
-                            'prefix': ' match-client-id '
-                        },
-                        {
-                            'name': 'set_tag_names',
-                            'doc': (
-                                'Set tag list names. '
-                                'Each tag length must be less than 15 chars.'
-                            ),
-                            'optional': True,
-                            'prefix': ' set tags '
-                        },
-                        {
-                            'name': 'lease_duration_value',
-                            'doc': (
-                                'Range lease duration. '
-                                'Default value is 60 min.'
-                            ),
-                            'optional': True,
-                            'prefix': ' lease-duration '
-                        },
-                    ],
-                },
-                {
-                    'command': (
-                        'option set'
-                    ),
-                    'doc': (
-                        'Sets DHCP configuration values using an option name.'
-                    ),
-                    'arguments': [
-                        {
-                            'name': 'set_name',
-                            'doc': 'DHCP option name',
-                            'prefix': ' option-name ',
-                            'optional': True
-                        },
-                        {
-                            'name': 'option-number',
-                            'doc': 'DHCP option number',
-                            'prefix': ' option-number ',
-                            'optional': True
-                        },
-                        {
-                            'name': 'option_value',
-                            'doc': 'DHCP option value',
-                            'prefix': ' option-value ',
-                            'optional': True
-                        },
-                        {
-                            'name': 'tag_name',
-                            'doc': (
-                                'Match tags list. '
-                                'Each tag length must be less than 15 chars.'
-                            ),
-                            'optional': True,
-                            'prefix': ' match tags'
-                        },
-                        {
-                            'name': 'ipv6',
-                            'doc': (
-                                'Enable ipv6 for the set.'
-                            ),
-                            'optional': True,
-                        },
-                    ],
-                },
-                {
-                    'command': (
-                        'no option set'
-                    ),
-                    'doc': (
-                        'Removes DHCP configuration '
-                        'values using an option name.'
-                    ),
-                    'arguments': [
-                        {
-                            'name': 'set_name',
-                            'doc': 'DHCP option name',
-                            'prefix': ' option-name ',
-                            'optional': True
-                        },
-                        {
-                            'name': 'option-number',
-                            'doc': 'DHCP option number',
-                            'prefix': ' option-number ',
-                            'optional': True
-                        },
-                        {
-                            'name': 'option_value',
-                            'doc': 'DHCP option value',
-                            'prefix': ' option-value ',
-                            'optional': True
-                        },
-                        {
-                            'name': 'tag_name',
-                            'doc': (
-                                'Match tags list. '
-                                'Each tag length must be less than 15 chars.'
-                            ),
-                            'optional': True,
-                            'prefix': ' match-tags ',
-                        },
-                        {
-                            'name': 'ipv6',
-                            'doc': (
-                                'Enable ipv6 for the set.'
-                            ),
-                            'optional': True,
-                        },
-                    ],
-                },
-                {
-                    'command': (
-                        'match set tag {tag_name}'
-                    ),
-                    'doc': (
-                        'Sets DHCP match configuration using an option name.'
-                    ),
-                    'arguments': [
-                        {
-                            'name': 'tag_name',
-                            'doc': (
-                                'DHCP match tag name'
-                                'Length must be less than 15 chars.'
-                            ),
-                        },
-                        {
-                            'name': 'option_number',
-                            'doc': (
-                                'DHCP option number. '
-                                '<0 - 255> Configurable range.'
-                            ),
-                            'prefix': ' match-option-number ',
-                            'optional': True
-                        },
-                        {
-                            'name': 'option_name',
-                            'doc': (
-                                'DHCP option name. '
-                                'Length must be less than 15 chars.'
-                            ),
-                            'prefix': ' match-option-name ',
-                            'optional': True
-                        },
-                        {
-                            'name': 'option_value',
-                            'doc': 'DHCP option value',
-                            'optional': True,
-                            'prefix': ' match-option-value '
-                        },
-                    ],
-                },
-                {
-                    'command': (
-                        'no match set tag {tag_name}'
-                    ),
-                    'doc': (
-                        'Removes DHCP match configuration '
-                        'using an option name.'
-                    ),
-                    'arguments': [
-                        {
-                            'name': 'tag_name',
-                            'doc': (
-                                'DHCP match tag name'
-                                'Length must be less than 15 chars.'
-                            ),
-                        },
-                        {
-                            'name': 'option_name',
-                            'doc': (
-                                'DHCP option name. '
-                                'Length must be less than 15 chars.'
-                            ),
-                            'prefix': ' match-option-name ',
-                            'optional': True
-                        },
-                        {
-                            'name': 'option_number',
-                            'doc': (
-                                'DHCP option number. '
-                                '<0 - 255> Configurable range.'
-                            ),
-                            'prefix': ' match-option-number ',
-                            'optional': True
-                        },
-                        {
-                            'name': 'option_value',
-                            'doc': 'DHCP option value',
-                            'optional': True,
-                            'prefix': ' match-option-value '
-                        },
-                    ],
-                },
-                {
-                    'command': (
-                        'boot set file {file_name}'
-                    ),
-                    'doc': 'Sets DHCP bootp options.',
-                    'arguments': [
-                        {
-                            'name': 'file_name',
-                            'doc': 'DHCP boot file name'
-                        },
-                        {
-                            'name': 'tag_name',
-                            'doc': (
-                                'DHCP match tag name. '
-                                'Length must be less than 15 chars.'
-                            ),
-                            'optional': True,
-                            'prefix': ' match tag '
-                        },
-                    ],
-                },
-                {
-                    'command': (
-                        'no boot set file {file_name}'
-                    ),
-                    'doc': 'Removes bootp options.',
-                    'arguments': [
-                        {
-                            'name': 'file_name',
-                            'doc': 'DHCP boot file name'
-                        },
-                        {
-                            'name': 'tag_name',
-                            'doc': (
-                                'DHCP match tag name. '
-                                'Length must be less than 15 chars.'
-                            ),
-                            'optional': True,
-                            'prefix': ' match tag '
-                        },
-                    ],
-                }
-            ]
-        },
-    ),
-    ('config_mirror_session', {
-        'doc': 'Mirror session configuration.',
+    ('config_access_list_ip_testname', {
+        'doc': 'ACE permission.',
         'arguments': [
             {
-                'name': 'name',
-                'doc': (
-                    'Up to 64 letters, numbers, underscores, dashes, '
-                    'or periods.'
-                )
+                'name': 'acl_name',
+                'doc': 'access-list name'
             }
         ],
-        'pre_commands': ['config terminal', 'mirror session {name}'],
+        'pre_commands': ['config terminal', 'access-list ip {acl_name}'],
         'post_commands': ['end'],
         'commands': [
             {
-                'command': 'destination interface',
-                'doc': 'Set the destination interface.',
+                'command': '{negate} {sequence} permit {protocol} '
+                           '{ip1} {port1} {ip2} {port2} {count} {log}',
+                'doc': 'Permit access-list entry',
                 'arguments': [
                     {
-                        'name': 'interface',
-                        'doc': 'Ethernet interface or LAG'
-                    }
-                ]
-            },
-            {
-                'command': 'no destination interface',
-                'doc': (
-                    'Un-set the destination interface and '
-                    'shutdown the session.'
-                ),
-                'arguments': []
-            },
-            {
-                'command': 'shutdown',
-                'doc': 'Shutdown the mirroring session.',
-                'arguments': []
-            },
-            {
-                'command': 'no shutdown',
-                'doc': 'Activate the mirroring session.',
-                'arguments': []
-            },
-            {
-                'command': 'source interface',
-                'doc': 'Assign a source interface.',
-                'arguments': [
-                    {
-                        'name': 'interface',
-                        'doc': 'Ethernet interface or LAG'
+                        'name': 'negate',
+                        'doc': 'remove access-list entry.',
                     },
                     {
-                        'name': 'direction',
-                        'doc': (
-                            '<both | rx | tx>'
-                        ),
-                    }
-                ]
+                        'name': 'sequence',
+                        'doc': 'sequence number of ACE.',
+                    },
+                    {
+                        'name': 'protocol',
+                        'doc': 'Protocol (number) type.',
+                    },
+                    {
+                        'name': 'ip1',
+                        'doc': '<A.B.C.D/M> Source IPv4 address.',
+                    },
+                    {
+                        'name': 'port1',
+                        'doc': 'Source Port range <1-65535>.',
+                    },
+                    {
+                        'name': 'ip2',
+                        'doc': '<A.B.C.D/M> Destination IPv4 address.',
+                    },
+                    {
+                        'name': 'port2',
+                        'doc': 'Destination Port range <1-65535>.',
+                    },
+                    {
+                        'name': 'count',
+                        'doc': 'TBD',
+                        'optional': True
+                    },
+                    {
+                        'name': 'log',
+                        'doc': 'TBD',
+                        'optional': True
+                    },
+                ],
             },
             {
-                'command': 'no source interface',
-                'doc': (
-                    'Remove a source interface from the session.'
-                ),
+                'command': '{negate} {sequence} deny {protocol} '
+                           '{ip1} {port1} {ip2} {port2} {count} {log}',
+                'doc': 'Deny access-list entry',
                 'arguments': [
                     {
-                        'name': 'interface',
-                        'doc': 'Ethernet interface or LAG'
-                    }
-                ]
-            }
+                        'name': 'negate',
+                        'doc': 'remove access-list entry.',
+                    },
+                    {
+                        'name': 'sequence',
+                        'doc': 'sequence number of ACE.',
+                    },
+                    {
+                        'name': 'protocol',
+                        'doc': 'Protocol type for entry.',
+                    },
+                    {
+                        'name': 'ip1',
+                        'doc': '<A.B.C.D/M> Source IPv4 address.',
+                    },
+                    {
+                        'name': 'port1',
+                        'doc': 'Source Port range <1-65535>.',
+                    },
+                    {
+                        'name': 'ip2',
+                        'doc': '<A.B.C.D/M> Destination IPv4 address.',
+                    },
+                    {
+                        'name': 'port2',
+                        'doc': 'Destination Port range <1-65535>.',
+                    },
+                    {
+                        'name': 'count',
+                        'doc': 'TBD',
+                        'optional': True
+                    },
+                    {
+                        'name': 'log',
+                        'doc': 'TBD',
+                        'optional': True
+                    },
+                ],
+            },
+            {
+                'command': 'no {sequence}',
+                'doc': 'Remove access-list entry',
+                'arguments': [
+                    {
+                        'name': 'sequence',
+                        'doc': 'sequence number of ACE.',
+                    },
+                ],
+            },
         ]
-    },
-    )
+    })
 ])
 
 """Vtysh Specification as a Python dictionary"""
@@ -4221,26 +2451,61 @@ VTYSH_EXCEPTIONS_SPEC = OrderedDict([
     (
         'UnknownCommandException',
         [
-            'Unknown command', '% Unknown command.'
+            'unknown command',
         ]
     ), (
         'IncompleteCommandException',
         [
-            'Command incomplete',
+            'command incomplete',
         ]
     ), (
-        'NotValidLAG',
+        'InvalidQnCommandException',
         [
-            'Specified LAG port does not exist.',
+            'name  acl name',
         ]
     ), (
-        'DuplicateLoopbackIPException',
+        'AclEmptyException',
         [
-            'IP address is already assigned to interface. [A-Za-z0-9]+\
-             as primary.',
+            'acl is empty',
+        ]
+    ), (
+        'TcamResourcesException',
+        [
+            'command failed',
+        ]
+    ), (
+        'ResequenceNumberException',
+        [
+            'sequence numbers would exceed maximum',
+        ]
+    ), (
+        'AmbiguousCommandException',
+        [
+            'ambiguous command',
+        ]
+    ), (
+        'InvalidL4SourcePortRangeException',
+        [
+            'invalid l4 source port range',
+        ]
+    ), (
+        'EchoCommandException',
+        [
+            'range',
+        ]
+    ), (
+        'AceDoesNotExistException',
+        [
+            'acl entry does not exist',
+        ]
+    ), (
+        'AclDoesNotExistException',
+        [
+            'acl does not exist',
         ]
     )
 ])
+
 """Vtysh Exceptions specification as a Python dictionary"""
 
 
