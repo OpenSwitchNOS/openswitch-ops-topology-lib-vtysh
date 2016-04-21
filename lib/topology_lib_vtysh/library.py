@@ -2041,20 +2041,20 @@ class Configure(ContextManager):
 
         ::
 
-            # snmp-server host {host_ip_address} trap version                             {snmp_version}  # noqa
+            # snmp-server host {host_ip_address} trap version {snmp_version}
 
         :param host_ip_address: Configured host ip address for trap receiver
         :param snmp_version: Configured snmp version for receiver
         :param community: Configured snmp community name for trap
             receiver
-        :param community-name: Configured snmp community name for trap
+        :param community_name: Configured snmp community name for trap
             receiver
         :param port: Configured snmp port for trap receiver
-        :param snmp-port: Configured snmp port for trap receiver
-        """  # noqa
+        :param snmp_port: Configured snmp port for trap receiver
+        """
 
         cmd = [
-            'snmp-server host {host_ip_address} trap version                             {snmp_version}'  # noqa
+            'snmp-server host {host_ip_address} trap version {snmp_version}'
         ]
 
         if community:
@@ -2064,9 +2064,9 @@ class Configure(ContextManager):
                 )
             )
 
-        if community-name:
+        if community_name:
             cmd.append(
-                '{}{{community-name}}{}'.format(
+                '{}{{community_name}}{}'.format(
                     '', ''
                 )
             )
@@ -2078,9 +2078,9 @@ class Configure(ContextManager):
                 )
             )
 
-        if snmp-port:
+        if snmp_port:
             cmd.append(
-                '{}{{snmp-port}}{}'.format(
+                '{}{{snmp_port}}{}'.format(
                     '', ''
                 )
             )
@@ -2103,21 +2103,21 @@ class Configure(ContextManager):
 
         ::
 
-            # no snmp-server host {host_ip_address} trap                             version {snmp_version}  # noqa
+            # no snmp-server host {host_ip_address} trap version {snmp_version}
 
         :param host_ip_address: Unconfigured host ip address for trap
             receiver
         :param snmp_version: Unconfigured snmp version for receiver
         :param community: Unconfigured snmp community name for trap
             receiver
-        :param community-name: Unconfigured snmp community name for trap
+        :param community_name: Unconfigured snmp community name for trap
             receiver
         :param port: Unconfigured snmp port for trap receiver
-        :param snmp-port: Unconfigured snmp port for trap receiver
-        """  # noqa
+        :param snmp_port: Unconfigured snmp port for trap receiver
+        """
 
         cmd = [
-            'no snmp-server host {host_ip_address} trap                             version {snmp_version}'  # noqa
+            'no snmp-server host {host_ip_address} trap version {snmp_version}'
         ]
 
         if community:
@@ -2127,9 +2127,9 @@ class Configure(ContextManager):
                 )
             )
 
-        if community-name:
+        if community_name:
             cmd.append(
-                '{}{{community-name}}{}'.format(
+                '{}{{community_name}}{}'.format(
                     '', ''
                 )
             )
@@ -2141,9 +2141,9 @@ class Configure(ContextManager):
                 )
             )
 
-        if snmp-port:
+        if snmp_port:
             cmd.append(
-                '{}{{snmp-port}}{}'.format(
+                '{}{{snmp_port}}{}'.format(
                     '', ''
                 )
             )
@@ -2156,7 +2156,7 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
-    def snmp_server_inform_trap_version(
+    def snmp_server_host_inform_version(
             self, host_ip_address, snmp_version, community='',
             community_name='', port='', snmp_port=''):
         """
@@ -2166,20 +2166,20 @@ class Configure(ContextManager):
 
         ::
 
-            # snmp-server inform {host_ip_address} trap version                             {snmp_version}  # noqa
+            # snmp-server host {host_ip_address} inform version {snmp_version}
 
         :param host_ip_address: Configured host ip address for notifications
         :param snmp_version: Configured snmp version for notifications
         :param community: Configured snmp community name for
             notifications
-        :param community-name: Configured snmp community name for
+        :param community_name: Configured snmp community name for
             notifications
         :param port: Configured snmp port for notifications
-        :param snmp-port: Configured snmp port for notifications
-        """  # noqa
+        :param snmp_port: Configured snmp port for notifications
+        """
 
         cmd = [
-            'snmp-server inform {host_ip_address} trap version                             {snmp_version}'  # noqa
+            'snmp-server host {host_ip_address} inform version {snmp_version}'
         ]
 
         if community:
@@ -2189,9 +2189,9 @@ class Configure(ContextManager):
                 )
             )
 
-        if community-name:
+        if community_name:
             cmd.append(
-                '{}{{community-name}}{}'.format(
+                '{}{{community_name}}{}'.format(
                     '', ''
                 )
             )
@@ -2203,9 +2203,9 @@ class Configure(ContextManager):
                 )
             )
 
-        if snmp-port:
+        if snmp_port:
             cmd.append(
-                '{}{{snmp-port}}{}'.format(
+                '{}{{snmp_port}}{}'.format(
                     '', ''
                 )
             )
@@ -2218,7 +2218,7 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
-    def no_snmp_server_inform_trap_version(
+    def no_snmp_server_host_inform_version(
             self, host_ip_address, snmp_version, community='',
             community_name='', port='', snmp_port=''):
         """
@@ -2228,21 +2228,21 @@ class Configure(ContextManager):
 
         ::
 
-            # no snmp-server inform {host_ip_address} trap                            version {snmp_version}  # noqa
+            # no snmp-server host {host_ip_address} inform version {snmp_version}  # noqa
 
         :param host_ip_address: Unconfigured host ip address for
             notifications
         :param snmp_version: Unconfigured snmp version for notifications
         :param community: Unconfigured snmp community name for
             notifications
-        :param community-name: Unconfigured snmp community name for
+        :param community_name: Unconfigured snmp community name for
             notifications
         :param port: Unconfigured snmp port for notifications
-        :param snmp-port: Unconfigured snmp port for notifications
+        :param snmp_port: Unconfigured snmp port for notifications
         """  # noqa
 
         cmd = [
-            'no snmp-server inform {host_ip_address} trap                            version {snmp_version}'  # noqa
+            'no snmp-server host {host_ip_address} inform version {snmp_version}'  # noqa
         ]
 
         if community:
@@ -2252,9 +2252,9 @@ class Configure(ContextManager):
                 )
             )
 
-        if community-name:
+        if community_name:
             cmd.append(
-                '{}{{community-name}}{}'.format(
+                '{}{{community_name}}{}'.format(
                     '', ''
                 )
             )
@@ -2266,9 +2266,9 @@ class Configure(ContextManager):
                 )
             )
 
-        if snmp-port:
+        if snmp_port:
             cmd.append(
-                '{}{{snmp-port}}{}'.format(
+                '{}{{snmp_port}}{}'.format(
                     '', ''
                 )
             )
@@ -2290,13 +2290,13 @@ class Configure(ContextManager):
 
         ::
 
-            # snmpv3 user {user-name}
+            # snmpv3 user {user_name}
 
-        :param user-name: Configured user-name for SNMPv3
+        :param user-name: Configured user_name for SNMPv3
         """
 
         cmd = [
-            'snmpv3 user {user-name}'
+            'snmpv3 user {user_name}'
         ]
 
         result = self.enode(
@@ -2307,7 +2307,7 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
-    def no_snmpv3_username(
+    def no_snmpv3_user(
             self, user_name):
         """
         Unconfigure SNMPv3 user name
@@ -2316,13 +2316,13 @@ class Configure(ContextManager):
 
         ::
 
-            # no snmpv3 username {user-name}
+            # no snmpv3 user {user_name}
 
-        :param user-name: Unconfigured SNMPv3 user name
+        :param user_name: Unconfigured SNMPv3 user name
         """
 
         cmd = [
-            'no snmpv3 username {user-name}'
+            'no snmpv3 user {user_name}'
         ]
 
         result = self.enode(
@@ -2343,15 +2343,15 @@ class Configure(ContextManager):
 
         ::
 
-            # snmpv3 user {user-name} auth {auth-protocol}                             auth-pass {auth-password}  # noqa
+            # snmpv3 user {user_name} auth {auth_protocol} auth-pass {auth_password}  # noqa
 
-        :param user-name: Configured user-name for SNMPv3
-        :param auth-protocol: Configured auth protocol for SNMPv3 user
-        :param auth-password: Configured auth password for SNMPv3 user
+        :param user_name: Configured user-name for SNMPv3
+        :param auth_protocol: Configured auth protocol for SNMPv3 user
+        :param auth_password: Configured auth password for SNMPv3 user
         """  # noqa
 
         cmd = [
-            'snmpv3 user {user-name} auth {auth-protocol}                             auth-pass {auth-password}'  # noqa
+            'snmpv3 user {user_name} auth {auth_protocol} auth-pass {auth_password}'  # noqa
         ]
 
         result = self.enode(
@@ -2372,15 +2372,15 @@ class Configure(ContextManager):
 
         ::
 
-            # no snmpv3 user {user-name} auth {auth-protocol}                             auth-pass {auth-password}  # noqa
+            # no snmpv3 user {user_name} auth {auth_protocol} auth-pass {auth_password}  # noqa
 
-        :param user-name: Unconfigured user-name for SNMPv3
-        :param auth-protocol: Unconfigured auth protocol for SNMPv3 user
-        :param auth-password: Unconfigured auth password for SNMPv3 user
+        :param user_name: Unconfigured user-name for SNMPv3
+        :param auth_protocol: Unconfigured auth protocol for SNMPv3 user
+        :param auth_password: Unconfigured auth password for SNMPv3 user
         """  # noqa
 
         cmd = [
-            'no snmpv3 user {user-name} auth {auth-protocol}                             auth-pass {auth-password}'  # noqa
+            'no snmpv3 user {user_name} auth {auth_protocol} auth-pass {auth_password}'  # noqa
         ]
 
         result = self.enode(
@@ -2402,17 +2402,17 @@ class Configure(ContextManager):
 
         ::
 
-            # snmpv3 user {user-name} auth {auth-protocol}                             auth-pass {auth-password} priv {priv-protocol}                             priv-pass {priv-password}  # noqa
+            # snmpv3 user {user_name} auth {auth_protocol} auth-pass {auth_password} priv {priv_protocol} priv-pass {priv_password}  # noqa
 
-        :param user-name: Configured user-name for SNMPv3
-        :param auth-protocol: Configured auth protocol for SNMPv3 user
-        :param auth-password: Configured auth password for SNMPv3 user
-        :param priv-protocol: Configured priv protocol for SNMPv3 user
-        :param priv-password: Configured priv password for SNMPv3 user
+        :param user_name: Configured user-name for SNMPv3
+        :param auth_protocol: Configured auth protocol for SNMPv3 user
+        :param auth_password: Configured auth password for SNMPv3 user
+        :param priv_protocol: Configured priv protocol for SNMPv3 user
+        :param priv_password: Configured priv password for SNMPv3 user
         """  # noqa
 
         cmd = [
-            'snmpv3 user {user-name} auth {auth-protocol}                             auth-pass {auth-password} priv {priv-protocol}                             priv-pass {priv-password}'  # noqa
+            'snmpv3 user {user_name} auth {auth_protocol} auth-pass {auth_password} priv {priv_protocol} priv-pass {priv_password}'  # noqa
         ]
 
         result = self.enode(
@@ -2434,18 +2434,77 @@ class Configure(ContextManager):
 
         ::
 
-            # no snmpv3 user {user-name} auth {auth-protocol}                             auth-pass {auth-password} priv {priv-protocol}                             priv-pass {priv-password}  # noqa
+            # no snmpv3 user {user_name} auth {auth_protocol} auth-pass {auth_password} priv {priv_protocol} priv-pass {priv_password}  # noqa
 
-        :param user-name: Unconfigured user-name for SNMPv3
-        :param auth-protocol: Unconfigured auth protocol for SNMPv3 user
-        :param auth-password: Unconfigured auth password for SNMPv3 user
-        :param priv-protocol: Unconfigured priv protocol for SNMPv3 user
-        :param priv-password: Unconfigured priv password for SNMPv3 user
+        :param user_name: Unconfigured user-name for SNMPv3
+        :param auth_protocol: Unconfigured auth protocol for SNMPv3 user
+        :param auth_password: Unconfigured auth password for SNMPv3 user
+        :param priv_protocol: Unconfigured priv protocol for SNMPv3 user
+        :param priv_password: Unconfigured priv password for SNMPv3 user
         """  # noqa
 
         cmd = [
-            'no snmpv3 user {user-name} auth {auth-protocol}                             auth-pass {auth-password} priv {priv-protocol}                             priv-pass {priv-password}'  # noqa
+            'no snmpv3 user {user_name} auth {auth_protocol} auth-pass {auth_password} priv {priv_protocol} priv-pass {priv_password}'  # noqa
         ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def snmp_server_agent_port(
+            self, port_num):
+        """
+        Configure SNMP agent port
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # snmp-server agent-port {port_num}
+
+        :param port_num: UDP port on which the SNMP agent listens
+        """
+
+        cmd = [
+            'snmp-server agent-port {port_num}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_snmp_server_agent_port(
+            self, port_num=''):
+        """
+        Unconfigure SNMP agent port
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no snmp-server agent-port
+
+        :param port_num: UDP port on which the SNMP agent listens
+        """
+
+        cmd = [
+            'no snmp-server agent-port'
+        ]
+
+        if port_num:
+            cmd.append(
+                '{}{{port_num}}{}'.format(
+                    '', ''
+                )
+            )
 
         result = self.enode(
             (' '.join(cmd)).format(**locals()),
@@ -10442,6 +10501,33 @@ def show_core_dump(
     return parse_show_core_dump(result)
 
 
+def show_snmp_agent_port(
+        enode):
+    """
+    Display SNMP agent port configuration.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show snmp agent-port
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_snmp_agent_port`
+    """
+
+    cmd = [
+        'show snmp agent-port'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_snmp_agent_port(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -10520,5 +10606,6 @@ __all__ = [
     'show_snmp_trap',
     'diag_dump_lacp_basic',
     'show_snmpv3_users',
-    'show_core_dump'
+    'show_core_dump',
+    'show_snmp_agent_port'
 ]
