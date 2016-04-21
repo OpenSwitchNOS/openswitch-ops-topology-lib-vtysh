@@ -701,7 +701,12 @@ VTYSH_SPEC = OrderedDict([
                 'arguments': [],
                 'returns': True
             },
-
+            {
+                'command': 'show snmp agent-port',
+                'doc': 'Display SNMP agent port configuration.',
+                'arguments': [],
+                'returns': True
+            },
         ]
     }),
     ('configure', {
@@ -1516,8 +1521,8 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'snmp-server host {host_ip_address} trap version \
-                            {snmp_version}',
+                'command': ('snmp-server host {host_ip_address} trap version '
+                            '{snmp_version}'),
                 'doc': 'Configure SNMP server information for trap receiver',
                 'arguments': [
                     {
@@ -1535,7 +1540,7 @@ VTYSH_SPEC = OrderedDict([
                          'optional': True
                     },
                     {
-                         'name': 'community-name',
+                         'name': 'community_name',
                          'doc': 'Configured snmp community name for trap \
                                  receiver',
                          'optional': True
@@ -1546,15 +1551,15 @@ VTYSH_SPEC = OrderedDict([
                          'optional': True
                     },
                     {
-                         'name': 'snmp-port',
+                         'name': 'snmp_port',
                          'doc': 'Configured snmp port for trap receiver',
                          'optional': True
                     }
                 ],
             },
             {
-                'command': 'no snmp-server host {host_ip_address} trap \
-                            version {snmp_version}',
+                'command': ('no snmp-server host {host_ip_address} trap '
+                           'version {snmp_version}'),
                 'doc': 'Unconfigure SNMP server information for trap receiver',
                 'arguments': [
                     {
@@ -1573,7 +1578,7 @@ VTYSH_SPEC = OrderedDict([
                          'optional': True
                     },
                     {
-                         'name': 'community-name',
+                         'name': 'community_name',
                          'doc': 'Unconfigured snmp community name for trap \
                                  receiver',
                          'optional': True
@@ -1584,15 +1589,15 @@ VTYSH_SPEC = OrderedDict([
                          'optional': True
                     },
                     {
-                         'name': 'snmp-port',
+                         'name': 'snmp_port',
                          'doc': 'Unconfigured snmp port for trap receiver',
                          'optional': True
                     }
                 ],
             },
             {
-                'command': 'snmp-server inform {host_ip_address} trap version \
-                            {snmp_version}',
+                'command': ('snmp-server host {host_ip_address} inform version '
+                            '{snmp_version}'),
                 'doc': 'Configure SNMP server information for notifications',
                 'arguments': [
                     {
@@ -1610,7 +1615,7 @@ VTYSH_SPEC = OrderedDict([
                          'optional': True
                     },
                     {
-                         'name': 'community-name',
+                         'name': 'community_name',
                          'doc': 'Configured snmp community name for \
                                  notifications',
                          'optional': True
@@ -1621,15 +1626,15 @@ VTYSH_SPEC = OrderedDict([
                          'optional': True
                     },
                     {
-                         'name': 'snmp-port',
+                         'name': 'snmp_port',
                          'doc': 'Configured snmp port for notifications',
                          'optional': True
                     }
                 ],
             },
             {
-                'command': 'no snmp-server inform {host_ip_address} trap\
-                            version {snmp_version}',
+                'command': ('no snmp-server host {host_ip_address} inform '
+                            'version {snmp_version}'),
                 'doc': 'Unconfigure SNMP server information for notifications',
                 'arguments': [
                     {
@@ -1648,7 +1653,7 @@ VTYSH_SPEC = OrderedDict([
                          'optional': True
                     },
                     {
-                         'name': 'community-name',
+                         'name': 'community_name',
                          'doc': 'Unconfigured snmp community name for \
                                  notifications',
                          'optional': True
@@ -1659,133 +1664,154 @@ VTYSH_SPEC = OrderedDict([
                          'optional': True
                     },
                     {
-                         'name': 'snmp-port',
+                         'name': 'snmp_port',
                          'doc': 'Unconfigured snmp port for notifications',
                          'optional': True
                     }
                 ],
             },
             {
-                'command': 'snmpv3 user {user-name}',
+                'command': 'snmpv3 user {user_name}',
                 'doc': 'Configure SNMPv3 user name',
                 'arguments': [
                     {
                          'name': 'user-name',
-                         'doc': 'Configured user-name for SNMPv3'
+                         'doc': 'Configured user_name for SNMPv3'
                     }
                 ],
             },
             {
-                'command': 'no snmpv3 username {user-name}',
+                'command': 'no snmpv3 user {user_name}',
                 'doc': 'Unconfigure SNMPv3 user name',
                 'arguments': [
                     {
-                         'name': 'user-name',
+                         'name': 'user_name',
                          'doc': 'Unconfigured SNMPv3 user name'
                     }
                 ],
             },
             {
-                'command': 'snmpv3 user {user-name} auth {auth-protocol} \
-                            auth-pass {auth-password}',
+                'command': ('snmpv3 user {user_name} auth {auth_protocol} '
+                            'auth-pass {auth_password}'),
                 'doc': 'Configure SNMPv3 user name with auth protocol and \
                         password',
                 'arguments': [
                     {
-                         'name': 'user-name',
+                         'name': 'user_name',
                          'doc': 'Configured user-name for SNMPv3'
                     },
                     {
-                         'name': 'auth-protocol',
+                         'name': 'auth_protocol',
                          'doc': 'Configured auth protocol for SNMPv3 user'
                     },
                     {
-                         'name': 'auth-password',
+                         'name': 'auth_password',
                          'doc': 'Configured auth password for SNMPv3 user'
                     }
 
                 ],
             },
             {
-                'command': 'no snmpv3 user {user-name} auth {auth-protocol} \
-                            auth-pass {auth-password}',
+                'command': ('no snmpv3 user {user_name} auth {auth_protocol} '
+                            'auth-pass {auth_password}'),
                 'doc': 'Unconfigure SNMPv3 user name with auth protocol and \
                         password',
                 'arguments': [
                     {
-                         'name': 'user-name',
+                         'name': 'user_name',
                          'doc': 'Unconfigured user-name for SNMPv3'
                     },
                     {
-                         'name': 'auth-protocol',
+                         'name': 'auth_protocol',
                          'doc': 'Unconfigured auth protocol for SNMPv3 user'
                     },
                     {
-                         'name': 'auth-password',
+                         'name': 'auth_password',
                          'doc': 'Unconfigured auth password for SNMPv3 user'
                     }
 
                 ],
             },
             {
-                'command': 'snmpv3 user {user-name} auth {auth-protocol} \
-                            auth-pass {auth-password} priv {priv-protocol} \
-                            priv-pass {priv-password}',
+                'command': ('snmpv3 user {user_name} auth {auth_protocol} '
+                            'auth-pass {auth_password} priv {priv_protocol} '
+                            'priv-pass {priv_password}'),
                 'doc': 'Configure SNMPv3 user name with auth protocol and \
                         password',
                 'arguments': [
                     {
-                         'name': 'user-name',
+                         'name': 'user_name',
                          'doc': 'Configured user-name for SNMPv3'
                     },
                     {
-                         'name': 'auth-protocol',
+                         'name': 'auth_protocol',
                          'doc': 'Configured auth protocol for SNMPv3 user'
                     },
                     {
-                         'name': 'auth-password',
+                         'name': 'auth_password',
                          'doc': 'Configured auth password for SNMPv3 user'
                     },
                     {
-                         'name': 'priv-protocol',
+                         'name': 'priv_protocol',
                          'doc': 'Configured priv protocol for SNMPv3 user'
                     },
                     {
-                         'name': 'priv-password',
+                         'name': 'priv_password',
                          'doc': 'Configured priv password for SNMPv3 user'
                     }
 
                 ],
             },
             {
-                'command': 'no snmpv3 user {user-name} auth {auth-protocol} \
-                            auth-pass {auth-password} priv {priv-protocol} \
-                            priv-pass {priv-password}',
+                'command': ('no snmpv3 user {user_name} auth {auth_protocol} '
+                            'auth-pass {auth_password} priv {priv_protocol} '
+                            'priv-pass {priv_password}'),
                 'doc': 'Unconfigure SNMPv3 user name with auth protocol and \
                         password',
                 'arguments': [
                     {
-                         'name': 'user-name',
+                         'name': 'user_name',
                          'doc': 'Unconfigured user-name for SNMPv3'
                     },
                     {
-                         'name': 'auth-protocol',
+                         'name': 'auth_protocol',
                          'doc': 'Unconfigured auth protocol for SNMPv3 user'
                     },
                     {
-                         'name': 'auth-password',
+                         'name': 'auth_password',
                          'doc': 'Unconfigured auth password for SNMPv3 user'
                     },
                     {
-                         'name': 'priv-protocol',
+                         'name': 'priv_protocol',
                          'doc': 'Unconfigured priv protocol for SNMPv3 user'
                     },
                     {
-                         'name': 'priv-password',
+                         'name': 'priv_password',
                          'doc': 'Unconfigured priv password for SNMPv3 user'
                     }
 
                 ],
+            },
+            {
+                'command': 'snmp-server agent-port {port_num}',
+                'doc': 'Configure SNMP agent port',
+                'arguments': [
+                    {
+                        'name': 'port_num',
+                        'doc': 'UDP port on which the SNMP agent listens'
+                    }
+                ],
+            },
+            {
+                'command': 'no snmp-server agent-port',
+                'doc': 'Unconfigure SNMP agent port',
+                'arguments': [
+                     {
+                         'name': 'port_num',
+                         'doc': 'UDP port on which the SNMP agent listens',
+                         'optional': True
+                     }
+                 ],
             },
         ]
     }),

@@ -88,7 +88,7 @@ class DuplicateLoopbackIPException(VtyshException):
     regular expressions match the output of a command:
 
     ::
-        IP address is already assigned to interface. [A-Za-z0-9]+  as primary.
+        IP address is already assigned to interface. [A-Za-z0-9]+             as primary.
 
     """
 
@@ -116,8 +116,7 @@ VTYSH_EXCEPTIONS = OrderedDict([
     (
         DuplicateLoopbackIPException,
         [
-            'IP address is already assigned to interface.[A-Za-z0-9]+ as\
-             primary.',
+            'IP address is already assigned to interface. [A-Za-z0-9]+             as primary.',
         ]
     ),
 ])
