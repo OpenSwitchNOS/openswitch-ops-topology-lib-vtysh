@@ -3992,6 +3992,56 @@ class ConfigInterface(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def split(
+            self):
+        """
+        Split parent interface
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # split
+
+        """
+
+        cmd = [
+            'split'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_split(
+            self):
+        """
+        Disable split parent interface
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no split
+
+        """
+
+        cmd = [
+            'no split'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
 
 class ConfigSubinterface(ContextManager):
     """

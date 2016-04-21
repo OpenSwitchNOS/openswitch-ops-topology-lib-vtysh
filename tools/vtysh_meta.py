@@ -2312,6 +2312,16 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Disable sflow feature on interface',
                 'arguments': [],
             },
+            {
+                'command': 'split',
+                'doc': 'Split parent interface',
+                'arguments': [],
+            },
+            {
+                'command': 'no split',
+                'doc': 'Disable split parent interface',
+                'arguments': [],
+            },
         ]
     }),
     ('config_subinterface', {
