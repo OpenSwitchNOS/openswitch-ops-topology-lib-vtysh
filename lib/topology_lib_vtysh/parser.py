@@ -4170,10 +4170,10 @@ def parse_show_snmp_system(raw_result):
         )
 
     re_result = re.match(snmp_system_re, raw_result)
-    assert re_result
+    if re_result is None:
+        return re_result
 
     result = re_result.groupdict()
-
     return result
 
 
@@ -4516,6 +4516,40 @@ def parse_show_snmpv3_users(raw_result):
         return output
 
 
+def parse_show_snmp_agent_port(raw_result):
+
+    """
+    Parse the 'show snmp agent-port' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show snmp agent-port
+
+    ::
+
+        {
+            'SNMP agent port': '677'
+        }
+
+    """
+
+    print("In Parser method")
+    snmp_agent_port_re = (
+       r'\s*SNMP\s*agent\sport\s*:\s*(?P<agent_port>.+)'
+        )
+
+    re_result = re.match(snmp_agent_port_re, raw_result)
+    print(re_result)
+
+    if re_result is None:
+        return re_result
+
+    result = re_result.groupdict()
+    print(result)
+
+    return result
+
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
@@ -4551,5 +4585,6 @@ __all__ = [
     'parse_show_mirror',
     'parse_config_tftp_server_no_path', 'parse_show_snmp_community',
     'parse_show_snmp_system', 'parse_show_snmp_trap',
-    'parse_diag_dump_lacp_basic', 'parse_show_snmpv3_users'
+    'parse_diag_dump_lacp_basic', 'parse_show_snmpv3_users',
+    'parse_show_snmp_agent_port'
 ]
