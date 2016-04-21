@@ -8408,7 +8408,7 @@ class ConfigMirrorSession(ContextManager):
         )
 
     def destination_interface(
-            self, interface):
+            self, portlbl):
         """
         Set the destination interface.
 
@@ -8416,14 +8416,16 @@ class ConfigMirrorSession(ContextManager):
 
         ::
 
-            # destination interface
+            # destination interface {port}
 
-        :param interface: Ethernet interface or LAG
+        :param portlbl: Label that identifies an interface or LAG
         """
 
         cmd = [
-            'destination interface'
+            'destination interface {port}'
         ]
+
+        port = self.enode.ports.get(portlbl, portlbl)
 
         result = self.enode(
             (' '.join(cmd)).format(**locals()),
@@ -8509,7 +8511,7 @@ class ConfigMirrorSession(ContextManager):
             raise determine_exception(result)(result)
 
     def source_interface(
-            self, interface, direction):
+            self, portlbl, direction):
         """
         Assign a source interface.
 
@@ -8517,15 +8519,17 @@ class ConfigMirrorSession(ContextManager):
 
         ::
 
-            # source interface
+            # source interface {port}
 
-        :param interface: Ethernet interface or LAG
+        :param portlbl: Label that identifies an interface or LAG
         :param direction: <both | rx | tx>
         """
 
         cmd = [
-            'source interface'
+            'source interface {port}'
         ]
+
+        port = self.enode.ports.get(portlbl, portlbl)
 
         result = self.enode(
             (' '.join(cmd)).format(**locals()),

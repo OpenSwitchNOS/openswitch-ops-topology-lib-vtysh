@@ -4180,12 +4180,12 @@ VTYSH_SPEC = OrderedDict([
         'post_commands': ['end'],
         'commands': [
             {
-                'command': 'destination interface',
+                'command': 'destination interface {port}',
                 'doc': 'Set the destination interface.',
                 'arguments': [
                     {
-                        'name': 'interface',
-                        'doc': 'Ethernet interface or LAG'
+                        'name': 'portlbl',
+                        'doc': 'Label that identifies an interface or LAG'
                     }
                 ]
             },
@@ -4208,12 +4208,12 @@ VTYSH_SPEC = OrderedDict([
                 'arguments': []
             },
             {
-                'command': 'source interface',
+                'command': 'source interface {port}',
                 'doc': 'Assign a source interface.',
                 'arguments': [
                     {
-                        'name': 'interface',
-                        'doc': 'Ethernet interface or LAG'
+                        'name': 'portlbl',
+                        'doc': 'Label that identifies an interface or LAG'
                     },
                     {
                         'name': 'direction',
