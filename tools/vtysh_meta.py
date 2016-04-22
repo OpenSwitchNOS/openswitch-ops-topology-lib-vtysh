@@ -707,6 +707,46 @@ VTYSH_SPEC = OrderedDict([
                 'arguments': [],
                 'returns': True
             },
+            {
+                'command': 'diag-dump',
+                'doc': 'Display diagnostics dump that supports diag-dump.',
+                'arguments': [
+                    {
+                        'name': 'list',
+                        'doc': (
+                                'Optional, display daemons list '
+                                'that are supporting the featured.'
+                        ),
+                        'optional': True
+                    },
+                    {
+                        'name': 'daemon',
+                        'doc': (
+                                'Optional, supported daemon name whose '
+                                'diagnostics are to be requested.'
+                        ),
+                        'optional': True
+                    },
+                    {
+                        'name': 'level',
+                        'doc': (
+                                'Optional, takes the string values either '
+                                'basic or advanced.'
+                        ),
+                        'optional': True
+                    },
+                    {
+                        'name': 'file',
+                        'doc': (
+                                'Optional, takes the string values either '
+                                'basic or advanced.'
+                        ),
+                        'prefix': 'file',
+                        'optional': True
+                    }
+                ],
+                'returns': True
+            }
         ]
     }),
     ('configure', {

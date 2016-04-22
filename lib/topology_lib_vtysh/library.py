@@ -10578,6 +10578,67 @@ def show_snmp_agent_port(
     return parse_show_snmp_agent_port(result)
 
 
+def diag_dump(
+        enode, list='', daemon='', level='', file=''):
+    """
+    Display diagnostics dump that supports diag-dump.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # diag-dump
+
+    :param list: Optional, display daemons list that are supporting the
+     featured.
+    :param daemon: Optional, supported daemon name whose diagnostics are to be
+     requested.
+    :param level: Optional, takes the string values either basic or advanced.
+    :param file: Optional, takes the string values either basic or advanced.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_diag_dump`
+    """
+
+    cmd = [
+        'diag-dump'
+    ]
+
+    if list:
+        cmd.append(
+            '{}{{list}}{}'.format(
+                '', ''
+            )
+        )
+
+    if daemon:
+        cmd.append(
+            '{}{{daemon}}{}'.format(
+                '', ''
+            )
+        )
+
+    if level:
+        cmd.append(
+            '{}{{level}}{}'.format(
+                '', ''
+            )
+        )
+
+    if file:
+        cmd.append(
+            '{}{{file}}{}'.format(
+                'file', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_diag_dump(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -10657,5 +10718,6 @@ __all__ = [
     'diag_dump_lacp_basic',
     'show_snmpv3_users',
     'show_core_dump',
-    'show_snmp_agent_port'
+    'show_snmp_agent_port',
+    'diag_dump'
 ]

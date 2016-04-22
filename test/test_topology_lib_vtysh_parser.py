@@ -84,7 +84,8 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_snmp_system,
                                        parse_show_snmp_trap,
                                        parse_diag_dump_lacp_basic,
-                                       parse_show_snmpv3_users
+                                       parse_show_snmpv3_users,
+                                       parse_diag_dump
                                        )
 
 
@@ -3548,4 +3549,129 @@ user3          none      none"""
         }
     }
     ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_diag_dump():
+
+    raw_result = """\
+=========================================================================
+[Start] Feature lacp Time : Fri Apr 15 17:38:32 2016
+
+=========================================================================
+-------------------------------------------------------------------------
+[Start] Daemon ops-lacpd
+-------------------------------------------------------------------------
+System Ports:
+================ Ports ================
+Port 5:
+    lacp                 : off
+    lag_member_speed     : 0
+    configured_members   : 5
+    eligible_members     :
+    participant_members  :
+    interface_count      : 0
+Port bridge_normal:
+    lacp                 : off
+    lag_member_speed     : 0
+    configured_members   : bridge_normal
+    eligible_members     :
+    participant_members  :
+    interface_count      : 0
+Port 1:
+    lacp                 : off
+    lag_member_speed     : 0
+    configured_members   : 1
+    eligible_members     :
+    participant_members  :
+    interface_count      : 0
+Port lag10:
+    lacp                 : active
+    lag_member_speed     : 0
+    configured_members   : 3 2
+    eligible_members     : 3 2
+    participant_members  :
+    interface_count      : 0
+Port 4:
+    lacp                 : off
+    lag_member_speed     : 0
+    configured_members   : 4
+    eligible_members     :
+    participant_members  :
+    interface_count      : 0
+
+LAG interfaces: \nPort lag10:
+    configured_members   : 3 2
+    eligible_members     : 3 2
+    participant_members  :
+
+LACP PDUs counters: \nLAG lag10:
+ Configured interfaces:
+  Interface: 3
+    lacp_pdus_sent: 0
+    marker_response_pdus_sent: 0
+    lacp_pdus_received: 0
+    marker_pdus_received: 0
+  Interface: 2
+    lacp_pdus_sent: 0
+    marker_response_pdus_sent: 0
+    lacp_pdus_received: 0
+    marker_pdus_received: 0
+
+LACP state: \nLAG lag10:
+ Configured interfaces:
+  Interface: 3
+    actor_oper_port_state \n\
+        lacp_activity:1 time_out:1 aggregation:1 sync:0 collecting:0 \
+distributing:0 defaulted:1 expired:0
+    partner_oper_port_state \n\
+        lacp_activity:0 time_out:0 aggregation:1 sync:0 collecting:0 \
+distributing:0 defaulted:0 expired:0
+    lacp_control
+       begin:0 actor_churn:0 partner_churn:0 ready_n:0 selected:0 \
+port_moved:0 ntt:0 port_enabled:0
+  Interface: 2
+    actor_oper_port_state \n\
+       lacp_activity:1 time_out:1 aggregation:1 sync:0 collecting:0 \
+distributing:0 defaulted:1 expired:0
+    partner_oper_port_state \n\
+       lacp_activity:0 time_out:0 aggregation:1 sync:0 collecting:0 \
+distributing:0 defaulted:0 expired:0
+    lacp_control
+       begin:0 actor_churn:0 partner_churn:0 ready_n:0 selected:0 \
+port_moved:0 ntt:0 port_enabled:0 \n\
+
+-------------------------------------------------------------------------
+[End] Daemon ops-lacpd
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+[Start] Daemon ops-portd
+-------------------------------------------------------------------------
+Configuration file for lag10:
+Ethernet Channel Bonding Driver: v3.7.1 (April 27, 2011)
+
+Bonding Mode: load balancing (xor)
+Transmit Hash Policy: layer2 (0)
+MII Status: down
+MII Polling Interval (ms): 0
+Up Delay (ms): 0
+Down Delay (ms): 0
+
+
+-------------------------------------------------------------------------
+[End] Daemon ops-portd
+-------------------------------------------------------------------------
+=========================================================================
+[End] Feature lacp
+=========================================================================
+Diagnostic dump captured for feature lacp
+    """
+    result = parse_diag_dump(raw_result)
+
+    expected = {
+                   'result': 0
+               }
+
+    ddiff = DeepDiff(result, expected)
+
     assert not ddiff

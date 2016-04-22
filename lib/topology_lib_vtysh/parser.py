@@ -4550,6 +4550,37 @@ def parse_show_snmp_agent_port(raw_result):
     return result
 
 
+def parse_diag_dump(raw_result):
+    """
+    Parse the 'diag-dump' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the diag-dump command \
+        in a dictionary of the form:
+
+     ::
+
+        {
+            'result': 0
+        }
+    """
+
+    diag_dump_re = (
+        r'(Diagnostic dump captured for feature)'
+    )
+
+    result = {}
+    for line in raw_result.splitlines():
+        re_result = re.search(diag_dump_re, line)
+        if re_result:
+            result['result'] = 0
+            break
+        else:
+            result['result'] = 1
+    return result
+
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
@@ -4586,5 +4617,5 @@ __all__ = [
     'parse_config_tftp_server_no_path', 'parse_show_snmp_community',
     'parse_show_snmp_system', 'parse_show_snmp_trap',
     'parse_diag_dump_lacp_basic', 'parse_show_snmpv3_users',
-    'parse_show_snmp_agent_port'
+    'parse_show_snmp_agent_port', 'parse_diag_dump'
 ]
