@@ -80,6 +80,7 @@ from topology_lib_vtysh.parser import (
     parse_show_mac_address_table,
     parse_show_tftp_server,
     parse_show_core_dump,
+    parse_copy_core_dump,
     parse_config_tftp_server_enable,
     parse_config_tftp_server_no_enable,
     parse_config_tftp_server_path,
@@ -196,6 +197,51 @@ Total number of core dumps : 2
     result = parse_show_core_dump(raw_result)
 
     expected = {}
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_copy_core_dump():
+    raw_result = """\
+copying ...
+Sent 433184 bytes in 0.2 seconds
+"""
+    result = parse_copy_core_dump(raw_result)
+    expected = {"status": "success", "reason": "core dump copied"}
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+    raw_result = "Failed to validate instance ID:111111"
+    result = parse_copy_core_dump(raw_result)
+    expected = {"status": "failed", "reason": "instance ID not valid"}
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+    raw_result = "No coredump found for daemon dss with instance 420"
+    result = parse_copy_core_dump(raw_result)
+    expected = {"status": "failed", "reason": "no core dump found"}
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+    raw_result = """\
+ssh: connect to host 12.12.12.12 port 22: Network is unreachable
+"""
+    result = parse_copy_core_dump(raw_result)
+    expected = {"status": "failed", "reason": "ssh-connection issue for SFTP"}
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+    raw_result = """\
+copying ...
+Error code 1: File not found
+"""
+    result = parse_copy_core_dump(raw_result)
+    expected = {"status": "failed", "reason": "Error found while coping"}
+
     ddiff = DeepDiff(result, expected)
     assert not ddiff
 

@@ -14100,6 +14100,75 @@ def ping6(
     return parse_ping6(result)
 
 
+def copy_core_dump(
+        enode, daemonname, instance_id='', transport='', username='',
+        serveraddress='', filename=''):
+    """
+    Copy Coredump to Server
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # copy core-dump {daemonname}
+
+    :param daemonname: Name of the daemon name or kernel [Mandatory]
+    :param instance_id: instance_id ONLY for daemon,NOT FOR Kernel
+    :param transport: method for transport coredump [Mandatory]
+    :param username: username of server,ONLY for sftp,NOT FOR TFTP
+    :param serveraddress: IP address <A.B.C.D> of server [Mandatory]
+    :param filename: name of core filei [Optional]
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_copy_core_dump`
+    """
+
+    cmd = [
+        'copy core-dump {daemonname}'
+    ]
+
+    if instance_id:
+        cmd.append(
+            '{}{{instance_id}}{}'.format(
+                'instance-id ', ''
+            )
+        )
+
+    if transport:
+        cmd.append(
+            '{}{{transport}}{}'.format(
+                '', ''
+            )
+        )
+
+    if username:
+        cmd.append(
+            '{}{{username}}{}'.format(
+                '', ''
+            )
+        )
+
+    if serveraddress:
+        cmd.append(
+            '{}{{serveraddress}}{}'.format(
+                '', ''
+            )
+        )
+
+    if filename:
+        cmd.append(
+            '{}{{filename}}{}'.format(
+                '', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_copy_core_dump(result)
+
+
 def traceroute(
         enode, destination, min_ttl='', max_ttl='', dst_port='',
         time_out='', probes='', ip_option_source=''):
@@ -15675,6 +15744,7 @@ __all__ = [
     'ping6_repetitions',
     'ping',
     'ping6',
+    'copy_core_dump',
     'traceroute',
     'traceroute6',
     'show_ntp_associations',
