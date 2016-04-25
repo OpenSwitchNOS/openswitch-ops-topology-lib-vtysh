@@ -478,6 +478,43 @@ interface {port}',
                 'returns': True
             },
             {
+                 'command': 'copy core-dump {daemonname}',
+                 'doc': 'Copy Coredump to Server',
+                 'arguments': [
+                    {
+                        'name': 'daemonname',
+                        'doc': 'Name of the daemon name or kernel [Mandatory]',
+                    },
+                    {
+                        'name': 'instance_id',
+                        'doc': 'instance_id ONLY for daemon,NOT FOR Kernel',
+                        'prefix': 'instance-id ',
+                        'optional': True
+                    },
+                    {
+                        'name': 'transport',
+                        'doc': 'method for transport coredump [Mandatory]',
+                        'optional': True
+                    },
+                    {
+                        'name': 'username',
+                        'doc': 'username of server,ONLY for sftp,NOT FOR TFTP',
+                        'optional': True
+                    },
+                    {
+                        'name': 'serveraddress',
+                        'doc': 'IP address <A.B.C.D> of server [Mandatory]',
+                        'optional': True
+                    },
+                    {
+                        'name': 'filename',
+                        'doc': 'name of core filei [Optional]',
+                        'optional': True
+                    }
+                  ],
+                 'returns': True
+            },
+            {
                 'command': 'traceroute {destination}',
                 'doc': 'Send IPv4 traceroute',
                 'arguments': [
