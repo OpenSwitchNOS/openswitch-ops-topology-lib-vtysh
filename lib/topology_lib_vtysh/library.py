@@ -4042,6 +4042,81 @@ class ConfigInterface(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def autonegotiation_on(
+            self):
+        """
+        Autonegotiation ON
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # autonegotiation on
+
+        """
+
+        cmd = [
+            'autonegotiation on'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def autonegotiation_off(
+            self):
+        """
+        Autonegotiation OFF
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # autonegotiation off
+
+        """
+
+        cmd = [
+            'autonegotiation off'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_autonegotiation(
+            self):
+        """
+        Disable autonegotiation
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no autonegotiation
+
+        """
+
+        cmd = [
+            'no autonegotiation'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
 
 class ConfigSubinterface(ContextManager):
     """

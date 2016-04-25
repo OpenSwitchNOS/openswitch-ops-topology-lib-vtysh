@@ -2362,6 +2362,21 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Disable split parent interface',
                 'arguments': [],
             },
+            {
+                'command': 'autonegotiation on',
+                'doc': 'Autonegotiation ON',
+                'arguments': [],
+            },
+            {
+                'command': 'autonegotiation off',
+                'doc': 'Autonegotiation OFF',
+                'arguments': [],
+            },
+            {
+                'command': 'no autonegotiation',
+                'doc': 'Disable autonegotiation',
+                'arguments': [],
+            }
         ]
     }),
     ('config_subinterface', {
