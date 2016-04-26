@@ -3412,6 +3412,24 @@ def parse_show_dhcp_server(raw_result):
                     'match_tag': '*'
                 }
             ],
+            'static': [
+                {
+                    'static_ip': '192.168.20.48',
+                    'hostname': '*',
+                    'client_id': '*',
+                    'lease_time': '1440',
+                    'mac_address': 'aa:bb:cc:dd:ee:ff',
+                    'set_tag': '*'
+                },
+                {
+                    'static_ip': '10.2.2.2',
+                    'hostname': '*',
+                    'client_id': '*',
+                    'lease_time': '1440',
+                    'mac_address': '11:11:11:11:11:11',
+                    'set_tag': '*'
+                }
+            ],
             'options': [
                 {
                     'option_number': '15',
@@ -3427,14 +3445,21 @@ def parse_show_dhcp_server(raw_result):
                     'ipv6_option': 'False',
                     'match_tags': '*'
                 },
-             ]
+                {
+                    'option_number': '6',
+                    'option_name': '*',
+                    'option_value': '10.100.205.200',
+                    'ipv6_option': 'False',
+                    'match_tags': '*'
+                }
+            ]
         }
     """
 
     dhcp_dynamic_re = (
         r'(?P<pool_name>[\w_\-]+)'
-        r'\s+(?P<start_ip>[\d\.:]+)'
-        r'\s+(?P<end_ip>[\d\.:]+)'
+        r'\s+(?P<start_ip>[\d\.:a-fA-F]+)'
+        r'\s+(?P<end_ip>[\d\.:a-fA-F]+)'
         r'\s+(?P<netmask>[\d\.*]+)'
         r'\s+(?P<broadcast>[\d\.*]+)'
         r'\s+(?P<prefix_len>[\w\*/]+)'
@@ -3442,6 +3467,15 @@ def parse_show_dhcp_server(raw_result):
         r'\s+(?P<static_bind>True|False)'
         r'\s+(?P<set_tag>[\w\*]+)'
         r'\s+(?P<match_tag>[\w\*]+)'
+    )
+
+    dhcp_static_re = (
+        r'(?P<static_ip>[\d\.:a-fA-F]+)'
+        r'\s+(?P<hostname>[\w\*]+)'
+        r'\s+(?P<client_id>[\w\*]+)'
+        r'\s+(?P<lease_time>[\d]+)'
+        r'\s+(?P<mac_address>[\d:a-fA-F]+)'
+        r'\s+(?P<set_tag>[\w\*]+)'
     )
 
     dhcp_options_re = (
@@ -3454,11 +3488,16 @@ def parse_show_dhcp_server(raw_result):
 
     result = {}
     pools_list = []
+    static_list = []
     options_list = []
     for output in re.finditer(dhcp_dynamic_re, raw_result):
         dhcp_dynamic = output.groupdict()
         pools_list.append(dhcp_dynamic)
     result['pools'] = pools_list
+    for output in re.finditer(dhcp_static_re, raw_result):
+        dhcp_static = output.groupdict()
+        static_list.append(dhcp_static)
+    result['static'] = static_list
     for output in re.finditer(dhcp_options_re, raw_result):
         dhcp_options = output.groupdict()
         options_list.append(dhcp_options)
@@ -4535,8 +4574,8 @@ def parse_show_snmp_agent_port(raw_result):
 
     print("In Parser method")
     snmp_agent_port_re = (
-       r'\s*SNMP\s*agent\sport\s*:\s*(?P<agent_port>.+)'
-        )
+        r'\s*SNMP\s*agent\sport\s*:\s*(?P<agent_port>.+)'
+    )
 
     re_result = re.match(snmp_agent_port_re, raw_result)
     print(re_result)
