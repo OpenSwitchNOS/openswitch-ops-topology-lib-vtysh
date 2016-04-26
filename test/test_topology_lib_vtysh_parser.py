@@ -2590,7 +2590,14 @@ CLIENTS-VLAN60    192.168.60.10                                 192.168.\
 
 DHCP static IP allocation configuration
 ---------------------------------------
-DHCP static host is not configured.
+IP Address                                     Hostname          Client-\
+id         Lease time(min)  MAC-Address        Set tags
+------------------------------------------------------------------------\
+-------------------------------------------------------
+192.168.20.48                                  *                 *      \
+           1440             aa:bb:cc:dd:ee:ff  *
+10.2.2.2                                       *                 *      \
+           1440             11:11:11:11:11:11  *
 
 
 DHCP options configuration
@@ -2627,6 +2634,24 @@ DHCP BOOTP is not configured.
                 'static_bind': 'False',
                 'set_tag': '*',
                 'match_tag': '*'
+            }
+        ],
+        'static': [
+            {
+                'static_ip': '192.168.20.48',
+                'hostname': '*',
+                'client_id': '*',
+                'lease_time': '1440',
+                'mac_address': 'aa:bb:cc:dd:ee:ff',
+                'set_tag': '*'
+            },
+            {
+                'static_ip': '10.2.2.2',
+                'hostname': '*',
+                'client_id': '*',
+                'lease_time': '1440',
+                'mac_address': '11:11:11:11:11:11',
+                'set_tag': '*'
             }
         ],
         'options': [
@@ -3669,8 +3694,8 @@ Diagnostic dump captured for feature lacp
     result = parse_diag_dump(raw_result)
 
     expected = {
-                   'result': 0
-               }
+        'result': 0
+    }
 
     ddiff = DeepDiff(result, expected)
 
