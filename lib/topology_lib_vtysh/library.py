@@ -10669,7 +10669,8 @@ def diag_dump(
     :param daemon: Optional, supported daemon name whose diagnostics are to be
      requested.
     :param level: Optional, takes the string values either basic or advanced.
-    :param file: Optional, takes the string values either basic or advanced.
+    :param file: Optional, takes the string values either filename where the
+     output get dumped.
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_diag_dump`
     """
@@ -10702,7 +10703,7 @@ def diag_dump(
     if file:
         cmd.append(
             '{}{{file}}{}'.format(
-                'file', ''
+                '', ''
             )
         )
 

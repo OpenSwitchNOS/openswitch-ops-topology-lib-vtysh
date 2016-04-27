@@ -739,9 +739,8 @@ VTYSH_SPEC = OrderedDict([
                         'name': 'file',
                         'doc': (
                                 'Optional, takes the string values either '
-                                'basic or advanced.'
+                                'filename where the output get dumped.'
                         ),
-                        'prefix': 'file',
                         'optional': True
                     }
                 ],
