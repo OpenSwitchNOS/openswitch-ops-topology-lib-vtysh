@@ -10653,6 +10653,42 @@ def show_snmp_agent_port(
     return parse_show_snmp_agent_port(result)
 
 
+def show_events(
+        enode, filter=''):
+    """
+    Show system related event logs.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show events
+
+    :param filter: Optional, filters by category, event-id or severity (filter
+     value)
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_events`
+    """
+
+    cmd = [
+        'show events'
+    ]
+
+    if filter:
+        cmd.append(
+            '{}{{filter}}{}'.format(
+                '', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_events(result)
+
+
 def diag_dump(
         enode, list='', daemon='', level='', file=''):
     """
@@ -10794,5 +10830,6 @@ __all__ = [
     'show_snmpv3_users',
     'show_core_dump',
     'show_snmp_agent_port',
+    'show_events',
     'diag_dump'
 ]
