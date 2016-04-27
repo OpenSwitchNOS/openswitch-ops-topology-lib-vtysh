@@ -44,6 +44,12 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
+                'command': 'show interface mgmt',
+                'doc': 'Managment Interface infomation.',
+                'arguments': [],
+                'returns': True
+            },
+            {
                 'command': 'show interface {port} subinterface',
                 'doc': 'Show subinterfaces configured on this interface',
                 'arguments': [
