@@ -828,7 +828,7 @@ def parse_show_lacp_aggregates(raw_result):
     for re_result in re.finditer(lacp_re, raw_result):
         lag = re_result.groupdict()
         lag['interfaces'] = lag['interfaces'].split()
-        lag['fallback'] = lag['fallback'] == 'True'
+        lag['fallback'] = lag['fallback'] == 'true'
         result[lag['name']] = lag
 
     assert result is not None
