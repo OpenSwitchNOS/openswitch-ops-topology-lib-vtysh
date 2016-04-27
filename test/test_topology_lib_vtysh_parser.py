@@ -85,7 +85,8 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_snmp_trap,
                                        parse_diag_dump_lacp_basic,
                                        parse_show_snmpv3_users,
-                                       parse_diag_dump
+                                       parse_diag_dump,
+                                       parse_show_events
                                        )
 
 
@@ -3669,9 +3670,39 @@ Diagnostic dump captured for feature lacp
     result = parse_diag_dump(raw_result)
 
     expected = {
-                   'result': 0
-               }
+        'result': 0
+    }
 
     ddiff = DeepDiff(result, expected)
+
+    assert not ddiff
+
+
+def test_parse_show_events():
+    raw_result = """
+2016-04-27:16:45:55.704265|ops-lacpd|15007|LOG_INFO|\
+LACP system ID set to 70:72:cf:5b:fa:ae
+2016-04-27:16:45:55.975889|ops-lldpd|1002|LOG_INFO|LLDP Disabled
+    """
+
+    expected_result = [
+        {
+            'date': '2016-04-27:16:45:55.704265',
+            'daemon': 'ops-lacpd',
+            'severity': 'LOG_INFO',
+            'event_id': '15007',
+            'message': 'LACP system ID set to 70:72:cf:5b:fa:ae'
+        },
+        {
+            'date': '2016-04-27:16:45:55.975889',
+            'daemon': 'ops-lldpd',
+            'severity': 'LOG_INFO',
+            'event_id': '1002',
+            'message': 'LLDP Disabled'
+        }
+    ]
+
+    result = parse_show_events(raw_result)
+    ddiff = DeepDiff(result, expected_result)
 
     assert not ddiff
