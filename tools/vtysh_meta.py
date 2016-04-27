@@ -695,6 +695,19 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
+                'command': 'show events',
+                'doc': 'Show system related event logs.',
+                'arguments': [
+                    {
+                        'name': 'filter',
+                        'doc': 'Optional, filters by category,'
+                               ' event-id or severity (filter value)',
+                        'optional': True
+                    }
+                ],
+                'returns': True
+            },
+            {
                 'command': 'diag-dump',
                 'doc': 'Display diagnostics dump that supports diag-dump.',
                 'arguments': [
@@ -4326,8 +4339,8 @@ VTYSH_EXCEPTIONS_SPEC = OrderedDict([
     ), (
         'DuplicateLoopbackIPException',
         [
-            'IP address is already assigned to interface. [A-Za-z0-9]+\
-             as primary.',
+            'IP address is already assigned to interface'
+            ' as primary.',
         ]
     )
 ])

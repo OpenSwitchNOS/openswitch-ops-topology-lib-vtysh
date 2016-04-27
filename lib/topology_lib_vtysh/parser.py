@@ -4589,6 +4589,49 @@ def parse_show_snmp_agent_port(raw_result):
     return result
 
 
+def parse_show_events(raw_result):
+    """
+    Parse the 'show events' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the 'show events' command \
+        in a dictionary of the form:
+
+     ::
+
+         [
+             {
+                 'date': '2016-04-21:22:03:07.096457',
+                 'daemon': 'ops-lacpd',
+                 'severity': 'LOG_INFO',
+                 'event_id': '15007',
+                 'message': 'LACP system ID set to 70:72:cf:99:69:2f'
+             },
+             {
+                 'date': '2016-04-26:21:38:20.359365',
+                 'daemon': 'ops-lldpd',
+                 'severity': 'LOG_INFO',
+                 'event_id': '1002',
+                 'message': 'LLDP Disabled'
+             }
+         ]
+
+    """
+
+    show_re = r'(?P<date>\S+)\|(?P<daemon>\S+)\|(?P<event_id>\S+)'\
+        '\|(?P<severity>\S+)\|(?P<message>[\s*\S+]+)'
+
+    result = []
+    for curr_log in raw_result.splitlines():
+        re_result = re.match(show_re, curr_log)
+        if re_result:
+            curr_res = re_result.groupdict()
+            result.append(curr_res)
+
+    return result
+
+
 def parse_diag_dump(raw_result):
     """
     Parse the 'diag-dump' command raw output.
@@ -4656,5 +4699,5 @@ __all__ = [
     'parse_config_tftp_server_no_path', 'parse_show_snmp_community',
     'parse_show_snmp_system', 'parse_show_snmp_trap',
     'parse_diag_dump_lacp_basic', 'parse_show_snmpv3_users',
-    'parse_show_snmp_agent_port', 'parse_diag_dump'
+    'parse_show_snmp_agent_port', 'parse_diag_dump', 'parse_show_events'
 ]
