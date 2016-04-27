@@ -23,6 +23,7 @@ from __future__ import unicode_literals
 from deepdiff import DeepDiff
 
 from topology_lib_vtysh.parser import (parse_show_interface,
+                                       parse_show_interface_mgmt,
                                        parse_show_interface_subinterface,
                                        parse_show_vlan,
                                        parse_show_lacp_interface,
@@ -284,6 +285,62 @@ No MAC entries found
     """
     result = parse_show_mac_address_table(raw_result)
     assert not result
+
+
+def test_parse_show_interface_mgmt():
+    raw_result = """\
+  Address Mode                  : dhcp
+  IPv4 address/subnet-mask      :
+  Default gateway IPv4          :
+  IPv6 address/prefix           :
+  IPv6 link local address/prefix:
+  Default gateway IPv6          :
+  Primary Nameserver            :
+  Secondary Nameserver          :
+    """
+
+    result = parse_show_interface_mgmt(raw_result)
+
+    expected = {
+        'address_mode': 'dhcp',
+        'ipv4': None,
+        'default_gateway_ipv4': None,
+        'ipv6': None,
+        'ipv6_link_local': None,
+        'default_gateway_ipv6': None,
+        'primary_nameserver': None,
+        'secondary_nameserver': None
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+    raw_result2 = """\
+  Address Mode                  : static
+  IPv4 address/subnet-mask      : 20.1.1.2/30
+  Default gateway IPv4          : 20.1.1.1
+  IPv6 address/prefix           : 2011::2/64
+  IPv6 link local address/prefix: fe80::4a0f:cfff:feaf:6358/64
+  Default gateway IPv6          : 2011::1
+  Primary Nameserver            : 232.54.54.54
+  Secondary Nameserver          : 232.54.54.44
+    """
+
+    result2 = parse_show_interface_mgmt(raw_result2)
+
+    expected2 = {
+        'address_mode': 'static',
+        'ipv4': '20.1.1.2/30',
+        'default_gateway_ipv4': '20.1.1.1',
+        'ipv6': '2011::2/64',
+        'ipv6_link_local': 'fe80::4a0f:cfff:feaf:6358/64',
+        'default_gateway_ipv6': '2011::1',
+        'primary_nameserver': '232.54.54.54',
+        'secondary_nameserver': '232.54.54.44'
+    }
+
+    ddiff2 = DeepDiff(result2, expected2)
+    assert not ddiff2
 
 
 def test_parse_show_interface():

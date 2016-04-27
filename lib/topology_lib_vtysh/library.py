@@ -8748,6 +8748,33 @@ def show_interface(
     return parse_show_interface(result)
 
 
+def show_interface_mgmt(
+        enode):
+    """
+    Managment Interface infomation.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show interface mgmt
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_interface_mgmt`
+    """
+
+    cmd = [
+        'show interface mgmt'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_interface_mgmt(result)
+
+
 def show_interface_subinterface(
         enode, portlbl):
     """
@@ -10772,6 +10799,7 @@ __all__ = [
     'ConfigDhcpServer',
     'ConfigMirrorSession',
     'show_interface',
+    'show_interface_mgmt',
     'show_interface_subinterface',
     'show_vlan',
     'show_lacp_interface',

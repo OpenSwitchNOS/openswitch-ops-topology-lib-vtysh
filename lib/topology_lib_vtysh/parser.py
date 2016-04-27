@@ -25,6 +25,49 @@ from __future__ import print_function, division
 import re
 
 
+def parse_show_interface_mgmt(raw_result):
+    """
+    Parse the 'show interface mgmt' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show interface mgmt command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+            'address_mode': 'dhcp',
+            'ipv4': '20.1.1.2/30',
+            'default_gateway_ipv4': '20.1.1.1',
+            'ipv6': '2011::2/64',
+            'ipv6_link_local': 'fe80::4a0f:cfff:feaf:6358/64',
+            'default_gateway_ipv6': '2011::1',
+            'primary_nameserver': '232.54.54.54',
+            'secondary_nameserver': '232.54.54.44'
+       }
+    """
+
+    show_re = (
+        r'\s*Address Mode\s*:\s*(?P<address_mode>\S+)\s*'
+        r'\s*IPv4 address/subnet-mask\s*:\s*(?P<ipv4>[0-9./]+)?\s*'
+        r'\s*Default gateway IPv4\s*:\s*(?P<default_gateway_ipv4>[0-9.]+)?\s*'
+        r'\s*IPv6 address/prefix\s*:\s*(?P<ipv6>[0-9a-f:/]+)?\s*'
+        r'\s*IPv6 link local address/prefix\s*:\s*'
+        r'(?P<ipv6_link_local>[0-9a-f:/]+)?\s*'
+        r'\s*Default gateway IPv6\s*:\s*'
+        r'(?P<default_gateway_ipv6>[0-9a-f:]+)?\s*'
+        r'\s*Primary Nameserver\s*:\s*(?P<primary_nameserver>[0-9.]+)?\s*'
+        r'\s*Secondary Nameserver\s*:\s*(?P<secondary_nameserver>[0-9.]+)?\s*'
+    )
+
+    re_result = re.match(show_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    return result
+
+
 def parse_show_interface(raw_result):
     """
     Parse the 'show interface' command raw output.
@@ -4666,7 +4709,7 @@ def parse_diag_dump(raw_result):
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
-    'parse_show_interface_subinterface',
+    'parse_show_interface_mgmt', 'parse_show_interface_subinterface',
     'parse_show_lacp_configuration', 'parse_show_lldp_neighbor_info',
     'parse_show_lldp_statistics', 'parse_show_ip_bgp_summary',
     'parse_show_ip_bgp_neighbors', 'parse_show_ip_bgp',
