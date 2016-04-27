@@ -638,19 +638,6 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
-                'command': 'no mirror session {name}',
-                'doc': 'Delete a mirroring session.',
-                'arguments': [
-                    {
-                        'name': 'name',
-                        'doc': (
-                            'Up to 64 letters, numbers, underscores, dashes, '
-                            'or periods.'
-                        )
-                    }
-                ]
-            },
-            {
                 'command': 'show mirror {name}',
                 'doc': 'Show mirroring session information.',
                 'arguments': [
@@ -1851,6 +1838,19 @@ VTYSH_SPEC = OrderedDict([
                          'optional': True
                      }
                  ],
+            },
+            {
+                'command': 'no mirror session {name}',
+                'doc': 'Delete a mirroring session.',
+                'arguments': [
+                    {
+                        'name': 'name',
+                        'doc': (
+                            'Up to 64 letters, numbers, underscores, dashes, '
+                            'or periods.'
+                        )
+                    }
+                ]
             },
         ]
     }),
