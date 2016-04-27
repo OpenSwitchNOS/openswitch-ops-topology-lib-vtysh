@@ -939,7 +939,7 @@ def parse_show_lldp_neighbor_info(raw_result):
         r'Neighbor entries age-out\s+:\s*(?P<neighbor_entries_age_out>\d+)\n'
         r'Neighbor Chassis-Name\s+:\s*(?P<neighbor_chassis_name>\S+)?\n'
         r'Neighbor Chassis-Description\s+:\s*'
-        r'(?P<neighbor_chassis_description>[\w\s\n/,.*()_-]+)?'
+        r'(?P<neighbor_chassis_description>[\w\s\n/,#~:.*()_-]+)?'
         r'Neighbor Chassis-ID\s+:\s*(?P<neighbor_chassis_id>[0-9a-f:]+)?\n'
         r'Neighbor Management-Address\s+:\s*'
         r'(?P<neighbor_mgmt_address>[\w:.]+)?\n'
@@ -951,7 +951,7 @@ def parse_show_lldp_neighbor_info(raw_result):
         r'TTL\s+:\s*(?P<ttl>\d+)?'
     )
 
-    re_result = re.match(neighbor_info_re, raw_result)
+    re_result = re.search(neighbor_info_re, raw_result)
     assert re_result
 
     result = re_result.groupdict()
