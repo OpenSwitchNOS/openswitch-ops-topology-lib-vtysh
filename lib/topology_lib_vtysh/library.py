@@ -2514,6 +2514,33 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def no_mirror_session(
+            self, name):
+        """
+        Delete a mirroring session.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no mirror session {name}
+
+        :param name: Up to 64 letters, numbers, underscores, dashes, or
+            periods.
+        """
+
+        cmd = [
+            'no mirror session {name}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
 
 class RouteMap(ContextManager):
     """
@@ -10406,33 +10433,6 @@ def show_tftp_server(
     return parse_show_tftp_server(result)
 
 
-def no_mirror_session(
-        enode, name):
-    """
-    Delete a mirroring session.
-
-    This function runs the following vtysh command:
-
-    ::
-
-        # no mirror session {name}
-
-    :param name: Up to 64 letters, numbers, underscores, dashes, or periods.
-    """
-
-    cmd = [
-        'no mirror session {name}'
-    ]
-
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
-    )
-
-    if result:
-        raise determine_exception(result)(result)
-
-
 def show_mirror(
         enode, name=''):
     """
@@ -10790,7 +10790,6 @@ __all__ = [
     'copy_running_config_startup_config',
     'show_startup_config',
     'show_tftp_server',
-    'no_mirror_session',
     'show_mirror',
     'show_snmp_community',
     'show_snmp_system',
