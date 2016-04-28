@@ -1821,6 +1821,58 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def logrotate_maxsize(
+            self, file_size):
+        """
+        Set Logrotate maxsize of file.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # logrotate maxsize {file_size}
+
+        :param file_size: <1-200>  File size in Mega Bytes
+        """
+
+        cmd = [
+            'logrotate maxsize {file_size}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def logrotate_target(
+            self, tftp_host):
+        """
+        Set Logrotate tftp remote host.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # logrotate target {tftp_host}
+
+        :param tftp_host: URI of the remote host
+        """
+
+        cmd = [
+            'logrotate target {tftp_host}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def snmp_server_community(
             self, community_name):
         """

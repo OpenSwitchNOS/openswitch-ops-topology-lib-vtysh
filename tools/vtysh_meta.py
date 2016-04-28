@@ -1491,6 +1491,26 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
+                'command': 'logrotate maxsize {file_size}',
+                'doc': 'Set Logrotate maxsize of file.',
+                'arguments': [
+                    {
+                        'name': 'file_size',
+                        'doc': '<1-200>  File size in Mega Bytes',
+                    },
+                ],
+            },
+            {
+                'command': 'logrotate target {tftp_host}',
+                'doc': 'Set Logrotate tftp remote host.',
+                'arguments': [
+                    {
+                        'name': 'tftp_host',
+                        'doc': 'URI of the remote host',
+                    },
+                ],
+            },
+            {
                 'command': 'snmp-server community {community_name}',
                 'doc': 'Configure SNMP community names',
                 'arguments': [
