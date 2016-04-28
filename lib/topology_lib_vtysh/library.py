@@ -1795,6 +1795,32 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def logrotate_period(
+            self, time_interval):
+        """
+        Set Logrotate time interval.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # logrotate period {time_interval}
+
+        :param time_interval: rotates log files time interval
+        """
+
+        cmd = [
+            'logrotate period {time_interval}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def snmp_server_community(
             self, community_name):
         """

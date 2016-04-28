@@ -1475,6 +1475,16 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
+                'command': 'logrotate period {time_interval}',
+                'doc': 'Set Logrotate time interval.',
+                'arguments': [
+                    {
+                        'name': 'time_interval',
+                        'doc': 'rotates log files time interval',
+                    },
+                ],
+            },
+            {
                 'command': 'snmp-server community {community_name}',
                 'doc': 'Configure SNMP community names',
                 'arguments': [
