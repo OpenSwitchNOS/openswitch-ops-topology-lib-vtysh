@@ -1495,7 +1495,6 @@ def parse_show_ip_ospf_interface(raw_result):
 
 
 def parse_show_ip_ospf(raw_result):
-
     """
     Parse the 'show ip ospf' command raw output.
 
@@ -1559,7 +1558,7 @@ def parse_show_ip_ospf(raw_result):
         '(?P<opaque_link_checksum>[\S]+).*'
         r'[\S ]+opaque\s*area\s*(?P<opaque_area>\d+)[\S ]+Sum\s*'
         '(?P<opaque_area_checksum>[\S]+).*'
-        )
+    )
 
     result = {}
     result_area = {}
@@ -2844,7 +2843,7 @@ def parse_show_running_config(raw_result):
             r'ipv?6? route\s(?P<network>.*)'
             r'/(?P<prefix>\d+)\s'
             r'(?P<via>(?:.*))'
-            )
+        )
         for line in re_ip_routes_section[0].splitlines():
             re_result = re.match(ip_route_re, line)
             partial = re_result.groupdict()
@@ -3025,8 +3024,8 @@ def parse_show_ipv6_route(raw_result):
     )
 
     ipv6_nexthop_re = (
-        r'via\s+(?P<via>(?:(?:(?:[0-9A-Za-z]+:)+:?([0-9A-Za-z]+)?)+|\d+)),\s+'
-        r'\[(?P<distance>\d+)/(?P<metric>\d+)\],\s+(?P<from>\S+)'
+        r'via\s+(?P<via>(?:(?:(?:[0-9A-Za-z]+:)+:?([0-9A-Za-z]+)?)+|[a-zA-Z0-9'
+        r']+)),\s+\[(?P<distance>[a-z0-9]+)/(?P<metric>\d+)\],\s+(?P<from>\S+)'
     )
 
     result = []
@@ -3877,12 +3876,12 @@ def parse_show_core_dump(raw_result):
         r'\s*(?P<instance_id>\S+)'
         r'\s*(?P<crash_reason>.{1,30})'
         r'\s*(?P<timestamp>[0-9\s:-]{18,20})'
-        )
+    )
 
     show_re_kernel = (
         r'\s*(?P<daemon_name>\S+)'
         r'\s*(?P<timestamp>[0-9\s:-]{18,20})'
-        )
+    )
     if "No core dumps are present" in raw_result:
         return {}
 
@@ -4147,7 +4146,6 @@ def parse_show_mirror(raw_result):
 
 
 def parse_show_snmp_community(raw_result):
-
     """
     Parse the 'show snmp community' command raw output.
 
@@ -4183,7 +4181,6 @@ def parse_show_snmp_community(raw_result):
 
 
 def parse_show_snmp_system(raw_result):
-
     """
     Parse the 'show snmp system' command raw output.
 
@@ -4206,7 +4203,7 @@ def parse_show_snmp_system(raw_result):
         r'\s*System\sdescription\s\:\s*(?P<system_description>.+)'
         r'\s*System\slocation\s\:\s*(?P<system_location>.+)'
         r'\s*System\scontact\s\:\s*(?P<system_contact>.+)'
-        )
+    )
 
     re_result = re.match(snmp_system_re, raw_result)
     if re_result is None:
@@ -4217,7 +4214,6 @@ def parse_show_snmp_system(raw_result):
 
 
 def parse_show_snmp_trap(raw_result):
-
     """
     Parse the 'show snmp trap' command raw output.
 
@@ -4512,7 +4508,6 @@ def parse_diag_dump_lacp_basic_interfaces(raw_result):
 
 
 def parse_show_snmpv3_users(raw_result):
-
     """
     Parse the 'show snmpv3 users' command raw output.
 
@@ -4556,7 +4551,6 @@ def parse_show_snmpv3_users(raw_result):
 
 
 def parse_show_snmp_agent_port(raw_result):
-
     """
     Parse the 'show snmp agent-port' command raw output.
 

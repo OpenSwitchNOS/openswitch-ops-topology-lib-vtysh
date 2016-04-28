@@ -2295,6 +2295,8 @@ Displaying ipv6 routes selected for forwarding
         via  2004::4000:0:0:2,  [1/0],  static
 2004::2000:0:0:0/67,  1 unicast next-hops
         via  2,  [0/0],  connected
+2004:0:1::/48,  1 unicast next-hops
+        via  lo2,  [0/0],  connected
     """
 
     result = parse_show_ipv6_route(raw_result)
@@ -2339,6 +2341,17 @@ Displaying ipv6 routes selected for forwarding
                 }
             ]
         },
+        {
+            'id': '2004:0:1::/48',
+            'next_hops': [
+                {
+                    'via': 'lo2',
+                    'distance': '0',
+                    'from': 'connected',
+                    'metric': '0'
+                }
+            ]
+        }
     ]
 
     ddiff = DeepDiff(result, expected)
