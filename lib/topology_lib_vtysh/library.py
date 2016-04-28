@@ -9532,6 +9532,34 @@ def show_ip_ecmp(
     return parse_show_ip_ecmp(result)
 
 
+def clear_bgp(
+        enode, peer, softreconfig):
+    """
+    Clear bgp peer.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # clear bgp {peer} {softreconfig}
+
+    :param peer: BGP peer to clear.
+    :param softreconfig: <in | out | soft>
+    """
+
+    cmd = [
+        'clear bgp {peer} {softreconfig}'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
 def clear_udld_statistics(
         enode):
     """
@@ -10902,6 +10930,7 @@ __all__ = [
     'show_udld_interface',
     'show_rib',
     'show_ip_ecmp',
+    'clear_bgp',
     'clear_udld_statistics',
     'clear_udld_statistics_interface',
     'ping_repetitions',

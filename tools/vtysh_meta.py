@@ -234,6 +234,20 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
+                'command': 'clear bgp {peer} {softreconfig}',
+                'doc': 'Clear bgp peer.',
+                'arguments': [
+                    {
+                        'name': 'peer',
+                        'doc': 'BGP peer to clear.',
+                    },
+                    {
+                        'name': 'softreconfig',
+                        'doc': '<in | out | soft>',
+                    },
+                ],
+            },
+            {
                 'command': 'clear udld statistics',
                 'doc': 'Clear UDLD statistics from all interfaces.',
                 'arguments': [],
