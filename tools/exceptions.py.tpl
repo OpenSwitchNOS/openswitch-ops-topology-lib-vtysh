@@ -26,7 +26,8 @@ Vtysh auto-generated typed exceptions module.
 from __future__ import unicode_literals, absolute_import
 from __future__ import print_function, division
 
-from re import match
+from re import search
+from re import sub
 from collections import OrderedDict
 
 
@@ -84,9 +85,11 @@ def determine_exception(output):
     :rtype: VtyshException subclass.
     :return: The corresponding exception class for given message.
     """
+    output = sub('[%]+', '', output)
+    output = output.strip().lower()
     for exc, matches in VTYSH_EXCEPTIONS.items():
         for expression in matches:
-            if match(expression, output):
+            if search(expression, output):
                 return exc
     return UnknownVtyshException
 

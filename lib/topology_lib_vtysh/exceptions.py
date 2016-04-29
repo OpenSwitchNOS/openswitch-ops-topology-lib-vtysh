@@ -26,7 +26,8 @@ Vtysh auto-generated typed exceptions module.
 from __future__ import unicode_literals, absolute_import
 from __future__ import print_function, division
 
-from re import match
+from re import search
+from re import sub
 from collections import OrderedDict
 
 
@@ -54,8 +55,7 @@ class UnknownCommandException(VtyshException):
     regular expressions match the output of a command:
 
     ::
-        Unknown command
-        % Unknown command.
+        unknown command
 
     """
 
@@ -66,7 +66,7 @@ class IncompleteCommandException(VtyshException):
     regular expressions match the output of a command:
 
     ::
-        Command incomplete
+        command incomplete
 
     """
 
@@ -77,7 +77,7 @@ class NotValidLAG(VtyshException):
     regular expressions match the output of a command:
 
     ::
-        Specified LAG port does not exist.
+        specified lag port does not exist.
 
     """
 
@@ -88,7 +88,106 @@ class DuplicateLoopbackIPException(VtyshException):
     regular expressions match the output of a command:
 
     ::
-        IP address is already assigned to interface as primary.
+        ip address is already assigned to interface as primary.
+
+    """
+
+
+class InvalidQnCommandException(VtyshException):
+    """
+    This is a typed exception that will be raised when any of the following
+    regular expressions match the output of a command:
+
+    ::
+        name  acl name
+
+    """
+
+
+class AclEmptyException(VtyshException):
+    """
+    This is a typed exception that will be raised when any of the following
+    regular expressions match the output of a command:
+
+    ::
+        acl is empty
+
+    """
+
+
+class TcamResourcesException(VtyshException):
+    """
+    This is a typed exception that will be raised when any of the following
+    regular expressions match the output of a command:
+
+    ::
+        command failed
+
+    """
+
+
+class ResequenceNumberException(VtyshException):
+    """
+    This is a typed exception that will be raised when any of the following
+    regular expressions match the output of a command:
+
+    ::
+        sequence numbers would exceed maximum
+
+    """
+
+
+class AmbiguousCommandException(VtyshException):
+    """
+    This is a typed exception that will be raised when any of the following
+    regular expressions match the output of a command:
+
+    ::
+        ambiguous command
+
+    """
+
+
+class InvalidL4SourcePortRangeException(VtyshException):
+    """
+    This is a typed exception that will be raised when any of the following
+    regular expressions match the output of a command:
+
+    ::
+        invalid l4 source port range
+
+    """
+
+
+class EchoCommandException(VtyshException):
+    """
+    This is a typed exception that will be raised when any of the following
+    regular expressions match the output of a command:
+
+    ::
+        range
+
+    """
+
+
+class AceDoesNotExistException(VtyshException):
+    """
+    This is a typed exception that will be raised when any of the following
+    regular expressions match the output of a command:
+
+    ::
+        acl entry does not exist
+
+    """
+
+
+class AclDoesNotExistException(VtyshException):
+    """
+    This is a typed exception that will be raised when any of the following
+    regular expressions match the output of a command:
+
+    ::
+        acl does not exist
 
     """
 
@@ -97,26 +196,79 @@ VTYSH_EXCEPTIONS = OrderedDict([
     (
         UnknownCommandException,
         [
-            'Unknown command',
-            '% Unknown command.',
+            'unknown command',
         ]
     ),
     (
         IncompleteCommandException,
         [
-            'Command incomplete',
+            'command incomplete',
         ]
     ),
     (
         NotValidLAG,
         [
-            'Specified LAG port does not exist.',
+            'specified lag port does not exist.',
         ]
     ),
     (
         DuplicateLoopbackIPException,
         [
-            'IP address is already assigned to interface as primary.',
+            'ip address is already assigned to interface as primary.',
+        ]
+    ),
+    (
+        InvalidQnCommandException,
+        [
+            'name  acl name',
+        ]
+    ),
+    (
+        AclEmptyException,
+        [
+            'acl is empty',
+        ]
+    ),
+    (
+        TcamResourcesException,
+        [
+            'command failed',
+        ]
+    ),
+    (
+        ResequenceNumberException,
+        [
+            'sequence numbers would exceed maximum',
+        ]
+    ),
+    (
+        AmbiguousCommandException,
+        [
+            'ambiguous command',
+        ]
+    ),
+    (
+        InvalidL4SourcePortRangeException,
+        [
+            'invalid l4 source port range',
+        ]
+    ),
+    (
+        EchoCommandException,
+        [
+            'range',
+        ]
+    ),
+    (
+        AceDoesNotExistException,
+        [
+            'acl entry does not exist',
+        ]
+    ),
+    (
+        AclDoesNotExistException,
+        [
+            'acl does not exist',
         ]
     ),
 ])
@@ -130,9 +282,11 @@ def determine_exception(output):
     :rtype: VtyshException subclass.
     :return: The corresponding exception class for given message.
     """
+    output = sub('[%]+', '', output)
+    output = output.strip().lower()
     for exc, matches in VTYSH_EXCEPTIONS.items():
         for expression in matches:
-            if match(expression, output):
+            if search(expression, output):
                 return exc
     return UnknownVtyshException
 
@@ -144,6 +298,15 @@ __all__ = [
     'IncompleteCommandException',
     'NotValidLAG',
     'DuplicateLoopbackIPException',
+    'InvalidQnCommandException',
+    'AclEmptyException',
+    'TcamResourcesException',
+    'ResequenceNumberException',
+    'AmbiguousCommandException',
+    'InvalidL4SourcePortRangeException',
+    'EchoCommandException',
+    'AceDoesNotExistException',
+    'AclDoesNotExistException',
     'VTYSH_EXCEPTIONS',
     'determine_exception'
 ]
