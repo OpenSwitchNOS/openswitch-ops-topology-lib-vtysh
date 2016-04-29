@@ -1865,6 +1865,45 @@ VTYSH_SPEC = OrderedDict([
                     }
                 ]
             },
+            {
+                'command': 'access-list ip {access_list}',
+                'doc': 'Configure access list.',
+                'arguments': [
+                    {
+                        'name': 'access_list',
+                        'doc': 'Access List Name.',
+                    },
+                ],
+            },
+            {
+                'command': 'no access-list ip {access_list}',
+                'doc': 'Unconfigure access list.',
+                'arguments': [
+                    {
+                        'name': 'access_list',
+                        'doc': 'Access List Name.',
+                    },
+                ],
+            },
+            {
+                'command': 'access-list ip {access_list} resequence'
+                           ' {start} {increment}',
+                'doc': 'Resequence ACL Lists.',
+                'arguments': [
+                    {
+                        'name': 'access_list',
+                        'doc': 'Access List Name.',
+                    },
+                    {
+                        'name': 'start',
+                        'doc': 'beginning index of entry in access list',
+                    },
+                    {
+                        'name': 'increment',
+                        'doc': 'increment factor of subsequent ACE in ACL',
+                    },
+                ],
+            }
         ]
     }),
     ('route_map', {
@@ -2388,6 +2427,26 @@ VTYSH_SPEC = OrderedDict([
                 'command': 'no autonegotiation',
                 'doc': 'Disable autonegotiation',
                 'arguments': [],
+            },
+            {
+                'command': 'apply access-list ip {acl_name} in',
+                'doc': 'Apply ACL on interface',
+                'arguments': [
+                    {
+                        'name': 'acl_name',
+                        'doc': 'Access-list name'
+                    }
+                ],
+            },
+            {
+                'command': 'no apply access-list ip {acl_name} in',
+                'doc': 'Apply no ACL on interface',
+                'arguments': [
+                    {
+                        'name': 'acl_name',
+                        'doc': 'Access-list name'
+                    }
+                ],
             }
         ]
     }),
@@ -4314,7 +4373,120 @@ VTYSH_SPEC = OrderedDict([
             }
         ]
     },
-    )
+    ),
+    ('config_access_list_ip_testname', {
+        'doc': 'ACE permission.',
+        'arguments': [
+            {
+                'name': 'acl_name',
+                'doc': 'access-list name'
+            }
+        ],
+        'pre_commands': ['config terminal', 'access-list ip {acl_name}'],
+        'post_commands': ['end'],
+        'commands': [
+            {
+                'command': '{negate} {sequence} permit {protocol} '
+                           '{ip1} {port1} {ip2} {port2} {count} {log}',
+                'doc': 'Permit access-list entry',
+                'arguments': [
+                    {
+                        'name': 'negate',
+                        'doc': 'remove access-list entry.',
+                    },
+                    {
+                        'name': 'sequence',
+                        'doc': 'sequence number of ACE.',
+                    },
+                    {
+                        'name': 'protocol',
+                        'doc': 'Protocol (number) type.',
+                    },
+                    {
+                        'name': 'ip1',
+                        'doc': '<A.B.C.D/M> Source IPv4 address.',
+                    },
+                    {
+                        'name': 'port1',
+                        'doc': 'Source Port range <1-65535>.',
+                    },
+                    {
+                        'name': 'ip2',
+                        'doc': '<A.B.C.D/M> Destination IPv4 address.',
+                    },
+                    {
+                        'name': 'port2',
+                        'doc': 'Destination Port range <1-65535>.',
+                    },
+                    {
+                        'name': 'count',
+                        'doc': 'TBD',
+                        'optional': True
+                    },
+                    {
+                        'name': 'log',
+                        'doc': 'TBD',
+                        'optional': True
+                    },
+                ],
+            },
+            {
+                'command': '{negate} {sequence} deny {protocol} '
+                           '{ip1} {port1} {ip2} {port2} {count} {log}',
+                'doc': 'Deny access-list entry',
+                'arguments': [
+                    {
+                        'name': 'negate',
+                        'doc': 'remove access-list entry.',
+                    },
+                    {
+                        'name': 'sequence',
+                        'doc': 'sequence number of ACE.',
+                    },
+                    {
+                        'name': 'protocol',
+                        'doc': 'Protocol type for entry.',
+                    },
+                    {
+                        'name': 'ip1',
+                        'doc': '<A.B.C.D/M> Source IPv4 address.',
+                    },
+                    {
+                        'name': 'port1',
+                        'doc': 'Source Port range <1-65535>.',
+                    },
+                    {
+                        'name': 'ip2',
+                        'doc': '<A.B.C.D/M> Destination IPv4 address.',
+                    },
+                    {
+                        'name': 'port2',
+                        'doc': 'Destination Port range <1-65535>.',
+                    },
+                    {
+                        'name': 'count',
+                        'doc': 'TBD',
+                        'optional': True
+                    },
+                    {
+                        'name': 'log',
+                        'doc': 'TBD',
+                        'optional': True
+                    },
+                ],
+            },
+            {
+                'command': 'no {sequence}',
+                'doc': 'Remove access-list entry',
+                'arguments': [
+                    {
+                        'name': 'sequence',
+                        'doc': 'sequence number of ACE.',
+                    },
+                ],
+            },
+        ]
+    })
 ])
 
 """Vtysh Specification as a Python dictionary"""
@@ -4324,23 +4496,68 @@ VTYSH_EXCEPTIONS_SPEC = OrderedDict([
     (
         'UnknownCommandException',
         [
-            'Unknown command', '% Unknown command.'
+            'unknown command',
         ]
     ), (
         'IncompleteCommandException',
         [
-            'Command incomplete',
+            'command incomplete',
         ]
     ), (
         'NotValidLAG',
         [
-            'Specified LAG port does not exist.',
+            'specified lag port does not exist.',
         ]
     ), (
         'DuplicateLoopbackIPException',
         [
-            'IP address is already assigned to interface'
+            'ip address is already assigned to interface'
             ' as primary.',
+        ]
+    ), (
+        'InvalidQnCommandException',
+        [
+            'name  acl name',
+        ]
+    ), (
+        'AclEmptyException',
+        [
+            'acl is empty',
+        ]
+    ), (
+        'TcamResourcesException',
+        [
+            'command failed',
+        ]
+    ), (
+        'ResequenceNumberException',
+        [
+            'sequence numbers would exceed maximum',
+        ]
+    ), (
+        'AmbiguousCommandException',
+        [
+            'ambiguous command',
+        ]
+    ), (
+        'InvalidL4SourcePortRangeException',
+        [
+            'invalid l4 source port range',
+        ]
+    ), (
+        'EchoCommandException',
+        [
+            'range',
+        ]
+    ), (
+        'AceDoesNotExistException',
+        [
+            'acl entry does not exist',
+        ]
+    ), (
+        'AclDoesNotExistException',
+        [
+            'acl does not exist',
         ]
     )
 ])

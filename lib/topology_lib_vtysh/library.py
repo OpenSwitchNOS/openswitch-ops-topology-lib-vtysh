@@ -2541,6 +2541,86 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def access_list_ip(
+            self, access_list):
+        """
+        Configure access list.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # access-list ip {access_list}
+
+        :param access_list: Access List Name.
+        """
+
+        cmd = [
+            'access-list ip {access_list}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_access_list_ip(
+            self, access_list):
+        """
+        Unconfigure access list.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no access-list ip {access_list}
+
+        :param access_list: Access List Name.
+        """
+
+        cmd = [
+            'no access-list ip {access_list}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def access_list_ip_resequence(
+            self, access_list, start, increment):
+        """
+        Resequence ACL Lists.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # access-list ip {access_list} resequence {start} {increment}
+
+        :param access_list: Access List Name.
+        :param start: beginning index of entry in access list
+        :param increment: increment factor of subsequent ACE in ACL
+        """
+
+        cmd = [
+            'access-list ip {access_list} resequence {start} {increment}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
 
 class RouteMap(ContextManager):
     """
@@ -4134,6 +4214,58 @@ class ConfigInterface(ContextManager):
 
         cmd = [
             'no autonegotiation'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def apply_access_list_ip_in(
+            self, acl_name):
+        """
+        Apply ACL on interface
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # apply access-list ip {acl_name} in
+
+        :param acl_name: Access-list name
+        """
+
+        cmd = [
+            'apply access-list ip {acl_name} in'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_apply_access_list_ip_in(
+            self, acl_name):
+        """
+        Apply no ACL on interface
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no apply access-list ip {acl_name} in
+
+        :param acl_name: Access-list name
+        """
+
+        cmd = [
+            'no apply access-list ip {acl_name} in'
         ]
 
         result = self.enode(
@@ -8718,6 +8850,176 @@ class ConfigMirrorSession(ContextManager):
             raise determine_exception(result)(result)
 
 
+class ConfigAccessListIpTestname(ContextManager):
+    """
+    ACE permission.
+
+    pre_commands:
+
+    ::
+
+            ['config terminal', 'access-list ip {acl_name}']
+
+    post_commands:
+
+    ::
+
+            ['end']
+    """
+    def __init__(self, enode, acl_name):
+        self.enode = enode
+        self.acl_name = acl_name
+
+    def __enter__(self):
+        commands = """\
+            config terminal
+            access-list ip {acl_name}
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+        return self
+
+    def __exit__(self, type, value, traceback):
+        commands = """\
+            end
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+    def permit(
+            self, negate, sequence, protocol, ip1, port1, ip2,
+            port2, count='', log=''):
+        """
+        Permit access-list entry
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # {negate} {sequence} permit {protocol} {ip1} {port1} {ip2} {port2} {count} {log}  # noqa
+
+        :param negate: remove access-list entry.
+        :param sequence: sequence number of ACE.
+        :param protocol: Protocol (number) type.
+        :param ip1: <A.B.C.D/M> Source IPv4 address.
+        :param port1: Source Port range <1-65535>.
+        :param ip2: <A.B.C.D/M> Destination IPv4 address.
+        :param port2: Destination Port range <1-65535>.
+        :param count: TBD
+        :param log: TBD
+        """  # noqa
+
+        cmd = [
+            '{negate} {sequence} permit {protocol} {ip1} {port1} {ip2} {port2} {count} {log}'  # noqa
+        ]
+
+        if count:
+            cmd.append(
+                '{}{{count}}{}'.format(
+                    '', ''
+                )
+            )
+
+        if log:
+            cmd.append(
+                '{}{{log}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def deny(
+            self, negate, sequence, protocol, ip1, port1, ip2,
+            port2, count='', log=''):
+        """
+        Deny access-list entry
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # {negate} {sequence} deny {protocol} {ip1} {port1} {ip2} {port2} {count} {log}  # noqa
+
+        :param negate: remove access-list entry.
+        :param sequence: sequence number of ACE.
+        :param protocol: Protocol type for entry.
+        :param ip1: <A.B.C.D/M> Source IPv4 address.
+        :param port1: Source Port range <1-65535>.
+        :param ip2: <A.B.C.D/M> Destination IPv4 address.
+        :param port2: Destination Port range <1-65535>.
+        :param count: TBD
+        :param log: TBD
+        """  # noqa
+
+        cmd = [
+            '{negate} {sequence} deny {protocol} {ip1} {port1} {ip2} {port2} {count} {log}'  # noqa
+        ]
+
+        if count:
+            cmd.append(
+                '{}{{count}}{}'.format(
+                    '', ''
+                )
+            )
+
+        if log:
+            cmd.append(
+                '{}{{log}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no(
+            self, sequence):
+        """
+        Remove access-list entry
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no {sequence}
+
+        :param sequence: sequence number of ACE.
+        """
+
+        cmd = [
+            'no {sequence}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+
 def show_interface(
         enode, portlbl):
     """
@@ -10771,6 +11073,7 @@ __all__ = [
     'ConfigTftpServer',
     'ConfigDhcpServer',
     'ConfigMirrorSession',
+    'ConfigAccessListIpTestname',
     'show_interface',
     'show_interface_subinterface',
     'show_vlan',
