@@ -462,6 +462,526 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def apply_qos_queue_profile_schedule_profile(
+            self, queue_profile_name, schedule_profile_name):
+        """
+        Applies qos profiles.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # apply qos queue-profile {queue_profile_name} schedule-profile {schedule_profile_name}  # noqa
+
+        :param queue_profile_name: The queue profile to apply.
+        :param schedule_profile_name: The schedule profile to apply.
+        """  # noqa
+
+        cmd = [
+            'apply qos queue-profile {queue_profile_name} schedule-profile {schedule_profile_name}'  # noqa
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def qos_cos_map_local_priority(
+            self, code_point, local_priority):
+        """
+        Configures the qos cos-map.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # qos cos-map {code_point} local-priority {local_priority}
+
+        :param code_point: The code point of the cos map entry.
+        :param local_priority: The local priority of the cos map entry.
+        """
+
+        cmd = [
+            'qos cos-map {code_point} local-priority {local_priority}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def qos_cos_map_local_priority_color(
+            self, code_point, local_priority, color):
+        """
+        Configures the qos cos-map.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # qos cos-map {code_point} local-priority {local_priority} color {color}  # noqa
+
+        :param code_point: The code point of the cos map entry.
+        :param local_priority: The local priority of the cos map entry.
+        :param color: The color of the cos map entry.
+        """  # noqa
+
+        cmd = [
+            'qos cos-map {code_point} local-priority {local_priority} color {color}'  # noqa
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def qos_cos_map_local_priority_name(
+            self, code_point, local_priority, name):
+        """
+        Configures the qos cos-map.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # qos cos-map {code_point} local-priority {local_priority} name {name}  # noqa
+
+        :param code_point: The code point of the cos map entry.
+        :param local_priority: The local priority of the cos map entry.
+        :param name: The name of the cos map entry.
+        """  # noqa
+
+        cmd = [
+            'qos cos-map {code_point} local-priority {local_priority} name {name}'  # noqa
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def qos_cos_map_local_priority_color_name(
+            self, code_point, local_priority, color, name):
+        """
+        Configures the qos cos-map.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # qos cos-map {code_point} local-priority {local_priority} color {color} name {name}  # noqa
+
+        :param code_point: The code point of the cos map entry.
+        :param local_priority: The local priority of the cos map entry.
+        :param color: The color of the cos map entry.
+        :param name: The name of the cos map entry.
+        """  # noqa
+
+        cmd = [
+            'qos cos-map {code_point} local-priority {local_priority} color {color} name {name}'  # noqa
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def qos_cos_map_local_priority_name_color(
+            self, code_point, local_priority, name, color):
+        """
+        Configures the qos cos-map.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # qos cos-map {code_point} local-priority {local_priority} name {name} color {color}  # noqa
+
+        :param code_point: The code point of the cos map entry.
+        :param local_priority: The local priority of the cos map entry.
+        :param name: The name of the cos map entry.
+        :param color: The color of the cos map entry.
+        """  # noqa
+
+        cmd = [
+            'qos cos-map {code_point} local-priority {local_priority} name {name} color {color}'  # noqa
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_qos_cos_map(
+            self, code_point):
+        """
+        Restores a qos cos-map entry to factory default.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no qos cos-map {code_point}
+
+        :param code_point: The code point of the cos map entry.
+        """
+
+        cmd = [
+            'no qos cos-map {code_point}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def qos_dscp_map_local_priority(
+            self, code_point, local_priority):
+        """
+        Configures the qos dscp-map.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # qos dscp-map {code_point} local-priority {local_priority}
+
+        :param code_point: The code point of the dscp map entry.
+        :param local_priority: The local priority of the dscp map entry.
+        """
+
+        cmd = [
+            'qos dscp-map {code_point} local-priority {local_priority}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def qos_dscp_map_local_priority_color(
+            self, code_point, local_priority, color):
+        """
+        Configures the qos dscp-map.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # qos dscp-map {code_point} local-priority {local_priority} color {color}  # noqa
+
+        :param code_point: The code point of the dscp map entry.
+        :param local_priority: The local priority of the dscp map entry.
+        :param color: The color of the dscp map entry.
+        """  # noqa
+
+        cmd = [
+            'qos dscp-map {code_point} local-priority {local_priority} color {color}'  # noqa
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def qos_dscp_map_local_priority_name(
+            self, code_point, local_priority, name):
+        """
+        Configures the qos dscp-map.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # qos dscp-map {code_point} local-priority {local_priority} name {name}  # noqa
+
+        :param code_point: The code point of the dscp map entry.
+        :param local_priority: The local priority of the dscp map entry.
+        :param name: The name of the dscp map entry.
+        """  # noqa
+
+        cmd = [
+            'qos dscp-map {code_point} local-priority {local_priority} name {name}'  # noqa
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def qos_dscp_map_local_priority_color_name(
+            self, code_point, local_priority, color, name):
+        """
+        Configures the qos dscp-map.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # qos dscp-map {code_point} local-priority {local_priority} color {color} name {name}  # noqa
+
+        :param code_point: The code point of the dscp map entry.
+        :param local_priority: The local priority of the dscp map entry.
+        :param color: The color of the dscp map entry.
+        :param name: The name of the dscp map entry.
+        """  # noqa
+
+        cmd = [
+            'qos dscp-map {code_point} local-priority {local_priority} color {color} name {name}'  # noqa
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def qos_dscp_map_local_priority_name_color(
+            self, code_point, local_priority, name, color):
+        """
+        Configures the qos dscp-map.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # qos dscp-map {code_point} local-priority {local_priority} name {name} color {color}  # noqa
+
+        :param code_point: The code point of the dscp map entry.
+        :param local_priority: The local priority of the dscp map entry.
+        :param name: The name of the dscp map entry.
+        :param color: The color of the dscp map entry.
+        """  # noqa
+
+        cmd = [
+            'qos dscp-map {code_point} local-priority {local_priority} name {name} color {color}'  # noqa
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_qos_dscp_map(
+            self, code_point):
+        """
+        Restores a qos dscp-map entry to factory default.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no qos dscp-map {code_point}
+
+        :param code_point: The code point of the dscp map entry.
+        """
+
+        cmd = [
+            'no qos dscp-map {code_point}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def qos_queue_profile(
+            self, queue_profile_name):
+        """
+        Creates a queue profile.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # qos queue-profile {queue_profile_name}
+
+        :param queue_profile_name: Up to 64 letters, numbers, underscores,
+            dashes, or periods.
+        """
+
+        cmd = [
+            'qos queue-profile {queue_profile_name}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_qos_queue_profile(
+            self, queue_profile_name):
+        """
+        Deletes a queue profile.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no qos queue-profile {queue_profile_name}
+
+        :param queue_profile_name: Up to 64 letters, numbers, underscores,
+            dashes, or periods.
+        """
+
+        cmd = [
+            'no qos queue-profile {queue_profile_name}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def qos_schedule_profile(
+            self, schedule_profile_name):
+        """
+        Creates a schedule profile.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # qos schedule-profile {schedule_profile_name}
+
+        :param schedule_profile_name: Up to 64 letters, numbers, underscores,
+            dashes, or periods.
+        """
+
+        cmd = [
+            'qos schedule-profile {schedule_profile_name}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_qos_schedule_profile(
+            self, schedule_profile_name):
+        """
+        Deletes a schedule profile.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no qos schedule-profile {schedule_profile_name}
+
+        :param schedule_profile_name: Up to 64 letters, numbers, underscores,
+            dashes, or periods.
+        """
+
+        cmd = [
+            'no qos schedule-profile {schedule_profile_name}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def qos_trust(
+            self, value):
+        """
+        Sets qos trust.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # qos trust {value}
+
+        :param value: none, cos, or dscp
+        """
+
+        cmd = [
+            'qos trust {value}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_qos_trust(
+            self):
+        """
+        Restores qos trust to its factory default.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no qos trust
+
+        """
+
+        cmd = [
+            'no qos trust'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def lacp_system_priority(
             self, priority):
         """
@@ -4292,6 +4812,167 @@ class ConfigInterface(ContextManager):
 
         cmd = [
             'no autonegotiation'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def apply_qos_schedule_profile(
+            self, schedule_profile_name):
+        """
+        Apply qos profiles on an interface.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # apply qos schedule-profile {schedule_profile_name}
+
+        :param schedule_profile_name: The schedule profile to apply.
+        """
+
+        cmd = [
+            'apply qos schedule-profile {schedule_profile_name}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_apply_qos_schedule_profile(
+            self, schedule_profile_name=''):
+        """
+        Clears qos profiles from an interface.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no apply qos schedule-profile
+
+        :param schedule_profile_name: The schedule profile to clear.
+        """
+
+        cmd = [
+            'no apply qos schedule-profile'
+        ]
+
+        if schedule_profile_name:
+            cmd.append(
+                '{}{{schedule_profile_name}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def qos_dscp(
+            self, dscp_map_index):
+        """
+        Set the dscp override for the port.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # qos dscp {dscp_map_index}
+
+        :param dscp_map_index: The index into the dscp map.
+        """
+
+        cmd = [
+            'qos dscp {dscp_map_index}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_qos_dscp(
+            self):
+        """
+        Remove the dscp override for the port.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no qos dscp
+
+        """
+
+        cmd = [
+            'no qos dscp'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def qos_trust(
+            self, value):
+        """
+        Set the qos trust mode for the port.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # qos trust {value}
+
+        :param value: The qos trust mode to set.
+        """
+
+        cmd = [
+            'qos trust {value}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_qos_trust(
+            self):
+        """
+        Remove the qos trust mode for the port.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no qos trust
+
+        """
+
+        cmd = [
+            'no qos trust'
         ]
 
         result = self.enode(
@@ -8829,13 +9510,13 @@ class ConfigMirrorSession(ContextManager):
 
         ::
 
-            # destination interface {port}
+            # destination interface {portlbl}
 
         :param portlbl: Label that identifies an interface or LAG
         """
 
         cmd = [
-            'destination interface {port}'
+            'destination interface {portlbl}'
         ]
 
         port = self.enode.ports.get(portlbl, portlbl)
@@ -8932,14 +9613,14 @@ class ConfigMirrorSession(ContextManager):
 
         ::
 
-            # source interface {port}
+            # source interface {portlbl} {direction}
 
         :param portlbl: Label that identifies an interface or LAG
         :param direction: <both | rx | tx>
         """
 
         cmd = [
-            'source interface {port}'
+            'source interface {portlbl} {direction}'
         ]
 
         port = self.enode.ports.get(portlbl, portlbl)
@@ -8953,7 +9634,7 @@ class ConfigMirrorSession(ContextManager):
             raise determine_exception(result)(result)
 
     def no_source_interface(
-            self, interface):
+            self, portlbl, direction=''):
         """
         Remove a source interface from the session.
 
@@ -8961,13 +9642,353 @@ class ConfigMirrorSession(ContextManager):
 
         ::
 
-            # no source interface
+            # no source interface {portlbl}
 
-        :param interface: Ethernet interface or LAG
+        :param portlbl: Ethernet interface or LAG
+        :param direction: <both | rx | tx>
         """
 
         cmd = [
-            'no source interface'
+            'no source interface {portlbl}'
+        ]
+
+        port = self.enode.ports.get(portlbl, portlbl)
+
+        if direction:
+            cmd.append(
+                '{}{{direction}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+
+class ConfigQueueProfile(ContextManager):
+    """
+    Configure a queue profile.
+
+    pre_commands:
+
+    ::
+
+            ['config terminal', 'qos queue-profile {name}']
+
+    post_commands:
+
+    ::
+
+            ['end']
+    """
+    def __init__(self, enode, name):
+        self.enode = enode
+        self.name = name
+
+    def __enter__(self):
+        commands = """\
+            config terminal
+            qos queue-profile {name}
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+        return self
+
+    def __exit__(self, type, value, traceback):
+        commands = """\
+            end
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+    def map_queue_local_priority(
+            self, queue, local_priority):
+        """
+        Map a local priority to a queue.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # map queue {queue} local-priority {local_priority}
+
+        :param queue: The queue to configure.
+        :param local_priority: The local priority to configure.
+        """
+
+        cmd = [
+            'map queue {queue} local-priority {local_priority}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_map_queue(
+            self, queue):
+        """
+        Clear the map for a queue.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no map queue {queue}
+
+        :param queue: The queue to clear.
+        """
+
+        cmd = [
+            'no map queue {queue}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_map_queue_local_priority(
+            self, queue, local_priority):
+        """
+        Clear a local priority from a queue.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no map queue {queue} local-priority {local_priority}
+
+        :param queue: The queue to configure.
+        :param local_priority: The local priority to configure.
+        """
+
+        cmd = [
+            'no map queue {queue} local-priority {local_priority}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def name_queue(
+            self, queue, name):
+        """
+        Name a queue.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # name queue {queue} {name}
+
+        :param queue: The queue to configure.
+        :param name: The name to assign to the queue.
+        """
+
+        cmd = [
+            'name queue {queue} {name}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_name_queue(
+            self, queue):
+        """
+        Clears the name of a queue.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no name queue {queue}
+
+        :param queue: The queue to clear.
+        """
+
+        cmd = [
+            'no name queue {queue}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+
+class ConfigScheduleProfile(ContextManager):
+    """
+    Configure a schedule profile.
+
+    pre_commands:
+
+    ::
+
+            ['config terminal', 'qos schedule-profile {name}']
+
+    post_commands:
+
+    ::
+
+            ['end']
+    """
+    def __init__(self, enode, name):
+        self.enode = enode
+        self.name = name
+
+    def __enter__(self):
+        commands = """\
+            config terminal
+            qos schedule-profile {name}
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+        return self
+
+    def __exit__(self, type, value, traceback):
+        commands = """\
+            end
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+    def strict_queue(
+            self, queue):
+        """
+        Assign the strict algorithm to a queue.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # strict queue {queue}
+
+        :param queue: The queue to configure.
+        """
+
+        cmd = [
+            'strict queue {queue}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_strict_queue(
+            self, queue):
+        """
+        Clear the strict algorithm from a queue.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no strict queue {queue}
+
+        :param queue: The queue to clear.
+        """
+
+        cmd = [
+            'no strict queue {queue}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def dwrr_queue_weight(
+            self, queue, weight):
+        """
+        Assign the dwrr algorithm to a queue.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # dwrr queue {queue} weight {weight}
+
+        :param queue: The queue to configure.
+        :param weight: The weight for the queue.
+        """
+
+        cmd = [
+            'dwrr queue {queue} weight {weight}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_dwrr_queue(
+            self, queue):
+        """
+        Clears the dwrr algorithm for a queue.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no dwrr queue {queue}
+
+        :param queue: The queue to clear.
+        """
+
+        cmd = [
+            'no dwrr queue {queue}'
         ]
 
         result = self.enode(
@@ -10955,7 +11976,7 @@ def show_mirror(
 
     ::
 
-        # show mirror {name}
+        # show mirror
 
     :param name: Up to 64 letters, numbers, underscores, dashes, or periods.
     :return: A dictionary as returned by
@@ -10963,7 +11984,7 @@ def show_mirror(
     """
 
     cmd = [
-        'show mirror {name}'
+        'show mirror'
     ]
 
     if name:
@@ -10979,6 +12000,183 @@ def show_mirror(
     )
 
     return parse_show_mirror(result)
+
+
+def show_qos_cos_map(
+        enode, default=''):
+    """
+    Shows the qos cos-map.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show qos cos-map
+
+    :param default: Show the default cos-map.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_qos_cos_map`
+    """
+
+    cmd = [
+        'show qos cos-map'
+    ]
+
+    if default:
+        cmd.append(
+            '{}{{default}}{}'.format(
+                '', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_qos_cos_map(result)
+
+
+def show_qos_dscp_map(
+        enode, default=''):
+    """
+    Shows the qos dscp-map.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show qos dscp-map
+
+    :param default: Show the default dscp-map.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_qos_dscp_map`
+    """
+
+    cmd = [
+        'show qos dscp-map'
+    ]
+
+    if default:
+        cmd.append(
+            '{}{{default}}{}'.format(
+                '', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_qos_dscp_map(result)
+
+
+def show_qos_queue_profile(
+        enode, queue_profile_name=''):
+    """
+    Shows the qos queue profile.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show qos queue-profile
+
+    :param queue_profile_name: Up to 64 letters, numbers, underscores, dashes,
+     or periods.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_qos_queue_profile`
+    """
+
+    cmd = [
+        'show qos queue-profile'
+    ]
+
+    if queue_profile_name:
+        cmd.append(
+            '{}{{queue_profile_name}}{}'.format(
+                '', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_qos_queue_profile(result)
+
+
+def show_qos_schedule_profile(
+        enode, schedule_profile_name=''):
+    """
+    Shows the qos schedule profile.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show qos schedule-profile
+
+    :param schedule_profile_name: Up to 64 letters, numbers, underscores,
+     dashes, or periods.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_qos_schedule_profile`
+    """
+
+    cmd = [
+        'show qos schedule-profile'
+    ]
+
+    if schedule_profile_name:
+        cmd.append(
+            '{}{{schedule_profile_name}}{}'.format(
+                '', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_qos_schedule_profile(result)
+
+
+def show_qos_trust(
+        enode, default=''):
+    """
+    Shows the qos trust.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show qos trust
+
+    :param default: Show the default qos trust.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_qos_trust`
+    """
+
+    cmd = [
+        'show qos trust'
+    ]
+
+    if default:
+        cmd.append(
+            '{}{{default}}{}'.format(
+                '', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_qos_trust(result)
 
 
 def show_snmp_community(
@@ -11284,6 +12482,8 @@ __all__ = [
     'ConfigTftpServer',
     'ConfigDhcpServer',
     'ConfigMirrorSession',
+    'ConfigQueueProfile',
+    'ConfigScheduleProfile',
     'ConfigAccessListIpTestname',
     'show_interface',
     'show_interface_mgmt',
@@ -11344,6 +12544,11 @@ __all__ = [
     'erase_startup_config',
     'show_tftp_server',
     'show_mirror',
+    'show_qos_cos_map',
+    'show_qos_dscp_map',
+    'show_qos_queue_profile',
+    'show_qos_schedule_profile',
+    'show_qos_trust',
     'show_snmp_community',
     'show_snmp_system',
     'show_snmp_trap',

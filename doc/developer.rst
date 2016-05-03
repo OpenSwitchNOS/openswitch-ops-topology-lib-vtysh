@@ -113,7 +113,8 @@ To add a new command to the library, a developer needs to:
    #. Run ``deactivate``.
 
 If the vtysh command has output (by example any *show* command), a parser
-function has to be defined in **parser.py**. The name of this function must be
+function has to be defined in **parser.py**, and the function must be added to
+the __all__ variable at the end of the file. The name of this function must be
 "parse_<name_of_the_function>".Be aware that a function that does not belongs
 to root, must have the shape "parse_<context_name>_<function_name>".
 For example, if a command is "show house" a python function called "show_house"
