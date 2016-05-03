@@ -2093,6 +2093,7 @@ interface mgmt
     nameserver 2.2.2.2
 sftp-server
     enable
+mirror session foo
 ipv6 route 2020::3/128 1
 ip route 140.1.1.10/32 1
 ip route 140.1.1.30/32 1
@@ -2233,6 +2234,10 @@ ipv6 route 2020::2/128 1
                 'prefix': '32',
                 'network': '140.1.1.30',
             }
+        },
+        'mirror_session':
+        {
+            'foo': 'foo'
         }
     }
 

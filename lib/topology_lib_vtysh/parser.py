@@ -2546,9 +2546,9 @@ def parse_show_running_config(raw_result):
                 'transport': 'tcp',
                 'severity': 'debug'
             }
-        }
-
-
+        },
+        'mirror_session': {
+            'name': 'foo'
         }
     """
 
@@ -2924,6 +2924,18 @@ def parse_show_running_config(raw_result):
         i += 1
 
     result['syslog_remotes'] = remote_syslog
+
+    # Mirror section
+    result['mirror_session'] = {}
+    mirror_section_re = r'mirror\s+session\s+.*'
+    re_mirror_section = re.findall(mirror_section_re, raw_result, re.DOTALL)
+    if re_mirror_section:
+        for line in re_mirror_section[0].splitlines():
+            mirror_session_name_re = r'mirror\ssession\s(.*)'
+            session_name = re.match(mirror_session_name_re, line)
+            if session_name:
+                result['mirror_session'][session_name.group(1)] = \
+                                                    session_name.group(1)
 
     return result
 
@@ -4180,30 +4192,93 @@ def parse_show_mirror(raw_result):
                 result[partial['name']] = partial
     else:
         re_result = re.match(mirror_re, raw_result)
-        assert re_result
-        result = re_result.groupdict()
-        for key, value in result.items():
-            if value and value.isdigit():
-                result[key] = int(value)
+        if re_result:
+            result = re_result.groupdict()
+            for key, value in result.items():
+                if value and value.isdigit():
+                    result[key] = int(value)
 
-        result['source'] = []
-        for line in raw_result.splitlines():
-            re_result = re.search(mirror_sorce_re, line)
-            if re_result:
-                partial = re_result.groupdict()
-                result['source'].append(partial)
+            result['source'] = []
+            for line in raw_result.splitlines():
+                re_result = re.search(mirror_sorce_re, line)
+                if re_result:
+                    partial = re_result.groupdict()
+                    result['source'].append(partial)
 
-        result['destination'] = []
-        for line in raw_result.splitlines():
-            re_result = re.search(mirror_destination_re, line)
-            if re_result:
-                partial = re_result.groupdict()
-                result['destination'] = partial
+            result['destination'] = []
+            for line in raw_result.splitlines():
+                re_result = re.search(mirror_destination_re, line)
+                if re_result:
+                    partial = re_result.groupdict()
+                    result['destination'] = partial
 
     if result == {}:
-        return None
+        if 'Invalid mirror session' in raw_result:
+            return "Invalid"
+        if 'No mirror' in raw_result:
+            return "None"
     else:
         return result
+
+
+def parse_show_qos_cos_map(raw_result):
+    """
+    Parse the show command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: string
+    :return: The output of the command.
+    """
+
+    return raw_result
+
+
+def parse_show_qos_dscp_map(raw_result):
+    """
+    Parse the show command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: string
+    :return: The output of the command.
+    """
+
+    return raw_result
+
+
+def parse_show_qos_queue_profile(raw_result):
+    """
+    Parse the show command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: string
+    :return: The output of the command.
+    """
+
+    return raw_result
+
+
+def parse_show_qos_schedule_profile(raw_result):
+    """
+    Parse the show command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: string
+    :return: The output of the command.
+    """
+
+    return raw_result
+
+
+def parse_show_qos_trust(raw_result):
+    """
+    Parse the show command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: string
+    :return: The output of the command.
+    """
+
+    return raw_result
 
 
 def parse_show_snmp_community(raw_result):
@@ -4751,6 +4826,11 @@ __all__ = [
     'parse_config_tftp_server_no_enable', 'parse_config_tftp_server_path',
     'parse_config_tftp_server_no_path', 'parse_show_interface_lag',
     'parse_show_mirror',
+    'parse_show_qos_cos_map',
+    'parse_show_qos_dscp_map',
+    'parse_show_qos_queue_profile',
+    'parse_show_qos_schedule_profile',
+    'parse_show_qos_trust',
     'parse_config_tftp_server_no_path', 'parse_show_snmp_community',
     'parse_show_snmp_system', 'parse_show_snmp_trap',
     'parse_diag_dump_lacp_basic', 'parse_show_snmpv3_users',
