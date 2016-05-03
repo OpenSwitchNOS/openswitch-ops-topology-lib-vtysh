@@ -658,7 +658,7 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
-                'command': 'show mirror {name}',
+                'command': 'show mirror',
                 'doc': 'Show mirroring session information.',
                 'arguments': [
                     {
@@ -669,6 +669,72 @@ VTYSH_SPEC = OrderedDict([
                         ),
                         'optional': True
                     }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show qos cos-map',
+                'doc': 'Shows the qos cos-map.',
+                'arguments': [
+                    {
+                        'name': 'default',
+                        'doc': 'Show the default cos-map.',
+                        'optional': True
+                    },
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show qos dscp-map',
+                'doc': 'Shows the qos dscp-map.',
+                'arguments': [
+                    {
+                        'name': 'default',
+                        'doc': 'Show the default dscp-map.',
+                        'optional': True
+                    },
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show qos queue-profile',
+                'doc': 'Shows the qos queue profile.',
+                'arguments': [
+                    {
+                        'name': 'queue_profile_name',
+                        'doc': (
+                            'Up to 64 letters, numbers, underscores, dashes, '
+                            'or periods.'
+                        ),
+                        'optional': True
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show qos schedule-profile',
+                'doc': 'Shows the qos schedule profile.',
+                'arguments': [
+                    {
+                        'name': 'schedule_profile_name',
+                        'doc': (
+                            'Up to 64 letters, numbers, underscores, dashes, '
+                            'or periods.'
+                        ),
+                        'optional': True
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show qos trust',
+                'doc': 'Shows the qos trust.',
+                'arguments': [
+                    {
+                        'name': 'default',
+                        'doc': 'Show the default qos trust.',
+                        'optional': True
+                    },
                 ],
                 'returns': True
             },
@@ -1027,6 +1093,306 @@ VTYSH_SPEC = OrderedDict([
                         'optional': True
                     },
                 ],
+            },
+            {
+                'command': 'apply qos queue-profile {queue_profile_name} \
+schedule-profile {schedule_profile_name}',
+                'doc': 'Applies qos profiles.',
+                'arguments': [
+                    {
+                        'name': 'queue_profile_name',
+                        'doc': 'The queue profile to apply.',
+                    },
+                    {
+                        'name': 'schedule_profile_name',
+                        'doc': 'The schedule profile to apply.',
+                    },
+                ],
+            },
+            {
+                'command': 'qos cos-map {code_point} \
+local-priority {local_priority}',
+                'doc': 'Configures the qos cos-map.',
+                'arguments': [
+                    {
+                        'name': 'code_point',
+                        'doc': 'The code point of the cos map entry.',
+                    },
+                    {
+                        'name': 'local_priority',
+                        'doc': 'The local priority of the cos map entry.',
+                    },
+                ],
+            },
+            {
+                'command': 'qos cos-map {code_point} \
+local-priority {local_priority} color {color}',
+                'doc': 'Configures the qos cos-map.',
+                'arguments': [
+                    {
+                        'name': 'code_point',
+                        'doc': 'The code point of the cos map entry.',
+                    },
+                    {
+                        'name': 'local_priority',
+                        'doc': 'The local priority of the cos map entry.',
+                    },
+                    {
+                        'name': 'color',
+                        'doc': 'The color of the cos map entry.',
+                    },
+                ],
+            },
+            {
+                'command': 'qos cos-map {code_point} \
+local-priority {local_priority} name {name}',
+                'doc': 'Configures the qos cos-map.',
+                'arguments': [
+                    {
+                        'name': 'code_point',
+                        'doc': 'The code point of the cos map entry.',
+                    },
+                    {
+                        'name': 'local_priority',
+                        'doc': 'The local priority of the cos map entry.',
+                    },
+                    {
+                        'name': 'name',
+                        'doc': 'The name of the cos map entry.',
+                    },
+                ],
+            },
+            {
+                'command': 'qos cos-map {code_point} \
+local-priority {local_priority} color {color} name {name}',
+                'doc': 'Configures the qos cos-map.',
+                'arguments': [
+                    {
+                        'name': 'code_point',
+                        'doc': 'The code point of the cos map entry.',
+                    },
+                    {
+                        'name': 'local_priority',
+                        'doc': 'The local priority of the cos map entry.',
+                    },
+                    {
+                        'name': 'color',
+                        'doc': 'The color of the cos map entry.',
+                    },
+                    {
+                        'name': 'name',
+                        'doc': 'The name of the cos map entry.',
+                    },
+                ],
+            },
+            {
+                'command': 'qos cos-map {code_point} \
+local-priority {local_priority} name {name} color {color}',
+                'doc': 'Configures the qos cos-map.',
+                'arguments': [
+                    {
+                        'name': 'code_point',
+                        'doc': 'The code point of the cos map entry.',
+                    },
+                    {
+                        'name': 'local_priority',
+                        'doc': 'The local priority of the cos map entry.',
+                    },
+                    {
+                        'name': 'name',
+                        'doc': 'The name of the cos map entry.',
+                    },
+                    {
+                        'name': 'color',
+                        'doc': 'The color of the cos map entry.',
+                    },
+                ],
+            },
+            {
+                'command': 'no qos cos-map {code_point}',
+                'doc': 'Restores a qos cos-map entry to factory default.',
+                'arguments': [
+                    {
+                        'name': 'code_point',
+                        'doc': 'The code point of the cos map entry.',
+                    },
+                ],
+            },
+            {
+                'command': 'qos dscp-map {code_point} \
+local-priority {local_priority}',
+                'doc': 'Configures the qos dscp-map.',
+                'arguments': [
+                    {
+                        'name': 'code_point',
+                        'doc': 'The code point of the dscp map entry.',
+                    },
+                    {
+                        'name': 'local_priority',
+                        'doc': 'The local priority of the dscp map entry.',
+                    },
+                ],
+            },
+            {
+                'command': 'qos dscp-map {code_point} \
+local-priority {local_priority} color {color}',
+                'doc': 'Configures the qos dscp-map.',
+                'arguments': [
+                    {
+                        'name': 'code_point',
+                        'doc': 'The code point of the dscp map entry.',
+                    },
+                    {
+                        'name': 'local_priority',
+                        'doc': 'The local priority of the dscp map entry.',
+                    },
+                    {
+                        'name': 'color',
+                        'doc': 'The color of the dscp map entry.',
+                    },
+                ],
+            },
+            {
+                'command': 'qos dscp-map {code_point} \
+local-priority {local_priority} name {name}',
+                'doc': 'Configures the qos dscp-map.',
+                'arguments': [
+                    {
+                        'name': 'code_point',
+                        'doc': 'The code point of the dscp map entry.',
+                    },
+                    {
+                        'name': 'local_priority',
+                        'doc': 'The local priority of the dscp map entry.',
+                    },
+                    {
+                        'name': 'name',
+                        'doc': 'The name of the dscp map entry.',
+                    },
+                ],
+            },
+            {
+                'command': 'qos dscp-map {code_point} \
+local-priority {local_priority} color {color} name {name}',
+                'doc': 'Configures the qos dscp-map.',
+                'arguments': [
+                    {
+                        'name': 'code_point',
+                        'doc': 'The code point of the dscp map entry.',
+                    },
+                    {
+                        'name': 'local_priority',
+                        'doc': 'The local priority of the dscp map entry.',
+                    },
+                    {
+                        'name': 'color',
+                        'doc': 'The color of the dscp map entry.',
+                    },
+                    {
+                        'name': 'name',
+                        'doc': 'The name of the dscp map entry.',
+                    },
+                ],
+            },
+            {
+                'command': 'qos dscp-map {code_point} \
+local-priority {local_priority} name {name} color {color}',
+                'doc': 'Configures the qos dscp-map.',
+                'arguments': [
+                    {
+                        'name': 'code_point',
+                        'doc': 'The code point of the dscp map entry.',
+                    },
+                    {
+                        'name': 'local_priority',
+                        'doc': 'The local priority of the dscp map entry.',
+                    },
+                    {
+                        'name': 'name',
+                        'doc': 'The name of the dscp map entry.',
+                    },
+                    {
+                        'name': 'color',
+                        'doc': 'The color of the dscp map entry.',
+                    },
+                ],
+            },
+            {
+                'command': 'no qos dscp-map {code_point}',
+                'doc': 'Restores a qos dscp-map entry to factory default.',
+                'arguments': [
+                    {
+                        'name': 'code_point',
+                        'doc': 'The code point of the dscp map entry.',
+                    },
+                ],
+            },
+            {
+                'command': 'qos queue-profile {queue_profile_name}',
+                'doc': 'Creates a queue profile.',
+                'arguments': [
+                    {
+                        'name': 'queue_profile_name',
+                        'doc': (
+                            'Up to 64 letters, numbers, underscores, dashes, '
+                            'or periods.'
+                        )
+                    }
+                ]
+            },
+            {
+                'command': 'no qos queue-profile {queue_profile_name}',
+                'doc': 'Deletes a queue profile.',
+                'arguments': [
+                    {
+                        'name': 'queue_profile_name',
+                        'doc': (
+                            'Up to 64 letters, numbers, underscores, dashes, '
+                            'or periods.'
+                        )
+                    }
+                ]
+            },
+            {
+                'command': 'qos schedule-profile {schedule_profile_name}',
+                'doc': 'Creates a schedule profile.',
+                'arguments': [
+                    {
+                        'name': 'schedule_profile_name',
+                        'doc': (
+                            'Up to 64 letters, numbers, underscores, dashes, '
+                            'or periods.'
+                        )
+                    }
+                ]
+            },
+            {
+                'command': 'no qos schedule-profile {schedule_profile_name}',
+                'doc': 'Deletes a schedule profile.',
+                'arguments': [
+                    {
+                        'name': 'schedule_profile_name',
+                        'doc': (
+                            'Up to 64 letters, numbers, underscores, dashes, '
+                            'or periods.'
+                        )
+                    }
+                ]
+            },
+            {
+                'command': 'qos trust {value}',
+                'doc': 'Sets qos trust.',
+                'arguments': [
+                    {
+                        'name': 'value',
+                        'doc': 'none, cos, or dscp',
+                    },
+                ],
+            },
+            {
+                'command': 'no qos trust',
+                'doc': 'Restores qos trust to its factory default.',
+                'arguments': [],
             },
             {
                 'command': 'lacp system-priority {priority}',
@@ -2476,6 +2842,58 @@ VTYSH_SPEC = OrderedDict([
             {
                 'command': 'no autonegotiation',
                 'doc': 'Disable autonegotiation',
+                'arguments': [],
+            },
+            {
+                'command': 'apply qos schedule-profile \
+{schedule_profile_name}',
+                'doc': 'Apply qos profiles on an interface.',
+                'arguments': [
+                    {
+                        'name': 'schedule_profile_name',
+                        'doc': 'The schedule profile to apply.'
+                    }
+                ],
+            },
+            {
+                'command': 'no apply qos schedule-profile',
+                'doc': 'Clears qos profiles from an interface.',
+                'arguments': [
+                    {
+                        'name': 'schedule_profile_name',
+                        'doc': 'The schedule profile to clear.',
+                        'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'qos dscp {dscp_map_index}',
+                'doc': 'Set the dscp override for the port.',
+                'arguments': [
+                    {
+                        'name': 'dscp_map_index',
+                        'doc': 'The index into the dscp map.'
+                    }
+                ],
+            },
+            {
+                'command': 'no qos dscp',
+                'doc': 'Remove the dscp override for the port.',
+                'arguments': [],
+            },
+            {
+                'command': 'qos trust {value}',
+                'doc': 'Set the qos trust mode for the port.',
+                'arguments': [
+                    {
+                        'name': 'value',
+                        'doc': 'The qos trust mode to set.'
+                    }
+                ],
+            },
+            {
+                'command': 'no qos trust',
+                'doc': 'Remove the qos trust mode for the port.',
                 'arguments': [],
             },
             {
@@ -4381,7 +4799,7 @@ VTYSH_SPEC = OrderedDict([
         'post_commands': ['end'],
         'commands': [
             {
-                'command': 'destination interface {port}',
+                'command': 'destination interface {portlbl}',
                 'doc': 'Set the destination interface.',
                 'arguments': [
                     {
@@ -4409,7 +4827,7 @@ VTYSH_SPEC = OrderedDict([
                 'arguments': []
             },
             {
-                'command': 'source interface {port}',
+                'command': 'source interface {portlbl} {direction}',
                 'doc': 'Assign a source interface.',
                 'arguments': [
                     {
@@ -4425,15 +4843,163 @@ VTYSH_SPEC = OrderedDict([
                 ]
             },
             {
-                'command': 'no source interface',
+                'command': 'no source interface {portlbl}',
                 'doc': (
                     'Remove a source interface from the session.'
                 ),
                 'arguments': [
                     {
-                        'name': 'interface',
+                        'name': 'portlbl',
                         'doc': 'Ethernet interface or LAG'
+                    },
+                    {
+                        'name': 'direction',
+                        'doc': (
+                            '<both | rx | tx>'
+                        ),
+                        'optional': True,
                     }
+                ]
+            }
+        ]
+    },
+    ),
+    ('config_queue_profile', {
+        'doc': 'Configure a queue profile.',
+        'arguments': [
+            {
+                'name': 'name',
+                'doc': (
+                    'Up to 64 letters, numbers, underscores, dashes, '
+                    'or periods.'
+                )
+            }
+        ],
+        'pre_commands': ['config terminal', 'qos queue-profile {name}'],
+        'post_commands': ['end'],
+        'commands': [
+            {
+                'command': 'map queue {queue} local-priority {local_priority}',
+                'doc': 'Map a local priority to a queue.',
+                'arguments': [
+                    {
+                        'name': 'queue',
+                        'doc': 'The queue to configure.'
+                    },
+                    {
+                        'name': 'local_priority',
+                        'doc': 'The local priority to configure.'
+                    }
+                ]
+            },
+            {
+                'command': 'no map queue {queue}',
+                'doc': 'Clear the map for a queue.',
+                'arguments': [
+                    {
+                        'name': 'queue',
+                        'doc': 'The queue to clear.'
+                    }
+                ]
+            },
+            {
+                'command': 'no map queue {queue} \
+local-priority {local_priority}',
+                'doc': 'Clear a local priority from a queue.',
+                'arguments': [
+                    {
+                        'name': 'queue',
+                        'doc': 'The queue to configure.'
+                    },
+                    {
+                        'name': 'local_priority',
+                        'doc': 'The local priority to configure.'
+                    }
+                ]
+            },
+            {
+                'command': 'name queue {queue} {name}',
+                'doc': 'Name a queue.',
+                'arguments': [
+                    {
+                        'name': 'queue',
+                        'doc': 'The queue to configure.'
+                    },
+                    {
+                        'name': 'name',
+                        'doc': 'The name to assign to the queue.'
+                    }
+                ]
+            },
+            {
+                'command': 'no name queue {queue}',
+                'doc': 'Clears the name of a queue.',
+                'arguments': [
+                    {
+                        'name': 'queue',
+                        'doc': 'The queue to clear.'
+                    }
+                ]
+            }
+        ]
+    },
+    ),
+    ('config_schedule_profile', {
+        'doc': 'Configure a schedule profile.',
+        'arguments': [
+            {
+                'name': 'name',
+                'doc': (
+                    'Up to 64 letters, numbers, underscores, dashes, '
+                    'or periods.'
+                )
+            }
+        ],
+        'pre_commands': ['config terminal', 'qos schedule-profile {name}'],
+        'post_commands': ['end'],
+        'commands': [
+            {
+                'command': 'strict queue {queue}',
+                'doc': 'Assign the strict algorithm to a queue.',
+                'arguments': [
+                    {
+                        'name': 'queue',
+                        'doc': 'The queue to configure.'
+                    },
+                ]
+            },
+            {
+                'command': 'no strict queue {queue}',
+                'doc': 'Clear the strict algorithm from a queue.',
+                'arguments': [
+                    {
+                        'name': 'queue',
+                        'doc': 'The queue to clear.'
+                    }
+                ]
+            },
+            {
+                'command': 'dwrr queue {queue} weight {weight}',
+                'doc': 'Assign the dwrr algorithm to a queue.',
+                'arguments': [
+                    {
+                        'name': 'queue',
+                        'doc': 'The queue to configure.'
+                    },
+                    {
+                        'name': 'weight',
+                        'doc': 'The weight for the queue.'
+                    }
+                ]
+            },
+            {
+                'command': 'no dwrr queue {queue}',
+                'doc': 'Clears the dwrr algorithm for a queue.',
+                'arguments': [
+                    {
+                        'name': 'queue',
+                        'doc': 'The queue to clear.'
+                    },
                 ]
             }
         ]
