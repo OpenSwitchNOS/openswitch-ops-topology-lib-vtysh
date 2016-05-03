@@ -2442,9 +2442,9 @@ def parse_show_running_config(raw_result):
                 'transport': 'tcp',
                 'severity': 'debug'
             }
-        }
-
-
+        },
+        'mirror_session': {
+            'name': 'foo'
         }
     """
 
@@ -2820,6 +2820,18 @@ def parse_show_running_config(raw_result):
         i += 1
 
     result['syslog_remotes'] = remote_syslog
+
+    # Mirror section
+    result['mirror_session'] = {}
+    mirror_section_re = r'mirror\s+session\s+.*'
+    re_mirror_section = re.findall(mirror_section_re, raw_result, re.DOTALL)
+    if re_mirror_section:
+        for line in re_mirror_section[0].splitlines():
+            mirror_session_name_re = r'mirror\ssession\s(.*)'
+            session_name = re.match(mirror_session_name_re, line)
+            if session_name:
+                result['mirror_session'][session_name.group(1)] = \
+                                                    session_name.group(1)
 
     return result
 
@@ -4110,30 +4122,285 @@ def parse_show_mirror(raw_result):
                 result[partial['name']] = partial
     else:
         re_result = re.match(mirror_re, raw_result)
-        assert re_result
-        result = re_result.groupdict()
-        for key, value in result.items():
-            if value and value.isdigit():
-                result[key] = int(value)
+        if re_result:
+            result = re_result.groupdict()
+            for key, value in result.items():
+                if value and value.isdigit():
+                    result[key] = int(value)
 
-        result['source'] = []
-        for line in raw_result.splitlines():
-            re_result = re.search(mirror_sorce_re, line)
-            if re_result:
-                partial = re_result.groupdict()
-                result['source'].append(partial)
+            result['source'] = []
+            for line in raw_result.splitlines():
+                re_result = re.search(mirror_sorce_re, line)
+                if re_result:
+                    partial = re_result.groupdict()
+                    result['source'].append(partial)
 
-        result['destination'] = []
-        for line in raw_result.splitlines():
-            re_result = re.search(mirror_destination_re, line)
-            if re_result:
-                partial = re_result.groupdict()
-                result['destination'] = partial
+            result['destination'] = []
+            for line in raw_result.splitlines():
+                re_result = re.search(mirror_destination_re, line)
+                if re_result:
+                    partial = re_result.groupdict()
+                    result['destination'] = partial
 
     if result == {}:
-        return None
+        if 'Invalid mirror session' in raw_result:
+            return "Invalid"
+        if 'No mirror' in raw_result:
+            return "None"
     else:
         return result
+
+
+def parse_show_qos_cos_map(raw_result):
+    """
+    Parse the show command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the 'show qos cos-map' command in a \
+        dictionary where each key is a code point in the cos map:
+
+     ::
+
+        {
+            '0': {'code_point': '0',
+                    'local_priority': '1',
+                    'color': 'green',
+                    'name': 'Best_Effort'},
+            '1': {'code_point': '1',
+                    'local_priority': '0',
+                    'color': 'green',
+                    'name': 'Background'},
+            ...
+        }
+    """
+
+    hyphen_line = raw_result.splitlines()[1]
+    columns = [pos for pos, char in enumerate(hyphen_line) if char == ' ']
+
+    result = {}
+    for line in raw_result.splitlines():
+        if line[0].isdecimal():
+            code_point = line[0:columns[0]].strip()
+            result[code_point] = {}
+
+            result[code_point]['code_point'] = \
+                line[0:columns[0]].strip()
+            result[code_point]['local_priority'] = \
+                line[columns[0]:columns[1]].strip()
+            result[code_point]['color'] = \
+                line[columns[1]:columns[2]].strip()
+            result[code_point]['name'] = \
+                line[columns[2]:len(line)].strip()
+
+    return result
+
+
+def parse_show_qos_dscp_map(raw_result):
+    """
+    Parse the show command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the 'show qos dscp-map' command in a \
+        dictionary where each key is a code point in the dscp map:
+
+     ::
+
+        {
+            '0': {'code_point': '0',
+                    'local_priority': '0',
+                    'color': 'green',
+                    'name': 'CS0'},
+            '1': {'code_point': '1',
+                    'local_priority': '0',
+                    'color': 'green',
+                    'name': ''},
+            ...
+        }
+    """
+
+    hyphen_line = raw_result.splitlines()[1]
+    columns = [pos for pos, char in enumerate(hyphen_line) if char == ' ']
+
+    result = {}
+    for line in raw_result.splitlines():
+        if line[0].isdecimal():
+            code_point = line[0:columns[0]].strip()
+            result[code_point] = {}
+
+            result[code_point]['code_point'] = \
+                line[0:columns[0]].strip()
+            result[code_point]['local_priority'] = \
+                line[columns[0]:columns[1]].strip()
+            result[code_point]['color'] = \
+                line[columns[1]:columns[2]].strip()
+            result[code_point]['name'] = \
+                line[columns[2]:len(line)].strip()
+
+    return result
+
+
+def parse_show_qos_queue_profile(raw_result):
+    """
+    Parse the show command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the 'show qos queue-profile' command in a \
+        dictionary:
+
+    for 'show qos queue-profile':
+
+     ::
+
+        {
+            'default': {'profile_name': 'default',
+                             'profile_status': 'applied'},
+            'factory-default': {'profile_name': 'factory-default',
+                             'profile_status': 'complete'}
+        }
+
+    for 'show qos queue-profile <name>':
+
+     ::
+
+        {
+            '0': {'queue_num': '0',
+                    'local_priorities': '0',
+                    'name': 'Scavenger_and_backup_data'},
+            '1': {'queue_num': '1',
+                    'local_priorities': '1',
+                    'name': ''},
+            ...
+        }
+    """
+
+    hyphen_line = raw_result.splitlines()[1]
+    columns = [pos for pos, char in enumerate(hyphen_line) if char == ' ']
+    result = {}
+
+    if len(columns) + 1 == 2:
+        # All profiles.
+        # Skip the first two banner lines.
+        for line in raw_result.splitlines()[2:]:
+            profile_name = line[columns[0]:len(line)].strip()
+            result[profile_name] = {}
+
+            result[profile_name]['profile_status'] = \
+                line[0:columns[0]].strip()
+            result[profile_name]['profile_name'] = \
+                line[columns[0]:len(line)].strip()
+    elif len(columns) + 1 == 3:
+        # Single profile.
+        # Skip the first two banner lines.
+        for line in raw_result.splitlines()[2:]:
+            queue_num = line[0:columns[0]].strip()
+            result[queue_num] = {}
+
+            result[queue_num]['queue_num'] = \
+                line[0:columns[0]].strip()
+            result[queue_num]['local_priorities'] = \
+                line[columns[0]:columns[1]].strip()
+            result[queue_num]['name'] = \
+                line[columns[1]:len(line)].strip()
+    else:
+        # Error.
+        raise ValueError("Unexpected number of columns.")
+
+    return result
+
+
+def parse_show_qos_schedule_profile(raw_result):
+    """
+    Parse the show command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the 'show qos schedule-profile' \
+        command in a dictionary:
+
+    for 'show qos schedule-profile':
+
+     ::
+
+        {
+            'default': {'profile_name': 'default',
+                             'profile_status': 'applied'},
+            'factory-default': {'profile_name': 'factory-default',
+                             'profile_status': 'complete'}
+        }
+
+    for 'show qos schedule-profile <name>':
+
+     ::
+
+        {
+            '0': {'queue_num': '0',
+                    'algorithm': 'dwrr',
+                    'weight': '1'},
+            '1': {'queue_num': '1',
+                    'algorithm': 'dwrr',
+                    'weight': '2'},
+            ...
+        }
+    """
+
+    hyphen_line = raw_result.splitlines()[1]
+    columns = [pos for pos, char in enumerate(hyphen_line) if char == ' ']
+    result = {}
+
+    if len(columns) + 1 == 2:
+        # All profiles.
+        # Skip the first two banner lines.
+        for line in raw_result.splitlines()[2:]:
+            profile_name = line[columns[0]:len(line)].strip()
+            result[profile_name] = {}
+
+            result[profile_name]['profile_status'] = \
+                line[0:columns[0]].strip()
+            result[profile_name]['profile_name'] = \
+                line[columns[0]:len(line)].strip()
+    elif len(columns) + 1 == 3:
+        # Single profile.
+        # Skip the first two banner lines.
+        for line in raw_result.splitlines()[2:]:
+            queue_num = line[0:columns[0]].strip()
+            result[queue_num] = {}
+
+            result[queue_num]['queue_num'] = \
+                line[0:columns[0]].strip()
+            result[queue_num]['algorithm'] = \
+                line[columns[0]:columns[1]].strip()
+            result[queue_num]['weight'] = \
+                line[columns[1]:len(line)].strip()
+    else:
+        # Error.
+        raise ValueError("Unexpected number of columns.")
+
+    return result
+
+
+def parse_show_qos_trust(raw_result):
+    """
+    Parse the show command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the 'show qos trust' command in a \
+        dictionary:
+
+     ::
+
+        {
+            'trust': 'none'
+        }
+    """
+
+    result = {}
+    result['trust'] = raw_result.split()[2]
+
+    return result
 
 
 def parse_show_snmp_community(raw_result):
@@ -4680,7 +4947,13 @@ __all__ = [
     'parse_config_tftp_server_enable',
     'parse_config_tftp_server_no_enable', 'parse_config_tftp_server_path',
     'parse_config_tftp_server_no_path', 'parse_show_interface_lag',
-    'parse_show_mirror', 'parse_erase_startup_config',
+    'parse_erase_startup_config',
+    'parse_show_mirror',
+    'parse_show_qos_cos_map',
+    'parse_show_qos_dscp_map',
+    'parse_show_qos_queue_profile',
+    'parse_show_qos_schedule_profile',
+    'parse_show_qos_trust',
     'parse_config_tftp_server_no_path', 'parse_show_snmp_community',
     'parse_show_snmp_system', 'parse_show_snmp_trap',
     'parse_diag_dump_lacp_basic', 'parse_show_snmpv3_users',
