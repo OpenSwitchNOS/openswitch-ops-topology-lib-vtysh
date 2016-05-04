@@ -8414,7 +8414,7 @@ class ConfigDhcpServer(ContextManager):
             raise determine_exception(result)(result)
 
     def option_set(
-            self, set_name='', option_number='', option_value='',
+            self, option_name='', option_number='', option_value='',
             tag_name='', ipv6=''):
         """
         Sets DHCP configuration values using an option name.
@@ -8425,8 +8425,8 @@ class ConfigDhcpServer(ContextManager):
 
             # option set
 
-        :param set_name: DHCP option name
-        :param option-number: DHCP option number
+        :param option_name: DHCP option name
+        :param option_number: DHCP option number
         :param option_value: DHCP option value
         :param tag_name: Match tags list. Each tag length must be less than 15
             chars.
@@ -8437,16 +8437,16 @@ class ConfigDhcpServer(ContextManager):
             'option set'
         ]
 
-        if set_name:
+        if option_name:
             cmd.append(
-                '{}{{set_name}}{}'.format(
+                '{}{{option_name}}{}'.format(
                     ' option-name ', ''
                 )
             )
 
-        if option-number:
+        if option_number:
             cmd.append(
-                '{}{{option-number}}{}'.format(
+                '{}{{option_number}}{}'.format(
                     ' option-number ', ''
                 )
             )
@@ -8481,7 +8481,7 @@ class ConfigDhcpServer(ContextManager):
             raise determine_exception(result)(result)
 
     def no_option_set(
-            self, set_name='', option_number='', option_value='',
+            self, option_name='', option_number='', option_value='',
             tag_name='', ipv6=''):
         """
         Removes DHCP configuration values using an option name.
@@ -8492,8 +8492,8 @@ class ConfigDhcpServer(ContextManager):
 
             # no option set
 
-        :param set_name: DHCP option name
-        :param option-number: DHCP option number
+        :param option_name: DHCP option name
+        :param option_number: DHCP option number
         :param option_value: DHCP option value
         :param tag_name: Match tags list. Each tag length must be less than 15
             chars.
@@ -8504,16 +8504,16 @@ class ConfigDhcpServer(ContextManager):
             'no option set'
         ]
 
-        if set_name:
+        if option_name:
             cmd.append(
-                '{}{{set_name}}{}'.format(
+                '{}{{option_name}}{}'.format(
                     ' option-name ', ''
                 )
             )
 
-        if option-number:
+        if option_number:
             cmd.append(
-                '{}{{option-number}}{}'.format(
+                '{}{{option_number}}{}'.format(
                     ' option-number ', ''
                 )
             )

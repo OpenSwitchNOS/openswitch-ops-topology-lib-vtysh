@@ -4143,13 +4143,13 @@ VTYSH_SPEC = OrderedDict([
                     ),
                     'arguments': [
                         {
-                            'name': 'set_name',
+                            'name': 'option_name',
                             'doc': 'DHCP option name',
                             'prefix': ' option-name ',
                             'optional': True
                         },
                         {
-                            'name': 'option-number',
+                            'name': 'option_number',
                             'doc': 'DHCP option number',
                             'prefix': ' option-number ',
                             'optional': True
@@ -4188,13 +4188,13 @@ VTYSH_SPEC = OrderedDict([
                     ),
                     'arguments': [
                         {
-                            'name': 'set_name',
+                            'name': 'option_name',
                             'doc': 'DHCP option name',
                             'prefix': ' option-name ',
                             'optional': True
                         },
                         {
-                            'name': 'option-number',
+                            'name': 'option_number',
                             'doc': 'DHCP option number',
                             'prefix': ' option-number ',
                             'optional': True
