@@ -745,7 +745,32 @@ VTYSH_SPEC = OrderedDict([
                     }
                 ],
                 'returns': True
-            }
+            },
+            {
+                'command': 'show spanning-tree',
+                'doc': (
+                    'Shows priority, address, Hello-time, Max-age, '
+                    'Forward-delay for bridge and root node.'
+                ),
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show spanning-tree mst',
+                'doc': (
+                    'Shows MSTP instance and corresponding VLANs.'
+                ),
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show spanning-tree mst-config',
+                'doc': (
+                    'Shows global MSTP configuration'
+                ),
+                'arguments': [],
+                'returns': True
+            },
         ]
     }),
     ('configure', {
@@ -1865,6 +1890,271 @@ VTYSH_SPEC = OrderedDict([
                     }
                 ]
             },
+            {
+                'command': 'spanning-tree',
+                'doc': 'Enables MSTP feature for all the instances',
+                'arguments': [],
+            },
+            {
+                'command': 'no spanning-tree',
+                'doc': 'Disables MSTP feature for all the instances',
+                'arguments': [],
+            },
+            {
+                'command': 'spanning-tree config-name {configuration_name}',
+                'doc': 'Sets config name for MSTP',
+                'arguments': [
+                    {
+                        'name': 'configuration_name',
+                        'doc': 'Specifies the MSTP configuration name',
+                    }
+                ],
+            },
+            {
+                'command': 'no spanning-tree config-name',
+                'doc': 'Sets the default config name for all the instances,' +
+                       ' default is system MAC-Address',
+                'arguments': [
+                    {
+                        'name': 'configuration_name',
+                        'doc': 'Specifies the MSTP configuration name',
+                        'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'spanning-tree config-revision {revision_number}',
+                'doc': 'Sets config revision number for the all the instances',
+                'arguments': [
+                    {
+                        'name': 'revision_number',
+                        'doc': 'Specifies the MSTP configuration revision '
+                               'number value <1-40>',
+                    }
+                ],
+            },
+            {
+                'command': 'no spanning-tree config-revision',
+                'doc': 'Sets default config revision number for the all '
+                       'the instances, default value is 0',
+                'arguments': [
+                    {
+                        'name': 'revision_number',
+                        'doc': 'Specifies the MSTP configuration revision '
+                               'number value <1-40>',
+                        'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'spanning-tree instance {instance_id} '
+                           'vlan {vlan_id}',
+                'doc': 'Maps the VLAN-ID to corresponding instance',
+                'arguments': [
+                    {
+                        'name': 'instance_id',
+                        'doc': 'Specifies the MSTP instance number <1-64>',
+                    },
+                    {
+                        'name': 'vlan_id',
+                        'doc': 'Specifies the VLAN-ID number <1-4094>',
+                    }
+                ],
+            },
+            {
+                'command': 'no spanning-tree instance {instance_id} '
+                           'vlan',
+                'doc': 'Removes the VLAN-ID from the MSTP instance',
+                'arguments': [
+                    {
+                        'name': 'instance_id',
+                        'doc': 'Specifies the MSTP instance number <1-64>',
+                    },
+                    {
+                        'name': 'vlan_id',
+                        'doc': 'Specifies the VLAN-ID number <1-4094>',
+                        'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'spanning-tree instance {instance_id} '
+                           'priority {priority}',
+                'doc': 'Maps the priority to corresponding instance',
+                'arguments': [
+                    {
+                        'name': 'instance_id',
+                        'doc': 'Specifies the MSTP instance number <1-64>',
+                    },
+                    {
+                        'name': 'priority',
+                        'doc': 'The device priority multiplier for '
+                               'the MST instance <0-15>',
+                    }
+                ],
+            },
+            {
+                'command': 'no spanning-tree instance {instance_id} '
+                           'priority',
+                'doc': 'Removes the priority from the MSTP instance',
+                'arguments': [
+                    {
+                        'name': 'instance_id',
+                        'doc': 'Specifies the MSTP instance number <1-64>',
+                    },
+                    {
+                        'name': 'priority',
+                        'doc': 'The device priority multiplier for '
+                               'the MST instance <0-15>',
+                        'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'no spanning-tree instance {instance_id}',
+                'doc': 'Removes the MSTP instance',
+                'arguments': [
+                    {
+                        'name': 'instance_id',
+                        'doc': 'Specifies the MSTP instance number <1-64>',
+                    }
+                ],
+            },
+            {
+                'command': 'spanning-tree forward-delay {delay_in_secs}',
+                'doc': 'Sets the forward-delay for all the MSTP instances',
+                'arguments': [
+                    {
+                        'name': 'delay_in_secs',
+                        'doc': 'Specifies the forward delay in seconds <4-30>',
+                    }
+                ],
+            },
+            {
+                'command': 'no spanning-tree forward-delay',
+                'doc': 'Sets the default forward-delay for all the MSTP '
+                       'instances, default value is 15 seconds',
+                'arguments': [
+                    {
+                        'name': 'delay_in_secs',
+                        'doc': 'Specifies the forward delay in '
+                               'seconds <4-30>',
+                        'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'spanning-tree hello-time {hello_in_secs}',
+                'doc': 'Sets the hello interval for all the MSTP instances',
+                'arguments': [
+                    {
+                        'name': 'hello_in_secs',
+                        'doc': 'Specifies the hello interval in '
+                               'seconds <2-10>',
+                    }
+                ],
+            },
+            {
+                'command': 'no spanning-tree hello-time',
+                'doc': 'Sets the default hello interval for all the MSTP '
+                       'instances, default value is 2 seconds',
+                'arguments': [
+                    {
+                        'name': 'hello_in_secs',
+                        'doc': 'Specifies the hello interval in '
+                               'seconds <2-10>',
+                        'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'spanning-tree max-age {age_in_secs}',
+                'doc': 'Sets the maximum age for all the MSTP instances',
+                'arguments': [
+                    {
+                        'name': 'age_in_secs',
+                        'doc': 'Specifies the maximum age in seconds <6-30>',
+                    }
+                ],
+            },
+            {
+                'command': 'no spanning-tree max-age',
+                'doc': 'Sets the default max age for all the MSTP '
+                       'instances, default value is 20 seconds',
+                'arguments': [
+                    {
+                        'name': 'age_in_secs',
+                        'doc': 'Specifies the maximum age in seconds <6-30>',
+                        'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'spanning-tree max-hops {hop_count}',
+                'doc': 'Sets the hop count for all the MSTP instances',
+                'arguments': [
+                    {
+                        'name': 'hop_count',
+                        'doc': 'Specifies the maximum number of hops <1-40>',
+                    }
+                ],
+            },
+            {
+                'command': 'no spanning-tree max-hops',
+                'doc': 'Sets the default hop count for all the MSTP '
+                       'instances, default value is 20',
+                'arguments': [
+                    {
+                        'name': 'hop_count',
+                        'doc': 'Specifies the maximum number of hops <1-40>',
+                        'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'spanning-tree priority {priority}',
+                'doc': 'Set the device priority multiplier',
+                'arguments': [
+                    {
+                        'name': 'priority',
+                        'doc': 'Device priority multiplier <0-15>',
+                    }
+                ],
+            },
+            {
+                'command': 'no spanning-tree priority',
+                'doc': 'Set the device priority multiplier',
+                'arguments': [
+                    {
+                        'name': 'priority',
+                        'doc': 'Device priority multiplier <0-15>',
+                        'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'spanning-tree transmit-hold-count {count}',
+                'doc': 'Sets the transmit hold count performance '
+                       'parameter in pps',
+                'arguments': [
+                    {
+                        'name': 'count',
+                        'doc': 'Transmit hold count <1-10>',
+                    }
+                ],
+            },
+            {
+                'command': 'no spanning-tree transmit-hold-count',
+                'doc': 'Sets the transmit hold count performance '
+                       'parameter in pps',
+                'arguments': [
+                    {
+                        'name': 'count',
+                        'doc': 'Transmit hold count <1-10>',
+                        'optional': True
+                    }
+                ],
+            },
         ]
     }),
     ('route_map', {
@@ -2388,6 +2678,207 @@ VTYSH_SPEC = OrderedDict([
                 'command': 'no autonegotiation',
                 'doc': 'Disable autonegotiation',
                 'arguments': [],
+            },
+            {
+                'command': 'spanning-tree port-type {admin_type}',
+                'doc': 'Sets the port-type for all the MSTP instances',
+                'arguments': [
+                    {
+                        'name': 'admin_type',
+                        'doc': (
+                            'admin-edge Specifies the port as admin-edge\n'
+                            'admin-network Specifies the port as admin-network'
+                        ),
+                    }
+                ],
+            },
+            {
+                'command': 'no spanning-tree port-type {admin_type}',
+                'doc': 'Sets the port-type for all the MSTP instances',
+                'arguments': [
+                    {
+                        'name': 'admin_type',
+                        'doc': (
+                            'admin-edge Specifies the port as admin-edge\n'
+                            'admin-network Specifies the port as admin-network'
+                        ),
+                        'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'spanning-tree bpdu-guard {action}',
+                'doc': 'Enable/Disable the bpdu guard on the interfaces',
+                'arguments': [
+                    {
+                        'name': 'action',
+                        'doc': (
+                            'enable Enable the bpdu guard on the interfaces'
+                            'disable Disable the bpdu guard on the interfaces'
+                        ),
+                    }
+                ],
+            },
+            {
+                'command': 'no spanning-tree bpdu-guard {action}',
+                'doc': 'Enable/Disable the bpdu guard on the interfaces',
+                'arguments': [
+                    {
+                        'name': 'action',
+                        'doc': (
+                            'enable Enable the bpdu guard on the interfaces'
+                            'disable Disable the bpdu guard on the interfaces'
+                        ),
+                        'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'spanning-tree root-guard {action}',
+                'doc': 'Enable/Disable the root guard on the interfaces',
+                'arguments': [
+                    {
+                        'name': 'action',
+                        'doc': (
+                            'enable Enable the root guard on the interfaces'
+                            'disable Disable the root guard on the interfaces'
+                        ),
+                    }
+                ],
+            },
+            {
+                'command': 'no spanning-tree root-guard {action}',
+                'doc': 'Enable/Disable the root guard on the interfaces',
+                'arguments': [
+                    {
+                        'name': 'action',
+                        'doc': (
+                            'enable Enable the root guard on the interfaces'
+                            'disable Disable the root guard on the interfaces'
+                        ),
+                        'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'spanning-tree loop-guard {action}',
+                'doc': 'Enable/Disable the loop guard on the interfaces',
+                'arguments': [
+                    {
+                        'name': 'action',
+                        'doc': (
+                            'enable Enable the loop guard on the interfaces'
+                            'disable Disable the loop guard on the interfaces'
+                        ),
+                    }
+                ],
+            },
+            {
+                'command': 'no spanning-tree loop-guard {action}',
+                'doc': 'Enable/Disable the loop guard on the interfaces',
+                'arguments': [
+                    {
+                        'name': 'action',
+                        'doc': (
+                            'enable Enable the loop guard on the interfaces'
+                            'disable Disable the loop guard on the interfaces'
+                        ),
+                        'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'spanning-tree bpdu-filter {action}',
+                'doc': 'Enable/Disable the bpdu filter on the interfaces',
+                'arguments': [
+                    {
+                        'name': 'action',
+                        'doc': (
+                            'enable Enable the bpdu filter on the interfaces'
+                            'disable Disable the bpdu filter on the interfaces'
+                        ),
+                    }
+                ],
+            },
+            {
+                'command': 'no spanning-tree bpdu-filter {action}',
+                'doc': 'Enable/Disable the bpdu filter on the interfaces',
+                'arguments': [
+                    {
+                        'name': 'action',
+                        'doc': (
+                            'enable Enable the bpdu filter on the interfaces'
+                            'disable Disable the bpdu filter on the interfaces'
+                        ),
+                        'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'spanning-tree instance {instance_id} '
+                           'cost {cost}',
+                'doc': 'Specify a standard to use when calculating '
+                       'the default pathcost',
+                'arguments': [
+                    {
+                        'name': 'instance_id',
+                        'doc': 'Specifies the MSTP instance number <1-64>',
+                    },
+                    {
+                        'name': 'cost',
+                        'doc': 'Path cost range <1-200000000>',
+                    }
+                ],
+            },
+            {
+                'command': 'no spanning-tree instance {instance_id} '
+                           'cost {cost}',
+                'doc': 'Specify a standard to use when calculating '
+                       'the default pathcost',
+                'arguments': [
+                    {
+                        'name': 'instance_id',
+                        'doc': 'Specifies the MSTP instance number <1-64>',
+                    },
+                    {
+                        'name': 'cost',
+                        'doc': 'Path cost range <1-200000000>',
+                        'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'spanning-tree instance {instance_id} '
+                           'port-priority {priority}',
+                'doc': 'Maps the priority to corresponding instance',
+                'arguments': [
+                    {
+                        'name': 'instance_id',
+                        'doc': 'Specifies the MSTP instance number <1-64>',
+                    },
+                    {
+                        'name': 'priority',
+                        'doc': 'The device priority multiplier for '
+                               'the MST instance <0-15>',
+                    }
+                ],
+            },
+            {
+                'command': 'no spanning-tree instance {instance_id} '
+                           'port-priority {priority}',
+                'doc': 'Removes the port-priority from the MSTP instance',
+                'arguments': [
+                    {
+                        'name': 'instance_id',
+                        'doc': 'Specifies the MSTP instance number <1-64>',
+                    },
+                    {
+                        'name': 'priority',
+                        'doc': 'The device priority multiplier for '
+                               'the MST instance <0-15>',
+                        'optional': True
+                    }
+                ],
             }
         ]
     }),
