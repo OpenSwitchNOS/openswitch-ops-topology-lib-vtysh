@@ -2538,7 +2538,16 @@ def parse_show_running_config(raw_result):
                     'prefix': '128',
                     'via': '1'
                 }
+        },
+        "syslog_remotes": {
+            '0': {
+                'remote_host': '10.0.0.10',
+                'port': 514,
+                'transport': 'tcp',
+                'severity': 'debug'
+            }
         }
+
 
         }
     """
@@ -2893,6 +2902,42 @@ def parse_show_running_config(raw_result):
             for key, value in partial.items():
                 partial[key] = value
             result['ip_routes'][partial['network']] = partial
+
+    # Syslog Remote configuration
+    result['syslog_remotes'] = {}
+    re_syslog_config = (
+                        r'\s*logging\s*(?P<remote_host>\S+)\s*(?P<transport>'
+                        r'(tcp|udp))*\s*(?P<port>[0-9]+)*\s*((severity)\s*'
+                        r'(?P<severity>\S+))*'
+                       )
+    syslog_configs = re.finditer(re_syslog_config, raw_result)
+
+    remote_syslog = {}
+    i = 0
+    for line in syslog_configs:
+        syslog_config = line.groupdict()
+
+        # Set default transport
+        if syslog_config['transport'] is None:
+            syslog_config['transport'] = 'udp'
+
+        # Set default port based on transport
+        if syslog_config['port'] is None:
+            if syslog_config['transport'] == 'tcp':
+                syslog_config['port'] = 1470
+            else:
+                syslog_config['port'] = 514
+        else:
+            syslog_config['port'] = int(syslog_config['port'])
+
+        # Set default severity
+        if syslog_config['severity'] is None:
+            syslog_config['severity'] = 'debug'
+
+        remote_syslog[str(i)] = syslog_config
+        i += 1
+
+    result['syslog_remotes'] = remote_syslog
 
     return result
 
