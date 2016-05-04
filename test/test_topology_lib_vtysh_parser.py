@@ -2013,6 +2013,10 @@ def test_parse_show_running_config():
     raw_result = """\
 Current configuration:
 !
+logging 20.20.20.1 udp severity info
+logging 2001::1 severity warning
+logging syserver
+logging 10.10.10.10 tcp 400 severity debug
 !
 !
 !
@@ -2098,6 +2102,26 @@ ipv6 route 2020::2/128 1
     result = parse_show_running_config(raw_result)
 
     expected = {
+        'syslog_remotes': {
+            '0': {
+                'remote_host': '20.20.20.1',
+                'transport': 'udp',
+                'severity': 'info'
+            },
+            '1': {
+                'remote_host': '2001::1',
+                'severity': 'warning'
+            },
+            '2': {
+                'remote_host': 'syserver',
+            },
+            '3': {
+                'remote_host': '10.10.10.10',
+                'port': '400',
+                'transport': 'tcp',
+                'severity': 'debug'
+            }
+        },
         'interface': {
             '50': {
                 'admin': 'up',
