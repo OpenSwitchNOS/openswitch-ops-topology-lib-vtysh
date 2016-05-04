@@ -2013,6 +2013,10 @@ def test_parse_show_running_config():
     raw_result = """\
 Current configuration:
 !
+logging 20.20.20.1 udp severity info
+logging 2001::1 severity warning
+logging syserver
+logging 10.10.10.10 tcp 400 severity debug
 !
 !
 !
@@ -2096,8 +2100,29 @@ ipv6 route 2020::2/128 1
 """
 
     result = parse_show_running_config(raw_result)
+    result_startup = parse_show_startup_config(raw_result)
 
     expected = {
+        'syslog_remotes': {
+            '0': {
+                'remote_host': '20.20.20.1',
+                'transport': 'udp',
+                'severity': 'info'
+            },
+            '1': {
+                'remote_host': '2001::1',
+                'severity': 'warning'
+            },
+            '2': {
+                'remote_host': 'syserver',
+            },
+            '3': {
+                'remote_host': '10.10.10.10',
+                'port': '400',
+                'transport': 'tcp',
+                'severity': 'debug'
+            }
+        },
         'interface': {
             '50': {
                 'admin': 'up',
@@ -2212,6 +2237,11 @@ ipv6 route 2020::2/128 1
     }
 
     ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+    # Startup Config and Running config are similar, hence using same test
+    # case to test both
+    ddiff = DeepDiff(result_startup, expected)
     assert not ddiff
 
 
@@ -3216,32 +3246,6 @@ def test_parse_show_ip_ospf_neighbor():
             'rxmtl': '0',
             'rqstl': '0',
             'dbsml': '0'
-        }
-    }
-
-    ddiff = DeepDiff(result, expected)
-    assert not ddiff
-
-
-def test_parse_show_startup_config():
-
-    raw_result = """\
-Startup configuration:
-!
-!
-!
-!
-!
-vlan 1
-    no shutdown
-sftp-server
-    enable
-"""
-
-    result = parse_show_startup_config(raw_result)
-    expected = {
-        'sftp-server': {
-            'status': 'enable'
         }
     }
 
