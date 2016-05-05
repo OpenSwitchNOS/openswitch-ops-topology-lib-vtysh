@@ -3547,7 +3547,7 @@ def parse_show_dhcp_server(raw_result):
         r'\s+(?P<hostname>[\w\*]+)'
         r'\s+(?P<client_id>[\w\*]+)'
         r'\s+(?P<lease_time>[\d]+)'
-        r'\s+(?P<mac_address>[\d:a-fA-F]+)'
+        r'\s+(?P<mac_address>([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2}))'
         r'\s+(?P<set_tag>[\w\*]+)'
     )
 
