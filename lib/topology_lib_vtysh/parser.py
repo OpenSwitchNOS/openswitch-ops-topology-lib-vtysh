@@ -3553,8 +3553,8 @@ def parse_show_dhcp_server(raw_result):
 
     dhcp_options_re = (
         r'\n(?P<option_number>[\d\*]+)'
-        r'\s+(?P<option_name>[\w\*]+)'
-        r'\s+(?P<option_value>[\w_\-\.]+)'
+        r'\s+(?P<option_name>\S+)'
+        r'\s+(?P<option_value>\S+)'
         r'\s+(?P<ipv6_option>True|False)'
         r'\s+(?P<match_tags>[\w\*]+)'
     )
