@@ -6644,6 +6644,57 @@ class ConfigRouterOspf(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def distance_ospf_external(
+            self, external_distance):
+        """
+        Configures distance for external routes
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # distance ospf external {external_distance}
+
+        :param external_distance: <1-255> Distance for external routes
+        """
+
+        cmd = [
+            'distance ospf external {external_distance}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_distance_ospf_external(
+            self):
+        """
+        Removing the distance for external routes
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no distance ospf external
+
+        """
+
+        cmd = [
+            'no distance ospf external'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def network_area(
             self, network, area):
         """

@@ -3211,6 +3211,21 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
+                'command': 'distance ospf external {external_distance}',
+                'doc': 'Configures distance for external routes',
+                'arguments': [
+                    {
+                        'name': 'external_distance',
+                        'doc': '<1-255> Distance for external routes',
+                    },
+                ],
+            },
+            {
+                'command': 'no distance ospf external',
+                'doc': 'Removing the distance for external routes',
+                'arguments': [],
+            },
+            {
                 'command': 'network {network} area {area}',
                 'doc': 'Adds the announcement network for OSPF',
                 'arguments': [
