@@ -4743,10 +4743,11 @@ def parse_show_spanning_tree(raw_result):
 
     root = False
     if 'This bridge is the root' in raw_result:
-        raw_result = re.sub(r'\s*This\s*bridge\s*is\s*the\s*root\s*\n',
+        raw_result = re.sub(r'\s*This\s*bridge\s*is\s*the\s*root\s*\n', '\n',
                             raw_result, 1)
         root = True
 
+    print(raw_result)
     re_result = re.search(mst_zero_config, raw_result)
     assert re_result
 
