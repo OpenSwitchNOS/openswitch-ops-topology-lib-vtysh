@@ -3528,35 +3528,25 @@ Diagnostic dump captured for feature lacp
 
 def test_parse_show_interface_loopback_brief():
     raw_result = """\
---------------------------------------------------------------------------------
-Ethernet      VLAN       Type       Mode     Status      Reason       Speed    Port
-Interface                                                           (Mb/s)   Ch#
---------------------------------------------------------------------------------
+---------------------------------------------------
+Loopback      IPv4 Address       Status
+Interface
+---------------------------------------------------
 
-lo4         --        loopback     routed       up       auto      --
-lo1024      --        loopback     routed       up       auto      --
+lo2         192.168.1.1/24      up
+lo1024      192.168.2.1/24      up
      """  # noqa
 
     result = parse_show_interface_loopback_brief(raw_result)
     expected = [
         {
-            'ports': '',
-            'speed': '--',
-            'mode': 'routed',
-            'reason': 'auto',
-            'vlan': '--',
-            'type': 'loopback',
-            'loopback_int': 'lo4',
+            'loopback_int': 'lo2',
+            'loopback_ip': '192.168.1.1/24',
             'status': 'up'
         },
         {
-            'ports': '',
-            'speed': '--',
-            'mode': 'routed',
-            'reason': 'auto',
-            'vlan': '--',
-            'type': 'loopback',
             'loopback_int': 'lo1024',
+            'loopback_ip': '192.168.2.1/24',
             'status': 'up'
         }
     ]

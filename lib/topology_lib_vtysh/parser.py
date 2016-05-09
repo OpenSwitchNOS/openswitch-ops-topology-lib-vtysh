@@ -627,24 +627,13 @@ def parse_show_interface_loopback_brief(raw_result):
 
       [
        {
-         'ports': '',
-         'speed': '--',
-         'mode': 'routed',
-         'reason': 'auto',
-         'vlan': '--',
-         'type': 'loopback',
-         'loopback_int': 'lo4',
+         'loopback_int': 'lo2',
+         'loopback_ip' : '192.168.2.1/24',
          'status': 'up'
        },
-
        {
-         'ports': '',
-         'speed': '--',
-         'mode': 'routed',
-         'reason': 'auto',
-         'vlan': '--',
-         'type': 'loopback',
          'loopback_int': 'lo1024',
+         'loopback_ip' : '192.168.1.1/24',
          'status': 'up'
        }
       ]
@@ -652,13 +641,12 @@ def parse_show_interface_loopback_brief(raw_result):
     """
     result = {}
     loopback_re = (
-        r'(?P<loopback_int>\S+)\s+(?P<vlan>--)\s+(?P<type>loopback)\s+'
-        r'(?P<mode>routed)\s+(?P<status>up)\s+'
-        r'(?P<reason>auto)\s*(?P<speed>--)?\s*(?P<ports>.*)'
+        r'(?P<loopback_int>[a-z0-9]+)\s+(?P<loopback_ip>[0-9.\/]+)\s+'
+        r'(?P<status>up)'
     )
-
     result = []
     for line in raw_result.splitlines():
+        line = line.strip()
         re_result = re.search(loopback_re, line)
         if re_result:
             loopback_match = re_result.groupdict()
@@ -2906,10 +2894,10 @@ def parse_show_running_config(raw_result):
     # Syslog Remote configuration
     result['syslog_remotes'] = {}
     re_syslog_config = (
-                        r'\s*logging\s*(?P<remote_host>\S+)\s*(?P<transport>'
-                        r'(tcp|udp))*\s*(?P<port>[0-9]+)*\s*((severity)\s*'
-                        r'(?P<severity>\S+))*'
-                       )
+        r'\s*logging\s*(?P<remote_host>\S+)\s*(?P<transport>'
+        r'(tcp|udp))*\s*(?P<port>[0-9]+)*\s*((severity)\s*'
+        r'(?P<severity>\S+))*'
+    )
     syslog_configs = re.finditer(re_syslog_config, raw_result)
 
     remote_syslog = {}
