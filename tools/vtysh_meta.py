@@ -2384,22 +2384,22 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'lldp transmission',
+                'command': 'lldp transmit',
                 'doc': 'Set the transmission on lldp.',
                 'arguments': [],
             },
             {
-                'command': 'no lldp transmission',
+                'command': 'no lldp transmit',
                 'doc': 'Un-set the transmission on lldp.',
                 'arguments': [],
             },
             {
-                'command': 'lldp reception',
+                'command': 'lldp receive',
                 'doc': 'Set the reception on lldp.',
                 'arguments': [],
             },
             {
-                'command': 'no lldp reception',
+                'command': 'no lldp receive',
                 'doc': 'Un-set the reception on lldp.',
                 'arguments': [],
             },

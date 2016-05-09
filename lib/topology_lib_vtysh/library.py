@@ -3899,7 +3899,7 @@ class ConfigInterface(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
-    def lldp_transmission(
+    def lldp_transmit(
             self):
         """
         Set the transmission on lldp.
@@ -3908,12 +3908,12 @@ class ConfigInterface(ContextManager):
 
         ::
 
-            # lldp transmission
+            # lldp transmit
 
         """
 
         cmd = [
-            'lldp transmission'
+            'lldp transmit'
         ]
 
         result = self.enode(
@@ -3924,7 +3924,7 @@ class ConfigInterface(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
-    def no_lldp_transmission(
+    def no_lldp_transmit(
             self):
         """
         Un-set the transmission on lldp.
@@ -3933,12 +3933,12 @@ class ConfigInterface(ContextManager):
 
         ::
 
-            # no lldp transmission
+            # no lldp transmit
 
         """
 
         cmd = [
-            'no lldp transmission'
+            'no lldp transmit'
         ]
 
         result = self.enode(
@@ -3949,7 +3949,7 @@ class ConfigInterface(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
-    def lldp_reception(
+    def lldp_receive(
             self):
         """
         Set the reception on lldp.
@@ -3958,12 +3958,12 @@ class ConfigInterface(ContextManager):
 
         ::
 
-            # lldp reception
+            # lldp receive
 
         """
 
         cmd = [
-            'lldp reception'
+            'lldp receive'
         ]
 
         result = self.enode(
@@ -3974,7 +3974,7 @@ class ConfigInterface(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
-    def no_lldp_reception(
+    def no_lldp_receive(
             self):
         """
         Un-set the reception on lldp.
@@ -3983,12 +3983,12 @@ class ConfigInterface(ContextManager):
 
         ::
 
-            # no lldp reception
+            # no lldp receive
 
         """
 
         cmd = [
-            'no lldp reception'
+            'no lldp receive'
         ]
 
         result = self.enode(
