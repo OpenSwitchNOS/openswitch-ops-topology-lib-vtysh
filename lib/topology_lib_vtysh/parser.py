@@ -109,8 +109,6 @@ def parse_show_interface(raw_result):
     """
     if 'lag' in raw_result:
         return parse_show_interface_lag(raw_result)
-    elif 'qos' in raw_result:
-        return parse_show_interface_qos(raw_result)
 
     show_re = (
         r'\s*Interface (?P<port>\w+) is (?P<interface_state>\S+)\s*'
@@ -118,106 +116,10 @@ def parse_show_interface(raw_result):
         r'Admin state is (?P<admin_state>\S+)\s+'
         r'(State information: (?P<state_information>\S+))?\s*'
         r'Hardware: (?P<hardware>\S+), MAC Address: (?P<mac_address>\S+)\s+'
-        r'(IPv4 address (?P<ipv4>\S+))?\s*'
-        r'(IPv6 address (?P<ipv6>\S+))?\s*'
-        r'MTU (?P<mtu>\d+)\s+'
-        r'(?P<conection_type>\S+)\s+'
-        r'Speed (?P<speed>\d+) (?P<speed_unit>\S+)\s+'
-        r'Auto-Negotiation is turned (?P<autonegotiation>\S+)\s+'
-        r'Input flow-control is (?P<input_flow_control>\w+),\s+'
-        r'output flow-control is (?P<output_flow_control>\w+)\s+'
-        r'RX\s+'
-        r'(?P<rx_packets>\d+) input packets\s+'
-        r'(?P<rx_bytes>\d+) bytes\s+'
-        r'(?P<rx_error>\d+) input error\s+'
-        r'(?P<rx_dropped>\d+) dropped\s+'
-        r'(?P<rx_crc_fcs>\d+) CRC/FCS\s+'
-        r'(L3:)?'
-        r'(\s*ucast:\s+(?P<rx_l3_ucast_packets>\d+) packets,)?\s*'
-        r'((?P<rx_l3_ucast_bytes>\d+) bytes)?'
-        r'(\s*mcast:\s+(?P<rx_l3_mcast_packets>\d+) packets,)?\s+'
-        r'((?P<rx_l3_mcast_bytes>\d+) bytes\s+)?'
-        r'TX\s+'
-        r'(?P<tx_packets>\d+) output packets\s+'
-        r'(?P<tx_bytes>\d+) bytes\s+'
-        r'(?P<tx_errors>\d+) input error\s+'
-        r'(?P<tx_dropped>\d+) dropped\s+'
-        r'(?P<tx_collisions>\d+) collision'
-        r'(\s*L3:)?'
-        r'(\s*ucast:\s+(?P<tx_l3_ucast_packets>\d+) packets,\s+)?'
-        r'((?P<tx_l3_ucast_bytes>\d+) bytes)?'
-        r'(\s*mcast:\s+(?P<tx_l3_mcast_packets>\d+) packets,\s+)?'
-        r'((?P<tx_l3_mcast_bytes>\d+) bytes)?'
-    )
-
-    re_result = re.match(show_re, raw_result)
-    assert re_result
-
-    result = re_result.groupdict()
-    for key, value in result.items():
-        if value is not None:
-            if value.isdigit():
-                result[key] = int(value)
-            elif value == 'on':
-                result[key] = True
-            elif value == 'off':
-                result[key] = False
-            else:
-                result[key] = value
-    return result
-
-
-def parse_show_interface_qos(raw_result):
-    """
-    Parse the 'show interface' with qos command raw output.
-
-    :param str raw_result: vtysh raw result string.
-    :rtype: dict
-    :return: The parsed result of the show interface command in a \
-        dictionary of the form:
-
-     ::
-
-        {
-            'admin_state': 'down',
-            'autonegotiation': True,
-            'conection_type': 'Half-duplex',
-            'hardware': 'Ethernet',
-            'input_flow_control': False,
-            'interface_state': 'down',
-            'mac_address': '70:72:cf:d7:d3:dd',
-            'mtu': 0,
-            'output_flow_control': False,
-            'port': 7,
-            'qos_trust': 'none',
-            'qos_queue_profile': 'default',
-            'qos_schedule_profile': 'default',
-            'rx_crc_fcs': 0,
-            'rx_dropped': 0,
-            'rx_bytes': 0,
-            'rx_error': 0,
-            'rx_packets': 0,
-            'speed': 0,
-            'speed_unit': 'Mb/s',
-            'state_description': 'Administratively down',
-            'state_information': 'admin_down',
-            'tx_bytes': 0,
-            'tx_collisions': 0,
-            'tx_dropped': 0,
-            'tx_errors': 0,
-            'tx_packets': 0
-            'ipv4': '20.1.1.2/30'
-        }
-    """
-
-    show_re = (
-        r'\s*Interface (?P<port>\w+) is (?P<interface_state>\S+)\s*'
-        r'(\((?P<state_description>.*)\))?\s*'
-        r'Admin state is (?P<admin_state>\S+)\s+'
-        r'(State information: (?P<state_information>\S+))?\s*'
-        r'Hardware: (?P<hardware>\S+), MAC Address: (?P<mac_address>\S+)\s+'
-        r'(IPv4 address (?P<ipv4>\S+))?\s*'
-        r'(IPv6 address (?P<ipv6>\S+))?\s*'
+        r'(IPv4\saddress\s(?P<ipv4>\S+))?\s*'
+        r'(IPv4\saddress\s(?P<ipv4_secondary>\S+) secondary)?\s*'
+        r'(IPv6\saddress\s(?P<ipv6>\S+))?\s*'
+        r'(IPv6\saddress\s(?P<ipv6_secondary>\S+) secondary)?\s*'
         r'MTU (?P<mtu>\d+)\s+'
         r'(?P<conection_type>\S+)\s+'
         r'qos trust (?P<qos_trust>\S+)\s+'
@@ -627,13 +529,24 @@ def parse_show_interface_loopback_brief(raw_result):
 
       [
        {
-         'loopback_int': 'lo2',
-         'loopback_ip' : '192.168.2.1/24',
+         'ports': '',
+         'speed': '--',
+         'mode': 'routed',
+         'reason': 'auto',
+         'vlan': '--',
+         'type': 'loopback',
+         'loopback_int': 'lo4',
          'status': 'up'
        },
+
        {
+         'ports': '',
+         'speed': '--',
+         'mode': 'routed',
+         'reason': 'auto',
+         'vlan': '--',
+         'type': 'loopback',
          'loopback_int': 'lo1024',
-         'loopback_ip' : '192.168.1.1/24',
          'status': 'up'
        }
       ]
@@ -641,12 +554,13 @@ def parse_show_interface_loopback_brief(raw_result):
     """
     result = {}
     loopback_re = (
-        r'(?P<loopback_int>[a-z0-9]+)\s+(?P<loopback_ip>[0-9.\/]+)\s+'
-        r'(?P<status>up)'
+        r'(?P<loopback_int>\S+)\s+(?P<vlan>--)\s+(?P<type>loopback)\s+'
+        r'(?P<mode>routed)\s+(?P<status>up)\s+'
+        r'(?P<reason>auto)\s*(?P<speed>--)?\s*(?P<ports>.*)'
     )
+
     result = []
     for line in raw_result.splitlines():
-        line = line.strip()
         re_result = re.search(loopback_re, line)
         if re_result:
             loopback_match = re_result.groupdict()
@@ -2894,10 +2808,10 @@ def parse_show_running_config(raw_result):
     # Syslog Remote configuration
     result['syslog_remotes'] = {}
     re_syslog_config = (
-        r'\s*logging\s*(?P<remote_host>\S+)\s*(?P<transport>'
-        r'(tcp|udp))*\s*(?P<port>[0-9]+)*\s*((severity)\s*'
-        r'(?P<severity>\S+))*'
-    )
+                        r'\s*logging\s*(?P<remote_host>\S+)\s*(?P<transport>'
+                        r'(tcp|udp))*\s*(?P<port>[0-9]+)*\s*((severity)\s*'
+                        r'(?P<severity>\S+))*'
+                       )
     syslog_configs = re.finditer(re_syslog_config, raw_result)
 
     remote_syslog = {}
