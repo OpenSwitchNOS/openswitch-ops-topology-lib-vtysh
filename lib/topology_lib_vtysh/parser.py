@@ -1602,7 +1602,6 @@ def parse_show_ip_ospf(raw_result):
         r'[\S ]+opaque\s*area\s*(?P<opaque_area>\d+)[\S ]+Sum\s*'
         '(?P<opaque_area_checksum>[\S]+).*'
     )
-
     result = {}
     result_area = {}
     lines = []
@@ -1625,7 +1624,191 @@ def parse_show_ip_ospf(raw_result):
                             partial[key] = int(value)
                             result_area[partial['area_id']] = partial
                     result.update(result_area)
+
         return result
+
+
+"""
+def parse_show_ip_ospf_route(raw_result):
+    """ """
+    network_routing_table = r'={12} OSPF network routing table ={12}'
+    router_routing_table = r'={12} OSPF router routing table ={13}'
+    external_routing_table = r'={12} OSPF external routing table ={11}'
+    result = {}
+
+    for line in raw_result.splitlines():
+
+        # SECTION TO PARSE THE OSPF NETWORK ROUTING TABLE
+
+        network_routing_content = re.search(network_routing_table, line)
+        router_routing_content = re.search(router_routing_table, line)
+        external_routing_content = re.search(external_routing_table, line)
+
+        if network_routing_content:
+            network_routing_table = True
+            router_routing_table = False
+            external_routing_table = False
+            result['network routing table'] = []
+
+        if router_routing_content:
+            router_routing_table = True
+            network_routing_table = False
+            external_routing_table = False
+            result['router routing table'] = []
+
+        if external_routing_content:
+            router_routing_table = False
+            network_routing_table = False
+            external_routing_table = True
+            result['external routing table'] = []
+
+        if network_routing_table and not (router_routing_table and
+                                          external_routing_table):
+            temp = re.match(
+                r'(?P<network>N)\s*(?P<ip_address>\S+)\s+\[(?P<hops>\d+)\]\s'
+                '\S*\s(?P<area>([\d]+.)\S+)\n(\s+\S+){3}\s+(?P<port>\d+)',
+                line
+            )
+            if temp is not None:
+                result['network routing table'].append(temp.groupdict())
+
+    # SECTION TO PARSE THE OSPF ROUTER ROUTING TABLE
+
+        if router_routing_table and not (network_routing_table and
+                                         external_routing_table):
+            temp = re.search(
+                r'(?P<router>R)\s*(?P<ip_address>([\d]+.)\S+)\s+\[(?P<hops>'
+                '\d+)\]\s\S+\s(?P<area>([\d]+.){3}\d+),\s(?P<asbr>\S+)',
+                line
+            )
+            if temp is not None:
+                result['router routing table'].append(temp.groupdict())
+
+            temp = re.search(
+                r'(\s+\S+\s+(?P<via_ip>([\d]+.){3}\d+),\s+(?P<via_port>'
+                '\d+))',
+                line
+            )
+            if temp is not None:
+                result['router routing table'].append(temp.groupdict())
+
+    # SECTION TO PARSE THE OSPF EXTERNAL ROUTING TABLE
+
+        if external_routing_table and not (network_routing_table and
+                                           router_routing_table):
+            temp = re.search(
+                r'(?P<router>N)\s*(?P<external_type>E\d)\s*(?P<ip_address>\S+)'
+                '\s+\[(?P<hops>\d+)/(?P<metric>\d+)\]\s\S+\s(?P<tag>\d)',
+                line
+            )
+            if temp is not None:
+                result['external routing table'].append(temp.groupdict())
+
+            temp = re.search(
+                r'(\s+\S+\s+(?P<via_ip>([\d]+.){3}\d+),\s+(?P<via_port>'
+                '\d+))',
+                line
+            )
+            if temp is not None:
+                result['external routing table'].append(temp.groupdict())
+
+    return result
+
+    """
+
+
+def parse_show_ip_ospf_route(raw_result):
+    """"""
+    # SECTION TO PARSE THE OSPF NETWORK ROUTING TABLE
+    network_routing_table = (
+        r'={12} OSPF network routing table ={12}\n(.*?\n)\n'
+    )
+
+    network_routing_content = re.search(network_routing_table, raw_result,
+                                        re.DOTALL).group(1)
+
+    rows = re.findall(r'.*?\n.*?\n', network_routing_content)
+
+    result = {}
+
+    result['network routing table'] = []
+
+    for row in rows:
+        temp = re.match(
+            r'(?P<network>N)\s*(?P<ip_address>\S+)\s+\[(?P<hops>\d+)\]\s'
+            '\S*\s(?P<area>([\d]+.)\S+)\n(\s+\S+){3}\s+(?P<port>\d+)',
+            row
+        )
+        if temp is not None:
+            result['network routing table'].append(temp.groupdict())
+
+    # SECTION TO PARSE THE OSPF ROUTER ROUTING TABLE
+
+    router_routing_table = r'={12} OSPF router routing table ={13}\n(.*?\n)\n'
+
+    router_routing_content = re.search(router_routing_table, raw_result,
+                                       re.DOTALL)
+
+    assert router_routing_content is not None
+
+    router_routing_content = router_routing_content.group(1)
+
+    rows = re.findall(r'.*?\n', router_routing_content)
+
+    result['router routing table'] = []
+
+    for iterator in range(len(rows)):
+        if iterator == 0:
+            temp = re.search(
+                r'(?P<router>R)\s*(?P<ip_address>([\d]+.)\S+)\s+\[(?P<hops>'
+                '\d+)\]\s\S+\s(?P<area>([\d]+.){3}\d+),\s(?P<asbr>\S+)',
+                rows[iterator]
+            )
+            if temp is not None:
+                result['router routing table'].append(temp.groupdict())
+        else:
+            temp = re.search(
+                r'(\s+\S+\s+(?P<via_ip>([\d]+.){3}\d+),\s+(?P<via_port>'
+                '\d+))',
+                rows[iterator]
+            )
+            if temp is not None:
+                result['router routing table'].append(temp.groupdict())
+
+    # SECTION TO PARSE THE OSPF EXTERNAL ROUTING TABLE
+    external_routing_table = (
+        r'={12} OSPF external routing table ={11}(.*)'
+    )
+
+    external_routing_content = re.search(external_routing_table, raw_result,
+                                         re.DOTALL)
+    assert external_routing_content is not None
+
+    external_routing_content = external_routing_content.groups()
+
+    rows = re.findall(r'.*', external_routing_content[0])
+
+    result['external routing table'] = []
+
+    for iterator in range(len(rows)):
+
+        temp = re.search(
+            r'(?P<router>N)\s*(?P<external_type>E\d)\s*(?P<ip_address>\S+)'
+            '\s+\[(?P<hops>\d+)/(?P<metric>\d+)\]\s\S+\s(?P<tag>\d)',
+            rows[iterator]
+        )
+        if temp is not None:
+            result['external routing table'].append(temp.groupdict())
+
+        temp = re.search(
+            r'(\s+\S+\s+(?P<via_ip>([\d]+.){3}\d+),\s+(?P<via_port>'
+            '\d+))',
+            rows[iterator]
+        )
+        if temp is not None:
+            result['external routing table'].append(temp.groupdict())
+
+    return result
 
 
 def parse_ping_repetitions(raw_result):
@@ -2906,10 +3089,10 @@ def parse_show_running_config(raw_result):
     # Syslog Remote configuration
     result['syslog_remotes'] = {}
     re_syslog_config = (
-                        r'\s*logging\s*(?P<remote_host>\S+)\s*(?P<transport>'
-                        r'(tcp|udp))*\s*(?P<port>[0-9]+)*\s*((severity)\s*'
-                        r'(?P<severity>\S+))*'
-                       )
+        r'\s*logging\s*(?P<remote_host>\S+)\s*(?P<transport>'
+        r'(tcp|udp))*\s*(?P<port>[0-9]+)*\s*((severity)\s*'
+        r'(?P<severity>\S+))*'
+    )
     syslog_configs = re.finditer(re_syslog_config, raw_result)
 
     remote_syslog = {}
@@ -3547,14 +3730,14 @@ def parse_show_dhcp_server(raw_result):
         r'\s+(?P<hostname>[\w\*]+)'
         r'\s+(?P<client_id>[\w\*]+)'
         r'\s+(?P<lease_time>[\d]+)'
-        r'\s+(?P<mac_address>([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2}))'
+        r'\s+(?P<mac_address>[\d:a-fA-F]+)'
         r'\s+(?P<set_tag>[\w\*]+)'
     )
 
     dhcp_options_re = (
         r'\n(?P<option_number>[\d\*]+)'
-        r'\s+(?P<option_name>\S+)'
-        r'\s+(?P<option_value>\S+)'
+        r'\s+(?P<option_name>[\w\*]+)'
+        r'\s+(?P<option_value>[\w_\-\.]+)'
         r'\s+(?P<ipv6_option>True|False)'
         r'\s+(?P<match_tags>[\w\*]+)'
     )
@@ -4509,11 +4692,11 @@ def parse_diag_dump_lacp_basic_state(raw_result):
                 for key_actor, key_partner, key_lacp_control in\
                         zip(actor_data_keys, partner_data_keys,
                             lacp_control_keys):
-                        actor_dict[key_actor[2:]] = interface_data[key_actor]
-                        partner_dict[key_partner[2:]] =\
-                            interface_data[key_partner]
-                        lacp_control_dict[key_lacp_control] =\
-                            interface_data[key_lacp_control]
+                    actor_dict[key_actor[2:]] = interface_data[key_actor]
+                    partner_dict[key_partner[2:]] =\
+                        interface_data[key_partner]
+                    lacp_control_dict[key_lacp_control] =\
+                        interface_data[key_lacp_control]
                 interface_data_dict['actor_oper_port_state'] = actor_dict
                 interface_data_dict['partner_oper_port_state'] = partner_dict
                 interface_data_dict['lacp_control'] = lacp_control_dict
@@ -4744,6 +4927,7 @@ __all__ = [
     'parse_show_vlog', 'parse_show_interface_loopback_brief',
     'parse_show_ip_ospf_neighbor_detail', 'parse_show_ip_ospf_interface',
     'parse_show_ip_ospf', 'parse_show_ip_ospf_neighbor',
+    'parse_show_ip_ospf_route',
     'parse_show_startup_config',
     'parse_show_mac_address_table',
     'parse_show_tftp_server', 'parse_show_core_dump',

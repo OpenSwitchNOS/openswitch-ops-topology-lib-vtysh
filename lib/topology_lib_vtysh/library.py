@@ -3899,7 +3899,7 @@ class ConfigInterface(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
-    def lldp_transmit(
+    def lldp_transmission(
             self):
         """
         Set the transmission on lldp.
@@ -3908,12 +3908,12 @@ class ConfigInterface(ContextManager):
 
         ::
 
-            # lldp transmit
+            # lldp transmission
 
         """
 
         cmd = [
-            'lldp transmit'
+            'lldp transmission'
         ]
 
         result = self.enode(
@@ -3924,7 +3924,7 @@ class ConfigInterface(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
-    def no_lldp_transmit(
+    def no_lldp_transmission(
             self):
         """
         Un-set the transmission on lldp.
@@ -3933,12 +3933,12 @@ class ConfigInterface(ContextManager):
 
         ::
 
-            # no lldp transmit
+            # no lldp transmission
 
         """
 
         cmd = [
-            'no lldp transmit'
+            'no lldp transmission'
         ]
 
         result = self.enode(
@@ -3949,7 +3949,7 @@ class ConfigInterface(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
-    def lldp_receive(
+    def lldp_reception(
             self):
         """
         Set the reception on lldp.
@@ -3958,12 +3958,12 @@ class ConfigInterface(ContextManager):
 
         ::
 
-            # lldp receive
+            # lldp reception
 
         """
 
         cmd = [
-            'lldp receive'
+            'lldp reception'
         ]
 
         result = self.enode(
@@ -3974,7 +3974,7 @@ class ConfigInterface(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
-    def no_lldp_receive(
+    def no_lldp_reception(
             self):
         """
         Un-set the reception on lldp.
@@ -3983,12 +3983,12 @@ class ConfigInterface(ContextManager):
 
         ::
 
-            # no lldp receive
+            # no lldp reception
 
         """
 
         cmd = [
-            'no lldp receive'
+            'no lldp reception'
         ]
 
         result = self.enode(
@@ -9585,6 +9585,33 @@ def show_ip_ospf_interface(
     return parse_show_ip_ospf_interface(result)
 
 
+def show_ip_ospf_route(
+        enode):
+    """
+    Show ospf route detail.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip ospf route
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_ospf_route`
+    """
+
+    cmd = [
+        'show ip ospf route'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ip_ospf_route(result)
+
+
 def show_ip_ospf(
         enode):
     """
@@ -11224,6 +11251,7 @@ __all__ = [
     'show_ip_ospf_neighbor_detail',
     'show_ip_ospf_neighbor',
     'show_ip_ospf_interface',
+    'show_ip_ospf_route',
     'show_ip_ospf',
     'show_running_config',
     'show_ip_route',
