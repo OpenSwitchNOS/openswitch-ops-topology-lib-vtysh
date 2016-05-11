@@ -734,6 +734,8 @@ def parse_show_lacp_aggregates(raw_result):
                     'interfaces': [4, 9],
                     'heartbeat_rate': 'slow',
                     'fallback': False,
+                    'fallback_mode': priority,
+                    'fallback_timeout': 0,
                     'hash': 'l3-src-dst',
                     'mode': 'off'
                 },
@@ -742,6 +744,8 @@ def parse_show_lacp_aggregates(raw_result):
                     'interfaces': [],
                     'heartbeat_rate': 'slow',
                     'fallback': False,
+                    'fallback_mode': priority,
+                    'fallback_timeout': 0,
                     'hash': 'l3-src-dst',
                     'mode': 'off'
                 }
@@ -753,6 +757,8 @@ def parse_show_lacp_aggregates(raw_result):
         r'Aggregated-interfaces\s+:[ ]?(?P<interfaces>[\w \-]*)\s*'
         r'Heartbeat rate[ ]+: (?P<heartbeat_rate>slow|fast)\s*'
         r'Fallback[ ]+: (?P<fallback>true|false)\s*'
+        r'Fallback mode[ ]+: (?P<fallback_mode>\w+)\s*'
+        r'Fallback timeout[ ]+: \s*(?P<fallback_timeout>\d+)\s*'
         r'Hash[ ]+: (?P<hash>l2-src-dst|l3-src-dst|l4-src-dst)\s*'
         r'Aggregate mode[ ]+: (?P<mode>off|passive|active)\s*'
     )

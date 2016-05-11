@@ -5746,6 +5746,107 @@ class ConfigInterfaceLag(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def lacp_fallback_mode_priority(
+            self):
+        """
+        Set fallback mode to priority.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # lacp fallback mode priority
+
+        """
+
+        cmd = [
+            'lacp fallback mode priority'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def lacp_fallback_mode_all_active(
+            self):
+        """
+        Set fallback mode to all_active.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # lacp fallback mode all_active
+
+        """
+
+        cmd = [
+            'lacp fallback mode all_active'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_lacp_fallback_mode_all_active(
+            self):
+        """
+        Set fallback mode to priority.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no lacp fallback mode all_active
+
+        """
+
+        cmd = [
+            'no lacp fallback mode all_active'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def lacp_fallback_timeout(
+            self, timeout):
+        """
+        Set LACP fallback timeout.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # lacp fallback timeout {timeout}
+
+        :param timeout: <1-900>  The range is 1 to 900.
+        """
+
+        cmd = [
+            'lacp fallback timeout {timeout}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def hash_l2_src_dst(
             self):
         """
