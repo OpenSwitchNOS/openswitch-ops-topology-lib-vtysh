@@ -2959,6 +2959,41 @@ VTYSH_SPEC = OrderedDict([
                 'arguments': [],
             },
             {
+                'command': 'lacp fallback mode priority',
+                'doc': 'Set fallback mode to priority.',
+                'arguments': [],
+            },
+            {
+                'command': 'lacp fallback mode all_active',
+                'doc': 'Set fallback mode to all_active.',
+                'arguments': [],
+            },
+            {
+                'command': 'no lacp fallback mode all_active',
+                'doc': 'Set fallback mode to priority.',
+                'arguments': [],
+            },
+            {
+                'command': 'lacp fallback timeout {timeout}',
+                'doc': 'Set LACP fallback timeout.',
+                'arguments': [
+                    {
+                        'name': 'timeout',
+                        'doc': '<1-900>  LACP fallback timeout'
+                    }
+                ],
+            },
+            {
+                'command': 'no lacp fallback timeout {timeout}',
+                'doc': 'Set LACP fallback timeout to zero.',
+                'arguments': [
+                    {
+                        'name': 'timeout',
+                        'doc': '<1-900>  LACP fallback timeout'
+                    }
+                ],
+            },
+            {
                 'command': 'hash l2-src-dst',
                 'doc': 'Base the hash on l2-src-dst.',
                 'arguments': [],
