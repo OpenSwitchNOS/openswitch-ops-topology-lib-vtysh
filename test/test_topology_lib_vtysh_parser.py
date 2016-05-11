@@ -365,9 +365,6 @@ Interface 7 is down (Administratively down)
  Hardware: Ethernet, MAC Address: 70:72:cf:d7:d3:dd
  MTU 0
  Half-duplex
- qos trust none
- qos queue-profile default
- qos schedule-profile default
  Speed 0 Mb/s
  Auto-Negotiation is turned on
  Input flow-control is off, output flow-control is off
@@ -421,9 +418,9 @@ Interface 7 is down (Administratively down)
         'ipv4_secondary': None,
         'ipv6': None,
         'ipv6_secondary': None,
-        'qos_trust': 'none',
-        'qos_queue_profile': 'default',
-        'qos_schedule_profile': 'default'
+        'qos_trust': None,
+        'qos_queue_profile': None,
+        'qos_schedule_profile': None
     }
 
     ddiff = DeepDiff(result, expected)
