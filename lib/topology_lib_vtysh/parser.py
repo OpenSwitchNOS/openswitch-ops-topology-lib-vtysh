@@ -2597,6 +2597,7 @@ def parse_show_running_config(raw_result):
     vlan_access_re = r'\s+vlan access\s(\d+)'
     autoneg_re = r'\s+autonego\w+\s(\w+)'
     int_loopback_re = r'interface loopback\s+([0-9]+)'
+    lacp_mode_re = r'lacp\s+mode\s+(\w+)'
 
     result['interface'] = {}
     if re_interface_section:
@@ -2687,7 +2688,10 @@ def parse_show_running_config(raw_result):
             # Match routing
             re_result = re.match(no_routing_re, line)
             if re_result:
-                result['interface'][port]['routing'] = 'no'
+                if result['interface'].get('lag'):
+                    result['interface']['lag'][port]['routing'] = 'no'
+                else:
+                    result['interface'][port]['routing'] = 'no'
 
             # Match duplex rate
             re_result = re.match(duplex_half_re, line)
@@ -2740,22 +2744,31 @@ def parse_show_running_config(raw_result):
                 mtype = re_result.group(1)
                 vlanid = re_result.group(2)
                 vlan_info = {'mode': 'trunk', 'type': mtype, 'vlanid': vlanid}
-                if 'vlan' not in result['interface'][port].keys():
-                    result['interface'][port]['vlan'] = []
-                    result['interface'][port]['vlan'].append(vlan_info)
-                else:
-                    result['interface'][port]['vlan'].append(vlan_info)
+                if result['interface'].get(port):
+                    if 'vlan' not in result['interface'][port].keys():
+                        result['interface'][port]['vlan'] = []
+                        result['interface'][port]['vlan'].append(vlan_info)
+                    else:
+                        result['interface'][port]['vlan'].append(vlan_info)
 
             # Match vlan access
             re_result = re.match(vlan_access_re, line)
             if re_result:
                 vlan_access_info = {'mode': 'access',
                                     'vlanid': re_result.group(1)}
-                if 'vlan' not in result['interface'][port].keys():
-                    result['interface'][port]['vlan'] = []
-                    result['interface'][port]['vlan'].append(vlan_access_info)
+                if result['interface'].get('lag'):
+                    if 'vlan' not in result['interface']['lag'][port].keys():
+                        result['interface']['lag'][port]['vlan'] = []
+                    result['interface']['lag'][port]['vlan'].append(
+                        vlan_access_info)
                 else:
-                    result['interface'][port]['vlan'].append(vlan_access_info)
+                    if 'vlan' not in result['interface'][port].keys():
+                        result['interface'][port]['vlan'] = []
+                        result['interface'][port]['vlan'].append(
+                            vlan_access_info)
+                    else:
+                        result['interface'][port]['vlan'].append(
+                            vlan_access_info)
 
             # Match lacp
             re_result = re.match(lacp_re, line)
@@ -2768,6 +2781,13 @@ def parse_show_running_config(raw_result):
                 elif re_result.group(1) == 'priority':
                     result['interface'][port]['lacp']['priority'] =\
                         re_result.group(2)
+
+            # Match lacp mode
+            re_result = re.search(lacp_mode_re, line)
+            if re_result:
+                if result['interface'].get('lag'):
+                    result['interface']['lag'][port]['lacp_mode'] = \
+                        re_result.group(1)
 
     # sftp-server section
     result['sftp-server'] = {}

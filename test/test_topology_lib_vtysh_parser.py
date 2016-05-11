@@ -1936,6 +1936,8 @@ interface loopback 2
 interface mgmt
     ip static 1.1.1.1/24
     nameserver 2.2.2.2
+interface lag 1
+    lacp mode passive
 sftp-server
     enable
 ipv6 route 2020::3/128 1
@@ -2021,7 +2023,8 @@ ipv6 route 2020::2/128 1
             'loopback 2': {
                 'ipv4': '10.0.0.1/24',
                 'ipv6': '2001::2/64'
-            }
+            },
+            'lag': {'1': {'lacp_mode': 'passive'}}
         },
         'ospf': {
             'router-id': '7.7.7.7',
