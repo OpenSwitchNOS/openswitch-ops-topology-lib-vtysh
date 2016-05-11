@@ -87,8 +87,21 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_diag_dump_lacp_basic,
                                        parse_show_snmpv3_users,
                                        parse_diag_dump,
-                                       parse_show_events
+                                       parse_show_events,
+                                       parse_erase_startup_config
                                        )
+
+
+def test_parse_erase_startup_config():
+    raw_result = "Delete statup row status : success"
+
+    result = parse_erase_startup_config(raw_result)
+    expected = {
+        'erase_startup_config_status': 'success'
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
 
 
 def test_parse_show_tftp_server():

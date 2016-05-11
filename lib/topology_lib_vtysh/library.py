@@ -10892,6 +10892,33 @@ def show_startup_config(
     return parse_show_startup_config(result)
 
 
+def erase_startup_config(
+        enode):
+    """
+    Erase startup-config information.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # erase startup-config
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_erase_startup_config`
+    """
+
+    cmd = [
+        'erase startup-config'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_erase_startup_config(result)
+
+
 def show_tftp_server(
         enode):
     """
@@ -11314,6 +11341,7 @@ __all__ = [
     'show_vlog_severity_daemon',
     'copy_running_config_startup_config',
     'show_startup_config',
+    'erase_startup_config',
     'show_tftp_server',
     'show_mirror',
     'show_snmp_community',

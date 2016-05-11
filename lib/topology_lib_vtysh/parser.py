@@ -3760,7 +3760,41 @@ def parse_show_startup_config(raw_result):
         'status':'enable'}
         }
     """
-    return parse_show_running_config(raw_result)
+    result = {}
+
+    if "No saved configuration exists" in raw_result:
+        result = {"startup_config": "No saved configuration exists"}
+        return result
+    else:
+        return parse_show_running_config(raw_result)
+
+
+def parse_erase_startup_config(raw_result):
+    """
+    Parse the 'erase startup-config' command raw output.
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the erase startup-config\
+        in a dictionary of the form:
+
+    ::
+
+        {
+        'erase_startup_config_status': 'success'
+        }
+    """
+    erase_startup_re = (r'Delete.*\s+:\s+(?P<erase_startup_config_status>\S+)')
+
+    result = {}
+
+    re_result = re.search(erase_startup_re, raw_result)
+    if re_result:
+        for key, value in re_result.groupdict().items():
+            if value is None:
+                result[key] = 'No match found'
+            else:
+                result[key] = value
+    return result
 
 
 def parse_show_tftp_server(raw_result):
@@ -4640,7 +4674,7 @@ __all__ = [
     'parse_config_tftp_server_enable',
     'parse_config_tftp_server_no_enable', 'parse_config_tftp_server_path',
     'parse_config_tftp_server_no_path', 'parse_show_interface_lag',
-    'parse_show_mirror',
+    'parse_show_mirror', 'parse_erase_startup_config',
     'parse_config_tftp_server_no_path', 'parse_show_snmp_community',
     'parse_show_snmp_system', 'parse_show_snmp_trap',
     'parse_diag_dump_lacp_basic', 'parse_show_snmpv3_users',

@@ -652,6 +652,12 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
+                'command': 'erase startup-config',
+                'doc': 'Erase startup-config information.',
+                'arguments': [],
+                'returns': True
+            },
+            {
                 'command': 'show tftp-server',
                 'doc': 'Display TFTP-Server configuration.',
                 'arguments': [],
@@ -1529,8 +1535,8 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Configure SNMP community names',
                 'arguments': [
                     {
-                         'name': 'community_name',
-                         'doc': 'Configured Community names'
+                        'name': 'community_name',
+                        'doc': 'Configured Community names'
                     }
                 ],
             },
@@ -1539,9 +1545,9 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Unconfigure SNMP community names',
                 'arguments': [
                     {
-                         'name': 'community_name',
-                         'doc': 'Unconfigured community names',
-                         'optional': True
+                        'name': 'community_name',
+                        'doc': 'Unconfigured community names',
+                        'optional': True
                     }
                 ],
             },
@@ -1550,8 +1556,8 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Configure SNMP system contact information',
                 'arguments': [
                     {
-                         'name': 'system_contact',
-                         'doc': 'Configured System contact information'
+                        'name': 'system_contact',
+                        'doc': 'Configured System contact information'
                     }
                 ],
             },
@@ -1560,9 +1566,9 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Unconfigure SNMP contact information',
                 'arguments': [
                     {
-                         'name': 'system_contact',
-                         'doc': 'Unconfigure system contact information',
-                         'optional': True
+                        'name': 'system_contact',
+                        'doc': 'Unconfigure system contact information',
+                        'optional': True
                     }
                 ],
             },
@@ -1571,8 +1577,8 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Configure SNMP system location information',
                 'arguments': [
                     {
-                         'name': 'system_location',
-                         'doc': 'Configured System location information'
+                        'name': 'system_location',
+                        'doc': 'Configured System location information'
                     }
                 ],
             },
@@ -1581,9 +1587,9 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Unconfigure SNMP location information',
                 'arguments': [
                     {
-                         'name': 'system_location',
-                         'doc': 'Unconfigure system location information',
-                         'optional': True
+                        'name': 'system_location',
+                        'doc': 'Unconfigure system location information',
+                        'optional': True
                     }
                 ],
             },
@@ -1593,8 +1599,8 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Configure SNMP system description',
                 'arguments': [
                     {
-                         'name': 'system_description',
-                         'doc': 'Configured System description'
+                        'name': 'system_description',
+                        'doc': 'Configured System description'
                     }
                 ],
             },
@@ -1603,9 +1609,9 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Unconfigure SNMP system description',
                 'arguments': [
                     {
-                         'name': 'system_desription',
-                         'doc': 'Unconfigure system description',
-                         'optional': True
+                        'name': 'system_desription',
+                        'doc': 'Unconfigure system description',
+                        'optional': True
                     }
                 ],
             },
@@ -1615,34 +1621,34 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Configure SNMP server information for trap receiver',
                 'arguments': [
                     {
-                         'name': 'host_ip_address',
-                         'doc': 'Configured host ip address for trap receiver'
+                        'name': 'host_ip_address',
+                        'doc': 'Configured host ip address for trap receiver'
                     },
                     {
-                         'name': 'snmp_version',
-                         'doc': 'Configured snmp version for receiver'
+                        'name': 'snmp_version',
+                        'doc': 'Configured snmp version for receiver'
                     },
                     {
-                         'name': 'community',
-                         'doc': 'Configured snmp community name for trap \
-                                 receiver',
-                         'optional': True
+                        'name': 'community',
+                        'doc': 'Configured snmp community name for trap \
+                                receiver',
+                        'optional': True
                     },
                     {
-                         'name': 'community_name',
-                         'doc': 'Configured snmp community name for trap \
-                                 receiver',
-                         'optional': True
+                        'name': 'community_name',
+                        'doc': 'Configured snmp community name for trap \
+                                receiver',
+                        'optional': True
                     },
                     {
-                         'name': 'port',
-                         'doc': 'Configured snmp port for trap receiver',
-                         'optional': True
+                        'name': 'port',
+                        'doc': 'Configured snmp port for trap receiver',
+                        'optional': True
                     },
                     {
-                         'name': 'snmp_port',
-                         'doc': 'Configured snmp port for trap receiver',
-                         'optional': True
+                        'name': 'snmp_port',
+                        'doc': 'Configured snmp port for trap receiver',
+                        'optional': True
                     }
                 ],
             },
@@ -1652,35 +1658,35 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Unconfigure SNMP server information for trap receiver',
                 'arguments': [
                     {
-                         'name': 'host_ip_address',
-                         'doc': 'Unconfigured host ip address for trap \
-                                 receiver'
+                        'name': 'host_ip_address',
+                        'doc': 'Unconfigured host ip address for trap \
+                                receiver'
                     },
                     {
-                         'name': 'snmp_version',
-                         'doc': 'Unconfigured snmp version for receiver'
+                        'name': 'snmp_version',
+                        'doc': 'Unconfigured snmp version for receiver'
                     },
                     {
-                         'name': 'community',
-                         'doc': 'Unconfigured snmp community name for trap \
-                                 receiver',
-                         'optional': True
+                        'name': 'community',
+                        'doc': 'Unconfigured snmp community name for trap \
+                                receiver',
+                        'optional': True
                     },
                     {
-                         'name': 'community_name',
-                         'doc': 'Unconfigured snmp community name for trap \
-                                 receiver',
-                         'optional': True
+                        'name': 'community_name',
+                        'doc': 'Unconfigured snmp community name for trap \
+                                receiver',
+                        'optional': True
                     },
                     {
-                         'name': 'port',
-                         'doc': 'Unconfigured snmp port for trap receiver',
-                         'optional': True
+                        'name': 'port',
+                        'doc': 'Unconfigured snmp port for trap receiver',
+                        'optional': True
                     },
                     {
-                         'name': 'snmp_port',
-                         'doc': 'Unconfigured snmp port for trap receiver',
-                         'optional': True
+                        'name': 'snmp_port',
+                        'doc': 'Unconfigured snmp port for trap receiver',
+                        'optional': True
                     }
                 ],
             },
@@ -1690,34 +1696,34 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Configure SNMP server information for notifications',
                 'arguments': [
                     {
-                         'name': 'host_ip_address',
-                         'doc': 'Configured host ip address for notifications'
+                        'name': 'host_ip_address',
+                        'doc': 'Configured host ip address for notifications'
                     },
                     {
-                         'name': 'snmp_version',
-                         'doc': 'Configured snmp version for notifications'
+                        'name': 'snmp_version',
+                        'doc': 'Configured snmp version for notifications'
                     },
                     {
-                         'name': 'community',
-                         'doc': 'Configured snmp community name for \
-                                 notifications',
-                         'optional': True
+                        'name': 'community',
+                        'doc': 'Configured snmp community name for \
+                                notifications',
+                        'optional': True
                     },
                     {
-                         'name': 'community_name',
-                         'doc': 'Configured snmp community name for \
-                                 notifications',
-                         'optional': True
+                        'name': 'community_name',
+                        'doc': 'Configured snmp community name for \
+                                notifications',
+                        'optional': True
                     },
                     {
-                         'name': 'port',
-                         'doc': 'Configured snmp port for notifications',
-                         'optional': True
+                        'name': 'port',
+                        'doc': 'Configured snmp port for notifications',
+                        'optional': True
                     },
                     {
-                         'name': 'snmp_port',
-                         'doc': 'Configured snmp port for notifications',
-                         'optional': True
+                        'name': 'snmp_port',
+                        'doc': 'Configured snmp port for notifications',
+                        'optional': True
                     }
                 ],
             },
@@ -1727,35 +1733,35 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Unconfigure SNMP server information for notifications',
                 'arguments': [
                     {
-                         'name': 'host_ip_address',
-                         'doc': 'Unconfigured host ip address for \
-                                 notifications'
+                        'name': 'host_ip_address',
+                        'doc': 'Unconfigured host ip address for \
+                                notifications'
                     },
                     {
-                         'name': 'snmp_version',
-                         'doc': 'Unconfigured snmp version for notifications'
+                        'name': 'snmp_version',
+                        'doc': 'Unconfigured snmp version for notifications'
                     },
                     {
-                         'name': 'community',
-                         'doc': 'Unconfigured snmp community name for \
-                                 notifications',
-                         'optional': True
+                        'name': 'community',
+                        'doc': 'Unconfigured snmp community name for \
+                                notifications',
+                        'optional': True
                     },
                     {
-                         'name': 'community_name',
-                         'doc': 'Unconfigured snmp community name for \
-                                 notifications',
-                         'optional': True
+                        'name': 'community_name',
+                        'doc': 'Unconfigured snmp community name for \
+                                notifications',
+                        'optional': True
                     },
                     {
-                         'name': 'port',
-                         'doc': 'Unconfigured snmp port for notifications',
-                         'optional': True
+                        'name': 'port',
+                        'doc': 'Unconfigured snmp port for notifications',
+                        'optional': True
                     },
                     {
-                         'name': 'snmp_port',
-                         'doc': 'Unconfigured snmp port for notifications',
-                         'optional': True
+                        'name': 'snmp_port',
+                        'doc': 'Unconfigured snmp port for notifications',
+                        'optional': True
                     }
                 ],
             },
@@ -1764,8 +1770,8 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Configure SNMPv3 user name',
                 'arguments': [
                     {
-                         'name': 'user-name',
-                         'doc': 'Configured user_name for SNMPv3'
+                        'name': 'user-name',
+                        'doc': 'Configured user_name for SNMPv3'
                     }
                 ],
             },
@@ -1774,8 +1780,8 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Unconfigure SNMPv3 user name',
                 'arguments': [
                     {
-                         'name': 'user_name',
-                         'doc': 'Unconfigured SNMPv3 user name'
+                        'name': 'user_name',
+                        'doc': 'Unconfigured SNMPv3 user name'
                     }
                 ],
             },
@@ -1786,16 +1792,16 @@ VTYSH_SPEC = OrderedDict([
                         password',
                 'arguments': [
                     {
-                         'name': 'user_name',
-                         'doc': 'Configured user-name for SNMPv3'
+                        'name': 'user_name',
+                        'doc': 'Configured user-name for SNMPv3'
                     },
                     {
-                         'name': 'auth_protocol',
-                         'doc': 'Configured auth protocol for SNMPv3 user'
+                        'name': 'auth_protocol',
+                        'doc': 'Configured auth protocol for SNMPv3 user'
                     },
                     {
-                         'name': 'auth_password',
-                         'doc': 'Configured auth password for SNMPv3 user'
+                        'name': 'auth_password',
+                        'doc': 'Configured auth password for SNMPv3 user'
                     }
 
                 ],
@@ -1807,16 +1813,16 @@ VTYSH_SPEC = OrderedDict([
                         password',
                 'arguments': [
                     {
-                         'name': 'user_name',
-                         'doc': 'Unconfigured user-name for SNMPv3'
+                        'name': 'user_name',
+                        'doc': 'Unconfigured user-name for SNMPv3'
                     },
                     {
-                         'name': 'auth_protocol',
-                         'doc': 'Unconfigured auth protocol for SNMPv3 user'
+                        'name': 'auth_protocol',
+                        'doc': 'Unconfigured auth protocol for SNMPv3 user'
                     },
                     {
-                         'name': 'auth_password',
-                         'doc': 'Unconfigured auth password for SNMPv3 user'
+                        'name': 'auth_password',
+                        'doc': 'Unconfigured auth password for SNMPv3 user'
                     }
 
                 ],
@@ -1829,24 +1835,24 @@ VTYSH_SPEC = OrderedDict([
                         password',
                 'arguments': [
                     {
-                         'name': 'user_name',
-                         'doc': 'Configured user-name for SNMPv3'
+                        'name': 'user_name',
+                        'doc': 'Configured user-name for SNMPv3'
                     },
                     {
-                         'name': 'auth_protocol',
-                         'doc': 'Configured auth protocol for SNMPv3 user'
+                        'name': 'auth_protocol',
+                        'doc': 'Configured auth protocol for SNMPv3 user'
                     },
                     {
-                         'name': 'auth_password',
-                         'doc': 'Configured auth password for SNMPv3 user'
+                        'name': 'auth_password',
+                        'doc': 'Configured auth password for SNMPv3 user'
                     },
                     {
-                         'name': 'priv_protocol',
-                         'doc': 'Configured priv protocol for SNMPv3 user'
+                        'name': 'priv_protocol',
+                        'doc': 'Configured priv protocol for SNMPv3 user'
                     },
                     {
-                         'name': 'priv_password',
-                         'doc': 'Configured priv password for SNMPv3 user'
+                        'name': 'priv_password',
+                        'doc': 'Configured priv password for SNMPv3 user'
                     }
 
                 ],
@@ -1859,24 +1865,24 @@ VTYSH_SPEC = OrderedDict([
                         password',
                 'arguments': [
                     {
-                         'name': 'user_name',
-                         'doc': 'Unconfigured user-name for SNMPv3'
+                        'name': 'user_name',
+                        'doc': 'Unconfigured user-name for SNMPv3'
                     },
                     {
-                         'name': 'auth_protocol',
-                         'doc': 'Unconfigured auth protocol for SNMPv3 user'
+                        'name': 'auth_protocol',
+                        'doc': 'Unconfigured auth protocol for SNMPv3 user'
                     },
                     {
-                         'name': 'auth_password',
-                         'doc': 'Unconfigured auth password for SNMPv3 user'
+                        'name': 'auth_password',
+                        'doc': 'Unconfigured auth password for SNMPv3 user'
                     },
                     {
-                         'name': 'priv_protocol',
-                         'doc': 'Unconfigured priv protocol for SNMPv3 user'
+                        'name': 'priv_protocol',
+                        'doc': 'Unconfigured priv protocol for SNMPv3 user'
                     },
                     {
-                         'name': 'priv_password',
-                         'doc': 'Unconfigured priv password for SNMPv3 user'
+                        'name': 'priv_password',
+                        'doc': 'Unconfigured priv password for SNMPv3 user'
                     }
 
                 ],
@@ -1886,8 +1892,8 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Configure SNMP agent port',
                 'arguments': [
                     {
-                        'name': 'port_num',
-                        'doc': 'UDP port on which the SNMP agent listens'
+                       'name': 'port_num',
+                       'doc': 'UDP port on which the SNMP agent listens'
                     }
                 ],
             },
@@ -1895,12 +1901,12 @@ VTYSH_SPEC = OrderedDict([
                 'command': 'no snmp-server agent-port',
                 'doc': 'Unconfigure SNMP agent port',
                 'arguments': [
-                     {
-                         'name': 'port_num',
-                         'doc': 'UDP port on which the SNMP agent listens',
-                         'optional': True
-                     }
-                 ],
+                    {
+                        'name': 'port_num',
+                        'doc': 'UDP port on which the SNMP agent listens',
+                        'optional': True
+                    }
+                ],
             },
             {
                 'command': 'no mirror session {name}',
