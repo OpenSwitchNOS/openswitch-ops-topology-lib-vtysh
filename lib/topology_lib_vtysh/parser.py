@@ -306,7 +306,33 @@ def parse_show_interface_subinterface(raw_result):
         r'\s*(?P<interface_state>\S+)\.(\s*)'
         r'(\((?P<state_description>.*)\))?\s*'
         r'Admin state is (?P<admin_state>\S+)\s+'
+        r'Parent interface is (?P<parent_interface>\d+)\s*'
+        r'Parent interface is (?P<parent_state_info>.*)\s*'
         r'(State information: (?P<state_information>\S+))?\s*'
+        r'Encapsulation dot1Q (?P<encapsulation_dot1q>\d+)\s*'
+        r'Hardware: (?P<hardware>\S+), MAC Address: (?P<mac_address>\S+)\s+'
+        r'(IPv4 address (?P<ipv4>\S+))?\s*'
+        r'(IPv6 address (?P<ipv6>\S+))?\s*'
+        r'Input flow-control is (?P<input_flow_control>\w+),\s+'
+        r'output flow-control is (?P<output_flow_control>\w+)\s+'
+        r'RX\s+'
+        r'\s*L3:'
+        r'\s*ucast:\s+(?P<rx_ucast_packets>\d+) packets,\s*'
+        r'(?P<rx_ucast_bytes>\d+) bytes'
+        r'\s*mcast:\s+(?P<rx_mcast_packets>\d+) packets,\s+'
+        r'(?P<rx_mcast_bytes>\d+) bytes\s+'
+        r'TX\s+'
+        r'\s*L3:'
+        r'\s*ucast:\s+(?P<tx_ucast_packets>\d+) packets,\s+'
+        r'(?P<tx_ucast_bytes>\d+) bytes'
+        r'\s*mcast:\s+(?P<tx_mcast_packets>\d+) packets,\s+'
+        r'(?P<tx_mcast_bytes>\d+) bytes\s*'
+    )
+
+    show_re_subint = (
+        r'\s*Interface (?P<port>\d+)\.(?P<subinterface>\d+) is'
+        r'\s*(?P<interface_state>\S+)\.(\s*)'
+        r'Admin state is (?P<admin_state>\S+)\s+'
         r'Parent interface is (?P<parent_interface>\d+)\s*'
         r'Encapsulation dot1Q (?P<encapsulation_dot1q>\d+)\s*'
         r'Hardware: (?P<hardware>\S+), MAC Address: (?P<mac_address>\S+)\s+'
@@ -327,12 +353,15 @@ def parse_show_interface_subinterface(raw_result):
         r'\s*mcast:\s+(?P<tx_mcast_packets>\d+) packets,\s+'
         r'(?P<tx_mcast_bytes>\d+) bytes\s*'
     )
+
     subint_list = raw_result.split("Interface")
     result = {}
     for subint in subint_list:
         if subint != "":
             subint = "Interface{}".format(subint)
             re_result = re.match(show_re, subint)
+            if re_result is None:
+                re_result = re.match(show_re_subint, subint)
             assert re_result
             subint_result = re_result.groupdict()
             for key, value in subint_result.items():
@@ -4726,11 +4755,11 @@ def parse_diag_dump_lacp_basic_state(raw_result):
                 for key_actor, key_partner, key_lacp_control in\
                         zip(actor_data_keys, partner_data_keys,
                             lacp_control_keys):
-                        actor_dict[key_actor[2:]] = interface_data[key_actor]
-                        partner_dict[key_partner[2:]] =\
-                            interface_data[key_partner]
-                        lacp_control_dict[key_lacp_control] =\
-                            interface_data[key_lacp_control]
+                    actor_dict[key_actor[2:]] = interface_data[key_actor]
+                    partner_dict[key_partner[2:]] =\
+                        interface_data[key_partner]
+                    lacp_control_dict[key_lacp_control] =\
+                        interface_data[key_lacp_control]
                 interface_data_dict['actor_oper_port_state'] = actor_dict
                 interface_data_dict['partner_oper_port_state'] = partner_dict
                 interface_data_dict['lacp_control'] = lacp_control_dict
