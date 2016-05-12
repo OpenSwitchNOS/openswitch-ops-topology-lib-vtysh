@@ -57,11 +57,11 @@ def parse_show_interface_mgmt(raw_result):
         r'(?P<ipv6_link_local>[0-9a-f:/]+)?\s*'
         r'\s*Default gateway IPv6\s*:\s*'
         r'(?P<default_gateway_ipv6>[0-9a-f:]+)?\s*'
-        r'\s*Primary Nameserver\s*:\s*(?P<primary_nameserver>[0-9.]+)?\s*'
-        r'\s*Secondary Nameserver\s*:\s*(?P<secondary_nameserver>[0-9.]+)?\s*'
+        r'\s*Primary Nameserver\s*:\s*(?P<primary_nameserver>[0-9.:a-f]+)?\s*'
+        r'\s*Secondary Nameserver\s*:\s*(?P<secondary_nameserver>[0-9.:a-f]+)?\s*'
     )
 
-    re_result = re.match(show_re, raw_result)
+    re_result = re.search(show_re, raw_result)
     assert re_result
 
     result = re_result.groupdict()
