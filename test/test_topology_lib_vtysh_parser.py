@@ -979,8 +979,6 @@ Aggregate-name        : lag1
 Aggregated-interfaces : 4 9
 Heartbeat rate        : slow
 Fallback              : false
-Fallback mode         : priority
-Fallback timeout      : 0
 Hash                  : l3-src-dst
 Aggregate mode        : off
 
@@ -1003,8 +1001,8 @@ Aggregate mode        : off
             'interfaces': ['4', '9'],
             'heartbeat_rate': 'slow',
             'fallback': False,
-            'fallback_mode': 'priority',
-            'fallback_timeout': '0',
+            'fallback_mode': None,
+            'fallback_timeout': None,
             'hash': 'l3-src-dst',
             'mode': 'off'
         },
