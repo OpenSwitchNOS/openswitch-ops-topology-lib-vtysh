@@ -10784,6 +10784,33 @@ def show_ip_ospf_interface(
     return parse_show_ip_ospf_interface(result)
 
 
+def show_ip_ospf_route(
+        enode):
+    """
+    Show ospf route detail.
+
+    This function runs the following vtysh command:
+
+     ::
+
+        # show ip ospf route
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_ospf_route`
+    """
+
+    cmd = [
+        'show ip ospf route'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ip_ospf_route(result)
+
+
 def show_ip_ospf(
         enode):
     """
@@ -12629,6 +12656,7 @@ __all__ = [
     'show_ip_ospf_neighbor_detail',
     'show_ip_ospf_neighbor',
     'show_ip_ospf_interface',
+    'show_ip_ospf_route',
     'show_ip_ospf',
     'show_running_config',
     'show_ip_route',
