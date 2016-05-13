@@ -175,6 +175,12 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
+                'command': 'show ip ospf route',
+                'doc': 'Show ospf detail.',
+                'arguments': [],
+                'returns': True
+            },
+            {
                 'command': 'show running-config',
                 'doc': 'Show running-config information.',
                 'arguments': [],

@@ -71,6 +71,7 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_ip_ospf_neighbor,
                                        parse_show_ip_ospf,
                                        parse_show_ip_ospf_interface,
+                                       parse_show_ip_ospf_route,
                                        parse_show_startup_config,
                                        parse_show_mac_address_table,
                                        parse_show_tftp_server,
@@ -3061,6 +3062,72 @@ def test_parse_show_ip_ospf_neighbor():
     }
 
     ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_ip_ospf_route():
+    raw_result = """
+Codes: N - Network, R - Router, IA - Inter Area,
+       E1 - External Type 1, E2 - External Type 2
+============ OSPF network routing table ============
+N    12.0.0.0/24           [1] area: 0.0.0.0
+                           directly attached to 2
+N    14.0.0.0/24           [1] area: 0.0.0.0
+                           directly attached to 6
+N    13.0.0.0/24           [1] area: 0.0.0.0
+                           directly attached to 5
+
+============ OSPF router routing table =============
+R    1.0.0.1               [1] area: 0.0.0.0, ASBR
+                           via 12.0.0.1, 2
+                           via 13.0.0.1, 5
+                           via 14.0.0.1, 6
+
+============ OSPF external routing table ===========
+N E2 100.0.0.0/24          [1/20] tag: 0
+                           via 12.0.0.1, 2
+                           via 13.0.0.1, 5
+                           via 14.0.0.1, 6
+
+    """
+
+    expected_result = {
+        'network routing table': [
+            {'hops': '1',
+             'area': '0.0.0.0',
+             'ip_address': '12.0.0.0/24',
+             'port': '2',
+             'network': 'N'},
+            {'hops': '1',
+             'area': '0.0.0.0',
+             'ip_address': '14.0.0.0/24',
+             'port': '6',
+             'network': 'N'},
+            {'hops': '1',
+             'area': '0.0.0.0',
+             'ip_address': '13.0.0.0/24',
+             'port': '5',
+             'network': 'N'}
+        ],
+        'router routing table': [
+            {'hops': '1', 'router': 'R', 'asbr': 'ASBR',
+             'ip_address': '1.0.0.1', 'area': '0.0.0.0'},
+            {'via_ip': '12.0.0.1', 'via_port': '2'},
+            {'via_ip': '13.0.0.1', 'via_port': '5'},
+            {'via_ip': '14.0.0.1', 'via_port': '6'}
+        ],
+        'external routing table': [
+            {'hops': '1', 'metric': '20', 'tag': '0', 'router': 'N',
+             'ip_address': '100.0.0.0/24', 'external_type': 'E2'},
+            {'via_ip': '12.0.0.1', 'via_port': '2'},
+            {'via_ip': '13.0.0.1', 'via_port': '5'},
+            {'via_ip': '14.0.0.1', 'via_port': '6'}
+        ],
+    }
+
+    result = parse_show_ip_ospf_route(raw_result)
+    ddiff = DeepDiff(result, expected_result)
+
     assert not ddiff
 
 
