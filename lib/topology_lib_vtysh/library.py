@@ -5866,133 +5866,6 @@ class ConfigInterfaceLag(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
-    def lacp_fallback_mode_priority(
-            self):
-        """
-        Set fallback mode to priority.
-
-        This function runs the following vtysh command:
-
-        ::
-
-            # lacp fallback mode priority
-
-        """
-
-        cmd = [
-            'lacp fallback mode priority'
-        ]
-
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
-        )
-
-        if result:
-            raise determine_exception(result)(result)
-
-    def lacp_fallback_mode_all_active(
-            self):
-        """
-        Set fallback mode to all_active.
-
-        This function runs the following vtysh command:
-
-        ::
-
-            # lacp fallback mode all_active
-
-        """
-
-        cmd = [
-            'lacp fallback mode all_active'
-        ]
-
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
-        )
-
-        if result:
-            raise determine_exception(result)(result)
-
-    def no_lacp_fallback_mode_all_active(
-            self):
-        """
-        Set fallback mode to priority.
-
-        This function runs the following vtysh command:
-
-        ::
-
-            # no lacp fallback mode all_active
-
-        """
-
-        cmd = [
-            'no lacp fallback mode all_active'
-        ]
-
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
-        )
-
-        if result:
-            raise determine_exception(result)(result)
-
-    def lacp_fallback_timeout(
-            self, timeout):
-        """
-        Set LACP fallback timeout.
-
-        This function runs the following vtysh command:
-
-        ::
-
-            # lacp fallback timeout {timeout}
-
-        :param timeout: <1-900>  The range is 1 to 900.
-        """
-
-        cmd = [
-            'lacp fallback timeout {timeout}'
-        ]
-
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
-        )
-
-        if result:
-            raise determine_exception(result)(result)
-
-    def no_lacp_fallback_timeout(
-            self, timeout):
-        """
-        Set LACP fallback timeout to 0.
-
-        This function runs the following vtysh command:
-
-        ::
-
-            # no lacp fallback timeout {timeout}
-
-        :param timeout: <1-900>  The range is 1 to 900.
-        """
-
-        cmd = [
-            'no lacp fallback timeout {timeout}'
-        ]
-
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
-        )
-
-        if result:
-            raise determine_exception(result)(result)
-
     def no_ip_address_secondary(
             self, ipv4):
         """
@@ -6544,6 +6417,133 @@ class ConfigInterfaceLag(ContextManager):
 
         cmd = [
             'lacp fallback'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def lacp_fallback_mode_priority(
+            self):
+        """
+        Set fallback mode to priority.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # lacp fallback mode priority
+
+        """
+
+        cmd = [
+            'lacp fallback mode priority'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def lacp_fallback_mode_all_active(
+            self):
+        """
+        Set fallback mode to all_active.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # lacp fallback mode all_active
+
+        """
+
+        cmd = [
+            'lacp fallback mode all_active'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_lacp_fallback_mode_all_active(
+            self):
+        """
+        Set fallback mode to priority.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no lacp fallback mode all_active
+
+        """
+
+        cmd = [
+            'no lacp fallback mode all_active'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def lacp_fallback_timeout(
+            self, timeout):
+        """
+        Set LACP fallback timeout.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # lacp fallback timeout {timeout}
+
+        :param timeout: <1-900>  LACP fallback timeout
+        """
+
+        cmd = [
+            'lacp fallback timeout {timeout}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_lacp_fallback_timeout(
+            self, timeout):
+        """
+        Set LACP fallback timeout to zero.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no lacp fallback timeout {timeout}
+
+        :param timeout: <1-900>  LACP fallback timeout
+        """
+
+        cmd = [
+            'no lacp fallback timeout {timeout}'
         ]
 
         result = self.enode(
@@ -10892,6 +10892,742 @@ def show_ipv6_route(
     return parse_show_ipv6_route(result)
 
 
+def lldp_clear_counters(
+        enode):
+    """
+    Clear LLDP counters.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # lldp clear counters
+
+    """
+
+    cmd = [
+        'lldp clear counters'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def lldp_clear_neighbors(
+        enode):
+    """
+    Clear LLDP neighbors.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # lldp clear neighbors
+
+    """
+
+    cmd = [
+        'lldp clear neighbors'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def lldp_holdtime(
+        enode, holdtime_multiplier):
+    """
+    Configure hold time multiplier.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # lldp holdtime {holdtime_multiplier}
+
+    :param holdtime_multiplier: <5-32768>  holdtime_multiplier range
+    """
+
+    cmd = [
+        'lldp holdtime {holdtime_multiplier}'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def no_lldp_holdtime(
+        enode, holdtime_multiplier):
+    """
+    Unconfigure hold time multiplier.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # no lldp holdtime {holdtime_multiplier}
+
+    :param holdtime_multiplier: <5-32768>  holdtime_multiplier range
+    """
+
+    cmd = [
+        'no lldp holdtime {holdtime_multiplier}'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def lldp_management_address(
+        enode, lldp_mgmt_address):
+    """
+    Configure LLDP management IPV4/IPV6 address.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # lldp management-address {lldp_mgmt_address}
+
+    :param lldp_mgmt_address: A.B.C.D/X:X::X:X IPV4/IPV6 address.
+    """
+
+    cmd = [
+        'lldp management-address {lldp_mgmt_address}'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def no_lldp_management_address(
+        enode, lldp_mgmt_address):
+    """
+    Unconfigure LLDP management IPV4/IPV6 address.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # no lldp management-address {lldp_mgmt_address}
+
+    :param lldp_mgmt_address: A.B.C.D/X:X::X:X IPV4/IPV6 address.
+    """
+
+    cmd = [
+        'no lldp management-address {lldp_mgmt_address}'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def lldp_reinit(
+        enode, reinit_timer):
+    """
+    Configure wait time before perfomring LLDP initialization.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # lldp reinit {reinit_timer}
+
+    :param reinit_timer: <1-10>  reinit_timer range
+    """
+
+    cmd = [
+        'lldp reinit {reinit_timer}'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def no_lldp_reinit(
+        enode, reinit_timer):
+    """
+    Unconfigure wait time before perfomring LLDP initialization.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # no lldp reinit {reinit_timer}
+
+    :param reinit_timer: <1-10>  reinit_timer range
+    """
+
+    cmd = [
+        'no lldp reinit {reinit_timer}'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def lldp_select_tlv_management_address(
+        enode):
+    """
+    Enabling LLDP tlv field management IP address.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # lldp select-tlv management-address
+
+    """
+
+    cmd = [
+        'lldp select-tlv management-address'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def lldp_select_tlv_port_description(
+        enode):
+    """
+    Enabling LLDP tlv field port-description.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # lldp select-tlv port-description
+
+    """
+
+    cmd = [
+        'lldp select-tlv port-description'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def lldp_select_tlv_port_protocol_id(
+        enode):
+    """
+    Enabling LLDP tlv field port-protocol-id.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # lldp select-tlv port-protocol-id
+
+    """
+
+    cmd = [
+        'lldp select-tlv port-protocol-id'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def lldp_select_tlv_port_protocol_vlan_id(
+        enode):
+    """
+    Enabling LLDP tlv field port-protocol-vlan-id.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # lldp select-tlv port-protocol-vlan-id
+
+    """
+
+    cmd = [
+        'lldp select-tlv port-protocol-vlan-id'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def lldp_select_tlv_port_vlan_id(
+        enode):
+    """
+    Enabling LLDP tlv field port-vlan-id.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # lldp select-tlv port-vlan-id
+
+    """
+
+    cmd = [
+        'lldp select-tlv port-vlan-id'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def lldp_select_tlv_port_vlan_name(
+        enode):
+    """
+    Enabling LLDP tlv field port-vlan-name.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # lldp select-tlv port-vlan-name
+
+    """
+
+    cmd = [
+        'lldp select-tlv port-vlan-name'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def lldp_select_tlv_system_capabilities(
+        enode):
+    """
+    Enabling LLDP tlv field system-capabilities.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # lldp select-tlv system-capabilities
+
+    """
+
+    cmd = [
+        'lldp select-tlv system-capabilities'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def lldp_select_tlv_system_description(
+        enode):
+    """
+    Enabling LLDP tlv field system-description.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # lldp select-tlv system-description
+
+    """
+
+    cmd = [
+        'lldp select-tlv system-description'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def lldp_select_tlv_system_name(
+        enode):
+    """
+    Enabling LLDP tlv field system-name .
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # lldp select-tlv system-name
+
+    """
+
+    cmd = [
+        'lldp select-tlv system-name'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def no_lldp_select_tlv_management_address(
+        enode):
+    """
+    Disabling LLDP tlv field management IP address.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # no lldp select-tlv management-address
+
+    """
+
+    cmd = [
+        'no lldp select-tlv management-address'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def no_lldp_select_tlv_port_description(
+        enode):
+    """
+    Disabling LLDP tlv field port-description.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # no lldp select-tlv port-description
+
+    """
+
+    cmd = [
+        'no lldp select-tlv port-description'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def no_lldp_select_tlv_port_protocol_id(
+        enode):
+    """
+    Disabling LLDP tlv field port-protocol-id.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # no lldp select-tlv port-protocol-id
+
+    """
+
+    cmd = [
+        'no lldp select-tlv port-protocol-id'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def no_lldp_select_tlv_port_protocol_vlan_id(
+        enode):
+    """
+    Disabling LLDP tlv field port-protocol-vlan-id.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # no lldp select-tlv port-protocol-vlan-id
+
+    """
+
+    cmd = [
+        'no lldp select-tlv port-protocol-vlan-id'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def no_lldp_select_tlv_port_vlan_id(
+        enode):
+    """
+    Disabling LLDP tlv field port-vlan-id.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # no lldp select-tlv port-vlan-id
+
+    """
+
+    cmd = [
+        'no lldp select-tlv port-vlan-id'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def no_lldp_select_tlv_port_vlan_name(
+        enode):
+    """
+    Disabling LLDP tlv field port-vlan-name.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # no lldp select-tlv port-vlan-name
+
+    """
+
+    cmd = [
+        'no lldp select-tlv port-vlan-name'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def no_lldp_select_tlv_system_capabilities(
+        enode):
+    """
+    Disabling LLDP tlv field system-capabilities.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # no lldp select-tlv system-capabilities
+
+    """
+
+    cmd = [
+        'no lldp select-tlv system-capabilities'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def no_lldp_select_tlv_system_description(
+        enode):
+    """
+    Disabling LLDP tlv field system-description.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # no lldp select-tlv system-description
+
+    """
+
+    cmd = [
+        'no lldp select-tlv system-description'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def no_lldp_select_tlv_system_name(
+        enode):
+    """
+    Disabling LLDP tlv field system-name .
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # no lldp select-tlv system-name
+
+    """
+
+    cmd = [
+        'no lldp select-tlv system-name'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def lldp_timer(
+        enode, lldp_update_timer):
+    """
+    Configure LLDP status update interval.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # lldp timer {lldp_update_timer}
+
+    :param lldp_update_timer: <5-32768>  lldp_update_timer range
+    """
+
+    cmd = [
+        'lldp timer {lldp_update_timer}'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def no_lldp_timer(
+        enode, lldp_update_timer):
+    """
+    Unconfigure LLDP status update interval.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # no lldp timer {lldp_update_timer}
+
+    :param lldp_update_timer: <5-32768>  lldp_update_timer range
+    """
+
+    cmd = [
+        'no lldp timer {lldp_update_timer}'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
 def show_sflow(
         enode):
     """
@@ -12633,6 +13369,34 @@ __all__ = [
     'show_running_config',
     'show_ip_route',
     'show_ipv6_route',
+    'lldp_clear_counters',
+    'lldp_clear_neighbors',
+    'lldp_holdtime',
+    'no_lldp_holdtime',
+    'lldp_management_address',
+    'no_lldp_management_address',
+    'lldp_reinit',
+    'no_lldp_reinit',
+    'lldp_select_tlv_management_address',
+    'lldp_select_tlv_port_description',
+    'lldp_select_tlv_port_protocol_id',
+    'lldp_select_tlv_port_protocol_vlan_id',
+    'lldp_select_tlv_port_vlan_id',
+    'lldp_select_tlv_port_vlan_name',
+    'lldp_select_tlv_system_capabilities',
+    'lldp_select_tlv_system_description',
+    'lldp_select_tlv_system_name',
+    'no_lldp_select_tlv_management_address',
+    'no_lldp_select_tlv_port_description',
+    'no_lldp_select_tlv_port_protocol_id',
+    'no_lldp_select_tlv_port_protocol_vlan_id',
+    'no_lldp_select_tlv_port_vlan_id',
+    'no_lldp_select_tlv_port_vlan_name',
+    'no_lldp_select_tlv_system_capabilities',
+    'no_lldp_select_tlv_system_description',
+    'no_lldp_select_tlv_system_name',
+    'lldp_timer',
+    'no_lldp_timer',
     'show_sflow',
     'show_sflow_interface',
     'show_udld_interface',
