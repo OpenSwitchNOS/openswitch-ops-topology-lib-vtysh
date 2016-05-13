@@ -2627,6 +2627,8 @@ def parse_show_running_config(raw_result):
     autoneg_re = r'\s+autonego\w+\s(\w+)'
     int_loopback_re = r'interface loopback\s+([0-9]+)'
     lacp_mode_re = r'lacp\s+mode\s+(\w+)'
+    lacp_fallback_mode_re = r'lacp\s+fallback\s+mode\s+(\w+)'
+    lacp_fallback_timeout_re = r'lacp\s+fallback\s+timeout\s+(\w+)'
 
     result['interface'] = {}
     if re_interface_section:
@@ -2817,6 +2819,20 @@ def parse_show_running_config(raw_result):
                 if result['interface'].get('lag'):
                     result['interface']['lag'][port]['lacp_mode'] = \
                         re_result.group(1)
+
+            # Match lacp fallback mode
+            re_result = re.search(lacp_fallback_mode_re, line)
+            if re_result:
+                if result['interface'].get('lag'):
+                    result['interface']['lag'][port]['lacp_fallback_mode'] = \
+                        re_result.group(1)
+
+            # Match lacp fallback timeout
+            re_result = re.search(lacp_fallback_timeout_re, line)
+            if re_result:
+                if result['interface'].get('lag'):
+                    result['interface']['lag'][port]['lacp_fallback_timeout'] \
+                        = re_result.group(1)
 
     # sftp-server section
     result['sftp-server'] = {}
