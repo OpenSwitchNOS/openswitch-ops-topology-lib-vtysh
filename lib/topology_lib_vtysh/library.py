@@ -5866,133 +5866,6 @@ class ConfigInterfaceLag(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
-    def lacp_fallback_mode_priority(
-            self):
-        """
-        Set fallback mode to priority.
-
-        This function runs the following vtysh command:
-
-        ::
-
-            # lacp fallback mode priority
-
-        """
-
-        cmd = [
-            'lacp fallback mode priority'
-        ]
-
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
-        )
-
-        if result:
-            raise determine_exception(result)(result)
-
-    def lacp_fallback_mode_all_active(
-            self):
-        """
-        Set fallback mode to all_active.
-
-        This function runs the following vtysh command:
-
-        ::
-
-            # lacp fallback mode all_active
-
-        """
-
-        cmd = [
-            'lacp fallback mode all_active'
-        ]
-
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
-        )
-
-        if result:
-            raise determine_exception(result)(result)
-
-    def no_lacp_fallback_mode_all_active(
-            self):
-        """
-        Set fallback mode to priority.
-
-        This function runs the following vtysh command:
-
-        ::
-
-            # no lacp fallback mode all_active
-
-        """
-
-        cmd = [
-            'no lacp fallback mode all_active'
-        ]
-
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
-        )
-
-        if result:
-            raise determine_exception(result)(result)
-
-    def lacp_fallback_timeout(
-            self, timeout):
-        """
-        Set LACP fallback timeout.
-
-        This function runs the following vtysh command:
-
-        ::
-
-            # lacp fallback timeout {timeout}
-
-        :param timeout: <1-900>  The range is 1 to 900.
-        """
-
-        cmd = [
-            'lacp fallback timeout {timeout}'
-        ]
-
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
-        )
-
-        if result:
-            raise determine_exception(result)(result)
-
-    def no_lacp_fallback_timeout(
-            self, timeout):
-        """
-        Set LACP fallback timeout to 0.
-
-        This function runs the following vtysh command:
-
-        ::
-
-            # no lacp fallback timeout {timeout}
-
-        :param timeout: <1-900>  The range is 1 to 900.
-        """
-
-        cmd = [
-            'no lacp fallback timeout {timeout}'
-        ]
-
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
-        )
-
-        if result:
-            raise determine_exception(result)(result)
-
     def no_ip_address_secondary(
             self, ipv4):
         """
@@ -6544,6 +6417,133 @@ class ConfigInterfaceLag(ContextManager):
 
         cmd = [
             'lacp fallback'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def lacp_fallback_mode_priority(
+            self):
+        """
+        Set fallback mode to priority.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # lacp fallback mode priority
+
+        """
+
+        cmd = [
+            'lacp fallback mode priority'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def lacp_fallback_mode_all_active(
+            self):
+        """
+        Set fallback mode to all_active.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # lacp fallback mode all_active
+
+        """
+
+        cmd = [
+            'lacp fallback mode all_active'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_lacp_fallback_mode_all_active(
+            self):
+        """
+        Set fallback mode to priority.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no lacp fallback mode all_active
+
+        """
+
+        cmd = [
+            'no lacp fallback mode all_active'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def lacp_fallback_timeout(
+            self, timeout):
+        """
+        Set LACP fallback timeout.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # lacp fallback timeout {timeout}
+
+        :param timeout: <1-900>  LACP fallback timeout
+        """
+
+        cmd = [
+            'lacp fallback timeout {timeout}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_lacp_fallback_timeout(
+            self, timeout):
+        """
+        Set LACP fallback timeout to zero.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no lacp fallback timeout {timeout}
+
+        :param timeout: <1-900>  LACP fallback timeout
+        """
+
+        cmd = [
+            'no lacp fallback timeout {timeout}'
         ]
 
         result = self.enode(
@@ -8919,6 +8919,58 @@ class ConfigTftpServer(ContextManager):
 
         return parse_config_tftp_server_no_path(result)
 
+    def secure_mode(
+            self):
+        """
+        Enable secure mode for tftp server.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # secure-mode
+
+        :return: A dictionary as returned by
+         :func:`topology_lib_vtysh.parser.parse_config_tftp_server_secure_mode`
+        """
+
+        cmd = [
+            'secure-mode'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        return parse_config_tftp_server_secure_mode(result)
+
+    def no_secure_mode(
+            self):
+        """
+        Disable secure mode for tftp server.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no secure-mode
+
+        :return: A dictionary as returned by
+         :func:`topology_lib_vtysh.parser.parse_config_tftp_server_no_secure_mode`
+        """
+
+        cmd = [
+            'no secure-mode'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        return parse_config_tftp_server_no_secure_mode(result)
+
 
 class ConfigDhcpServer(ContextManager):
     """
@@ -10784,33 +10836,6 @@ def show_ip_ospf_interface(
     return parse_show_ip_ospf_interface(result)
 
 
-def show_ip_ospf_route(
-        enode):
-    """
-    Show ospf route detail.
-
-    This function runs the following vtysh command:
-
-     ::
-
-        # show ip ospf route
-
-    :return: A dictionary as returned by
-     :func:`topology_lib_vtysh.parser.parse_show_ip_ospf_route`
-    """
-
-    cmd = [
-        'show ip ospf route'
-    ]
-
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
-    )
-
-    return parse_show_ip_ospf_route(result)
-
-
 def show_ip_ospf(
         enode):
     """
@@ -10836,6 +10861,33 @@ def show_ip_ospf(
     )
 
     return parse_show_ip_ospf(result)
+
+
+def show_ip_ospf_route(
+        enode):
+    """
+    Show ospf detail.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip ospf route
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_ospf_route`
+    """
+
+    cmd = [
+        'show ip ospf route'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ip_ospf_route(result)
 
 
 def show_running_config(
@@ -12656,8 +12708,8 @@ __all__ = [
     'show_ip_ospf_neighbor_detail',
     'show_ip_ospf_neighbor',
     'show_ip_ospf_interface',
-    'show_ip_ospf_route',
     'show_ip_ospf',
+    'show_ip_ospf_route',
     'show_running_config',
     'show_ip_route',
     'show_ipv6_route',

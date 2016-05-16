@@ -4148,6 +4148,74 @@ def parse_config_tftp_server_no_enable(raw_result):
     return result
 
 
+def parse_config_tftp_server_secure_mode(raw_result):
+    """
+    Parse the 'secure-mode' command raw output in tftp-server context
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the 'secure-mode' in tftp-server\
+        context:
+
+    ::
+
+        {
+            '\s*TFTP server secure mode is enabled successfully\s*-*\s*'
+        }
+    """
+
+    enable_tfpt_server_secure_mode_re = (
+        r'TFTP server secure mode is\s(?P<result>\S*)\s*'
+    )
+
+    re_result = re.match(enable_tfpt_server_secure_mode_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    for key, value in result.items():
+        if value is not None:
+            if key == 'result':
+                if value == 'already' or value == 'enabled':
+                    result[key] = True
+                else:
+                    result[key] = False
+
+    return result
+
+
+def parse_config_tftp_server_no_secure_mode(raw_result):
+    """
+    Parse the 'no secure-mode' command raw output in tftp-server context
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the 'no secure-mode' in tftp-server\
+        context:
+
+    ::
+
+        {
+            '\s*TFTP server secure mode is disabled successfully\s*-*\s*'
+        }
+    """
+
+    disable_tfpt_server_secure_mode_re = (
+        r'TFTP server secure mode is\s(?P<result>\S*)\s*'
+    )
+
+    re_result = re.match(disable_tfpt_server_secure_mode_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    for key, value in result.items():
+        if value is not None:
+            if key == 'result':
+                if value == 'already' or value == 'disabled':
+                    result[key] = True
+                else:
+                    result[key] = False
+
+    return result
+
+
 def parse_config_tftp_server_path(raw_result):
     """
     Parse the 'path {path}' command raw output in tftp-server context
@@ -5107,8 +5175,8 @@ __all__ = [
     'parse_config_tftp_server_enable',
     'parse_config_tftp_server_no_enable', 'parse_config_tftp_server_path',
     'parse_config_tftp_server_no_path', 'parse_show_interface_lag',
-    'parse_erase_startup_config',
-    'parse_show_mirror',
+    'parse_erase_startup_config', 'parse_config_tftp_server_enable',
+    'parse_config_tftp_server_no_enable', 'parse_show_mirror',
     'parse_show_qos_cos_map',
     'parse_show_qos_dscp_map',
     'parse_show_qos_queue_profile',

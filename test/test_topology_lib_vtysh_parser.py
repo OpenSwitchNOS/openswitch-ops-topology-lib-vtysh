@@ -89,8 +89,34 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_snmpv3_users,
                                        parse_diag_dump,
                                        parse_show_events,
-                                       parse_erase_startup_config
+                                       parse_erase_startup_config,
+                                       parse_config_tftp_server_secure_mode,
+                                       parse_config_tftp_server_no_secure_mode
                                        )
+
+
+def test_parse_config_tftp_server_secure_mode():
+    raw_result = "TFTP server secure mode is enabled successfully"
+
+    result = parse_config_tftp_server_secure_mode(raw_result)
+    expected = {
+        'result': True
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_config_tftp_server_no_secure_mode():
+    raw_result = "TFTP server secure mode is disabled successfully"
+
+    result = parse_config_tftp_server_no_secure_mode(raw_result)
+    expected = {
+        'result': True
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
 
 
 def test_parse_erase_startup_config():

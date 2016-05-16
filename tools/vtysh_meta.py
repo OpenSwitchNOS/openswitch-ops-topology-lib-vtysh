@@ -4324,7 +4324,19 @@ local-priority {local_priority} name {name} color {color}',
                     }
                 ],
                 'returns': True
-            }
+            },
+            {
+                'command': 'secure-mode',
+                'doc': 'Enable secure mode for tftp server.',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'no secure-mode',
+                'doc': 'Disable secure mode for tftp server.',
+                'arguments': [],
+                'returns': True
+            },
         ]
     },
     ),
