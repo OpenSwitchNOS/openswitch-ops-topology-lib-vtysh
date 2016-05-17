@@ -5629,6 +5629,58 @@ class ConfigInterface(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def vrrp_address_family(
+            self, af):
+        """
+        Set VRRP virtual router id and address-family
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # vrrp {grpid} address-family {af}
+
+        :param af: Address family <ipv4|ipv6>
+        """
+
+        cmd = [
+            'vrrp {grpid} address-family {af}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_vrrp_address_family(
+            self, af):
+        """
+        Unset VRRP virtual router id and address-family
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no vrrp {grpid} address-family {af}
+
+        :param af: Address family <ipv4|ipv6>
+        """
+
+        cmd = [
+            'no vrrp {grpid} address-family {af}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
 
 class ConfigSubinterface(ContextManager):
     """
@@ -11104,6 +11156,266 @@ class ConfigAccessListIpTestname(ContextManager):
             raise determine_exception(result)(result)
 
 
+class ConfigVrrpInterface(ContextManager):
+    """
+    VRRP-Interface configuration.
+
+    pre_commands:
+
+    ::
+
+            ['config terminal',
+             'interface {port}',
+             'vrrp {grpid} address-family {af}']
+
+    post_commands:
+
+    ::
+
+            ['exit', 'end']
+    """
+    def __init__(self, enode, portlbl, grpid, af):
+        self.enode = enode
+        self.port = enode.ports.get(portlbl, portlbl)
+        self.grpid = grpid
+        self.af = af
+
+    def __enter__(self):
+        commands = """\
+            config terminal
+            interface {port}
+            vrrp {grpid} address-family {af}
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+        return self
+
+    def __exit__(self, type, value, traceback):
+        commands = """\
+            exit
+            end
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+    def vrrp_version(
+            self, version):
+        """
+        Set VRRP version
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # vrrp version {version}
+
+        :param version: VRRP version 2|3
+        """
+
+        cmd = [
+            'vrrp version {version}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_vrrp_version(
+            self, version):
+        """
+        Unset VRRP version
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no vrrp version {version}
+
+        :param version: VRRP version 2|3
+        """
+
+        cmd = [
+            'no vrrp version {version}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ip_address(
+            self, ipv4):
+        """
+        Set VRRP primary IP address
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip address {ipv4}
+
+        :param ipv4: A.B.C.D VRRP primary virtual IP address.
+        """
+
+        cmd = [
+            'ip address {ipv4}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ip_address(
+            self, ipv4):
+        """
+        Unset VRRP primary IP address
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ip address {ipv4}
+
+        :param ipv4: A.B.C.D VRRP primary virtual IP address.
+        """
+
+        cmd = [
+            'no ip address {ipv4}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ip_address_secondary(
+            self, ipv4):
+        """
+        Set VRRP secondary IP address
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip address {ipv4} secondary
+
+        :param ipv4: A.B.C.D VRRP secondary virtual IP address.
+        """
+
+        cmd = [
+            'ip address {ipv4} secondary'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ip_address_secondary(
+            self, ipv4):
+        """
+        Unset VRRP secondary IP address
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ip address {ipv4} secondary
+
+        :param ipv4: A.B.C.D VRRP secondary virtual IP address.
+        """
+
+        cmd = [
+            'no ip address {ipv4} secondary'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def priority(
+            self, prio):
+        """
+        Set VRRP virtual router priority
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # priority {prio}
+
+        :param prio: [0-255] VRRP virtual router Priority Level
+        """
+
+        cmd = [
+            'priority {prio}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_priority(
+            self, prio):
+        """
+        Unset VRRP virtual router priority
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no priority {prio}
+
+        :param prio: [0-255] VRRP virtual router Priority Level
+        """
+
+        cmd = [
+            'no priority {prio}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+
 def show_interface(
         enode, portlbl):
     """
@@ -13556,6 +13868,7 @@ __all__ = [
     'ConfigQueueProfile',
     'ConfigScheduleProfile',
     'ConfigAccessListIpTestname',
+    'ConfigVrrpInterface',
     'show_interface',
     'show_interface_mgmt',
     'show_interface_subinterface',
