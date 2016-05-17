@@ -58,7 +58,8 @@ def parse_show_interface_mgmt(raw_result):
         r'\s*Default gateway IPv6\s*:\s*'
         r'(?P<default_gateway_ipv6>[0-9a-f:]+)?\s*'
         r'\s*Primary Nameserver\s*:\s*(?P<primary_nameserver>[0-9.:a-f]+)?\s*'
-        r'\s*Secondary Nameserver\s*:\s*(?P<secondary_nameserver>[0-9.:a-f]+)?\s*'
+        r'\s*Secondary Nameserver\s*:'
+        r'\s*(?P<secondary_nameserver>[0-9.:a-f]+)?\s*'
     )
 
     re_result = re.search(show_re, raw_result)
