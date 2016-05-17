@@ -1427,11 +1427,18 @@ local-priority {local_priority} name {name} color {color}',
                 'arguments': [],
             },
             {
-                'command': 'lldp clear counters',
-                'doc': 'Clear LLDP counters.',
-                'arguments': [],
+                'command': 'lldp clear {param}',
+                'doc': 'Clear LLDP counters and neighbors.',
+                'arguments': [
+		     {
+		         'name': 'param',
+			 'doc' : (
+			     'counters clear lldp counters'
+			     'neighbors clear lldp neighbors'
+			 ),
+		     },
+		],
             },
-
             {
                 'command': 'lldp clear neighbors',
                 'doc': 'Clear LLDP neighbors.',

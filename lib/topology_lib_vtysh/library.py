@@ -1058,21 +1058,23 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
-    def lldp_clear_counters(
-            self):
+    def lldp_clear(
+            self, param):
         """
-        Clear LLDP counters.
+        Clear LLDP counters and neighbors.
 
         This function runs the following vtysh command:
 
         ::
 
-            # lldp clear counters
+            # lldp clear {param}
 
+        :param param: counters clear lldp countersneighbors clear lldp
+            neighbors
         """
 
         cmd = [
-            'lldp clear counters'
+            'lldp clear {param}'
         ]
 
         result = self.enode(
