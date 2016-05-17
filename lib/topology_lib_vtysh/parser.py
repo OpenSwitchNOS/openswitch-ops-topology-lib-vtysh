@@ -588,6 +588,61 @@ def parse_show_interface_loopback_brief(raw_result):
     return result
 
 
+def parse_show_interface_subinterface_brief(raw_result):
+    """
+    Parse the 'show interface subinterface brief' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show interface subinterface brief \
+        command in a list of dictionaries of the form:
+     ::
+
+      [
+        {
+            'vlan_id': 40,
+            'subinterface': '4.1',
+            'type': 'eth',
+            'mode': 'routed',
+            'status': 'down',
+            'reason': 'Administratively down    ',
+            'speed': 'auto',
+            'port_ch': '--'
+        },
+        {
+            'vlan_id': 20,
+            'subinterface': '4.2',
+            'type': 'eth',
+            'mode': 'routed',
+            'status': 'down',
+            'reason': 'Administratively down    ',
+            'speed': 'auto',
+            'port_ch': '--'
+        }
+      ]
+
+    """
+    result = {}
+
+    subinterface_re = (
+        r'(?P<subinterface>[0-9]+\.[0-9]+)\s+(?P<vlan_id>[0-9]+)\s+'
+        r'(?P<type>\w+)\s+(?P<mode>\w+)\s+(?P<status>\w+)\s+'
+        r'(?P<reason>.*)\s+(?P<speed>\w+)\s+(?P<port_ch>--)'
+    )
+
+    result = []
+    for line in raw_result.splitlines():
+        line = line.strip()
+        re_result = re.search(subinterface_re, line)
+        if re_result:
+            subinterface_match = re_result.groupdict()
+            for key, value in subinterface_match.items():
+                if value and value.isdigit():
+                    subinterface_match[key] = int(value)
+            result.append(subinterface_match)
+    return result
+
+
 def parse_show_vlan(raw_result):
     """
     Parse the 'show vlan' command raw output.
@@ -2523,6 +2578,12 @@ def parse_show_running_config(raw_result):
                 'ipv6_address': '2002::1/64'
                 }
         },
+        },
+        'subint': {'4.2': {
+                'dot1q': '20',
+                'admin': 'up',
+                'ipv4': '20.0.0.1/24'}
+        },
          'sftp-server': {
                     'status':'enable'
         },
@@ -2699,6 +2760,8 @@ def parse_show_running_config(raw_result):
     if_section_re = r'\s+int\w+(?:\s+\S+.*)*'
     re_interface_section = re.findall(if_section_re, raw_result, re.DOTALL)
     interface_vlan_re = r'\interface\s(vlan\d+)'
+    interface_subinterface = r'interface\s(\d+\.\d+)'
+    dot1q_encapsulation = r'\s+encapsulation dot1Q (\d+)'
     interface_port_re = r'interface\s(\d+)'
     interface_mgmt_re = r'interface\smgmt'
     interface_lag_re = r'\s*interface\slag\s(\d+)'
@@ -2731,7 +2794,6 @@ def parse_show_running_config(raw_result):
             # Check for blank line
             if line == '':
                 continue
-
             # Check if interface is vlan
             if re.match(interface_vlan_re, line):
                 re_result = re.match(interface_vlan_re, line)
@@ -2742,8 +2804,18 @@ def parse_show_running_config(raw_result):
             # Check if interface is port
             elif re.match(interface_port_re, line):
                 re_result = re.match(interface_port_re, line)
+                re_result_subint = re.match(interface_subinterface, line)
+                if re_result_subint:
+                    re_result = re_result_subint
+                    subintport = re_result.group(1)
+                    if 'subint' not in result['interface'].keys():
+                        result['interface']['subint'] = {}
+                    if subintport not in \
+                            result['interface']['subint'].keys():
+                        result['interface']['subint'][subintport] = {}
                 port = re_result.group(1)
-                if port not in result['interface'].keys():
+                if port not in result['interface'].keys() \
+                   and not re_result_subint:
                     result['interface'][port] = {}
 
             # Check if interface is mgmt or lag
@@ -2787,12 +2859,25 @@ def parse_show_running_config(raw_result):
                 result['interface'][port]['autonegotiation'] =\
                     re_result.group(1)
 
+            # Match dot1q encapsulation for subinterfaces
+            re_result = re.match(dot1q_encapsulation, line)
+            if re_result:
+                if result['interface'].get('subint'):
+                    if subintport in result['interface']['subint']:
+                        result['interface']['subint'][
+                            subintport]['dot1q'] = re_result.group(1)
+
             # Match ipv4
             re_result = re.match(ipv4_re, line)
             if re_result:
-                if result['interface'].get('lag'):
+                if result['interface'].get('lag') and not\
+                        result['interface'].get('subint'):
                     result['interface']['lag'][port]['ipv4'] = \
                         re_result.group(1)
+                elif result['interface'].get('subint'):
+                    if subintport in result['interface']['subint']:
+                        result['interface']['subint'][subintport]['ipv4'] =\
+                            re_result.group(1)
                 else:
                     result['interface'][port]['ipv4'] = re_result.group(1)
 
@@ -2807,8 +2892,11 @@ def parse_show_running_config(raw_result):
 
             # Match admin state
             re_result = re.match(no_shut_re, line)
-            if re_result:
+            if re_result and not result['interface'].get('subint'):
                 result['interface'][port]['admin'] = 'up'
+            if result['interface'].get('subint'):
+                if result['interface']['subint'].get(subintport):
+                    result['interface']['subint'][subintport]['admin'] = 'up'
 
             # Match routing
             re_result = re.match(no_routing_re, line)
@@ -2990,7 +3078,7 @@ def parse_show_running_config(raw_result):
             session_name = re.match(mirror_session_name_re, line)
             if session_name:
                 result['mirror_session'][session_name.group(1)] = \
-                                                    session_name.group(1)
+                    session_name.group(1)
 
     return result
 
@@ -5170,6 +5258,7 @@ __all__ = [
     'parse_show_ip_ospf', 'parse_show_ip_ospf_neighbor',
     'parse_show_startup_config',
     'parse_show_ip_ospf_route',
+    'parse_show_startup_config', 'parse_show_interface_subinterface_brief',
     'parse_show_mac_address_table',
     'parse_show_tftp_server', 'parse_show_core_dump',
     'parse_config_tftp_server_enable',

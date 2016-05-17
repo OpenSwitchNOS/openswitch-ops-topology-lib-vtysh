@@ -25,6 +25,7 @@ from deepdiff import DeepDiff
 from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_interface_mgmt,
                                        parse_show_interface_subinterface,
+                                       parse_show_interface_subinterface_brief,
                                        parse_show_vlan,
                                        parse_show_lacp_interface,
                                        parse_show_lacp_aggregates,
@@ -836,6 +837,45 @@ Interface 3.20 is up.
              'ipv6': None,
              'ipv4': '20.0.0.1/24'}
     }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_interface_subinterface_brief():
+    raw_result = """\
+--------------------------------------------------------------------------------
+Ethernet      VLAN    Type Mode   Status  Reason                   Speed    Port
+Interface                                                          (Mb/s)   Ch#
+--------------------------------------------------------------------------------
+ 4.1            40    eth  routed down   Administratively down     auto     --
+ 4.2            20    eth  routed down   Administratively down     auto     --
+
+     """  # noqa
+
+    result = parse_show_interface_subinterface_brief(raw_result)
+    expected = [
+        {
+            'vlan_id': 40,
+            'subinterface': '4.1',
+            'type': 'eth',
+            'mode': 'routed',
+            'status': 'down',
+            'reason': 'Administratively down    ',
+            'speed': 'auto',
+            'port_ch': '--'
+        },
+        {
+            'vlan_id': 20,
+            'subinterface': '4.2',
+            'type': 'eth',
+            'mode': 'routed',
+            'status': 'down',
+            'reason': 'Administratively down    ',
+            'speed': 'auto',
+            'port_ch': '--'
+        }
+    ]
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff
@@ -1923,6 +1963,10 @@ interface mgmt
     nameserver 2.2.2.2
 interface lag 1
     lacp mode passive
+interface 4.2
+    no shutdown
+    encapsulation dot1Q 20
+    ip address 20.0.0.1/24
 sftp-server
     enable
 mirror session foo
@@ -1969,6 +2013,11 @@ ipv6 route 2020::2/128 1
                 'flowcontrol': {'receive': 'on', 'send': 'on'},
                 'mtu': '1518'
             },
+            'subint': {'4.2': {
+                'dot1q': '20',
+                'admin': 'up',
+                'ipv4': '20.0.0.1/24'}
+            },
             'vlan10': {
                 'admin': 'up',
                 'ipv4': '10.1.10.1/24'
@@ -1983,6 +2032,7 @@ ipv6 route 2020::2/128 1
                 'admin': 'up',
                 'ipv4': '10.1.11.1/24'
             },
+
             'vlan12': {
                 'admin': 'up',
                 'ipv4': '10.1.12.1/24'
@@ -2076,7 +2126,6 @@ ipv6 route 2020::2/128 1
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff
-
     # Startup Config and Running config are similar, hence using same test
     # case to test both
     ddiff = DeepDiff(result_startup, expected)

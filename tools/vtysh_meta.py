@@ -61,6 +61,17 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
+                'command': 'show interface {port} subinterface brief',
+                'doc': 'Show subinterface summary on a physical port',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'Label that identifies interface.',
+                    },
+                ],
+                'returns': True
+            },
+            {
                 'command': 'show vlan',
                 'doc': 'Show VLAN configuration.',
                 'arguments': [

@@ -10436,6 +10436,36 @@ def show_interface_subinterface(
     return parse_show_interface_subinterface(result)
 
 
+def show_interface_subinterface_brief(
+        enode, portlbl):
+    """
+    Show subinterface summary on a physical port
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show interface {port} subinterface brief
+
+    :param portlbl: Label that identifies interface.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_interface_subinterface_brief`
+    """
+
+    cmd = [
+        'show interface {port} subinterface brief'
+    ]
+
+    port = enode.ports.get(portlbl, portlbl)
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_interface_subinterface_brief(result)
+
+
 def show_vlan(
         enode, vlanid=''):
     """
@@ -12694,6 +12724,7 @@ __all__ = [
     'show_interface',
     'show_interface_mgmt',
     'show_interface_subinterface',
+    'show_interface_subinterface_brief',
     'show_vlan',
     'show_lacp_interface',
     'show_lacp_aggregates',
