@@ -1427,6 +1427,139 @@ local-priority {local_priority} name {name} color {color}',
                 'arguments': [],
             },
             {
+                'command': 'lldp clear counters',
+                'doc': 'Clear LLDP counters.',
+                'arguments': [],
+            },
+
+            {
+                'command': 'lldp clear neighbors',
+                'doc': 'Clear LLDP neighbors.',
+                'arguments': [],
+            },
+            {
+                'command': 'lldp holdtime {holdtime_multiplier}',
+                'doc': 'Configure hold time multiplier.',
+                'arguments': [
+		    {
+		        'name': 'holdtime_multiplier',
+			'doc' : '<5-32768>  holdtime_multiplier range',
+		    }
+		],
+            },
+            {
+                'command': 'no lldp holdtime {holdtime_multiplier}',
+                'doc': 'Unconfigure hold time multiplier.',
+                'arguments': [
+		    {
+		        'name': 'holdtime_multiplier',
+			'doc' : '<5-32768>  holdtime_multiplier range',
+		    }
+		],
+            },
+            {
+                'command': 'lldp management-address {lldp_mgmt_address}',
+                'doc': 'Configure LLDP management IPV4/IPV6 address.',
+                'arguments': [
+		    {
+			'name': 'lldp_mgmt_address',
+			'doc': 'A.B.C.D/X:X::X:X IPV4/IPV6 address.',
+		    }
+	        ],
+             },
+	     {
+                'command': 'no lldp management-address {lldp_mgmt_address}',
+                'doc': 'Unconfigure LLDP management IPV4/IPV6 address.',
+                'arguments': [
+                    {
+			'name': 'lldp_mgmt_address',
+			'doc': 'A.B.C.D/X:X::X:X IPV4/IPV6 address.',
+		    }
+		],
+             },
+             {
+                'command': 'lldp reinit {reinit_timer}',
+                'doc': 'Configure wait time before perfomring LLDP initialization.',
+                'arguments': [
+		    {
+			'name': 'reinit_timer',
+			'doc': '<1-10>  reinit_timer range',
+		    }
+		],
+            },
+            {
+                'command': 'no lldp reinit {reinit_timer}',
+                'doc': 'Unconfigure wait time before perfomring LLDP initialization.',
+                'arguments': [
+                    {
+			'name': 'reinit_timer',
+			'doc': '<1-10>  reinit_timer range',
+		    }
+		],
+            },
+            {
+                'command': 'lldp select-tlv {tlv_field}',
+                'doc': 'Enabling LLDP tlv field management IP address.',
+                'arguments': [
+		    {
+                        'name': 'tlv_field',
+                        'doc': (
+                            'management-address Enable management-address'
+                            'port-description Enable port-description'
+			    'port-protocol-id Enable port-protocol-id'
+			    'port-protocol-vlan-id Enable port-protocol-vlan-id'
+			    'port-vlan-id Enable port-vlan-id'
+			    'port-vlan-name Enable port-vlan-name'
+			    'system-capabilities Enable system-capabilities'
+			    'system-description Enable system-description'
+			    'system-name Enable system-name'
+                        ),
+                    },
+                ],
+            },
+            {
+                'command': 'no lldp select-tlv {tlv_field}',
+                'doc': 'Enabling LLDP tlv field management IP address.',
+                'arguments': [
+		    {
+                        'name': 'tlv_field',
+                        'doc': (
+                            'management-address Enable management-address'
+                            'port-description Enable port-description'
+			    'port-protocol-id Enable port-protocol-id'
+			    'port-protocol-vlan-id Enable port-protocol-vlan-id'
+			    'port-vlan-id Enable port-vlan-id'
+			    'port-vlan-name Enable port-vlan-name'
+			    'system-capabilities Enable system-capabilities'
+			    'system-description Enable system-description'
+			    'system-name Enable system-name'
+                        ),
+                    },
+                ],
+            },
+
+            {
+                'command': 'lldp timer {lldp_update_timer}',
+                'doc': 'Configure LLDP status update interval.',
+                'arguments': [
+		    {
+			 'name': 'lldp_update_timer',
+			 'doc': '<5-32768>  lldp_update_timer range',
+		    }
+		],
+            },
+	    {
+                'command': 'no lldp timer {lldp_update_timer}',
+                'doc': 'Unconfigure LLDP status update interval.',
+                'arguments': [
+		    {
+			 'name': 'lldp_update_timer',
+			 'doc': '<5-32768>  lldp_update_timer range',
+		    }
+		],
+            },
+
+            {
                 'command': 'sflow enable',
                 'doc': 'Configure sFlow.',
                 'arguments': [],
