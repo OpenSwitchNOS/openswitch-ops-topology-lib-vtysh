@@ -1058,6 +1058,303 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def lldp_clear(
+            self, param):
+        """
+        Clear LLDP counters and neighbors.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # lldp clear {param}
+
+        :param param: counters clear lldp countersneighbors clear lldp
+            neighbors
+        """
+
+        cmd = [
+            'lldp clear {param}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def lldp_holdtime(
+            self, holdtime_multiplier):
+        """
+        Configure hold time multiplier.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # lldp holdtime {holdtime_multiplier}
+
+        :param holdtime_multiplier: <5-32768>  holdtime_multiplier range
+        """
+
+        cmd = [
+            'lldp holdtime {holdtime_multiplier}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_lldp_holdtime(
+            self, holdtime_multiplier):
+        """
+        Unconfigure hold time multiplier.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no lldp holdtime {holdtime_multiplier}
+
+        :param holdtime_multiplier: <5-32768>  holdtime_multiplier range
+        """
+
+        cmd = [
+            'no lldp holdtime {holdtime_multiplier}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def lldp_management_address(
+            self, lldp_mgmt_address):
+        """
+        Configure LLDP management IPV4/IPV6 address.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # lldp management-address {lldp_mgmt_address}
+
+        :param lldp_mgmt_address: A.B.C.D/X:X::X:X IPV4/IPV6 address.
+        """
+
+        cmd = [
+            'lldp management-address {lldp_mgmt_address}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_lldp_management_address(
+            self, lldp_mgmt_address):
+        """
+        Unconfigure LLDP management IPV4/IPV6 address.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no lldp management-address {lldp_mgmt_address}
+
+        :param lldp_mgmt_address: A.B.C.D/X:X::X:X IPV4/IPV6 address.
+        """
+
+        cmd = [
+            'no lldp management-address {lldp_mgmt_address}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def lldp_reinit(
+            self, reinit_timer):
+        """
+        Configure wait time before perfomring LLDP initialization.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # lldp reinit {reinit_timer}
+
+        :param reinit_timer: <1-10>  reinit_timer range
+        """
+
+        cmd = [
+            'lldp reinit {reinit_timer}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_lldp_reinit(
+            self, reinit_timer):
+        """
+        Unconfigure wait time before perfomring LLDP initialization.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no lldp reinit {reinit_timer}
+
+        :param reinit_timer: <1-10>  reinit_timer range
+        """
+
+        cmd = [
+            'no lldp reinit {reinit_timer}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def lldp_select_tlv(
+            self, tlv_field):
+        """
+        Enabling LLDP tlv field management IP address.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # lldp select-tlv {tlv_field}
+
+        :param tlv_field: management-address Enable management-addressport-
+            description Enable port-descriptionport-protocol-id Enable port-
+            protocol-idport-protocol-vlan-id Enable port-protocol-vlan-idport-
+            vlan-id Enable port-vlan-idport-vlan-name Enable port-vlan-namesystem-
+            capabilities Enable system-capabilitiessystem-description Enable
+            system-descriptionsystem-name Enable system-name
+        """
+
+        cmd = [
+            'lldp select-tlv {tlv_field}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_lldp_select_tlv(
+            self, tlv_field):
+        """
+        Enabling LLDP tlv field management IP address.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no lldp select-tlv {tlv_field}
+
+        :param tlv_field: management-address Enable management-addressport-
+            description Enable port-descriptionport-protocol-id Enable port-
+            protocol-idport-protocol-vlan-id Enable port-protocol-vlan-idport-
+            vlan-id Enable port-vlan-idport-vlan-name Enable port-vlan-namesystem-
+            capabilities Enable system-capabilitiessystem-description Enable
+            system-descriptionsystem-name Enable system-name
+        """
+
+        cmd = [
+            'no lldp select-tlv {tlv_field}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def lldp_timer(
+            self, lldp_update_timer):
+        """
+        Configure LLDP status update interval.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # lldp timer {lldp_update_timer}
+
+        :param lldp_update_timer: <5-32768>  lldp_update_timer range
+        """
+
+        cmd = [
+            'lldp timer {lldp_update_timer}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_lldp_timer(
+            self, lldp_update_timer):
+        """
+        Unconfigure LLDP status update interval.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no lldp timer {lldp_update_timer}
+
+        :param lldp_update_timer: <5-32768>  lldp_update_timer range
+        """
+
+        cmd = [
+            'no lldp timer {lldp_update_timer}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def sflow_enable(
             self):
         """
