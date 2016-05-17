@@ -3233,6 +3233,30 @@ local-priority {local_priority} name {name} color {color}',
                         'doc': 'Access-list name'
                     }
                 ],
+            },
+            {
+                'command': 'vrrp {grpid} address-family {af}',
+                'doc': 'Set VRRP virtual router id and address-family',
+                'arguments': [
+                    {
+                        'name': 'grpid',
+                        'doc': 'Virtual router id <1-255>',
+                        'name': 'af',
+                        'doc': 'Address family <ipv4|ipv6>'
+                    }
+                ],
+            },
+            {
+                'command': 'no vrrp {grpid} address-family {af}',
+                'doc': 'Unset VRRP virtual router id and address-family',
+                'arguments': [
+                    {
+                        'name': 'grpid',
+                        'doc': 'Virtual router id <1-255>',
+                        'name': 'af',
+                        'doc': 'Address family <ipv4|ipv6>'
+                    }
+                ],
             }
         ]
     }),
@@ -5530,6 +5554,109 @@ local-priority {local_priority}',
                     {
                         'name': 'sequence',
                         'doc': 'sequence number of ACE.',
+                    },
+                ],
+            },
+        ]
+    }),
+    ('config_vrrp_interface', {
+        'doc': 'VRRP-Interface configuration.',
+        'arguments': [
+            {
+                'name': 'portlbl',
+                'doc': 'Label that identifies a physical interface.'
+            },
+            {
+                'name': 'grpid',
+                'doc': 'VRRP group id <1-255>'
+            },
+            {
+                'name': 'af',
+                'doc': 'address-family [ipv4|ipv6]'
+            }
+        ],
+        'pre_commands': ['config terminal',
+                         'interface {port}',
+                         'vrrp {grpid} address-family {af}'],
+        'post_commands': ['exit', 'end'],
+        'commands': [
+            {
+                'command': 'vrrp version {version}',
+                'doc': 'Set VRRP version',
+                'arguments': [
+                    {
+                        'name': 'version',
+                        'doc': 'VRRP version 2|3',
+                    },
+                ],
+            },
+            {
+                'command': 'no vrrp version {version}',
+                'doc': 'Unset VRRP version',
+                'arguments': [
+                    {
+                        'name': 'version',
+                        'doc': 'VRRP version 2|3',
+                    },
+                ],
+            },
+            {
+                'command': 'ip address {ipv4}',
+                'doc': 'Set VRRP primary IP address',
+                'arguments': [
+                    {
+                        'name': 'ipv4',
+                        'doc': 'A.B.C.D VRRP primary virtual IP address.',
+                    },
+                ],
+            },
+            {
+                'command': 'no ip address {ipv4}',
+                'doc': 'Unset VRRP primary IP address',
+                'arguments': [
+                    {
+                        'name': 'ipv4',
+                        'doc': 'A.B.C.D VRRP primary virtual IP address.',
+                    },
+                ],
+            },
+            {
+                'command': 'ip address {ipv4} secondary',
+                'doc': 'Set VRRP secondary IP address',
+                'arguments': [
+                    {
+                        'name': 'ipv4',
+                        'doc': 'A.B.C.D VRRP secondary virtual IP address.',
+                    },
+                ],
+            },
+            {
+                'command': 'no ip address {ipv4} secondary',
+                'doc': 'Unset VRRP secondary IP address',
+                'arguments': [
+                    {
+                        'name': 'ipv4',
+                        'doc': 'A.B.C.D VRRP secondary virtual IP address.',
+                    },
+                ],
+            },
+            {
+                'command': 'priority {prio}',
+                'doc': 'Set VRRP virtual router priority',
+                'arguments': [
+                    {
+                        'name': 'prio',
+                        'doc': '[0-255] VRRP virtual router Priority Level',
+                    },
+                ],
+            },
+            {
+                'command': 'no priority {prio}',
+                'doc': 'Unset VRRP virtual router priority',
+                'arguments': [
+                    {
+                        'name': 'prio',
+                        'doc': '[0-255] VRRP virtual router Priority Level',
                     },
                 ],
             },
