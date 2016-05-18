@@ -3379,6 +3379,32 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def aaa_authentication_login(
+            self, type):
+        """
+        AAA authentication login configuration
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # aaa authentication login {type}
+
+        :param type: local Local authenticationradius Radius authentication
+        """
+
+        cmd = [
+            'aaa authentication login {type}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
 
 class RouteMap(ContextManager):
     """
