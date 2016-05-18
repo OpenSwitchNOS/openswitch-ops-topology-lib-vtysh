@@ -58,7 +58,7 @@ def parse_show_interface_mgmt(raw_result):
         r'\s*Default gateway IPv6\s*:\s*'
         r'(?P<default_gateway_ipv6>[0-9a-f:]+)?\s*'
         r'\s*Primary Nameserver\s*:\s*(?P<primary_nameserver>[0-9.:a-f]+)?\s*'
-        r'\s*Secondary Nameserver\s*:\s*(?P<secondary_nameserver>[0-9.:a-f]+)?\s*'
+        r'\s*Secondary Nameserver\s*:\s*(?P<secondary_nameserver>[0-9.:a-f]+)?\s*'  # noqa
     )
 
     re_result = re.search(show_re, raw_result)
@@ -5264,8 +5264,8 @@ __all__ = [
     'parse_config_tftp_server_enable',
     'parse_config_tftp_server_no_enable', 'parse_config_tftp_server_path',
     'parse_config_tftp_server_no_path', 'parse_show_interface_lag',
-    'parse_erase_startup_config', 'parse_config_tftp_server_enable',
-    'parse_config_tftp_server_no_enable', 'parse_show_mirror',
+    'parse_erase_startup_config', 'parse_config_tftp_server_secure_mode',
+    'parse_config_tftp_server_no_secure_mode', 'parse_show_mirror',
     'parse_show_qos_cos_map',
     'parse_show_qos_dscp_map',
     'parse_show_qos_queue_profile',
