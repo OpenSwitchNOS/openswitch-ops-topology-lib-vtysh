@@ -23,6 +23,7 @@ from __future__ import unicode_literals
 from deepdiff import DeepDiff
 
 from topology_lib_vtysh.parser import (parse_show_interface,
+                                       parse_show_interface_vlan,
                                        parse_show_interface_mgmt,
                                        parse_show_interface_subinterface,
                                        parse_show_interface_subinterface_brief,
@@ -752,6 +753,51 @@ Interface 1 is up
 
     ddiff5 = DeepDiff(result5, expected5)
     assert not ddiff5
+
+
+def test_parse_show_interface_vlan():
+    raw_result = """\
+
+Interface vlan10 is up
+ Admin state is up
+ Hardware: Ethernet, MAC Address: 48:0f:cf:af:73:37
+ IPv4 address 10.0.0.1/24
+ RX
+       L3:
+            ucast: 34432 packets, 12323376 bytes
+            mcast: 3 packets, 322 bytes
+ TX
+       L3:
+            ucast: 23 packets, 32344 bytes
+            mcast: 2 packets, 5023 bytes
+
+    """
+
+    result = parse_show_interface_vlan(raw_result)
+
+    expected = {
+        'state_description': None,
+        'rx_l3_ucast_packets': 34432,
+        'tx_l3_mcast_bytes': 3,
+        'interface_state': 'up',
+        'rx_l3_mcast_bytes': 322,
+        'mac_address': '48:0f:cf:af:73:37',
+        'tx_l3_ucast_bytes': 32344,
+        'hardware': 'Ethernet',
+        'rx_l3_ucast_bytes': 12323376,
+        'tx_l3_mcast_packets': 2,
+        'ipv4': '10.0.0.1/24',
+        'ipv4_secondary': None,
+        'ipv6': None,
+        'admin_state': 'up',
+        'rx_l3_mcast_packets': 3,
+        'tx_l3_ucast_packets': 23,
+        'vlan_number': 10,
+        'ipv6_secondary': None
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
 
 
 def test_parse_show_interface_subinterface():

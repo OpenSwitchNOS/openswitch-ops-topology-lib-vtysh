@@ -109,6 +109,8 @@ def parse_show_interface(raw_result):
     """
     if 'lag' in raw_result:
         return parse_show_interface_lag(raw_result)
+    if 'vlan' in raw_result:
+        return parse_show_interface_vlan(raw_result)
 
     show_re = (
         r'\s*Interface (?P<port>\w+) is (?P<interface_state>\S+)\s*'
@@ -241,6 +243,74 @@ def parse_show_interface_lag(raw_result):
                 result[key] = True
             elif value == 'off':
                 result[key] = False
+    return result
+
+
+def parse_show_interface_vlan(raw_result):
+    """
+    Parse the 'show interface' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show interface command for a vlan in a \
+        dictionary of the form:
+
+     ::
+
+        {
+            'state_description': 'None',
+            'rx_l3_ucast_packets': 34432,
+            'tx_l3_mcast_bytes': 3,
+            'interface_state': 'up',
+            'rx_l3_mcast_bytes': 322,
+            'mac_address': '48:0f:cf:af:73:37',
+            'tx_l3_ucast_bytes': 32344,
+            'hardware': 'Ethernet',
+            'rx_l3_ucast_bytes': 12323376,
+            'tx_l3_mcast_packets': 2,
+            'ipv4': '10.0.0.1/24',
+            'ipv4_secondary': 'None',
+            'ipv6': 'None',
+            'admin_state': 'up',
+            'rx_l3_mcast_packets': 3,
+            'tx_l3_ucast_packets': 23,
+            'vlan_number': 10,
+            'ipv6_secondary': 'None'
+        }
+    """
+
+    show_re = (
+        r'\s*Interface\svlan(?P<vlan_number>\w*) is '
+        r'(?P<interface_state>\S+)\s*'
+        r'(\((?P<state_description>.*)\))?\s* '
+        r'Admin state is (?P<admin_state>\S+)\s*'
+        r'Hardware: (?P<hardware>\S+), MAC Address: (?P<mac_address>\S+)\s*'
+        r'(IPv4 address (?P<ipv4>\S+))?\s*'
+        r'(IPv4\saddress\s(?P<ipv4_secondary>\S+) secondary)?\s*'
+        r'(IPv6 address (?P<ipv6>\S+))?\s*'
+        r'(IPv6\saddress\s(?P<ipv6_secondary>\S+) secondary)?\s*'
+        r'RX\s*'
+        r'L3:\s*'
+        r'ucast:\s+(?P<rx_l3_ucast_packets>\d+) packets,\s+'
+        r'(?P<rx_l3_ucast_bytes>\d+) bytes\s*'
+        r'mcast:\s+(?P<rx_l3_mcast_packets>\d+) packets,\s+'
+        r'(?P<rx_l3_mcast_bytes>\d+) bytes\s*'
+        r'TX\s*'
+        r'L3:\s*'
+        r'ucast:\s+(?P<tx_l3_ucast_packets>\d+) packets,\s+'
+        r'(?P<tx_l3_ucast_bytes>\d+) bytes\s*'
+        r'mcast:\s+(?P<tx_l3_mcast_packets>\d+) packets,\s+'
+        r'(?P<tx_l3_mcast_bytes>\d)+ bytes'
+    )
+
+    re_result = re.match(show_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    for key, value in result.items():
+        if value is not None:
+            if value.isdigit():
+                result[key] = int(value)
     return result
 
 
@@ -5233,6 +5303,7 @@ def parse_diag_dump(raw_result):
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
+    'parse_show_interface_vlan',
     'parse_show_interface_mgmt', 'parse_show_interface_subinterface',
     'parse_show_lacp_configuration', 'parse_show_lldp_neighbor_info',
     'parse_show_lldp_statistics', 'parse_show_ip_bgp_summary',
