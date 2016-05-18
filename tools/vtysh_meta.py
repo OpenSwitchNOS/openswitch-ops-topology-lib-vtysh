@@ -2418,6 +2418,19 @@ local-priority {local_priority} name {name} color {color}',
                         'doc': 'Radius server IPv4 address',
                     },
                 ],
+            },
+            {
+                'command': 'aaa authentication login {type}',
+                'doc': 'AAA authentication login configuration',
+                'arguments': [
+                    {
+                        'name': 'type',
+                        'doc': (
+                            'local Local authentication'
+                            'radius Radius authentication'
+                        ),
+                    },
+                ],
             }
         ]
     }),
