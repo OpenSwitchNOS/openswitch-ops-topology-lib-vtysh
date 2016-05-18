@@ -57,7 +57,7 @@ class {{ exception }}(VtyshException):
     ::
 
         {%- for expression in matches %}
-        {{ expression }}
+        '{{ expression|wordwrap(79,false)|indent(9) }}',
         {%- endfor %}
 
     """
@@ -69,7 +69,7 @@ VTYSH_EXCEPTIONS = OrderedDict([
         {{ exception }},
         [
             {%- for expression in matches %}
-            '{{ expression }}',
+            '{{ expression|wordwrap(79,false)|indent(13) }}',
             {%- endfor %}
         ]
     ),
