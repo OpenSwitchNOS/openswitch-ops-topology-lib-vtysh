@@ -3219,6 +3219,166 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def radius_server_host_auth_port(
+            self, ip_addr, port):
+        """
+        Radius server auth-port configuration
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # radius-server host {ip_addr} auth-port {port}
+
+        :param ip_addr: Radius server IPv4 address
+        :param port: <0-65535>  UDP port range is 0 to 65535
+        """
+
+        cmd = [
+            'radius-server host {ip_addr} auth-port {port}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_radius_server_host_auth_port(
+            self, ip_addr, port):
+        """
+        Radius server auth-port configuration
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no radius-server host {ip_addr} auth-port {port}
+
+        :param ip_addr: Radius server IPv4 address
+        :param port: <0-65535>  UDP port range is 0 to 65535
+        """
+
+        cmd = [
+            'no radius-server host {ip_addr} auth-port {port}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def radius_server_host_key(
+            self, ip_addr, secret):
+        """
+        Radius server key configuration
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # radius-server host {ip_addr} key {secret}
+
+        :param ip_addr: Radius server IPv4 address
+        :param secret: WORD Radius shared secret
+        """
+
+        cmd = [
+            'radius-server host {ip_addr} key {secret}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_radius_server_host_key(
+            self, ip_addr, secret):
+        """
+        Radius server key configuration
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no radius-server host {ip_addr} key {secret}
+
+        :param ip_addr: Radius server IPv4 address
+        :param secret: WORD Radius shared secret
+        """
+
+        cmd = [
+            'no radius-server host {ip_addr} key {secret}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def radius_server_host(
+            self, ip_addr):
+        """
+        Radius server configuration
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # radius-server host {ip_addr}
+
+        :param ip_addr: Radius server IPv4 address
+        """
+
+        cmd = [
+            'radius-server host {ip_addr}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_radius_server_host(
+            self, ip_addr):
+        """
+        Radius server configuration
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no radius-server host {ip_addr}
+
+        :param ip_addr: Radius server IPv4 address
+        """
+
+        cmd = [
+            'no radius-server host {ip_addr}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
 
 class RouteMap(ContextManager):
     """

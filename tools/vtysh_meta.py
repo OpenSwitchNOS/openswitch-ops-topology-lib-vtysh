@@ -2342,6 +2342,82 @@ local-priority {local_priority} name {name} color {color}',
                         'doc': 'increment factor of subsequent ACE in ACL',
                     },
                 ],
+            },
+            {
+                'command': 'radius-server host {ip_addr} auth-port {port}',
+                'doc': 'Radius server auth-port configuration',
+                'arguments': [
+                    {
+                        'name': 'ip_addr',
+                        'doc': 'Radius server IPv4 address',
+                    },
+                    {
+                        'name': 'port',
+                        'doc': '<0-65535>  UDP port range is 0 to 65535',
+                    },
+                ],
+            },
+            {
+                'command': 'no radius-server host {ip_addr} auth-port {port}',
+                'doc': 'Radius server auth-port configuration',
+                'arguments': [
+                    {
+                        'name': 'ip_addr',
+                        'doc': 'Radius server IPv4 address',
+                    },
+                    {
+                        'name': 'port',
+                        'doc': '<0-65535>  UDP port range is 0 to 65535',
+                    },
+                ],
+            },
+            {
+                'command': 'radius-server host {ip_addr} key {secret}',
+                'doc': 'Radius server key configuration',
+                'arguments': [
+                    {
+                        'name': 'ip_addr',
+                        'doc': 'Radius server IPv4 address',
+                    },
+                    {
+                        'name': 'secret',
+                        'doc': 'WORD Radius shared secret',
+                    },
+                ],
+            },
+            {
+                'command': 'no radius-server host {ip_addr} key {secret}',
+                'doc': 'Radius server key configuration',
+                'arguments': [
+                    {
+                        'name': 'ip_addr',
+                        'doc': 'Radius server IPv4 address',
+                    },
+                    {
+                        'name': 'secret',
+                        'doc': 'WORD Radius shared secret',
+                    },
+                ],
+            },
+            {
+                'command': 'radius-server host {ip_addr}',
+                'doc': 'Radius server configuration',
+                'arguments': [
+                    {
+                        'name': 'ip_addr',
+                        'doc': 'Radius server IPv4 address',
+                    },
+                ],
+            },
+            {
+                'command': 'no radius-server host {ip_addr}',
+                'doc': 'Radius server configuration',
+                'arguments': [
+                    {
+                        'name': 'ip_addr',
+                        'doc': 'Radius server IPv4 address',
+                    },
+                ],
             }
         ]
     }),
