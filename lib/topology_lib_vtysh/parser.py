@@ -2790,6 +2790,7 @@ def parse_show_running_config(raw_result):
     result['interface'] = {}
     if re_interface_section:
         port = None
+        subint_flag = None
         for line in re_interface_section[0].splitlines():
             # Check for blank line
             if line == '':
@@ -2806,6 +2807,7 @@ def parse_show_running_config(raw_result):
                 re_result = re.match(interface_port_re, line)
                 re_result_subint = re.match(interface_subinterface, line)
                 if re_result_subint:
+                    subint_flag = True
                     re_result = re_result_subint
                     subintport = re_result.group(1)
                     if 'subint' not in result['interface'].keys():
@@ -2813,6 +2815,8 @@ def parse_show_running_config(raw_result):
                     if subintport not in \
                             result['interface']['subint'].keys():
                         result['interface']['subint'][subintport] = {}
+                else:
+                    subint_flag = None
                 port = re_result.group(1)
                 if port not in result['interface'].keys() \
                    and not re_result_subint:
@@ -2869,31 +2873,41 @@ def parse_show_running_config(raw_result):
 
             # Match ipv4
             re_result = re.match(ipv4_re, line)
+            if re_result and subint_flag is None:
+                result['interface'][port]['ipv4'] = re_result.group(1)
             if re_result:
                 if result['interface'].get('lag') and not\
                         result['interface'].get('subint'):
                     result['interface']['lag'][port]['ipv4'] = \
                         re_result.group(1)
                 elif result['interface'].get('subint'):
-                    if subintport in result['interface']['subint']:
+                    if subintport in result['interface']['subint']\
+                       and subint_flag:
                         result['interface']['subint'][subintport]['ipv4'] =\
                             re_result.group(1)
-                else:
-                    result['interface'][port]['ipv4'] = re_result.group(1)
+                        subint_flag = None
 
             # Match ipv6
             re_result = re.match(ipv6_re, line)
+            if re_result and subint_flag is None:
+                result['interface'][port]['ipv6'] = re_result.group(1)
             if re_result:
-                if result['interface'].get('lag'):
+                if result['interface'].get('lag') and not\
+                        result['interface'].get('subint'):
                     result['interface']['lag'][port]['ipv6'] = \
                         re_result.group(1)
-                else:
-                    result['interface'][port]['ipv6'] = re_result.group(1)
+                elif result['interface'].get('subint'):
+                    if subintport in result['interface']['subint'] \
+                       and subint_flag:
+                        result['interface']['subint'][subintport]['ipv6'] =\
+                            re_result.group(1)
+                        subint_flag = None
 
             # Match admin state
             re_result = re.match(no_shut_re, line)
-            if re_result and not result['interface'].get('subint'):
-                result['interface'][port]['admin'] = 'up'
+            if re_result:
+                if subint_flag is None:
+                    result['interface'][port]['admin'] = 'up'
             if result['interface'].get('subint'):
                 if result['interface']['subint'].get(subintport):
                     result['interface']['subint'][subintport]['admin'] = 'up'
