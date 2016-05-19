@@ -170,6 +170,33 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def no_interface(
+            self, physical_int, subint):
+        """
+        Delete a subinterface
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no interface {physical_int} {subint}
+
+        :param physical_int: Physical interface associated to subinterface
+        :param subint: Subinterface ID
+        """
+
+        cmd = [
+            'no interface {physical_int} {subint}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def ip_route(
             self, ipv4, next_hop, metric=''):
         """

@@ -894,6 +894,20 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
+                'command': 'no interface {physical_int} {subint}',
+                'doc': 'Delete a subinterface',
+                'arguments': [
+                    {
+                        'name': 'physical_int',
+                        'doc': 'Physical interface associated to subinterface',
+                    },
+                    {
+                        'name': 'subint',
+                        'doc': 'Subinterface ID',
+                    },
+                ],
+            },
+            {
                 'command': 'ip route {ipv4} {next_hop}',
                 'doc': 'Configure static routes',
                 'arguments': [
