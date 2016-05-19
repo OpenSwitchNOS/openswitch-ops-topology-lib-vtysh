@@ -2431,6 +2431,11 @@ local-priority {local_priority} name {name} color {color}',
                         ),
                     },
                 ],
+            },
+            {
+                'command': 'aaa authentication login fallback error local',
+                'doc': 'AAA authentication login fallback configuration',
+                'arguments': [],
             }
         ]
     }),

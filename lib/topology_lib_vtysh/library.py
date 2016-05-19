@@ -3405,6 +3405,31 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def aaa_authentication_login_fallback_error_local(
+            self):
+        """
+        AAA authentication login fallback configuration
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # aaa authentication login fallback error local
+
+        """
+
+        cmd = [
+            'aaa authentication login fallback error local'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
 
 class RouteMap(ContextManager):
     """
