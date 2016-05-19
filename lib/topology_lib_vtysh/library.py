@@ -179,14 +179,14 @@ class Configure(ContextManager):
 
         ::
 
-            # no interface {physical_int} {subint}
+            # no interface {physical_int}.{subint}
 
         :param physical_int: Physical interface associated to subinterface
         :param subint: Subinterface ID
         """
 
         cmd = [
-            'no interface {physical_int} {subint}'
+            'no interface {physical_int}.{subint}'
         ]
 
         result = self.enode(

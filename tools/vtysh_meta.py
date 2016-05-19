@@ -894,7 +894,7 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'no interface {physical_int} {subint}',
+                'command': 'no interface {physical_int}.{subint}',
                 'doc': 'Delete a subinterface',
                 'arguments': [
                     {
