@@ -57,7 +57,9 @@ class {{ exception }}(VtyshException):
     ::
 
         {%- for expression in matches %}
-        '{{ expression|wordwrap(79,false)|indent(9) }}',
+        {%- for part in range(0, ((expression|length)/65)|round(0, 'ceil')|int) %}
+        '{{ expression[(part * 65):((part + 1) * 65)] }}'
+        {%- endfor %}
         {%- endfor %}
 
     """
@@ -69,7 +71,9 @@ VTYSH_EXCEPTIONS = OrderedDict([
         {{ exception }},
         [
             {%- for expression in matches %}
-            '{{ expression|wordwrap(79,false)|indent(13) }}',
+            {%- for part in range(0, ((expression|length)/65)|round(0, 'ceil')|int) %}
+            '{{ expression[(part * 65):((part + 1) * 65)] }}'
+            {%- endfor %}
             {%- endfor %}
         ]
     ),
