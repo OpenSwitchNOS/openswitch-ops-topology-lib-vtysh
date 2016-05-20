@@ -448,6 +448,7 @@ Interface 7 is down (Administratively down)
         'ipv6': None,
         'ipv6_secondary': None,
         'qos_trust': None,
+        'qos_dscp': None,
         'qos_queue_profile': None,
         'qos_schedule_profile': None
     }
@@ -519,6 +520,7 @@ Interface 1 is up
         'ipv6': None,
         'ipv6_secondary': None,
         'qos_trust': 'none',
+        'qos_dscp': None,
         'qos_queue_profile': 'default',
         'qos_schedule_profile': 'default'
     }
@@ -590,6 +592,7 @@ Interface 1 is up
         'ipv6': '2002::1/64',
         'ipv6_secondary': None,
         'qos_trust': 'none',
+        'qos_dscp': None,
         'qos_queue_profile': 'default',
         'qos_schedule_profile': 'default'
     }
@@ -667,6 +670,7 @@ Interface 1 is up
         'ipv6': '2002::1/64',
         'ipv6_secondary': None,
         'qos_trust': 'none',
+        'qos_dscp': None,
         'qos_queue_profile': 'default',
         'qos_schedule_profile': 'default'
     }
@@ -747,6 +751,7 @@ Interface 1 is up
         'ipv6': '2001::1/12',
         'ipv6_secondary': '2001::2/12',
         'qos_trust': 'none',
+        'qos_dscp': None,
         'qos_queue_profile': 'default',
         'qos_schedule_profile': 'default'
     }
@@ -971,6 +976,10 @@ Aggregate-name lag1
         'tx_dropped': 0,
         'tx_errors': 0,
         'tx_packets': 0,
+        'qos_trust': None,
+        'qos_dscp': None,
+        'qos_queue_profile': None,
+        'qos_schedule_profile': None
     }
 
     ddiff = DeepDiff(result, expected)
@@ -2167,7 +2176,25 @@ ipv6 route 2020::2/128 1
         'mirror_session':
         {
             'foo': 'foo'
-        }
+        },
+        'qos_trust':
+        {
+        },
+        'qos_cos_map':
+        {
+        },
+        'qos_dscp_map':
+        {
+        },
+        'qos_schedule_profile':
+        {
+        },
+        'qos_queue_profile':
+        {
+        },
+        'apply_qos':
+        {
+        },
     }
 
     ddiff = DeepDiff(result, expected)

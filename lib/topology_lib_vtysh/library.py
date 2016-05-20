@@ -6943,6 +6943,167 @@ class ConfigInterfaceLag(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def apply_qos_schedule_profile(
+            self, schedule_profile_name):
+        """
+        Apply qos profiles on an interface.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # apply qos schedule-profile {schedule_profile_name}
+
+        :param schedule_profile_name: The schedule profile to apply.
+        """
+
+        cmd = [
+            'apply qos schedule-profile {schedule_profile_name}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_apply_qos_schedule_profile(
+            self, schedule_profile_name=''):
+        """
+        Clears qos profiles from an interface.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no apply qos schedule-profile
+
+        :param schedule_profile_name: The schedule profile to clear.
+        """
+
+        cmd = [
+            'no apply qos schedule-profile'
+        ]
+
+        if schedule_profile_name:
+            cmd.append(
+                '{}{{schedule_profile_name}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def qos_dscp(
+            self, dscp_map_index):
+        """
+        Set the dscp override for the port.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # qos dscp {dscp_map_index}
+
+        :param dscp_map_index: The index into the dscp map.
+        """
+
+        cmd = [
+            'qos dscp {dscp_map_index}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_qos_dscp(
+            self):
+        """
+        Remove the dscp override for the port.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no qos dscp
+
+        """
+
+        cmd = [
+            'no qos dscp'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def qos_trust(
+            self, value):
+        """
+        Set the qos trust mode for the port.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # qos trust {value}
+
+        :param value: The qos trust mode to set.
+        """
+
+        cmd = [
+            'qos trust {value}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_qos_trust(
+            self):
+        """
+        Remove the qos trust mode for the port.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no qos trust
+
+        """
+
+        cmd = [
+            'no qos trust'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
 
 class ConfigInterfaceMgmt(ContextManager):
     """

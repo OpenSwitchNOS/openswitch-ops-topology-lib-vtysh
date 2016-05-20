@@ -3573,6 +3573,58 @@ local-priority {local_priority} name {name} color {color}',
                        ' 30 seconds.',
                 'arguments': [],
             },
+            {
+                'command': 'apply qos schedule-profile \
+{schedule_profile_name}',
+                'doc': 'Apply qos profiles on an interface.',
+                'arguments': [
+                    {
+                        'name': 'schedule_profile_name',
+                        'doc': 'The schedule profile to apply.'
+                    }
+                ],
+            },
+            {
+                'command': 'no apply qos schedule-profile',
+                'doc': 'Clears qos profiles from an interface.',
+                'arguments': [
+                    {
+                        'name': 'schedule_profile_name',
+                        'doc': 'The schedule profile to clear.',
+                        'optional': True
+                    }
+                ],
+            },
+            {
+                'command': 'qos dscp {dscp_map_index}',
+                'doc': 'Set the dscp override for the port.',
+                'arguments': [
+                    {
+                        'name': 'dscp_map_index',
+                        'doc': 'The index into the dscp map.'
+                    }
+                ],
+            },
+            {
+                'command': 'no qos dscp',
+                'doc': 'Remove the dscp override for the port.',
+                'arguments': [],
+            },
+            {
+                'command': 'qos trust {value}',
+                'doc': 'Set the qos trust mode for the port.',
+                'arguments': [
+                    {
+                        'name': 'value',
+                        'doc': 'The qos trust mode to set.'
+                    }
+                ],
+            },
+            {
+                'command': 'no qos trust',
+                'doc': 'Remove the qos trust mode for the port.',
+                'arguments': [],
+            },
         ]
     }),
     ('config_interface_mgmt', {

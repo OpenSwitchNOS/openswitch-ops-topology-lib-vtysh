@@ -127,6 +127,7 @@ def parse_show_interface(raw_result):
         r'(qos trust (?P<qos_trust>\S+))?\s*'
         r'(qos queue-profile (?P<qos_queue_profile>\S+))?\s*'
         r'(qos schedule-profile (?P<qos_schedule_profile>\S+))?\s*'
+        r'(qos dscp override (?P<qos_dscp>\S+))?\s*'
         r'Speed (?P<speed>\d+) (?P<speed_unit>\S+)\s+'
         r'Auto-Negotiation is turned (?P<autonegotiation>\S+)\s+'
         r'Input flow-control is (?P<input_flow_control>\w+),\s+'
@@ -217,6 +218,10 @@ def parse_show_interface_lag(raw_result):
         r'(IPv6\saddress\s(?P<ipv6>\S+))?\s*'
         r'(IPv6\saddress\s(?P<ipv6_secondary>\S+) secondary)?\s*'
         r'Speed\s(?P<speed>\d+)\s(?P<speed_unit>\S+)\s*'
+        r'(qos trust (?P<qos_trust>\S+))?\s*'
+        r'(qos queue-profile (?P<qos_queue_profile>\S+))?\s*'
+        r'(qos schedule-profile (?P<qos_schedule_profile>\S+))?\s*'
+        r'(qos dscp override (?P<qos_dscp>\S+))?\s*'
         r'RX\s*'
         r'(?P<rx_packets>\d+) input packets\s*'
         r'(?P<rx_bytes>\d+) bytes\s*'
@@ -2844,6 +2849,9 @@ def parse_show_running_config(raw_result):
     lag_re = r'\s+lag\s(\d+)'
     mtu_re = r'\s+mtu\s(\w+)'
     speed_re = r'\s+speed\s(\w+)'
+    qos_trust_re = r'\s+qos\strust\s(\w+)'
+    apply_qos_re = r'\s+apply\sqos\s+(.*)'
+    qos_dscp_re = r'\s+qos\sdscp\s(\w+)'
     vrf_re = r'\s+vrf attach\s(\w+)'
     flow_ctl_re = r'\s+flowcontrol\s(\w+)\s(\w+)'
     no_shut_re = r'\s+no shutdown'
@@ -2976,7 +2984,8 @@ def parse_show_running_config(raw_result):
             # Match admin state
             re_result = re.match(no_shut_re, line)
             if re_result:
-                if subint_flag is None:
+                if subint_flag is None and \
+                        not result['interface'].get('lag'):
                     result['interface'][port]['admin'] = 'up'
             if result['interface'].get('subint'):
                 if result['interface']['subint'].get(subintport):
@@ -2986,7 +2995,8 @@ def parse_show_running_config(raw_result):
             re_result = re.match(no_routing_re, line)
             if re_result:
                 if result['interface'].get('lag'):
-                    result['interface']['lag'][port]['routing'] = 'no'
+                    if result['interface']['lag'].get(port):
+                        result['interface']['lag'][port]['routing'] = 'no'
                 else:
                     result['interface'][port]['routing'] = 'no'
 
@@ -3019,6 +3029,40 @@ def parse_show_running_config(raw_result):
             re_result = re.match(speed_re, line)
             if re_result:
                 result['interface'][port]['speed'] = re_result.group(1)
+
+            # Match qos trust
+            re_result = re.match(qos_trust_re, line)
+            if re_result:
+                if result['interface'].get('lag') and \
+                        result['interface']['lag'].get(port) is not None:
+                    result['interface']['lag'][port]['qos_trust'] = \
+                        re_result.group(1)
+                else:
+                    result['interface'][port]['qos_trust'] = re_result.group(1)
+
+            # Match apply qos
+            re_result = re.match(apply_qos_re, line)
+            if re_result:
+                # Create name-value pairs.
+                apply_qos_line = iter(re_result.group(1).split())
+                apply_qos_dict = dict(zip(apply_qos_line, apply_qos_line))
+
+                if result['interface'].get('lag') and \
+                        result['interface']['lag'].get(port) is not None:
+                    result['interface']['lag'][port]['apply_qos'] = \
+                        apply_qos_dict
+                else:
+                    result['interface'][port]['apply_qos'] = apply_qos_dict
+
+            # Match qos dscp
+            re_result = re.match(qos_dscp_re, line)
+            if re_result:
+                if result['interface'].get('lag') and \
+                        result['interface']['lag'].get(port) is not None:
+                    result['interface']['lag'][port]['qos_dscp'] = \
+                        re_result.group(1)
+                else:
+                    result['interface'][port]['qos_dscp'] = re_result.group(1)
 
             # Match flowcontrol
             re_result = re.match(flow_ctl_re, line)
@@ -3163,6 +3207,146 @@ def parse_show_running_config(raw_result):
             if session_name:
                 result['mirror_session'][session_name.group(1)] = \
                     session_name.group(1)
+
+    # qos cos-map section
+    result['qos_cos_map'] = {}
+    qos_cos_map_re = r'qos\s+cos-map\s+.*'
+    re_qos_cos_map_section = re.findall(qos_cos_map_re, raw_result, re.DOTALL)
+    if re_qos_cos_map_section:
+        for line in re_qos_cos_map_section[0].splitlines():
+            # Trim off the leading 'qos '.
+            line = line[4:]
+
+            # Create name-value pairs.
+            line = iter(line.split())
+            qos_cos_map_dict = dict(zip(line, line))
+
+            # Get the code point and remove it from the dict.
+            code_point = qos_cos_map_dict.pop('cos-map')
+
+            # Map the code point to the remaining name-value pairs.
+            result['qos_cos_map'][code_point] = qos_cos_map_dict
+
+    # qos dscp-map section
+    result['qos_dscp_map'] = {}
+    qos_dscp_map_re = r'qos\s+dscp-map\s+.*'
+    re_qos_dscp_map_section = re.findall(
+        qos_dscp_map_re, raw_result, re.DOTALL)
+    if re_qos_dscp_map_section:
+        for line in re_qos_dscp_map_section[0].splitlines():
+            # Trim off the leading 'qos '.
+            line = line[4:]
+
+            # Create name-value pairs.
+            line = iter(line.split())
+            qos_dscp_map_dict = dict(zip(line, line))
+
+            # Get the code point and remove it from the dict.
+            code_point = qos_dscp_map_dict.pop('dscp-map')
+
+            # Map the code point to the remaining name-value pairs.
+            result['qos_dscp_map'][code_point] = qos_dscp_map_dict
+
+    # qos apply section
+    result['apply_qos'] = {}
+    apply_qos_re = r'apply\s+qos\s+.*'
+    re_apply_qos_section = re.findall(
+        apply_qos_re, raw_result, re.DOTALL)
+    if re_apply_qos_section:
+        for line in re_apply_qos_section[0].splitlines():
+            # Create name-value pairs.
+            line = iter(line.split())
+            apply_qos_dict = dict(zip(line, line))
+
+            result['apply_qos'] = apply_qos_dict
+
+    # qos trust section
+    result['qos_trust'] = {}
+    qos_trust_re = r'qos\s+trust\s(\w+)'
+    re_qos_trust_section = re.findall(qos_trust_re, raw_result, re.DOTALL)
+    if re_qos_trust_section:
+        for line in re_qos_trust_section[0].splitlines():
+            result['qos_trust'] = line
+
+    # qos queue profile section
+    queue_profile_section_re = r'qos\s+queue.profile(?:\s+\S+.*)*'
+    re_queue_profile_section = re.findall(
+        queue_profile_section_re, raw_result, re.DOTALL)
+    qpn_re = r'qos\s+queue.profile\s+(.*)'
+    queue_name_re = r'\s+name\s+(.*)'
+    local_priorities_re = r'\s+map\s+(.*)'
+    result['qos_queue_profile'] = {}
+    if re_queue_profile_section:
+        qpn = ''
+        for line in re_queue_profile_section[0].splitlines():
+            re_result = re.match(qpn_re, line)
+            if re_result:
+                qpn = re_result.group(1)
+                result['qos_queue_profile'][qpn] = {}
+
+            re_result = re.match(queue_name_re, line)
+            if re_result:
+                queue = re_result.group(1).split()[1]
+                queue_name = re_result.group(1).split()[2]
+
+                result['qos_queue_profile'][qpn].setdefault(queue, {})
+                result['qos_queue_profile'][qpn][queue]['name'] = queue_name
+
+            re_result = re.match(local_priorities_re, line)
+            if re_result:
+                # Create name-value pairs.
+                pairs = re_result.group(1)
+                pairs = iter(pairs.split())
+                pairs = dict(zip(pairs, pairs))
+
+                result['qos_queue_profile'][qpn]\
+                    .setdefault(pairs['queue'], {})
+                s = pairs['queue']
+                result['qos_queue_profile'][qpn][s]['local_priorities'] = \
+                    pairs['local-priority']
+
+    # qos schedule profile section
+    schedule_profile_section_re = r'qos\s+schedule.profile(?:\s+\S+.*)*'
+    re_schedule_profile_section = re.findall(
+        schedule_profile_section_re, raw_result, re.DOTALL)
+    spn_re = r'qos\s+schedule.profile\s+(.*)'
+    strict_re = r'\s+strict\s+(.*)'
+    dwrr_re = r'\s+dwrr\s+(.*)'
+    result['qos_schedule_profile'] = {}
+    if re_schedule_profile_section:
+        spn = ''
+        for line in re_schedule_profile_section[0].splitlines():
+            re_result = re.match(spn_re, line)
+            if re_result:
+                spn = re_result.group(1)
+                result['qos_schedule_profile'][spn] = {}
+
+            re_result = re.match(strict_re, line)
+            if re_result:
+                # Create name-value pairs.
+                pairs = re_result.group(1)
+                pairs = iter(pairs.split())
+                pairs = dict(zip(pairs, pairs))
+
+                result['qos_schedule_profile'][spn]\
+                    .setdefault(pairs['queue'], {})
+                s = pairs['queue']
+                result['qos_schedule_profile'][spn][s]['algorithm'] = 'strict'
+
+            re_result = re.match(dwrr_re, line)
+            if re_result:
+                # Create name-value pairs.
+                pairs = re_result.group(1)
+                pairs = iter(pairs.split())
+                pairs = dict(zip(pairs, pairs))
+
+                result['qos_schedule_profile'][spn]\
+                    .setdefault(pairs['queue'], {})
+                s = pairs['queue']
+                result['qos_schedule_profile'][spn][s]['algorithm'] = \
+                    'dwrr'
+                result['qos_schedule_profile'][spn][s]['weight'] = \
+                    pairs['weight']
 
     return result
 
