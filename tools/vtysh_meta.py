@@ -894,6 +894,16 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
+                'command': 'session-timeout {mins}',
+                'doc': 'Idle timeout range in minutes,0 disables the timeout',
+                'arguments': [
+                    {
+                        'name': 'mins',
+                        'doc': 'timeout in minutes',
+                    },
+                ],
+            },
+            {
                 'command': 'no interface {physical_int}.{subint}',
                 'doc': 'Delete a subinterface',
                 'arguments': [

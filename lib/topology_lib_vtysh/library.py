@@ -170,6 +170,32 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def session_timeout(
+            self, mins):
+        """
+        Idle timeout range in minutes,0 disables the timeout
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # session-timeout {mins}
+
+        :param mins: timeout in minutes
+        """
+
+        cmd = [
+            'session-timeout {mins}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def no_interface(
             self, physical_int, subint):
         """
