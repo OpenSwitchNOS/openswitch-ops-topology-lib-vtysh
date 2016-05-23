@@ -10444,13 +10444,13 @@ class ConfigMirrorSession(ContextManager):
 
         ::
 
-            # destination interface {portlbl}
+            # destination interface {port}
 
         :param portlbl: Label that identifies an interface or LAG
         """
 
         cmd = [
-            'destination interface {portlbl}'
+            'destination interface {port}'
         ]
 
         port = self.enode.ports.get(portlbl, portlbl)
@@ -10547,14 +10547,14 @@ class ConfigMirrorSession(ContextManager):
 
         ::
 
-            # source interface {portlbl} {direction}
+            # source interface {port} {direction}
 
         :param portlbl: Label that identifies an interface or LAG
         :param direction: <both | rx | tx>
         """
 
         cmd = [
-            'source interface {portlbl} {direction}'
+            'source interface {port} {direction}'
         ]
 
         port = self.enode.ports.get(portlbl, portlbl)
@@ -10576,14 +10576,14 @@ class ConfigMirrorSession(ContextManager):
 
         ::
 
-            # no source interface {portlbl}
+            # no source interface {port}
 
         :param portlbl: Ethernet interface or LAG
         :param direction: <both | rx | tx>
         """
 
         cmd = [
-            'no source interface {portlbl}'
+            'no source interface {port}'
         ]
 
         port = self.enode.ports.get(portlbl, portlbl)

@@ -5216,7 +5216,7 @@ local-priority {local_priority} name {name} color {color}',
         'post_commands': ['end'],
         'commands': [
             {
-                'command': 'destination interface {portlbl}',
+                'command': 'destination interface {port}',
                 'doc': 'Set the destination interface.',
                 'arguments': [
                     {
@@ -5244,7 +5244,7 @@ local-priority {local_priority} name {name} color {color}',
                 'arguments': []
             },
             {
-                'command': 'source interface {portlbl} {direction}',
+                'command': 'source interface {port} {direction}',
                 'doc': 'Assign a source interface.',
                 'arguments': [
                     {
@@ -5260,7 +5260,7 @@ local-priority {local_priority} name {name} color {color}',
                 ]
             },
             {
-                'command': 'no source interface {portlbl}',
+                'command': 'no source interface {port}',
                 'doc': (
                     'Remove a source interface from the session.'
                 ),
