@@ -93,7 +93,9 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_events,
                                        parse_erase_startup_config,
                                        parse_config_tftp_server_secure_mode,
-                                       parse_config_tftp_server_no_secure_mode
+                                       parse_config_tftp_server_no_secure_mode,
+                                       parse_show_radius_server,
+                                       parse_show_aaa_authentication
                                        )
 
 
@@ -3818,6 +3820,66 @@ LACP system ID set to 70:72:cf:5b:fa:ae
     ]
 
     result = parse_show_events(raw_result)
+    ddiff = DeepDiff(result, expected_result)
+
+    assert not ddiff
+
+
+def test_parse_show_radius_server():
+    raw_result = """
+***** Radius Server information ******
+Radius-server:1
+ Host IP address        : 10.10.10.11
+ Auth port              : 1812
+ Shared secret          : procurve
+ Retries                : 1
+ Timeout                : 5
+Radius-server:2
+ Host IP address        : 10.10.10.12
+ Auth port              : 1812
+ Shared secret          : procurve
+ Retries                : 1
+ Timeout                : 5
+    """
+
+    expected_result = [
+        {
+            'radius_host_ip': '10.10.10.11',
+            'radius_auth_port': '1812',
+            'radius_shared_secret': 'procurve',
+            'radius_retries': '1',
+            'radius_timeout': '5'
+        },
+        {
+            'radius_host_ip': '10.10.10.12',
+            'radius_auth_port': '1812',
+            'radius_shared_secret': 'procurve',
+            'radius_retries': '1',
+            'radius_timeout': '5'
+        }
+    ]
+
+    result = parse_show_radius_server(raw_result)
+    ddiff = DeepDiff(result, expected_result)
+
+    assert not ddiff
+
+
+def test_parse_show_aaa_authentication():
+    raw_result = """
+AAA Authentication:
+  Local authentication                  : Enabled
+  Radius authentication                 : Disabled
+  Fallback to local authentication      : Enabled
+    """
+
+    expected_result = {
+        'local_auth_status': 'Enabled',
+        'radius_auth_status': 'Disabled',
+        'fallback_status': 'Enabled'
+    }
+
+    result = parse_show_aaa_authentication(raw_result)
     ddiff = DeepDiff(result, expected_result)
 
     assert not ddiff

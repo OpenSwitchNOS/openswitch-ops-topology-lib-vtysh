@@ -5498,6 +5498,91 @@ def parse_diag_dump(raw_result):
     return result
 
 
+def parse_show_aaa_authentication(raw_result):
+    """
+    Parse the 'show aaa authentication' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show aaa authentication command \
+        in a dictionary of the form:
+
+     ::
+
+        {
+            'local_auth_status': 'disabled',
+            'radius_auth_status': 'enabled',
+            'fallback_status': 'enabled'
+       }
+
+    """
+
+    show_re = (
+        r'.*AAA Authentication:.*'
+        r'\s+Local authentication\s+:\s+(?P<local_auth_status>\w+)'
+        r'\s+Radius authentication\s+:\s+(?P<radius_auth_status>\w+)'
+        r'\s+Fallback to local authentication\s+:\s+(?P<fallback_status>\w+)'
+    )
+
+    re_result = re.search(show_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    return result
+
+
+def parse_show_radius_server(raw_result):
+    """
+    Parse the 'show radius-server' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show radius-server command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+            'radius_host_ip': '10.10.10.11',
+            'radius_auth_port': '1812',
+            'radius_shared_secret': 'procurve',
+            'radius_retries': '1',
+            'radius_timeout': '5',
+        },
+        {
+            'radius_host_ip': '10.10.10.12',
+            'radius_auth_port': '1812',
+            'radius_shared_secret': 'procurve',
+            'radius_retries': '1',
+            'radius_timeout': '5',
+        }
+
+    """
+
+    show_re = (
+        r'\s+Host IP address\s+:\s+(?P<radius_host_ip>\S+)\s+'
+        r'Auth port\s+:\s+(?P<radius_auth_port>\d+)\s+'
+        r'Shared secret\s+:\s+(?P<radius_shared_secret>\S+)\s+'
+        r'Retries\s+:\s+(?P<radius_retries>\d+)\s+'
+        r'Timeout\s+:\s+(?P<radius_timeout>\d+)'
+    )
+
+    show_radius = re.compile('Radius-server:[0-9]+', re.DOTALL)
+    radius_list = show_radius.findall(raw_result)
+    if radius_list:
+        radiuslist = re.split(r'Radius-server:[0-9]+', raw_result)
+    radiuslist.remove(radiuslist[0])
+    result = []
+    for line in radiuslist:
+        line = line.replace("\n", "")
+        re_result = re.search(show_re, line)
+        assert re_result
+        partial = re_result.groupdict()
+        result.append(partial)
+
+    return result
+
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
@@ -5538,8 +5623,8 @@ __all__ = [
     'parse_show_qos_cos_map',
     'parse_show_qos_dscp_map',
     'parse_show_qos_queue_profile',
-    'parse_show_qos_schedule_profile',
-    'parse_show_qos_trust',
+    'parse_show_qos_schedule_profile', 'parse_show_radius_server',
+    'parse_show_qos_trust', 'parse_show_aaa_authentication',
     'parse_config_tftp_server_no_path', 'parse_show_snmp_community',
     'parse_show_snmp_system', 'parse_show_snmp_trap',
     'parse_diag_dump_lacp_basic', 'parse_show_snmpv3_users',

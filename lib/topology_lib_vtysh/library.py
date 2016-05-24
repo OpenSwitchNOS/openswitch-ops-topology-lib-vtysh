@@ -13366,6 +13366,60 @@ def show_events(
     return parse_show_events(result)
 
 
+def show_aaa_authentication(
+        enode):
+    """
+    AAA authentication infomation.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show aaa authentication
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_aaa_authentication`
+    """
+
+    cmd = [
+        'show aaa authentication'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_aaa_authentication(result)
+
+
+def show_radius_server(
+        enode):
+    """
+    Radius Server infomation.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show radius-server
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_radius_server`
+    """
+
+    cmd = [
+        'show radius-server'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_radius_server(result)
+
+
 def diag_dump(
         enode, list='', daemon='', level='', file=''):
     """
@@ -13521,5 +13575,7 @@ __all__ = [
     'show_core_dump',
     'show_snmp_agent_port',
     'show_events',
+    'show_aaa_authentication',
+    'show_radius_server',
     'diag_dump'
 ]
