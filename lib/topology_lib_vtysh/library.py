@@ -197,7 +197,7 @@ class Configure(ContextManager):
             raise determine_exception(result)(result)
 
     def no_interface(
-            self, physical_int, subint):
+            self, portlbl, subint):
         """
         Delete a subinterface
 
@@ -205,15 +205,17 @@ class Configure(ContextManager):
 
         ::
 
-            # no interface {physical_int}.{subint}
+            # no interface {port}.{subint}
 
-        :param physical_int: Physical interface associated to subinterface
+        :param portlbl: Physical interface associated to subinterface
         :param subint: Subinterface ID
         """
 
         cmd = [
-            'no interface {physical_int}.{subint}'
+            'no interface {port}.{subint}'
         ]
+
+        port = self.enode.ports.get(portlbl, portlbl)
 
         result = self.enode(
             (' '.join(cmd)).format(**locals()),

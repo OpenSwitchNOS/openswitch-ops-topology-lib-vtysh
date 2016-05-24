@@ -904,11 +904,11 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command': 'no interface {physical_int}.{subint}',
+                'command': 'no interface {port}.{subint}',
                 'doc': 'Delete a subinterface',
                 'arguments': [
                     {
-                        'name': 'physical_int',
+                        'name': 'portlbl',
                         'doc': 'Physical interface associated to subinterface',
                     },
                     {
