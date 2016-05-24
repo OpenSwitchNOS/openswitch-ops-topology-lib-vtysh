@@ -817,6 +817,18 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
+                'command': 'show aaa authentication',
+                'doc': 'AAA authentication infomation.',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show radius-server',
+                'doc': 'Radius Server infomation.',
+                'arguments': [],
+                'returns': True
+            },
+            {
                 'command': 'diag-dump',
                 'doc': 'Display diagnostics dump that supports diag-dump.',
                 'arguments': [
