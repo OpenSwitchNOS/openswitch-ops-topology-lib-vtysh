@@ -886,6 +886,30 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
+                'command':\
+                'vlan internal range {min_range} {max_range} {order}',
+                'doc': 'Set internal vlan range configuration <2-4094',
+                'arguments': [
+                    {
+                        'name': 'min_range',
+                        'doc': 'minimum vlan range for internal vlan is 2'
+                    },
+                    {
+                        'name': 'max_range',
+                        'doc': 'maximum vlan range for internal vlan is 4094'
+                    },
+                    {
+                        'name': 'order',
+                        'doc': 'Assign vlan in ascending(default) or \
+                               descending order'
+                    }
+
+
+
+                ],
+            },
+
+            {
                 'command': 'no interface lag {lag_id}',
                 'doc': 'Delete a lag',
                 'arguments': [

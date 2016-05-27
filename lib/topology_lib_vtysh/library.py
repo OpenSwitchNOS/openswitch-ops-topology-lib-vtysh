@@ -118,6 +118,35 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def vlan_internal_range(
+            self, min_range, max_range, order):
+        """
+        Set internal vlan range configuration <2-4094
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # vlan internal range {min_range} {max_range} {order}
+
+        :param min_range: minimum vlan range for internal vlan is 2
+        :param max_range: maximum vlan range for internal vlan is 4094
+        :param order: Assign vlan in ascending(default) or
+            descending order
+        """
+
+        cmd = [
+            'vlan internal range {min_range} {max_range} {order}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def no_interface_lag(
             self, lag_id):
         """
