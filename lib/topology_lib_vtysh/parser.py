@@ -4875,7 +4875,7 @@ def parse_show_spanning_tree_mst(raw_result):
         r'\s*Priority\s*:\s*(?P<bridge_priority>[0-9]*)\s*\n'
         r'\s*Root\s*Address\s*:\s*(?P<root_address>[^ ]*)\s*'
         r'\s*Priority\s*:\s*(?P<root_priority>[0-9]*)\s*\n'
-        r'\s*Port\s*:\s*(?P<Port>[^ ]+)\s*,'
+        r'\s*Port\s*:\s*(?P<Port>[1-9-]*)\s*,'
         r'\s*Cost\s*:\s*(?P<cost>[0-9]+)\s*,'
         r'\s*Rem\s*Hops\s*:\s*(?P<rem_hops>[0-9]+)\s*\n'
     )
@@ -4924,7 +4924,7 @@ def parse_show_spanning_tree_mst(raw_result):
 
             if regional_root:
                 partial['regional_root'] = 'yes'
-        elif re.search('MST[1-64]', string):
+        elif re.search('MST[0-9]+', string):
             re_result = re.search(mst_conf_re, string)
             partial = re_result.groupdict()
         else:
