@@ -12877,6 +12877,32 @@ def copy_running_config_startup_config(
         raise determine_exception(result)(result)
 
 
+def copy_startup_config_running_config(
+        enode):
+    """
+    copies startup config to running config
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # copy startup-config running-config
+
+    """
+
+    cmd = [
+        'copy startup-config running-config'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
 def show_startup_config(
         enode):
     """
@@ -13587,6 +13613,7 @@ __all__ = [
     'show_vlog_daemon_severity',
     'show_vlog_severity_daemon',
     'copy_running_config_startup_config',
+    'copy_startup_config_running_config',
     'show_startup_config',
     'erase_startup_config',
     'show_tftp_server',

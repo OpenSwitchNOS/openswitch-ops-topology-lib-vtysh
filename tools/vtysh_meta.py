@@ -663,6 +663,11 @@ VTYSH_SPEC = OrderedDict([
                 'arguments': []
             },
             {
+                'command': 'copy startup-config running-config',
+                'doc': 'copies startup config to running config',
+                'arguments': []
+            },
+            {
                 'command': 'show startup-config',
                 'doc': 'Show startup-config information.',
                 'arguments': [],
@@ -886,7 +891,7 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
-                'command':\
+                'command':
                 'vlan internal range {min_range} {max_range} {order}',
                 'doc': 'Set internal vlan range configuration <2-4094',
                 'arguments': [
