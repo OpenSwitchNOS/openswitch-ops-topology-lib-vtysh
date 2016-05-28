@@ -1789,6 +1789,8 @@ Displaying ipv4 rib entries
     *via  56.0.0.3,  [1/0],  static
 *10.10.0.0/24,  1 unicast next-hops
     *via  1,  [0/0],  connected
+*172.16.0.24/30, 1 unicast next-hops
+    *via 1.5, [0/0], connected
 
 Displaying ipv6 rib entries
 
@@ -1867,6 +1869,20 @@ Displaying ipv6 rib entries
                         'distance': '0',
                         'from': 'connected',
                         'metric': '0'
+                    }
+                ]
+            },
+            {
+                'id': '172.16.0.24',
+                'prefix': '30',
+                'selected': True,
+                'next_hops': [
+                    {
+                        'selected': True,
+                        'via': '1.5',
+                        'distance': '0',
+                        'from': 'connected',
+                        'metric': '0',
                     }
                 ]
             }
