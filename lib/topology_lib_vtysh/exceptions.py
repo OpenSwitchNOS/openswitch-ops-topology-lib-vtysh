@@ -93,6 +93,28 @@ class DuplicateLoopbackIPException(VtyshException):
     """
 
 
+class MaximumCommunitiesException(VtyshException):
+    """
+    This is a typed exception that will be raised when any of the following
+    regular expressions match the output of a command:
+
+    ::
+        Config rejected : Maximum allowed communities are configured
+
+    """
+
+
+class DuplicateCommunityException(VtyshException):
+    """
+    This is a typed exception that will be raised when any of the following
+    regular expressions match the output of a command:
+
+    ::
+        This community is already configured
+
+    """
+
+
 VTYSH_EXCEPTIONS = OrderedDict([
     (
         UnknownCommandException,
@@ -117,6 +139,18 @@ VTYSH_EXCEPTIONS = OrderedDict([
         DuplicateLoopbackIPException,
         [
             'IP address is already assigned to interface as primary.',
+        ]
+    ),
+    (
+        MaximumCommunitiesException,
+        [
+            'Config rejected : Maximum allowed communities are configured',
+        ]
+    ),
+    (
+        DuplicateCommunityException,
+        [
+            'This community is already configured',
         ]
     ),
 ])
@@ -144,6 +178,8 @@ __all__ = [
     'IncompleteCommandException',
     'NotValidLAG',
     'DuplicateLoopbackIPException',
+    'MaximumCommunitiesException',
+    'DuplicateCommunityException',
     'VTYSH_EXCEPTIONS',
     'determine_exception'
 ]

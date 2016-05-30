@@ -4833,7 +4833,18 @@ VTYSH_EXCEPTIONS_SPEC = OrderedDict([
             'IP address is already assigned to interface'
             ' as primary.',
         ]
+    ), (
+        'MaximumCommunitiesException',
+        [
+            'Config rejected : Maximum allowed communities are configured',
+        ]
+    ), (
+        'DuplicateCommunityException',
+        [
+            'This community is already configured',
+        ]
     )
+
 ])
 """Vtysh Exceptions specification as a Python dictionary"""
 
