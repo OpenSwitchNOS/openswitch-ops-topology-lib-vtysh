@@ -55,7 +55,7 @@ class UnknownCommandException(VtyshException):
     regular expressions match the output of a command:
 
     ::
-        unknown command
+        'unknown command'
 
     """
 
@@ -66,7 +66,7 @@ class IncompleteCommandException(VtyshException):
     regular expressions match the output of a command:
 
     ::
-        command incomplete
+        'command incomplete'
 
     """
 
@@ -77,7 +77,7 @@ class NotValidLAG(VtyshException):
     regular expressions match the output of a command:
 
     ::
-        specified lag port does not exist.
+        'specified lag port does not exist.'
 
     """
 
@@ -88,7 +88,7 @@ class DuplicateLoopbackIPException(VtyshException):
     regular expressions match the output of a command:
 
     ::
-        ip address is already assigned to interface as primary.
+        'ip address is already assigned to interface as primary.'
 
     """
 
@@ -99,7 +99,7 @@ class InvalidQnCommandException(VtyshException):
     regular expressions match the output of a command:
 
     ::
-        name  acl name
+        'name  acl name'
 
     """
 
@@ -110,7 +110,7 @@ class AclEmptyException(VtyshException):
     regular expressions match the output of a command:
 
     ::
-        acl is empty
+        'acl is empty'
 
     """
 
@@ -121,7 +121,7 @@ class TcamResourcesException(VtyshException):
     regular expressions match the output of a command:
 
     ::
-        command failed
+        'command failed'
 
     """
 
@@ -132,7 +132,7 @@ class ResequenceNumberException(VtyshException):
     regular expressions match the output of a command:
 
     ::
-        sequence numbers would exceed maximum
+        'sequence numbers would exceed maximum'
 
     """
 
@@ -143,7 +143,7 @@ class AmbiguousCommandException(VtyshException):
     regular expressions match the output of a command:
 
     ::
-        ambiguous command
+        'ambiguous command'
 
     """
 
@@ -154,7 +154,7 @@ class InvalidL4SourcePortRangeException(VtyshException):
     regular expressions match the output of a command:
 
     ::
-        invalid l4 source port range
+        'invalid l4 source port range'
 
     """
 
@@ -165,7 +165,7 @@ class EchoCommandException(VtyshException):
     regular expressions match the output of a command:
 
     ::
-        range
+        'range'
 
     """
 
@@ -176,7 +176,7 @@ class AceDoesNotExistException(VtyshException):
     regular expressions match the output of a command:
 
     ::
-        acl entry does not exist
+        'acl entry does not exist'
 
     """
 
@@ -187,7 +187,29 @@ class AclDoesNotExistException(VtyshException):
     regular expressions match the output of a command:
 
     ::
-        acl does not exist
+        'acl does not exist'
+
+    """
+
+
+class MaximumCommunitiesException(VtyshException):
+    """
+    This is a typed exception that will be raised when any of the following
+    regular expressions match the output of a command:
+
+    ::
+        'config rejected : maximum allowed communities are configured'
+
+    """
+
+
+class DuplicateCommunityException(VtyshException):
+    """
+    This is a typed exception that will be raised when any of the following
+    regular expressions match the output of a command:
+
+    ::
+        'this community is already configured'
 
     """
 
@@ -196,79 +218,91 @@ VTYSH_EXCEPTIONS = OrderedDict([
     (
         UnknownCommandException,
         [
-            'unknown command',
+            'unknown command'
         ]
     ),
     (
         IncompleteCommandException,
         [
-            'command incomplete',
+            'command incomplete'
         ]
     ),
     (
         NotValidLAG,
         [
-            'specified lag port does not exist.',
+            'specified lag port does not exist.'
         ]
     ),
     (
         DuplicateLoopbackIPException,
         [
-            'ip address is already assigned to interface as primary.',
+            'ip address is already assigned to interface as primary.'
         ]
     ),
     (
         InvalidQnCommandException,
         [
-            'name  acl name',
+            'name  acl name'
         ]
     ),
     (
         AclEmptyException,
         [
-            'acl is empty',
+            'acl is empty'
         ]
     ),
     (
         TcamResourcesException,
         [
-            'command failed',
+            'command failed'
         ]
     ),
     (
         ResequenceNumberException,
         [
-            'sequence numbers would exceed maximum',
+            'sequence numbers would exceed maximum'
         ]
     ),
     (
         AmbiguousCommandException,
         [
-            'ambiguous command',
+            'ambiguous command'
         ]
     ),
     (
         InvalidL4SourcePortRangeException,
         [
-            'invalid l4 source port range',
+            'invalid l4 source port range'
         ]
     ),
     (
         EchoCommandException,
         [
-            'range',
+            'range'
         ]
     ),
     (
         AceDoesNotExistException,
         [
-            'acl entry does not exist',
+            'acl entry does not exist'
         ]
     ),
     (
         AclDoesNotExistException,
         [
-            'acl does not exist',
+            'acl does not exist'
+        ]
+    ),
+    (
+        MaximumCommunitiesException,
+        [
+            'config rejected : maximum allowed communities are configured'
+        ]
+    ),
+    (
+        DuplicateCommunityException,
+        [
+            'this community is already configured'
         ]
     ),
 ])
@@ -307,6 +341,8 @@ __all__ = [
     'EchoCommandException',
     'AceDoesNotExistException',
     'AclDoesNotExistException',
+    'MaximumCommunitiesException',
+    'DuplicateCommunityException',
     'VTYSH_EXCEPTIONS',
     'determine_exception'
 ]

@@ -5607,7 +5607,18 @@ VTYSH_EXCEPTIONS_SPEC = OrderedDict([
         [
             'acl does not exist',
         ]
+    ), (
+        'MaximumCommunitiesException',
+        [
+            'config rejected : maximum allowed communities are configured',
+        ]
+    ), (
+        'DuplicateCommunityException',
+        [
+            'this community is already configured',
+        ]
     )
+
 ])
 """Vtysh Exceptions specification as a Python dictionary"""
 
