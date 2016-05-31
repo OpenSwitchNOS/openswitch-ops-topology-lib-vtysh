@@ -455,7 +455,8 @@ Interface 7 is down (Administratively down)
         'qos_trust': None,
         'qos_dscp': None,
         'qos_queue_profile': None,
-        'qos_schedule_profile': None
+        'qos_schedule_profile': None,
+        'qos_schedule_profile_status': None
     }
 
     ddiff = DeepDiff(result, expected)
@@ -471,7 +472,7 @@ Interface 1 is up
  Full-duplex
  qos trust none
  qos queue-profile default
- qos schedule-profile default
+ qos schedule-profile default, status is strict
  Speed 1000 Mb/s
  Auto-Negotiation is turned on
  Input flow-control is off, output flow-control is off
@@ -527,7 +528,8 @@ Interface 1 is up
         'qos_trust': 'none',
         'qos_dscp': None,
         'qos_queue_profile': 'default',
-        'qos_schedule_profile': 'default'
+        'qos_schedule_profile': 'default',
+        'qos_schedule_profile_status': 'strict'
     }
 
     ddiff2 = DeepDiff(result2, expected2)
@@ -599,7 +601,8 @@ Interface 1 is up
         'qos_trust': 'none',
         'qos_dscp': None,
         'qos_queue_profile': 'default',
-        'qos_schedule_profile': 'default'
+        'qos_schedule_profile': 'default',
+        'qos_schedule_profile_status': None
     }
 
     ddiff3 = DeepDiff(result3, expected3)
@@ -677,7 +680,8 @@ Interface 1 is up
         'qos_trust': 'none',
         'qos_dscp': None,
         'qos_queue_profile': 'default',
-        'qos_schedule_profile': 'default'
+        'qos_schedule_profile': 'default',
+        'qos_schedule_profile_status': None
     }
 
     ddiff4 = DeepDiff(result4, expected4)
@@ -758,7 +762,8 @@ Interface 1 is up
         'qos_trust': 'none',
         'qos_dscp': None,
         'qos_queue_profile': 'default',
-        'qos_schedule_profile': 'default'
+        'qos_schedule_profile': 'default',
+        'qos_schedule_profile_status': None
     }
 
     ddiff5 = DeepDiff(result5, expected5)
