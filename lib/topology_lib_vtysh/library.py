@@ -9340,6 +9340,62 @@ class ConfigRouterBgp(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def neighbor_update_source(
+            self, peer, update_source):
+        """
+        Applies an update source to the neighbor
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # neighbor {peer} update-source {update_source}
+
+        :param peer: <A.B.C.D|X:X::X:X|WORD> peer IPv4/IPv6 address or
+            neighbor tag
+        :param update_source: <A.B.C.D|X:X::X:X|WORD> peer IPv4/IPv6 address
+            or neighbor tag
+        """
+
+        cmd = [
+            'neighbor {peer} update-source {update_source}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_neighbor_update_source(
+            self, peer):
+        """
+        Remove a an update source to the neighbor
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no neighbor {peer} update-source
+
+        :param peer: <A.B.C.D|X:X::X:X|WORD> peer IPv4/IPv6 address or
+            neighbor tag
+        """
+
+        cmd = [
+            'no neighbor {peer} update-source'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def no_neighbor_peer_group(
             self, ip_or_group, group=''):
         """
