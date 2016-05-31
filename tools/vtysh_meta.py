@@ -4576,6 +4576,33 @@ local-priority {local_priority} name {name} color {color}',
                 ],
             },
             {
+                'command': 'neighbor {peer} update-source {update_source}',
+                'doc': 'Applies an update source to the neighbor',
+                'arguments': [
+                    {
+                        'name': 'peer',
+                        'doc': '<A.B.C.D|X:X::X:X|WORD> peer IPv4/IPv6 address'
+                               ' or neighbor tag',
+                    },
+                    {
+                        'name': 'update_source',
+                        'doc': '<A.B.C.D|X:X::X:X|WORD> peer IPv4/IPv6 address'
+                               ' or neighbor tag',
+                    },
+                ],
+            },
+            {
+                'command': 'no neighbor {peer} update-source',
+                'doc': 'Remove a an update source to the neighbor',
+                'arguments': [
+                    {
+                        'name': 'peer',
+                        'doc': '<A.B.C.D|X:X::X:X|WORD> peer IPv4/IPv6 address'
+                               ' or neighbor tag',
+                    },
+                ],
+            },
+            {
                 'command': 'no neighbor {ip_or_group} peer-group',
                 'doc': 'Removes the neighbor from the peer-group',
                 'arguments': [
