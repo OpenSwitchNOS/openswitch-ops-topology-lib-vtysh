@@ -72,6 +72,18 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
+                'command': 'show interface {port} queues',
+                'doc': 'Show queue statistics for this interface',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'Label that identifies interface.',
+                        'optional': True
+                    },
+                ],
+                'returns': True
+            },
+            {
                 'command': 'show vlan',
                 'doc': 'Show VLAN configuration.',
                 'arguments': [
@@ -195,6 +207,23 @@ VTYSH_SPEC = OrderedDict([
                 'command': 'show running-config',
                 'doc': 'Show running-config information.',
                 'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show running-config interface {port} {subint}',
+                'doc': 'Show running-config for the interface.',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'Label that identifies interface.',
+                        'optional': True
+                    },
+                    {
+                        'name': 'subint',
+                        'doc': 'Subinterface ID',
+                        'optional': True
+                    },
+                ],
                 'returns': True
             },
             {

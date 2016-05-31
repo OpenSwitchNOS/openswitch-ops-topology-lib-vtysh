@@ -126,7 +126,8 @@ def parse_show_interface(raw_result):
         r'(?P<conection_type>\S+)\s+'
         r'(qos trust (?P<qos_trust>\S+))?\s*'
         r'(qos queue-profile (?P<qos_queue_profile>\S+))?\s*'
-        r'(qos schedule-profile (?P<qos_schedule_profile>\S+))?\s*'
+        r'(qos schedule-profile (?P<qos_schedule_profile>\w+))?\s*'
+        r'(, status is (?P<qos_schedule_profile_status>\w+))?\s*'
         r'(qos dscp override (?P<qos_dscp>\S+))?\s*'
         r'Speed (?P<speed>\d+) (?P<speed_unit>\S+)\s+'
         r'Auto-Negotiation is turned (?P<autonegotiation>\S+)\s+'
@@ -448,6 +449,45 @@ def parse_show_interface_subinterface(raw_result):
                     elif value == 'off':
                         subint_result[key] = False
             result[subint_result['subinterface']] = subint_result
+    return result
+
+
+def parse_show_interface_queues(raw_result):
+    """
+    Parse the 'show interface <port> queues' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show interface command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+            '54-4' : {
+                'Q0': {'tx_bytes': '76801',
+                      'tx_packets': 76801,
+                      'tx_errors': '76801'}
+            }
+            ...
+        }
+    """
+
+    result = {}
+    for line in raw_result.splitlines():
+        words = line.split()
+        if words == []:
+            pass
+        elif words[0].startswith('Interface'):
+            interface = words[1]
+            result[interface] = {}
+        elif words[0].startswith('Q'):
+            queue = words[0]
+            result[interface][queue] = {}
+            result[interface][queue]['tx_bytes'] = words[1]
+            result[interface][queue]['tx_packets'] = words[2]
+            result[interface][queue]['tx_errors'] = words[3]
+
     return result
 
 
@@ -2569,6 +2609,20 @@ def parse_show_rib(raw_result):
 
 def parse_show_running_config(raw_result):
     """
+    Delegates to parse_show_running_config_helper.
+    """
+    return parse_show_running_config_helper(raw_result)
+
+
+def parse_show_running_config_interface(raw_result):
+    """
+    Delegates to parse_show_running_config_helper.
+    """
+    return parse_show_running_config_helper(raw_result)
+
+
+def parse_show_running_config_helper(raw_result):
+    """
     Parse the 'show running-config' command raw output.
     This parser currently returns only BGP, OSPF, vlan and interface section
     of the show-running command, please review the doc/developer.rst file to
@@ -2851,7 +2905,7 @@ def parse_show_running_config(raw_result):
                 result['vlan'][vlan_info[0]] = vlan
 
     # interface Section
-    if_section_re = r'\s+int\w+(?:\s+\S+.*)*'
+    if_section_re = r'int\w+(?:\s+\S+.*)*'
     re_interface_section = re.findall(if_section_re, raw_result, re.DOTALL)
     interface_vlan_re = r'\interface\s(vlan\d+)'
     interface_subinterface = r'interface\s(\d+\.\d+)'
@@ -5956,12 +6010,14 @@ __all__ = [
     'parse_show_lacp_interface', 'parse_show_interface',
     'parse_show_interface_vlan',
     'parse_show_interface_mgmt', 'parse_show_interface_subinterface',
+    'parse_show_interface_queues',
     'parse_show_lacp_configuration', 'parse_show_lldp_neighbor_info',
     'parse_show_lldp_statistics', 'parse_show_ip_bgp_summary',
     'parse_show_ip_bgp_neighbors', 'parse_show_ip_bgp',
     'parse_show_udld_interface', 'parse_ping_repetitions',
     'parse_ping6_repetitions', 'parse_show_rib',
     'parse_show_running_config', 'parse_show_ip_route',
+    'parse_show_running_config_interface',
     'parse_show_ipv6_route', 'parse_show_ipv6_bgp',
     'parse_show_ip_ecmp', 'parse_show_interface_loopback',
     'parse_show_ntp_associations', 'parse_show_ntp_authentication_key',
