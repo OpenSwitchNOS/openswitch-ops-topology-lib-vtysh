@@ -12751,6 +12751,36 @@ def show_interface_subinterface_brief(
     return parse_show_interface_subinterface_brief(result)
 
 
+def show_interface_queues(
+        enode, portlbl=''):
+    """
+    Show queue statistics for this interface
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show interface {port} queues
+
+    :param portlbl: Label that identifies interface.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_interface_queues`
+    """
+
+    cmd = [
+        'show interface {port} queues'
+    ]
+
+    port = enode.ports.get(portlbl, portlbl)
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_interface_queues(result)
+
+
 def show_vlan(
         enode, vlanid=''):
     """
@@ -13230,6 +13260,36 @@ def show_running_config(
     )
 
     return parse_show_running_config(result)
+
+
+def show_running_config_interface(
+        enode, portlbl=''):
+    """
+    Show running-config for the interface.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show running-config interface {port}
+
+    :param portlbl: Label that identifies interface.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_running_config_interface`
+    """
+
+    cmd = [
+        'show running-config interface {port}'
+    ]
+
+    port = enode.ports.get(portlbl, portlbl)
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_running_config_interface(result)
 
 
 def show_ip_route(
@@ -15173,6 +15233,7 @@ __all__ = [
     'show_interface_mgmt',
     'show_interface_subinterface',
     'show_interface_subinterface_brief',
+    'show_interface_queues',
     'show_vlan',
     'show_lacp_interface',
     'show_lacp_aggregates',
@@ -15190,6 +15251,7 @@ __all__ = [
     'show_ip_ospf',
     'show_ip_ospf_route',
     'show_running_config',
+    'show_running_config_interface',
     'show_ip_route',
     'show_ipv6_route',
     'show_sflow',
