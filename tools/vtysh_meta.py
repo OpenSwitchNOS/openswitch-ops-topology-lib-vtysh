@@ -3257,6 +3257,21 @@ local-priority {local_priority} name {name} color {color}',
                         'doc': 'Address family <ipv4|ipv6>'
                     }
                 ],
+            },
+            {
+                'command': 'mtu {mtu_size}',
+                'doc': 'Set MTU',
+                'arguments': [
+                    {
+                        'name': 'mtu_size',
+                        'doc': 'MTU in bytes range <576-9192>'
+                    }
+                ],
+            },
+            {
+                'command': 'no mtu',
+                'doc': 'Unset MTU',
+                'arguments': [],
             }
         ]
     }),
@@ -4572,6 +4587,33 @@ local-priority {local_priority} name {name} color {color}',
                             'String of maximum length 80 chars',
                         ),
                         'optional': True
+                    },
+                ],
+            },
+            {
+                'command': 'neighbor {peer} update-source {update_source}',
+                'doc': 'Applies an update source to the neighbor',
+                'arguments': [
+                    {
+                        'name': 'peer',
+                        'doc': '<A.B.C.D|X:X::X:X|WORD> peer IPv4/IPv6 address'
+                               ' or neighbor tag',
+                    },
+                    {
+                        'name': 'update_source',
+                        'doc': '<A.B.C.D|X:X::X:X|WORD> peer IPv4/IPv6 address'
+                               ' or neighbor tag',
+                    },
+                ],
+            },
+            {
+                'command': 'no neighbor {peer} update-source',
+                'doc': 'Remove a an update source to the neighbor',
+                'arguments': [
+                    {
+                        'name': 'peer',
+                        'doc': '<A.B.C.D|X:X::X:X|WORD> peer IPv4/IPv6 address'
+                               ' or neighbor tag',
                     },
                 ],
             },
