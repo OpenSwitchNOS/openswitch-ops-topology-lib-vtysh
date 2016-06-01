@@ -5681,6 +5681,57 @@ class ConfigInterface(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def mtu(
+            self, mtu_size):
+        """
+        Set MTU
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # mtu {mtu_size}
+
+        :param mtu_size: MTU in bytes range <576-9192>
+        """
+
+        cmd = [
+            'mtu {mtu_size}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_mtu(
+            self):
+        """
+        Unset MTU
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no mtu
+
+        """
+
+        cmd = [
+            'no mtu'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
 
 class ConfigSubinterface(ContextManager):
     """
