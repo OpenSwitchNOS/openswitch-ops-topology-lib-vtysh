@@ -3257,6 +3257,21 @@ local-priority {local_priority} name {name} color {color}',
                         'doc': 'Address family <ipv4|ipv6>'
                     }
                 ],
+            },
+            {
+                'command': 'mtu {mtu_size}',
+                'doc': 'Set MTU',
+                'arguments': [
+                    {
+                        'name': 'mtu_size',
+                        'doc': 'MTU in bytes range <576-9192>'
+                    }
+                ],
+            },
+            {
+                'command': 'no mtu',
+                'doc': 'Unset MTU',
+                'arguments': [],
             }
         ]
     }),
