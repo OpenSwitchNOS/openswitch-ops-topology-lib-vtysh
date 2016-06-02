@@ -4544,6 +4544,16 @@ local-priority {local_priority} name {name} color {color}',
                 ],
             },
             {
+                'command': 'no area {area_id} nssa no-summary',
+                'doc': 'Unconfigures NSSA (Totally stubby) area',
+                'arguments': [
+                    {
+                        'name': 'area_id',
+                        'doc': '<0-4294967295> area range',
+                    },
+                ],
+            },
+            {
                 'command': 'area {area_id} stub',
                 'doc': 'Configures area as stubby',
                 'arguments': [
@@ -4554,8 +4564,28 @@ local-priority {local_priority} name {name} color {color}',
                 ],
             },
             {
+                'command': 'no area {area_id} stub',
+                'doc': 'Unconfigures stubby area',
+                'arguments': [
+                    {
+                        'name': 'area_id',
+                        'doc': '<0-4294967295> area range',
+                    },
+                ],
+            },
+            {
                 'command': 'area {area_id} stub no-summary',
                 'doc': 'Configures area as Totally stubby',
+                'arguments': [
+                    {
+                        'name': 'area_id',
+                        'doc': '<0-4294967295> area range',
+                    },
+                ],
+            },
+            {
+                'command': 'no area {area_id} stub no-summary',
+                'doc': 'Unconfigures Totally stubby area',
                 'arguments': [
                     {
                         'name': 'area_id',
@@ -4589,6 +4619,148 @@ local-priority {local_priority} name {name} color {color}',
                     {
                         'name': 'area',
                         'doc': '<0-4228250625 | A.B.C.D> Area-id range'
+                    }
+                ],
+            },
+            {
+                'command': 'area {area_id} virtual-link {router_id}',
+                'doc': 'Configuring virtual links between OSPF switches',
+                'arguments': [
+                    {
+                        'name': 'area_id',
+                        'doc': '<0-4228250625 | A.B.C.D> Area-id range',
+                    },
+                    {
+                        'name': 'router_id',
+                        'doc': '<A.B.C.D> Router ID of the remote ABR'
+                    }
+                ],
+            },
+            {
+                'command': 'no area {area_id} virtual-link {router_id}',
+                'doc': 'Disabling virtual links between OSPF switches',
+                'arguments': [
+                    {
+                        'name': 'area_id',
+                        'doc': '<0-4228250625 | A.B.C.D> Area-id range',
+                    },
+                    {
+                        'name': 'router_id',
+                        'doc': '<A.B.C.D> Router ID of the remote ABR'
+                    }
+                ],
+            },
+            {
+                'command': 'area {area_id} virtual-link {router_id}'
+                           ' authentication message-digest',
+                'doc': 'Configuring virtual links with authenication',
+                'arguments': [
+                    {
+                        'name': 'area_id',
+                        'doc': '<0-4228250625 | A.B.C.D> Area-id range',
+                    },
+                    {
+                        'name': 'router_id',
+                        'doc': '<A.B.C.D> Router ID of the remote ABR'
+                    }
+                ],
+            },
+            {
+                'command': 'area {area_id} virtual-link {router_id}'
+                           ' hello-interval {time}',
+                'doc': 'Configuring hello-interval for virtual links',
+                'arguments': [
+                    {
+                        'name': 'area_id',
+                        'doc': '<0-4228250625 | A.B.C.D> Area-id range',
+                    },
+                    {
+                        'name': 'router_id',
+                        'doc': '<A.B.C.D> Router ID of the remote ABR'
+                    },
+                    {
+                        'name': 'time',
+                        'doc': '<1-65535>  Seconds'
+                    }
+                ],
+            },
+            {
+                'command': 'area {area_id} virtual-link {router_id}'
+                           ' retransmit-interval {time}',
+                'doc': 'Configuring retransmit-interval for virtual-links',
+                'arguments': [
+                    {
+                        'name': 'area_id',
+                        'doc': '<0-4228250625 | A.B.C.D> Area-id range',
+                    },
+                    {
+                        'name': 'router_id',
+                        'doc': '<A.B.C.D> Router ID of the remote ABR'
+                    },
+                    {
+                        'name': 'time',
+                        'doc': '<1-65535>  Seconds'
+                    }
+                ],
+            },
+            {
+                'command': 'area {area_id} virtual-link {router_id}'
+                           ' transmit-delay {time}',
+                'doc': 'Configuring transmit-delay for virtual links',
+                'arguments': [
+                    {
+                        'name': 'area_id',
+                        'doc': '<0-4228250625 | A.B.C.D> Area-id range',
+                    },
+                    {
+                        'name': 'router_id',
+                        'doc': '<A.B.C.D> Router ID of the remote ABR'
+                    },
+                    {
+                        'name': 'time',
+                        'doc': '<1-65535>  Seconds'
+                    }
+                ],
+            },
+            {
+                'command': 'area {area_id} virtual-link {router_id}'
+                           ' dead-interval {time}',
+                'doc': 'Configuring dead-interval for virtual links',
+                'arguments': [
+                    {
+                        'name': 'area_id',
+                        'doc': '<0-4228250625 | A.B.C.D> Area-id range',
+                    },
+                    {
+                        'name': 'router_id',
+                        'doc': '<A.B.C.D> Router ID of the remote ABR'
+                    },
+                    {
+                        'name': 'time',
+                        'doc': '<1-65535>  Seconds'
+                    }
+                ],
+            },
+            {
+                'command': 'area {area_id} virtual-link {router_id} '
+                           'message-digest-key {key} md5 {password}',
+                'doc': 'Configuring virtual links with md5 authentication',
+                'arguments': [
+                    {
+                        'name': 'area_id',
+                        'doc': '<0-4228250625 | A.B.C.D> Area-id range',
+                    },
+                    {
+                        'name': 'router_id',
+                        'doc': '<A.B.C.D> Router ID of the remote ABR'
+                    },
+                    {
+                        'name': 'key',
+                        'doc': '<1-255>  Key ID'
+                    },
+                    {
+                        'name': 'password',
+                        'doc': 'MD5_KEY  The OSPF password (key)'
                     }
                 ],
             },

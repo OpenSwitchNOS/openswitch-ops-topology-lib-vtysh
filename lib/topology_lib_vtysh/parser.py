@@ -1518,38 +1518,42 @@ def parse_show_ip_ospf_interface(raw_result):
 
         {
            'router_id': '2.2.2.2',
-           'priority': '1',
+           'wait_time': '40',
            'Area_id': '0.0.0.1',
-           'cost': '10',
+           'hello_timer': '10',
+           'Backup_designated_router': '10.10.10.1',
+           'hello_due_time': '7.717s',
            'retransmit_time': '5',
            'neighbor_count': '1',
-           'wait_time': '40',
            'state': '<DR >',
-           'Designated Router (ID)': '2.2.2.2',
-           'DR_Interface_address': '10.10.10.1',
-           'Backup Designated Router (ID)': '1.1.1.1',
-           'BDR_Interface_address': '10.10.10.2',
-           'hello_due_time': '7.717s',
+           'Interface_id': '1',
+           'priority': '1',
+           'BDR_Interface_address': '10.10.10.1',
+           'bandwidth': '1000',
+           'cost': '10',
            'Adjacent_neigbhor_count': '1',
            'internet_address': '10.10.10.2/24',
+           'Designated_router': '10.10.10.1',
            'dead_timer': '40',
-           'hello_timer': '10',
-           'transmit_delay': '1'
+           'network_type': '<BROADCAST>',
+           'transmit_delay': '1',
+           'DR_Interface_address': '10.10.10.1'
+
         }
     """
 
     show_ip_ospf_int_re = (
-        r'\s*Interface (?P<Interface_id>\d) BW '
+        r'\s*Interface (?P<Interface_id>\d) BW\s*'
         '(?P<bandwidth>\d+) Mbps.*'
-        r'\s*Internet address (?P<internet_address>[0-255.]+\S+) '
+        r'\s*Internet address (?P<internet_address>[0-255.]+\S+)\s*'
         'Area (?P<Area_id>[0-255.]+).*'
-        r'\s*Router ID : (?P<router_id>[0-255.]+), Network Type '
-        '(?P<network_type>\S+), Cost: (?P<cost>\d+).*'
-        r'\s*Transmit Delay is (?P<transmit_delay>\d) sec, State '
-        '(?P<state>\S+\s*\S+), Priority (?P<priority>\d)\s*'
-        r'[\S ]+\(ID\)\s*'
-        '(?P<Designated_router>[0-255.]+),\s*Interface Address '
-        '(?P<DR_Interface_address>[0-255.]+).*')
+        r'\s*Router ID\s*:\s*(?P<router_id>[\S]+),\s*Network Type\s*'
+        '(?P<network_type>[\S]+),\s*Cost:\s*(?P<cost>\d+).*'
+        r'\s*Transmit Delay is (?P<transmit_delay>\d) sec, State\s*'
+        '(?P<state>\S+\s*\S+), Priority (?P<priority>\d+).*'
+        r'\s*Designated\s*Router\s*\(ID\)\s*'
+        '(?P<Designated_router>[\S]+),\s*Interface Address\s*'
+        '(?P<DR_Interface_address>[\S]+).*')
 
     show_ip_ospf_int_re1 = (
         r'\s*Hello (?P<hello_timer>\d+) Dead (?P<dead_timer>\d+) '

@@ -9369,6 +9369,32 @@ class ConfigRouterOspf(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def no_area_nssa_no_summary(
+            self, area_id):
+        """
+        Unconfigures NSSA (Totally stubby) area
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no area {area_id} nssa no-summary
+
+        :param area_id: <0-4294967295> area range
+        """
+
+        cmd = [
+            'no area {area_id} nssa no-summary'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def area_stub(
             self, area_id):
         """
@@ -9395,6 +9421,32 @@ class ConfigRouterOspf(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def no_area_stub(
+            self, area_id):
+        """
+        Unconfigures stubby area
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no area {area_id} stub
+
+        :param area_id: <0-4294967295> area range
+        """
+
+        cmd = [
+            'no area {area_id} stub'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def area_stub_no_summary(
             self, area_id):
         """
@@ -9411,6 +9463,32 @@ class ConfigRouterOspf(ContextManager):
 
         cmd = [
             'area {area_id} stub no-summary'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_area_stub_no_summary(
+            self, area_id):
+        """
+        Unconfigures Totally stubby area
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no area {area_id} stub no-summary
+
+        :param area_id: <0-4294967295> area range
+        """
+
+        cmd = [
+            'no area {area_id} stub no-summary'
         ]
 
         result = self.enode(
@@ -9489,6 +9567,228 @@ class ConfigRouterOspf(ContextManager):
 
         cmd = [
             'network {network} area {area}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def area_virtual_link(
+            self, area_id, router_id):
+        """
+        Configuring virtual links between OSPF switches
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # area {area_id} virtual-link {router_id}
+
+        :param area_id: <0-4228250625 | A.B.C.D> Area-id range
+        :param router_id: <A.B.C.D> Router ID of the remote ABR
+        """
+
+        cmd = [
+            'area {area_id} virtual-link {router_id}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_area_virtual_link(
+            self, area_id, router_id):
+        """
+        Disabling virtual links between OSPF switches
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no area {area_id} virtual-link {router_id}
+
+        :param area_id: <0-4228250625 | A.B.C.D> Area-id range
+        :param router_id: <A.B.C.D> Router ID of the remote ABR
+        """
+
+        cmd = [
+            'no area {area_id} virtual-link {router_id}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def area_virtual_link_authentication_message_digest(
+            self, area_id, router_id):
+        """
+        Configuring virtual links with authenication
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # area {area_id} virtual-link {router_id} authentication message-digest  # noqa
+
+        :param area_id: <0-4228250625 | A.B.C.D> Area-id range
+        :param router_id: <A.B.C.D> Router ID of the remote ABR
+        """  # noqa
+
+        cmd = [
+            'area {area_id} virtual-link {router_id} authentication message-digest'  # noqa
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def area_virtual_link_hello_interval(
+            self, area_id, router_id, time):
+        """
+        Configuring hello-interval for virtual links
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # area {area_id} virtual-link {router_id} hello-interval {time}
+
+        :param area_id: <0-4228250625 | A.B.C.D> Area-id range
+        :param router_id: <A.B.C.D> Router ID of the remote ABR
+        :param time: <1-65535>  Seconds
+        """
+
+        cmd = [
+            'area {area_id} virtual-link {router_id} hello-interval {time}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def area_virtual_link_retransmit_interval(
+            self, area_id, router_id, time):
+        """
+        Configuring retransmit-interval for virtual-links
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # area {area_id} virtual-link {router_id} retransmit-interval {time}  # noqa
+
+        :param area_id: <0-4228250625 | A.B.C.D> Area-id range
+        :param router_id: <A.B.C.D> Router ID of the remote ABR
+        :param time: <1-65535>  Seconds
+        """
+
+        cmd = [
+            'area {area_id} virtual-link {router_id} retransmit-interval {time}'  # noqa
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def area_virtual_link_transmit_delay(
+            self, area_id, router_id, time):
+        """
+        Configuring transmit-delay for virtual links
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # area {area_id} virtual-link {router_id} transmit-delay {time}
+
+        :param area_id: <0-4228250625 | A.B.C.D> Area-id range
+        :param router_id: <A.B.C.D> Router ID of the remote ABR
+        :param time: <1-65535>  Seconds
+        """
+
+        cmd = [
+            'area {area_id} virtual-link {router_id} transmit-delay {time}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def area_virtual_link_dead_interval(
+            self, area_id, router_id, time):
+        """
+        Configuring dead-interval for virtual links
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # area {area_id} virtual-link {router_id} dead-interval {time}
+
+        :param area_id: <0-4228250625 | A.B.C.D> Area-id range
+        :param router_id: <A.B.C.D> Router ID of the remote ABR
+        :param time: <1-65535>  Seconds
+        """
+
+        cmd = [
+            'area {area_id} virtual-link {router_id} dead-interval {time}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def area_virtual_link_message_digest_key_md5(
+            self, area_id, router_id, key, password):
+        """
+        Configuring virtual links with md5 authentication
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # area {area_id} virtual-link {router_id} message-digest-key {key} md5 {password}  # noqa
+
+        :param area_id: <0-4228250625 | A.B.C.D> Area-id range
+        :param router_id: <A.B.C.D> Router ID of the remote ABR
+        :param key: <1-255>  Key ID
+        :param password: MD5_KEY  The OSPF password (key)
+        """  # noqa
+
+        cmd = [
+            'area {area_id} virtual-link {router_id} message-digest-key {key} md5 {password}'  # noqa
         ]
 
         result = self.enode(
@@ -12382,9 +12682,8 @@ class ConfigVrrpInterface(ContextManager):
 
     ::
 
-            ['config terminal',
-             'interface {port}',
-             'vrrp {grpid} address-family {af}']
+    ['config terminal', 'interface {port}', \
+     'vrrp {grpid} address-family {af}']
 
     post_commands:
 
