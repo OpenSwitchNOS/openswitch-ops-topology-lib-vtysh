@@ -764,6 +764,157 @@ Interface 1 is up
     ddiff5 = DeepDiff(result5, expected5)
     assert not ddiff5
 
+    raw_result6 = """\
+
+Interface 1-1 is up
+ Admin state is up
+ Hardware: Ethernet, MAC Address: 70:72:cf:75:25:70
+ IPv4 address 10.1.1.1/24
+ IPv4 address 10.1.1.2/24 secondary
+ IPv6 address 2001::1/12
+ IPv6 address 2001::2/12 secondary
+ MTU 0
+ Full-duplex
+ qos trust none
+ qos queue-profile default
+ qos schedule-profile default
+ Speed 1000 Mb/s
+ Auto-Negotiation is turned on
+ Input flow-control is off, output flow-control is off
+ RX
+            0 input packets              0 bytes
+            0 input error                0 dropped
+            0 CRC/FCS
+       L3:
+            ucast: 0 packets, 0 bytes
+            mcast: 0 packets, 0 bytes
+ TX
+            0 output packets             0 bytes
+            0 input error                0 dropped
+            0 collision
+       L3:
+            ucast: 0 packets, 0 bytes
+            mcast: 0 packets, 0 bytes
+    """
+
+    result6 = parse_show_interface(raw_result6)
+
+    expected6 = {
+        'admin_state': 'up',
+        'autonegotiation': True,
+        'conection_type': 'Full-duplex',
+        'hardware': 'Ethernet',
+        'input_flow_control': False,
+        'interface_state': 'up',
+        'mac_address': '70:72:cf:75:25:70',
+        'mtu': 0,
+        'output_flow_control': False,
+        'port': "1-1",
+        'rx_crc_fcs': 0,
+        'rx_dropped': 0,
+        'rx_bytes': 0,
+        'rx_error': 0,
+        'rx_packets': 0,
+        'rx_l3_ucast_packets': 0,
+        'rx_l3_ucast_bytes': 0,
+        'rx_l3_mcast_packets': 0,
+        'rx_l3_mcast_bytes': 0,
+        'speed': 1000,
+        'speed_unit': 'Mb/s',
+        'state_description': None,
+        'state_information': None,
+        'tx_bytes': 0,
+        'tx_collisions': 0,
+        'tx_dropped': 0,
+        'tx_errors': 0,
+        'tx_packets': 0,
+        'tx_l3_ucast_packets': 0,
+        'tx_l3_ucast_bytes': 0,
+        'tx_l3_mcast_packets': 0,
+        'tx_l3_mcast_bytes': 0,
+        'ipv4': '10.1.1.1/24',
+        'ipv4_secondary': '10.1.1.2/24',
+        'ipv6': '2001::1/12',
+        'ipv6_secondary': '2001::2/12',
+        'qos_trust': 'none',
+        'qos_dscp': None,
+        'qos_queue_profile': 'default',
+        'qos_schedule_profile': 'default'
+    }
+
+    ddiff6 = DeepDiff(result6, expected6)
+    assert not ddiff6
+
+    raw_result7 = """\
+
+Interface 7-1 is down (Administratively down)
+ Admin state is down
+ State information: admin_down
+ Hardware: Ethernet, MAC Address: 70:72:cf:d7:d3:dd
+ MTU 0
+ Half-duplex
+ Speed 0 Mb/s
+ Auto-Negotiation is turned on
+ Input flow-control is off, output flow-control is off
+ RX
+            0 input packets              0 bytes
+            0 input error                0 dropped
+            0 CRC/FCS
+ TX
+            0 output packets             0 bytes
+            0 input error                0 dropped
+            0 collision
+
+    """
+
+    result7 = parse_show_interface(raw_result7)
+
+    expected7 = {
+        'admin_state': 'down',
+        'autonegotiation': True,
+        'conection_type': 'Half-duplex',
+        'hardware': 'Ethernet',
+        'input_flow_control': False,
+        'interface_state': 'down',
+        'mac_address': '70:72:cf:d7:d3:dd',
+        'mtu': 0,
+        'output_flow_control': False,
+        'port': "7-1",
+        'rx_crc_fcs': 0,
+        'rx_dropped': 0,
+        'rx_bytes': 0,
+        'rx_error': 0,
+        'rx_packets': 0,
+        'rx_l3_ucast_packets': None,
+        'rx_l3_ucast_bytes': None,
+        'rx_l3_mcast_packets': None,
+        'rx_l3_mcast_bytes': None,
+        'speed': 0,
+        'speed_unit': 'Mb/s',
+        'state_description': 'Administratively down',
+        'state_information': 'admin_down',
+        'tx_bytes': 0,
+        'tx_collisions': 0,
+        'tx_dropped': 0,
+        'tx_errors': 0,
+        'tx_packets': 0,
+        'tx_l3_ucast_packets': None,
+        'tx_l3_ucast_bytes': None,
+        'tx_l3_mcast_packets': None,
+        'tx_l3_mcast_bytes': None,
+        'ipv4': None,
+        'ipv4_secondary': None,
+        'ipv6': None,
+        'ipv6_secondary': None,
+        'qos_trust': None,
+        'qos_dscp': None,
+        'qos_queue_profile': None,
+        'qos_schedule_profile': None
+    }
+
+    ddiff7 = DeepDiff(result7, expected7)
+    assert not ddiff7
+
 
 def test_parse_show_interface_vlan():
     raw_result = """\

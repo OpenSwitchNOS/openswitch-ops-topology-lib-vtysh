@@ -113,7 +113,7 @@ def parse_show_interface(raw_result):
         return parse_show_interface_vlan(raw_result)
 
     show_re = (
-        r'\s*Interface (?P<port>\w+) is (?P<interface_state>\S+)\s*'
+        r'\s*Interface (?P<port>\d+[.-]?\d*) is (?P<interface_state>\S+)\s*'
         r'(\((?P<state_description>.*)\))?\s*'
         r'Admin state is (?P<admin_state>\S+)\s+'
         r'(State information: (?P<state_information>\S+))?\s*'
