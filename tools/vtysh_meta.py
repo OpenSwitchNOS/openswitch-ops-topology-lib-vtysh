@@ -5992,7 +5992,7 @@ local-priority {local_priority}',
         'commands': [
             {
                 'command': '{negate} {sequence} permit {protocol} '
-                           '{ip1} {port1} {ip2} {port2} {count} {log}',
+                           '{ip1} {port1} {ip2} {port2}',
                 'doc': 'Permit access-list entry',
                 'arguments': [
                     {
@@ -6025,19 +6025,25 @@ local-priority {local_priority}',
                     },
                     {
                         'name': 'count',
-                        'doc': 'TBD',
+                        'doc': (
+                            'count the packets that'
+                            'match this entry.'
+                        ),
                         'optional': True
                     },
                     {
                         'name': 'log',
-                        'doc': 'TBD',
+                        'doc': (
+                            'log and count the packets'
+                            'that match this entry.'
+                        ),
                         'optional': True
                     },
                 ],
             },
             {
                 'command': '{negate} {sequence} deny {protocol} '
-                           '{ip1} {port1} {ip2} {port2} {count} {log}',
+                           '{ip1} {port1} {ip2} {port2}',
                 'doc': 'Deny access-list entry',
                 'arguments': [
                     {
@@ -6070,12 +6076,18 @@ local-priority {local_priority}',
                     },
                     {
                         'name': 'count',
-                        'doc': 'TBD',
+                        'doc': (
+                            'count the packets that'
+                            'match this entry.'
+                        ),
                         'optional': True
                     },
                     {
                         'name': 'log',
-                        'doc': 'TBD',
+                        'doc': (
+                            'log and count the packets'
+                            'that match this entry.'
+                        ),
                         'optional': True
                     },
                 ],

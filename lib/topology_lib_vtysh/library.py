@@ -12259,7 +12259,7 @@ class ConfigAccessListIpTestname(ContextManager):
 
         ::
 
-            # {negate} {sequence} permit {protocol} {ip1} {port1} {ip2} {port2} {count} {log}  # noqa
+            # {negate} {sequence} permit {protocol} {ip1} {port1} {ip2} {port2}
 
         :param negate: remove access-list entry.
         :param sequence: sequence number of ACE.
@@ -12268,12 +12268,12 @@ class ConfigAccessListIpTestname(ContextManager):
         :param port1: Source Port range <1-65535>.
         :param ip2: <A.B.C.D/M> Destination IPv4 address.
         :param port2: Destination Port range <1-65535>.
-        :param count: TBD
-        :param log: TBD
-        """  # noqa
+        :param count: count the packets thatmatch this entry.
+        :param log: log and count the packetsthat match this entry.
+        """
 
         cmd = [
-            '{negate} {sequence} permit {protocol} {ip1} {port1} {ip2} {port2} {count} {log}'  # noqa
+            '{negate} {sequence} permit {protocol} {ip1} {port1} {ip2} {port2}'
         ]
 
         if count:
@@ -12308,7 +12308,7 @@ class ConfigAccessListIpTestname(ContextManager):
 
         ::
 
-            # {negate} {sequence} deny {protocol} {ip1} {port1} {ip2} {port2} {count} {log}  # noqa
+            # {negate} {sequence} deny {protocol} {ip1} {port1} {ip2} {port2}
 
         :param negate: remove access-list entry.
         :param sequence: sequence number of ACE.
@@ -12317,12 +12317,12 @@ class ConfigAccessListIpTestname(ContextManager):
         :param port1: Source Port range <1-65535>.
         :param ip2: <A.B.C.D/M> Destination IPv4 address.
         :param port2: Destination Port range <1-65535>.
-        :param count: TBD
-        :param log: TBD
-        """  # noqa
+        :param count: count the packets thatmatch this entry.
+        :param log: log and count the packetsthat match this entry.
+        """
 
         cmd = [
-            '{negate} {sequence} deny {protocol} {ip1} {port1} {ip2} {port2} {count} {log}'  # noqa
+            '{negate} {sequence} deny {protocol} {ip1} {port1} {ip2} {port2}'
         ]
 
         if count:
@@ -12382,9 +12382,7 @@ class ConfigVrrpInterface(ContextManager):
 
     ::
 
-            ['config terminal',
-             'interface {port}',
-             'vrrp {grpid} address-family {af}']
+            ['config terminal', 'interface {port}', 'vrrp {grpid} address-family {af}']
 
     post_commands:
 
