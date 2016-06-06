@@ -12138,7 +12138,7 @@ class ConfigMirrorSession(ContextManager):
             raise determine_exception(result)(result)
 
     def no_source_interface(
-            self, portlbl, direction=''):
+            self, portlbl):
         """
         Remove a source interface from the session.
 
@@ -12149,7 +12149,6 @@ class ConfigMirrorSession(ContextManager):
             # no source interface {port}
 
         :param portlbl: Ethernet interface or LAG
-        :param direction: <both | rx | tx>
         """
 
         cmd = [
@@ -12157,13 +12156,6 @@ class ConfigMirrorSession(ContextManager):
         ]
 
         port = self.enode.ports.get(portlbl, portlbl)
-
-        if direction:
-            cmd.append(
-                '{}{{direction}}{}'.format(
-                    '', ''
-                )
-            )
 
         result = self.enode(
             (' '.join(cmd)).format(**locals()),
