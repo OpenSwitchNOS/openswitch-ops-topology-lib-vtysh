@@ -1906,65 +1906,72 @@ def parse_ping(raw_result):
         r'\s*PATTERN:\s+0x(?P<data>([a-fA-F0-9]+))'
     )
 
-    result = {}
-    re_result1 = re.search(ping_re1, raw_result)
-    if re_result1:
-        for key, value in re_result1.groupdict().items():
-            if value is None:
-                result[key] = "No match found"
-            elif value.isdigit():
-                result[key] = int(value)
-            else:
-                result[key] = value
+    if "Network is unreachable" in raw_result:
+        result = {"loss_pc": 100, "reason": "Network unreachable"}
+        return result
+    elif "Destination Host Unreachable" in raw_result:
+        result = {"loss_pc": 100, "reason": "Destination unreachable"}
+        return result
+    else:
+        result = {}
+        re_result1 = re.search(ping_re1, raw_result)
+        if re_result1:
+            for key, value in re_result1.groupdict().items():
+                if value is None:
+                    result[key] = "No match found"
+                elif value.isdigit():
+                    result[key] = int(value)
+                else:
+                    result[key] = value
 
-    re_result2 = re.search(ping_re2, raw_result)
-    if re_result2:
-        for key, value in re_result2.groupdict().items():
-            if value is None:
-                result[key] = "No match found"
-            elif value.isdigit():
-                result[key] = int(value)
-            else:
-                result[key] = value
+        re_result2 = re.search(ping_re2, raw_result)
+        if re_result2:
+            for key, value in re_result2.groupdict().items():
+                if value is None:
+                    result[key] = "No match found"
+                elif value.isdigit():
+                    result[key] = int(value)
+                else:
+                    result[key] = value
 
-    re_result3 = re.search(ping_re3, raw_result)
-    if re_result3:
-        for key, value in re_result3.groupdict().items():
-            if value is None:
-                result[key] = "No match found"
-            elif value.isdigit():
-                result[key] = int(value)
-            else:
-                result[key] = value
+        re_result3 = re.search(ping_re3, raw_result)
+        if re_result3:
+            for key, value in re_result3.groupdict().items():
+                if value is None:
+                    result[key] = "No match found"
+                elif value.isdigit():
+                    result[key] = int(value)
+                else:
+                    result[key] = value
 
-    re_result4 = re.search(ping_re4, raw_result)
-    if re_result4:
-        for key, value in re_result4.groupdict().items():
-            if value is None:
-                result[key] = "No match found"
-            elif value.isdigit():
-                result[key] = int(value)
-            else:
-                result[key] = value
-    re_result5 = re.search(ping_re5, raw_result)
-    if re_result5:
-        for key, value in re_result5.groupdict().items():
-            if value is None:
-                result[key] = "No match found"
-            elif value.isdigit():
-                result[key] = int(value)
-            else:
-                result[key] = value
-    re_result6 = re.search(ping_re6, raw_result)
-    if re_result6:
-        for key, value in re_result6.groupdict().items():
-            if value is None:
-                result[key] = "No match found"
-            elif value.isdigit():
-                result[key] = int(value)
-            else:
-                result[key] = value
-    return result
+        re_result4 = re.search(ping_re4, raw_result)
+        if re_result4:
+            for key, value in re_result4.groupdict().items():
+                if value is None:
+                    result[key] = "No match found"
+                elif value.isdigit():
+                    result[key] = int(value)
+                else:
+                    result[key] = value
+        re_result5 = re.search(ping_re5, raw_result)
+        if re_result5:
+            for key, value in re_result5.groupdict().items():
+                if value is None:
+                    result[key] = "No match found"
+                elif value.isdigit():
+                    result[key] = int(value)
+                else:
+                    result[key] = value
+        re_result6 = re.search(ping_re6, raw_result)
+        if re_result6:
+            for key, value in re_result6.groupdict().items():
+                if value is None:
+                    result[key] = "No match found"
+                elif value.isdigit():
+                    result[key] = int(value)
+                else:
+                    result[key] = value
+        return result
 
 
 def parse_ping6(raw_result):
@@ -2000,36 +2007,43 @@ def parse_ping6(raw_result):
         r'\s*PATTERN:\s+0x(?P<data>([a-fA-F0-9]+))'
     )
 
-    result = {}
-    re_result1 = re.search(ping6_re1, raw_result)
-    if re_result1:
-        for key, value in re_result1.groupdict().items():
-            if value is None:
-                result[key] = "No match found"
-            elif value.isdigit():
-                result[key] = int(value)
-            else:
-                result[key] = value
-    re_result2 = re.search(ping6_re2, raw_result)
-    if re_result2:
-        for key, value in re_result2.groupdict().items():
-            if value is None:
-                result[key] = "No match found"
-            elif value.isdigit():
-                result[key] = int(value)
-            else:
-                result[key] = value
-    re_result3 = re.search(ping6_re3, raw_result)
-    if re_result3:
-        for key, value in re_result3.groupdict().items():
-            if value is None:
-                result[key] = "No match found"
-            elif value.isdigit():
-                result[key] = int(value)
-            else:
-                result[key] = value
+    if "Network is unreachable" in raw_result:
+        result = {"loss_pc": 100, "reason": "Network unreachable"}
+        return result
+    elif "Destination unreachable" in raw_result:
+        result = {"loss_pc": 100, "reason": "Destination unreachable"}
+        return result
+    else:
+        result = {}
+        re_result1 = re.search(ping6_re1, raw_result)
+        if re_result1:
+            for key, value in re_result1.groupdict().items():
+                if value is None:
+                    result[key] = "No match found"
+                elif value.isdigit():
+                    result[key] = int(value)
+                else:
+                    result[key] = value
+        re_result2 = re.search(ping6_re2, raw_result)
+        if re_result2:
+            for key, value in re_result2.groupdict().items():
+                if value is None:
+                    result[key] = "No match found"
+                elif value.isdigit():
+                    result[key] = int(value)
+                else:
+                    result[key] = value
+        re_result3 = re.search(ping6_re3, raw_result)
+        if re_result3:
+            for key, value in re_result3.groupdict().items():
+                if value is None:
+                    result[key] = "No match found"
+                elif value.isdigit():
+                    result[key] = int(value)
+                else:
+                    result[key] = value
 
-    return result
+        return result
 
 
 def parse_traceroute(raw_result):

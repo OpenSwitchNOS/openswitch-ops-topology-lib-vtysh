@@ -1799,26 +1799,21 @@ rtt min/avg/max/mdev = 0.465/0.465/0.465/0.000 ms
 
 def test_parse_ping():
     raw_result = """\
-    PATTERN: 0xabcd
-    PING 10.1.1.1 (10.1.1.1) 100(128) bytes of data.
-    108 bytes from 10.1.1.1: icmp_seq=1 ttl=64 time=0.037 ms
-    108 bytes from 10.1.1.1: icmp_seq=2 ttl=64 time=0.028 ms
+    PING 10.1.1.10 (10.1.1.10) 100(128) bytes of data.
 
-    --- 10.1.1.1 ping statistics ---
-    2 packets transmitted, 2 received, 0% packet loss, time 999ms
-    rtt min/avg/max/mdev = 0.028/0.032/0.037/0.007 ms
-    """
+From 10.1.1.1 icmp_seq=1 Destination Host Unreachable
+From 10.1.1.1 icmp_seq=2 Destination Host Unreachable
+From 10.1.1.1 icmp_seq=3 Destination Host Unreachable
+From 10.1.1.1 icmp_seq=4 Destination Host Unreachable
+
+--- 10.1.1.10 ping statistics ---
+5 packets transmitted, 0 received, +4 errors, 100% packet loss, time 4001ms"""
 
     result = parse_ping(raw_result)
 
     expected = {
-        'transmitted': 2,
-        'received': 2,
-        'errors': 'No match found',
-        'loss_pc': 0,
-        'datagram_size': 100,
-        'time': 999,
-        'data': 'abcd',
+        'loss_pc': 100,
+        'reason': 'Destination unreachable'
     }
 
     ddiff = DeepDiff(result, expected)
@@ -1827,26 +1822,21 @@ def test_parse_ping():
 
 def test_parse_ping6():
     raw_result = """\
-    PATTERN: 0xabcd
-    PING 1001::1(1001::1) 100 data bytes
-    108 bytes from 1001::1: icmp_seq=1 ttl=64 time=0.043 ms
-    108 bytes from 1001::1: icmp_seq=2 ttl=64 time=0.071 ms
+    PING 1002::3(1002::3) 100 data bytes
+From 1002::2 icmp_seq=1 Destination unreachable: Address unreachable
+From 1002::2 icmp_seq=2 Destination unreachable: Address unreachable
+From 1002::2 icmp_seq=3 Destination unreachable: Address unreachable
+From 1002::2 icmp_seq=4 Destination unreachable: Address unreachable
+From 1002::2 icmp_seq=5 Destination unreachable: Address unreachable
 
-    --- 1001::1 ping statistics ---
-    2 packets transmitted, 2 received, 0% packet loss, time 1000ms
-    rtt min/avg/max/mdev = 0.043/0.057/0.071/0.014 ms
-    """
+--- 1002::3 ping statistics ---
+5 packets transmitted, 0 received, +5 errors, 100% packet loss, time 4000ms"""
 
     result = parse_ping6(raw_result)
 
     expected = {
-        'transmitted': 2,
-        'received': 2,
-        'errors': 'No match found',
-        'loss_pc': 0,
-        'time': 1000,
-        'datagram_size': 100,
-        'data': 'abcd'
+        'loss_pc': 100,
+        'reason': 'Destination unreachable'
     }
 
     ddiff = DeepDiff(result, expected)
