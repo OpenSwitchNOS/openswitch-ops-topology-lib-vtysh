@@ -6032,13 +6032,6 @@ local-priority {local_priority} name {name} color {color}',
                     {
                         'name': 'portlbl',
                         'doc': 'Ethernet interface or LAG'
-                    },
-                    {
-                        'name': 'direction',
-                        'doc': (
-                            '<both | rx | tx>'
-                        ),
-                        'optional': True,
                     }
                 ]
             }
