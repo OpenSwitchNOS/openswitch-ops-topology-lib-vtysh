@@ -4175,21 +4175,18 @@ def parse_show_vlog_config_daemon(raw_result):
     Parse the 'show vlog config daemon' command raw output.
 
     :param str raw_result: vtysh raw result string.
-    :return: The parsed result of the show vlog config daemon command.
-            : True on success or False on Failure.
+    :rtype: dict
+    :return: returns the exact string
     """
     show_config_daemon_re = (
-        r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
+        r'((?P<daemon>[a-z]+\-[a-z]+)\s+(?P<syslog>\w+)\s+(?P<file>\w+))'
     )
-    re_result = {}
-    for line in raw_result.splitlines():
-        re_result = re.search(show_config_daemon_re, raw_result)
-        if re_result is None:
-            assert False
-        else:
-            if "ops-lldpd" and "WARN" in line:
-                return True
-    return False
+    result = {}
+    re_result = re.search(show_config_daemon_re, raw_result)
+    result = re_result.groupdict()
+    for key, value in result.items():
+        result[key] = value
+    return result
 
 
 def parse_show_vlog_config_feature(raw_result):

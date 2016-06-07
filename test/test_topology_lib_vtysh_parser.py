@@ -3079,10 +3079,13 @@ Daemon              Syslog     File
 ======================================
 ops-lldpd           INFO       INFO
     """
-
     result = parse_show_vlog_config_daemon(raw_result)
 
-    expected = False
+    expected = {
+        'daemon': 'ops-lldpdi',
+        'syslog': 'INFO',
+        'file': 'INFO',
+    }
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff
