@@ -174,6 +174,44 @@ def parse_show_interface(raw_result):
     return result
 
 
+def parse_show_interface_brief(raw_result):
+    """
+    Parse the 'show interface brief' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show interface brief command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+            'status': 'down',
+            'type': 'eth',
+            'vlanId': '--',
+            'reason': 'Administratively down',
+            'mode': 'routed',
+            'interface': 1,
+            'speed': '--',
+            'port': '--'
+        }
+    """
+    show_interface_re = (
+        r'\s(?P<interface>\w+)\s+(?P<vlanId>[0-9,--]+)\s+(?P<type>\s+\w+)\s+'
+        r'(?P<mode>\w+)\s+(?P<status>\w+)\s+(?P<reason>\S+\s\w+)\s+'
+        r'(?P<speed>\S+)\s+(?P<port>\S+)'
+    )
+
+    result = {}
+    for line in raw_result.splitlines():
+        re_result = re.search(show_interface_re, line)
+        if re_result:
+            partial = re_result.groupdict()
+            result[partial['interface']] = partial
+
+    return result
+
+
 def parse_show_interface_lag(raw_result):
     """
     Parse the 'show interface' command raw output.
@@ -6005,7 +6043,7 @@ def parse_show_spanning_tree_mst_config(raw_result):
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
-    'parse_show_interface_vlan',
+    'parse_show_interface_brief', 'parse_show_interface_vlan',
     'parse_show_interface_mgmt', 'parse_show_interface_subinterface',
     'parse_show_interface_queues',
     'parse_show_lacp_configuration', 'parse_show_lldp_neighbor_info',
