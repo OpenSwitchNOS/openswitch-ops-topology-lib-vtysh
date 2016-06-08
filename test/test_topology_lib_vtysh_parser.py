@@ -23,6 +23,7 @@ from __future__ import unicode_literals
 from deepdiff import DeepDiff
 
 from topology_lib_vtysh.parser import (parse_show_interface,
+                                       parse_show_interface_brief,
                                        parse_show_interface_vlan,
                                        parse_show_interface_mgmt,
                                        parse_show_interface_subinterface,
@@ -4182,4 +4183,34 @@ AAA Authentication:
     result = parse_show_aaa_authentication(raw_result)
     ddiff = DeepDiff(result, expected_result)
 
+    assert not ddiff
+
+
+def test_parse_show_interface_brief():
+    raw_result = """\
+
+-------------------------------------------------------------------------------
+Ethernet         VLAN    Type Mode   Status  Reason               Speed    Port
+Interface                                                          (Mb/s)   Ch#
+-------------------------------------------------------------------------------
+ bridge_normal   --      eth  routed up                               --     --
+ 1               --      eth  routed down   Administratively down     --     --
+
+    """
+
+    result = parse_show_interface_brief(raw_result)
+
+    expected = {
+        '1': {
+            'status': 'down',
+            'type': ' eth',
+            'vlanId': '--',
+            'reason': 'Administratively down',
+            'mode': 'routed',
+            'interface': '1',
+            'speed': '--',
+            'port': '--'
+        }
+    }
+    ddiff = DeepDiff(result, expected)
     assert not ddiff
