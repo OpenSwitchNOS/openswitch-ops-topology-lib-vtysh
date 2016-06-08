@@ -12682,8 +12682,7 @@ class ConfigVrrpInterface(ContextManager):
 
     ::
 
-            ['config terminal', 'interface {port}', \
-            'vrrp {grpid} address-family {af}']
+            ['config terminal', 'interface {port}', 'vrrp {grpid} address-family {af}']
 
     post_commands:
 
@@ -12961,6 +12960,33 @@ def show_interface(
     )
 
     return parse_show_interface(result)
+
+
+def show_interface_brief(
+        enode):
+    """
+    Show all interfaces
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show interface brief
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_interface_brief`
+    """
+
+    cmd = [
+        'show interface brief'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_interface_brief(result)
 
 
 def show_interface_mgmt(
@@ -15537,6 +15563,7 @@ __all__ = [
     'ConfigAccessListIpTestname',
     'ConfigVrrpInterface',
     'show_interface',
+    'show_interface_brief',
     'show_interface_mgmt',
     'show_interface_subinterface',
     'show_interface_subinterface_brief',
