@@ -12683,7 +12683,7 @@ class ConfigVrrpInterface(ContextManager):
     ::
 
             ['config terminal', 'interface {port}', \
-            'vrrp {grpid} address-family {af}']
+             'vrrp {grpid} address-family {af}']
 
     post_commands:
 
@@ -15543,6 +15543,87 @@ def show_spanning_tree_mst_config(
     return parse_show_spanning_tree_mst_config(result)
 
 
+def show_vlan_summary(
+        enode):
+    """
+    Shows VLAN summary information.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show vlan summary
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_vlan_summary`
+    """
+
+    cmd = [
+        'show vlan summary'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_vlan_summary(result)
+
+
+def show_vlan_internal(
+        enode):
+    """
+    Shows internal VLAN information.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show vlan internal
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_vlan_internal`
+    """
+
+    cmd = [
+        'show vlan internal'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_vlan_internal(result)
+
+
+def show_vrf(
+        enode):
+    """
+    Show vrf information.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show vrf
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_vrf`
+    """
+
+    cmd = [
+        'show vrf'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_vrf(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -15646,5 +15727,8 @@ __all__ = [
     'diag_dump',
     'show_spanning_tree',
     'show_spanning_tree_mst',
-    'show_spanning_tree_mst_config'
+    'show_spanning_tree_mst_config',
+    'show_vlan_summary',
+    'show_vlan_internal',
+    'show_vrf'
 ]

@@ -99,7 +99,10 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_config_tftp_server_secure_mode,
                                        parse_config_tftp_server_no_secure_mode,
                                        parse_show_radius_server,
-                                       parse_show_aaa_authentication
+                                       parse_show_aaa_authentication,
+                                       parse_show_vlan_summary,
+                                       parse_show_vlan_internal,
+                                       parse_show_vrf
                                        )
 
 
@@ -4213,4 +4216,77 @@ Interface                                                          (Mb/s)   Ch#
         }
     }
     ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_vlan_summary():
+    raw_result = """
+Number of existing VLANs: 4
+    """
+
+    expected_result = {
+        'vlan_count': '4'
+    }
+
+    result = parse_show_vlan_summary(raw_result)
+    ddiff = DeepDiff(result, expected_result)
+
+    assert not ddiff
+
+
+def test_parse_show_vlan_internal():
+    raw_result = """
+Internal VLAN range  : 1024-4094
+Internal VLAN policy : ascending
+------------------------
+Assigned Interfaces:
+        VLAN            Interface
+        ----            ---------
+        1024            1
+        1025            10
+    """
+
+    expected_result = {
+        '1024': {
+            'vlan_id': '1024',
+            'interface': '1'
+        },
+        '1025': {
+            'vlan_id': '1025',
+            'interface': '10'
+        }
+    }
+
+    result = parse_show_vlan_internal(raw_result)
+    ddiff = DeepDiff(result, expected_result)
+
+    assert not ddiff
+
+
+def test_parse_show_vrf():
+    raw_result = """
+VRF Configuration:
+------------------
+VRF Name : vrf_default
+
+        Interfaces :     Status :
+        -------------------------
+        10                  up
+        1                   up
+    """
+
+    expected_result = {
+        '10': {
+            'interface': '10',
+            'status': 'up'
+        },
+        '1': {
+            'interface': '1',
+            'status': 'up'
+        }
+    }
+
+    result = parse_show_vrf(raw_result)
+    ddiff = DeepDiff(result, expected_result)
+
     assert not ddiff

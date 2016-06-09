@@ -6040,6 +6040,112 @@ def parse_show_spanning_tree_mst_config(raw_result):
     return result
 
 
+def parse_show_vlan_summary(raw_result):
+    """
+    Parse the 'show vlan summary' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show vlan summary command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+            'vlan_count': '4'
+        }
+    """
+
+    show_re = (
+        r'Number\s+of\s+existing\s+VLANs:\s+(?P<vlan_count>\d+)'
+    )
+
+    re_result = re.search(show_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    return result
+
+
+def parse_show_vrf(raw_result):
+    """
+    Parse the 'show vrf' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show vrf command in a \
+        dictionary of the form. Returns None if no vrf found or \
+        empty dictionary:
+
+     ::
+
+        {
+             '10': { 'status': 'up',
+                    'interface': '10'
+             },
+             '1': {
+                    'status': 'up',
+                    'interface': '1'
+             }
+        }
+    """
+
+    show_re = (
+        r'\s+(?P<interface>\w+)\s+(?P<status>\w+)'
+    )
+
+    result = {}
+
+    for line in raw_result.splitlines():
+        re_result = re.search(show_re, line)
+        if re_result:
+            partial = re_result.groupdict()
+            result[partial['interface']] = partial
+    if result == {}:
+        return None
+    else:
+        return result
+
+
+def parse_show_vlan_internal(raw_result):
+    """
+    Parse the 'show vlan internal' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show vlan internal command in a \
+        dictionary of the form. Returns None if no internal vlan found or \
+        empty dictionary:
+
+     ::
+
+        {
+            '1024': { 'interface': '1',
+                      'vlan_id': '1024'
+            },
+            '1025': { 'interface': '10',
+                      'vlan_id': '1025'
+            }
+        }
+    """
+
+    show_re = (
+        r'\s+(?P<vlan_id>\d+)\s+(?P<interface>\S+)'
+    )
+
+    result = {}
+
+    for line in raw_result.splitlines():
+        re_result = re.search(show_re, line)
+        if re_result:
+            partial = re_result.groupdict()
+            result[partial['vlan_id']] = partial
+    if result == {}:
+        return None
+    else:
+        return result
+
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
@@ -6080,8 +6186,8 @@ __all__ = [
     'parse_erase_startup_config', 'parse_config_tftp_server_secure_mode',
     'parse_config_tftp_server_no_secure_mode', 'parse_show_mirror',
     'parse_show_qos_cos_map',
-    'parse_show_qos_dscp_map',
-    'parse_show_qos_queue_profile',
+    'parse_show_qos_dscp_map', 'parse_show_vrf',
+    'parse_show_qos_queue_profile', 'parse_show_vlan_internal',
     'parse_show_qos_schedule_profile', 'parse_show_radius_server',
     'parse_show_qos_trust', 'parse_show_aaa_authentication',
     'parse_config_tftp_server_no_path', 'parse_show_snmp_community',
@@ -6089,5 +6195,5 @@ __all__ = [
     'parse_diag_dump_lacp_basic', 'parse_show_snmpv3_users',
     'parse_show_snmp_agent_port', 'parse_diag_dump', 'parse_show_events',
     'parse_show_spanning_tree', 'parse_show_spanning_tree_mst_config',
-    'parse_show_spanning_tree_mst'
+    'parse_show_spanning_tree_mst', 'parse_show_vlan_summary'
 ]
