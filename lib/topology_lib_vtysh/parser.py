@@ -2124,6 +2124,46 @@ def parse_ping6(raw_result):
         return result
 
 
+def parse_copy_core_dump(raw_result):
+    """
+    Parse the 'parse_copy_core_dump' command raw output.
+    :param str raw_result: copy core-dump raw result string.
+    :rtype: dict
+    :return: The parsed result of the copy core-dump to server:
+
+    ::
+
+       {
+           0:{
+              'status': 'success'
+              'reason': 'core dump copied'
+           }
+       }
+   """
+
+    if "Error code " in raw_result:
+        return {"status": "failed", "reason": "Error found while coping"}
+
+    if "No coredump found for" in raw_result:
+        return {"status": "failed", "reason": "no core dump found"}
+
+    if "Failed to validate instance ID" in raw_result:
+        return {"status": "failed", "reason": "instance ID not valid"}
+
+    if "ssh: connect to host" in raw_result:
+        return {"status": "failed", "reason": "ssh-connection issue for SFTP"}
+
+    if (
+        "copying ..." in raw_result and
+        "Sent " in raw_result and
+        "bytes" in raw_result and
+        "seconds" in raw_result
+    ):
+        return {"status": "success", "reason": "core dump copied"}
+    else:
+        return {"status": "failed", "reason": "undefined error"}
+
+
 def parse_traceroute(raw_result):
     """
     Parse the 'traceroute' command raw output.
@@ -6073,7 +6113,7 @@ __all__ = [
     'parse_show_ip_ospf_route',
     'parse_show_startup_config', 'parse_show_interface_subinterface_brief',
     'parse_show_mac_address_table',
-    'parse_show_tftp_server', 'parse_show_core_dump',
+    'parse_show_tftp_server', 'parse_show_core_dump', 'parse_copy_core_dump',
     'parse_config_tftp_server_enable',
     'parse_config_tftp_server_no_enable', 'parse_config_tftp_server_path',
     'parse_config_tftp_server_no_path', 'parse_show_interface_lag',
