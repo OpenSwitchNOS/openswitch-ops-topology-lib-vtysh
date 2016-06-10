@@ -1886,6 +1886,9 @@ def parse_ping_repetitions(raw_result):
     )
 
     result = {}
+    if re.search('connect: Network is unreachable', raw_result):
+        result['transmitted'] = None
+        return result
     for line in raw_result.splitlines():
         re_result = re.search(ping_re, line)
         if re_result:
@@ -1916,7 +1919,10 @@ def parse_ping6_repetitions(raw_result):
             'packet_loss': 0
         }
     """
-
+    result = {}
+    if re.search('connect: Network is unreachable', raw_result):
+        result['transmitted'] = None
+        return result
     ping_re = (
         r'^(?P<transmitted>\d+) packets transmitted, '
         r'(?P<received>\d+) received,'

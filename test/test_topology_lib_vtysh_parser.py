@@ -1771,7 +1771,9 @@ PING 10.0.0.2 (10.0.0.2) 100(128) bytes of data.
 1 packets transmitted, 1 received, 0% packet loss, time 0ms
 rtt min/avg/max/mdev = 0.213/0.213/0.213/0.000 ms
     """
-
+    raw_result_networkunreachable = """\
+connect: Network is unreachable
+    """
     result = parse_ping_repetitions(raw_result)
 
     expected = {
@@ -1784,6 +1786,13 @@ rtt min/avg/max/mdev = 0.213/0.213/0.213/0.000 ms
     ddiff = DeepDiff(result, expected)
     assert not ddiff
 
+    result = parse_ping_repetitions(raw_result_networkunreachable)
+    expected = {
+        'transmitted': None
+    }
+
+    assert not ddiff
+
 
 def test_parse_ping6_repetitions():
     raw_result = """\
@@ -1793,6 +1802,9 @@ PING 2000::2 (2000::2) 100(128) bytes of data.
 --- 2000::2 ping statistics ---
 1 packets transmitted, 1 received, 0% packet loss, time 0ms
 rtt min/avg/max/mdev = 0.465/0.465/0.465/0.000 ms
+    """
+    raw_result_networkunreachable = """\
+connect: Network is unreachable
     """
 
     result = parse_ping6_repetitions(raw_result)
@@ -1805,6 +1817,12 @@ rtt min/avg/max/mdev = 0.465/0.465/0.465/0.000 ms
     }
 
     ddiff = DeepDiff(result, expected)
+    assert not ddiff
+    result = parse_ping_repetitions(raw_result_networkunreachable)
+    expected = {
+        'transmitted': None
+    }
+
     assert not ddiff
 
 
