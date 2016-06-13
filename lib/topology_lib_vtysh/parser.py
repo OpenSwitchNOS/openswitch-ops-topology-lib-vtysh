@@ -4848,6 +4848,25 @@ def parse_show_mirror(raw_result):
         return result
 
 
+def parse_config_mirror_session_no_destination_interface(raw_result):
+    """
+    Parse the 'no destination interface' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: str
+    :return: the raw string, no parsing
+    """
+
+    show_re = (
+        r'Destination interface removed, mirror session \S+ shutdown'
+    )
+
+    re_result = re.match(show_re, raw_result)
+    assert re_result
+
+    return raw_result
+
+
 def parse_show_qos_cos_map(raw_result):
     """
     Parse the show command raw output.
@@ -6191,6 +6210,7 @@ __all__ = [
     'parse_config_tftp_server_no_path', 'parse_show_interface_lag',
     'parse_erase_startup_config', 'parse_config_tftp_server_secure_mode',
     'parse_config_tftp_server_no_secure_mode', 'parse_show_mirror',
+    'parse_config_mirror_session_no_destination_interface',
     'parse_show_qos_cos_map',
     'parse_show_qos_dscp_map', 'parse_show_vrf',
     'parse_show_qos_queue_profile', 'parse_show_vlan_internal',

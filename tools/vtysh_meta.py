@@ -6013,7 +6013,8 @@ local-priority {local_priority} name {name} color {color}',
                     'Un-set the destination interface and '
                     'shutdown the session.'
                 ),
-                'arguments': []
+                'arguments': [],
+                'returns': True
             },
             {
                 'command': 'shutdown',

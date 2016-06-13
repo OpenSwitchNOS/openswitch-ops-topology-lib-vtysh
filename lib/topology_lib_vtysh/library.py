@@ -12044,6 +12044,8 @@ class ConfigMirrorSession(ContextManager):
 
             # no destination interface
 
+        :return: A dictionary as returned by
+         :func:`topology_lib_vtysh.parser.parse_config_mirror_session_no_destination_interface`
         """
 
         cmd = [
@@ -12055,8 +12057,7 @@ class ConfigMirrorSession(ContextManager):
             shell='vtysh'
         )
 
-        if result:
-            raise determine_exception(result)(result)
+        return parse_config_mirror_session_no_destination_interface(result)
 
     def shutdown(
             self):
