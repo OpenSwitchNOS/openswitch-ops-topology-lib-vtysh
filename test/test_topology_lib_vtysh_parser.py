@@ -307,8 +307,8 @@ Number of MAC addresses : 2
 
 MAC Address          VLAN     Type       Port
 --------------------------------------------------
-:00:00:00:00:00:01   1        dynamic    1
-:00:00:00:00:00:02   2        dynamic    2
+00:00:00:00:00:01   1        dynamic    1
+00:00:00:00:00:02   2        dynamic    2
     """
 
     result = parse_show_mac_address_table(raw_result)
@@ -316,12 +316,12 @@ MAC Address          VLAN     Type       Port
     expected = {
         'age_time': '300',
         'no_mac_address': '2',
-        ':00:00:00:00:00:01': {
+        '00:00:00:00:00:01': {
             'vlan_id': '1',
             'from': 'dynamic',
             'port': '1'
         },
-        ':00:00:00:00:00:02': {
+        '00:00:00:00:00:02': {
             'vlan_id': '2',
             'from': 'dynamic',
             'port': '2'
