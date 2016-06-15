@@ -6076,41 +6076,40 @@ def parse_show_vlan_summary(raw_result):
 def parse_show_vrf(raw_result):
     """
     Parse the 'show vrf' command raw output.
-
     :param str raw_result: vtysh raw result string.
     :rtype: dict
     :return: The parsed result of the show vrf command in a \
-        dictionary of the form. Returns None if no vrf found or \
-        empty dictionary:
-
+        dictionary of the form:
      ::
-
         {
-             '10': { 'status': 'up',
-                    'interface': '10'
-             },
-             '1': {
-                    'status': 'up',
-                    'interface': '1'
-             }
-        }
+            <VRF_NAME> :
+            {
+                <INTERFACE_NAME>: <STATUS>
+            }
+        },
     """
 
-    show_re = (
-        r'\s+(?P<interface>\w+)\s+(?P<status>\w+)'
+    interface_re = (
+        r'(.*)######\s+Interfaces\s+:\s+Status\s+:(.*)'
     )
 
+    raw_result = re.sub(r'\n+\s+(--+\s*)+', '\n', raw_result)
+    raw_result = re.sub(r'\n+\s*\n+', '\n', raw_result)
+    vrf_split_output = raw_result.split('VRF Name : ')
     result = {}
-
-    for line in raw_result.splitlines():
-        re_result = re.search(show_re, line)
-        if re_result:
-            partial = re_result.groupdict()
-            result[partial['interface']] = partial
-    if result == {}:
-        return None
-    else:
-        return result
+    for i in range(1, len(vrf_split_output)):
+        vrf = vrf_split_output[i]
+        output = re.sub(r'\n', '######', vrf)
+        re_result = re.search(interface_re, output)
+        if re_result is None:
+            assert False, "Interface pattern is not available"
+        vrf_name = re_result.group(1)
+        vrf_interface_details = re.sub(r'######', '\n', re_result.group(2))
+        result[vrf_name] = {}
+        res = re.findall(r'(\S+)\s+(\S+)\s*\n*', vrf_interface_details)
+        for interface, status in res:
+            result[vrf_name][interface] = status
+    return result
 
 
 def parse_show_vlan_internal(raw_result):

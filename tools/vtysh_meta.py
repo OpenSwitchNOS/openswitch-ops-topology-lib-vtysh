@@ -392,6 +392,15 @@ VTYSH_SPEC = OrderedDict([
                         'optional': True
                     },
                     {
+                        'name': 'vrf',
+                        'doc': (
+                            'Type of service to be placed'
+                            ' in each probe.'
+                        ),
+                        'prefix': 'vrf ',
+                        'optional': True
+                    },
+                    {
                         'name': 'ip_option',
                         'doc': 'Ip-option.',
                         'prefix': 'ip-option ',
@@ -1003,6 +1012,26 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
+                'command': 'vrf {vrf_name}',
+                'doc': 'Configure vrf',
+                'arguments': [
+                    {
+                        'name': 'vrf_name',
+                        'doc': 'VRF NAME',
+                    },
+                ],
+            },
+            {
+                'command': 'no vrf {vrf_name}',
+                'doc': 'Delete  vrf',
+                'arguments': [
+                    {
+                        'name': 'vrf_name',
+                        'doc': 'VRF NAME',
+                    },
+                ],
+            },
+            {
                 'command': 'no interface loopback {loopback_id}',
                 'doc': 'Delete a L3 loopback interface',
                 'arguments': [
@@ -1053,6 +1082,12 @@ VTYSH_SPEC = OrderedDict([
                         'doc': 'Optional, route address to configure.',
                         'optional': True
                     },
+                    {
+                        'name': 'vrf_name',
+                        'doc': 'VRF based route address to configure.',
+                        'optional': True,
+                        'prefix': 'vrf '
+                    },
                 ],
             },
             {
@@ -1071,6 +1106,12 @@ VTYSH_SPEC = OrderedDict([
                         'name': 'metric',
                         'doc': 'Optional, route address to configure.',
                         'optional': True
+                    },
+                    {
+                        'name': 'vrf_name',
+                        'doc': 'VRF based route address to configure.',
+                        'optional': True,
+                        'prefix': 'vrf '
                     },
                 ],
             },
@@ -3132,6 +3173,26 @@ local-priority {local_priority} name {name} color {color}',
                     {
                         'name': 'ipv4',
                         'doc': 'A.B.C.D/M Interface IP address.',
+                    },
+                ],
+            },
+            {
+                'command': 'vrf attach {vrf_name}',
+                'doc': 'Mapping port to vrf',
+                'arguments': [
+                    {
+                        'name': 'vrf_name',
+                        'doc': 'Mapping the port to vrf.',
+                    },
+                ],
+            },
+            {
+                'command': 'no vrf attach {vrf_name}',
+                'doc': 'Unmapping port from vrf',
+                'arguments': [
+                    {
+                        'name': 'vrf_name',
+                        'doc': 'Unmapping the port from vrf.',
                     },
                 ],
             },
