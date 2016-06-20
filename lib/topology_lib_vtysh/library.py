@@ -173,6 +173,32 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def no_interface_vlan(
+            self, vlan_id):
+        """
+        Delete a interface vlan
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no interface vlan {vlan_id}
+
+        :param vlan_id: VLAN Interface Identifier.
+        """
+
+        cmd = [
+            'no interface vlan {vlan_id}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def no_interface_loopback(
             self, loopback_id):
         """
@@ -12675,7 +12701,7 @@ class ConfigVrrpInterface(ContextManager):
 
     ::
 
-            ['config terminal', 'interface {port}', \
+            ['config terminal', 'interface {port}',\
              'vrrp {grpid} address-family {af}']
 
     post_commands:

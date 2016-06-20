@@ -991,7 +991,6 @@ VTYSH_SPEC = OrderedDict([
 
                 ],
             },
-
             {
                 'command': 'no interface lag {lag_id}',
                 'doc': 'Delete a lag',
@@ -999,6 +998,16 @@ VTYSH_SPEC = OrderedDict([
                     {
                         'name': 'lag_id',
                         'doc': 'link-aggregation identifier.',
+                    },
+                ],
+            },
+            {
+                'command': 'no interface vlan {vlan_id}',
+                'doc': 'Delete a interface vlan',
+                'arguments': [
+                    {
+                        'name': 'vlan_id',
+                        'doc': 'VLAN Interface Identifier.',
                     },
                 ],
             },
