@@ -147,6 +147,32 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def no_interface_vlan(
+            self, vlan_id):
+        """
+        Delete a vlan interface
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no interface vlan {vlan_id}
+
+        :param vlan_id: vlan identifier.
+        """
+
+        cmd = [
+            'no interface vlan {vlan_id}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def no_interface_lag(
             self, lag_id):
         """
