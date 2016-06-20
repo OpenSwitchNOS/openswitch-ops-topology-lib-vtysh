@@ -949,6 +949,335 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Show vrf information.',
                 'arguments': [],
                 'returns': True
+            },
+            {
+                'command': 'show ip igmp snooping config',
+                'doc':  'Show igmp snooping configured on the switch for \
+                        all Vlan.',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show ip igmp snooping vlan {vlan_id} config',
+                'doc':  'Show igmp snooping configured on the switch for \
+                        particular Vlan.',
+                'arguments': [
+                    {
+                        'name': 'vlan_id',
+                        'doc': (
+                            'vlan id <2-4094>.'
+                        ),
+                        'optional': False
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show ipv6 mld snooping config',
+                'doc':  'Show mld snooping configured on the switch for \
+                        all Vlan.',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show ipv6 mld snooping vlan {vlan_id} config',
+                'doc':  'Show mld snooping configured on the switch for \
+                        particular Vlan.',
+                'arguments': [
+                    {
+                        'name': 'vlan_id',
+                        'doc': (
+                            'vlan id <2-4094>.'
+                        ),
+                        'optional': False
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show ip igmp snooping',
+                'doc':  'Show all or specific vlan on which igmp \
+                         snooping enabled.',
+                'arguments': [
+                    {
+                        'name': 'vlan_id',
+                        'doc': (
+                            'vlan id <2-4094>.'
+                        ),
+                        'prefix': 'vlan ',
+                        'optional': True
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show ipv6 mld snooping',
+                'doc':  'Show all or specific vlan on which mld \
+                         snooping enabled.',
+                'arguments': [
+                    {
+                        'name': 'vlan_id',
+                        'doc': (
+                            'vlan id <2-4094>.'
+                        ),
+                        'prefix': 'vlan ',
+                        'optional': True
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show ip igmp snooping vlan {vlan_id} group',
+                'doc':  'Show all or specific multicast group details \
+                         of vlan on which igmp snooping enabled.',
+                'arguments': [
+                    {
+                        'name': 'vlan_id',
+                        'doc': (
+                            'vlan id <2-4094>.'
+                        )
+                    },
+                    {
+                        'name': 'group_ip',
+                        'doc': (
+                            'group ip of form X.X.X.X'
+                        ),
+                        'optional': True
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show ipv6 mld snooping vlan {vlan_id} group',
+                'doc':  'Show all or specific multicast group details \
+                         of vlan on which mld snooping enabled.',
+                'arguments': [
+                    {
+                        'name': 'vlan_id',
+                        'doc': (
+                            'vlan id <2-4094>.'
+                        )
+                    },
+                    {
+                        'name': 'group_ip',
+                        'doc': (
+                            'group ip of form X:X::X:X'
+                        ),
+                        'optional': True
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show ip igmp snooping vlan {vlan_id} group \
+{group_ip} source',
+                'doc':  'Show source details of the group configured \
+                         over vlan on which igmp snooping enabled.',
+                'arguments': [
+                    {
+                        'name': 'vlan_id',
+                        'doc': (
+                            'vlan id <2-4094>.'
+                        )
+                    },
+                    {
+                        'name': 'group_ip',
+                        'doc': (
+                            'group ip of form X.X.X.X'
+                        )
+                    },
+                    {
+                        'name': 'src_ip',
+                        'doc': (
+                            'source ip of form X.X.X.X'
+                        ),
+                        'optional': True
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show ipv6 mld snooping vlan {vlan_id} group \
+{group_ip} source',
+                'doc':  'Show source details of the group configured \
+                         over vlan on which mld snooping enabled.',
+                'arguments': [
+                    {
+                        'name': 'vlan_id',
+                        'doc': (
+                            'vlan id <2-4094>.'
+                        )
+                    },
+                    {
+                        'name': 'group_ip',
+                        'doc': (
+                            'group ip of form X:X::X:X'
+                        )
+                    },
+                    {
+                        'name': 'src_ip',
+                        'doc': (
+                            'source ip of form X:X::X:X'
+                        ),
+                        'optional': True
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show ip igmp snooping vlan {vlan_id} group \
+{group_ip} port {port}',
+                'doc':  'Show port details of the group configured \
+                         over vlan on which igmp snooping enabled.',
+                'arguments': [
+                    {
+                        'name': 'vlan_id',
+                        'doc': (
+                            'vlan id <2-4094>.'
+                        )
+                    },
+                    {
+                        'name': 'group_ip',
+                        'doc': (
+                            'group ip of form X.X.X.X'
+                        ),
+                    },
+                    {
+                        'name': 'port',
+                        'doc': (
+                            'IFNAME'
+                        ),
+                        'optional': True
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show ipv6 mld snooping vlan {vlan_id} group \
+{group_ip} port',
+                'doc':  'Show port details of the group configured \
+                         over vlan on which mld snooping enabled.',
+                'arguments': [
+                    {
+                        'name': 'vlan_id',
+                        'doc': (
+                            'vlan id <2-4094>.'
+                        )
+                    },
+                    {
+                        'name': 'group_ip',
+                        'doc': (
+                            'group ip of form X:X::X:X'
+                        ),
+                    },
+                    {
+                        'name': 'port',
+                        'doc': (
+                            'IFNAME'
+                        ),
+                        'optional': True
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show ip igmp snooping vlan {vlan_id} counters',
+                'doc':  'Show counters of all or specific vlan on which \
+                         igmp snooping enabled.',
+                'arguments': [
+                    {
+                        'name': 'vlan_id',
+                        'doc': (
+                            'vlan id <2-4094>.'
+                        ),
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show ipv6 mld snooping vlan {vlan_id} counters',
+                'doc':  'Show counters of all or specific vlan on which \
+                         mld snooping enabled.',
+                'arguments': [
+                    {
+                        'name': 'vlan_id',
+                        'doc': (
+                            'vlan id <2-4094>.'
+                        ),
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show ip igmp snooping counters',
+                'doc':  'Show counters of all or specific vlan on which \
+                         igmp snooping enabled.',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show ipv6 mld snooping counters',
+                'doc':  'Show counters of all or specific vlan on which \
+                         mld snooping enabled.',
+                'arguments': [],
+                'returns': True
+            },
+
+            {
+                'command': 'show ip igmp snooping statistics',
+                'doc':  'Show statistics of all or specific vlan on which \
+                         igmp snooping enabled.',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show ipv6 mld snooping statistics',
+                'doc':  'Show statistics of all or specific vlan on which \
+                         mld snooping enabled.',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show ip igmp snooping vlan {vlan_id} statistics',
+                'doc':  'Show statistics of all or specific vlan on which \
+                         igmp snooping enabled.',
+                'arguments': [
+                    {
+                        'name': 'vlan_id',
+                        'doc': (
+                            'vlan id <2-4094>.'
+                        ),
+                        'optional': True
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show ipv6 mld snooping vlan {vlan_id} statistics',
+                'doc':  'Show statistics of all or specific vlan on which \
+                         mld snooping enabled.',
+                'arguments': [
+                    {
+                        'name': 'vlan_id',
+                        'doc': (
+                            'vlan id <2-4094>.'
+                        ),
+                        'optional': True
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show ip igmp snooping groups',
+                'doc':  'Show all groups.',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show ipv6 mld snooping groups',
+                'doc':  'Show all groups.',
+                'arguments': [],
+                'returns': True
             }
         ]
     }),
@@ -2989,6 +3318,76 @@ local-priority {local_priority} name {name} color {color}',
                 'command': 'aaa authentication login fallback error local',
                 'doc': 'AAA authentication login fallback configuration',
                 'arguments': [],
+            },
+            {
+                'command': 'ip igmp snooping fastlearn {portlbl}',
+                'doc': 'Enable igmp snooping fastlearn on port.',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'port label'
+                    }
+                ]
+            },
+            {
+                'command': 'no ip igmp snooping fastlearn {portlbl}',
+                'doc': 'Disable igmp snooping fastlearn on port.',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'port label'
+                    }
+                ]
+            },
+            {
+                'command': 'ipv6 mld snooping fastlearn {portlbl}',
+                'doc': 'Enable mld snooping fastlearn on port.',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'port label'
+                    }
+                ]
+            },
+            {
+                'command': 'no ipv6 mld snooping fastlearn {portlbl}',
+                'doc': 'Disable mld snooping fastlearn on port.',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'port label'
+                    }
+                ]
+            },
+            {
+                'command': 'ip igmp snooping drop-unknown {mode}',
+                'doc': 'Enable igmp snooping drop-unknown.',
+                'arguments': [
+                    {
+                        'name': 'mode',
+                        'doc': 'mode can be vlan-shared|vlan-exclusive'
+                    }
+                ]
+            },
+            {
+                'command': 'no ip igmp snooping drop-unknown',
+                'doc': 'Disable igmp snooping fastlearn on port.',
+                'arguments': []
+            },
+            {
+                'command': 'ipv6 mld snooping drop-unknown {mode}',
+                'doc': 'Enable mld snooping drop-unknown.',
+                'arguments': [
+                    {
+                        'name': 'mode',
+                        'doc': 'mode can be vlan-shared|vlan-exclusive'
+                    }
+                ]
+            },
+            {
+                'command': 'no ipv6 mld snooping drop-unknown',
+                'doc': 'Disable mld snooping drop-unknown.',
+                'arguments': []
             }
         ]
     }),
@@ -5430,6 +5829,324 @@ local-priority {local_priority} name {name} color {color}',
                         'doc': 'VLAN description.',
                     }
                 ],
+            },
+        ]
+    },
+    ),
+    ('config_vlan_mgmd', {
+        'doc': 'mulicast configuration over VLAN.',
+        'arguments': [
+            {
+                'name': 'vlan_id',
+                'doc': '<1-4094>  VLAN identifier.'
+            }
+        ],
+        'pre_commands': ['config terminal', 'vlan {vlan_id}'],
+        'post_commands': ['end'],
+        'commands': [
+            {
+                'command': 'ip igmp snooping enable',
+                'doc': 'Enable igmp snooping over VLAN.',
+                'arguments': []
+            },
+            {
+                'command': 'ip igmp snooping disable',
+                'doc': 'Disable igmp snooping over VLAN.',
+                'arguments': []
+            },
+            {
+                'command': 'ipv6 mld snooping enable',
+                'doc': 'Enable mld snooping over VLAN.',
+                'arguments': []
+            },
+            {
+                'command': 'ipv6 mld snooping disable',
+                'doc': 'Disable mld snooping over VLAN.',
+                'arguments': []
+            },
+            {
+                'command': 'no ip igmp snooping',
+                'doc': 'Disable igmp snooping over VLAN.',
+                'arguments': []
+            },
+            {
+                'command': 'no ipv6 mld snooping',
+                'doc': 'Disable mld snooping over VLAN.',
+                'arguments': []
+            },
+            {
+                'command': 'ip igmp snooping version {version}',
+                'doc': 'set igmp protocol version',
+                'arguments': [
+                    {
+                        'name': 'version',
+                        'doc': 'igmp protocol version 2|3.'
+                    }
+                ],
+            },
+            {
+                'command': 'ipv6 mld snooping version {version}',
+                'doc': 'set mld protocol version',
+                'arguments': [
+                    {
+                        'name': 'version',
+                        'doc': 'mld protocol version 1|2.'
+                    }
+                ],
+            },
+            {
+                'command': 'ip igmp snooping version {version} strict',
+                'doc': 'set igmp protocol version strict',
+                'arguments': [
+                    {
+                        'name': 'version',
+                        'doc': 'igmp protocol version 2|3.'
+                    }
+                ],
+            },
+            {
+                'command': 'ipv6 mld snooping version {version} strict',
+                'doc': 'set mld protocol version strict',
+                'arguments': [
+                    {
+                        'name': 'version',
+                        'doc': 'mld protocol version 1|2.'
+                    }
+                ],
+            },
+            {
+                'command': 'no ip igmp snooping version {version} strict',
+                'doc': 'Unset igmp protocol version strict',
+                'arguments': [
+                    {
+                        'name': 'version',
+                        'doc': 'igmp protocol version 2|3.'
+                    }
+                ],
+            },
+            {
+                'command': 'no ipv6 mld snooping version {version} strict',
+                'doc': 'Unset mld protocol version strict',
+                'arguments': [
+                    {
+                        'name': 'version',
+                        'doc': 'mld protocol version 1|2.'
+                    }
+                ],
+            },
+            {
+                'command': 'ip igmp snooping auto {portlbl}',
+                'doc': 'set igmp protocol port mode of port as auto',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'port label'
+                    }
+                ],
+            },
+            {
+                'command': 'ipv6 mld snooping auto {portlbl}',
+                'doc': 'set mld protocol port mode of port as auto',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'port label'
+                    }
+                ],
+            },
+            {
+                'command': 'no ip igmp snooping auto {portlbl}',
+                'doc': 'Unset igmp protocol port mode of port as auto',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'port label'
+                    }
+                ],
+            },
+            {
+                'command': 'no ipv6 mld snooping auto {portlbl}',
+                'doc': 'Unset mld protocol port mode of port as auto',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'port label'
+                    }
+                ],
+            },
+            {
+                'command': 'ip igmp snooping forward {portlbl}',
+                'doc': 'set igmp protocol port mode of port as forward',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'port label'
+                    }
+                ],
+            },
+            {
+                'command': 'ipv6 mld snooping forward {portlbl}',
+                'doc': 'set mld protocol port mode of port as forward',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'port label'
+                    }
+                ],
+            },
+            {
+                'command': 'no ip igmp snooping forward {portlbl}',
+                'doc': 'Unset igmp protocol port mode of port as forward',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'port label'
+                    }
+                ],
+            },
+            {
+                'command': 'no ipv6 mld snooping forward {portlbl}',
+                'doc': 'Unset mld protocol port mode of port as forward',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'port label'
+                    }
+                ],
+            },
+            {
+                'command': 'ip igmp snooping blocked {portlbl}',
+                'doc': 'set igmp protocol port mode of port as blocked',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'port label'
+                    }
+                ],
+            },
+            {
+                'command': 'ipv6 mld snooping blocked {portlbl}',
+                'doc': 'set mld protocol port mode of port as blocked',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'port label'
+                    }
+                ],
+            },
+            {
+                'command': 'no ip igmp snooping blocked {portlbl}',
+                'doc': 'Unset igmp protocol port mode of port as blocked.',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'port label'
+                    }
+                ],
+            },
+            {
+                'command': 'no ipv6 mld snooping blocked {portlbl}',
+                'doc': 'Unset mld protocol port mode of port as blocked',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'port label'
+                    }
+                ],
+            },
+            {
+                'command': 'ip igmp snooping static-group {group_ip}',
+                'doc': 'set igmp protocol static-group ',
+                'arguments': [
+                    {
+                        'name': 'group_ip',
+                        'doc': 'group_ip'
+                    }
+                ],
+            },
+            {
+                'command': 'ipv6 mld snooping static-group {group_ip}',
+                'doc': 'set mld protocol static-group ',
+                'arguments': [
+                    {
+                        'name': 'group_ip',
+                        'doc': 'group_ip'
+                    }
+                ],
+            },
+            {
+                'command': 'no ip igmp snooping static-group {group_ip}',
+                'doc': 'Unset igmp protocol static-group',
+                'arguments': [
+                    {
+                        'name': 'group_ip',
+                        'doc': 'group_ip'
+                    }
+                ],
+            },
+            {
+                'command': 'no ipv6 mld snooping static-group {group_ip}',
+                'doc': 'Unset mld protocol static-group',
+                'arguments': [
+                    {
+                        'name': 'group_ip',
+                        'doc': 'group_ip'
+                    }
+                ],
+            }
+        ]
+    },
+    ),
+    ('config_interface_vlan_mgmd', {
+        'doc': 'mulicast configuration over interface VLAN.',
+        'arguments': [
+            {
+                'name': 'vlan_id',
+                'doc': '<1-4094>  VLAN identifier.'
+            }
+        ],
+        'pre_commands': ['config terminal', 'interface vlan {vlan_id}'],
+        'post_commands': ['end'],
+        'commands': [
+            {
+                'command': 'ip igmp querier',
+                'doc': 'Enable igmp querier.',
+                'arguments': []
+            },
+            {
+                'command': 'no ip igmp querier',
+                'doc': 'Disable igmp querier.',
+                'arguments': []
+            },
+            {
+                'command': 'ipv6 mld querier',
+                'doc': 'Enable mld querier.',
+                'arguments': []
+            },
+            {
+                'command': 'no ipv6 mld querier',
+                'doc': 'Disable mld querier.',
+                'arguments': []
+            },
+            {
+                'command': 'ip igmp enable',
+                'doc': 'Enable igmp.',
+                'arguments': []
+            },
+            {
+                'command': 'ip igmp disable',
+                'doc': 'Disable igmp.',
+                'arguments': []
+            },
+            {
+                'command': 'ipv6 mld enable',
+                'doc': 'Enable mld.',
+                'arguments': []
+            },
+            {
+                'command': 'ipv6 mld disable',
+                'doc': 'Disable mld.',
+                'arguments': []
             }
         ]
     },

@@ -4519,6 +4519,220 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def ip_igmp_snooping_fastlearn(
+            self, portlbl):
+        """
+        Enable igmp snooping fastlearn on port.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip igmp snooping fastlearn {portlbl}
+
+        :param portlbl: port label
+        """
+
+        cmd = [
+            'ip igmp snooping fastlearn {portlbl}'
+        ]
+
+        port = self.enode.ports.get(portlbl, portlbl)
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ip_igmp_snooping_fastlearn(
+            self, portlbl):
+        """
+        Disable igmp snooping fastlearn on port.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ip igmp snooping fastlearn {portlbl}
+
+        :param portlbl: port label
+        """
+
+        cmd = [
+            'no ip igmp snooping fastlearn {portlbl}'
+        ]
+
+        port = self.enode.ports.get(portlbl, portlbl)
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ipv6_mld_snooping_fastlearn(
+            self, portlbl):
+        """
+        Enable mld snooping fastlearn on port.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ipv6 mld snooping fastlearn {portlbl}
+
+        :param portlbl: port label
+        """
+
+        cmd = [
+            'ipv6 mld snooping fastlearn {portlbl}'
+        ]
+
+        port = self.enode.ports.get(portlbl, portlbl)
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ipv6_mld_snooping_fastlearn(
+            self, portlbl):
+        """
+        Disable mld snooping fastlearn on port.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ipv6 mld snooping fastlearn {portlbl}
+
+        :param portlbl: port label
+        """
+
+        cmd = [
+            'no ipv6 mld snooping fastlearn {portlbl}'
+        ]
+
+        port = self.enode.ports.get(portlbl, portlbl)
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ip_igmp_snooping_drop_unknown(
+            self, mode):
+        """
+        Enable igmp snooping drop-unknown.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip igmp snooping drop-unknown {mode}
+
+        :param mode: mode can be vlan-shared|vlan-exclusive
+        """
+
+        cmd = [
+            'ip igmp snooping drop-unknown {mode}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ip_igmp_snooping_drop_unknown(
+            self):
+        """
+        Disable igmp snooping fastlearn on port.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ip igmp snooping drop-unknown
+
+        """
+
+        cmd = [
+            'no ip igmp snooping drop-unknown'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ipv6_mld_snooping_drop_unknown(
+            self, mode):
+        """
+        Enable mld snooping drop-unknown.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ipv6 mld snooping drop-unknown {mode}
+
+        :param mode: mode can be vlan-shared|vlan-exclusive
+        """
+
+        cmd = [
+            'ipv6 mld snooping drop-unknown {mode}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ipv6_mld_snooping_drop_unknown(
+            self):
+        """
+        Disable mld snooping drop-unknown.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ipv6 mld snooping drop-unknown
+
+        """
+
+        cmd = [
+            'no ipv6 mld snooping drop-unknown'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
 
 class RouteMap(ContextManager):
     """
@@ -11120,6 +11334,1044 @@ class ConfigVlan(ContextManager):
             raise determine_exception(result)(result)
 
 
+class ConfigVlanMgmd(ContextManager):
+    """
+    mulicast configuration over VLAN.
+
+    pre_commands:
+
+    ::
+
+            ['config terminal', 'vlan {vlan_id}']
+
+    post_commands:
+
+    ::
+
+            ['end']
+    """
+    def __init__(self, enode, vlan_id):
+        self.enode = enode
+        self.vlan_id = vlan_id
+
+    def __enter__(self):
+        commands = """\
+            config terminal
+            vlan {vlan_id}
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+        return self
+
+    def __exit__(self, type, value, traceback):
+        commands = """\
+            end
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+    def ip_igmp_snooping_enable(
+            self):
+        """
+        Enable igmp snooping over VLAN.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip igmp snooping enable
+
+        """
+
+        cmd = [
+            'ip igmp snooping enable'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ip_igmp_snooping_disable(
+            self):
+        """
+        Disable igmp snooping over VLAN.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip igmp snooping disable
+
+        """
+
+        cmd = [
+            'ip igmp snooping disable'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ipv6_mld_snooping_enable(
+            self):
+        """
+        Enable mld snooping over VLAN.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ipv6 mld snooping enable
+
+        """
+
+        cmd = [
+            'ipv6 mld snooping enable'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ipv6_mld_snooping_disable(
+            self):
+        """
+        Disable mld snooping over VLAN.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ipv6 mld snooping disable
+
+        """
+
+        cmd = [
+            'ipv6 mld snooping disable'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ip_igmp_snooping(
+            self):
+        """
+        Disable igmp snooping over VLAN.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ip igmp snooping
+
+        """
+
+        cmd = [
+            'no ip igmp snooping'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ipv6_mld_snooping(
+            self):
+        """
+        Disable mld snooping over VLAN.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ipv6 mld snooping
+
+        """
+
+        cmd = [
+            'no ipv6 mld snooping'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ip_igmp_snooping_version(
+            self, version):
+        """
+        set igmp protocol version
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip igmp snooping version {version}
+
+        :param version: igmp protocol version 2|3.
+        """
+
+        cmd = [
+            'ip igmp snooping version {version}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ipv6_mld_snooping_version(
+            self, version):
+        """
+        set mld protocol version
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ipv6 mld snooping version {version}
+
+        :param version: mld protocol version 1|2.
+        """
+
+        cmd = [
+            'ipv6 mld snooping version {version}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ip_igmp_snooping_version_strict(
+            self, version):
+        """
+        set igmp protocol version strict
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip igmp snooping version {version} strict
+
+        :param version: igmp protocol version 2|3.
+        """
+
+        cmd = [
+            'ip igmp snooping version {version} strict'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ipv6_mld_snooping_version_strict(
+            self, version):
+        """
+        set mld protocol version strict
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ipv6 mld snooping version {version} strict
+
+        :param version: mld protocol version 1|2.
+        """
+
+        cmd = [
+            'ipv6 mld snooping version {version} strict'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ip_igmp_snooping_version_strict(
+            self, version):
+        """
+        Unset igmp protocol version strict
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ip igmp snooping version {version} strict
+
+        :param version: igmp protocol version 2|3.
+        """
+
+        cmd = [
+            'no ip igmp snooping version {version} strict'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ipv6_mld_snooping_version_strict(
+            self, version):
+        """
+        Unset mld protocol version strict
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ipv6 mld snooping version {version} strict
+
+        :param version: mld protocol version 1|2.
+        """
+
+        cmd = [
+            'no ipv6 mld snooping version {version} strict'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ip_igmp_snooping_auto(
+            self, portlbl):
+        """
+        set igmp protocol port mode of port as auto
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip igmp snooping auto {portlbl}
+
+        :param portlbl: port label
+        """
+
+        cmd = [
+            'ip igmp snooping auto {portlbl}'
+        ]
+
+        port = self.enode.ports.get(portlbl, portlbl)
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ipv6_mld_snooping_auto(
+            self, portlbl):
+        """
+        set mld protocol port mode of port as auto
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ipv6 mld snooping auto {portlbl}
+
+        :param portlbl: port label
+        """
+
+        cmd = [
+            'ipv6 mld snooping auto {portlbl}'
+        ]
+
+        port = self.enode.ports.get(portlbl, portlbl)
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ip_igmp_snooping_auto(
+            self, portlbl):
+        """
+        Unset igmp protocol port mode of port as auto
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ip igmp snooping auto {portlbl}
+
+        :param portlbl: port label
+        """
+
+        cmd = [
+            'no ip igmp snooping auto {portlbl}'
+        ]
+
+        port = self.enode.ports.get(portlbl, portlbl)
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ipv6_mld_snooping_auto(
+            self, portlbl):
+        """
+        Unset mld protocol port mode of port as auto
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ipv6 mld snooping auto {portlbl}
+
+        :param portlbl: port label
+        """
+
+        cmd = [
+            'no ipv6 mld snooping auto {portlbl}'
+        ]
+
+        port = self.enode.ports.get(portlbl, portlbl)
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ip_igmp_snooping_forward(
+            self, portlbl):
+        """
+        set igmp protocol port mode of port as forward
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip igmp snooping forward {portlbl}
+
+        :param portlbl: port label
+        """
+
+        cmd = [
+            'ip igmp snooping forward {portlbl}'
+        ]
+
+        port = self.enode.ports.get(portlbl, portlbl)
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ipv6_mld_snooping_forward(
+            self, portlbl):
+        """
+        set mld protocol port mode of port as forward
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ipv6 mld snooping forward {portlbl}
+
+        :param portlbl: port label
+        """
+
+        cmd = [
+            'ipv6 mld snooping forward {portlbl}'
+        ]
+
+        port = self.enode.ports.get(portlbl, portlbl)
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ip_igmp_snooping_forward(
+            self, portlbl):
+        """
+        Unset igmp protocol port mode of port as forward
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ip igmp snooping forward {portlbl}
+
+        :param portlbl: port label
+        """
+
+        cmd = [
+            'no ip igmp snooping forward {portlbl}'
+        ]
+
+        port = self.enode.ports.get(portlbl, portlbl)
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ipv6_mld_snooping_forward(
+            self, portlbl):
+        """
+        Unset mld protocol port mode of port as forward
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ipv6 mld snooping forward {portlbl}
+
+        :param portlbl: port label
+        """
+
+        cmd = [
+            'no ipv6 mld snooping forward {portlbl}'
+        ]
+
+        port = self.enode.ports.get(portlbl, portlbl)
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ip_igmp_snooping_blocked(
+            self, portlbl):
+        """
+        set igmp protocol port mode of port as blocked
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip igmp snooping blocked {portlbl}
+
+        :param portlbl: port label
+        """
+
+        cmd = [
+            'ip igmp snooping blocked {portlbl}'
+        ]
+
+        port = self.enode.ports.get(portlbl, portlbl)
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ipv6_mld_snooping_blocked(
+            self, portlbl):
+        """
+        set mld protocol port mode of port as blocked
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ipv6 mld snooping blocked {portlbl}
+
+        :param portlbl: port label
+        """
+
+        cmd = [
+            'ipv6 mld snooping blocked {portlbl}'
+        ]
+
+        port = self.enode.ports.get(portlbl, portlbl)
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ip_igmp_snooping_blocked(
+            self, portlbl):
+        """
+        Unset igmp protocol port mode of port as blocked.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ip igmp snooping blocked {portlbl}
+
+        :param portlbl: port label
+        """
+
+        cmd = [
+            'no ip igmp snooping blocked {portlbl}'
+        ]
+
+        port = self.enode.ports.get(portlbl, portlbl)
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ipv6_mld_snooping_blocked(
+            self, portlbl):
+        """
+        Unset mld protocol port mode of port as blocked
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ipv6 mld snooping blocked {portlbl}
+
+        :param portlbl: port label
+        """
+
+        cmd = [
+            'no ipv6 mld snooping blocked {portlbl}'
+        ]
+
+        port = self.enode.ports.get(portlbl, portlbl)
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ip_igmp_snooping_static_group(
+            self, group_ip):
+        """
+        set igmp protocol static-group
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip igmp snooping static-group {group_ip}
+
+        :param group_ip: group_ip
+        """
+
+        cmd = [
+            'ip igmp snooping static-group {group_ip}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ipv6_mld_snooping_static_group(
+            self, group_ip):
+        """
+        set mld protocol static-group
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ipv6 mld snooping static-group {group_ip}
+
+        :param group_ip: group_ip
+        """
+
+        cmd = [
+            'ipv6 mld snooping static-group {group_ip}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ip_igmp_snooping_static_group(
+            self, group_ip):
+        """
+        Unset igmp protocol static-group
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ip igmp snooping static-group {group_ip}
+
+        :param group_ip: group_ip
+        """
+
+        cmd = [
+            'no ip igmp snooping static-group {group_ip}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ipv6_mld_snooping_static_group(
+            self, group_ip):
+        """
+        Unset mld protocol static-group
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ipv6 mld snooping static-group {group_ip}
+
+        :param group_ip: group_ip
+        """
+
+        cmd = [
+            'no ipv6 mld snooping static-group {group_ip}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+
+class ConfigInterfaceVlanMgmd(ContextManager):
+    """
+    mulicast configuration over interface VLAN.
+
+    pre_commands:
+
+    ::
+
+            ['config terminal', 'interface vlan {vlan_id}']
+
+    post_commands:
+
+    ::
+
+            ['end']
+    """
+    def __init__(self, enode, vlan_id):
+        self.enode = enode
+        self.vlan_id = vlan_id
+
+    def __enter__(self):
+        commands = """\
+            config terminal
+            interface vlan {vlan_id}
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+        return self
+
+    def __exit__(self, type, value, traceback):
+        commands = """\
+            end
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+    def ip_igmp_querier(
+            self):
+        """
+        Enable igmp querier.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip igmp querier
+
+        """
+
+        cmd = [
+            'ip igmp querier'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ip_igmp_querier(
+            self):
+        """
+        Disable igmp querier.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ip igmp querier
+
+        """
+
+        cmd = [
+            'no ip igmp querier'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ipv6_mld_querier(
+            self):
+        """
+        Enable mld querier.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ipv6 mld querier
+
+        """
+
+        cmd = [
+            'ipv6 mld querier'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_ipv6_mld_querier(
+            self):
+        """
+        Disable mld querier.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no ipv6 mld querier
+
+        """
+
+        cmd = [
+            'no ipv6 mld querier'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ip_igmp_enable(
+            self):
+        """
+        Enable igmp.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip igmp enable
+
+        """
+
+        cmd = [
+            'ip igmp enable'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ip_igmp_disable(
+            self):
+        """
+        Disable igmp.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ip igmp disable
+
+        """
+
+        cmd = [
+            'ip igmp disable'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ipv6_mld_enable(
+            self):
+        """
+        Enable mld.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ipv6 mld enable
+
+        """
+
+        cmd = [
+            'ipv6 mld enable'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def ipv6_mld_disable(
+            self):
+        """
+        Disable mld.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # ipv6 mld disable
+
+        """
+
+        cmd = [
+            'ipv6 mld disable'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+
 class ConfigTftpServer(ContextManager):
     """
     tftp-server configuration.
@@ -12701,7 +13953,7 @@ class ConfigVrrpInterface(ContextManager):
 
     ::
 
-            ['config terminal', 'interface {port}',\
+            ['config terminal', 'interface {port}', \
              'vrrp {grpid} address-family {af}']
 
     post_commands:
@@ -15643,6 +16895,714 @@ def show_vrf(
     return parse_show_vrf(result)
 
 
+def show_ip_igmp_snooping_config(
+        enode):
+    """
+    Show igmp snooping configured on the switch for
+    all Vlan.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip igmp snooping config
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_igmp_snooping_config`
+    """
+
+    cmd = [
+        'show ip igmp snooping config'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ip_igmp_snooping_config(result)
+
+
+def show_ip_igmp_snooping_vlan_config(
+        enode, vlan_id):
+    """
+    Show igmp snooping configured on the switch for
+    particular Vlan.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip igmp snooping vlan {vlan_id} config
+
+    :param vlan_id: vlan id <2-4094>.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_igmp_snooping_vlan_config`
+    """
+
+    cmd = [
+        'show ip igmp snooping vlan {vlan_id} config'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ip_igmp_snooping_vlan_config(result)
+
+
+def show_ipv6_mld_snooping_config(
+        enode):
+    """
+    Show mld snooping configured on the switch for
+    all Vlan.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ipv6 mld snooping config
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ipv6_mld_snooping_config`
+    """
+
+    cmd = [
+        'show ipv6 mld snooping config'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ipv6_mld_snooping_config(result)
+
+
+def show_ipv6_mld_snooping_vlan_config(
+        enode, vlan_id):
+    """
+    Show mld snooping configured on the switch for
+    particular Vlan.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ipv6 mld snooping vlan {vlan_id} config
+
+    :param vlan_id: vlan id <2-4094>.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ipv6_mld_snooping_vlan_config`
+    """
+
+    cmd = [
+        'show ipv6 mld snooping vlan {vlan_id} config'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ipv6_mld_snooping_vlan_config(result)
+
+
+def show_ip_igmp_snooping(
+        enode, vlan_id=''):
+    """
+    Show all or specific vlan on which igmp
+    snooping enabled.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip igmp snooping
+
+    :param vlan_id: vlan id <2-4094>.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_igmp_snooping`
+    """
+
+    cmd = [
+        'show ip igmp snooping'
+    ]
+
+    if vlan_id:
+        cmd.append(
+            '{}{{vlan_id}}{}'.format(
+                'vlan ', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ip_igmp_snooping(result)
+
+
+def show_ipv6_mld_snooping(
+        enode, vlan_id=''):
+    """
+    Show all or specific vlan on which mld
+    snooping enabled.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ipv6 mld snooping
+
+    :param vlan_id: vlan id <2-4094>.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ipv6_mld_snooping`
+    """
+
+    cmd = [
+        'show ipv6 mld snooping'
+    ]
+
+    if vlan_id:
+        cmd.append(
+            '{}{{vlan_id}}{}'.format(
+                'vlan ', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ipv6_mld_snooping(result)
+
+
+def show_ip_igmp_snooping_vlan_group(
+        enode, vlan_id, group_ip=''):
+    """
+    Show all or specific multicast group details
+    of vlan on which igmp snooping enabled.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip igmp snooping vlan {vlan_id} group
+
+    :param vlan_id: vlan id <2-4094>.
+    :param group_ip: group ip of form X.X.X.X
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_igmp_snooping_vlan_group`
+    """
+
+    cmd = [
+        'show ip igmp snooping vlan {vlan_id} group'
+    ]
+
+    if group_ip:
+        cmd.append(
+            '{}{{group_ip}}{}'.format(
+                '', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ip_igmp_snooping_vlan_group(result)
+
+
+def show_ipv6_mld_snooping_vlan_group(
+        enode, vlan_id, group_ip=''):
+    """
+    Show all or specific multicast group details
+    of vlan on which mld snooping enabled.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ipv6 mld snooping vlan {vlan_id} group
+
+    :param vlan_id: vlan id <2-4094>.
+    :param group_ip: group ip of form X:X::X:X
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ipv6_mld_snooping_vlan_group`
+    """
+
+    cmd = [
+        'show ipv6 mld snooping vlan {vlan_id} group'
+    ]
+
+    if group_ip:
+        cmd.append(
+            '{}{{group_ip}}{}'.format(
+                '', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ipv6_mld_snooping_vlan_group(result)
+
+
+def show_ip_igmp_snooping_vlan_group_source(
+        enode, vlan_id, group_ip, src_ip=''):
+    """
+    Show source details of the group configured
+    over vlan on which igmp snooping enabled.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip igmp snooping vlan {vlan_id} group {group_ip} source
+
+    :param vlan_id: vlan id <2-4094>.
+    :param group_ip: group ip of form X.X.X.X
+    :param src_ip: source ip of form X.X.X.X
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_igmp_snooping_vlan_group_source`
+    """
+
+    cmd = [
+        'show ip igmp snooping vlan {vlan_id} group {group_ip} source'
+    ]
+
+    if src_ip:
+        cmd.append(
+            '{}{{src_ip}}{}'.format(
+                '', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ip_igmp_snooping_vlan_group_source(result)
+
+
+def show_ipv6_mld_snooping_vlan_group_source(
+        enode, vlan_id, group_ip, src_ip=''):
+    """
+    Show source details of the group configured
+    over vlan on which mld snooping enabled.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ipv6 mld snooping vlan {vlan_id} group {group_ip} source
+
+    :param vlan_id: vlan id <2-4094>.
+    :param group_ip: group ip of form X:X::X:X
+    :param src_ip: source ip of form X:X::X:X
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ipv6_mld_snooping_vlan_group_source`
+    """
+
+    cmd = [
+        'show ipv6 mld snooping vlan {vlan_id} group {group_ip} source'
+    ]
+
+    if src_ip:
+        cmd.append(
+            '{}{{src_ip}}{}'.format(
+                '', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ipv6_mld_snooping_vlan_group_source(result)
+
+
+def show_ip_igmp_snooping_vlan_group_port(
+        enode, vlan_id, group_ip, port=''):
+    """
+    Show port details of the group configured                          over
+    vlan on which igmp snooping enabled.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip igmp snooping vlan {vlan_id} group {group_ip} port {port}
+
+    :param vlan_id: vlan id <2-4094>.
+    :param group_ip: group ip of form X.X.X.X
+    :param port: IFNAME
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_igmp_snooping_vlan_group_port`
+    """
+
+    cmd = [
+        'show ip igmp snooping vlan {vlan_id} group {group_ip} port {port}'
+    ]
+
+    if port:
+        cmd.append(
+            '{}{{port}}{}'.format(
+                '', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ip_igmp_snooping_vlan_group_port(result)
+
+
+def show_ipv6_mld_snooping_vlan_group_port(
+        enode, vlan_id, group_ip, port=''):
+    """
+    Show port details of the group configured                          over
+    vlan on which mld snooping enabled.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ipv6 mld snooping vlan {vlan_id} group {group_ip} port
+
+    :param vlan_id: vlan id <2-4094>.
+    :param group_ip: group ip of form X:X::X:X
+    :param port: IFNAME
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ipv6_mld_snooping_vlan_group_port`
+    """
+
+    cmd = [
+        'show ipv6 mld snooping vlan {vlan_id} group {group_ip} port'
+    ]
+
+    if port:
+        cmd.append(
+            '{}{{port}}{}'.format(
+                '', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ipv6_mld_snooping_vlan_group_port(result)
+
+
+def show_ip_igmp_snooping_vlan_counters(
+        enode, vlan_id):
+    """
+    Show counters of all or specific vlan on which
+    igmp snooping enabled.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip igmp snooping vlan {vlan_id} counters
+
+    :param vlan_id: vlan id <2-4094>.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_igmp_snooping_vlan_counters`
+    """
+
+    cmd = [
+        'show ip igmp snooping vlan {vlan_id} counters'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ip_igmp_snooping_vlan_counters(result)
+
+
+def show_ipv6_mld_snooping_vlan_counters(
+        enode, vlan_id):
+    """
+    Show counters of all or specific vlan on which
+    mld snooping enabled.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ipv6 mld snooping vlan {vlan_id} counters
+
+    :param vlan_id: vlan id <2-4094>.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ipv6_mld_snooping_vlan_counters`
+    """
+
+    cmd = [
+        'show ipv6 mld snooping vlan {vlan_id} counters'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ipv6_mld_snooping_vlan_counters(result)
+
+
+def show_ip_igmp_snooping_counters(
+        enode):
+    """
+    Show counters of all or specific vlan on which
+    igmp snooping enabled.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip igmp snooping counters
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_igmp_snooping_counters`
+    """
+
+    cmd = [
+        'show ip igmp snooping counters'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ip_igmp_snooping_counters(result)
+
+
+def show_ipv6_mld_snooping_counters(
+        enode):
+    """
+    Show counters of all or specific vlan on which
+    mld snooping enabled.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ipv6 mld snooping counters
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ipv6_mld_snooping_counters`
+    """
+
+    cmd = [
+        'show ipv6 mld snooping counters'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ipv6_mld_snooping_counters(result)
+
+
+def show_ip_igmp_snooping_statistics(
+        enode):
+    """
+    Show statistics of all or specific vlan on which
+    igmp snooping enabled.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip igmp snooping statistics
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_igmp_snooping_statistics`
+    """
+
+    cmd = [
+        'show ip igmp snooping statistics'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ip_igmp_snooping_statistics(result)
+
+
+def show_ipv6_mld_snooping_statistics(
+        enode):
+    """
+    Show statistics of all or specific vlan on which
+    mld snooping enabled.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ipv6 mld snooping statistics
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ipv6_mld_snooping_statistics`
+    """
+
+    cmd = [
+        'show ipv6 mld snooping statistics'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ipv6_mld_snooping_statistics(result)
+
+
+def show_ip_igmp_snooping_vlan_statistics(
+        enode, vlan_id=''):
+    """
+    Show statistics of all or specific vlan on which
+    igmp snooping enabled.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip igmp snooping vlan {vlan_id} statistics
+
+    :param vlan_id: vlan id <2-4094>.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_igmp_snooping_vlan_statistics`
+    """
+
+    cmd = [
+        'show ip igmp snooping vlan {vlan_id} statistics'
+    ]
+
+    if vlan_id:
+        cmd.append(
+            '{}{{vlan_id}}{}'.format(
+                '', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ip_igmp_snooping_vlan_statistics(result)
+
+
+def show_ipv6_mld_snooping_vlan_statistics(
+        enode, vlan_id=''):
+    """
+    Show statistics of all or specific vlan on which
+    mld snooping enabled.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ipv6 mld snooping vlan {vlan_id} statistics
+
+    :param vlan_id: vlan id <2-4094>.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ipv6_mld_snooping_vlan_statistics`
+    """
+
+    cmd = [
+        'show ipv6 mld snooping vlan {vlan_id} statistics'
+    ]
+
+    if vlan_id:
+        cmd.append(
+            '{}{{vlan_id}}{}'.format(
+                '', ''
+            )
+        )
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ipv6_mld_snooping_vlan_statistics(result)
+
+
+def show_ip_igmp_snooping_groups(
+        enode):
+    """
+    Show all groups.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip igmp snooping groups
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_igmp_snooping_groups`
+    """
+
+    cmd = [
+        'show ip igmp snooping groups'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ip_igmp_snooping_groups(result)
+
+
+def show_ipv6_mld_snooping_groups(
+        enode):
+    """
+    Show all groups.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ipv6 mld snooping groups
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ipv6_mld_snooping_groups`
+    """
+
+    cmd = [
+        'show ipv6 mld snooping groups'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ipv6_mld_snooping_groups(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -15656,6 +17616,8 @@ __all__ = [
     'ConfigRouterOspf',
     'ConfigRouterBgp',
     'ConfigVlan',
+    'ConfigVlanMgmd',
+    'ConfigInterfaceVlanMgmd',
     'ConfigTftpServer',
     'ConfigDhcpServer',
     'ConfigMirrorSession',
@@ -15749,5 +17711,27 @@ __all__ = [
     'show_spanning_tree_mst_config',
     'show_vlan_summary',
     'show_vlan_internal',
-    'show_vrf'
+    'show_vrf',
+    'show_ip_igmp_snooping_config',
+    'show_ip_igmp_snooping_vlan_config',
+    'show_ipv6_mld_snooping_config',
+    'show_ipv6_mld_snooping_vlan_config',
+    'show_ip_igmp_snooping',
+    'show_ipv6_mld_snooping',
+    'show_ip_igmp_snooping_vlan_group',
+    'show_ipv6_mld_snooping_vlan_group',
+    'show_ip_igmp_snooping_vlan_group_source',
+    'show_ipv6_mld_snooping_vlan_group_source',
+    'show_ip_igmp_snooping_vlan_group_port',
+    'show_ipv6_mld_snooping_vlan_group_port',
+    'show_ip_igmp_snooping_vlan_counters',
+    'show_ipv6_mld_snooping_vlan_counters',
+    'show_ip_igmp_snooping_counters',
+    'show_ipv6_mld_snooping_counters',
+    'show_ip_igmp_snooping_statistics',
+    'show_ipv6_mld_snooping_statistics',
+    'show_ip_igmp_snooping_vlan_statistics',
+    'show_ipv6_mld_snooping_vlan_statistics',
+    'show_ip_igmp_snooping_groups',
+    'show_ipv6_mld_snooping_groups'
 ]

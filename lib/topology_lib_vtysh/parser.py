@@ -6171,6 +6171,789 @@ def parse_show_vlan_internal(raw_result):
         return result
 
 
+def parse_show_ip_igmp_snooping_config(raw_result):
+    """
+    Parse the 'show ip igmp snooping config' command raw output.
+    :rtype: dict
+    :return: The parsed result of the show ip igmp snooping config command \
+         in a dictionary of the form:
+    ::
+
+        {
+            'Delayed_flush_timeout': '0',
+            'Control_unknown_multicast': 'Yes',
+            'Forced_fast_leave_timeout': '4'
+            'Look-up_Mode': 'mac',
+            'VLAN50': {
+                'Querier_Allowed': 'Yes',
+                'IGMP_Version': '2',
+                'IGMP_Enabled': 'Yes',
+                'VLAN_ID': '50',
+                'Querier_Interval': '125',
+                'VLAN_NAME': 'VLAN50'
+            },
+            'DEFAULT_VLAN': {
+                'Querier_Allowed': 'Yes',
+                'IGMP_Version': '2',
+                'IGMP_Enabled': 'No',
+                'VLAN_ID': '1',
+                'Querier_Interval': '125',
+                'VLAN_NAME': 'DEFAULT_VLAN'
+            },
+        }
+    """
+    parsed_result = {}
+    # This remove Empty line in output
+    raw_result = re.sub(r'\n*(\s*--+\s*)+', ' \n', raw_result)
+    raw_result = re.sub(r'\n+\s*\n+', '\n', raw_result)
+    output = re.sub(r'\n', '#MGMD#', raw_result)
+    re_result = re.search(r'.*IGMP Service Config(.*)(VLAN ID.*)', output)
+    if re_result is None:
+        assert False, 'Output not matched with given pattern'
+    else:
+        srv_cfg = re_result.group(1)
+        vlan_cfg = re_result.group(2)
+        srv_cfg = re.sub(r'#MGMD#', '\n', srv_cfg)
+        vlan_cfg = re.sub(r'#MGMD#', '\n', vlan_cfg)
+        parse_output = re.findall(r'(.*)\[.*\]\s+:\s+(\S+)\s*', srv_cfg)
+        for key, value in parse_output:
+            parsed_result['_'.join(key.strip().split(' '))] = value
+        vlan_cfg = re.sub(r'\n(.*?)\n', r' \1 \n', vlan_cfg)
+        vlan_cfg = vlan_cfg.splitlines()
+        vlan_cfg = ''.join(vlan_cfg[1:])
+        parse_output = re.findall(r'\s*(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s*', vlan_cfg)   # noqa
+        for vid, vlan_name, isEnable, isQurier, ver, qrInt in parse_output:
+            parsed_result[vlan_name] = {}
+            parsed_result[vlan_name]['VLAN_ID'] = vid
+            parsed_result[vlan_name]['VLAN_NAME'] = vlan_name
+            parsed_result[vlan_name]['IGMP_Enabled'] = isEnable
+            parsed_result[vlan_name]['Querier_Allowed'] = isQurier
+            parsed_result[vlan_name]['IGMP_Version'] = ver
+            parsed_result[vlan_name]['Querier_Interval'] = qrInt
+    return parsed_result
+
+
+def parse_show_ipv6_mld_snooping_config(raw_result):
+    """
+    Parse the 'show ipv6 mld snooping config' command raw output.
+    :rtype: dict
+    :return: The parsed result of the show ip igmp snooping config command \
+         in a dictionary of the form:
+    ::
+
+        {}
+    """
+    parsed_result = {}
+    return parsed_result
+
+
+def parse_show_ip_igmp_snooping_vlan_config(raw_result):
+    """
+    Parse the 'show ip igmp snooping vlan {vlan_id} config' command raw output.
+    :rtype: dict
+    :return: The parsed result of the show ip igmp snooping vlan {vlan_id} \
+        config command in a dictionary of the form:
+    ::
+
+        {
+            'Querier_Allowed': 'Yes',
+            'Robustness_Count': '2',
+            'VLAN_NAME': 'VLAN50',
+            'Last_Member_Query_Interval': '1',
+            'Strict_Mode': 'No',
+            'Query_Max_Response_Time': '10',
+            'IGMP_Version': '2',
+            'IGMP_Enabled': 'Yes',
+            'VLAN_ID': '50',
+            'Querier_Interval': '125'
+            'if23': {
+                'Fast_Leave': 'Yes',
+                'Forced_Fast_Leave': 'No',
+                'Port': '23',
+                'Type': '1000T',
+                'Port_Mode': 'Auto'
+            },
+            'if24': {
+                'Fast_Leave': 'Yes',
+                'Forced_Fast_Leave': 'No',
+                'Port': '24',
+                'Type': '1000T',
+                'Port_Mode': 'Auto'
+            },
+        }
+    """
+    parsed_result = {}
+    # This remove Empty line in output
+    raw_result = re.sub(r'\n*(\s*--+\s*)+', ' \n', raw_result)
+    raw_result = re.sub(r'\n+\s*\n+', '\n', raw_result)
+    out = re.sub(r'\n', '#MGMD#', raw_result)
+    re_result = re.search(r'.*IGMP Service VLAN Config(.*)(Port\s\s+.*)', out)
+    if re_result is None:
+        assert False, 'Output not matched with given pattern'
+    else:
+        srv_cfg = re_result.group(1)
+        vlan_cfg = re_result.group(2)
+        srv_cfg = re.sub(r'#MGMD#', '\n', srv_cfg)
+        vlan_cfg = re.sub(r'#MGMD#', '\n', vlan_cfg)
+        srv_cfg = [ln for ln in srv_cfg.split('\n') if ln .strip('\n, ') != '']
+        srv_cfg = '\n'.join(srv_cfg)
+        show_re = (
+            r'\s+VLAN ID.*:\s+(?P<VLAN_ID>\S+)\s*\n*'
+            r'\s+VLAN NAME.*:\s+(?P<VLAN_NAME>\S+)\s*\n*'
+            r'\s+IGMP Enabled.*:\s+(?P<IGMP_Enabled>\S+)\s*\n*'
+            r'\s+Querier Allowed.*:\s+(?P<Querier_Allowed>\S+)\s*\n*'
+            r'\s+IGMP Version.*:\s+(?P<IGMP_Version>\S+)\s*\n*'
+            r'\s+Strict Mode.*:\s+(?P<Strict_Mode>\S+)\s*\n*'
+            r'\s+Last Member Query Interval.*:\s+(?P<Last_Member_Query_Interval>\S+)\s*\n*'   # noqa
+            r'\s+Querier Interval.*:\s+(?P<Querier_Interval>\S+)\s*\n*'
+            r'\s+Query Max.*:\s+(?P<Query_Max_Response_Time>\S+)\s*\n*'
+            r'\s+Robustness Count.*:\s+(?P<Robustness_Count>\S+)\s*\n*'
+        )
+        re_result = re.match(show_re, srv_cfg)
+        parsed_result = re_result.groupdict()
+        vlan_cfg = vlan_cfg.splitlines()
+        vlan_cfg = ''.join(vlan_cfg[1:])
+        parse_output = re.findall(r'\s*(\S+)\s+(\S+)\s+\|\s+(\S+)\s+(\S+)\s+(\S+)\s*', vlan_cfg)   # noqa
+        for Port, Type, Port_Mode, Force_Fast_Lve, Fast_Lve in parse_output:
+            parsed_result['if'+Port] = {}
+            parsed_result['if'+Port]['Port'] = Port
+            parsed_result['if'+Port]['Type'] = Type
+            parsed_result['if'+Port]['Port_Mode'] = Port_Mode
+            parsed_result['if'+Port]['Forced_Fast_Leave'] = Force_Fast_Lve
+            parsed_result['if'+Port]['Fast_Leave'] = Fast_Lve
+    return parsed_result
+
+
+def parse_show_ipv6_mld_snooping_vlan_config(raw_result):
+    """
+    Parse the 'show ipv6 mld snooping vlan {vlan_id} config' command raw \
+        output.
+    :rtype: dict
+    :return: The parsed result of the show ip igmp snooping config command \
+         in a dictionary of the form:
+    ::
+
+        {}
+    """
+    parsed_result = {}
+    return parsed_result
+
+
+def parse_show_ip_igmp_snooping(raw_result):
+    """
+    Parse the 'show ip igmp snooping {vlan XXX}' command raw output.
+    :rtype: dict
+    :return: The parsed result of the show ip igmp snooping {vlan XXX} \
+        command in a dictionary of the form:
+    ::
+
+        {
+            'vlans_mgmd_enabled': ['10', '1'],
+            'groups': ['238.1.1.2', '238.1.1.1'],
+            'Current_count_of_multicast_groups_joined': '0',
+            'IGMP_Drop_Unknown_Multicast.': 'Disabled'
+            'Total_VLANs_with_IGMP_enabled': '1',
+            'IGMP_Drop_Unknown_Multicast_Status.': 'Disabled',
+            '10': {
+                'groups': ['238.1.1.2', '238.1.1.1']
+                'Querier_Address': '',
+                'VLAN_Name': 'DEFAULT_VLAN_1',
+                'IGMP_Version': '3',
+                'Querier_UpTime': '',
+                'Querier_Port': '',
+                'Querier_Expiration_Time': ''
+                '238.1.1.2': {
+                    'Tracking': 'Filter',
+                    'Expires': '3m 29s',
+                    'Mode': 'INC ',
+                    'Vers': '3',
+                    'Uptime': '0m 51s'
+                },
+                '238.1.1.1': {
+                    'Tracking': 'Filter',
+                    'Expires': '3m 29s',
+                    'Mode': 'INC ',
+                    'Vers': '3',
+                    'Uptime': '0m 51s'
+                },
+            },
+            '1': {
+                'groups': ['238.1.1.2', '238.1.1.1']
+                'Querier_Address': '',
+                'VLAN_Name': 'DEFAULT_VLAN_1',
+                'IGMP_Version': '3',
+                'Querier_UpTime': '',
+                'Querier_Port': '',
+                'Querier_Expiration_Time': ''
+                '238.1.1.2':
+                {
+                    'Tracking': 'Filter',
+                    'Expires': '3m 29s',
+                    'Mode': 'INC ',
+                    'Vers': '3',
+                    'Uptime': '0m 51s'
+                },
+                '238.1.1.1':
+                {
+                    'Tracking': 'Filter',
+                    'Expires': '3m 29s',
+                    'Mode': 'INC ',
+                    'Vers': '3',
+                    'Uptime': '0m 51s'
+                },
+            },
+        }
+    """
+    parsed_result = {}
+    vlans_mgmd_enabled = []
+    all_groups = []
+    # To remove any emplty lines and other unwanted  character in output
+    raw_result = re.sub(r'\n+(--+\s*)+', ' \n', raw_result)
+    raw_result = re.sub(r'\n+\s*\n+', '\n', raw_result)
+    output = raw_result.split('VLAN ID : ')
+    igmp_protocol_info = output[0]
+    parse_output = re.findall(r'(.*)\s+:\s+(\S+)\s*', igmp_protocol_info)
+    for key, value in parse_output:
+        parsed_result['_'.join(key.strip().split(' '))] = value
+    igmp_service_info = output[1:]
+    for output in igmp_service_info:
+        grp_per_vlan = []
+        group_info = None
+        output = re.sub(r'\n', '#MGMD#', output)
+        re_result = re.search(
+            r'(.*)(VLAN Name : .*)(Active Group Addresses.*)*',
+            output)
+        print(re_result.groups())
+        vlan_id = re.sub(r'#MGMD#', '\n', re_result.group(1)).strip('\n, ')
+        service_info = re.sub(r'#MGMD#', '\n', re_result.group(2))
+        if re_result.group(3):
+            group_info = re.sub(r'#MGMD#', '\n', re_result.group(3))
+        parsed_result[str(vlan_id)] = {}
+        for line in service_info.splitlines():
+            if line.strip() is '':
+                continue
+            parse_output = line.split(':')
+            if len(parse_output) == 2:
+                key = '_'.join(parse_output[0].strip().split(' '))
+                parsed_result[str(vlan_id)][key] = parse_output[1].strip()
+                if 'IGMP_Version' == key:
+                    vlans_mgmd_enabled.append(str(vlan_id))
+        if group_info:
+            group_info = group_info.splitlines()
+            group_info = '\n'.join(group_info[1:])
+            parse_output = re.findall(r'\s*(\S+)\s+(\S+)\s+(\S+)\s+(\S{0,3} )\s+(\S+ \S+)\s+(\S+ \S+)\s*\n*', group_info)  # noqa
+            for grp_addr, Tracking, Vers, Mode, Uptime, Expire in parse_output:
+                grp_per_vlan.append(grp_addr)
+                all_groups.append(grp_addr)
+                parsed_result[str(vlan_id)][grp_addr] = {}
+                parsed_result[str(vlan_id)][grp_addr]['Tracking'] = Tracking
+                parsed_result[str(vlan_id)][grp_addr]['Vers'] = Vers
+                parsed_result[str(vlan_id)][grp_addr]['Mode'] = Mode
+                parsed_result[str(vlan_id)][grp_addr]['Uptime'] = Uptime
+                parsed_result[str(vlan_id)][grp_addr]['Expires'] = Expire
+                parsed_result[str(vlan_id)]['groups'] = list(set(grp_per_vlan))
+    parsed_result['vlans_mgmd_enabled'] = list(set(vlans_mgmd_enabled))
+    if all_groups != []:
+        parsed_result['groups'] = list(set(all_groups))
+    else:
+        parsed_result['groups'] = []
+    return parsed_result
+
+
+def parse_show_ipv6_mld_snooping(raw_result):
+    """
+    Parse the 'show ipv6 mld snooping {vlan XXX}' command raw \
+        output.
+    :rtype: dict
+    :return: The parsed result of the show ipv6 mld snooping {vlan XXX} \
+          command in a dictionary of the form:
+    ::
+
+        {}
+    """
+    parsed_result = {}
+    return parsed_result
+
+
+def parse_show_ip_igmp_snooping_vlan_group(raw_result):
+    """
+    Parse the 'show ip igmp snooping vlan XXX group {group}' \
+        command raw output.
+    :rtype: dict
+    :return: The parsed result of the show ip igmp snooping vlan XXX  \
+        group {group} command in a dictionary of the form:
+    ::
+
+        {
+            <group_ip> :
+            {
+                <VLAN_ID>:
+                {
+                    VLAN_ID : 10,
+                    VLAN_Name : VLAN10,
+                    Last_Reporter : 192.168.1.3,
+                    Group_Type : Filter,
+                    Group_Address : 239.1.1.1,
+                    if4 : {
+                        'expire': '3m 55s',
+                        'uptime': '0m 26s',
+                        'isV1timer': False,
+                        'ver': '2',
+                        'isV2Timer': False,
+                        'mode': ' ',
+                        'srcBlk': '0',
+                        'srcFwd': '0'
+                    },
+                }
+            },
+        },
+    """
+    parsed_result = {}
+    # To remove any emplty lines and other unwanted character in output
+    raw_result = re.sub(r'\n+(--+\s*)+', ' \n', raw_result)
+    raw_result = re.sub(r'\n+\s*\n+', '\n', raw_result)
+    outputs = raw_result.split('IGMP ports and group information for group ')
+    for output in outputs:
+        if output.strip('\n, ') is '':
+            continue
+        output = re.sub(r'\n', '#MGMD#', output)
+        re_result = re.search(r'(.*)(VLAN ID.*)V1.*Blocked(.*)', output)
+        if re_result is None:
+            assert False, "Unable to process IGMP ports and group \
+                information for group, either given output is not \
+                proper or invalid to this parser function"
+        else:
+            grp_id = (re.sub(r'#MGMD#', '\n',
+                      re_result.group(1))).strip('\n, ')
+            mgmd_group_details = re.sub(r'#MGMD#', '\n',
+                                        re_result.group(2))
+            mgmd_group_port_details = re.sub(r'#MGMD#', '\n',
+                                             re_result.group(3))
+            mgmd_group_port_details = mgmd_group_port_details + '\n'
+            parsed_result[grp_id] = {}
+            lines = mgmd_group_details.split('\n')
+            result = {}
+            for line in lines:
+                line = line.strip()
+                if line is '':
+                    continue
+                res = line.split(' : ')
+                result['_'.join(res[0].strip().split(' '))] = res[1]
+            vid = result['VLAN_ID']
+            parsed_result[grp_id][vid] = {}
+            parsed_result[grp_id][vid] = result
+            res = re.findall(r'\s*(\S+)\s+(\S+)\s+(\S{0,3} )\s+(\S+ \S+)\s+(\S+ \S+)\s+(\S* \S*)\s+(\S* \S*)\s+(\S+)\s+(\S+)\s*\n', mgmd_group_port_details)   # noqa
+            if res == []:
+                assert False, "Unable to process the member port details,\
+                    either given output is not proper or invalid to this \
+                    parser function"
+            for prt, ver, mode, up, exp, isV1tr, isV2tr, srcFwd, srcBlk in res:
+                parsed_result[grp_id][vid]['if'+prt] = {}
+                parsed_result[grp_id][vid]['if'+prt]['ver'] = ver
+                parsed_result[grp_id][vid]['if'+prt]['mode'] = mode
+                parsed_result[grp_id][vid]['if'+prt]['uptime'] = up
+                parsed_result[grp_id][vid]['if'+prt]['expire'] = exp
+                if isV1tr is ' ':
+                    parsed_result[grp_id][vid]['if'+prt]['isV1timer'] = False
+                else:
+                    parsed_result[grp_id][vid]['if'+prt]['isV1timer'] = True
+                if isV2tr is ' ':
+                    parsed_result[grp_id][vid]['if'+prt]['isV2Timer'] = False
+                else:
+                    parsed_result[grp_id][vid]['if'+prt]['isV2Timer'] = True
+                parsed_result[grp_id][vid]['if'+prt]['srcFwd'] = srcFwd
+                parsed_result[grp_id][vid]['if'+prt]['srcBlk'] = srcBlk
+    print(parsed_result)
+    return parsed_result
+
+
+def parse_show_ipv6_mld_snooping_vlan_group(raw_result):
+    """
+    Parse the 'show ipv6 mld snooping vlan XXX group {group}' \
+        command raw output.
+    :rtype: dict
+    :return: The parsed result of the show ipv6 mld snooping vlan XXX  \
+        group {group} command in a dictionary of the form:
+    ::
+
+        {}
+    """
+    parsed_result = {}
+    return parsed_result
+
+
+def parse_show_ip_igmp_snooping_vlan_counters(raw_result):
+    """
+    Parse the 'show ip igmp snooping {vlan XXX} counters' \
+        or 'show ip igmp snooping counters' command raw output.
+    :rtype: dict
+    :return: The parsed result of the show ip igmp snooping {vlan XXX} \
+        counters command in a dictionary of the form:
+    ::
+
+        'show ip igmp snooping counters' - command
+            {
+                'rx_counters': {
+                    'Group_And_Source_Specific_Query': '0',
+                    'V3_Member_Report': '0',
+                    'V2_All_Hosts_Query': '0',
+                    'V3_Group_Specific_Query': '0',
+                    'V1_Member_Report': '0',
+                    'V2_Member_Leave': '0',
+                    'V2_Group_Specific_Query': '0',
+                    'V3_All_Hosts_Query': '0',
+                    'V1_All_Hosts_Query': '0',
+                    'V2_Member_Report': '0'
+                },
+                'errors': {
+                    'Packet_received_on_IGMP-disabled_Interface': '0',
+                    'Bad_Checksum': '0',
+                    'Unknown_Message_Type': '0',
+                    'Interface_Wrong_Version_Query': '0',
+                    'Malformed_Packet': '0'
+                },
+                'port_counter': {
+                    'Fast_Leave': '0',
+                    'Forced_Fast_Leave': '0',
+                    'Membership_Timeout': '0'
+                }
+            }
+    """
+    return parse_show_ip_igmp_snooping_counters(raw_result)
+
+
+def parse_show_ip_igmp_snooping_counters(raw_result):
+    """
+    Parse the 'show ip igmp snooping {vlan XXX} counters' \
+        or 'show ip igmp snooping counters' command raw output.
+    :rtype: dict
+    :return: The parsed result of the show ip igmp snooping {vlan XXX} \
+        counters command in a dictionary of the form:
+    ::
+
+        'show ip igmp snooping counters' - command
+            {
+                'rx_counters': {
+                    'Group_And_Source_Specific_Query': '0',
+                    'V3_Member_Report': '0',
+                    'V2_All_Hosts_Query': '0',
+                    'V3_Group_Specific_Query': '0',
+                    'V1_Member_Report': '0',
+                    'V2_Member_Leave': '0',
+                    'V2_Group_Specific_Query': '0',
+                    'V3_All_Hosts_Query': '0',
+                    'V1_All_Hosts_Query': '0',
+                    'V2_Member_Report': '0'
+                },
+                'errors': {
+                    'Packet_received_on_IGMP-disabled_Interface': '0',
+                    'Bad_Checksum': '0',
+                    'Unknown_Message_Type': '0',
+                    'Interface_Wrong_Version_Query': '0',
+                    'Malformed_Packet': '0'
+                },
+                'port_counter': {
+                    'Fast_Leave': '0',
+                    'Forced_Fast_Leave': '0',
+                    'Membership_Timeout': '0'
+                }
+            }
+
+            'show ip igmp snooping vlan <vlan_id> counters' - command
+            {
+                'VLAN_Name': 'VLAN10',
+                'VLAN_ID': '10'
+                '10': {
+                    'rx_counters': {
+                        'Group_And_Source_Specific_Query': '0',
+                        'V3_Member_Report': '0',
+                        'V2_All_Hosts_Query': '0',
+                        'V3_Group_Specific_Query': '0',
+                        'V1_Member_Report': '0',
+                        'V2_Member_Leave': '0',
+                        'V2_Group_Specific_Query': '0',
+                        'V3_All_Hosts_Query': '0',
+                        'V1_All_Hosts_Query': '0',
+                        'V2_Member_Report': '0'
+                    },
+                    'errors': {
+                        'Packet_received_on_IGMP-disabled_Interface': '0',
+                        'Bad_Checksum': '0',
+                        'Unknown_Message_Type': '0',
+                        'Interface_Wrong_Version_Query': '0',
+                        'Malformed_Packet': '0'
+                    },
+                    'port_counter': {
+                        'Fast_Leave': '0',
+                        'Forced_Fast_Leave': '0',
+                        'Membership_Timeout': '0'
+                    }
+                },
+            }
+    """
+    raw_result = re.sub(r'\n+\s*\n+', '\n', raw_result)
+    raw_result = re.sub(r'\n', '#MGMD#', raw_result)
+    parsed_result = {}
+    vid = None
+    output = re.search(r'.*(VLAN ID.*)Rx Counters.*', raw_result)
+    if not(output):
+        parsed_result['rx_counters'] = {}
+        parsed_result['errors'] = {}
+        parsed_result['port_counter'] = {}
+    else:
+        vlan_info = re.sub(r'#MGMD#', '\n', output.group(1))
+        parse_output = re.findall(r'(.*)\s+:\s+(\S+)\s*\n+', vlan_info)
+        for key, value in parse_output:
+            parsed_result['_'.join(key.strip().split(' '))] = value
+        vid = parsed_result['VLAN_ID']
+        parsed_result[str(vid)] = {}
+        parsed_result[str(vid)]['rx_counters'] = {}
+        parsed_result[str(vid)]['errors'] = {}
+        parsed_result[str(vid)]['port_counter'] = {}
+    output = re.search(r'.*(Rx Counters.*)(Errors.*)(Port Counters.*)',
+                       raw_result)
+    if not(output):
+        assert False
+    rx_counters = re.sub(r'#MGMD#', '\n', output.group(1))
+    errors = re.sub(r'#MGMD#', '\n', output.group(2))
+    port_counters = re.sub(r'#MGMD#', '\n', output.group(3))
+    rx_counters = re.sub(r'\s\s+(.*)\n', r' : \1\n', rx_counters)
+    errors = re.sub(r'\s\s+(.*)\n', r' : \1\n', errors)
+    port_counters = re.sub(r'\s\s+(.*)\n', r' : \1\n', port_counters)
+    parse_output = re.findall(r'(.*)\s+:\s+(\S+)\s*\n+', rx_counters)
+    for key, value in parse_output:
+        key = '_'.join(key.strip().split(' '))
+        if vid is not None:
+            parsed_result[str(vid)]['rx_counters'][key] = value
+        else:
+            parsed_result['rx_counters'][key] = value
+    parse_output = re.findall(r'(.*)\s+:\s+(\S+)\s*\n+', errors)
+    for key, value in parse_output:
+        key = '_'.join(key.strip().split(' '))
+        if vid is not None:
+            parsed_result[str(vid)]['errors'][key] = value
+        else:
+            parsed_result['errors'][key] = value
+    parse_output = re.findall(r'(.*)\s+:\s+(\S+)\s*\n+', port_counters)
+    for key, value in parse_output:
+        key = '_'.join(key.strip().split(' '))
+        if vid is not None:
+            parsed_result[str(vid)]['port_counter'][key] = value
+        else:
+            parsed_result['port_counter'][key] = value
+    return parsed_result
+
+
+def parse_show_ipv6_mld_snooping_vlan_counters(raw_result):
+    """
+    Parse the 'show ipv6 mld snooping {vlan XXX} counters' \
+        command raw output.
+    :rtype: dict
+    :return: The parsed result of the 'show ipv6 mld snooping {vlan XXX}   \
+        counters' command in a dictionary of the form:
+    ::
+
+        {}
+    """
+    return parse_show_ipv6_mld_snooping_counters(raw_result)
+
+
+def parse_show_ipv6_mld_snooping_counters(raw_result):
+    """
+    Parse the 'show ipv6 mld snooping {vlan XXX} counters' \
+        command raw output.
+    :rtype: dict
+    :return: The parsed result of the 'show ipv6 mld snooping {vlan XXX}   \
+        counters' command in a dictionary of the form:
+    ::
+
+        {}
+    """
+    parsed_result = {}
+    return parsed_result
+
+
+def parse_show_ip_igmp_snooping_vlan_statistics(raw_result):
+    """
+    Parse the 'show ip igmp snooping vlan {XXX} statistics' command raw output.
+    :rtype: dict
+    :return: The parsed result of the command 'show ip igmp snooping vlan \
+         {XXX} statistics' in a dictionary of the form:
+    ::
+
+        {
+            'VLAN_ID'   :   '2'
+            'VLAN_Name' : 'VLAN2'
+            'Number_of_Include_Groups'       :   '0'
+            'Number_of_Exclude_Groups'       :   '0'
+            'Number_of_Static_Groups'        :   '0'
+            'Total_Multicast_Groups_Joined'  :   '0'
+
+        }
+    """
+    parsed_result = {}
+    # This remove Empty line in output
+    raw_result = re.sub(r'\n+(--+\s*)+', ' \n', raw_result)
+    raw_result = re.sub(r'\n+\s*\n+', '\n', raw_result)
+    output = raw_result.split('VLAN ID : ')
+    igmp_protocol_info = output[0]
+    parse_output = re.findall(r'(.*)\s+:\s+(\S+)\s*', igmp_protocol_info)
+    for key, value in parse_output:
+        parsed_result['_'.join(key.strip().split(' '))] = value
+
+
+def parse_show_ipv6_mld_snooping_vlan_statistics(raw_result):
+    """
+    Parse the 'show ipv6 mld snooping vlan {XXX} statistics' \
+        command raw output.
+    :rtype: dict
+    :return: The parsed result of the show ipv6 mld snooping {vlan XXX}   \
+        statistics command in a dictionary of the form:
+    ::
+
+        {}
+    """
+    parsed_result = {}
+    return parsed_result
+
+
+def parse_show_ip_igmp_snooping_statistics(raw_result):
+    """
+    Parse the 'show ip igmp snooping statistics' command raw output.
+    :rtype: dict
+    :return: The parsed result of the command 'show ip igmp snooping \
+          statistics' in a dictionary of the form:
+    ::
+
+        {
+            'Total_VLANs_with_IGMP_enabled'             :  '1'
+            'Current_count_of_multicast_groups_joined'  :  '0'
+            'IGMP_Drop_Unknown_Multicast.'               : 'Disabled'
+            'IGMP_Drop_Unknown_Multicast_Status.'        : 'Disabled'
+            'VLAN50': {
+                'VLAN_ID': '50',
+                'VLAN_NAME': 'VLAN50',
+                'Total': '0',
+                'Static': '0',
+                'Include': '0',
+                'Exclude': '0'},
+        }
+    """
+    parsed_result = {}
+    # This remove Empty line in output
+    raw_result = re.sub(r'\n+(--+\s*)+', ' \n', raw_result)
+    raw_result = re.sub(r'\n+\s*\n+', '\n', raw_result)
+    output = raw_result.split('VLAN ID : ')
+    igmp_protocol_info = output[0]
+    parse_output = re.findall(r'(.*)\s+:\s+(\S+)\s*', igmp_protocol_info)
+    for key, value in parse_output:
+        parsed_result['_'.join(key.strip().split(' '))] = value
+
+
+def parse_show_ipv6_mld_snooping_statistics(raw_result):
+    """
+    Parse the 'show ipv6 mld snooping statistics' command raw output.
+    :rtype: dict
+    :return: The parsed result of the show ipv6 mld snooping statistics \
+         command in a dictionary of the form:
+    ::
+
+        {}
+    """
+    parsed_result = {}
+    return parsed_result
+
+
+def parse_show_ip_igmp_snooping_vlan_group_port(raw_result):
+    """
+    Parse the 'show ip igmp snooping vlan XXX group {group} port {port}' \
+        command raw output.
+    :rtype: dict
+    :return: The parsed result of the show ip igmp snooping vlan XXX  \
+        group {group}  port {port} command in a dictionary of the form:
+    ::
+
+        {},
+    """
+    parsed_result = {}
+    return parsed_result
+
+
+def parse_show_ipv6_mld_snooping_vlan_group_port(raw_result):
+    """
+    Parse the 'show ipv6 mld snooping vlan XXX group {group} port {port}' \
+        command raw output.
+    :rtype: dict
+    :return: The parsed result of the show ipv6 mld snooping vlan XXX  \
+        group {group}  port {port} command in a dictionary of the form:
+    ::
+
+        {}
+    """
+    parsed_result = {}
+    return parsed_result
+
+
+def parse_show_ip_igmp_snooping_vlan_group_source(raw_result):
+    """
+    Parse the 'show ip igmp snooping vlan XXX group {group} source {src_ip}' \
+        command raw output.
+    :rtype: dict
+    :return: The parsed result of the show ip igmp snooping vlan XXX  \
+        group {group}  source {src_ip} command in a dictionary of the form:
+    ::
+
+        {},
+    """
+    parsed_result = {}
+    return parsed_result
+
+
+def parse_show_ipv6_mld_snooping_vlan_group_source(raw_result):
+    """
+    Parse the 'show ipv6 mld snooping vlan XXX group {group} source {src_ip}' \
+        command raw output.
+    :rtype: dict
+    :return: The parsed result of the show ipv6 mld snooping vlan XXX  \
+        group {group}  source {src_ip} command in a dictionary of the form:
+    ::
+
+        {}
+    """
+    parsed_result = {}
+    return parsed_result
+
+
+def parse_show_ip_igmp_snooping_groups(raw_result):
+    """
+    Parse the 'show ip igmp snooping groups' \
+        command raw output.
+    :rtype: dict
+    :return: The parsed result of the show ip igmp snooping groups  \
+        command in a dictionary of the form:
+    ::
+
+        {},
+    """
+    parsed_result = {}
+    return parsed_result
+
+
+def parse_show_ipv6_mld_snooping_groups(raw_result):
+    """
+    Parse the 'show ipv6 mld snooping groups' \
+        command raw output.
+    :rtype: dict
+    :return: The parsed result of the show ipv6 mld snooping groups \
+        command in a dictionary of the form:
+    ::
+
+        {}
+    """
+    parsed_result = {}
+    return parsed_result
+
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
@@ -6221,5 +7004,25 @@ __all__ = [
     'parse_diag_dump_lacp_basic', 'parse_show_snmpv3_users',
     'parse_show_snmp_agent_port', 'parse_diag_dump', 'parse_show_events',
     'parse_show_spanning_tree', 'parse_show_spanning_tree_mst_config',
-    'parse_show_spanning_tree_mst', 'parse_show_vlan_summary'
+    'parse_show_spanning_tree_mst', 'parse_show_vlan_summary',
+    'parse_show_ip_igmp_snooping_config', 'parse_show_ip_igmp_snooping',
+    'parse_show_ipv6_mld_snooping_config', 'parse_show_ipv6_mld_snooping',
+    'parse_show_ip_igmp_snooping_vlan_config',
+    'parse_show_ipv6_mld_snooping_vlan_config',
+    'parse_show_ip_igmp_snooping_vlan_group',
+    'parse_show_ipv6_mld_snooping_vlan_group',
+    'parse_show_ip_igmp_snooping_vlan_statistics',
+    'parse_show_ipv6_mld_snooping_vlan_statistics',
+    'parse_show_ip_igmp_snooping_statistics',
+    'parse_show_ipv6_mld_snooping_statistics',
+    'parse_show_ip_igmp_snooping_vlan_group_port',
+    'parse_show_ipv6_mld_snooping_vlan_group_port',
+    'parse_show_ip_igmp_snooping_vlan_group_source',
+    'parse_show_ipv6_mld_snooping_vlan_group_source',
+    'parse_show_ip_igmp_snooping_groups',
+    'parse_show_ipv6_mld_snooping_groups',
+    'parse_show_ipv6_mld_snooping_vlan_counters',
+    'parse_show_ipv6_mld_snooping_counters',
+    'parse_show_ip_igmp_snooping_counters',
+    'parse_show_ip_igmp_snooping_vlan_counters'
 ]
