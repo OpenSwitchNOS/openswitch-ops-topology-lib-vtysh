@@ -156,6 +156,28 @@ VTYSH_SPEC = OrderedDict([
 
             },
             {
+                'command': 'show ip interface {port}',
+                'doc': 'Show ip interface information.',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'Label that identifies interface.'
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show ipv6 interface {port}',
+                'doc': 'Show ipv6 interface information.',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'Label that identifies interface.'
+                    }
+                ],
+                'returns': True
+            },
+            {
                 'command': 'show ip bgp summary',
                 'doc': 'Show bgp neighbors information summary.',
                 'arguments': [],

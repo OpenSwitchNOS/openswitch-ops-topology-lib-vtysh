@@ -49,6 +49,8 @@ from topology_lib_vtysh.parser import (
     parse_traceroute,
     parse_traceroute6,
     parse_show_running_config,
+    parse_show_ip_interface,
+    parse_show_ipv6_interface,
     parse_show_ip_ecmp,
     parse_show_ntp_associations,
     parse_show_ntp_authentication_key,
@@ -1363,6 +1365,260 @@ SFTP server : Enabled
     }
     ddiff = DeepDiff(result, expected)
     assert not ddiff
+
+
+def test_parse_show_ip_interface():
+    raw_result = """\
+
+Interface 1 is up
+ Admin state is up
+ Hardware: Ethernet, MAC Address: 70:72:cf:75:25:70
+ IPv4 address 10.1.1.1/24
+ IPv4 address 10.1.1.2/24 secondary
+ MTU 0
+ RX
+            ucast: 0 packets, 0 bytes
+            mcast: 10 packets, 0 bytes
+ TX
+            ucast: 0 packets, 0 bytes
+            mcast: 10 packets, 0 bytes
+    """
+
+    result = parse_show_ip_interface(raw_result)
+
+    expected = {
+        'admin_state': 'up',
+        'hardware': 'Ethernet',
+        'interface_state': 'up',
+        'mac_address': '70:72:cf:75:25:70',
+        'mtu': 0,
+        'port': 1,
+        'rx_ucast_packets': 0,
+        'rx_ucast_bytes': 0,
+        'rx_mcast_packets': 10,
+        'rx_mcast_bytes': 0,
+        'state_description': None,
+        'state_information': None,
+        'tx_ucast_packets': 0,
+        'tx_ucast_bytes': 0,
+        'tx_mcast_packets': 10,
+        'tx_mcast_bytes': 0,
+        'ipv4': '10.1.1.1/24',
+        'ipv4_secondary': '10.1.1.2/24',
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+    raw_result2 = """\
+
+Interface 1-1 is up
+ Admin state is up
+ Hardware: Ethernet, MAC Address: 70:72:cf:75:25:70
+ IPv4 address 10.1.1.1/24
+ IPv4 address 10.1.1.2/24 secondary
+ MTU 0
+ RX
+            ucast: 0 packets, 0 bytes
+            mcast: 0 packets, 0 bytes
+ TX
+            ucast: 0 packets, 0 bytes
+            mcast: 0 packets, 0 bytes
+    """
+
+    result2 = parse_show_ip_interface(raw_result2)
+
+    expected2 = {
+        'admin_state': 'up',
+        'hardware': 'Ethernet',
+        'interface_state': 'up',
+        'mac_address': '70:72:cf:75:25:70',
+        'mtu': 0,
+        'port': "1-1",
+        'rx_ucast_packets': 0,
+        'rx_ucast_bytes': 0,
+        'rx_mcast_packets': 0,
+        'rx_mcast_bytes': 0,
+        'state_description': None,
+        'state_information': None,
+        'tx_ucast_packets': 0,
+        'tx_ucast_bytes': 0,
+        'tx_mcast_packets': 0,
+        'tx_mcast_bytes': 0,
+        'ipv4': '10.1.1.1/24',
+        'ipv4_secondary': '10.1.1.2/24',
+    }
+
+    ddiff2 = DeepDiff(result2, expected2)
+    assert not ddiff2
+
+    raw_result3 = """\
+
+Interface 15 is down (Administratively down)
+ Admin state is down
+ State information: admin_down
+ Hardware: Ethernet, MAC Address: 48:0f:cf:af:d4:c3
+ MTU 1500
+ RX
+          ucast: 0 packets, 0 bytes
+          mcast: 0 packets, 0 bytes
+ TX
+          ucast: 0 packets, 0 bytes
+          mcast: 0 packets, 0 bytes
+    """
+
+    result3 = parse_show_ip_interface(raw_result3)
+
+    expected3 = {
+        'admin_state': 'down',
+        'hardware': 'Ethernet',
+        'interface_state': 'down',
+        'mac_address': '48:0f:cf:af:d4:c3',
+        'mtu': 1500,
+        'port': 15,
+        'rx_ucast_packets': 0,
+        'rx_ucast_bytes': 0,
+        'rx_mcast_packets': 0,
+        'rx_mcast_bytes': 0,
+        'state_description': 'Administratively down',
+        'state_information': 'admin_down',
+        'tx_ucast_packets': 0,
+        'tx_ucast_bytes': 0,
+        'tx_mcast_packets': 0,
+        'tx_mcast_bytes': 0,
+        'ipv4': None,
+        'ipv4_secondary': None,
+    }
+
+    ddiff3 = DeepDiff(result3, expected3)
+    assert not ddiff3
+
+
+def test_parse_show_ipv6_interface():
+    raw_result = """\
+
+Interface 1 is up
+ Admin state is up
+ Hardware: Ethernet, MAC Address: 70:72:cf:75:25:70
+ IPv6 address 2001::1/12
+ IPv6 address 2001::2/12 secondary
+ MTU 0
+ RX
+            ucast: 0 packets, 0 bytes
+            mcast: 10 packets, 0 bytes
+ TX
+            ucast: 0 packets, 0 bytes
+            mcast: 10 packets, 0 bytes
+    """
+
+    result = parse_show_ipv6_interface(raw_result)
+
+    expected = {
+        'admin_state': 'up',
+        'hardware': 'Ethernet',
+        'interface_state': 'up',
+        'mac_address': '70:72:cf:75:25:70',
+        'mtu': 0,
+        'port': 1,
+        'rx_ucast_packets': 0,
+        'rx_ucast_bytes': 0,
+        'rx_mcast_packets': 10,
+        'rx_mcast_bytes': 0,
+        'state_description': None,
+        'state_information': None,
+        'tx_ucast_packets': 0,
+        'tx_ucast_bytes': 0,
+        'tx_mcast_packets': 10,
+        'tx_mcast_bytes': 0,
+        'ipv6': '2001::1/12',
+        'ipv6_secondary': '2001::2/12'
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+    raw_result2 = """\
+
+Interface 1-1 is up
+ Admin state is up
+ Hardware: Ethernet, MAC Address: 70:72:cf:75:25:70
+ IPv6 address 2001::1/12
+ IPv6 address 2001::2/12 secondary
+ MTU 0
+ RX
+            ucast: 0 packets, 0 bytes
+            mcast: 0 packets, 0 bytes
+ TX
+            ucast: 0 packets, 0 bytes
+            mcast: 0 packets, 0 bytes
+    """
+
+    result2 = parse_show_ipv6_interface(raw_result2)
+
+    expected2 = {
+        'admin_state': 'up',
+        'hardware': 'Ethernet',
+        'interface_state': 'up',
+        'mac_address': '70:72:cf:75:25:70',
+        'mtu': 0,
+        'port': "1-1",
+        'rx_ucast_packets': 0,
+        'rx_ucast_bytes': 0,
+        'rx_mcast_packets': 0,
+        'rx_mcast_bytes': 0,
+        'state_description': None,
+        'state_information': None,
+        'tx_ucast_packets': 0,
+        'tx_ucast_bytes': 0,
+        'tx_mcast_packets': 0,
+        'tx_mcast_bytes': 0,
+        'ipv6': '2001::1/12',
+        'ipv6_secondary': '2001::2/12'
+    }
+
+    ddiff2 = DeepDiff(result2, expected2)
+    assert not ddiff2
+
+    raw_result3 = """\
+
+Interface 15 is down (Administratively down)
+ Admin state is down
+ State information: admin_down
+ Hardware: Ethernet, MAC Address: 48:0f:cf:af:d4:c3
+ MTU 1500
+ RX
+          ucast: 0 packets, 0 bytes
+          mcast: 0 packets, 0 bytes
+ TX
+          ucast: 0 packets, 0 bytes
+          mcast: 0 packets, 0 bytes
+    """
+
+    result3 = parse_show_ipv6_interface(raw_result3)
+
+    expected3 = {
+        'admin_state': 'down',
+        'hardware': 'Ethernet',
+        'interface_state': 'down',
+        'mac_address': '48:0f:cf:af:d4:c3',
+        'mtu': 1500,
+        'port': 15,
+        'rx_ucast_packets': 0,
+        'rx_ucast_bytes': 0,
+        'rx_mcast_packets': 0,
+        'rx_mcast_bytes': 0,
+        'state_description': 'Administratively down',
+        'state_information': 'admin_down',
+        'tx_ucast_packets': 0,
+        'tx_ucast_bytes': 0,
+        'tx_mcast_packets': 0,
+        'tx_mcast_bytes': 0,
+        'ipv6': None,
+        'ipv6_secondary': None,
+    }
+
+    ddiff3 = DeepDiff(result3, expected3)
+    assert not ddiff3
 
 
 def test_parse_show_ip_bgp_summary():

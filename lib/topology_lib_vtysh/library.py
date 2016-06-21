@@ -13337,6 +13337,66 @@ def show_sftp_server(
     return parse_show_sftp_server(result)
 
 
+def show_ip_interface(
+        enode, portlbl):
+    """
+    Show ip interface information.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip interface {port}
+
+    :param portlbl: Label that identifies interface.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_interface`
+    """
+
+    cmd = [
+        'show ip interface {port}'
+    ]
+
+    port = enode.ports.get(portlbl, portlbl)
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ip_interface(result)
+
+
+def show_ipv6_interface(
+        enode, portlbl):
+    """
+    Show ipv6 interface information.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ipv6 interface {port}
+
+    :param portlbl: Label that identifies interface.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ipv6_interface`
+    """
+
+    cmd = [
+        'show ipv6 interface {port}'
+    ]
+
+    port = enode.ports.get(portlbl, portlbl)
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ipv6_interface(result)
+
+
 def show_ip_bgp_summary(
         enode):
     """
@@ -15676,6 +15736,8 @@ __all__ = [
     'show_lldp_neighbor_info',
     'show_lldp_statistics',
     'show_sftp_server',
+    'show_ip_interface',
+    'show_ipv6_interface',
     'show_ip_bgp_summary',
     'show_ip_bgp_neighbors',
     'show_ip_bgp',
