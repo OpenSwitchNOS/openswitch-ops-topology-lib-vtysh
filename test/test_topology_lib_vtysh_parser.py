@@ -263,11 +263,13 @@ TFTP server path is deleted successfully
 def test_parse_show_vlan():
     raw_result = """\
 
---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 VLAN    Name      Status   Reason         Reserved       Ports
---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 2       vlan2     up       ok                            7, 3, 8, vlan2, 1
 1       vlan1     down     admin_down
+69      vlan69    up       ok                            3.100, 8-1.2, vlan69
+3       vlan3     up       ok                            vlan3, 1-1
     """
 
     result = parse_show_vlan(raw_result)
@@ -288,6 +290,22 @@ VLAN    Name      Status   Reason         Reserved       Ports
             'reserved': None,
             'status': 'up',
             'vlan_id': '2'
+        },
+        '69': {
+            'name': 'vlan69',
+            'ports': ['3.100', '8-1.2', 'vlan69'],
+            'reason': 'ok',
+            'reserved': None,
+            'status': 'up',
+            'vlan_id': '69'
+        },
+        '3': {
+            'name': 'vlan3',
+            'ports': ['vlan3', '1-1'],
+            'reason': 'ok',
+            'reserved': None,
+            'status': 'up',
+            'vlan_id': '3'
         }
     }
 
@@ -305,19 +323,21 @@ def test_parse_show_mac_address_table():
     raw_result = """\
 
 MAC age-time            : 300 seconds
-Number of MAC addresses : 2
+Number of MAC addresses : 4
 
 MAC Address          VLAN     Type       Port
 --------------------------------------------------
 00:00:00:00:00:01   1        dynamic    1
 00:00:00:00:00:02   2        dynamic    2
+00:00:00:00:00:03   3        dynamic    3-1
+00:00:00:00:00:04   4        dynamic    4-4
     """
 
     result = parse_show_mac_address_table(raw_result)
 
     expected = {
         'age_time': '300',
-        'no_mac_address': '2',
+        'no_mac_address': '4',
         '00:00:00:00:00:01': {
             'vlan_id': '1',
             'from': 'dynamic',
@@ -327,6 +347,16 @@ MAC Address          VLAN     Type       Port
             'vlan_id': '2',
             'from': 'dynamic',
             'port': '2'
+        },
+        '00:00:00:00:00:03': {
+            'vlan_id': '3',
+            'from': 'dynamic',
+            'port': '3-1'
+        },
+        '00:00:00:00:00:04': {
+            'vlan_id': '4',
+            'from': 'dynamic',
+            'port': '4-4'
         }
     }
 
@@ -1070,7 +1100,8 @@ Interface                                                          (Mb/s)   Ch#
 --------------------------------------------------------------------------------
  4.1            40    eth  routed down   Administratively down     auto     --
  4.2            20    eth  routed down   Administratively down     auto     --
-
+ 3-1.300        300   eth  routed down   Administratively down     auto     --
+ 4-4.689        689   eth  routed up                               auto     --
      """  # noqa
 
     result = parse_show_interface_subinterface_brief(raw_result)
@@ -1092,6 +1123,26 @@ Interface                                                          (Mb/s)   Ch#
             'mode': 'routed',
             'status': 'down',
             'reason': 'Administratively down    ',
+            'speed': 'auto',
+            'port_ch': '--'
+        },
+        {
+            'vlan_id': 300,
+            'subinterface': '3-1.300',
+            'type': 'eth',
+            'mode': 'routed',
+            'status': 'down',
+            'reason': 'Administratively down    ',
+            'speed': 'auto',
+            'port_ch': '--'
+        },
+        {
+            'vlan_id': 689,
+            'subinterface': '4-4.689',
+            'type': 'eth',
+            'mode': 'routed',
+            'status': 'up',
+            'reason': '',
             'speed': 'auto',
             'port_ch': '--'
         }
@@ -1311,6 +1362,78 @@ TTL                            :
 
     expected = {
         'port': 1,
+        'neighbor_entries': 0,
+        'neighbor_entries_deleted': 0,
+        'neighbor_entries_dropped': 0,
+        'neighbor_entries_age_out': 0,
+        'neighbor_chassis_name': None,
+        'neighbor_chassis_description': None,
+        'neighbor_chassis_id': None,
+        'neighbor_mgmt_address': None,
+        'chassis_capabilities_available': None,
+        'chassis_capabilities_enabled': None,
+        'neighbor_port_id': None,
+        'ttl': None
+    }
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+    raw_result = """\
+Port                           : 1-1
+Neighbor entries               : 0
+Neighbor entries deleted       : 0
+Neighbor entries dropped       : 0
+Neighbor entries age-out       : 0
+Neighbor Chassis-Name          :
+Neighbor Chassis-Description   :
+Neighbor Chassis-ID            :
+Neighbor Management-Address    :
+Chassis Capabilities Available :
+Chassis Capabilities Enabled   :
+Neighbor Port-ID               :
+TTL                            :
+    """
+
+    result = parse_show_lldp_neighbor_info(raw_result)
+
+    expected = {
+        'port': '1-1',
+        'neighbor_entries': 0,
+        'neighbor_entries_deleted': 0,
+        'neighbor_entries_dropped': 0,
+        'neighbor_entries_age_out': 0,
+        'neighbor_chassis_name': None,
+        'neighbor_chassis_description': None,
+        'neighbor_chassis_id': None,
+        'neighbor_mgmt_address': None,
+        'chassis_capabilities_available': None,
+        'chassis_capabilities_enabled': None,
+        'neighbor_port_id': None,
+        'ttl': None
+    }
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+    raw_result = """\
+Port                           : 1-1.100
+Neighbor entries               : 0
+Neighbor entries deleted       : 0
+Neighbor entries dropped       : 0
+Neighbor entries age-out       : 0
+Neighbor Chassis-Name          :
+Neighbor Chassis-Description   :
+Neighbor Chassis-ID            :
+Neighbor Management-Address    :
+Chassis Capabilities Available :
+Chassis Capabilities Enabled   :
+Neighbor Port-ID               :
+TTL                            :
+    """
+
+    result = parse_show_lldp_neighbor_info(raw_result)
+
+    expected = {
+        'port': '1-1.100',
         'neighbor_entries': 0,
         'neighbor_entries_deleted': 0,
         'neighbor_entries_dropped': 0,
@@ -2445,6 +2568,11 @@ Displaying ipv4 routes selected for forwarding
     via  56.0.0.3,  [1/0],  static
 10.1.64.0/18,  1 unicast next-hops
         via  lo2,  [0/0],  connected
+10.2.64.0/18,  1 unicast next-hops
+        via  1-1,  [0/0],  connected
+        via  4-4.100,  [0/0],  connected
+        via  9.4,  [0/0],  connected
+
     """
 
     result = parse_show_ip_route(raw_result)
@@ -2515,6 +2643,30 @@ Displaying ipv4 routes selected for forwarding
                     'metric': '0'
                 }
             ]
+        },
+        {
+            'id': '10.2.64.0',
+            'prefix': '18',
+            'next_hops': [
+                {
+                    'via': '1-1',
+                    'distance': '0',
+                    'from': 'connected',
+                    'metric': '0'
+                },
+                {
+                    'via': '4-4.100',
+                    'distance': '0',
+                    'from': 'connected',
+                    'metric': '0'
+                },
+                {
+                    'via': '9.4',
+                    'distance': '0',
+                    'from': 'connected',
+                    'metric': '0'
+                }
+            ]
         }
     ]
 
@@ -2537,6 +2689,10 @@ Displaying ipv6 routes selected for forwarding
         via  2,  [0/0],  connected
 2004:0:1::/48,  1 unicast next-hops
         via  lo2,  [0/0],  connected
+2005:0:1::/48,  1 unicast next-hops
+        via  1-1,  [0/0],  connected
+        via  9.4,  [0/0],  connected
+        via  4-1.100,  [0/0],  connected
     """
 
     result = parse_show_ipv6_route(raw_result)
@@ -2586,6 +2742,29 @@ Displaying ipv6 routes selected for forwarding
             'next_hops': [
                 {
                     'via': 'lo2',
+                    'distance': '0',
+                    'from': 'connected',
+                    'metric': '0'
+                }
+            ]
+        },
+        {
+            'id': '2005:0:1::/48',
+            'next_hops': [
+                {
+                    'via': '1-1',
+                    'distance': '0',
+                    'from': 'connected',
+                    'metric': '0'
+                },
+                {
+                    'via': '9.4',
+                    'distance': '0',
+                    'from': 'connected',
+                    'metric': '0'
+                },
+                {
+                    'via': '4-1.100',
                     'distance': '0',
                     'from': 'connected',
                     'metric': '0'
@@ -3074,6 +3253,45 @@ Number of Samples             20
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff
+    raw_result = """\
+sFlow Configuration - Interface 1-1
+-----------------------------------------
+sFlow                         enable
+Sampling Rate                 15
+Number of Samples             20
+    """
+
+    result = parse_show_sflow_interface(raw_result)
+
+    expected = {
+        'interface': '1-1',
+        'sflow': 'enable',
+        'sampling_rate': 15,
+        'number_of_samples': 20
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+    raw_result = """\
+sFlow Configuration - Interface 4-4
+-----------------------------------------
+sFlow                         disabled
+Sampling Rate                 20
+Number of Samples             18
+    """
+
+    result = parse_show_sflow_interface(raw_result)
+
+    expected = {
+        'interface': '4-4',
+        'sflow': 'disabled',
+        'sampling_rate': 20,
+        'number_of_samples': 18
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
 
 
 def test_parse_show_vlog_config():
@@ -3281,6 +3499,126 @@ def test_parse_show_ip_ospf_interface():
     ddiff = DeepDiff(result, expected)
     assert not ddiff
 
+    raw_result = """Interface 2-1 BW 1000 Mbps  <up,BROADCAST,up >
+    Internet address 10.10.10.2/24 Area 0.0.0.1
+    MTU mismatch detection: enabled
+    Router ID : 2.2.2.2, Network Type <BROADCAST>, Cost: 10
+    Transmit Delay is 1 sec, State <DR >, Priority 1
+    Designated Router (ID) 2.2.2.2,  Interface Address 10.10.10.2
+    Backup Designated Router (ID) 10.10.10.1,  Interface Address 10.10.10.1
+    Multicast group memberships: OSPFAllRouters OSPFDesignatedRouters
+    Timer intervals configured, Hello 10 Dead 40 wait 40 Retransmit 5
+    Hello due in  7.717s
+    Neighbor Count is 1, Adjacent neighbor count is 1"""
+
+    result = parse_show_ip_ospf_interface(raw_result)
+    expected = {
+        'router_id': '2.2.2.2',
+        'wait_time': '40',
+        'Area_id': '0.0.0.1',
+        'hello_timer': '10',
+        'Backup_designated_router': '10.10.10.1',
+        'hello_due_time': '7.717s',
+        'retransmit_time': '5',
+        'neighbor_count': '1',
+        'state': '<DR >',
+        'Interface_id': '2-1',
+        'priority': '1',
+        'BDR_Interface_address': '10.10.10.1',
+        'bandwidth': '1000',
+        'cost': '10',
+        'Adjacent_neigbhor_count': '1',
+        'internet_address': '10.10.10.2/24',
+        'Designated_router': '10.10.10.1',
+        'dead_timer': '40',
+        'network_type': '<BROADCAST>',
+        'transmit_delay': '1',
+        'DR_Interface_address': '10.10.10.1'
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+    raw_result = """Interface 3.100 BW 1000 Mbps  <up,BROADCAST,up >
+    Internet address 10.10.10.2/24 Area 0.0.0.1
+    MTU mismatch detection: enabled
+    Router ID : 2.2.2.2, Network Type <BROADCAST>, Cost: 10
+    Transmit Delay is 1 sec, State <DR >, Priority 1
+    Designated Router (ID) 2.2.2.2,  Interface Address 10.10.10.2
+    Backup Designated Router (ID) 10.10.10.1,  Interface Address 10.10.10.1
+    Multicast group memberships: OSPFAllRouters OSPFDesignatedRouters
+    Timer intervals configured, Hello 10 Dead 40 wait 40 Retransmit 5
+    Hello due in  7.717s
+    Neighbor Count is 1, Adjacent neighbor count is 1"""
+
+    result = parse_show_ip_ospf_interface(raw_result)
+    expected = {
+        'router_id': '2.2.2.2',
+        'wait_time': '40',
+        'Area_id': '0.0.0.1',
+        'hello_timer': '10',
+        'Backup_designated_router': '10.10.10.1',
+        'hello_due_time': '7.717s',
+        'retransmit_time': '5',
+        'neighbor_count': '1',
+        'state': '<DR >',
+        'Interface_id': '3.100',
+        'priority': '1',
+        'BDR_Interface_address': '10.10.10.1',
+        'bandwidth': '1000',
+        'cost': '10',
+        'Adjacent_neigbhor_count': '1',
+        'internet_address': '10.10.10.2/24',
+        'Designated_router': '10.10.10.1',
+        'dead_timer': '40',
+        'network_type': '<BROADCAST>',
+        'transmit_delay': '1',
+        'DR_Interface_address': '10.10.10.1'
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+    raw_result = """Interface 4-1.20 BW 1000 Mbps  <up,BROADCAST,up >
+    Internet address 10.10.10.2/24 Area 0.0.0.1
+    MTU mismatch detection: enabled
+    Router ID : 2.2.2.2, Network Type <BROADCAST>, Cost: 10
+    Transmit Delay is 1 sec, State <DR >, Priority 1
+    Designated Router (ID) 2.2.2.2,  Interface Address 10.10.10.2
+    Backup Designated Router (ID) 10.10.10.1,  Interface Address 10.10.10.1
+    Multicast group memberships: OSPFAllRouters OSPFDesignatedRouters
+    Timer intervals configured, Hello 10 Dead 40 wait 40 Retransmit 5
+    Hello due in  7.717s
+    Neighbor Count is 1, Adjacent neighbor count is 1"""
+
+    result = parse_show_ip_ospf_interface(raw_result)
+    expected = {
+        'router_id': '2.2.2.2',
+        'wait_time': '40',
+        'Area_id': '0.0.0.1',
+        'hello_timer': '10',
+        'Backup_designated_router': '10.10.10.1',
+        'hello_due_time': '7.717s',
+        'retransmit_time': '5',
+        'neighbor_count': '1',
+        'state': '<DR >',
+        'Interface_id': '4-1.20',
+        'priority': '1',
+        'BDR_Interface_address': '10.10.10.1',
+        'bandwidth': '1000',
+        'cost': '10',
+        'Adjacent_neigbhor_count': '1',
+        'internet_address': '10.10.10.2/24',
+        'Designated_router': '10.10.10.1',
+        'dead_timer': '40',
+        'network_type': '<BROADCAST>',
+        'transmit_delay': '1',
+        'DR_Interface_address': '10.10.10.1'
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
 
 def test_parse_show_ip_ospf_neighbor_detail():
     raw_result = """Neighbor 2.2.2.2,  interface address 10.10.10.2
@@ -3311,6 +3649,114 @@ def test_parse_show_ip_ospf_neighbor_detail():
             'Neighbor': '2.2.2.2',
             'BDR': '1.1.1.1',
             'interface': 1,
+            'link_retrans_list': 0,
+            'DR': '2.2.2.2',
+            'options': 0}
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+    raw_result = """Neighbor 2.2.2.2,  interface address 10.10.10.2
+    In the area 0.0.0.0 via interface 1-1
+    Neighbor priority is 1, State is 2-Way, 1 state changes
+    Neighbor is up for 9.240s
+    DR is 2.2.2.2,BDR is 1.1.1.1
+    Options 0  *|-|-|-|-|-|-|*
+    Dead timer due in 30.763s
+    Database Summary List 0
+    Link State Request List 0
+    Link State Retransmission List 0
+    """
+
+    result = parse_show_ip_ospf_neighbor_detail(raw_result)
+    expected = {
+        '2.2.2.2': {
+            'dead_timer': '30.763s',
+            'area': '0.0.0.0',
+            'hello_timer': '9.240s',
+            'state_change': 1,
+            'interface_address': '10.10.10.2',
+            'priority': 1,
+            'link_req_list': 0,
+            'state': '2-Way',
+            'admin_state': 'up',
+            'db_summary_list': 0,
+            'Neighbor': '2.2.2.2',
+            'BDR': '1.1.1.1',
+            'interface': '1-1',
+            'link_retrans_list': 0,
+            'DR': '2.2.2.2',
+            'options': 0}
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+    raw_result = """Neighbor 2.2.2.2,  interface address 10.10.10.2
+    In the area 0.0.0.0 via interface 1.100
+    Neighbor priority is 1, State is 2-Way, 1 state changes
+    Neighbor is up for 9.240s
+    DR is 2.2.2.2,BDR is 1.1.1.1
+    Options 0  *|-|-|-|-|-|-|*
+    Dead timer due in 30.763s
+    Database Summary List 0
+    Link State Request List 0
+    Link State Retransmission List 0
+    """
+
+    result = parse_show_ip_ospf_neighbor_detail(raw_result)
+    expected = {
+        '2.2.2.2': {
+            'dead_timer': '30.763s',
+            'area': '0.0.0.0',
+            'hello_timer': '9.240s',
+            'state_change': 1,
+            'interface_address': '10.10.10.2',
+            'priority': 1,
+            'link_req_list': 0,
+            'state': '2-Way',
+            'admin_state': 'up',
+            'db_summary_list': 0,
+            'Neighbor': '2.2.2.2',
+            'BDR': '1.1.1.1',
+            'interface': '1.100',
+            'link_retrans_list': 0,
+            'DR': '2.2.2.2',
+            'options': 0}
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+    raw_result = """Neighbor 2.2.2.2,  interface address 10.10.10.2
+    In the area 0.0.0.0 via interface 4-1.20
+    Neighbor priority is 1, State is 2-Way, 1 state changes
+    Neighbor is up for 9.240s
+    DR is 2.2.2.2,BDR is 1.1.1.1
+    Options 0  *|-|-|-|-|-|-|*
+    Dead timer due in 30.763s
+    Database Summary List 0
+    Link State Request List 0
+    Link State Retransmission List 0
+    """
+
+    result = parse_show_ip_ospf_neighbor_detail(raw_result)
+    expected = {
+        '2.2.2.2': {
+            'dead_timer': '30.763s',
+            'area': '0.0.0.0',
+            'hello_timer': '9.240s',
+            'state_change': 1,
+            'interface_address': '10.10.10.2',
+            'priority': 1,
+            'link_req_list': 0,
+            'state': '2-Way',
+            'admin_state': 'up',
+            'db_summary_list': 0,
+            'Neighbor': '2.2.2.2',
+            'BDR': '1.1.1.1',
+            'interface': '4-1.20',
             'link_retrans_list': 0,
             'DR': '2.2.2.2',
             'options': 0}
@@ -3420,18 +3866,30 @@ N    14.0.0.0/24           [1] area: 0.0.0.0
                            directly attached to 6
 N    13.0.0.0/24           [1] area: 0.0.0.0
                            directly attached to 5
+N    15.0.0.0/24           [1] area: 0.0.0.0
+                           directly attached to 1-1
+N    16.0.0.0/24           [1] area: 0.0.0.0
+                           directly attached to 8.10
+N    17.0.0.0/24           [1] area: 0.0.0.0
+                           directly attached to 7-1.20
 
 ============ OSPF router routing table =============
 R    1.0.0.1               [1] area: 0.0.0.0, ASBR
                            via 12.0.0.1, 2
                            via 13.0.0.1, 5
                            via 14.0.0.1, 6
+                           via 15.0.0.1, 1-1
+                           via 16.0.0.1, 8.10
+                           via 17.0.0.1, 7-1.20
 
 ============ OSPF external routing table ===========
 N E2 100.0.0.0/24          [1/20] tag: 0
                            via 12.0.0.1, 2
                            via 13.0.0.1, 5
                            via 14.0.0.1, 6
+                           via 15.0.0.1, 1-1
+                           via 16.0.0.1, 8.10
+                           via 17.0.0.1, 7-1.20
 
     """
 
@@ -3451,6 +3909,21 @@ N E2 100.0.0.0/24          [1/20] tag: 0
              'area': '0.0.0.0',
              'ip_address': '13.0.0.0/24',
              'port': '5',
+             'network': 'N'},
+            {'hops': '1',
+             'area': '0.0.0.0',
+             'ip_address': '15.0.0.0/24',
+             'port': '1-1',
+             'network': 'N'},
+            {'hops': '1',
+             'area': '0.0.0.0',
+             'ip_address': '16.0.0.0/24',
+             'port': '8.10',
+             'network': 'N'},
+            {'hops': '1',
+             'area': '0.0.0.0',
+             'ip_address': '17.0.0.0/24',
+             'port': '7-1.20',
              'network': 'N'}
         ],
         'router routing table': [
@@ -3458,14 +3931,20 @@ N E2 100.0.0.0/24          [1/20] tag: 0
              'ip_address': '1.0.0.1', 'area': '0.0.0.0'},
             {'via_ip': '12.0.0.1', 'via_port': '2'},
             {'via_ip': '13.0.0.1', 'via_port': '5'},
-            {'via_ip': '14.0.0.1', 'via_port': '6'}
+            {'via_ip': '14.0.0.1', 'via_port': '6'},
+            {'via_ip': '15.0.0.1', 'via_port': '1-1'},
+            {'via_ip': '16.0.0.1', 'via_port': '8.10'},
+            {'via_ip': '17.0.0.1', 'via_port': '7-1.20'}
         ],
         'external routing table': [
             {'hops': '1', 'metric': '20', 'tag': '0', 'router': 'N',
              'ip_address': '100.0.0.0/24', 'external_type': 'E2'},
             {'via_ip': '12.0.0.1', 'via_port': '2'},
             {'via_ip': '13.0.0.1', 'via_port': '5'},
-            {'via_ip': '14.0.0.1', 'via_port': '6'}
+            {'via_ip': '14.0.0.1', 'via_port': '6'},
+            {'via_ip': '15.0.0.1', 'via_port': '1-1'},
+            {'via_ip': '16.0.0.1', 'via_port': '8.10'},
+            {'via_ip': '17.0.0.1', 'via_port': '7-1.20'}
         ],
     }
 
@@ -3579,8 +4058,8 @@ Port 1:
 Port lag10:
     lacp                 : active
     lag_member_speed     : 0
-    configured_members   : 3 2
-    eligible_members     : 3 2
+    configured_members   : 3 2 9-1
+    eligible_members     : 3 2 9-1
     participant_members  :
     interface_count      : 0
 Port 4:
@@ -3590,10 +4069,17 @@ Port 4:
     eligible_members     :
     participant_members  :
     interface_count      : 0
+Port 4-1:
+    lacp                 : off
+    lag_member_speed     : 0
+    configured_members   : 4-1
+    eligible_members     :
+    participant_members  :
+    interface_count      : 0
 
 LAG interfaces: \nPort lag10:
-    configured_members   : 3 2
-    eligible_members     : 3 2
+    configured_members   : 3 2 9-1
+    eligible_members     : 3 2 9-1
     participant_members  :
 
 LACP PDUs counters: \nLAG lag10:
@@ -3604,6 +4090,11 @@ LACP PDUs counters: \nLAG lag10:
     lacp_pdus_received: 0
     marker_pdus_received: 0
   Interface: 2
+    lacp_pdus_sent: 0
+    marker_response_pdus_sent: 0
+    lacp_pdus_received: 0
+    marker_pdus_received: 0
+  Interface: 5-1
     lacp_pdus_sent: 0
     marker_response_pdus_sent: 0
     lacp_pdus_received: 0
@@ -3631,6 +4122,16 @@ distributing:0 defaulted:0 expired:0
     lacp_control
        begin:0 actor_churn:0 partner_churn:0 ready_n:0 selected:0 \
 port_moved:0 ntt:0 port_enabled:0 \n\
+  Interface: 3-1
+    actor_oper_port_state \n\
+        lacp_activity:1 time_out:1 aggregation:1 sync:0 collecting:0 \
+distributing:0 defaulted:1 expired:0
+    partner_oper_port_state \n\
+        lacp_activity:0 time_out:0 aggregation:1 sync:0 collecting:0 \
+distributing:0 defaulted:0 expired:0
+    lacp_control
+       begin:0 actor_churn:0 partner_churn:0 ready_n:0 selected:0 \
+port_moved:0 ntt:0 port_enabled:0
 
 -------------------------------------------------------------------------
 [End] Daemon ops-lacpd
@@ -3670,6 +4171,12 @@ Diagnostic dump captured for feature lacp
                     'lacp_pdus_sent': 0
                 },
                 '3': {
+                    'marker_pdus_received': 0,
+                    'marker_response_pdus_sent': 0,
+                    'lacp_pdus_received': 0,
+                    'lacp_pdus_sent': 0
+                },
+                '5-1': {
                     'marker_pdus_received': 0,
                     'marker_response_pdus_sent': 0,
                     'lacp_pdus_received': 0,
@@ -3742,13 +4249,45 @@ Diagnostic dump captured for feature lacp
                         'begin': 0,
                         'port_moved': 0
                     }
+                },
+                3-1: {
+                    'partner_oper_port_state': {
+                        'distributing': 0,
+                        'expired': 0,
+                        'time_out': 0,
+                        'aggregation': 1,
+                        'sync': 0,
+                        'lacp_activity': 0,
+                        'defaulted': 0,
+                        'collecting': 0
+                    },
+                    'actor_oper_port_state': {
+                        'distributing': 0,
+                        'expired': 0,
+                        'time_out': 1,
+                        'aggregation': 1,
+                        'sync': 0,
+                        'lacp_activity': 1,
+                        'defaulted': 1,
+                        'collecting': 0
+                    },
+                    'lacp_control': {
+                        'port_enabled': 0,
+                        'partner_churn': 0,
+                        'actor_churn': 0,
+                        'selected': 0,
+                        'ready_n': 0,
+                        'ntt': 0,
+                        'begin': 0,
+                        'port_moved': 0
+                    }
                 }
             }
         },
         'Interfaces': {
             '10': {
-                'eligible_interfaces': ['3', '2'],
-                'configured_interfaces': ['3', '2'],
+                'eligible_interfaces': ['3', '2', '9-1'],
+                'configured_interfaces': ['3', '2', '9-1'],
                 'participant_interfaces': []
             }
         }
@@ -4228,12 +4767,23 @@ Interface                                                          (Mb/s)   Ch#
 -------------------------------------------------------------------------------
  bridge_normal   --      eth  routed up                               --     --
  1               --      eth  routed down   Administratively down     --     --
+ 9-1             56      eth  access up                               10000  --
 
     """
 
     result = parse_show_interface_brief(raw_result)
 
     expected = {
+        'bridge_normal': {
+            'status': 'up',
+            'type': ' eth',
+            'vlanId': '--',
+            'reason': None,
+            'mode': 'routed',
+            'interface': 'bridge_normal',
+            'speed': '--',
+            'port': '--'
+        },
         '1': {
             'status': 'down',
             'type': ' eth',
@@ -4242,6 +4792,16 @@ Interface                                                          (Mb/s)   Ch#
             'mode': 'routed',
             'interface': '1',
             'speed': '--',
+            'port': '--'
+        },
+        '9-1': {
+            'status': 'up',
+            'type': ' eth',
+            'vlanId': '56',
+            'reason': None,
+            'mode': 'access',
+            'interface': '9-1',
+            'speed': '10000',
             'port': '--'
         }
     }
@@ -4303,6 +4863,9 @@ VRF Name : vrf_default
         -------------------------
         10                  up
         1                   up
+        10-1                up
+        1.14                up
+        9-1.200             up
     """
 
     expected_result = {
@@ -4312,6 +4875,18 @@ VRF Name : vrf_default
         },
         '1': {
             'interface': '1',
+            'status': 'up'
+        },
+        '10-1': {
+            'interface': '10-1',
+            'status': 'up'
+        },
+        '1.14': {
+            'interface': '1.14',
+            'status': 'up'
+        },
+        '9-1.200': {
+            'interface': '9-1.200',
             'status': 'up'
         }
     }

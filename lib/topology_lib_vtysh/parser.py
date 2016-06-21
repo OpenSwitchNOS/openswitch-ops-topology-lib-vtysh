@@ -197,8 +197,9 @@ def parse_show_interface_brief(raw_result):
         }
     """
     show_interface_re = (
-        r'\s(?P<interface>\w+)\s+(?P<vlanId>[0-9,--]+)\s+(?P<type>\s+\w+)\s+'
-        r'(?P<mode>\w+)\s+(?P<status>\w+)\s+(?P<reason>\S+\s\w+)\s+'
+        r'\s(?P<interface>\w+[-.]?\d*[.]?\d*)'
+        r'\s+(?P<vlanId>[0-9,--]+)\s+(?P<type>\s+\w+)\s+'
+        r'(?P<mode>\w+)\s+(?P<status>\w+)\s+(?P<reason>\S+\s\w+)?\s+'
         r'(?P<speed>\S+)\s+(?P<port>\S+)'
     )
 
@@ -561,7 +562,7 @@ def parse_show_mac_address_table(raw_result):
     mac_entry = (
         r'(?P<mac>\s*([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2})\s*'
         r'(?P<vlan_id>[0-9]+)\s*'
-        r'(?P<from>[- a-zA-Z]+)\s*(?P<port>\w+)'
+        r'(?P<from>[- a-zA-Z]+)\s*(?P<port>\d+[-.]?\d*)'
     )
 
     result = {}
@@ -778,7 +779,7 @@ def parse_show_interface_subinterface_brief(raw_result):
     result = {}
 
     subinterface_re = (
-        r'(?P<subinterface>[0-9]+\.[0-9]+)\s+(?P<vlan_id>[0-9]+)\s+'
+        r'(?P<subinterface>\d+[-.]?\d*[.]?\d*)\s+(?P<vlan_id>[0-9]+)\s+'
         r'(?P<type>\w+)\s+(?P<mode>\w+)\s+(?P<status>\w+)\s+'
         r'(?P<reason>.*)\s+(?P<speed>\w+)\s+(?P<port_ch>--)'
     )
@@ -829,7 +830,7 @@ def parse_show_vlan(raw_result):
 
     vlan_re = (
         r'(?P<vlan_id>\d+)\s+(?P<name>\S+)\s+(?P<status>\S+)\s+'
-        r'(?P<reason>\S+)\s*(?P<reserved>\(\w+\))?\s*(?P<ports>[\w ,]*)'
+        r'(?P<reason>\S+)\s*(?P<reserved>\(\w+\))?\s*(?P<ports>[\w ,-.]*)'
     )
 
     no_vlan_re = (r'\s*VLAN\s+\d+\s+has\s+not\s+been\s+configured\s*')
@@ -991,7 +992,7 @@ def parse_show_lacp_aggregates(raw_result):
 
     lacp_re = (
         r'Aggregate-name[ ]+: (?P<name>\w+)\s*'
-        r'Aggregated-interfaces\s+:[ ]?(?P<interfaces>[\w \-]*)\s*'
+        r'Aggregated-interfaces\s+:[ ]?(?P<interfaces>[\w ,-]*)\s*'
         r'Heartbeat rate[ ]+: (?P<heartbeat_rate>slow|fast)\s*'
         r'Fallback[ ]+: (?P<fallback>true|false)\s*'
         r'(Fallback mode[ ]+: (?P<fallback_mode>\w+))?\s*'
@@ -1062,7 +1063,7 @@ def parse_show_sflow_interface(raw_result):
     """
 
     sflow_info_re = (
-        r'sFlow Configuration - Interface\s(?P<interface>\d+)\s*'
+        r'sFlow Configuration - Interface\s(?P<interface>\d+[-]?\d*)\s*'
         r'-----------------------------------------\s*'
         r'sFlow\s*(?P<sflow>\S+)\s*'
         r'Sampling\sRate\s*(?P<sampling_rate>\d+)\s*'
@@ -1108,7 +1109,7 @@ def parse_show_lldp_neighbor_info(raw_result):
     """
 
     neighbor_info_re = (
-        r'\s*Port\s+:\s*(?P<port>\d+)\n'
+        r'\s*Port\s+:\s*(?P<port>\d+[-.]?\d*[.]?\d*)\n'
         r'Neighbor entries\s+:\s*(?P<neighbor_entries>\d+)\n'
         r'Neighbor entries deleted\s+:\s*(?P<neighbor_entries_deleted>\d+)\n'
         r'Neighbor entries dropped\s+:\s*(?P<neighbor_entries_dropped>\d+)\n'
@@ -1510,7 +1511,7 @@ def parse_show_ip_ospf_neighbor_detail(raw_result):
         r'\s*Neighbor (?P<Neighbor>[^,]+),\s*interface address '
         '(?P<interface_address>[0-255.]+).*'
         r'\s*[\w ]+area (?P<area>[0-255.]+) via interface '
-        '(?P<interface>\d+).*'
+        '(?P<interface>\d+[.-]?\d*[.]?\d*).*'
         r'\s*[\w ]+priority is (?P<priority>\d+), State is '
         '(?P<state>\S+), (?P<state_change>\d+)[\w ]+.*'
         r'\s*Neighbor is (?P<admin_state>\w+) for '
@@ -1621,7 +1622,7 @@ def parse_show_ip_ospf_interface(raw_result):
     """
 
     show_ip_ospf_int_re = (
-        r'\s*Interface (?P<Interface_id>\d) BW\s*'
+        r'\s*Interface (?P<Interface_id>\d+[-.]?\d*[.]?\d*) BW\s*'
         '(?P<bandwidth>\d+) Mbps.*'
         r'\s*Internet address (?P<internet_address>[0-255.]+\S+)\s*'
         'Area (?P<Area_id>[0-255.]+).*'
@@ -1784,7 +1785,8 @@ def parse_show_ip_ospf_route(raw_result):
     for row in rows:
         temp = re.match(
             r'(?P<network>N)\s*(?P<ip_address>\S+)\s+\[(?P<hops>\d+)\]\s'
-            '\S*\s(?P<area>([\d]+.)\S+)\n(\s+\S+){3}\s+(?P<port>\d+)',
+            '\S*\s(?P<area>([\d]+.)\S+)\n(\s+\S+){3}\s+'
+            '(?P<port>\d+[.-]?\d*[.]?\d*)',
             row
         )
         if temp is not None:
@@ -1817,7 +1819,7 @@ def parse_show_ip_ospf_route(raw_result):
         else:
             temp = re.search(
                 r'(\s+\S+\s+(?P<via_ip>([\d]+.){3}\d+),\s+(?P<via_port>'
-                '\d+))',
+                '\d+[.-]?\d*[.]?\d*))',
                 rows[iterator]
             )
             if temp is not None:
@@ -1850,7 +1852,7 @@ def parse_show_ip_ospf_route(raw_result):
 
         temp = re.search(
             r'(\s+\S+\s+(?P<via_ip>([\d]+.){3}\d+),\s+(?P<via_port>'
-            '\d+))',
+            '\d+[.-]?\d*[.]?\d*))',
             rows[iterator]
         )
         if temp is not None:
@@ -3530,7 +3532,8 @@ def parse_show_ip_route(raw_result):
     )
 
     ipv4_nexthop_re = (
-        r'via\s+(?P<via>(?:\d+\.\d+\.\d+\.\d+|[a-z0-9]+)),\s+'
+        r'via\s+(?P<via>(?:\d+\.\d+\.\d+\.\d+|[a-z0-9]+|'
+        '\d+[-.]?\d*[.]?\d*)),\s+'
         r'\[(?P<distance>\d+)/(?P<metric>\d+)\],\s+(?P<from>\S+)'
     )
 
@@ -3638,7 +3641,8 @@ def parse_show_ipv6_route(raw_result):
     )
 
     ipv6_nexthop_re = (
-        r'via\s+(?P<via>(?:(?:(?:[0-9A-Za-z]+:)+:?([0-9A-Za-z]+)?)+|[a-zA-Z0-9'
+        r'via\s+(?P<via>(?:(?:(?:[0-9A-Za-z]+:)+:?([0-9A-Za-z]+)?)+|'
+        r'\d+[-.]?\d*[.]?\d*|[a-zA-Z0-9'
         r']+)),\s+\[(?P<distance>[a-z0-9]+)/(?P<metric>\d+)\],\s+(?P<from>\S+)'
     )
 
@@ -5301,7 +5305,7 @@ def parse_diag_dump_lacp_basic_counters(raw_result):
     """
 
     getlacpcounters_re = (
-        r'Interface: (?P<interface>\d+)\s*'
+        r'Interface: (?P<interface>\d+[-]?\d*)\s*'
         r'lacp_pdus_sent: (?P<lacp_pdus_sent>\d+)\s*'
         r'marker_response_pdus_sent: (?P<marker_response_pdus_sent>\d+)\s*'
         r'lacp_pdus_received: (?P<lacp_pdus_received>\d+)\s*'
@@ -5378,7 +5382,7 @@ def parse_diag_dump_lacp_basic_state(raw_result):
     """
 
     getlacpstate_actor_re = (
-        r'Interface: (?P<interface>\d+)\s*'
+        r'Interface: (?P<interface>\d+[-]?\d*)\s*'
         r'actor_oper_port_state\s*'
         r'lacp_activity:(?P<a_lacp_activity>\S+) time_out:(?P<a_time_out>' +
         '\S+) aggregation:(?P<a_aggregation>\S+) sync:(?P<a_sync>\S+) ' +
@@ -6116,7 +6120,7 @@ def parse_show_vrf(raw_result):
     """
 
     show_re = (
-        r'\s+(?P<interface>\w+)\s+(?P<status>\w+)'
+        r'\s+(?P<interface>\w+[.-]?\d*[.]?\d*)\s+(?P<status>\w+)'
     )
 
     result = {}
