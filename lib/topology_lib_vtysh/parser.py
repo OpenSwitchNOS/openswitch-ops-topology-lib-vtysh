@@ -1208,6 +1208,140 @@ def parse_show_sftp_server(raw_result):
     return result
 
 
+def parse_show_ip_interface(raw_result):
+    """
+    Parse the 'show ip interface' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show interface command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+            'admin_state': 'up',
+            'hardware': 'Ethernet',
+            'interface_state': 'up',
+            'mac_address': '70:72:cf:75:25:70',
+            'mtu': 0,
+            'port': 1,
+            'rx_l3_ucast_packets': 0,
+            'rx_l3_ucast_bytes': 0,
+            'rx_l3_mcast_packets': 10,
+            'rx_l3_mcast_bytes': 0,
+            'state_description': None,
+            'state_information': None,
+            'tx_l3_ucast_packets': 0,
+            'tx_l3_ucast_bytes': 0,
+            'tx_l3_mcast_packets': 10,
+            'tx_l3_mcast_bytes': 0,
+            'ipv4': '10.1.1.1/24',
+            'ipv4_secondary': '10.1.1.2/24',
+        }
+    """
+
+    show_re = (
+        r'\s*Interface (?P<port>\d+[.-]?\d*) is (?P<interface_state>\S+)\s*'
+        r'(\((?P<state_description>.*)\))?\s*'
+        r'Admin state is (?P<admin_state>\S+)\s+'
+        r'(State information: (?P<state_information>\S+))?\s*'
+        r'Hardware: (?P<hardware>\S+), MAC Address: (?P<mac_address>\S+)\s+'
+        r'(IPv4 address (?P<ipv4>\S+))?\s*'
+        r'(IPv4\saddress\s(?P<ipv4_secondary>\S+) secondary)?\s*'
+        r'MTU (?P<mtu>\d+)\s+'
+        r'RX\s+'
+        r'(\s*ucast:\s+(?P<rx_l3_ucast_packets>\d+) packets,)?\s*'
+        r'((?P<rx_l3_ucast_bytes>\d+) bytes)?'
+        r'(\s*mcast:\s+(?P<rx_l3_mcast_packets>\d+) packets,)?\s+'
+        r'((?P<rx_l3_mcast_bytes>\d+) bytes\s+)?'
+        r'TX\s+'
+        r'(\s*ucast:\s+(?P<tx_l3_ucast_packets>\d+) packets,\s+)?'
+        r'((?P<tx_l3_ucast_bytes>\d+) bytes)?'
+        r'(\s*mcast:\s+(?P<tx_l3_mcast_packets>\d+) packets,\s+)?'
+        r'((?P<tx_l3_mcast_bytes>\d+) bytes)?'
+    )
+
+    re_result = re.match(show_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    for key, value in result.items():
+        if value is not None:
+            if value.isdigit():
+                result[key] = int(value)
+            else:
+                result[key] = value
+    return result
+
+
+def parse_show_ipv6_interface(raw_result):
+    """
+    Parse the 'show ipv6 interface' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show interface command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+            'admin_state': 'up',
+            'hardware': 'Ethernet',
+            'interface_state': 'up',
+            'mac_address': '70:72:cf:75:25:70',
+            'mtu': 0,
+            'port': 1,
+            'rx_l3_ucast_packets': 0,
+            'rx_l3_ucast_bytes': 0,
+            'rx_l3_mcast_packets': 10,
+            'rx_l3_mcast_bytes': 0,
+            'state_description': None,
+            'state_information': None,
+            'tx_l3_ucast_packets': 0,
+            'tx_l3_ucast_bytes': 0,
+            'tx_l3_mcast_packets': 10,
+            'tx_l3_mcast_bytes': 0,
+            'ipv6': '2001::1/12',
+            'ipv6_secondary': '2001::2/12'
+        }
+    """
+
+    show_re = (
+        r'\s*Interface (?P<port>\d+[.-]?\d*) is (?P<interface_state>\S+)\s*'
+        r'(\((?P<state_description>.*)\))?\s*'
+        r'Admin state is (?P<admin_state>\S+)\s+'
+        r'(State information: (?P<state_information>\S+))?\s*'
+        r'Hardware: (?P<hardware>\S+), MAC Address: (?P<mac_address>\S+)\s+'
+        r'(IPv6 address (?P<ipv6>\S+))?\s*'
+        r'(IPv6\saddress\s(?P<ipv6_secondary>\S+) secondary)?\s*'
+        r'MTU (?P<mtu>\d+)\s+'
+        r'RX\s+'
+        r'(\s*ucast:\s+(?P<rx_l3_ucast_packets>\d+) packets,)?\s*'
+        r'((?P<rx_l3_ucast_bytes>\d+) bytes)?'
+        r'(\s*mcast:\s+(?P<rx_l3_mcast_packets>\d+) packets,)?\s+'
+        r'((?P<rx_l3_mcast_bytes>\d+) bytes\s+)?'
+        r'TX\s+'
+        r'(\s*ucast:\s+(?P<tx_l3_ucast_packets>\d+) packets,\s+)?'
+        r'((?P<tx_l3_ucast_bytes>\d+) bytes)?'
+        r'(\s*mcast:\s+(?P<tx_l3_mcast_packets>\d+) packets,\s+)?'
+        r'((?P<tx_l3_mcast_bytes>\d+) bytes)?'
+    )
+
+    re_result = re.match(show_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    for key, value in result.items():
+        if value is not None:
+            if value.isdigit():
+                result[key] = int(value)
+            else:
+                result[key] = value
+    return result
+
+
 def parse_show_ip_bgp_summary(raw_result):
     """
     Parse the 'show ip bgp summary' command raw output.
@@ -6189,6 +6323,7 @@ __all__ = [
     'parse_show_running_config', 'parse_show_ip_route',
     'parse_show_running_config_interface',
     'parse_show_ipv6_route', 'parse_show_ipv6_bgp',
+    'parse_show_ip_interface', 'parse_show_ipv6_interface',
     'parse_show_ip_ecmp', 'parse_show_interface_loopback',
     'parse_show_ntp_associations', 'parse_show_ntp_authentication_key',
     'parse_show_ntp_statistics', 'parse_show_ntp_status',
