@@ -115,13 +115,14 @@ class AclEmptyException(VtyshException):
     """
 
 
-class TcamResourcesException(VtyshException):
+class MaxACEsException(VtyshException):
     """
     This is a typed exception that will be raised when any of the following
     regular expressions match the output of a command:
 
     ::
-        'command failed'
+        'unable to create acl entry. the maximum allowed number of entries'
+        ' per acl has been reached'
 
     """
 
@@ -252,9 +253,10 @@ VTYSH_EXCEPTIONS = OrderedDict([
         ]
     ),
     (
-        TcamResourcesException,
+        MaxACEsException,
         [
-            'command failed'
+            'unable to create acl entry. the maximum allowed number of entries'
+            ' per acl has been reached'
         ]
     ),
     (
@@ -334,7 +336,7 @@ __all__ = [
     'DuplicateLoopbackIPException',
     'InvalidQnCommandException',
     'AclEmptyException',
-    'TcamResourcesException',
+    'MaxACEsException',
     'ResequenceNumberException',
     'AmbiguousCommandException',
     'InvalidL4SourcePortRangeException',

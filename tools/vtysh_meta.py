@@ -6601,9 +6601,10 @@ VTYSH_EXCEPTIONS_SPEC = OrderedDict([
             'acl is empty',
         ]
     ), (
-        'TcamResourcesException',
+        'MaxACEsException',
         [
-            'command failed',
+            'unable to create acl entry. the maximum allowed'
+            ' number of entries per acl has been reached',
         ]
     ), (
         'ResequenceNumberException',
