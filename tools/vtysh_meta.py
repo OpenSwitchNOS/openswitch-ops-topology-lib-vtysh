@@ -55,6 +55,28 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
+                'command': 'show ip interface {port}',
+                'doc': 'Interface IPv4 infomation.',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'Label that identifies interface.',
+                    },
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show ipv6 interface {port}',
+                'doc': 'Interface IPv6 infomation.',
+                'arguments': [
+                    {
+                        'name': 'portlbl',
+                        'doc': 'Label that identifies interface.',
+                    },
+                ],
+                'returns': True
+            },
+            {
                 'command': 'show vlan',
                 'doc': 'Show VLAN configuration.',
                 'arguments': [
