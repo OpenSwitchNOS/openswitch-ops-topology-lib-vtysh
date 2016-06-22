@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# g-*- codging: utf-8 -*-
 #
 # Copyright (C) 2015-2016 Hewlett Packard Enterprise Development LP
 #
@@ -298,6 +298,91 @@ def parse_show_interface_lag(raw_result):
                 result[key] = False
     return result
 
+
+def parse_show_ip_interface_lag(raw_result):
+    """
+    Parse the 'show ip interface <lag>' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show ip interface <lag> command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+            'lag_name': 'lag1',
+            'forwarding_state': 'not forwarding'
+            'port_agg_forwarding': 'not forwarding'
+            'ipv4': '10.1.1.1/24',
+            'ipv4_secondary': '10.1.1.2/24'
+        }
+    """
+
+    show_re = (
+        r'\s*Aggregate-name\s(?P<lag_name>\w*)\s*'
+        r'(Forwarding State\s:\s(?P<forwarding_state>.*))?\s*'
+        r'(Port aggregation forwarding\s:\s(?P<port_agg_forwarding>.*))?\s*'
+        r'(IPv4\saddress\s(?P<ipv4>\S+))?\s*'
+        r'(IPv4\saddress\s(?P<ipv4_secondary>\S+) secondary)?\s*'
+    )
+
+    re_result = re.match(show_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    for key, value in result.items():
+        if value is not None:
+            if value.isdigit():
+                result[key] = int(value)
+            elif value == 'on':
+                result[key] = True
+            elif value == 'off':
+                result[key] = False
+    return result
+
+
+def parse_show_ipv6_interface_lag(raw_result):
+    """
+    Parse the 'show ipv6 interface <lag>' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show ipv6 interface <lag> command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+            'lag_name': 'lag1',
+            'forwarding_state': 'not forwarding'
+            'port_agg_forwarding': 'not forwarding'
+            'ipv6': '2001::1/24',
+            'ipv6_secondary': '3001::1/24'
+        }
+    """
+
+    show_re = (
+        r'\s*Aggregate-name\s(?P<lag_name>\w*)\s*'
+        r'(Forwarding State\s:\s(?P<forwarding_state>.*))?\s*'
+        r'(Port aggregation forwarding\s:\s(?P<port_agg_forwarding>.*))?\s*'
+        r'(IPv6\saddress\s(?P<ipv6>\S+))?\s*'
+        r'(IPv6\saddress\s(?P<ipv6_secondary>\S+) secondary)?\s*'
+    )
+
+    re_result = re.match(show_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    for key, value in result.items():
+        if value is not None:
+            if value.isdigit():
+                result[key] = int(value)
+            elif value == 'on':
+                result[key] = True
+            elif value == 'off':
+                result[key] = False
+    return result
 
 def parse_show_interface_subinterface(raw_result):
     """

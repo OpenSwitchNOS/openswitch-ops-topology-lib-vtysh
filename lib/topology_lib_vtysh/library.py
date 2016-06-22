@@ -9829,6 +9829,66 @@ class ConfigMirrorSession(ContextManager):
             raise determine_exception(result)(result)
 
 
+def show_ip_interface_lag(
+        enode, portlbl):
+    """
+    IP Interface LAG infomation.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip interface {port}
+
+    :param portlbl: Label that identifies interface.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_interface_lag`
+    """
+
+    cmd = [
+        'show ip interface {port}'
+    ]
+
+    port = enode.ports.get(portlbl, portlbl)
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ip_interface_lag(result)
+
+
+def show_ipv6_interface_lag(
+        enode, portlbl):
+    """
+    IPv6 Interface LAG infomation.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ipv6 interface {port}
+
+    :param portlbl: Label that identifies interface.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ipv6_interface_lag`
+    """
+
+    cmd = [
+        'show ipv6 interface {port}'
+    ]
+
+    port = enode.ports.get(portlbl, portlbl)
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ipv6_interface_lag(result)
+
+
 def show_interface(
         enode, portlbl):
     """
