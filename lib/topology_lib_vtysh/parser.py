@@ -545,12 +545,38 @@ def parse_show_mac_address_table(raw_result):
             '00:00:00:00:00:01': { 'vlan_id': '1',
                                     'from': 'dynamic',
                                     'port': '1'
+        },
+        '00:00:00:00:00:02': { 'vlan_id': '2',
+                                'from': 'dynamic',
+                                'port': '2'
+        },
+        'vlans': {
+            '1': {
+                '00:00:00:00:00:01': {
+                    'vlan_id': '1',
+                    'from': 'dynamic',
+                    'port': '1'
+                },
             },
-            '00:00:00:00:00:02': { 'vlan_id': '2',
-                                    'from': 'dynamic',
-                                    'port': '2'
-            }
-
+            '2': {
+                '00:00:00:00:00:02': {
+                    'vlan_id': '2',
+                    'from': 'dynamic',
+                    'port': '2'
+                },
+            },
+            '3': {
+                '00:00:00:00:00:02': {
+                    'vlan_id': '3',
+                    'from': 'dynamic',
+                    'port': '5'
+                },
+                '00:00:00:00:00:03': {
+                    'vlan_id': '3',
+                    'from': 'dynamic',
+                    'port': '3-1'
+                },
+            },
         }
     """
     table_global = (
@@ -569,6 +595,7 @@ def parse_show_mac_address_table(raw_result):
     re_result = re.search(table_global, raw_result)
     if re_result:
         result = re_result.groupdict()
+        result['vlans'] = {}
 
     for line in raw_result.splitlines():
         mac_result = re.search(mac_entry, line)
@@ -576,8 +603,12 @@ def parse_show_mac_address_table(raw_result):
             partial = mac_result.groupdict()
             partial['from'] = partial['from'].strip()
             mac = partial['mac']
+            vlan = partial['vlan_id']
             del partial['mac']
+            if vlan not in result['vlans']:
+                result['vlans'][vlan] = {}
             result[mac] = partial
+            result['vlans'][vlan][mac] = partial
 
     return result
 

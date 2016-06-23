@@ -331,6 +331,7 @@ MAC Address          VLAN     Type       Port
 --------------------------------------------------
 00:00:00:00:00:01   1        dynamic    1
 00:00:00:00:00:02   2        dynamic    2
+00:00:00:00:00:02   3        dynamic    5
 00:00:00:00:00:03   3        dynamic    3-1
 00:00:00:00:00:04   4        dynamic    4-4
     """
@@ -346,9 +347,9 @@ MAC Address          VLAN     Type       Port
             'port': '1'
         },
         '00:00:00:00:00:02': {
-            'vlan_id': '2',
+            'vlan_id': '3',
             'from': 'dynamic',
-            'port': '2'
+            'port': '5'
         },
         '00:00:00:00:00:03': {
             'vlan_id': '3',
@@ -359,6 +360,41 @@ MAC Address          VLAN     Type       Port
             'vlan_id': '4',
             'from': 'dynamic',
             'port': '4-4'
+        },
+        'vlans': {
+            '1': {
+                '00:00:00:00:00:01': {
+                    'vlan_id': '1',
+                    'from': 'dynamic',
+                    'port': '1'
+                },
+            },
+            '2': {
+                '00:00:00:00:00:02': {
+                    'vlan_id': '2',
+                    'from': 'dynamic',
+                    'port': '2'
+                },
+            },
+            '3': {
+                '00:00:00:00:00:02': {
+                    'vlan_id': '3',
+                    'from': 'dynamic',
+                    'port': '5'
+                },
+                '00:00:00:00:00:03': {
+                    'vlan_id': '3',
+                    'from': 'dynamic',
+                    'port': '3-1'
+                },
+            },
+            '4': {
+                '00:00:00:00:00:04': {
+                    'vlan_id': '4',
+                    'from': 'dynamic',
+                    'port': '4-4'
+                },
+            }
         }
     }
 
