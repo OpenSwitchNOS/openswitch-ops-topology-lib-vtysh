@@ -3235,8 +3235,10 @@ def parse_show_running_config_helper(raw_result):
 
             # Match ipv4
             re_result = re.match(ipv4_re, line)
-            if re_result and subint_flag is None:
-                result['interface'][port]['ipv4'] = re_result.group(1)
+            if re_result and subint_flag is None and \
+                    not result['interface'].get('lag'):
+                if port in result['interface']:
+                    result['interface'][port]['ipv4'] = re_result.group(1)
             if re_result:
                 if result['interface'].get('lag') and not\
                         result['interface'].get('subint'):
@@ -3247,12 +3249,14 @@ def parse_show_running_config_helper(raw_result):
                        and subint_flag:
                         result['interface']['subint'][subintport]['ipv4'] =\
                             re_result.group(1)
-                        subint_flag = None
+                        # subint_flag = None
 
             # Match ipv6
             re_result = re.match(ipv6_re, line)
-            if re_result and subint_flag is None:
-                result['interface'][port]['ipv6'] = re_result.group(1)
+            if re_result and subint_flag is None \
+                    and not result['interface'].get('lag'):
+                if port in result['interface']:
+                    result['interface'][port]['ipv6'] = re_result.group(1)
             if re_result:
                 if result['interface'].get('lag') and not\
                         result['interface'].get('subint'):
@@ -5709,19 +5713,16 @@ def parse_show_snmp_agent_port(raw_result):
 
     """
 
-    print("In Parser method")
     snmp_agent_port_re = (
         r'\s*SNMP\s*agent\sport\s*:\s*(?P<agent_port>.+)'
     )
 
     re_result = re.match(snmp_agent_port_re, raw_result)
-    print(re_result)
 
     if re_result is None:
         return re_result
 
     result = re_result.groupdict()
-    print(result)
 
     return result
 
@@ -5969,7 +5970,6 @@ def parse_show_spanning_tree(raw_result):
                             raw_result, 1)
         root = True
 
-    print(raw_result)
     re_result = re.search(mst_zero_config, raw_result)
     assert re_result
 
