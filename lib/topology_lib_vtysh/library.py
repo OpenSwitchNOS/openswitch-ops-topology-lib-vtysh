@@ -12701,8 +12701,7 @@ class ConfigVrrpInterface(ContextManager):
 
     ::
 
-            ['config terminal', 'interface {port}',\
-             'vrrp {grpid} address-family {af}']
+            ['config terminal', 'interface {port}', 'vrrp {grpid} address-family {af}']
 
     post_commands:
 
@@ -15703,6 +15702,35 @@ def show_vrf(
     return parse_show_vrf(result)
 
 
+def show_access_list_hitcounts_ip_interface(
+        enode, acl_name, port):
+    """
+    Show hit-counts per ACE aggregated across ports.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show access-list hitcounts ip {acl_name} interface {port}
+
+    :param acl_name: Access-list name.
+    :param port: Label that identifies interface.
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_access_list_hitcounts_ip_interface`
+    """
+
+    cmd = [
+        'show access-list hitcounts ip {acl_name} interface {port}'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_access_list_hitcounts_ip_interface(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -15811,5 +15839,6 @@ __all__ = [
     'show_spanning_tree_mst_config',
     'show_vlan_summary',
     'show_vlan_internal',
-    'show_vrf'
+    'show_vrf',
+    'show_access_list_hitcounts_ip_interface'
 ]
