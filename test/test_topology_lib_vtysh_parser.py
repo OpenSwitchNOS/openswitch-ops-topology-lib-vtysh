@@ -1443,6 +1443,8 @@ Neighbor Management-Address    :
 Chassis Capabilities Available :
 Chassis Capabilities Enabled   :
 Neighbor Port-ID               :
+Neighbor Port-Description      :
+Neighbor Port VLAN Id          :
 TTL                            :
     """
 
@@ -1461,6 +1463,8 @@ TTL                            :
         'chassis_capabilities_available': None,
         'chassis_capabilities_enabled': None,
         'neighbor_port_id': None,
+        'neighbor_port_description': None,
+        'neighbor_port_vlan_id': None,
         'ttl': None
     }
     ddiff = DeepDiff(result, expected)
@@ -1479,6 +1483,8 @@ Neighbor Management-Address    :
 Chassis Capabilities Available :
 Chassis Capabilities Enabled   :
 Neighbor Port-ID               :
+Neighbor Port-Description      :
+Neighbor Port VLAN Id          :
 TTL                            :
     """
 
@@ -1497,6 +1503,8 @@ TTL                            :
         'chassis_capabilities_available': None,
         'chassis_capabilities_enabled': None,
         'neighbor_port_id': None,
+        'neighbor_port_description': None,
+        'neighbor_port_vlan_id': None,
         'ttl': None
     }
     ddiff = DeepDiff(result, expected)
@@ -1515,6 +1523,8 @@ Neighbor Management-Address    :
 Chassis Capabilities Available :
 Chassis Capabilities Enabled   :
 Neighbor Port-ID               :
+Neighbor Port-Description      :
+Neighbor Port VLAN Id          :
 TTL                            :
     """
 
@@ -1533,6 +1543,8 @@ TTL                            :
         'chassis_capabilities_available': None,
         'chassis_capabilities_enabled': None,
         'neighbor_port_id': None,
+        'neighbor_port_description': None,
+        'neighbor_port_vlan_id': None,
         'ttl': None
     }
     ddiff = DeepDiff(result, expected)

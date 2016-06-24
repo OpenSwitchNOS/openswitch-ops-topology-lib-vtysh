@@ -1135,6 +1135,8 @@ def parse_show_lldp_neighbor_info(raw_result):
                 'chassis_capabilities_available': None,
                 'chassis_capabilities_enabled': None,
                 'neighbor_port_id': None,
+                'neighbor_port_description': None,
+                'neighbor_port_vlan_id': None,
                 'ttl': None
             }
     """
@@ -1156,6 +1158,10 @@ def parse_show_lldp_neighbor_info(raw_result):
         r'Chassis Capabilities Enabled\s+:\s*'
         r'(?P<chassis_capabilities_enabled>[\w\s\n,.*_-]+)?\n'
         r'Neighbor Port-ID\s+:\s*(?P<neighbor_port_id>[\w\s\n/,.*_-]+)?\n'
+        r'Neighbor Port-Description\s+:\s*'
+        r'(?P<neighbor_port_description>[\w\s\n/,.*_-]+)?\n'
+        r'Neighbor Port VLAN Id\s+:\s*'
+        r'(?P<neighbor_port_vlan_id>[\w\s\n/,.*_-]+)?\n'
         r'TTL\s+:\s*(?P<ttl>\d+)?'
     )
 
