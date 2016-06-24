@@ -6340,6 +6340,44 @@ def parse_show_vlan_internal(raw_result):
         return result
 
 
+def parse_show_access_list_hitcounts_ip_interface(raw_result):
+    """
+    Parse the 'show access-list hitcounts ip test12 interface 1'
+    command raw output. If no count on ACE, hit_cnt is '-'; for
+    traffic not matching an ACE, hit_count is 0
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show access-list command
+     in a dictionary of the form. Returns None if empty dictionary:
+
+     ::
+
+        {
+            '50 permit any 10.0.10.1 10.0.10.2': '10'
+        }
+    """
+    show_re = (
+        r'\s+(?P<hit_count>[-\d]+)\s+(?P<rule>.*$)'
+    )
+
+    result = {}
+    count = 0
+
+    for line in raw_result.splitlines():
+        count = count + 1
+        if count <= 2:
+            continue
+        re_result = re.search(show_re, line)
+        if re_result:
+            data = re_result.groupdict()
+            result[data['rule']] = data['hit_count']
+    if result == {}:
+        return None
+    else:
+        return result
+
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
@@ -6391,5 +6429,6 @@ __all__ = [
     'parse_diag_dump_lacp_basic', 'parse_show_snmpv3_users',
     'parse_show_snmp_agent_port', 'parse_diag_dump', 'parse_show_events',
     'parse_show_spanning_tree', 'parse_show_spanning_tree_mst_config',
-    'parse_show_spanning_tree_mst', 'parse_show_vlan_summary'
+    'parse_show_spanning_tree_mst', 'parse_show_vlan_summary',
+    'parse_show_access_list_hitcounts_ip_interface'
 ]

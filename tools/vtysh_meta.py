@@ -971,6 +971,22 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Show vrf information.',
                 'arguments': [],
                 'returns': True
+            },
+            {
+                'command': 'show access-list hitcounts ip {acl_name}'
+                           ' interface {port}',
+                'doc': 'Show hit-counts per ACE aggregated across ports.',
+                'arguments': [
+                    {
+                        'name': 'acl_name',
+                        'doc': 'Access-list name.',
+                    },
+                    {
+                        'name': 'port',
+                        'doc': 'Label that identifies interface.',
+                    },
+                ],
+                'returns': True
             }
         ]
     }),
@@ -6370,9 +6386,7 @@ local-priority {local_priority}',
                 'doc': 'address-family [ipv4|ipv6]'
             }
         ],
-        'pre_commands': ['config terminal',
-                         'interface {port}',
-                         'vrrp {grpid} address-family {af}'],
+        'pre_commands': ['config terminal', 'interface {port}', 'vrrp {grpid} address-family {af}'],
         'post_commands': ['exit', 'end'],
         'commands': [
             {

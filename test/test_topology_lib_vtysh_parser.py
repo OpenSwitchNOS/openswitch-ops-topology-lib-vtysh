@@ -106,7 +106,8 @@ from topology_lib_vtysh.parser import (
     parse_show_aaa_authentication,
     parse_show_vlan_summary,
     parse_show_vlan_internal,
-    parse_show_vrf
+    parse_show_vrf,
+    parse_show_access_list_hitcounts_ip_interface
     )
 
 
@@ -5140,6 +5141,24 @@ Assigned Interfaces:
     }
 
     result = parse_show_vlan_internal(raw_result)
+    ddiff = DeepDiff(result, expected_result)
+
+    assert not ddiff
+
+
+def test_parse_show_access_list_hitcounts_ip_interface():
+    raw_result = """\
+Statistics for ACL test13 (ipv4):
+Interface 2 (in):
+           Hit Count  Configuration
+                  10  50 permit any 10.0.10.1 10.0.10.2 count
+    """
+
+    expected_result = {
+        '50 permit any 10.0.10.1 10.0.10.2 count': '10'
+    }
+
+    result = parse_show_access_list_hitcounts_ip_interface(raw_result)
     ddiff = DeepDiff(result, expected_result)
 
     assert not ddiff
