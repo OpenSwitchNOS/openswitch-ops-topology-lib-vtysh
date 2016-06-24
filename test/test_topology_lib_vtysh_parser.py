@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # Copyright (C) 2015 Hewlett Packard Enterprise Development LP
 #
@@ -106,7 +105,10 @@ from topology_lib_vtysh.parser import (
     parse_show_aaa_authentication,
     parse_show_vlan_summary,
     parse_show_vlan_internal,
-    parse_show_vrf
+    parse_show_vrf,
+    parse_show_ip_prefix_list,
+    parse_show_ipv6_prefix_list,
+    parse_show_ip_bgp_route_map
     )
 
 
@@ -5184,6 +5186,187 @@ VRF Name : vrf_default
     }
 
     result = parse_show_vrf(raw_result)
+    ddiff = DeepDiff(result, expected_result)
+
+    assert not ddiff
+
+
+def test_parse_show_ip_prefix_list():
+    raw_result = """
+ip prefix-list List1: 2 entries
+   seq 1 permit 20.0.0.0/8
+   seq 2 deny 10.0.0.0/8
+ip prefix-list List3: 1 entries
+   seq 1 deny any
+ip prefix-list List2: 2 entries
+   seq 1 deny 192.168.1.0/24
+   seq 2 permit any
+    """
+
+    expected_result = {
+        'List1':
+            {
+                'prefix_entries':
+                    [
+                        {
+                            'seq_num': '1',
+                            'network': '20.0.0.0/8',
+                            'action': 'permit'
+                        },
+                        {
+                            'seq_num': '2',
+                            'network': '10.0.0.0/8',
+                            'action': 'deny'
+                        }
+                    ],
+                    'prefix_name': 'List1',
+                    'prefix_qty': '2'
+            },
+        'List3':
+            {
+                'prefix_entries':
+                    [
+                        {
+                            'seq_num': '1',
+                            'network': 'any',
+                            'action': 'deny'
+                        }
+                    ],
+                'prefix_name': 'List3',
+                'prefix_qty': '1'
+            },
+        'List2':
+            {
+                'prefix_entries':
+                    [
+                        {
+                            'seq_num': '1',
+                            'network': '192.168.1.0/24',
+                            'action': 'deny'
+                        },
+                        {
+                            'seq_num': '2',
+                            'network': 'any',
+                            'action': 'permit'
+                        }
+                    ],
+                'prefix_name': 'List2',
+                'prefix_qty': '2'
+            }
+        }
+
+    result = parse_show_ip_prefix_list(raw_result)
+    ddiff = DeepDiff(result, expected_result)
+
+    assert not ddiff
+
+
+def test_parse_show_ipv6_prefix_list():
+    raw_result = """
+ipv6 prefix-list List2-6: 2 entries
+   seq 19 deny 2001:db8:1:1::/64
+   seq 20 permit any
+ipv6 prefix-list List1-6: 2 entries
+   seq 10 permit 2001:2::/64
+   seq 11 deny any
+    """
+
+    expected_result = {
+        'List1-6':
+            {
+                'prefix_entries':
+                    [
+                        {
+                            'seq_num': '10',
+                            'network': '2001:2::/64',
+                            'action': 'permit'
+                        },
+                        {
+                            'seq_num': '11',
+                            'network': 'any',
+                            'action': 'deny'
+                        }
+                    ],
+                'prefix_name': 'List1-6',
+                'prefix_qty': '2'
+            },
+        'List2-6':
+            {
+                'prefix_entries':
+                    [
+                        {
+                            'seq_num': '19',
+                            'network': '2001:db8:1:1::/64',
+                            'action': 'deny'
+                        },
+                        {
+                            'seq_num': '20',
+                            'network': 'any',
+                            'action': 'permit'
+                        }
+                    ],
+                'prefix_name': 'List2-6',
+                'prefix_qty': '2'
+            }
+    }
+
+    result = parse_show_ipv6_prefix_list(raw_result)
+    ddiff = DeepDiff(result, expected_result)
+
+    assert not ddiff
+
+
+def test_parse_show_ip_bgp_route_map():
+    raw_result = """
+BGP route map table entry for test
+Entry 1:
+     action : deny
+     Set parameters :
+     as_path_exclude : 20 30 40
+     Match parameters :
+     prefix_list : List2
+     ipv6_prefix_list : List2-6
+Entry 2:
+     action : permit
+     Set parameters :
+     Match parameters :
+Entry 3:
+     action : permit
+     Set parameters :
+     Match parameters :
+     prefix_list : List1
+     """
+
+    expected_result = {
+        '1':
+            {
+                'action': 'deny',
+                'set_parameters': '',
+                'as_path_exclude': '20 30 40',
+                'match_parameters': '',
+                'prefix_list': 'List2',
+                'ipv6_prefix_list': 'List2-6'
+            },
+        '2':
+            {
+                'action': 'permit',
+                'set_parameters': '',
+                'as_path_exclude': None,
+                'match_parameters': '',
+                'prefix_list': None,
+                'ipv6_prefix_list': None
+            },
+        '3':
+            {
+                'action': 'permit',
+                'set_parameters': '',
+                'as_path_exclude': None,
+                'match_parameters': '',
+                'prefix_list': 'List1',
+                'ipv6_prefix_list': None
+            }
+    }
+    result = parse_show_ip_bgp_route_map(raw_result)
     ddiff = DeepDiff(result, expected_result)
 
     assert not ddiff

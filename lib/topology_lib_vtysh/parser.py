@@ -6340,6 +6340,246 @@ def parse_show_vlan_internal(raw_result):
         return result
 
 
+def parse_show_ip_prefix_list(raw_result):
+    """
+    Parse the 'show ip prefix-list' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show ip prefix-list command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+            'List1':
+            {
+                    'prefix_entries':
+                    [
+                        {
+                            'seq_num': '1',
+                            'network': '20.0.0.0/8',
+                            'action': 'permit'
+                        },
+                        {
+                            'seq_num': '2',
+                            'network': '10.0.0.0/8',
+                            'action': 'deny'
+                        }
+                    ],
+                    'prefix_name': 'List1',
+                    'prefix_qty': '2'
+            },
+            'List3':
+            {
+                    'prefix_entries':
+                    [
+                         {
+                            'seq_num': '1',
+                            'network': 'any',
+                            'action': 'deny'
+                         }
+                    ],
+                    'prefix_name': 'List3',
+                    'prefix_qty': '1'
+            },
+            'List2':
+            {
+                    'prefix_entries':
+                    [
+                        {
+                            'seq_num': '1',
+                            'network': '192.168.1.0/24',
+                            'action': 'deny'
+                        },
+                        {
+                            'seq_num': '2',
+                            'network': 'any',
+                            'action': 'permit'
+                        }
+                    ],
+                    'prefix_name': 'List2',
+                    'prefix_qty': '2'
+            }
+        }
+    """
+
+    prefix_settings_re = (
+        r'ip prefix-list (?P<prefix_name>[\w_\-]+):\s'
+        r'(?P<prefix_qty>[\d]+)\s\w+\n'
+    )
+    prefix_entry_re = (
+        r'\s+seq\s(?P<seq_num>[\d]+)\s'
+        r'(?P<action>[\w]+)\s'
+        r'(?P<network>\S+)'
+    )
+
+    result = {}
+    plist = []
+
+    for prefix_output in re.finditer(prefix_entry_re, raw_result):
+        statement = prefix_output.groupdict()
+        plist.append(statement)
+
+    entry_count = 0
+    for output in re.finditer(prefix_settings_re, raw_result):
+        entry = output.groupdict()
+        tmp_list = []
+        for i in range(int(entry['prefix_qty'])):
+            tmp_list.append(plist[entry_count])
+            entry_count += 1
+        entry['prefix_entries'] = tmp_list
+        result[entry['prefix_name']] = entry
+
+    assert result
+    return result
+
+
+def parse_show_ipv6_prefix_list(raw_result):
+    """
+    Parse the 'show ipv6 prefix-list' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show ipv6 prefix-list command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+            'List1-6':
+            {
+                    'prefix_entries':
+                    [
+                        {
+                            'seq_num': '10',
+                            'network': '2001:2::/64',
+                            'action': 'permit'
+                        },
+                        {
+                            'seq_num': '11',
+                            'network': 'any',
+                            'action': 'deny'
+                        }
+                    ],
+                    'prefix_name': 'List1-6',
+                    'prefix_qty': '2'
+            },
+            'List2-6':
+            {
+                    'prefix_entries':
+                    [
+                        {
+                            'seq_num': '19',
+                            'network': '2001:db8:1:1::/64',
+                            'action': 'deny'
+                        },
+                        {
+                            'seq_num': '20',
+                            'network': 'any',
+                            'action': 'permit'
+                        }
+                    ],
+                    'prefix_name': 'List2-6',
+                    'prefix_qty': '2'
+            }
+        }
+    """
+
+    prefix_settings_re = (
+        r'ipv6 prefix-list (?P<prefix_name>[\w_\-]+):\s'
+        r'(?P<prefix_qty>[\d]+)\s\w+\n'
+    )
+    prefix_entry_re = (
+        r'\s+seq\s(?P<seq_num>[\d]+)\s'
+        r'(?P<action>[\w]+)\s'
+        r'(?P<network>\S+)'
+    )
+
+    result = {}
+    plist = []
+
+    for prefix_output in re.finditer(prefix_entry_re, raw_result):
+        statement = prefix_output.groupdict()
+        plist.append(statement)
+
+    entry_count = 0
+    for output in re.finditer(prefix_settings_re, raw_result):
+        entry = output.groupdict()
+        tmp_list = []
+        for i in range(int(entry['prefix_qty'])):
+            tmp_list.append(plist[entry_count])
+            entry_count += 1
+        entry['prefix_entries'] = tmp_list
+        result[entry['prefix_name']] = entry
+
+    assert result
+    return result
+
+
+def parse_show_ip_bgp_route_map(raw_result):
+    """
+    Parse the 'show ip bgp route-map' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show ip bgp route-map command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+            '1':
+                {
+                            'action': 'deny',
+                            'set_parameters': '',
+                            'as_path_exclude': '20 30 40',
+                            'match_parameters': '',
+                            'prefix_list': 'List2',
+                            'ipv6_prefix_list': 'List2-6'
+                },
+            '2':
+                {
+                            'action': 'permit',
+                            'set_parameters': '',
+                            'as_path_exclude': None,
+                            'match_parameters': '',
+                            'prefix_list': None,
+                            'ipv6_prefix_list': None
+                }
+            '3':
+                {
+                            'action': 'permit',
+                            'set_parameters': '',
+                            'as_path_exclude': None,
+                            'match_parameters': '',
+                            'prefix_list': 'List1',
+                            'ipv6_prefix_list': None
+                }
+        }
+    """
+
+    rmap_re = (
+        r'Entry\s(?P<entry_number>\d+):\n'
+        r'\s+action\s:\s(?P<action>\w+)\n'
+        r'\s+Set\sparameters\s:(?P<set_parameters>[\S]*)\n'
+        r'(\s+as_path_exclude\s:\s(?P<as_path_exclude>[\d ]+))?'
+        r'\s+Match\sparameters\s:(?P<match_parameters>[\S]*)\n'
+        r'(\s+prefix_list\s:\s(?P<prefix_list>[\w-]+)\n?)?'
+        r'(\s+ipv6_prefix_list\s:\s(?P<ipv6_prefix_list>[\w_\-]+)\n?)?'
+    )
+
+    result = {}
+
+    for output in re.finditer(rmap_re, raw_result):
+        entry = output.groupdict()
+        result[entry['entry_number']] = entry
+        del result[entry['entry_number']]['entry_number']
+
+    assert result
+    return result
+
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
@@ -6391,5 +6631,7 @@ __all__ = [
     'parse_diag_dump_lacp_basic', 'parse_show_snmpv3_users',
     'parse_show_snmp_agent_port', 'parse_diag_dump', 'parse_show_events',
     'parse_show_spanning_tree', 'parse_show_spanning_tree_mst_config',
-    'parse_show_spanning_tree_mst', 'parse_show_vlan_summary'
+    'parse_show_spanning_tree_mst', 'parse_show_vlan_summary',
+    'parse_show_ip_prefix_list', 'parse_show_ipv6_prefix_list',
+    'parse_show_ip_bgp_route_map'
 ]

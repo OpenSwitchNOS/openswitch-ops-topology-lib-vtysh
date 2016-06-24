@@ -12701,14 +12701,14 @@ class ConfigVrrpInterface(ContextManager):
 
     ::
 
-            ['config terminal', 'interface {port}',\
-             'vrrp {grpid} address-family {af}']
+        ['config terminal', 'interface {port}', 'vrrp {grpid} address-family
+         {af}']
 
     post_commands:
 
     ::
 
-            ['exit', 'end']
+        ['exit', 'end']
     """
     def __init__(self, enode, portlbl, grpid, af):
         self.enode = enode
@@ -15703,6 +15703,88 @@ def show_vrf(
     return parse_show_vrf(result)
 
 
+def show_ip_prefix_list(
+        enode):
+    """
+    Display IP prefix list information.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip prefix list
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_prefix_list`
+    """
+
+    cmd = [
+        'show ip prefix list'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ip_prefix_list(result)
+
+
+def show_ipv6_prefix_list(
+        enode):
+    """
+    Display IPv6 prefix list information
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ipv6 prefix list
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ipv6_prefix_list`
+    """
+
+    cmd = [
+        'show ipv6 prefix list'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ipv6_prefix_list(result)
+
+
+def show_ip_bgp_route_map(
+        enode, rmap):
+    """
+    Display route-map information
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip bgp route-map {rmap}
+
+    :param rmap: Route-map name
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_bgp_route_map`
+    """
+
+    cmd = [
+        'show ip bgp route-map {rmap}'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ip_bgp_route_map(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -15811,5 +15893,8 @@ __all__ = [
     'show_spanning_tree_mst_config',
     'show_vlan_summary',
     'show_vlan_internal',
-    'show_vrf'
+    'show_vrf',
+    'show_ip_prefix_list',
+    'show_ipv6_prefix_list',
+    'show_ip_bgp_route_map'
 ]
