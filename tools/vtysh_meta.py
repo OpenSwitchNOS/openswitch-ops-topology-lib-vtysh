@@ -987,6 +987,29 @@ VTYSH_SPEC = OrderedDict([
                     },
                 ],
                 'returns': True
+            },
+            {
+                'command': 'show ip prefix-list',
+                'doc': 'Display IP prefix list information.',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show ipv6 prefix-list',
+                'doc': 'Display IPv6 prefix list information',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show ip bgp route-map {rmap}',
+                'doc': 'Display route-map information ',
+                'arguments': [
+                    {
+                        'name': 'rmap',
+                        'doc': 'Route-map name'
+                    }
+                ],
+                'returns': True
             }
         ]
     }),

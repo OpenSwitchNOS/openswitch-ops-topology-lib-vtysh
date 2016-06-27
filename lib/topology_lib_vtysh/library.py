@@ -12702,7 +12702,7 @@ class ConfigVrrpInterface(ContextManager):
     ::
 
             ['config terminal', 'interface {port}',
-            'vrrp {grpid} address-family {af}']
+             'vrrp {grpid} address-family {af}']
 
     post_commands:
 
@@ -15732,6 +15732,88 @@ def show_access_list_hitcounts_ip_interface(
     return parse_show_access_list_hitcounts_ip_interface(result)
 
 
+def show_ip_prefix_list(
+        enode):
+    """
+    Display IP prefix list information.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip prefix-list
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_prefix_list`
+    """
+
+    cmd = [
+        'show ip prefix-list'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ip_prefix_list(result)
+
+
+def show_ipv6_prefix_list(
+        enode):
+    """
+    Display IPv6 prefix list information
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ipv6 prefix-list
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ipv6_prefix_list`
+    """
+
+    cmd = [
+        'show ipv6 prefix-list'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ipv6_prefix_list(result)
+
+
+def show_ip_bgp_route_map(
+        enode, rmap):
+    """
+    Display route-map information
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show ip bgp route-map {rmap}
+
+    :param rmap: Route-map name
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_ip_bgp_route_map`
+    """
+
+    cmd = [
+        'show ip bgp route-map {rmap}'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_ip_bgp_route_map(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -15841,5 +15923,8 @@ __all__ = [
     'show_vlan_summary',
     'show_vlan_internal',
     'show_vrf',
-    'show_access_list_hitcounts_ip_interface'
+    'show_access_list_hitcounts_ip_interface',
+    'show_ip_prefix_list',
+    'show_ipv6_prefix_list',
+    'show_ip_bgp_route_map'
 ]
