@@ -6580,31 +6580,27 @@ def parse_show_ip_bgp_route_map(raw_result):
                 {
                             'action': 'permit',
                             'set_parameters': '',
-                            'as_path_exclude': None,
                             'match_parameters': '',
                             'prefix_list': None,
-                            'ipv6_prefix_list': None
                 }
             '3':
                 {
                             'action': 'permit',
                             'set_parameters': '',
-                            'as_path_exclude': None,
                             'match_parameters': '',
                             'prefix_list': 'List1',
-                            'ipv6_prefix_list': None
                 }
         }
     """
 
     rmap_re = (
         r'Entry\s(?P<entry_number>\d+):\n'
-        r'\s+action\s:\s(?P<action>\w+)\n'
+        r'\s+action\s:\s(?P<action>\w+) \n'
         r'\s+Set\sparameters\s:(?P<set_parameters>[\S]*)\n'
         r'(\s+as_path_exclude\s:\s(?P<as_path_exclude>[\d ]+))?'
-        r'\s+Match\sparameters\s:(?P<match_parameters>[\S]*)\n'
-        r'(\s+prefix_list\s:\s(?P<prefix_list>[\w-]+)\n?)?'
-        r'(\s+ipv6_prefix_list\s:\s(?P<ipv6_prefix_list>[\w_\-]+)\n?)?'
+        r'\s+Match\sparameters\s:(?P<match_parameters>[\S]*)\n?'
+        r'(\s+prefix_list\s:\s(?P<prefix_list>[\w-]+) \n?)?'
+        r'(\s+ipv6_prefix_list\s:\s(?P<ipv6_prefix_list>[\w_\-]+) \n?)?'
     )
 
     result = {}
@@ -6612,6 +6608,14 @@ def parse_show_ip_bgp_route_map(raw_result):
     for output in re.finditer(rmap_re, raw_result):
         entry = output.groupdict()
         result[entry['entry_number']] = entry
+
+        if result[entry['entry_number']]['prefix_list'] is None:
+            del result[entry['entry_number']]['prefix_list']
+        if result[entry['entry_number']]['ipv6_prefix_list'] is None:
+            del result[entry['entry_number']]['ipv6_prefix_list']
+        if result[entry['entry_number']]['as_path_exclude'] is None:
+            del result[entry['entry_number']]['as_path_exclude']
+
         del result[entry['entry_number']]['entry_number']
 
     assert result

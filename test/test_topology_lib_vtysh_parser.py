@@ -5340,21 +5340,21 @@ def test_parse_show_ip_bgp_route_map():
     raw_result = """
 BGP route map table entry for test
 Entry 1:
-     action : deny
+     action : deny \n\
      Set parameters :
      as_path_exclude : 20 30 40
      Match parameters :
-     prefix_list : List2
-     ipv6_prefix_list : List2-6
+     prefix_list : List2 \n\
+     ipv6_prefix_list : List2-6 \n\
 Entry 2:
-     action : permit
+     action : permit \n\
      Set parameters :
      Match parameters :
 Entry 3:
-     action : permit
+     action : permit \n\
      Set parameters :
      Match parameters :
-     prefix_list : List1
+     prefix_list : List1 \n\
      """
 
     expected_result = {
@@ -5371,19 +5371,14 @@ Entry 3:
             {
                 'action': 'permit',
                 'set_parameters': '',
-                'as_path_exclude': None,
                 'match_parameters': '',
-                'prefix_list': None,
-                'ipv6_prefix_list': None
             },
         '3':
             {
                 'action': 'permit',
                 'set_parameters': '',
-                'as_path_exclude': None,
                 'match_parameters': '',
                 'prefix_list': 'List1',
-                'ipv6_prefix_list': None
             }
     }
     result = parse_show_ip_bgp_route_map(raw_result)
