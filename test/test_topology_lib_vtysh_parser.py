@@ -26,6 +26,7 @@ from topology_lib_vtysh.parser import (parse_show_interface,
                                        parse_show_interface_subinterface,
                                        parse_show_vlan,
                                        parse_show_lacp_interface,
+                                       parse_show_lacp_interface_all,
                                        parse_show_lacp_aggregates,
                                        parse_show_lacp_configuration,
                                        parse_show_lldp_neighbor_info,
@@ -1008,6 +1009,142 @@ Aggregate-name lag1
         'tx_errors': 0,
         'tx_packets': 0,
     }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_lacp_interface_all():
+    raw_result = """\
+
+State abbreviations :
+A - Active        P - Passive      F - Aggregable I - Individual
+S - Short-timeout L - Long-timeout N - InSync     O - OutofSync
+C - Collecting    D - Distributing
+X - State m/c expired              E - Default neighbor state
+
+Actor details of all interfaces:
+------------------------------------------------------------------------------
+Intf Aggregate Port    Port     Key  State   System-id         System   Aggr
+     name      id      Priority                                Priority Key
+------------------------------------------------------------------------------
+1    lag10     18      1        10   ALFNCD  70:72:cf:5b:3e:f0 65534    10
+2    lag10     12      1        10   ALFNCD  70:72:cf:5b:3e:f0 65534    10
+
+
+Partner details of all interfaces:
+------------------------------------------------------------------------------
+Intf Aggregate Partner Port     Key  State   System-id         System   Aggr
+     name      Port-id Priority                                Priority Key
+------------------------------------------------------------------------------
+1    lag20     18      1        20   ALFNCD  70:72:cf:50:ce:b1 65534    20
+2    lag20     12      1        20   ALFNCD  70:72:cf:50:ce:b1 65534    20
+"""
+
+    result = parse_show_lacp_interface_all(raw_result)
+
+    expected = {
+            'actor': {
+                '1': {
+                    'intf': '1',
+                    'agg_name': 'lag10',
+                    'port_id': '18',
+                    'port_priority': '1',
+                    'key': '10',
+                    'state': {
+                        'active': True,
+                        'short_time': False,
+                        'collecting': True,
+                        'state_expired': False,
+                        'passive': False,
+                        'long_timeout': True,
+                        'distributing': True,
+                        'aggregable': True,
+                        'in_sync': True,
+                        'neighbor_state': False,
+                        'individual': False,
+                        'out_sync': False
+                    },
+                    'system_id': '70:72:cf:5b:3e:f0',
+                    'system_priority': '65534',
+                    'agg_key': '10'
+                },
+                '2': {
+                    'intf': '2',
+                    'agg_name': 'lag10',
+                    'port_id': '12',
+                    'port_priority': '1',
+                    'key': '10',
+                    'state': {
+                        'active': True,
+                        'short_time': False,
+                        'collecting': True,
+                        'state_expired': False,
+                        'passive': False,
+                        'long_timeout': True,
+                        'distributing': True,
+                        'aggregable': True,
+                        'in_sync': True,
+                        'neighbor_state': False,
+                        'individual': False,
+                        'out_sync': False
+                    },
+                    'system_id': '70:72:cf:5b:3e:f0',
+                    'system_priority': '65534',
+                    'agg_key': '10'
+                }
+            },
+            'partner': {
+                '1': {
+                    'intf': '1',
+                    'agg_name': 'lag20',
+                    'port_id': '18',
+                    'port_priority': '1',
+                    'key': '20',
+                    'state': {
+                        'active': True,
+                        'short_time': False,
+                        'collecting': True,
+                        'state_expired': False,
+                        'passive': False,
+                        'long_timeout': True,
+                        'distributing': True,
+                        'aggregable': True,
+                        'in_sync': True,
+                        'neighbor_state': False,
+                        'individual': False,
+                        'out_sync': False
+                    },
+                    'system_id': '70:72:cf:50:ce:b1',
+                    'system_priority': '65534',
+                    'agg_key': '20'
+                },
+                '2': {
+                    'intf': '2',
+                    'agg_name': 'lag20',
+                    'port_id': '12',
+                    'port_priority': '1',
+                    'key': '20',
+                    'state': {
+                        'active': True,
+                        'short_time': False,
+                        'collecting': True,
+                        'state_expired': False,
+                        'passive': False,
+                        'long_timeout': True,
+                        'distributing': True,
+                        'aggregable': True,
+                        'in_sync': True,
+                        'neighbor_state': False,
+                        'individual': False,
+                        'out_sync': False
+                    },
+                    'system_id': '70:72:cf:50:ce:b1',
+                    'system_priority': '65534',
+                    'agg_key': '20'
+                }
+            }
+        }
 
     ddiff = DeepDiff(result, expected)
     assert not ddiff
