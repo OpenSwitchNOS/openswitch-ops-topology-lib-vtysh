@@ -2984,7 +2984,7 @@ def parse_show_running_config_helper(raw_result):
                 'ipv4': '20.0.0.1/24'}
         },
          'sftp-server': {
-                    'status':'enable'
+                 'status': 'True'
         },
         'ip_routes': {
             '10.1.1.3':
@@ -3474,15 +3474,10 @@ def parse_show_running_config_helper(raw_result):
 
     # sftp-server section
     result['sftp-server'] = {}
-    sftp_server_re = r'(\s+sftp-server\s+)'
-    sftp_status_re = r'(\s+(?P<status>enable)\s*)'
-    re_server = re.search(sftp_server_re, raw_result)
-    re_server_status = re.search(sftp_status_re, raw_result)
-    if re_server:
-        result_status = re_server_status.groupdict()
-        for key, value in result_status.items():
-            if value is not None:
-                result['sftp-server'][key] = value
+    sftp_status_re = r'\s*sftp\s*server\s*enable\s*'
+    re_result = re.search(sftp_status_re, raw_result)
+    if re_result:
+        result['sftp-server']['status'] = 'True'
 
     # IP Routes section capture regex
     result['ip_routes'] = {}
