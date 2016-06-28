@@ -5085,12 +5085,14 @@ def test_parse_show_aaa_authentication():
 AAA Authentication:
   Local authentication                  : Enabled
   Radius authentication                 : Disabled
+  Radius authentication type            : pap
   Fallback to local authentication      : Enabled
     """
 
     expected_result = {
         'local_auth_status': 'Enabled',
         'radius_auth_status': 'Disabled',
+        'radius_auth_type': 'pap',
         'fallback_status': 'Enabled'
     }
 

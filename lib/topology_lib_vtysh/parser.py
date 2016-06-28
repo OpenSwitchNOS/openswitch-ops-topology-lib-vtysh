@@ -5855,6 +5855,7 @@ def parse_show_aaa_authentication(raw_result):
         {
             'local_auth_status': 'disabled',
             'radius_auth_status': 'enabled',
+            'radius_auth_type': 'pap',
             'fallback_status': 'enabled'
        }
 
@@ -5864,6 +5865,7 @@ def parse_show_aaa_authentication(raw_result):
         r'.*AAA Authentication:.*'
         r'\s+Local authentication\s+:\s+(?P<local_auth_status>\w+)'
         r'\s+Radius authentication\s+:\s+(?P<radius_auth_status>\w+)'
+        r'\s+Radius authentication type\s+:\s+(?P<radius_auth_type>\w+)'
         r'\s+Fallback to local authentication\s+:\s+(?P<fallback_status>\w+)'
     )
 
