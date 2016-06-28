@@ -4308,6 +4308,32 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def access_list_log_timer(
+            self, seconds):
+        """
+        Configure ACL Log Timer value.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # access-list log-timer {seconds}
+
+        :param seconds: <30-300>Specify value(seconds) or default.
+        """
+
+        cmd = [
+            'access-list log-timer {seconds}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def radius_server_host_auth_port(
             self, ip_addr, port):
         """
@@ -13983,6 +14009,60 @@ def clear_udld_statistics_interface(
         raise determine_exception(result)(result)
 
 
+def clear_access_list_hitcounts_all(
+        enode):
+    """
+    Clear all ACL stat values.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # clear access-list hitcounts all
+
+    """
+
+    cmd = [
+        'clear access-list hitcounts all'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
+def clear_access_list_hitcounts_ip_interface(
+        enode, acl_name, port):
+    """
+    Clear ACL state values per port.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # clear access-list hitcounts ip {acl_name} interface {port}
+
+    :param acl_name: Access-list name.
+    :param port: Label that identifies interface.
+    """
+
+    cmd = [
+        'clear access-list hitcounts ip {acl_name} interface {port}'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    if result:
+        raise determine_exception(result)(result)
+
+
 def ping_repetitions(
         enode, destination, count):
     """
@@ -15870,6 +15950,8 @@ __all__ = [
     'clear_bgp',
     'clear_udld_statistics',
     'clear_udld_statistics_interface',
+    'clear_access_list_hitcounts_all',
+    'clear_access_list_hitcounts_ip_interface',
     'ping_repetitions',
     'ping6_repetitions',
     'ping',

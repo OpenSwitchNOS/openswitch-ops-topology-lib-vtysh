@@ -337,6 +337,26 @@ VTYSH_SPEC = OrderedDict([
                 ],
             },
             {
+                'command': 'clear access-list hitcounts all',
+                'doc': 'Clear all ACL stat values.',
+                'arguments': []
+            },
+            {
+                'command': 'clear access-list hitcounts ip {acl_name} \
+interface {port}',
+                'doc': 'Clear ACL state values per port.',
+                'arguments': [
+                    {
+                        'name': 'acl_name',
+                        'doc': 'Access-list name.'
+                    },
+                    {
+                        'name': 'port',
+                        'doc': 'Label that identifies interface.'
+                    },
+                ],
+            },
+            {
                 'command': 'ping {destination} repetitions {count}',
                 'doc': 'Send IPv4 ping',
                 'arguments': [
@@ -2954,6 +2974,16 @@ local-priority {local_priority} name {name} color {color}',
                     {
                         'name': 'increment',
                         'doc': 'increment factor of subsequent ACE in ACL',
+                    },
+                ],
+            },
+            {
+                'command': 'access-list log-timer {seconds}',
+                'doc': 'Configure ACL Log Timer value.',
+                'arguments': [
+                    {
+                        'name': 'seconds',
+                        'doc': '<30-300>Specify value(seconds) or default.'
                     },
                 ],
             },
