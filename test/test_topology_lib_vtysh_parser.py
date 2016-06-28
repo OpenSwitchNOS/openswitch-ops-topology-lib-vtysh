@@ -2680,8 +2680,7 @@ interface 4.2
     no shutdown
     encapsulation dot1Q 20
     ip address 20.0.0.1/24
-sftp-server
-    enable
+sftp server enable
 mirror session foo
 ipv6 route 2020::3/128 1
 ip route 140.1.1.10/32 1
@@ -2807,7 +2806,7 @@ ipv6 route 2020::2/128 1
             }
         },
         'sftp-server': {
-            'status': 'enable'
+            'status': 'True'
         },
         'ip_routes': {
             '2020::2': {
