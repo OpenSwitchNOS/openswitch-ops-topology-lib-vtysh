@@ -199,6 +199,58 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def vrf(
+            self, vrf_name):
+        """
+        Configure vrf
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # vrf {vrf_name}
+
+        :param vrf_name: VRF NAME
+        """
+
+        cmd = [
+            'vrf {vrf_name}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_vrf(
+            self, vrf_name):
+        """
+        Delete  vrf
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no vrf {vrf_name}
+
+        :param vrf_name: VRF NAME
+        """
+
+        cmd = [
+            'no vrf {vrf_name}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def no_interface_loopback(
             self, loopback_id):
         """
@@ -281,7 +333,7 @@ class Configure(ContextManager):
             raise determine_exception(result)(result)
 
     def ip_route(
-            self, ipv4, next_hop, metric=''):
+            self, ipv4, next_hop, metric='', vrf_name=''):
         """
         Configure static routes
 
@@ -294,6 +346,7 @@ class Configure(ContextManager):
         :param ipv4: A.B.C.D/M IP destination prefix.
         :param next_hop: Can be an ip address or a interface.
         :param metric: Optional, route address to configure.
+        :param vrf_name: VRF based route address to configure.
         """
 
         cmd = [
@@ -307,6 +360,13 @@ class Configure(ContextManager):
                 )
             )
 
+        if vrf_name:
+            cmd.append(
+                '{}{{vrf_name}}{}'.format(
+                    'vrf ', ''
+                )
+            )
+
         result = self.enode(
             (' '.join(cmd)).format(**locals()),
             shell='vtysh'
@@ -316,7 +376,7 @@ class Configure(ContextManager):
             raise determine_exception(result)(result)
 
     def no_ip_route(
-            self, ipv4, next_hop, metric=''):
+            self, ipv4, next_hop, metric='', vrf_name=''):
         """
         Un-configure static routes
 
@@ -329,6 +389,7 @@ class Configure(ContextManager):
         :param ipv4: A.B.C.D/M IP destination prefix.
         :param next_hop: Can be an ip address or a interface.
         :param metric: Optional, route address to configure.
+        :param vrf_name: VRF based route address to configure.
         """
 
         cmd = [
@@ -339,6 +400,13 @@ class Configure(ContextManager):
             cmd.append(
                 '{}{{metric}}{}'.format(
                     '', ''
+                )
+            )
+
+        if vrf_name:
+            cmd.append(
+                '{}{{vrf_name}}{}'.format(
+                    'vrf ', ''
                 )
             )
 
@@ -4912,6 +4980,58 @@ class ConfigInterface(ContextManager):
 
         cmd = [
             'no ip address {ipv4}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def vrf_attach(
+            self, vrf_name):
+        """
+        Mapping port to vrf
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # vrf attach {vrf_name}
+
+        :param vrf_name: Mapping the port to vrf.
+        """
+
+        cmd = [
+            'vrf attach {vrf_name}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_vrf_attach(
+            self, vrf_name):
+        """
+        Unmapping port from vrf
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no vrf attach {vrf_name}
+
+        :param vrf_name: Unmapping the port from vrf.
+        """
+
+        cmd = [
+            'no vrf attach {vrf_name}'
         ]
 
         result = self.enode(
@@ -14123,7 +14243,7 @@ def ping6_repetitions(
 
 def ping(
         enode, destination, count='', size='', data='', interval='',
-        timeout='', tos='', ip_option=''):
+        timeout='', tos='', vrf='', ip_option=''):
     """
     Send IPv4 ping
 
@@ -14140,6 +14260,7 @@ def ping(
     :param interval: Time interval between ping requests.
     :param timeout: Max time to wait for ping reply.
     :param tos: Type of service to be placed in each probe.
+    :param vrf: Type of service to be placed in each probe.
     :param ip_option: Ip-option.
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_ping`
@@ -14188,6 +14309,13 @@ def ping(
         cmd.append(
             '{}{{tos}}{}'.format(
                 'tos ', ''
+            )
+        )
+
+    if vrf:
+        cmd.append(
+            '{}{{vrf}}{}'.format(
+                'vrf ', ''
             )
         )
 
