@@ -109,6 +109,7 @@ VTYSH_SPEC = OrderedDict([
                     {
                         'name': 'portlbl',
                         'doc': 'Label that identifies interface.',
+                        'optional': True
                     }
                 ],
                 'returns': True
