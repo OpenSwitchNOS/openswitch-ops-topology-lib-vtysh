@@ -2044,8 +2044,40 @@ local-priority {local_priority} name {name} color {color}',
                 ],
             },
             {
+                'command': 'track {track_id} interface {interface}',
+                'doc': 'Create track object for interface',
+                'arguments': [
+                    {
+                        'name': 'track_id',
+                        'doc': '[1-500] Track object ID',
+                        'name': 'interface',
+                        'doc': 'Interface name to be tracked',
+                    }
+                ],
+            },
+            {
+                'command': 'no track {track_id}',
+                'doc': 'Remove track object for interface',
+                'arguments': [
+                    {
+                        'name': 'track_id',
+                        'doc': '[1-500] Track object ID',
+                    }
+                ],
+            },
+            {
                 'command': 'no router ospf',
                 'doc': 'Removes the OSPF Router',
+                'arguments': [],
+            },
+            {
+                'command': 'router vrrp',
+                'doc': 'Enables the VRRP Router',
+                'arguments': [],
+            },
+            {
+                'command': 'no router vrrp',
+                'doc': 'Disables the VRRP Router',
                 'arguments': [],
             },
             {
@@ -6604,27 +6636,7 @@ local-priority {local_priority}',
         'post_commands': ['exit', 'end'],
         'commands': [
             {
-                'command': 'vrrp version {version}',
-                'doc': 'Set VRRP version',
-                'arguments': [
-                    {
-                        'name': 'version',
-                        'doc': 'VRRP version 2|3',
-                    },
-                ],
-            },
-            {
-                'command': 'no vrrp version {version}',
-                'doc': 'Unset VRRP version',
-                'arguments': [
-                    {
-                        'name': 'version',
-                        'doc': 'VRRP version 2|3',
-                    },
-                ],
-            },
-            {
-                'command': 'ip address {ipv4}',
+                'command': 'address {ipv4} primary',
                 'doc': 'Set VRRP primary IP address',
                 'arguments': [
                     {
@@ -6634,7 +6646,7 @@ local-priority {local_priority}',
                 ],
             },
             {
-                'command': 'no ip address {ipv4}',
+                'command': 'no address {ipv4} primary',
                 'doc': 'Unset VRRP primary IP address',
                 'arguments': [
                     {
@@ -6644,7 +6656,7 @@ local-priority {local_priority}',
                 ],
             },
             {
-                'command': 'ip address {ipv4} secondary',
+                'command': 'address {ipv4} secondary',
                 'doc': 'Set VRRP secondary IP address',
                 'arguments': [
                     {
@@ -6654,7 +6666,7 @@ local-priority {local_priority}',
                 ],
             },
             {
-                'command': 'no ip address {ipv4} secondary',
+                'command': 'no address {ipv4} secondary',
                 'doc': 'Unset VRRP secondary IP address',
                 'arguments': [
                     {
@@ -6674,14 +6686,89 @@ local-priority {local_priority}',
                 ],
             },
             {
-                'command': 'no priority {prio}',
+                'command': 'no priority',
                 'doc': 'Unset VRRP virtual router priority',
+                'arguments': [],
+            },
+            {
+                'command': 'version {ver}',
+                'doc': 'Set VRRP virtual router version',
                 'arguments': [
                     {
-                        'name': 'prio',
-                        'doc': '[0-255] VRRP virtual router Priority Level',
+                        'name': 'ver',
+                        'doc': '[2-3] VRRP virtual router version',
                     },
                 ],
+            },
+            {
+                'command': 'no version',
+                'doc': 'Unset VRRP virtual router version',
+                'arguments': [],
+            },
+            {
+                'command': 'preempt',
+                'doc': 'Set VRRP virtual router preempt mode',
+                'arguments': [],
+            },
+            {
+                'command': 'no preempt',
+                'doc': 'Unset VRRP virtual router preempt mode',
+                'arguments': [],
+            },
+            {
+                'command': 'shutdown',
+                'doc': 'Enable VRRP VR',
+                'arguments': [],
+            },
+            {
+                'command': 'no shutdown',
+                'doc': 'Disable VRRP VR',
+                'arguments': [],
+            },
+            {
+                'command': 'preempt delay minimum {time}',
+                'doc': 'Set minimum preempt delay time',
+                'arguments': [
+                    {
+                        'name': 'time',
+                        'doc': '[0-3600] VRRP VR minimum preempt delay time',
+                    },
+                ],
+            },
+            {
+                'command': 'no preempt delay',
+                'doc': 'Reset minimum preempt delay time',
+                'arguments': [],
+            },
+            {
+                'command': 'timers advertise {time}',
+                'doc': 'Set minimum VRRP advertise time',
+                'arguments': [
+                    {
+                        'name': 'time',
+                        'doc': '[100-40950] VRRP VR advertise time',
+                    },
+                ],
+            },
+            {
+                'command': 'no timers advertise',
+                'doc': 'Reset minimum VRRP advertise time',
+                'arguments': [],
+            },
+            {
+                'command': 'track {track_id}',
+                'doc': 'Set track object',
+                'arguments': [
+                    {
+                        'name': 'track_id',
+                        'doc': '[1-500] VRRP tracking entity',
+                    },
+                ],
+            },
+            {
+                'command': 'no track',
+                'doc': 'Remove track object',
+                'arguments': [],
             },
         ]
     })
