@@ -2868,6 +2868,84 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def track_interface(
+        self, interface,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Create track object for interface
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # track {track_id} interface {interface}
+
+        :param interface: Interface name to be tracked
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'track {track_id} interface {interface}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_track(
+        self, track_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Remove track object for interface
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no track {track_id}
+
+        :param track_id: [1-500] Track object ID
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no track {track_id}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
     def no_router_ospf(
         self,
         _shell='vtysh',
@@ -2893,6 +2971,82 @@ class Configure(ContextManager):
 
         cmd = [
             'no router ospf'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def router_vrrp(
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Enables the VRRP Router
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # router vrrp
+
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'router vrrp'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_router_vrrp(
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Disables the VRRP Router
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no router vrrp
+
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no router vrrp'
         ]
 
         shell = self.enode.get_shell(_shell)
@@ -18552,7 +18706,8 @@ class ConfigVrrpInterface(ContextManager):
 
     ::
 
-        ['config terminal', 'interface {port}', 'vrrp {grpid} address-family {af}']
+        ['config terminal', 'interface {port}',
+         'vrrp {grpid} address-family {af}']
 
     post_commands:
 
@@ -18593,85 +18748,7 @@ class ConfigVrrpInterface(ContextManager):
             shell='vtysh'
         )
 
-    def vrrp_version(
-        self, version,
-        _shell='vtysh',
-        _shell_args={
-            'matches': None,
-            'newline': True,
-            'timeout': None,
-            'connection': None
-        }
-    ):
-        """
-        Set VRRP version
-
-        This function runs the following vtysh command:
-
-        ::
-
-            # vrrp version {version}
-
-        :param version: VRRP version 2|3
-        :param str _shell: shell to be selected
-        :param dict _shell_args: low-level shell API arguments
-        """
-
-        cmd = [
-            'vrrp version {version}'
-        ]
-
-        shell = self.enode.get_shell(_shell)
-
-        shell.send_command(
-            (' '.join(cmd)).format(**locals()), **_shell_args
-        )
-
-        result = shell.get_response()
-
-        if result:
-            raise determine_exception(result)(result)
-
-    def no_vrrp_version(
-        self, version,
-        _shell='vtysh',
-        _shell_args={
-            'matches': None,
-            'newline': True,
-            'timeout': None,
-            'connection': None
-        }
-    ):
-        """
-        Unset VRRP version
-
-        This function runs the following vtysh command:
-
-        ::
-
-            # no vrrp version {version}
-
-        :param version: VRRP version 2|3
-        :param str _shell: shell to be selected
-        :param dict _shell_args: low-level shell API arguments
-        """
-
-        cmd = [
-            'no vrrp version {version}'
-        ]
-
-        shell = self.enode.get_shell(_shell)
-
-        shell.send_command(
-            (' '.join(cmd)).format(**locals()), **_shell_args
-        )
-
-        result = shell.get_response()
-
-        if result:
-            raise determine_exception(result)(result)
-
-    def ip_address(
+    def address_primary(
         self, ipv4,
         _shell='vtysh',
         _shell_args={
@@ -18688,7 +18765,7 @@ class ConfigVrrpInterface(ContextManager):
 
         ::
 
-            # ip address {ipv4}
+            # address {ipv4} primary
 
         :param ipv4: A.B.C.D VRRP primary virtual IP address.
         :param str _shell: shell to be selected
@@ -18696,7 +18773,7 @@ class ConfigVrrpInterface(ContextManager):
         """
 
         cmd = [
-            'ip address {ipv4}'
+            'address {ipv4} primary'
         ]
 
         shell = self.enode.get_shell(_shell)
@@ -18710,7 +18787,7 @@ class ConfigVrrpInterface(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
-    def no_ip_address(
+    def no_address_primary(
         self, ipv4,
         _shell='vtysh',
         _shell_args={
@@ -18727,7 +18804,7 @@ class ConfigVrrpInterface(ContextManager):
 
         ::
 
-            # no ip address {ipv4}
+            # no address {ipv4} primary
 
         :param ipv4: A.B.C.D VRRP primary virtual IP address.
         :param str _shell: shell to be selected
@@ -18735,7 +18812,7 @@ class ConfigVrrpInterface(ContextManager):
         """
 
         cmd = [
-            'no ip address {ipv4}'
+            'no address {ipv4} primary'
         ]
 
         shell = self.enode.get_shell(_shell)
@@ -18749,7 +18826,7 @@ class ConfigVrrpInterface(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
-    def ip_address_secondary(
+    def address_secondary(
         self, ipv4,
         _shell='vtysh',
         _shell_args={
@@ -18766,7 +18843,7 @@ class ConfigVrrpInterface(ContextManager):
 
         ::
 
-            # ip address {ipv4} secondary
+            # address {ipv4} secondary
 
         :param ipv4: A.B.C.D VRRP secondary virtual IP address.
         :param str _shell: shell to be selected
@@ -18774,7 +18851,7 @@ class ConfigVrrpInterface(ContextManager):
         """
 
         cmd = [
-            'ip address {ipv4} secondary'
+            'address {ipv4} secondary'
         ]
 
         shell = self.enode.get_shell(_shell)
@@ -18788,7 +18865,7 @@ class ConfigVrrpInterface(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
-    def no_ip_address_secondary(
+    def no_address_secondary(
         self, ipv4,
         _shell='vtysh',
         _shell_args={
@@ -18805,7 +18882,7 @@ class ConfigVrrpInterface(ContextManager):
 
         ::
 
-            # no ip address {ipv4} secondary
+            # no address {ipv4} secondary
 
         :param ipv4: A.B.C.D VRRP secondary virtual IP address.
         :param str _shell: shell to be selected
@@ -18813,7 +18890,7 @@ class ConfigVrrpInterface(ContextManager):
         """
 
         cmd = [
-            'no ip address {ipv4} secondary'
+            'no address {ipv4} secondary'
         ]
 
         shell = self.enode.get_shell(_shell)
@@ -18867,7 +18944,7 @@ class ConfigVrrpInterface(ContextManager):
             raise determine_exception(result)(result)
 
     def no_priority(
-        self, prio,
+        self,
         _shell='vtysh',
         _shell_args={
             'matches': None,
@@ -18883,15 +18960,474 @@ class ConfigVrrpInterface(ContextManager):
 
         ::
 
-            # no priority {prio}
+            # no priority
 
-        :param prio: [0-255] VRRP virtual router Priority Level
         :param str _shell: shell to be selected
         :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
-            'no priority {prio}'
+            'no priority'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def vrrp_version(
+        self, ver,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Set VRRP virtual router version
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # version {ver}
+
+        :param ver: [2-3] VRRP virtual router version
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'version {ver}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_vrrp_version(
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Unset VRRP virtual router version
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no version
+
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no version'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def preempt(
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Set VRRP virtual router preempt mode
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # preempt
+
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'preempt'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_preempt(
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Unset VRRP virtual router preempt mode
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no preempt
+
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no preempt'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def shutdown(
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Enable VRRP VR
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # shutdown
+
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'shutdown'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_shutdown(
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Disable VRRP VR
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no shutdown
+
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no shutdown'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def preempt_delay_minimum(
+        self, time,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Set minimum preempt delay time
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # preempt delay minimum {time}
+
+        :param time: [0-3600] VRRP VR minimum preempt delay time
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'preempt delay minimum {time}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_preempt_delay(
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Reset minimum preempt delay time
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no preempt delay
+
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no preempt delay'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def timers_advertise(
+        self, time,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Set minimum VRRP advertise time
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # timers advertise {time}
+
+        :param time: [100-40950] VRRP VR advertise time
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'timers advertise {time}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_timers_advertise(
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Reset minimum VRRP advertise time
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no timers advertise
+
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no timers advertise'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def track(
+        self, track_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Set track object
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # track {track_id}
+
+        :param track_id: [1-500] VRRP tracking entity
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'track {track_id}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_track(
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Remove track object
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no track
+
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no track'
         ]
 
         shell = self.enode.get_shell(_shell)
