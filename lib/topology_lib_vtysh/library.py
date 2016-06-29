@@ -13188,7 +13188,7 @@ def show_vlan(
 
 
 def show_lacp_interface(
-        enode, portlbl):
+        enode, portlbl=''):
     """
     Show LACP interface.
 
@@ -13213,8 +13213,10 @@ def show_lacp_interface(
         (' '.join(cmd)).format(**locals()),
         shell='vtysh'
     )
-
-    return parse_show_lacp_interface(result)
+    if portlbl:
+        return parse_show_lacp_interface(result)
+    else:
+        return parse_show_lacp_interface_all(result)
 
 
 def show_lacp_aggregates(
