@@ -41,6 +41,8 @@ from topology_lib_vtysh.parser import (
     parse_show_ipv6_bgp,
     parse_show_ip_route,
     parse_show_ipv6_route,
+    parse_show_ip_interface_lag,
+    parse_show_ipv6_interface_lag,
     parse_show_rib,
     parse_ping_repetitions,
     parse_ping6_repetitions,
@@ -1174,6 +1176,53 @@ Interface 3.20 is up.
              'tx_ucast_bytes': 0,
              'ipv6': None,
              'ipv4': '20.0.0.1/24'}
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_ip_interface_lag():
+    raw_result = """\
+
+Aggregate-name lag1
+Forwarding State : not forwarding
+Port aggregation forwarding : not forwarding
+IPv4 address 10.0.0.1/24
+IPv4 address 11.0.0.1/24 secondary
+"""
+
+    result = parse_show_ip_interface(raw_result)
+
+    expected = {
+            'lag_name': 'lag1',
+            'forwarding_state': 'not forwarding',
+            'port_agg_forwarding': 'not forwarding',
+            'ipv4': '10.0.0.1/24',
+            'ipv4_secondary': '11.0.0.1/24'
+    }
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_ipv6_interface_lag():
+    raw_result = """\
+
+Aggregate-name lag1
+Forwarding State : not forwarding
+Port aggregation forwarding : not forwarding
+IPv6 address 2001::1/24
+IPv6 address 3001::1/24 secondary
+"""
+
+    result = parse_show_ipv6_interface(raw_result)
+
+    expected = {
+            'lag_name': 'lag1',
+            'forwarding_state': 'not forwarding',
+            'port_agg_forwarding': 'not forwarding',
+            'ipv6': '2001::1/24',
+            'ipv6_secondary': '3001::1/24'
     }
 
     ddiff = DeepDiff(result, expected)
