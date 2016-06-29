@@ -66,14 +66,14 @@ class {{ context_name|objectize }}(ContextManager):
 
     ::
 
-            {{ context.pre_commands }}
+        {{ context.pre_commands }}
 
     post_commands:
 
     ::
 
-            {{ context.post_commands }}
-    """
+        {{ context.post_commands }}
+    """  # noqa
     def __init__({{ 'self, enode%s):'|format(param_attrs(context.arguments))|wordwrap(67)|indent(12) }}
         self.enode = enode
         {%- for arg in context.arguments %}
@@ -113,7 +113,15 @@ class {{ context_name|objectize }}(ContextManager):
         )
 {% for command in context.commands %}
     def {{ command.command|methodize }}(
-            {{ 'self%s):'|format(param_attrs(command.arguments))|wordwrap(56)|indent(12) }}
+        {{ 'self%s,'|format(param_attrs(command.arguments))|wordwrap(56)|indent(8) }}
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         {{ command.doc|wordwrap(71)|indent(8) }}
 
@@ -121,12 +129,14 @@ class {{ context_name|objectize }}(ContextManager):
 
         ::
 
-            # {{ command.command }}{% if command.command|length > 65%}  # noqa{% endif %}
+            # {{ command.command }}{% if command.command|length > 65%} # noqa{% endif %}
 
         {% for attr in command.arguments -%}
         {{ ':param %s: %s'|format(attr.name, attr.doc)|wordwrap(70)|indent(12) }}
         {% endfor -%}
-        {%- if 'returns' in command.keys() and command.returns -%}
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        {% if 'returns' in command.keys() and command.returns -%}
         :return: A dictionary as returned by
          :func:`topology_lib_vtysh.parser.{{ 'parse_%s_%s'|format(context_name|methodize, command.command|methodize) }}`
         {% endif -%}
@@ -151,10 +161,13 @@ class {{ context_name|objectize }}(ContextManager):
             {%- endif -%}
         {%- endfor %}
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         {% if 'returns' in command.keys() and command.returns -%}
         {{ 'return parse_%s_%s(result)'|format(context_name|methodize, command.command|methodize) }}
@@ -167,7 +180,15 @@ class {{ context_name|objectize }}(ContextManager):
 
 {% for command in spec.root.commands %}
 def {{ command.command|methodize }}(
-        {{'enode%s):'|format(param_attrs(command.arguments))|wordwrap(67)|indent(8) }}
+    {{'enode%s, '|format(param_attrs(command.arguments))|wordwrap(67)|indent(4) }}
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     {{ command.doc|wordwrap(71)|indent(4) }}
 
@@ -177,10 +198,14 @@ def {{ command.command|methodize }}(
 
         # {{ command.command }}{% if command.command|length > 68%}  # noqa{% endif %}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     {% for attr in command.arguments -%}
     {{ ':param %s: %s'|format(attr.name, attr.doc)|wordwrap(75)|indent(5) }}
     {% endfor -%}
-    {%- if 'returns' in command.keys() and command.returns -%}
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
+    {% if 'returns' in command.keys() and command.returns -%}
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.{{ 'parse_%s'|format(command.command|methodize) }}`
     {% endif -%}
@@ -205,10 +230,13 @@ def {{ command.command|methodize }}(
         {%- endif -%}
     {%- endfor %}
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     {% if 'returns' in command.keys() and command.returns -%}
     {{ 'return parse_%s(result)'|format(command.command|methodize) }}

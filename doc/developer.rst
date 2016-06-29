@@ -243,7 +243,7 @@ identify the output of a command::
     )
 
 To assert that the proper exception was raised, you can use the ``pytest``
-``raises`` feautre like this:
+``raises`` feature like this:
 
 ::
 
@@ -261,3 +261,46 @@ To assert that the proper exception was raised, you can use the ``pytest``
        with raises(UnknownCommandException):
            with ops1.libs.vtysh.ConfigVlan('8') as ctx:
                ctx.description('some wrong description')
+
+Accessing the low-level shell API
+=================================
+
+The low-level shell API can be accessed by using the ``_shell`` and
+``_shell_args`` arguments.
+
+``_shell`` alows the user to specify the shell object who will receive the
+arguments. It defaults to ``vtysh``, for obvious reasons, but this is
+configurable to take into consideration nodes who may have vtysh-like shells
+that are not named ``vtysh``.
+
+``_shell_args`` is a dictionary that may contain the values specified for the
+low-level shell API ``send_command`` arguments. So far, these arguments are:
+
+#. **matches** (list): List of strings that may be matched by the shell
+   expect-like mechanism as prompts in the command response.
+#. **newline** (bool): True to append a newline at the end of the
+   command, False otherwise.
+#. **timeout** (int): Amount of time to wait until a prompt match is
+   found in the command response.
+#. **connection** (str): Name of the connection to be used to send the
+   command. If not defined, the default connection will be used.
+
+These arguments are prefixed with an underscore to avoid colliding with another
+optional arguments a command may have.
+
+Examples
+--------
+
+.. code-block:: python
+
+    with ops1.libs.vtysh.ConfigInterface('8') as ctx:
+        ctx.vlan_access('8', _shell_args={'timeout': 1, 'matches': [r'var']})
+
+.. code-block:: python
+
+    with ops1.libs.vtysh.ConfigInterface('9') as ctx:
+        ctx.vlan_access(
+            '8',
+            _shell='pseudo_vtysh',
+            _shell_args={'connection': '6'}
+        )

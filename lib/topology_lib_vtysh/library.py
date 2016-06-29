@@ -57,14 +57,14 @@ class Configure(ContextManager):
 
     ::
 
-            ['configure terminal']
+        ['configure terminal']
 
     post_commands:
 
     ::
 
-            ['end']
-    """
+        ['end']
+    """  # noqa
     def __init__(self, enode):
         self.enode = enode
 
@@ -93,7 +93,15 @@ class Configure(ContextManager):
         )
 
     def no_vlan(
-            self, vlan_id):
+        self, vlan_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Delete a VLAN
 
@@ -104,22 +112,35 @@ class Configure(ContextManager):
             # no vlan {vlan_id}
 
         :param vlan_id: VLAN Identifier.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no vlan {vlan_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def vlan_internal_range(
-            self, min_range, max_range, order):
+        self, min_range, max_range, order,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set internal vlan range configuration <2-4094
 
@@ -133,22 +154,35 @@ class Configure(ContextManager):
         :param max_range: maximum vlan range for internal vlan is 4094
         :param order: Assign vlan in ascending(default) or
             descending order
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'vlan internal range {min_range} {max_range} {order}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_interface_lag(
-            self, lag_id):
+        self, lag_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Delete a lag
 
@@ -159,22 +193,35 @@ class Configure(ContextManager):
             # no interface lag {lag_id}
 
         :param lag_id: link-aggregation identifier.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no interface lag {lag_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_interface_vlan(
-            self, vlan_id):
+        self, vlan_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Delete a interface vlan
 
@@ -185,22 +232,35 @@ class Configure(ContextManager):
             # no interface vlan {vlan_id}
 
         :param vlan_id: VLAN Interface Identifier.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no interface vlan {vlan_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_interface_loopback(
-            self, loopback_id):
+        self, loopback_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Delete a L3 loopback interface
 
@@ -211,22 +271,35 @@ class Configure(ContextManager):
             # no interface loopback {loopback_id}
 
         :param loopback_id: Loopback interface identifier.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no interface loopback {loopback_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def session_timeout(
-            self, mins):
+        self, mins,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Idle timeout range in minutes,0 disables the timeout
 
@@ -237,22 +310,35 @@ class Configure(ContextManager):
             # session-timeout {mins}
 
         :param mins: timeout in minutes
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'session-timeout {mins}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_interface(
-            self, portlbl, subint):
+        self, portlbl, subint,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Delete a subinterface
 
@@ -264,6 +350,8 @@ class Configure(ContextManager):
 
         :param portlbl: Physical interface associated to subinterface
         :param subint: Subinterface ID
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -272,16 +360,27 @@ class Configure(ContextManager):
 
         port = self.enode.ports.get(portlbl, portlbl)
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ip_route(
-            self, ipv4, next_hop, metric=''):
+        self, ipv4, next_hop, metric='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure static routes
 
@@ -294,6 +393,8 @@ class Configure(ContextManager):
         :param ipv4: A.B.C.D/M IP destination prefix.
         :param next_hop: Can be an ip address or a interface.
         :param metric: Optional, route address to configure.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -307,16 +408,27 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ip_route(
-            self, ipv4, next_hop, metric=''):
+        self, ipv4, next_hop, metric='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Un-configure static routes
 
@@ -329,6 +441,8 @@ class Configure(ContextManager):
         :param ipv4: A.B.C.D/M IP destination prefix.
         :param next_hop: Can be an ip address or a interface.
         :param metric: Optional, route address to configure.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -342,16 +456,27 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ip_prefix_list_seq(
-            self, prefix_name, seq, permission, network):
+        self, prefix_name, seq, permission, network,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure prefix list
 
@@ -367,22 +492,35 @@ class Configure(ContextManager):
             packets to forward
         :param network: A.B.C.D/M  IP prefix <network>/<length>, e.g.,
             35.0.0.0/8 any Any prefix match. Same as "0.0.0.0/0 le 32"
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip prefix-list {prefix_name} seq {seq} {permission} {network}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ip_prefix_list_seq(
-            self, prefix_name, seq, permission, network):
+        self, prefix_name, seq, permission, network,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Un-configure prefix list
 
@@ -398,22 +536,35 @@ class Configure(ContextManager):
             packets to forward
         :param network: A.B.C.D/M  IP prefix <network>/<length>, e.g.,
             35.0.0.0/8 any Any prefix match. Same as "0.0.0.0/0 le 32"
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ip prefix-list {prefix_name} seq {seq} {permission} {network}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ipv6_prefix_list_seq(
-            self, prefix_name, seq, permission, network):
+        self, prefix_name, seq, permission, network,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure IPv6 prefix-based filtering
 
@@ -428,22 +579,35 @@ class Configure(ContextManager):
         :param permission: deny    Specify packets to rejectpermit  Specify
             packets to forward
         :param network: X:X::X:X/M IPv6 prefix
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ipv6 prefix-list {prefix_name} seq {seq} {permission} {network}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ipv6_prefix_list_seq(
-            self, prefix_name, seq, permission, network):
+        self, prefix_name, seq, permission, network,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Deletes the IPv6 prefix-list
 
@@ -451,29 +615,42 @@ class Configure(ContextManager):
 
         ::
 
-            # no ipv6 prefix-list {prefix_name} seq {seq} {permission} {network}  # noqa
+            # no ipv6 prefix-list {prefix_name} seq {seq} {permission} {network} # noqa
 
         :param prefix_name: WORD  The IP prefix-list name
         :param seq: <1-4294967295>  Sequence number
         :param permission: deny    Specify packets to rejectpermit  Specify
             packets to forward
         :param network: X:X::X:X/M IPv6 prefix
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ipv6 prefix-list {prefix_name} seq {seq} {permission} {network}'  # noqa
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_route_map(
-            self, routemap_name, permission, seq):
+        self, routemap_name, permission, seq,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Route-map configuration
 
@@ -488,22 +665,35 @@ class Configure(ContextManager):
             map permits set operations
         :param seq: <1-65535>  Sequence to insert to/delete from existing
             route-map entry
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no route-map {routemap_name} {permission} {seq}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ipv6_route(
-            self, ipv6, next_hop, metric=''):
+        self, ipv6, next_hop, metric='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure static routes
 
@@ -516,6 +706,8 @@ class Configure(ContextManager):
         :param ipv6: X:X::X:X/M IP destination prefix.
         :param next_hop: Can be an ip address or a interface.
         :param metric: Optional, route address to configure.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -529,16 +721,27 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ipv6_route(
-            self, ipv6, next_hop, metric=''):
+        self, ipv6, next_hop, metric='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Un-configure static routes
 
@@ -551,6 +754,8 @@ class Configure(ContextManager):
         :param ipv6: X:X::X:X/M IP destination prefix.
         :param next_hop: Can be an ip address or a interface.
         :param metric: Optional, route address to configure.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -564,16 +769,27 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def apply_qos_queue_profile_schedule_profile(
-            self, queue_profile_name, schedule_profile_name):
+        self, queue_profile_name, schedule_profile_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Applies qos profiles.
 
@@ -581,26 +797,39 @@ class Configure(ContextManager):
 
         ::
 
-            # apply qos queue-profile {queue_profile_name} schedule-profile {schedule_profile_name}  # noqa
+            # apply qos queue-profile {queue_profile_name} schedule-profile {schedule_profile_name} # noqa
 
         :param queue_profile_name: The queue profile to apply.
         :param schedule_profile_name: The schedule profile to apply.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """  # noqa
 
         cmd = [
             'apply qos queue-profile {queue_profile_name} schedule-profile {schedule_profile_name}'  # noqa
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def qos_cos_map_local_priority(
-            self, code_point, local_priority):
+        self, code_point, local_priority,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configures the qos cos-map.
 
@@ -612,22 +841,35 @@ class Configure(ContextManager):
 
         :param code_point: The code point of the cos map entry.
         :param local_priority: The local priority of the cos map entry.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'qos cos-map {code_point} local-priority {local_priority}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def qos_cos_map_local_priority_color(
-            self, code_point, local_priority, color):
+        self, code_point, local_priority, color,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configures the qos cos-map.
 
@@ -635,27 +877,40 @@ class Configure(ContextManager):
 
         ::
 
-            # qos cos-map {code_point} local-priority {local_priority} color {color}  # noqa
+            # qos cos-map {code_point} local-priority {local_priority} color {color} # noqa
 
         :param code_point: The code point of the cos map entry.
         :param local_priority: The local priority of the cos map entry.
         :param color: The color of the cos map entry.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """  # noqa
 
         cmd = [
             'qos cos-map {code_point} local-priority {local_priority} color {color}'  # noqa
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def qos_cos_map_local_priority_name(
-            self, code_point, local_priority, name):
+        self, code_point, local_priority, name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configures the qos cos-map.
 
@@ -663,27 +918,40 @@ class Configure(ContextManager):
 
         ::
 
-            # qos cos-map {code_point} local-priority {local_priority} name {name}  # noqa
+            # qos cos-map {code_point} local-priority {local_priority} name {name} # noqa
 
         :param code_point: The code point of the cos map entry.
         :param local_priority: The local priority of the cos map entry.
         :param name: The name of the cos map entry.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """  # noqa
 
         cmd = [
             'qos cos-map {code_point} local-priority {local_priority} name {name}'  # noqa
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def qos_cos_map_local_priority_color_name(
-            self, code_point, local_priority, color, name):
+        self, code_point, local_priority, color, name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configures the qos cos-map.
 
@@ -691,28 +959,41 @@ class Configure(ContextManager):
 
         ::
 
-            # qos cos-map {code_point} local-priority {local_priority} color {color} name {name}  # noqa
+            # qos cos-map {code_point} local-priority {local_priority} color {color} name {name} # noqa
 
         :param code_point: The code point of the cos map entry.
         :param local_priority: The local priority of the cos map entry.
         :param color: The color of the cos map entry.
         :param name: The name of the cos map entry.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """  # noqa
 
         cmd = [
             'qos cos-map {code_point} local-priority {local_priority} color {color} name {name}'  # noqa
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def qos_cos_map_local_priority_name_color(
-            self, code_point, local_priority, name, color):
+        self, code_point, local_priority, name, color,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configures the qos cos-map.
 
@@ -720,28 +1001,41 @@ class Configure(ContextManager):
 
         ::
 
-            # qos cos-map {code_point} local-priority {local_priority} name {name} color {color}  # noqa
+            # qos cos-map {code_point} local-priority {local_priority} name {name} color {color} # noqa
 
         :param code_point: The code point of the cos map entry.
         :param local_priority: The local priority of the cos map entry.
         :param name: The name of the cos map entry.
         :param color: The color of the cos map entry.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """  # noqa
 
         cmd = [
             'qos cos-map {code_point} local-priority {local_priority} name {name} color {color}'  # noqa
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_qos_cos_map(
-            self, code_point):
+        self, code_point,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Restores a qos cos-map entry to factory default.
 
@@ -752,22 +1046,35 @@ class Configure(ContextManager):
             # no qos cos-map {code_point}
 
         :param code_point: The code point of the cos map entry.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no qos cos-map {code_point}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def qos_dscp_map_local_priority(
-            self, code_point, local_priority):
+        self, code_point, local_priority,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configures the qos dscp-map.
 
@@ -779,22 +1086,35 @@ class Configure(ContextManager):
 
         :param code_point: The code point of the dscp map entry.
         :param local_priority: The local priority of the dscp map entry.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'qos dscp-map {code_point} local-priority {local_priority}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def qos_dscp_map_local_priority_color(
-            self, code_point, local_priority, color):
+        self, code_point, local_priority, color,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configures the qos dscp-map.
 
@@ -802,27 +1122,40 @@ class Configure(ContextManager):
 
         ::
 
-            # qos dscp-map {code_point} local-priority {local_priority} color {color}  # noqa
+            # qos dscp-map {code_point} local-priority {local_priority} color {color} # noqa
 
         :param code_point: The code point of the dscp map entry.
         :param local_priority: The local priority of the dscp map entry.
         :param color: The color of the dscp map entry.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """  # noqa
 
         cmd = [
             'qos dscp-map {code_point} local-priority {local_priority} color {color}'  # noqa
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def qos_dscp_map_local_priority_name(
-            self, code_point, local_priority, name):
+        self, code_point, local_priority, name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configures the qos dscp-map.
 
@@ -830,27 +1163,40 @@ class Configure(ContextManager):
 
         ::
 
-            # qos dscp-map {code_point} local-priority {local_priority} name {name}  # noqa
+            # qos dscp-map {code_point} local-priority {local_priority} name {name} # noqa
 
         :param code_point: The code point of the dscp map entry.
         :param local_priority: The local priority of the dscp map entry.
         :param name: The name of the dscp map entry.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """  # noqa
 
         cmd = [
             'qos dscp-map {code_point} local-priority {local_priority} name {name}'  # noqa
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def qos_dscp_map_local_priority_color_name(
-            self, code_point, local_priority, color, name):
+        self, code_point, local_priority, color, name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configures the qos dscp-map.
 
@@ -858,28 +1204,41 @@ class Configure(ContextManager):
 
         ::
 
-            # qos dscp-map {code_point} local-priority {local_priority} color {color} name {name}  # noqa
+            # qos dscp-map {code_point} local-priority {local_priority} color {color} name {name} # noqa
 
         :param code_point: The code point of the dscp map entry.
         :param local_priority: The local priority of the dscp map entry.
         :param color: The color of the dscp map entry.
         :param name: The name of the dscp map entry.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """  # noqa
 
         cmd = [
             'qos dscp-map {code_point} local-priority {local_priority} color {color} name {name}'  # noqa
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def qos_dscp_map_local_priority_name_color(
-            self, code_point, local_priority, name, color):
+        self, code_point, local_priority, name, color,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configures the qos dscp-map.
 
@@ -887,28 +1246,41 @@ class Configure(ContextManager):
 
         ::
 
-            # qos dscp-map {code_point} local-priority {local_priority} name {name} color {color}  # noqa
+            # qos dscp-map {code_point} local-priority {local_priority} name {name} color {color} # noqa
 
         :param code_point: The code point of the dscp map entry.
         :param local_priority: The local priority of the dscp map entry.
         :param name: The name of the dscp map entry.
         :param color: The color of the dscp map entry.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """  # noqa
 
         cmd = [
             'qos dscp-map {code_point} local-priority {local_priority} name {name} color {color}'  # noqa
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_qos_dscp_map(
-            self, code_point):
+        self, code_point,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Restores a qos dscp-map entry to factory default.
 
@@ -919,22 +1291,35 @@ class Configure(ContextManager):
             # no qos dscp-map {code_point}
 
         :param code_point: The code point of the dscp map entry.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no qos dscp-map {code_point}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def qos_queue_profile(
-            self, queue_profile_name):
+        self, queue_profile_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Creates a queue profile.
 
@@ -946,22 +1331,35 @@ class Configure(ContextManager):
 
         :param queue_profile_name: Up to 64 letters, numbers, underscores,
             dashes, or periods.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'qos queue-profile {queue_profile_name}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_qos_queue_profile(
-            self, queue_profile_name):
+        self, queue_profile_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Deletes a queue profile.
 
@@ -973,22 +1371,35 @@ class Configure(ContextManager):
 
         :param queue_profile_name: Up to 64 letters, numbers, underscores,
             dashes, or periods.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no qos queue-profile {queue_profile_name}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def qos_schedule_profile(
-            self, schedule_profile_name):
+        self, schedule_profile_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Creates a schedule profile.
 
@@ -1000,22 +1411,35 @@ class Configure(ContextManager):
 
         :param schedule_profile_name: Up to 64 letters, numbers, underscores,
             dashes, or periods.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'qos schedule-profile {schedule_profile_name}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_qos_schedule_profile(
-            self, schedule_profile_name):
+        self, schedule_profile_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Deletes a schedule profile.
 
@@ -1027,22 +1451,35 @@ class Configure(ContextManager):
 
         :param schedule_profile_name: Up to 64 letters, numbers, underscores,
             dashes, or periods.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no qos schedule-profile {schedule_profile_name}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def qos_trust(
-            self, value):
+        self, value,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets qos trust.
 
@@ -1053,22 +1490,35 @@ class Configure(ContextManager):
             # qos trust {value}
 
         :param value: none, cos, or dscp
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'qos trust {value}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_qos_trust(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Restores qos trust to its factory default.
 
@@ -1078,22 +1528,35 @@ class Configure(ContextManager):
 
             # no qos trust
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no qos trust'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def lacp_system_priority(
-            self, priority):
+        self, priority,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set LACP system priority.
 
@@ -1104,22 +1567,35 @@ class Configure(ContextManager):
             # lacp system-priority {priority}
 
         :param priority: <0-65535>  The range is 0 to 65535.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'lacp system-priority {priority}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def lldp_enable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enable LLDP globally.
 
@@ -1129,22 +1605,35 @@ class Configure(ContextManager):
 
             # lldp enable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'lldp enable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_lldp_enable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable LLDP globally.
 
@@ -1154,22 +1643,35 @@ class Configure(ContextManager):
 
             # no lldp enable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no lldp enable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def lldp_clear(
-            self, param):
+        self, param,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Clear LLDP counters and neighbors.
 
@@ -1181,22 +1683,35 @@ class Configure(ContextManager):
 
         :param param: counters clear lldp countersneighbors clear lldp
             neighbors
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'lldp clear {param}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def lldp_holdtime(
-            self, holdtime_multiplier):
+        self, holdtime_multiplier,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure hold time multiplier.
 
@@ -1207,22 +1722,35 @@ class Configure(ContextManager):
             # lldp holdtime {holdtime_multiplier}
 
         :param holdtime_multiplier: <5-32768>  holdtime_multiplier range
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'lldp holdtime {holdtime_multiplier}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_lldp_holdtime(
-            self, holdtime_multiplier):
+        self, holdtime_multiplier,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unconfigure hold time multiplier.
 
@@ -1233,22 +1761,35 @@ class Configure(ContextManager):
             # no lldp holdtime {holdtime_multiplier}
 
         :param holdtime_multiplier: <5-32768>  holdtime_multiplier range
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no lldp holdtime {holdtime_multiplier}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def lldp_management_address(
-            self, lldp_mgmt_address):
+        self, lldp_mgmt_address,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure LLDP management IPV4/IPV6 address.
 
@@ -1259,22 +1800,35 @@ class Configure(ContextManager):
             # lldp management-address {lldp_mgmt_address}
 
         :param lldp_mgmt_address: A.B.C.D/X:X::X:X IPV4/IPV6 address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'lldp management-address {lldp_mgmt_address}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_lldp_management_address(
-            self, lldp_mgmt_address):
+        self, lldp_mgmt_address,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unconfigure LLDP management IPV4/IPV6 address.
 
@@ -1285,22 +1839,35 @@ class Configure(ContextManager):
             # no lldp management-address {lldp_mgmt_address}
 
         :param lldp_mgmt_address: A.B.C.D/X:X::X:X IPV4/IPV6 address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no lldp management-address {lldp_mgmt_address}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def lldp_reinit(
-            self, reinit_timer):
+        self, reinit_timer,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure wait time before LLDP initialization.
 
@@ -1311,22 +1878,35 @@ class Configure(ContextManager):
             # lldp reinit {reinit_timer}
 
         :param reinit_timer: <1-10>  reinit_timer range
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'lldp reinit {reinit_timer}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_lldp_reinit(
-            self, reinit_timer):
+        self, reinit_timer,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unconfigure wait time before LLDP initialization.
 
@@ -1337,22 +1917,35 @@ class Configure(ContextManager):
             # no lldp reinit {reinit_timer}
 
         :param reinit_timer: <1-10>  reinit_timer range
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no lldp reinit {reinit_timer}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def lldp_select_tlv(
-            self, tlv_field):
+        self, tlv_field,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enabling LLDP tlv field management IP address.
 
@@ -1369,22 +1962,35 @@ class Configure(ContextManager):
             Enable port-vlan-namesystem-capabilities Enable system-
             capabilitiessystem-description Enable system-descriptionsystem-name
             Enable system-name
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'lldp select-tlv {tlv_field}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_lldp_select_tlv(
-            self, tlv_field):
+        self, tlv_field,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enabling LLDP tlv field management IP address.
 
@@ -1401,22 +2007,35 @@ class Configure(ContextManager):
             Enable port-vlan-namesystem-capabilities Enable system-
             capabilitiessystem-description Enable system-descriptionsystem-name
             Enable system-name
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no lldp select-tlv {tlv_field}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def lldp_timer(
-            self, lldp_update_timer):
+        self, lldp_update_timer,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure LLDP status update interval.
 
@@ -1427,22 +2046,35 @@ class Configure(ContextManager):
             # lldp timer {lldp_update_timer}
 
         :param lldp_update_timer: <5-32768>  lldp_update_timer range
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'lldp timer {lldp_update_timer}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_lldp_timer(
-            self, lldp_update_timer):
+        self, lldp_update_timer,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unconfigure LLDP status update interval.
 
@@ -1453,22 +2085,35 @@ class Configure(ContextManager):
             # no lldp timer {lldp_update_timer}
 
         :param lldp_update_timer: <5-32768>  lldp_update_timer range
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no lldp timer {lldp_update_timer}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def sflow_enable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure sFlow.
 
@@ -1478,22 +2123,35 @@ class Configure(ContextManager):
 
             # sflow enable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'sflow enable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_sflow_enable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Un-configure sFlow.
 
@@ -1503,22 +2161,35 @@ class Configure(ContextManager):
 
             # no sflow enable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no sflow enable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def sflow_sampling(
-            self, rate):
+        self, rate,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set sFlow sampling rate.
 
@@ -1529,22 +2200,35 @@ class Configure(ContextManager):
             # sflow sampling {rate}
 
         :param rate: <1-1000000000>  The range is 1 to 1000000000.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'sflow sampling {rate}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def sflow_header_size(
-            self, size):
+        self, size,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set sFlow header-size size.
 
@@ -1555,22 +2239,35 @@ class Configure(ContextManager):
             # sflow header-size {size}
 
         :param size: <64-256>  The size is 64 to 256.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'sflow header-size {size}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_sflow_header_size(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset sFlow header-size
 
@@ -1580,22 +2277,35 @@ class Configure(ContextManager):
 
             # no sflow header-size
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no sflow header-size'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def sflow_max_datagram_size(
-            self, size):
+        self, size,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set sFlow max-datagram-size size.
 
@@ -1606,22 +2316,35 @@ class Configure(ContextManager):
             # sflow max-datagram-size {size}
 
         :param size: <1-9000>  The size is 1 to 9000.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'sflow max-datagram-size {size}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_sflow_max_datagram_size(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset sFlow max-datagram-size
 
@@ -1631,22 +2354,35 @@ class Configure(ContextManager):
 
             # no sflow max-datagram-size
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no sflow max-datagram-size'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_sflow_sampling(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Reset sFlow sampling rate to default.
 
@@ -1656,22 +2392,35 @@ class Configure(ContextManager):
 
             # no sflow sampling
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no sflow sampling'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def sflow_polling(
-            self, interval):
+        self, interval,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set sFlow polling interval.
 
@@ -1682,22 +2431,35 @@ class Configure(ContextManager):
             # sflow polling {interval}
 
         :param interval: <0-3600>  The range is 0 to 3600.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'sflow polling {interval}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_sflow_polling(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Reset sFlow polling interval to default.
 
@@ -1707,22 +2469,35 @@ class Configure(ContextManager):
 
             # no sflow polling
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no sflow polling'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def sflow_agent_interface(
-            self, portlbl, address_family=''):
+        self, portlbl, address_family='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set sFlow agent interface
 
@@ -1734,6 +2509,8 @@ class Configure(ContextManager):
 
         :param portlbl: Valid L3 interface name.
         :param address_family: Optional, IPv4 or IPv6 (Default : IPv4).
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -1749,16 +2526,27 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_sflow_agent_interface(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove sFlow agent interface configuration.
 
@@ -1768,22 +2556,35 @@ class Configure(ContextManager):
 
             # no sflow agent-interface
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no sflow agent-interface'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def sflow_collector(
-            self, ip):
+        self, ip,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set sFlow collector configuration (IP)
 
@@ -1794,22 +2595,35 @@ class Configure(ContextManager):
             # sflow collector {ip}
 
         :param ip: IP address of collector.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'sflow collector {ip}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def sflow_collector_port(
-            self, ip, port):
+        self, ip, port,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set sFlow collector configuration (IP, port)
 
@@ -1821,22 +2635,35 @@ class Configure(ContextManager):
 
         :param ip: IP address of collector.
         :param port: Port of collector <0-65535> (Default : 6343).
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'sflow collector {ip} port {port}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def sflow_collector_vrf(
-            self, ip, vrf):
+        self, ip, vrf,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set sFlow collector configuration (IP, vrf)
 
@@ -1848,22 +2675,35 @@ class Configure(ContextManager):
 
         :param ip: IP address of collector.
         :param vrf: Name of VRF (Default : vrf_default).
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'sflow collector {ip} vrf {vrf}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def sflow_collector_port_vrf(
-            self, ip, port, vrf):
+        self, ip, port, vrf,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set sFlow collector configuration (IP, port, vrf)
 
@@ -1876,22 +2716,35 @@ class Configure(ContextManager):
         :param ip: IP address of collector.
         :param port: Port of collector <0-65535> (Default : 6343).
         :param vrf: Name of VRF (Default : vrf_default).
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'sflow collector {ip} port {port} vrf {vrf}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_router_bgp(
-            self, asn):
+        self, asn,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes the BGP Router
 
@@ -1902,22 +2755,35 @@ class Configure(ContextManager):
             # no router bgp {asn}
 
         :param asn: Autonomous System Number.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no router bgp {asn}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_router_ospf(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes the OSPF Router
 
@@ -1927,22 +2793,35 @@ class Configure(ContextManager):
 
             # no router ospf
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no router ospf'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ip_ecmp_disable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Completely disable ECMP
 
@@ -1952,22 +2831,35 @@ class Configure(ContextManager):
 
             # ip ecmp disable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip ecmp disable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ip_ecmp_disable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Completely disable ECMP
 
@@ -1977,22 +2869,35 @@ class Configure(ContextManager):
 
             # no ip ecmp disable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ip ecmp disable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ip_ecmp_load_balance_dst_ip_disable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable load balancing by destination IP
 
@@ -2002,22 +2907,35 @@ class Configure(ContextManager):
 
             # ip ecmp load-balance dst-ip disable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip ecmp load-balance dst-ip disable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ip_ecmp_load_balance_dst_ip_disable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable load balancing by destination IP
 
@@ -2027,22 +2945,35 @@ class Configure(ContextManager):
 
             # no ip ecmp load-balance dst-ip disable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ip ecmp load-balance dst-ip disable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ip_ecmp_load_balance_dst_port_disable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable load balancing by destination port
 
@@ -2052,22 +2983,35 @@ class Configure(ContextManager):
 
             # ip ecmp load-balance dst-port disable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip ecmp load-balance dst-port disable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ip_ecmp_load_balance_dst_port_disable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable load balancing by destination port
 
@@ -2077,22 +3021,35 @@ class Configure(ContextManager):
 
             # no ip ecmp load-balance dst-port disable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ip ecmp load-balance dst-port disable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ip_ecmp_load_balance_src_port_disable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable load balancing by source port
 
@@ -2102,22 +3059,35 @@ class Configure(ContextManager):
 
             # ip ecmp load-balance src-port disable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip ecmp load-balance src-port disable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ip_ecmp_load_balance_src_port_disable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable load balancing by source port
 
@@ -2127,22 +3097,35 @@ class Configure(ContextManager):
 
             # no ip ecmp load-balance src-port disable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ip ecmp load-balance src-port disable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ip_ecmp_load_balance_src_ip_disable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable load balancing by source IP
 
@@ -2152,22 +3135,35 @@ class Configure(ContextManager):
 
             # ip ecmp load-balance src-ip disable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip ecmp load-balance src-ip disable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ip_ecmp_load_balance_src_ip_disable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable load balancing by source IP
 
@@ -2177,22 +3173,35 @@ class Configure(ContextManager):
 
             # no ip ecmp load-balance src-ip disable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ip ecmp load-balance src-ip disable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ip_ecmp_load_balance_resilient_disable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable resilient hashing for load balancing
 
@@ -2202,22 +3211,35 @@ class Configure(ContextManager):
 
             # ip ecmp load-balance resilient disable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip ecmp load-balance resilient disable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ip_ecmp_load_balance_resilient_disable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable resilient hashing for load balancing
 
@@ -2227,22 +3249,35 @@ class Configure(ContextManager):
 
             # no ip ecmp load-balance resilient disable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ip ecmp load-balance resilient disable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def sftp_server_enable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enable sftp server.
 
@@ -2252,22 +3287,35 @@ class Configure(ContextManager):
 
             # sftp server enable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'sftp server enable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_sftp_server_enable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable sftp server.
 
@@ -2277,22 +3325,35 @@ class Configure(ContextManager):
 
             # no sftp server enable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no sftp server enable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ntp_server(
-            self, host):
+        self, host,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         NTP Association configuration
 
@@ -2303,22 +3364,35 @@ class Configure(ContextManager):
             # ntp server {host}
 
         :param host: NTP Association name or IPv4 Address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ntp server {host}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ntp_server(
-            self, host):
+        self, host,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove NTP association
 
@@ -2329,22 +3403,35 @@ class Configure(ContextManager):
             # no ntp server {host}
 
         :param host: NTP Association name or IPv4 Address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ntp server {host}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ntp_server_prefer(
-            self, host):
+        self, host,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Add NTP Association preference configuration
 
@@ -2355,22 +3442,35 @@ class Configure(ContextManager):
             # ntp server {host} prefer
 
         :param host: NTP Association name or IPv4 Address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ntp server {host} prefer'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ntp_server_key_id(
-            self, host, key_id):
+        self, host, key_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Add NTP Key ID
 
@@ -2382,22 +3482,35 @@ class Configure(ContextManager):
 
         :param host: NTP Association name or IPv4 Address.
         :param key_id: WORD  NTP Key Number between 1-65534
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ntp server {host} key-id {key_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ntp_server_version(
-            self, host, version):
+        self, host, version,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Add NTP Association version configuration
 
@@ -2409,22 +3522,35 @@ class Configure(ContextManager):
 
         :param host: NTP Association name or IPv4 Address.
         :param version: WORD  Version can be 3 or 4
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ntp server {host} version {version}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ntp_authentication_enable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enable NTP Authentication configuration
 
@@ -2434,22 +3560,35 @@ class Configure(ContextManager):
 
             # ntp authentication enable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ntp authentication enable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ntp_authentication_enable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable NTP Authentication configuration
 
@@ -2459,22 +3598,35 @@ class Configure(ContextManager):
 
             # no ntp authentication enable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ntp authentication enable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ntp_authentication_key_md5(
-            self, key_id, password):
+        self, key_id, password,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Add NTP Authentication Key
 
@@ -2486,22 +3638,35 @@ class Configure(ContextManager):
 
         :param key_id: WORD  NTP Key Number between 1-65534
         :param password: WORD  NTP MD5 Password <8-16> chars
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ntp authentication-key {key_id} md5 {password}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ntp_authentication_key(
-            self, key_id):
+        self, key_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove NTP Authentication Key
 
@@ -2512,22 +3677,35 @@ class Configure(ContextManager):
             # no ntp authentication-key {key_id}
 
         :param key_id: WORD  NTP Key Number between 1-65534
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ntp authentication-key {key_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ntp_trusted_key(
-            self, key_id):
+        self, key_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Add NTP Trusted Key
 
@@ -2538,22 +3716,35 @@ class Configure(ContextManager):
             # ntp trusted-key {key_id}
 
         :param key_id: WORD  NTP Key Number between 1-65534
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ntp trusted-key {key_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ntp_trusted_key(
-            self, key_id):
+        self, key_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove NTP Trusted Key
 
@@ -2564,22 +3755,35 @@ class Configure(ContextManager):
             # no ntp trusted-key {key_id}
 
         :param key_id: WORD  NTP Key Number between 1-65534
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ntp trusted-key {key_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def logging(
-            self, remote_host, transport='', severity=''):
+        self, remote_host, transport='', severity='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure Syslog Server
 
@@ -2595,6 +3799,8 @@ class Configure(ContextManager):
         :param severity: Optional : Filter syslog messages using severity.
             Only messages with severity higher than or equal to the specified
             severity will be sent to the remote host.  Example severity debug
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -2615,16 +3821,27 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_logging(
-            self, remote_host, transport='', severity=''):
+        self, remote_host, transport='', severity='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove Syslog Server Configuration
 
@@ -2640,6 +3857,8 @@ class Configure(ContextManager):
         :param severity: Optional : Filter syslog messages using severity.
             Only messages with severity higher than or equal to the specified
             severity will be sent to the remote host.  Example severity debug
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -2660,16 +3879,27 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def vlog_daemon(
-            self, daemon, destination, severity):
+        self, daemon, destination, severity,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure the daemon
 
@@ -2682,22 +3912,35 @@ class Configure(ContextManager):
         :param daemon: daemon name
         :param destination: configure the log level of destination
         :param severity: severity level
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'vlog daemon {daemon} {destination} {severity}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def vlog_feature(
-            self, feature, destination, severity):
+        self, feature, destination, severity,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure the feature
 
@@ -2710,22 +3953,35 @@ class Configure(ContextManager):
         :param feature: feature name
         :param destination: configure the log level of destination
         :param severity: severity level
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'vlog feature {feature} {destination} {severity}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def logrotate_period(
-            self, time_interval):
+        self, time_interval,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set Logrotate time interval.
 
@@ -2736,22 +3992,35 @@ class Configure(ContextManager):
             # logrotate period {time_interval}
 
         :param time_interval: rotates log files time interval
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'logrotate period {time_interval}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def logrotate_maxsize(
-            self, file_size):
+        self, file_size,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set Logrotate maxsize of file.
 
@@ -2762,22 +4031,35 @@ class Configure(ContextManager):
             # logrotate maxsize {file_size}
 
         :param file_size: <1-200>  File size in Mega Bytes
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'logrotate maxsize {file_size}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def logrotate_target(
-            self, tftp_host):
+        self, tftp_host,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set Logrotate tftp remote host.
 
@@ -2788,22 +4070,35 @@ class Configure(ContextManager):
             # logrotate target {tftp_host}
 
         :param tftp_host: URI of the remote host
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'logrotate target {tftp_host}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def snmp_server_community(
-            self, community_name):
+        self, community_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure SNMP community names
 
@@ -2814,22 +4109,35 @@ class Configure(ContextManager):
             # snmp-server community {community_name}
 
         :param community_name: Configured Community names
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'snmp-server community {community_name}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_snmp_server_community(
-            self, community_name=''):
+        self, community_name='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unconfigure SNMP community names
 
@@ -2840,6 +4148,8 @@ class Configure(ContextManager):
             # no snmp-server community
 
         :param community_name: Unconfigured community names
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -2853,16 +4163,27 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def snmp_server_system_contact(
-            self, system_contact):
+        self, system_contact,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure SNMP system contact information
 
@@ -2873,22 +4194,35 @@ class Configure(ContextManager):
             # snmp-server system-contact {system_contact}
 
         :param system_contact: Configured System contact information
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'snmp-server system-contact {system_contact}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_snmp_server_system_contact(
-            self, system_contact=''):
+        self, system_contact='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unconfigure SNMP contact information
 
@@ -2899,6 +4233,8 @@ class Configure(ContextManager):
             # no snmp-server system-contact
 
         :param system_contact: Unconfigure system contact information
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -2912,16 +4248,27 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def snmp_server_system_location(
-            self, system_location):
+        self, system_location,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure SNMP system location information
 
@@ -2932,22 +4279,35 @@ class Configure(ContextManager):
             # snmp-server system-location {system_location}
 
         :param system_location: Configured System location information
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'snmp-server system-location {system_location}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_snmp_server_system_location(
-            self, system_location=''):
+        self, system_location='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unconfigure SNMP location information
 
@@ -2958,6 +4318,8 @@ class Configure(ContextManager):
             # no snmp-server system-location
 
         :param system_location: Unconfigure system location information
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -2971,16 +4333,27 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def snmp_server_system_description(
-            self, system_description):
+        self, system_description,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure SNMP system description
 
@@ -2988,25 +4361,38 @@ class Configure(ContextManager):
 
         ::
 
-            # snmp-server system-description                {system_description}  # noqa
+            # snmp-server system-description                {system_description} # noqa
 
         :param system_description: Configured System description
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'snmp-server system-description                {system_description}'  # noqa
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_snmp_server_system_description(
-            self, system_desription=''):
+        self, system_desription='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unconfigure SNMP system description
 
@@ -3017,6 +4403,8 @@ class Configure(ContextManager):
             # no snmp-server system-description
 
         :param system_desription: Unconfigure system description
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -3030,17 +4418,28 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def snmp_server_host_trap_version(
-            self, host_ip_address, snmp_version, community='',
-            community_name='', port='', snmp_port=''):
+        self, host_ip_address, snmp_version, community='',
+        community_name='', port='', snmp_port='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure SNMP server information for trap receiver
 
@@ -3058,6 +4457,8 @@ class Configure(ContextManager):
             receiver
         :param port: Configured snmp port for trap receiver
         :param snmp_port: Configured snmp port for trap receiver
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -3092,17 +4493,28 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_snmp_server_host_trap_version(
-            self, host_ip_address, snmp_version, community='',
-            community_name='', port='', snmp_port=''):
+        self, host_ip_address, snmp_version, community='',
+        community_name='', port='', snmp_port='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unconfigure SNMP server information for trap receiver
 
@@ -3121,6 +4533,8 @@ class Configure(ContextManager):
             receiver
         :param port: Unconfigured snmp port for trap receiver
         :param snmp_port: Unconfigured snmp port for trap receiver
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -3155,17 +4569,28 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def snmp_server_host_inform_version(
-            self, host_ip_address, snmp_version, community='',
-            community_name='', port='', snmp_port=''):
+        self, host_ip_address, snmp_version, community='',
+        community_name='', port='', snmp_port='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure SNMP server information for notifications
 
@@ -3183,6 +4608,8 @@ class Configure(ContextManager):
             notifications
         :param port: Configured snmp port for notifications
         :param snmp_port: Configured snmp port for notifications
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -3217,17 +4644,28 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_snmp_server_host_inform_version(
-            self, host_ip_address, snmp_version, community='',
-            community_name='', port='', snmp_port=''):
+        self, host_ip_address, snmp_version, community='',
+        community_name='', port='', snmp_port='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unconfigure SNMP server information for notifications
 
@@ -3235,7 +4673,7 @@ class Configure(ContextManager):
 
         ::
 
-            # no snmp-server host {host_ip_address} inform version {snmp_version}  # noqa
+            # no snmp-server host {host_ip_address} inform version {snmp_version} # noqa
 
         :param host_ip_address: Unconfigured host ip address for
             notifications
@@ -3246,6 +4684,8 @@ class Configure(ContextManager):
             notifications
         :param port: Unconfigured snmp port for notifications
         :param snmp_port: Unconfigured snmp port for notifications
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """  # noqa
 
         cmd = [
@@ -3280,16 +4720,27 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def snmpv3_user(
-            self, user_name):
+        self, user_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure SNMPv3 user name
 
@@ -3300,22 +4751,35 @@ class Configure(ContextManager):
             # snmpv3 user {user_name}
 
         :param user-name: Configured user_name for SNMPv3
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'snmpv3 user {user_name}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_snmpv3_user(
-            self, user_name):
+        self, user_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unconfigure SNMPv3 user name
 
@@ -3326,22 +4790,35 @@ class Configure(ContextManager):
             # no snmpv3 user {user_name}
 
         :param user_name: Unconfigured SNMPv3 user name
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no snmpv3 user {user_name}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def snmpv3_user_auth_auth_pass(
-            self, user_name, auth_protocol, auth_password):
+        self, user_name, auth_protocol, auth_password,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure SNMPv3 user name with auth protocol and
         password
@@ -3350,27 +4827,40 @@ class Configure(ContextManager):
 
         ::
 
-            # snmpv3 user {user_name} auth {auth_protocol} auth-pass {auth_password}  # noqa
+            # snmpv3 user {user_name} auth {auth_protocol} auth-pass {auth_password} # noqa
 
         :param user_name: Configured user-name for SNMPv3
         :param auth_protocol: Configured auth protocol for SNMPv3 user
         :param auth_password: Configured auth password for SNMPv3 user
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """  # noqa
 
         cmd = [
             'snmpv3 user {user_name} auth {auth_protocol} auth-pass {auth_password}'  # noqa
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_snmpv3_user_auth_auth_pass(
-            self, user_name, auth_protocol, auth_password):
+        self, user_name, auth_protocol, auth_password,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unconfigure SNMPv3 user name with auth protocol and
         password
@@ -3379,28 +4869,41 @@ class Configure(ContextManager):
 
         ::
 
-            # no snmpv3 user {user_name} auth {auth_protocol} auth-pass {auth_password}  # noqa
+            # no snmpv3 user {user_name} auth {auth_protocol} auth-pass {auth_password} # noqa
 
         :param user_name: Unconfigured user-name for SNMPv3
         :param auth_protocol: Unconfigured auth protocol for SNMPv3 user
         :param auth_password: Unconfigured auth password for SNMPv3 user
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """  # noqa
 
         cmd = [
             'no snmpv3 user {user_name} auth {auth_protocol} auth-pass {auth_password}'  # noqa
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def snmpv3_user_auth_auth_pass_priv_priv_pass(
-            self, user_name, auth_protocol, auth_password,
-            priv_protocol, priv_password):
+        self, user_name, auth_protocol, auth_password,
+        priv_protocol, priv_password,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure SNMPv3 user name with auth protocol and
         password
@@ -3409,30 +4912,43 @@ class Configure(ContextManager):
 
         ::
 
-            # snmpv3 user {user_name} auth {auth_protocol} auth-pass {auth_password} priv {priv_protocol} priv-pass {priv_password}  # noqa
+            # snmpv3 user {user_name} auth {auth_protocol} auth-pass {auth_password} priv {priv_protocol} priv-pass {priv_password} # noqa
 
         :param user_name: Configured user-name for SNMPv3
         :param auth_protocol: Configured auth protocol for SNMPv3 user
         :param auth_password: Configured auth password for SNMPv3 user
         :param priv_protocol: Configured priv protocol for SNMPv3 user
         :param priv_password: Configured priv password for SNMPv3 user
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """  # noqa
 
         cmd = [
             'snmpv3 user {user_name} auth {auth_protocol} auth-pass {auth_password} priv {priv_protocol} priv-pass {priv_password}'  # noqa
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_snmpv3_user_auth_auth_pass_priv_priv_pass(
-            self, user_name, auth_protocol, auth_password,
-            priv_protocol, priv_password):
+        self, user_name, auth_protocol, auth_password,
+        priv_protocol, priv_password,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unconfigure SNMPv3 user name with auth protocol and
         password
@@ -3441,29 +4957,42 @@ class Configure(ContextManager):
 
         ::
 
-            # no snmpv3 user {user_name} auth {auth_protocol} auth-pass {auth_password} priv {priv_protocol} priv-pass {priv_password}  # noqa
+            # no snmpv3 user {user_name} auth {auth_protocol} auth-pass {auth_password} priv {priv_protocol} priv-pass {priv_password} # noqa
 
         :param user_name: Unconfigured user-name for SNMPv3
         :param auth_protocol: Unconfigured auth protocol for SNMPv3 user
         :param auth_password: Unconfigured auth password for SNMPv3 user
         :param priv_protocol: Unconfigured priv protocol for SNMPv3 user
         :param priv_password: Unconfigured priv password for SNMPv3 user
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """  # noqa
 
         cmd = [
             'no snmpv3 user {user_name} auth {auth_protocol} auth-pass {auth_password} priv {priv_protocol} priv-pass {priv_password}'  # noqa
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def snmp_server_agent_port(
-            self, port_num):
+        self, port_num,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure SNMP agent port
 
@@ -3474,22 +5003,35 @@ class Configure(ContextManager):
             # snmp-server agent-port {port_num}
 
         :param port_num: UDP port on which the SNMP agent listens
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'snmp-server agent-port {port_num}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_snmp_server_agent_port(
-            self, port_num=''):
+        self, port_num='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unconfigure SNMP agent port
 
@@ -3500,6 +5042,8 @@ class Configure(ContextManager):
             # no snmp-server agent-port
 
         :param port_num: UDP port on which the SNMP agent listens
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -3513,16 +5057,27 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_mirror_session(
-            self, name):
+        self, name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Delete a mirroring session.
 
@@ -3534,22 +5089,35 @@ class Configure(ContextManager):
 
         :param name: Up to 64 letters, numbers, underscores, dashes, or
             periods.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no mirror session {name}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def spanning_tree(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enables MSTP feature for all the instances
 
@@ -3559,22 +5127,35 @@ class Configure(ContextManager):
 
             # spanning-tree
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'spanning-tree'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_spanning_tree(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disables MSTP feature for all the instances
 
@@ -3584,22 +5165,35 @@ class Configure(ContextManager):
 
             # no spanning-tree
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no spanning-tree'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def spanning_tree_config_name(
-            self, configuration_name):
+        self, configuration_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets config name for MSTP
 
@@ -3610,22 +5204,35 @@ class Configure(ContextManager):
             # spanning-tree config-name {configuration_name}
 
         :param configuration_name: Specifies the MSTP configuration name
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'spanning-tree config-name {configuration_name}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_spanning_tree_config_name(
-            self, configuration_name=''):
+        self, configuration_name='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets the default config name for all the instances, default is system
         MAC-Address
@@ -3637,6 +5244,8 @@ class Configure(ContextManager):
             # no spanning-tree config-name
 
         :param configuration_name: Specifies the MSTP configuration name
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -3650,16 +5259,27 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def spanning_tree_config_revision(
-            self, revision_number):
+        self, revision_number,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets config revision number for the all the instances
 
@@ -3671,22 +5291,35 @@ class Configure(ContextManager):
 
         :param revision_number: Specifies the MSTP configuration revision
             number value <1-40>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'spanning-tree config-revision {revision_number}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_spanning_tree_config_revision(
-            self, revision_number=''):
+        self, revision_number='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets default config revision number for the all the instances, default
         value is 0
@@ -3699,6 +5332,8 @@ class Configure(ContextManager):
 
         :param revision_number: Specifies the MSTP configuration revision
             number value <1-40>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -3712,16 +5347,27 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def spanning_tree_instance_vlan(
-            self, instance_id, vlan_id):
+        self, instance_id, vlan_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Maps the VLAN-ID to corresponding instance
 
@@ -3733,22 +5379,35 @@ class Configure(ContextManager):
 
         :param instance_id: Specifies the MSTP instance number <1-64>
         :param vlan_id: Specifies the VLAN-ID number <1-4094>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'spanning-tree instance {instance_id} vlan {vlan_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_spanning_tree_instance_vlan(
-            self, instance_id, vlan_id=''):
+        self, instance_id, vlan_id='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes the VLAN-ID from the MSTP instance
 
@@ -3760,6 +5419,8 @@ class Configure(ContextManager):
 
         :param instance_id: Specifies the MSTP instance number <1-64>
         :param vlan_id: Specifies the VLAN-ID number <1-4094>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -3773,16 +5434,27 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def spanning_tree_instance_priority(
-            self, instance_id, priority):
+        self, instance_id, priority,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Maps the priority to corresponding instance
 
@@ -3795,22 +5467,35 @@ class Configure(ContextManager):
         :param instance_id: Specifies the MSTP instance number <1-64>
         :param priority: The device priority multiplier for the MST instance
             <0-15>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'spanning-tree instance {instance_id} priority {priority}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_spanning_tree_instance_priority(
-            self, instance_id, priority=''):
+        self, instance_id, priority='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes the priority from the MSTP instance
 
@@ -3823,6 +5508,8 @@ class Configure(ContextManager):
         :param instance_id: Specifies the MSTP instance number <1-64>
         :param priority: The device priority multiplier for the MST instance
             <0-15>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -3836,16 +5523,27 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_spanning_tree_instance(
-            self, instance_id):
+        self, instance_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes the MSTP instance
 
@@ -3856,22 +5554,35 @@ class Configure(ContextManager):
             # no spanning-tree instance {instance_id}
 
         :param instance_id: Specifies the MSTP instance number <1-64>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no spanning-tree instance {instance_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def spanning_tree_forward_delay(
-            self, delay_in_secs):
+        self, delay_in_secs,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets the forward-delay for all the MSTP instances
 
@@ -3882,22 +5593,35 @@ class Configure(ContextManager):
             # spanning-tree forward-delay {delay_in_secs}
 
         :param delay_in_secs: Specifies the forward delay in seconds <4-30>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'spanning-tree forward-delay {delay_in_secs}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_spanning_tree_forward_delay(
-            self, delay_in_secs=''):
+        self, delay_in_secs='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets the default forward-delay for all the MSTP instances, default
         value is 15 seconds
@@ -3909,6 +5633,8 @@ class Configure(ContextManager):
             # no spanning-tree forward-delay
 
         :param delay_in_secs: Specifies the forward delay in seconds <4-30>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -3922,16 +5648,27 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def spanning_tree_hello_time(
-            self, hello_in_secs):
+        self, hello_in_secs,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets the hello interval for all the MSTP instances
 
@@ -3942,22 +5679,35 @@ class Configure(ContextManager):
             # spanning-tree hello-time {hello_in_secs}
 
         :param hello_in_secs: Specifies the hello interval in seconds <2-10>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'spanning-tree hello-time {hello_in_secs}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_spanning_tree_hello_time(
-            self, hello_in_secs=''):
+        self, hello_in_secs='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets the default hello interval for all the MSTP instances, default
         value is 2 seconds
@@ -3969,6 +5719,8 @@ class Configure(ContextManager):
             # no spanning-tree hello-time
 
         :param hello_in_secs: Specifies the hello interval in seconds <2-10>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -3982,16 +5734,27 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def spanning_tree_max_age(
-            self, age_in_secs):
+        self, age_in_secs,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets the maximum age for all the MSTP instances
 
@@ -4002,22 +5765,35 @@ class Configure(ContextManager):
             # spanning-tree max-age {age_in_secs}
 
         :param age_in_secs: Specifies the maximum age in seconds <6-30>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'spanning-tree max-age {age_in_secs}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_spanning_tree_max_age(
-            self, age_in_secs=''):
+        self, age_in_secs='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets the default max age for all the MSTP instances, default value is
         20 seconds
@@ -4029,6 +5805,8 @@ class Configure(ContextManager):
             # no spanning-tree max-age
 
         :param age_in_secs: Specifies the maximum age in seconds <6-30>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -4042,16 +5820,27 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def spanning_tree_max_hops(
-            self, hop_count):
+        self, hop_count,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets the hop count for all the MSTP instances
 
@@ -4062,22 +5851,35 @@ class Configure(ContextManager):
             # spanning-tree max-hops {hop_count}
 
         :param hop_count: Specifies the maximum number of hops <1-40>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'spanning-tree max-hops {hop_count}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_spanning_tree_max_hops(
-            self, hop_count=''):
+        self, hop_count='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets the default hop count for all the MSTP instances, default value is
         20
@@ -4089,6 +5891,8 @@ class Configure(ContextManager):
             # no spanning-tree max-hops
 
         :param hop_count: Specifies the maximum number of hops <1-40>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -4102,16 +5906,27 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def spanning_tree_priority(
-            self, priority):
+        self, priority,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set the device priority multiplier
 
@@ -4122,22 +5937,35 @@ class Configure(ContextManager):
             # spanning-tree priority {priority}
 
         :param priority: Device priority multiplier <0-15>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'spanning-tree priority {priority}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_spanning_tree_priority(
-            self, priority=''):
+        self, priority='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set the device priority multiplier
 
@@ -4148,6 +5976,8 @@ class Configure(ContextManager):
             # no spanning-tree priority
 
         :param priority: Device priority multiplier <0-15>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -4161,16 +5991,27 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def spanning_tree_transmit_hold_count(
-            self, count):
+        self, count,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets the transmit hold count performance parameter in pps
 
@@ -4181,22 +6022,35 @@ class Configure(ContextManager):
             # spanning-tree transmit-hold-count {count}
 
         :param count: Transmit hold count <1-10>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'spanning-tree transmit-hold-count {count}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_spanning_tree_transmit_hold_count(
-            self, count=''):
+        self, count='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets the transmit hold count performance parameter in pps
 
@@ -4207,6 +6061,8 @@ class Configure(ContextManager):
             # no spanning-tree transmit-hold-count
 
         :param count: Transmit hold count <1-10>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -4220,16 +6076,27 @@ class Configure(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def access_list_ip(
-            self, access_list):
+        self, access_list,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure access list.
 
@@ -4240,22 +6107,35 @@ class Configure(ContextManager):
             # access-list ip {access_list}
 
         :param access_list: Access List Name.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'access-list ip {access_list}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_access_list_ip(
-            self, access_list):
+        self, access_list,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unconfigure access list.
 
@@ -4266,22 +6146,35 @@ class Configure(ContextManager):
             # no access-list ip {access_list}
 
         :param access_list: Access List Name.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no access-list ip {access_list}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def access_list_ip_resequence(
-            self, access_list, start, increment):
+        self, access_list, start, increment,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Resequence ACL Lists.
 
@@ -4294,22 +6187,35 @@ class Configure(ContextManager):
         :param access_list: Access List Name.
         :param start: beginning index of entry in access list
         :param increment: increment factor of subsequent ACE in ACL
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'access-list ip {access_list} resequence {start} {increment}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def access_list_log_timer(
-            self, seconds):
+        self, seconds,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure ACL Log Timer value.
 
@@ -4320,22 +6226,35 @@ class Configure(ContextManager):
             # access-list log-timer {seconds}
 
         :param seconds: <30-300>Specify value(seconds) or default.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'access-list log-timer {seconds}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def radius_server_host_auth_port(
-            self, ip_addr, port):
+        self, ip_addr, port,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Radius server auth-port configuration
 
@@ -4347,22 +6266,35 @@ class Configure(ContextManager):
 
         :param ip_addr: Radius server IPv4 address
         :param port: <0-65535>  UDP port range is 0 to 65535
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'radius-server host {ip_addr} auth-port {port}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_radius_server_host_auth_port(
-            self, ip_addr, port):
+        self, ip_addr, port,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Radius server auth-port configuration
 
@@ -4374,22 +6306,35 @@ class Configure(ContextManager):
 
         :param ip_addr: Radius server IPv4 address
         :param port: <0-65535>  UDP port range is 0 to 65535
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no radius-server host {ip_addr} auth-port {port}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def radius_server_host_key(
-            self, ip_addr, secret):
+        self, ip_addr, secret,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Radius server key configuration
 
@@ -4401,22 +6346,35 @@ class Configure(ContextManager):
 
         :param ip_addr: Radius server IPv4 address
         :param secret: WORD Radius shared secret
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'radius-server host {ip_addr} key {secret}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_radius_server_host_key(
-            self, ip_addr, secret):
+        self, ip_addr, secret,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Radius server key configuration
 
@@ -4428,22 +6386,35 @@ class Configure(ContextManager):
 
         :param ip_addr: Radius server IPv4 address
         :param secret: WORD Radius shared secret
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no radius-server host {ip_addr} key {secret}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def radius_server_host(
-            self, ip_addr):
+        self, ip_addr,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Radius server configuration
 
@@ -4454,22 +6425,35 @@ class Configure(ContextManager):
             # radius-server host {ip_addr}
 
         :param ip_addr: Radius server IPv4 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'radius-server host {ip_addr}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_radius_server_host(
-            self, ip_addr):
+        self, ip_addr,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Radius server configuration
 
@@ -4480,22 +6464,35 @@ class Configure(ContextManager):
             # no radius-server host {ip_addr}
 
         :param ip_addr: Radius server IPv4 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no radius-server host {ip_addr}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def aaa_authentication_login(
-            self, type):
+        self, type,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         AAA authentication login configuration
 
@@ -4506,22 +6503,35 @@ class Configure(ContextManager):
             # aaa authentication login {type}
 
         :param type: local Local authenticationradius Radius authentication
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'aaa authentication login {type}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def aaa_authentication_login_fallback_error_local(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         AAA authentication login fallback configuration
 
@@ -4531,16 +6541,21 @@ class Configure(ContextManager):
 
             # aaa authentication login fallback error local
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'aaa authentication login fallback error local'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
@@ -4554,14 +6569,14 @@ class RouteMap(ContextManager):
 
     ::
 
-            ['config terminal', 'route-map {routemap_name} {permission} {seq}']
+        ['config terminal', 'route-map {routemap_name} {permission} {seq}']
 
     post_commands:
 
     ::
 
-            ['end']
-    """
+        ['end']
+    """  # noqa
     def __init__(self, enode, routemap_name, permission, seq):
         self.enode = enode
         self.routemap_name = routemap_name
@@ -4594,7 +6609,15 @@ class RouteMap(ContextManager):
         )
 
     def description(
-            self, description):
+        self, description,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set description
 
@@ -4605,22 +6628,35 @@ class RouteMap(ContextManager):
             # description {description}
 
         :param description: LINE  Comment describing this route-map rule
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'description {description}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_description(
-            self, description):
+        self, description,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset description
 
@@ -4631,22 +6667,35 @@ class RouteMap(ContextManager):
             # no description {description}
 
         :param description: LINE  Comment describing this route-map rule
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no description {description}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def match_ip_address_prefix_list(
-            self, prefix_name):
+        self, prefix_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set prefix-list
 
@@ -4657,22 +6706,35 @@ class RouteMap(ContextManager):
             # match ip address prefix-list {prefix_name}
 
         :param prefix_name: WORD  IP prefix-list name
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'match ip address prefix-list {prefix_name}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_match_ip_address_prefix_list(
-            self, prefix_name=''):
+        self, prefix_name='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset prefix-list
 
@@ -4683,6 +6745,8 @@ class RouteMap(ContextManager):
             # no match ip address prefix-list
 
         :param prefix_name: WORD  IP prefix-list name
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -4696,16 +6760,27 @@ class RouteMap(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def set_metric(
-            self, metric):
+        self, metric,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set metric
 
@@ -4716,22 +6791,35 @@ class RouteMap(ContextManager):
             # set metric {metric}
 
         :param metric: <0-4294967295>  Metric value
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'set metric {metric}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_set_metric(
-            self, metric=''):
+        self, metric='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset metric
 
@@ -4742,6 +6830,8 @@ class RouteMap(ContextManager):
             # no set metric
 
         :param metric: <0-4294967295>  Metric value
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -4755,16 +6845,27 @@ class RouteMap(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def set_community(
-            self, community):
+        self, community,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set community
 
@@ -4776,22 +6877,35 @@ class RouteMap(ContextManager):
 
         :param community: AA:NN  Community number in aa:nn format or local-AS
             \|no-advertise\|no-export\|internet or additive
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'set community {community}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_set_community(
-            self, community=''):
+        self, community='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset community
 
@@ -4803,6 +6917,8 @@ class RouteMap(ContextManager):
 
         :param community: AA:NN  Community number in aa:nn format orlocal-AS
             \|no-advertise\|no-export\|internet or additive
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -4816,10 +6932,13 @@ class RouteMap(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
@@ -4833,14 +6952,14 @@ class ConfigInterface(ContextManager):
 
     ::
 
-            ['config terminal', 'interface {port}']
+        ['config terminal', 'interface {port}']
 
     post_commands:
 
     ::
 
-            ['end']
-    """
+        ['end']
+    """  # noqa
     def __init__(self, enode, portlbl):
         self.enode = enode
         self.port = enode.ports.get(portlbl, portlbl)
@@ -4871,7 +6990,15 @@ class ConfigInterface(ContextManager):
         )
 
     def ip_address(
-            self, ipv4):
+        self, ipv4,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set IP address
 
@@ -4882,22 +7009,35 @@ class ConfigInterface(ContextManager):
             # ip address {ipv4}
 
         :param ipv4: A.B.C.D/M Interface IP address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip address {ipv4}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ip_address(
-            self, ipv4):
+        self, ipv4,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset IP address
 
@@ -4908,22 +7048,35 @@ class ConfigInterface(ContextManager):
             # no ip address {ipv4}
 
         :param ipv4: A.B.C.D/M Interface IP address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ip address {ipv4}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ip_address_secondary(
-            self, ipv4):
+        self, ipv4,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set secondary IP address
 
@@ -4934,22 +7087,35 @@ class ConfigInterface(ContextManager):
             # ip address {ipv4} secondary
 
         :param ipv4: A.B.C.D/M Interface IP address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip address {ipv4} secondary'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ip_address_secondary(
-            self, ipv4):
+        self, ipv4,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset secondary IP address
 
@@ -4960,22 +7126,35 @@ class ConfigInterface(ContextManager):
             # no ip address {ipv4} secondary
 
         :param ipv4: A.B.C.D/M Interface IP address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ip address {ipv4} secondary'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ipv6_address(
-            self, ipv6):
+        self, ipv6,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set IPv6 address
 
@@ -4986,22 +7165,35 @@ class ConfigInterface(ContextManager):
             # ipv6 address {ipv6}
 
         :param ipv6: X:X::X:X/M  Interface IPv6 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ipv6 address {ipv6}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ipv6_address(
-            self, ipv6):
+        self, ipv6,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset IPv6 address
 
@@ -5012,22 +7204,35 @@ class ConfigInterface(ContextManager):
             # no ipv6 address {ipv6}
 
         :param ipv6: X:X::X:X/M  Interface IPv6 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ipv6 address {ipv6}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ipv6_address_secondary(
-            self, ipv6):
+        self, ipv6,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set secondary IPv6 address
 
@@ -5038,22 +7243,35 @@ class ConfigInterface(ContextManager):
             # ipv6 address {ipv6} secondary
 
         :param ipv6: X:X::X:X/M  Interface IPv6 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ipv6 address {ipv6} secondary'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ipv6_address_secondary(
-            self, ipv6):
+        self, ipv6,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset IPv6 address
 
@@ -5064,22 +7282,35 @@ class ConfigInterface(ContextManager):
             # no ipv6 address {ipv6} secondary
 
         :param ipv6: X:X::X:X/M  Interface IPv6 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ipv6 address {ipv6} secondary'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ip_ospf_authentication_message_digest(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure OSPF MD5 authentication
 
@@ -5089,22 +7320,35 @@ class ConfigInterface(ContextManager):
 
             # ip ospf authentication message-digest
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip ospf authentication message-digest'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ip_ospf_authentication(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure OSPF text authentication
 
@@ -5114,22 +7358,35 @@ class ConfigInterface(ContextManager):
 
             # ip ospf authentication
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip ospf authentication'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ip_ospf_authentication(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove OSPF text authentication
 
@@ -5139,22 +7396,35 @@ class ConfigInterface(ContextManager):
 
             # no ip ospf authentication
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ip ospf authentication'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ip_ospf_message_digest_key_md5(
-            self, key_id, password_key):
+        self, key_id, password_key,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configuring MD5 authentication with encryption
 
@@ -5166,22 +7436,35 @@ class ConfigInterface(ContextManager):
 
         :param key_id: <1-255> key_id range
         :param password_key: OSPF password key
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip ospf message-digest-key {key_id} md5 {password_key}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ip_ospf_message_digest_key(
-            self, key_id):
+        self, key_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removing MD5 authentication with encryption
 
@@ -5192,22 +7475,35 @@ class ConfigInterface(ContextManager):
             # no ip ospf message-digest-key {key_id}
 
         :param key_id: <1-255> key_id range
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ip ospf message-digest-key {key_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ip_ospf_authentication_key(
-            self, auth_key):
+        self, auth_key,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configuring text authentication with encryption
 
@@ -5218,22 +7514,35 @@ class ConfigInterface(ContextManager):
             # ip ospf authentication-key {auth_key}
 
         :param auth_key: Text authentication Authorization key
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip ospf authentication-key {auth_key}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ip_ospf_authentication_key(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removing text authentication with encryption
 
@@ -5243,22 +7552,35 @@ class ConfigInterface(ContextManager):
 
             # no ip ospf authentication-key
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ip ospf authentication-key'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def routing(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure interface as L3.
 
@@ -5268,22 +7590,35 @@ class ConfigInterface(ContextManager):
 
             # routing
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'routing'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_routing(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unconfigure interface as L3.
 
@@ -5293,22 +7628,35 @@ class ConfigInterface(ContextManager):
 
             # no routing
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no routing'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def shutdown(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enable an interface.
 
@@ -5318,22 +7666,35 @@ class ConfigInterface(ContextManager):
 
             # shutdown
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'shutdown'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_shutdown(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable an interface.
 
@@ -5343,22 +7704,35 @@ class ConfigInterface(ContextManager):
 
             # no shutdown
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no shutdown'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def vlan_access(
-            self, vlan_id):
+        self, vlan_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Access configuration
 
@@ -5369,22 +7743,35 @@ class ConfigInterface(ContextManager):
             # vlan access {vlan_id}
 
         :param vlan_id: <1-4094>  VLAN identifier
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'vlan access {vlan_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_vlan_access(
-            self, vlan_id):
+        self, vlan_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove vlan access
 
@@ -5395,22 +7782,35 @@ class ConfigInterface(ContextManager):
             # no vlan access {vlan_id}
 
         :param vlan_id: <1-4094>  VLAN identifier
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no vlan access {vlan_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def vlan_trunk_allowed(
-            self, vlan_id):
+        self, vlan_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Allow VLAN on the trunk port
 
@@ -5421,22 +7821,35 @@ class ConfigInterface(ContextManager):
             # vlan trunk allowed {vlan_id}
 
         :param vlan_id: <1-4094>  VLAN identifier
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'vlan trunk allowed {vlan_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_vlan_trunk_allowed(
-            self, vlan_id):
+        self, vlan_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disallow VLAN on the trunk port
 
@@ -5447,22 +7860,35 @@ class ConfigInterface(ContextManager):
             # no vlan trunk allowed {vlan_id}
 
         :param vlan_id: <1-4094>  VLAN identifier
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no vlan trunk allowed {vlan_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def vlan_trunk_native_tag(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Tag configuration on the trunk port
 
@@ -5472,22 +7898,35 @@ class ConfigInterface(ContextManager):
 
             # vlan trunk native tag
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'vlan trunk native tag'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_vlan_trunk_native_tag(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove tag configuration on the trunk port
 
@@ -5497,22 +7936,35 @@ class ConfigInterface(ContextManager):
 
             # no vlan trunk native tag
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no vlan trunk native tag'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def vlan_trunk_native(
-            self, vlan_id):
+        self, vlan_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Native VLAN on the trunk port
 
@@ -5523,22 +7975,35 @@ class ConfigInterface(ContextManager):
             # vlan trunk native {vlan_id}
 
         :param vlan_id: <1-4094>  VLAN identifier
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'vlan trunk native {vlan_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_vlan_trunk_native(
-            self, vlan_id):
+        self, vlan_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove native VLAN on the trunk port
 
@@ -5549,22 +8014,35 @@ class ConfigInterface(ContextManager):
             # no vlan trunk native {vlan_id}
 
         :param vlan_id: <1-4094>  VLAN identifier
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no vlan trunk native {vlan_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def lacp_port_id(
-            self, port_id):
+        self, port_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set port ID used in LACP negotiation.
 
@@ -5575,22 +8053,35 @@ class ConfigInterface(ContextManager):
             # lacp port-id {port_id}
 
         :param port_id: <1-65535>  .The range is 1 to 65535
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'lacp port-id {port_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ip_ospf_dead_interval(
-            self, dead_timer):
+        self, dead_timer,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure ospf dead_timer
 
@@ -5601,22 +8092,35 @@ class ConfigInterface(ContextManager):
             # ip ospf dead-interval {dead_timer}
 
         :param dead_timer: <1-65535>  dead_timer range
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip ospf dead-interval {dead_timer}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ip_ospf_hello_interval(
-            self, hello_timer):
+        self, hello_timer,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure ospf hello_timer
 
@@ -5627,22 +8131,35 @@ class ConfigInterface(ContextManager):
             # ip ospf hello-interval {hello_timer}
 
         :param hello_timer: <10-30>  hello interval range
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip ospf hello-interval {hello_timer}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ip_ospf_priority(
-            self, ospf_priority):
+        self, ospf_priority,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure ospf priority
 
@@ -5653,22 +8170,35 @@ class ConfigInterface(ContextManager):
             # ip ospf priority {ospf_priority}
 
         :param ospf_priority: <0-255>  . The range is 0 to 255
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip ospf priority {ospf_priority}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def lacp_port_priority(
-            self, port_priority):
+        self, port_priority,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set port priority is used in LACP negotiation.
 
@@ -5679,22 +8209,35 @@ class ConfigInterface(ContextManager):
             # lacp port-priority {port_priority}
 
         :param port_priority: <1-65535>  The range is 1 to 65535
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'lacp port-priority {port_priority}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def lag(
-            self, lag_id):
+        self, lag_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Add the current interface to link aggregation.
 
@@ -5705,22 +8248,35 @@ class ConfigInterface(ContextManager):
             # lag {lag_id}
 
         :param lag_id: <1-2000>  LAG number ranges from 1 to 2000
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'lag {lag_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_lag(
-            self, lag_id):
+        self, lag_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove the current interface to link aggregation.
 
@@ -5731,22 +8287,35 @@ class ConfigInterface(ContextManager):
             # no lag {lag_id}
 
         :param lag_id: <1-2000>  LAG number ranges from 1 to 2000
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no lag {lag_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def lldp_transmit(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set the transmission on lldp.
 
@@ -5756,22 +8325,35 @@ class ConfigInterface(ContextManager):
 
             # lldp transmit
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'lldp transmit'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_lldp_transmit(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Un-set the transmission on lldp.
 
@@ -5781,22 +8363,35 @@ class ConfigInterface(ContextManager):
 
             # no lldp transmit
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no lldp transmit'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def lldp_receive(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set the reception on lldp.
 
@@ -5806,22 +8401,35 @@ class ConfigInterface(ContextManager):
 
             # lldp receive
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'lldp receive'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_lldp_receive(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Un-set the reception on lldp.
 
@@ -5831,22 +8439,35 @@ class ConfigInterface(ContextManager):
 
             # no lldp receive
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no lldp receive'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def udld_enable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enable UDLD in the interface.
 
@@ -5856,22 +8477,35 @@ class ConfigInterface(ContextManager):
 
             # udld enable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'udld enable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_udld_enable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable UDLD in the interface.
 
@@ -5881,22 +8515,35 @@ class ConfigInterface(ContextManager):
 
             # no udld enable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no udld enable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def udld_interval(
-            self, interval):
+        self, interval,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set the packet interval
 
@@ -5907,22 +8554,35 @@ class ConfigInterface(ContextManager):
             # udld interval {interval}
 
         :param interval: <100-10000> Allowed is 100 ms to 10,000 ms
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'udld interval {interval}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def udld_retries(
-            self, retries):
+        self, retries,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set the retries
 
@@ -5933,22 +8593,35 @@ class ConfigInterface(ContextManager):
             # udld retries {retries}
 
         :param retries: <3-10> Allowed is from 3 to 10 retries.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'udld retries {retries}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def udld_mode(
-            self, mode):
+        self, mode,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set the operation mode
 
@@ -5959,22 +8632,35 @@ class ConfigInterface(ContextManager):
             # udld mode {mode}
 
         :param mode: <forward_then_verify | verify_then_forward>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'udld mode {mode}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def sflow_enable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enable sflow feature on interface
 
@@ -5984,22 +8670,35 @@ class ConfigInterface(ContextManager):
 
             # sflow enable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'sflow enable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_sflow_enable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable sflow feature on interface
 
@@ -6009,22 +8708,35 @@ class ConfigInterface(ContextManager):
 
             # no sflow enable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no sflow enable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def split(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Split parent interface
 
@@ -6034,22 +8746,35 @@ class ConfigInterface(ContextManager):
 
             # split
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'split'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_split(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable split parent interface
 
@@ -6059,22 +8784,35 @@ class ConfigInterface(ContextManager):
 
             # no split
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no split'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def autonegotiation_on(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Autonegotiation ON
 
@@ -6084,22 +8822,35 @@ class ConfigInterface(ContextManager):
 
             # autonegotiation on
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'autonegotiation on'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def autonegotiation_off(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Autonegotiation OFF
 
@@ -6109,22 +8860,35 @@ class ConfigInterface(ContextManager):
 
             # autonegotiation off
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'autonegotiation off'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_autonegotiation(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable autonegotiation
 
@@ -6134,22 +8898,35 @@ class ConfigInterface(ContextManager):
 
             # no autonegotiation
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no autonegotiation'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def spanning_tree_port_type(
-            self, admin_type):
+        self, admin_type,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets the port-type for all the MSTP instances
 
@@ -6162,22 +8939,35 @@ class ConfigInterface(ContextManager):
         :param admin_type: admin-edge Specifies the port as admin-edge
             admin-
             network Specifies the port as admin-network
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'spanning-tree port-type {admin_type}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_spanning_tree_port_type(
-            self, admin_type=''):
+        self, admin_type='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets the port-type for all the MSTP instances
 
@@ -6190,6 +8980,8 @@ class ConfigInterface(ContextManager):
         :param admin_type: admin-edge Specifies the port as admin-edge
             admin-
             network Specifies the port as admin-network
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -6203,16 +8995,27 @@ class ConfigInterface(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def spanning_tree_bpdu_guard(
-            self, action):
+        self, action,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enable/Disable the bpdu guard on the interfaces
 
@@ -6224,22 +9027,35 @@ class ConfigInterface(ContextManager):
 
         :param action: enable Enable the bpdu guard on the interfacesdisable
             Disable the bpdu guard on the interfaces
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'spanning-tree bpdu-guard {action}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_spanning_tree_bpdu_guard(
-            self, action=''):
+        self, action='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enable/Disable the bpdu guard on the interfaces
 
@@ -6251,6 +9067,8 @@ class ConfigInterface(ContextManager):
 
         :param action: enable Enable the bpdu guard on the interfacesdisable
             Disable the bpdu guard on the interfaces
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -6264,16 +9082,27 @@ class ConfigInterface(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def spanning_tree_root_guard(
-            self, action):
+        self, action,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enable/Disable the root guard on the interfaces
 
@@ -6285,22 +9114,35 @@ class ConfigInterface(ContextManager):
 
         :param action: enable Enable the root guard on the interfacesdisable
             Disable the root guard on the interfaces
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'spanning-tree root-guard {action}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_spanning_tree_root_guard(
-            self, action=''):
+        self, action='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enable/Disable the root guard on the interfaces
 
@@ -6312,6 +9154,8 @@ class ConfigInterface(ContextManager):
 
         :param action: enable Enable the root guard on the interfacesdisable
             Disable the root guard on the interfaces
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -6325,16 +9169,27 @@ class ConfigInterface(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def spanning_tree_loop_guard(
-            self, action):
+        self, action,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enable/Disable the loop guard on the interfaces
 
@@ -6346,22 +9201,35 @@ class ConfigInterface(ContextManager):
 
         :param action: enable Enable the loop guard on the interfacesdisable
             Disable the loop guard on the interfaces
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'spanning-tree loop-guard {action}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_spanning_tree_loop_guard(
-            self, action=''):
+        self, action='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enable/Disable the loop guard on the interfaces
 
@@ -6373,6 +9241,8 @@ class ConfigInterface(ContextManager):
 
         :param action: enable Enable the loop guard on the interfacesdisable
             Disable the loop guard on the interfaces
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -6386,16 +9256,27 @@ class ConfigInterface(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def spanning_tree_bpdu_filter(
-            self, action):
+        self, action,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enable/Disable the bpdu filter on the interfaces
 
@@ -6407,22 +9288,35 @@ class ConfigInterface(ContextManager):
 
         :param action: enable Enable the bpdu filter on the interfacesdisable
             Disable the bpdu filter on the interfaces
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'spanning-tree bpdu-filter {action}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_spanning_tree_bpdu_filter(
-            self, action=''):
+        self, action='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enable/Disable the bpdu filter on the interfaces
 
@@ -6434,6 +9328,8 @@ class ConfigInterface(ContextManager):
 
         :param action: enable Enable the bpdu filter on the interfacesdisable
             Disable the bpdu filter on the interfaces
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -6447,16 +9343,27 @@ class ConfigInterface(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def spanning_tree_instance_cost(
-            self, instance_id, cost):
+        self, instance_id, cost,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Specify a standard to use when calculating the default pathcost
 
@@ -6468,22 +9375,35 @@ class ConfigInterface(ContextManager):
 
         :param instance_id: Specifies the MSTP instance number <1-64>
         :param cost: Path cost range <1-200000000>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'spanning-tree instance {instance_id} cost {cost}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_spanning_tree_instance_cost(
-            self, instance_id, cost=''):
+        self, instance_id, cost='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Specify a standard to use when calculating the default pathcost
 
@@ -6495,6 +9415,8 @@ class ConfigInterface(ContextManager):
 
         :param instance_id: Specifies the MSTP instance number <1-64>
         :param cost: Path cost range <1-200000000>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -6508,16 +9430,27 @@ class ConfigInterface(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def spanning_tree_instance_port_priority(
-            self, instance_id, priority):
+        self, instance_id, priority,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Maps the priority to corresponding instance
 
@@ -6530,22 +9463,35 @@ class ConfigInterface(ContextManager):
         :param instance_id: Specifies the MSTP instance number <1-64>
         :param priority: The device priority multiplier for the MST instance
             <0-15>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'spanning-tree instance {instance_id} port-priority {priority}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_spanning_tree_instance_port_priority(
-            self, instance_id, priority=''):
+        self, instance_id, priority='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes the port-priority from the MSTP instance
 
@@ -6558,6 +9504,8 @@ class ConfigInterface(ContextManager):
         :param instance_id: Specifies the MSTP instance number <1-64>
         :param priority: The device priority multiplier for the MST instance
             <0-15>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -6571,16 +9519,27 @@ class ConfigInterface(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def apply_qos_schedule_profile(
-            self, schedule_profile_name):
+        self, schedule_profile_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Apply qos profiles on an interface.
 
@@ -6591,22 +9550,35 @@ class ConfigInterface(ContextManager):
             # apply qos schedule-profile {schedule_profile_name}
 
         :param schedule_profile_name: The schedule profile to apply.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'apply qos schedule-profile {schedule_profile_name}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_apply_qos_schedule_profile(
-            self, schedule_profile_name=''):
+        self, schedule_profile_name='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Clears qos profiles from an interface.
 
@@ -6617,6 +9589,8 @@ class ConfigInterface(ContextManager):
             # no apply qos schedule-profile
 
         :param schedule_profile_name: The schedule profile to clear.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -6630,16 +9604,27 @@ class ConfigInterface(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def qos_dscp(
-            self, dscp_map_index):
+        self, dscp_map_index,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set the dscp override for the port.
 
@@ -6650,22 +9635,35 @@ class ConfigInterface(ContextManager):
             # qos dscp {dscp_map_index}
 
         :param dscp_map_index: The index into the dscp map.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'qos dscp {dscp_map_index}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_qos_dscp(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove the dscp override for the port.
 
@@ -6675,22 +9673,35 @@ class ConfigInterface(ContextManager):
 
             # no qos dscp
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no qos dscp'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def qos_trust(
-            self, value):
+        self, value,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set the qos trust mode for the port.
 
@@ -6701,22 +9712,35 @@ class ConfigInterface(ContextManager):
             # qos trust {value}
 
         :param value: The qos trust mode to set.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'qos trust {value}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_qos_trust(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove the qos trust mode for the port.
 
@@ -6726,22 +9750,35 @@ class ConfigInterface(ContextManager):
 
             # no qos trust
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no qos trust'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def apply_access_list_ip_in(
-            self, acl_name):
+        self, acl_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Apply ACL on interface
 
@@ -6752,22 +9789,35 @@ class ConfigInterface(ContextManager):
             # apply access-list ip {acl_name} in
 
         :param acl_name: Access-list name
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'apply access-list ip {acl_name} in'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_apply_access_list_ip_in(
-            self, acl_name):
+        self, acl_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Apply no ACL on interface
 
@@ -6778,22 +9828,35 @@ class ConfigInterface(ContextManager):
             # no apply access-list ip {acl_name} in
 
         :param acl_name: Access-list name
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no apply access-list ip {acl_name} in'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def vrrp_address_family(
-            self, af):
+        self, af,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set VRRP virtual router id and address-family
 
@@ -6804,22 +9867,35 @@ class ConfigInterface(ContextManager):
             # vrrp {grpid} address-family {af}
 
         :param af: Address family <ipv4|ipv6>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'vrrp {grpid} address-family {af}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_vrrp_address_family(
-            self, af):
+        self, af,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset VRRP virtual router id and address-family
 
@@ -6830,22 +9906,35 @@ class ConfigInterface(ContextManager):
             # no vrrp {grpid} address-family {af}
 
         :param af: Address family <ipv4|ipv6>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no vrrp {grpid} address-family {af}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def mtu(
-            self, mtu_size):
+        self, mtu_size,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set MTU
 
@@ -6856,22 +9945,35 @@ class ConfigInterface(ContextManager):
             # mtu {mtu_size}
 
         :param mtu_size: MTU in bytes range <576-9192>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'mtu {mtu_size}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_mtu(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset MTU
 
@@ -6881,16 +9983,21 @@ class ConfigInterface(ContextManager):
 
             # no mtu
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no mtu'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
@@ -6904,14 +10011,14 @@ class ConfigSubinterface(ContextManager):
 
     ::
 
-            ['config terminal', 'interface {port}.{subint}']
+        ['config terminal', 'interface {port}.{subint}']
 
     post_commands:
 
     ::
 
-            ['end']
-    """
+        ['end']
+    """  # noqa
     def __init__(self, enode, portlbl, subint):
         self.enode = enode
         self.port = enode.ports.get(portlbl, portlbl)
@@ -6943,7 +10050,15 @@ class ConfigSubinterface(ContextManager):
         )
 
     def ip_address(
-            self, ipv4):
+        self, ipv4,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set IP address
 
@@ -6954,22 +10069,35 @@ class ConfigSubinterface(ContextManager):
             # ip address {ipv4}
 
         :param ipv4: A.B.C.D/M Subinterface IP address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip address {ipv4}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ip_address(
-            self, ipv4):
+        self, ipv4,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset IP address
 
@@ -6980,22 +10108,35 @@ class ConfigSubinterface(ContextManager):
             # no ip address {ipv4}
 
         :param ipv4: A.B.C.D/M Subinterface IP address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ip address {ipv4}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ipv6_address(
-            self, ipv6):
+        self, ipv6,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set IPv6 address
 
@@ -7006,22 +10147,35 @@ class ConfigSubinterface(ContextManager):
             # ipv6 address {ipv6}
 
         :param ipv6: X:X::X:X/M  Subinterface IPv6 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ipv6 address {ipv6}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ipv6_address(
-            self, ipv6):
+        self, ipv6,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset IPv6 address
 
@@ -7032,22 +10186,35 @@ class ConfigSubinterface(ContextManager):
             # no ipv6 address {ipv6}
 
         :param ipv6: X:X::X:X/M  Subinterface IPv6 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ipv6 address {ipv6}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def encapsulation_dot1_q(
-            self, vlan_id):
+        self, vlan_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set encapsulation type for a subinterface
 
@@ -7058,22 +10225,35 @@ class ConfigSubinterface(ContextManager):
             # encapsulation dot1Q {vlan_id}
 
         :param vlan_id: <1-4094>  VLAN identifier.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'encapsulation dot1Q {vlan_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_encapsulation_dot1_q(
-            self, vlan_id):
+        self, vlan_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset encapsulation type for a subinterface
 
@@ -7084,22 +10264,35 @@ class ConfigSubinterface(ContextManager):
             # no encapsulation dot1Q {vlan_id}
 
         :param vlan_id: <1-4094>  VLAN identifier.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no encapsulation dot1Q {vlan_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def shutdown(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enable a subinterface.
 
@@ -7109,22 +10302,35 @@ class ConfigSubinterface(ContextManager):
 
             # shutdown
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'shutdown'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_shutdown(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable a subinterface.
 
@@ -7134,16 +10340,21 @@ class ConfigSubinterface(ContextManager):
 
             # no shutdown
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no shutdown'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
@@ -7157,14 +10368,14 @@ class ConfigInterfaceVlan(ContextManager):
 
     ::
 
-            ['config terminal', 'interface vlan {vlan_id}']
+        ['config terminal', 'interface vlan {vlan_id}']
 
     post_commands:
 
     ::
 
-            ['end']
-    """
+        ['end']
+    """  # noqa
     def __init__(self, enode, vlan_id):
         self.enode = enode
         self.vlan_id = vlan_id
@@ -7195,7 +10406,15 @@ class ConfigInterfaceVlan(ContextManager):
         )
 
     def ip_address(
-            self, ipv4):
+        self, ipv4,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set IP address
 
@@ -7206,22 +10425,35 @@ class ConfigInterfaceVlan(ContextManager):
             # ip address {ipv4}
 
         :param ipv4: A.B.C.D/M Interface IP address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip address {ipv4}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ip_address(
-            self, ipv4):
+        self, ipv4,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset IP address
 
@@ -7232,22 +10464,35 @@ class ConfigInterfaceVlan(ContextManager):
             # no ip address {ipv4}
 
         :param ipv4: A.B.C.D/M Interface IP address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ip address {ipv4}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ip_address_secondary(
-            self, ipv4):
+        self, ipv4,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set secondary IP address
 
@@ -7258,22 +10503,35 @@ class ConfigInterfaceVlan(ContextManager):
             # ip address {ipv4} secondary
 
         :param ipv4: A.B.C.D/M Interface IP address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip address {ipv4} secondary'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ip_address_secondary(
-            self, ipv4):
+        self, ipv4,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset secondary IP address
 
@@ -7284,22 +10542,35 @@ class ConfigInterfaceVlan(ContextManager):
             # no ip address {ipv4} secondary
 
         :param ipv4: A.B.C.D/M Interface IP address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ip address {ipv4} secondary'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ipv6_address(
-            self, ipv6):
+        self, ipv6,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set IPv6 address
 
@@ -7310,22 +10581,35 @@ class ConfigInterfaceVlan(ContextManager):
             # ipv6 address {ipv6}
 
         :param ipv6: X:X::X:X/M  Interface IPv6 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ipv6 address {ipv6}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ipv6_address(
-            self, ipv6):
+        self, ipv6,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset IPv6 address
 
@@ -7336,22 +10620,35 @@ class ConfigInterfaceVlan(ContextManager):
             # no ipv6 address {ipv6}
 
         :param ipv6: X:X::X:X/M  Interface IPv6 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ipv6 address {ipv6}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ipv6_address_secondary(
-            self, ipv6):
+        self, ipv6,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set secondary IPv6 address
 
@@ -7362,22 +10659,35 @@ class ConfigInterfaceVlan(ContextManager):
             # ipv6 address {ipv6} secondary
 
         :param ipv6: X:X::X:X/M  Interface IPv6 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ipv6 address {ipv6} secondary'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ipv6_address_secondary(
-            self, ipv6):
+        self, ipv6,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset IPv6 address
 
@@ -7388,22 +10698,35 @@ class ConfigInterfaceVlan(ContextManager):
             # no ipv6 address {ipv6} secondary
 
         :param ipv6: X:X::X:X/M  Interface IPv6 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ipv6 address {ipv6} secondary'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def shutdown(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enable an interface.
 
@@ -7413,22 +10736,35 @@ class ConfigInterfaceVlan(ContextManager):
 
             # shutdown
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'shutdown'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_shutdown(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable an interface.
 
@@ -7438,16 +10774,21 @@ class ConfigInterfaceVlan(ContextManager):
 
             # no shutdown
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no shutdown'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
@@ -7461,14 +10802,14 @@ class ConfigInterfaceLoopback(ContextManager):
 
     ::
 
-            ['config terminal', 'interface loopback {loopback_id}']
+        ['config terminal', 'interface loopback {loopback_id}']
 
     post_commands:
 
     ::
 
-            ['end']
-    """
+        ['end']
+    """  # noqa
     def __init__(self, enode, loopback_id):
         self.enode = enode
         self.loopback_id = loopback_id
@@ -7499,7 +10840,15 @@ class ConfigInterfaceLoopback(ContextManager):
         )
 
     def ip_address(
-            self, ipv4):
+        self, ipv4,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set IPv4 address for loopback
 
@@ -7510,22 +10859,35 @@ class ConfigInterfaceLoopback(ContextManager):
             # ip address {ipv4}
 
         :param ipv4: A.B.C.D/M Loopback IP address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip address {ipv4}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ip_address(
-            self, ipv4):
+        self, ipv4,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset IPv4 address for loopback
 
@@ -7536,22 +10898,35 @@ class ConfigInterfaceLoopback(ContextManager):
             # no ip address {ipv4}
 
         :param ipv4: A.B.C.D/M Loopback IP address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ip address {ipv4}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ipv6_address(
-            self, ipv6):
+        self, ipv6,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set IPv6 address on Loopback
 
@@ -7562,22 +10937,35 @@ class ConfigInterfaceLoopback(ContextManager):
             # ipv6 address {ipv6}
 
         :param ipv6: X:X::X:X/M  Loopback IPv6 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ipv6 address {ipv6}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ipv6_address(
-            self, ipv6):
+        self, ipv6,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset IPv6 address on loopback interface
 
@@ -7588,16 +10976,21 @@ class ConfigInterfaceLoopback(ContextManager):
             # no ipv6 address {ipv6}
 
         :param ipv6: X:X::X:X/M  Loopback IPv6 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ipv6 address {ipv6}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
@@ -7611,14 +11004,14 @@ class ConfigInterfaceLag(ContextManager):
 
     ::
 
-            ['config terminal', 'interface lag {lag}']
+        ['config terminal', 'interface lag {lag}']
 
     post_commands:
 
     ::
 
-            ['end']
-    """
+        ['end']
+    """  # noqa
     def __init__(self, enode, lag):
         self.enode = enode
         self.lag = lag
@@ -7649,7 +11042,15 @@ class ConfigInterfaceLag(ContextManager):
         )
 
     def ip_address(
-            self, ipv4):
+        self, ipv4,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set IP address
 
@@ -7660,22 +11061,35 @@ class ConfigInterfaceLag(ContextManager):
             # ip address {ipv4}
 
         :param ipv4: A.B.C.D/M Interface IP address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip address {ipv4}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ip_address(
-            self, ipv4):
+        self, ipv4,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset IP address
 
@@ -7686,22 +11100,35 @@ class ConfigInterfaceLag(ContextManager):
             # no ip address {ipv4}
 
         :param ipv4: A.B.C.D/M Interface IP address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ip address {ipv4}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ip_address_secondary(
-            self, ipv4):
+        self, ipv4,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set secondary IP address
 
@@ -7712,22 +11139,35 @@ class ConfigInterfaceLag(ContextManager):
             # ip address {ipv4} secondary
 
         :param ipv4: A.B.C.D/M Interface IP address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip address {ipv4} secondary'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ip_address_secondary(
-            self, ipv4):
+        self, ipv4,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset secondary IP address
 
@@ -7738,22 +11178,35 @@ class ConfigInterfaceLag(ContextManager):
             # no ip address {ipv4} secondary
 
         :param ipv4: A.B.C.D/M Interface IP address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ip address {ipv4} secondary'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ipv6_address(
-            self, ipv6):
+        self, ipv6,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set IPv6 address
 
@@ -7764,22 +11217,35 @@ class ConfigInterfaceLag(ContextManager):
             # ipv6 address {ipv6}
 
         :param ipv6: X:X::X:X/M  Interface IPv6 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ipv6 address {ipv6}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ipv6_address(
-            self, ipv6):
+        self, ipv6,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset IPv6 address
 
@@ -7790,22 +11256,35 @@ class ConfigInterfaceLag(ContextManager):
             # no ipv6 address {ipv6}
 
         :param ipv6: X:X::X:X/M  Interface IPv6 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ipv6 address {ipv6}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ipv6_address_secondary(
-            self, ipv6):
+        self, ipv6,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set secondary IPv6 address
 
@@ -7816,22 +11295,35 @@ class ConfigInterfaceLag(ContextManager):
             # ipv6 address {ipv6} secondary
 
         :param ipv6: X:X::X:X/M  Interface IPv6 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ipv6 address {ipv6} secondary'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ipv6_address_secondary(
-            self, ipv6):
+        self, ipv6,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset IPv6 address
 
@@ -7842,22 +11334,35 @@ class ConfigInterfaceLag(ContextManager):
             # no ipv6 address {ipv6} secondary
 
         :param ipv6: X:X::X:X/M  Interface IPv6 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ipv6 address {ipv6} secondary'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def shutdown(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enable an interface.
 
@@ -7867,22 +11372,35 @@ class ConfigInterfaceLag(ContextManager):
 
             # shutdown
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'shutdown'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_shutdown(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable an interface.
 
@@ -7892,22 +11410,35 @@ class ConfigInterfaceLag(ContextManager):
 
             # no shutdown
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no shutdown'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def routing(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure interface as L3.
 
@@ -7917,22 +11448,35 @@ class ConfigInterfaceLag(ContextManager):
 
             # routing
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'routing'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_routing(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unconfigure interface as L3.
 
@@ -7942,22 +11486,35 @@ class ConfigInterfaceLag(ContextManager):
 
             # no routing
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no routing'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def vlan_access(
-            self, vlan_id):
+        self, vlan_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Access configuration
 
@@ -7968,22 +11525,35 @@ class ConfigInterfaceLag(ContextManager):
             # vlan access {vlan_id}
 
         :param vlan_id: <1-4094>  VLAN identifier
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'vlan access {vlan_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_vlan_access(
-            self, vlan_id):
+        self, vlan_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove vlan access
 
@@ -7994,22 +11564,35 @@ class ConfigInterfaceLag(ContextManager):
             # no vlan access {vlan_id}
 
         :param vlan_id: <1-4094>  VLAN identifier
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no vlan access {vlan_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def vlan_trunk_allowed(
-            self, vlan_id):
+        self, vlan_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Allow VLAN on the trunk port
 
@@ -8020,22 +11603,35 @@ class ConfigInterfaceLag(ContextManager):
             # vlan trunk allowed {vlan_id}
 
         :param vlan_id: <1-4094>  VLAN identifier
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'vlan trunk allowed {vlan_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_vlan_trunk_allowed(
-            self, vlan_id):
+        self, vlan_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disallow VLAN on the trunk port
 
@@ -8046,22 +11642,35 @@ class ConfigInterfaceLag(ContextManager):
             # no vlan trunk allowed {vlan_id}
 
         :param vlan_id: <1-4094>  VLAN identifier
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no vlan trunk allowed {vlan_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def vlan_trunk_native_tag(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Tag configuration on the trunk port
 
@@ -8071,22 +11680,35 @@ class ConfigInterfaceLag(ContextManager):
 
             # vlan trunk native tag
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'vlan trunk native tag'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_vlan_trunk_native_tag(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove tag configuration on the trunk port
 
@@ -8096,22 +11718,35 @@ class ConfigInterfaceLag(ContextManager):
 
             # no vlan trunk native tag
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no vlan trunk native tag'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def vlan_trunk_native(
-            self, vlan_id):
+        self, vlan_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Native VLAN on the trunk port
 
@@ -8122,22 +11757,35 @@ class ConfigInterfaceLag(ContextManager):
             # vlan trunk native {vlan_id}
 
         :param vlan_id: <1-4094>  VLAN identifier
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'vlan trunk native {vlan_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_vlan_trunk_native(
-            self, vlan_id):
+        self, vlan_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove native VLAN on the trunk port
 
@@ -8148,22 +11796,35 @@ class ConfigInterfaceLag(ContextManager):
             # no vlan trunk native {vlan_id}
 
         :param vlan_id: <1-4094>  VLAN identifier
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no vlan trunk native {vlan_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def lacp_mode_passive(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets an interface as LACP passive.
 
@@ -8173,22 +11834,35 @@ class ConfigInterfaceLag(ContextManager):
 
             # lacp mode passive
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'lacp mode passive'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_lacp_mode_passive(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets an LACP passive interface off.
 
@@ -8198,22 +11872,35 @@ class ConfigInterfaceLag(ContextManager):
 
             # no lacp mode passive
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no lacp mode passive'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def lacp_mode_active(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets an interface as LACP active.
 
@@ -8223,22 +11910,35 @@ class ConfigInterfaceLag(ContextManager):
 
             # lacp mode active
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'lacp mode active'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_lacp_mode_active(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets an LACP active interface off.
 
@@ -8248,22 +11948,35 @@ class ConfigInterfaceLag(ContextManager):
 
             # no lacp mode active
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no lacp mode active'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def lacp_fallback(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enable LACP fallback mode.
 
@@ -8273,22 +11986,35 @@ class ConfigInterfaceLag(ContextManager):
 
             # lacp fallback
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'lacp fallback'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def lacp_fallback_mode_priority(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set fallback mode to priority.
 
@@ -8298,22 +12024,35 @@ class ConfigInterfaceLag(ContextManager):
 
             # lacp fallback mode priority
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'lacp fallback mode priority'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def lacp_fallback_mode_all_active(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set fallback mode to all_active.
 
@@ -8323,22 +12062,35 @@ class ConfigInterfaceLag(ContextManager):
 
             # lacp fallback mode all_active
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'lacp fallback mode all_active'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_lacp_fallback_mode_all_active(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set fallback mode to priority.
 
@@ -8348,22 +12100,35 @@ class ConfigInterfaceLag(ContextManager):
 
             # no lacp fallback mode all_active
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no lacp fallback mode all_active'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def lacp_fallback_timeout(
-            self, timeout):
+        self, timeout,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set LACP fallback timeout.
 
@@ -8374,22 +12139,35 @@ class ConfigInterfaceLag(ContextManager):
             # lacp fallback timeout {timeout}
 
         :param timeout: <1-900>  LACP fallback timeout
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'lacp fallback timeout {timeout}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_lacp_fallback_timeout(
-            self, timeout):
+        self, timeout,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set LACP fallback timeout to zero.
 
@@ -8400,22 +12178,35 @@ class ConfigInterfaceLag(ContextManager):
             # no lacp fallback timeout {timeout}
 
         :param timeout: <1-900>  LACP fallback timeout
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no lacp fallback timeout {timeout}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def hash_l2_src_dst(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Base the hash on l2-src-dst.
 
@@ -8425,22 +12216,35 @@ class ConfigInterfaceLag(ContextManager):
 
             # hash l2-src-dst
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'hash l2-src-dst'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def hash_l3_src_dst(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Base the hash on l3-src-dst.
 
@@ -8450,22 +12254,35 @@ class ConfigInterfaceLag(ContextManager):
 
             # hash l3-src-dst
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'hash l3-src-dst'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def hash_l4_src_dst(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Base the hash on l4-src-dst.
 
@@ -8475,22 +12292,35 @@ class ConfigInterfaceLag(ContextManager):
 
             # hash l4-src-dst
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'hash l4-src-dst'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def lacp_rate_fast(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set LACP heartbeats are requested at the rate of one per second.
 
@@ -8500,22 +12330,35 @@ class ConfigInterfaceLag(ContextManager):
 
             # lacp rate fast
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'lacp rate fast'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_lacp_rate_fast(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set LACP heartbeats slow which is once every  30 seconds.
 
@@ -8525,22 +12368,35 @@ class ConfigInterfaceLag(ContextManager):
 
             # no lacp rate fast
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no lacp rate fast'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def apply_qos_schedule_profile(
-            self, schedule_profile_name):
+        self, schedule_profile_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Apply qos profiles on an interface.
 
@@ -8551,22 +12407,35 @@ class ConfigInterfaceLag(ContextManager):
             # apply qos schedule-profile {schedule_profile_name}
 
         :param schedule_profile_name: The schedule profile to apply.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'apply qos schedule-profile {schedule_profile_name}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_apply_qos_schedule_profile(
-            self, schedule_profile_name=''):
+        self, schedule_profile_name='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Clears qos profiles from an interface.
 
@@ -8577,6 +12446,8 @@ class ConfigInterfaceLag(ContextManager):
             # no apply qos schedule-profile
 
         :param schedule_profile_name: The schedule profile to clear.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -8590,16 +12461,27 @@ class ConfigInterfaceLag(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def qos_dscp(
-            self, dscp_map_index):
+        self, dscp_map_index,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set the dscp override for the port.
 
@@ -8610,22 +12492,35 @@ class ConfigInterfaceLag(ContextManager):
             # qos dscp {dscp_map_index}
 
         :param dscp_map_index: The index into the dscp map.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'qos dscp {dscp_map_index}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_qos_dscp(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove the dscp override for the port.
 
@@ -8635,22 +12530,35 @@ class ConfigInterfaceLag(ContextManager):
 
             # no qos dscp
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no qos dscp'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def qos_trust(
-            self, value):
+        self, value,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set the qos trust mode for the port.
 
@@ -8661,22 +12569,35 @@ class ConfigInterfaceLag(ContextManager):
             # qos trust {value}
 
         :param value: The qos trust mode to set.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'qos trust {value}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_qos_trust(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove the qos trust mode for the port.
 
@@ -8686,16 +12607,21 @@ class ConfigInterfaceLag(ContextManager):
 
             # no qos trust
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no qos trust'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
@@ -8709,14 +12635,14 @@ class ConfigInterfaceMgmt(ContextManager):
 
     ::
 
-            ['config terminal', 'interface mgmt']
+        ['config terminal', 'interface mgmt']
 
     post_commands:
 
     ::
 
-            ['end']
-    """
+        ['end']
+    """  # noqa
     def __init__(self, enode):
         self.enode = enode
 
@@ -8746,7 +12672,15 @@ class ConfigInterfaceMgmt(ContextManager):
         )
 
     def ip_static(
-            self, ip):
+        self, ip,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set IP address
 
@@ -8757,22 +12691,35 @@ class ConfigInterfaceMgmt(ContextManager):
             # ip static {ip}
 
         :param ip: Interface IP (ipv4 or ipv6) address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip static {ip}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ip_static(
-            self, ip):
+        self, ip,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset IP address
 
@@ -8783,22 +12730,35 @@ class ConfigInterfaceMgmt(ContextManager):
             # no ip static {ip}
 
         :param ip: Interface IP (ipv4 or ipv6) address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ip static {ip}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def default_gateway(
-            self, gateway):
+        self, gateway,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure the Default gateway address (IPv4 and IPv6)
 
@@ -8809,22 +12769,35 @@ class ConfigInterfaceMgmt(ContextManager):
             # default-gateway {gateway}
 
         :param gateway: IP (ipv4 or ipv6) address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'default-gateway {gateway}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_default_gateway(
-            self, gateway):
+        self, gateway,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove the Default gateway address (IPv4 and IPv6)
 
@@ -8835,22 +12808,35 @@ class ConfigInterfaceMgmt(ContextManager):
             # no default-gateway {gateway}
 
         :param gateway: IP (ipv4 or ipv6) address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no default-gateway {gateway}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def nameserver(
-            self, primary_nameserver, secondary_nameserver=''):
+        self, primary_nameserver, secondary_nameserver='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure the nameserver
 
@@ -8863,6 +12849,8 @@ class ConfigInterfaceMgmt(ContextManager):
         :param primary_nameserver: Primary nameserver (ipv4 or ipv6) address.
         :param secondary_nameserver: Secondary nameserver (ipv4 or ipv6)
             address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -8876,16 +12864,27 @@ class ConfigInterfaceMgmt(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_nameserver(
-            self, primary_nameserver, secondary_nameserver=''):
+        self, primary_nameserver, secondary_nameserver='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configure the nameserver
 
@@ -8898,6 +12897,8 @@ class ConfigInterfaceMgmt(ContextManager):
         :param primary_nameserver: Primary nameserver (ipv4 or ipv6) address.
         :param secondary_nameserver: Secondary nameserver (ipv4 or ipv6)
             address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -8911,16 +12912,27 @@ class ConfigInterfaceMgmt(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ip_dhcp(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set the mode as dhcp.
 
@@ -8930,16 +12942,21 @@ class ConfigInterfaceMgmt(ContextManager):
 
             # ip dhcp
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip dhcp'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
@@ -8953,14 +12970,14 @@ class ConfigRouterOspf(ContextManager):
 
     ::
 
-            ['config terminal', 'router ospf']
+        ['config terminal', 'router ospf']
 
     post_commands:
 
     ::
 
-            ['end']
-    """
+        ['end']
+    """  # noqa
     def __init__(self, enode):
         self.enode = enode
 
@@ -8990,7 +13007,15 @@ class ConfigRouterOspf(ContextManager):
         )
 
     def router_id(
-            self, id):
+        self, id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Specifies the OSPF router-ID for a OSPF Router
 
@@ -9001,22 +13026,35 @@ class ConfigRouterOspf(ContextManager):
             # router-id {id}
 
         :param id: <A.B.C.D> IPv4 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'router-id {id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_router_id(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         unconfigure router-ID for a OSPF Router
 
@@ -9026,22 +13064,35 @@ class ConfigRouterOspf(ContextManager):
 
             # no router-id
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no router-id'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def redistribute_static(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Redistributes the static routes in router
 
@@ -9051,22 +13102,35 @@ class ConfigRouterOspf(ContextManager):
 
             # redistribute static
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'redistribute static'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_redistribute_static(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes redistributed the static routes in router
 
@@ -9076,22 +13140,35 @@ class ConfigRouterOspf(ContextManager):
 
             # no redistribute static
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no redistribute static'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def redistribute_connected(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Redistributes the connected routes in router
 
@@ -9101,22 +13178,35 @@ class ConfigRouterOspf(ContextManager):
 
             # redistribute connected
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'redistribute connected'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_redistribute_connected(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes redistributed the connected routes in router
 
@@ -9126,22 +13216,35 @@ class ConfigRouterOspf(ContextManager):
 
             # no redistribute connected
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no redistribute connected'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def redistribute_bgp(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Redistributes the routes learned from BGP
 
@@ -9151,22 +13254,35 @@ class ConfigRouterOspf(ContextManager):
 
             # redistribute bgp
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'redistribute bgp'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_redistribute_bgp(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes redistributed the routes learned from BGP
 
@@ -9176,22 +13292,35 @@ class ConfigRouterOspf(ContextManager):
 
             # no redistribute bgp
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no redistribute bgp'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def default_information_originate_always(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Redistributes default routes in router
 
@@ -9201,22 +13330,35 @@ class ConfigRouterOspf(ContextManager):
 
             # default-information originate always
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'default-information originate always'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_default_information_originate_always(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove redistributed default routes in router
 
@@ -9226,22 +13368,35 @@ class ConfigRouterOspf(ContextManager):
 
             # no default-information originate always
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no default-information originate always'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def area_authentication_message_digest(
-            self, area_id):
+        self, area_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configures MD5 authentication over area
 
@@ -9252,22 +13407,35 @@ class ConfigRouterOspf(ContextManager):
             # area {area_id} authentication message-digest
 
         :param area_id: <0-4294967295> area range
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'area {area_id} authentication message-digest'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def area_authentication(
-            self, area_id):
+        self, area_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configures text authentication over area
 
@@ -9278,22 +13446,35 @@ class ConfigRouterOspf(ContextManager):
             # area {area_id} authentication
 
         :param area_id: <0-4294967295> area range
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'area {area_id} authentication'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_area_authentication(
-            self, area_id):
+        self, area_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes authentication over area
 
@@ -9304,22 +13485,35 @@ class ConfigRouterOspf(ContextManager):
             # no area {area_id} authentication
 
         :param area_id: <0-4294967295> area range
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no area {area_id} authentication'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def max_metric_router_lsa(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configures the router as stub router
 
@@ -9329,22 +13523,35 @@ class ConfigRouterOspf(ContextManager):
 
             # max-metric router-lsa
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'max-metric router-lsa'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def max_metric_router_lsa_on_startup(
-            self, time):
+        self, time,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configures the router as stub router on startup
 
@@ -9355,22 +13562,35 @@ class ConfigRouterOspf(ContextManager):
             # max-metric router-lsa on-startup {time}
 
         :param time: <5-86400> seconds
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'max-metric router-lsa on-startup {time}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def area_nssa(
-            self, area_id):
+        self, area_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configures area as NSSA
 
@@ -9381,22 +13601,35 @@ class ConfigRouterOspf(ContextManager):
             # area {area_id} nssa
 
         :param area_id: <0-4294967295> area range
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'area {area_id} nssa'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def area_nssa_no_summary(
-            self, area_id):
+        self, area_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configures area as NSSA (Totally stubby)
 
@@ -9407,22 +13640,35 @@ class ConfigRouterOspf(ContextManager):
             # area {area_id} nssa no-summary
 
         :param area_id: <0-4294967295> area range
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'area {area_id} nssa no-summary'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_area_nssa_no_summary(
-            self, area_id):
+        self, area_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unconfigures NSSA (Totally stubby) area
 
@@ -9433,22 +13679,35 @@ class ConfigRouterOspf(ContextManager):
             # no area {area_id} nssa no-summary
 
         :param area_id: <0-4294967295> area range
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no area {area_id} nssa no-summary'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def area_stub(
-            self, area_id):
+        self, area_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configures area as stubby
 
@@ -9459,22 +13718,35 @@ class ConfigRouterOspf(ContextManager):
             # area {area_id} stub
 
         :param area_id: <0-4294967295> area range
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'area {area_id} stub'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_area_stub(
-            self, area_id):
+        self, area_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unconfigures stubby area
 
@@ -9485,22 +13757,35 @@ class ConfigRouterOspf(ContextManager):
             # no area {area_id} stub
 
         :param area_id: <0-4294967295> area range
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no area {area_id} stub'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def area_stub_no_summary(
-            self, area_id):
+        self, area_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configures area as Totally stubby
 
@@ -9511,22 +13796,35 @@ class ConfigRouterOspf(ContextManager):
             # area {area_id} stub no-summary
 
         :param area_id: <0-4294967295> area range
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'area {area_id} stub no-summary'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_area_stub_no_summary(
-            self, area_id):
+        self, area_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unconfigures Totally stubby area
 
@@ -9537,22 +13835,35 @@ class ConfigRouterOspf(ContextManager):
             # no area {area_id} stub no-summary
 
         :param area_id: <0-4294967295> area range
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no area {area_id} stub no-summary'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def distance_ospf_external(
-            self, external_distance):
+        self, external_distance,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configures distance for external routes
 
@@ -9563,22 +13874,35 @@ class ConfigRouterOspf(ContextManager):
             # distance ospf external {external_distance}
 
         :param external_distance: <1-255> Distance for external routes
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'distance ospf external {external_distance}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_distance_ospf_external(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removing the distance for external routes
 
@@ -9588,22 +13912,35 @@ class ConfigRouterOspf(ContextManager):
 
             # no distance ospf external
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no distance ospf external'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def network_area(
-            self, network, area):
+        self, network, area,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Adds the announcement network for OSPF
 
@@ -9615,22 +13952,35 @@ class ConfigRouterOspf(ContextManager):
 
         :param network: <A.B.C.D/M> IPv4 address with the prefix len
         :param area: <0-4228250625 | A.B.C.D> Area-id range
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'network {network} area {area}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def area_virtual_link(
-            self, area_id, router_id):
+        self, area_id, router_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configuring virtual links between OSPF switches
 
@@ -9642,22 +13992,35 @@ class ConfigRouterOspf(ContextManager):
 
         :param area_id: <0-4228250625 | A.B.C.D> Area-id range
         :param router_id: <A.B.C.D> Router ID of the remote ABR
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'area {area_id} virtual-link {router_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_area_virtual_link(
-            self, area_id, router_id):
+        self, area_id, router_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disabling virtual links between OSPF switches
 
@@ -9669,22 +14032,35 @@ class ConfigRouterOspf(ContextManager):
 
         :param area_id: <0-4228250625 | A.B.C.D> Area-id range
         :param router_id: <A.B.C.D> Router ID of the remote ABR
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no area {area_id} virtual-link {router_id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def area_virtual_link_authentication_message_digest(
-            self, area_id, router_id):
+        self, area_id, router_id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configuring virtual links with authenication
 
@@ -9692,26 +14068,39 @@ class ConfigRouterOspf(ContextManager):
 
         ::
 
-            # area {area_id} virtual-link {router_id} authentication message-digest  # noqa
+            # area {area_id} virtual-link {router_id} authentication message-digest # noqa
 
         :param area_id: <0-4228250625 | A.B.C.D> Area-id range
         :param router_id: <A.B.C.D> Router ID of the remote ABR
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """  # noqa
 
         cmd = [
             'area {area_id} virtual-link {router_id} authentication message-digest'  # noqa
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def area_virtual_link_hello_interval(
-            self, area_id, router_id, time):
+        self, area_id, router_id, time,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configuring hello-interval for virtual links
 
@@ -9724,22 +14113,35 @@ class ConfigRouterOspf(ContextManager):
         :param area_id: <0-4228250625 | A.B.C.D> Area-id range
         :param router_id: <A.B.C.D> Router ID of the remote ABR
         :param time: <1-65535>  Seconds
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'area {area_id} virtual-link {router_id} hello-interval {time}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def area_virtual_link_retransmit_interval(
-            self, area_id, router_id, time):
+        self, area_id, router_id, time,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configuring retransmit-interval for virtual-links
 
@@ -9747,27 +14149,40 @@ class ConfigRouterOspf(ContextManager):
 
         ::
 
-            # area {area_id} virtual-link {router_id} retransmit-interval {time}  # noqa
+            # area {area_id} virtual-link {router_id} retransmit-interval {time} # noqa
 
         :param area_id: <0-4228250625 | A.B.C.D> Area-id range
         :param router_id: <A.B.C.D> Router ID of the remote ABR
         :param time: <1-65535>  Seconds
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'area {area_id} virtual-link {router_id} retransmit-interval {time}'  # noqa
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def area_virtual_link_transmit_delay(
-            self, area_id, router_id, time):
+        self, area_id, router_id, time,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configuring transmit-delay for virtual links
 
@@ -9780,22 +14195,35 @@ class ConfigRouterOspf(ContextManager):
         :param area_id: <0-4228250625 | A.B.C.D> Area-id range
         :param router_id: <A.B.C.D> Router ID of the remote ABR
         :param time: <1-65535>  Seconds
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'area {area_id} virtual-link {router_id} transmit-delay {time}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def area_virtual_link_dead_interval(
-            self, area_id, router_id, time):
+        self, area_id, router_id, time,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configuring dead-interval for virtual links
 
@@ -9808,22 +14236,35 @@ class ConfigRouterOspf(ContextManager):
         :param area_id: <0-4228250625 | A.B.C.D> Area-id range
         :param router_id: <A.B.C.D> Router ID of the remote ABR
         :param time: <1-65535>  Seconds
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'area {area_id} virtual-link {router_id} dead-interval {time}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def area_virtual_link_message_digest_key_md5(
-            self, area_id, router_id, key, password):
+        self, area_id, router_id, key, password,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configuring virtual links with md5 authentication
 
@@ -9831,28 +14272,41 @@ class ConfigRouterOspf(ContextManager):
 
         ::
 
-            # area {area_id} virtual-link {router_id} message-digest-key {key} md5 {password}  # noqa
+            # area {area_id} virtual-link {router_id} message-digest-key {key} md5 {password} # noqa
 
         :param area_id: <0-4228250625 | A.B.C.D> Area-id range
         :param router_id: <A.B.C.D> Router ID of the remote ABR
         :param key: <1-255>  Key ID
         :param password: MD5_KEY  The OSPF password (key)
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """  # noqa
 
         cmd = [
             'area {area_id} virtual-link {router_id} message-digest-key {key} md5 {password}'  # noqa
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_network_area(
-            self, network, area):
+        self, network, area,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes the announcement network for OSPF
 
@@ -9864,16 +14318,21 @@ class ConfigRouterOspf(ContextManager):
 
         :param network: <A.B.C.D/M> IPv4 address with the prefix length
         :param area: <0-4228250625 | A.B.C.D> Area-id range
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no network {network} area {area}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
@@ -9887,14 +14346,14 @@ class ConfigRouterBgp(ContextManager):
 
     ::
 
-            ['config terminal', 'router bgp {asn}']
+        ['config terminal', 'router bgp {asn}']
 
     post_commands:
 
     ::
 
-            ['end']
-    """
+        ['end']
+    """  # noqa
     def __init__(self, enode, asn):
         self.enode = enode
         self.asn = asn
@@ -9925,7 +14384,15 @@ class ConfigRouterBgp(ContextManager):
         )
 
     def bgp_router_id(
-            self, id):
+        self, id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Specifies the BGP router-ID for a BGP Router
 
@@ -9936,22 +14403,35 @@ class ConfigRouterBgp(ContextManager):
             # bgp router-id {id}
 
         :param id: <A.B.C.D> IPv4 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'bgp router-id {id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_bgp_router_id(
-            self, id):
+        self, id,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes the BGP router-ID for a BGP Router
 
@@ -9962,22 +14442,35 @@ class ConfigRouterBgp(ContextManager):
             # no bgp router-id {id}
 
         :param id: <A.B.C.D> IPv4 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no bgp router-id {id}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def bgp_fast_external_failover(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Immediately reset session if a link to a directly connected external
         peer goes down
@@ -9988,22 +14481,35 @@ class ConfigRouterBgp(ContextManager):
 
             # bgp fast-external-failover
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'bgp fast-external-failover'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_bgp_fast_external_failover(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disables BGP fast external failover
 
@@ -10013,22 +14519,35 @@ class ConfigRouterBgp(ContextManager):
 
             # no bgp fast-external-failover
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no bgp fast-external-failover'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def network(
-            self, network):
+        self, network,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Adds the announcement network for BGP
 
@@ -10039,22 +14558,35 @@ class ConfigRouterBgp(ContextManager):
             # network {network}
 
         :param network: <A.B.C.D/M> IPv4 address with the prefix len
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'network {network}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_network(
-            self, network):
+        self, network,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes the announcement network for BGP
 
@@ -10065,22 +14597,35 @@ class ConfigRouterBgp(ContextManager):
             # no network {network}
 
         :param network: <A.B.C.D/M> IPv4 address with the prefix length
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no network {network}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def maximum_paths(
-            self, num):
+        self, num,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets the maximum number of paths for a BGP route
 
@@ -10091,22 +14636,35 @@ class ConfigRouterBgp(ContextManager):
             # maximum-paths {num}
 
         :param num: <1-255> Maximum number of paths. Default is 1
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'maximum-paths {num}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_maximum_paths(
-            self, num):
+        self, num,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set the max number of paths to the default value of 1
 
@@ -10117,22 +14675,35 @@ class ConfigRouterBgp(ContextManager):
             # no maximum-paths {num}
 
         :param num: <1-255> Maximum number of paths. Default is 1
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no maximum-paths {num}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def timers_bgp(
-            self, keepalive, hold):
+        self, keepalive, hold,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets the keepalive interval and hold time for a BGP router
 
@@ -10145,22 +14716,35 @@ class ConfigRouterBgp(ContextManager):
         :param keepalive: <0-65535> Keepalive interval in seconds. Default is
             60
         :param hold: <0 - 65535> Hold time in seconds. Default is 180
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'timers bgp {keepalive} {hold}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_timers_bgp(
-            self, keepalive='', hold=''):
+        self, keepalive='', hold='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets the default values for keepalive interval and hold time for a BGP
         router
@@ -10174,6 +14758,8 @@ class ConfigRouterBgp(ContextManager):
         :param keepalive: <0 - 65535> Keepalive interval in seconds. Default
             is 60
         :param hold: <0 - 65535> Hold time in seconds. Default is 180
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -10194,16 +14780,27 @@ class ConfigRouterBgp(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def neighbor_remote_as(
-            self, ip, asn):
+        self, ip, asn,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configures a BGP neighbor
 
@@ -10216,22 +14813,35 @@ class ConfigRouterBgp(ContextManager):
         :param ip: <A.B.C.D> Neighbor IPv4 address
         :param asn: <1 - 4294967295> Neighbor AS number. Ranges from 1 to
             4294967295
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'neighbor {ip} remote-as {asn}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_neighbor(
-            self, ip):
+        self, ip,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes a BGP neighbor
 
@@ -10242,22 +14852,35 @@ class ConfigRouterBgp(ContextManager):
             # no neighbor {ip}
 
         :param ip: <A.B.C.D> Neighbor IPv4 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no neighbor {ip}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def neighbor_route_map(
-            self, ip, route_name, action):
+        self, ip, route_name, action,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configures a BGP neighbor route-map
 
@@ -10278,22 +14901,35 @@ class ConfigRouterBgp(ContextManager):
             in      Apply map to incoming routes
             out     Apply map to
             outbound routes
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'neighbor {ip} route-map {route_name} {action}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_neighbor_route_map(
-            self, ip, route_name, action):
+        self, ip, route_name, action,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unconfigures a BGP neighbor route-map
 
@@ -10314,22 +14950,35 @@ class ConfigRouterBgp(ContextManager):
             in      Apply map to incoming routes
             out     Apply map to
             outbound routes
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no neighbor {ip} route-map {route_name} {action}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def neighbor_prefix_list(
-            self, peer, prefix_name, filter_direction=''):
+        self, peer, prefix_name, filter_direction='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Applies a prefix-list to the neighbor to filter updates to and from the
         neighbor
@@ -10344,6 +14993,8 @@ class ConfigRouterBgp(ContextManager):
             neighbor tag
         :param prefix_name: <WORD> The name of a prefix list
         :param filter_direction: <in|out> Filters incoming/outgoing routes
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -10357,16 +15008,27 @@ class ConfigRouterBgp(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_neighbor_prefix_list(
-            self, peer, prefix_name, filter_direction=''):
+        self, peer, prefix_name, filter_direction='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove a prefix-list filter from the neighbor
 
@@ -10380,6 +15042,8 @@ class ConfigRouterBgp(ContextManager):
             neighbor tag
         :param prefix_name: <WORD> The name of a prefix list
         :param filter_direction: <in|out> Filters incoming/outgoing routes
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -10393,16 +15057,27 @@ class ConfigRouterBgp(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def neighbor_description(
-            self, ip, text):
+        self, ip, text,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes a BGP neighbor
 
@@ -10415,22 +15090,35 @@ class ConfigRouterBgp(ContextManager):
         :param ip: <A.B.C.D> Neighbor IPv4 address
         :param text: Description of the peer router. String of maximum length
             80 chars
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'neighbor {ip} description {text}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_neighbor_description(
-            self, ip, text=''):
+        self, ip, text='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes a BGP neighbor
 
@@ -10443,6 +15131,8 @@ class ConfigRouterBgp(ContextManager):
         :param ip: <A.B.C.D> Neighbor IPv4 address
         :param text: Description of the peer router.String of maximum length
             80 chars
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -10456,16 +15146,27 @@ class ConfigRouterBgp(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def neighbor_password(
-            self, ip, pwd):
+        self, ip, pwd,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enables MD5 authentication on a TCP connection between BGP peers.
 
@@ -10477,22 +15178,35 @@ class ConfigRouterBgp(ContextManager):
 
         :param ip: <A.B.C.D> Neighbor IPv4 address
         :param pwd: Password in plain text.String of maximum length 80 chars
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'neighbor {ip} password {pwd}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_neighbor_password(
-            self, ip):
+        self, ip,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes MD5 authentication on a TCP connection between BGP peers.
 
@@ -10503,22 +15217,35 @@ class ConfigRouterBgp(ContextManager):
             # no neighbor {ip} password
 
         :param ip: <A.B.C.D> Neighbor IPv4 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no neighbor {ip} password'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def neighbor_timers(
-            self, ip, keepalive, hold):
+        self, ip, keepalive, hold,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets the keepalive interval and hold time for a specific BGP peer
 
@@ -10532,22 +15259,35 @@ class ConfigRouterBgp(ContextManager):
         :param keepalive: <0 - 65535> Keepalive interval in seconds.Default is
             60
         :param hold: <0-65535> Hold time in seconds. Default is 180
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'neighbor {ip} timers {keepalive} {hold}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_neighbor_timers(
-            self, ip, keepalive='', hold=''):
+        self, ip, keepalive='', hold='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets the default values for keepalive interval and hold time for a
         specific BGP peer
@@ -10562,6 +15302,8 @@ class ConfigRouterBgp(ContextManager):
         :param keepalive: <0 - 65535> Keepalive interval in seconds.Default is
             0
         :param hold: <0 - 65535> Hold time in seconds. Default is 0
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -10582,16 +15324,27 @@ class ConfigRouterBgp(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def neighbor_allowas_in(
-            self, ip, val=''):
+        self, ip, val='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Specifies an allow-as-in occurrence number for an AS to be in the AS
         path
@@ -10605,6 +15358,8 @@ class ConfigRouterBgp(ContextManager):
         :param ip: <A.B.C.D> Neighbor IPv4 address
         :param val: <0 - 10> Number of times BGP can allow an instance of AS
             to be in the AS_PATH
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -10618,16 +15373,27 @@ class ConfigRouterBgp(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_neighbor_allowas_in(
-            self, ip, val=''):
+        self, ip, val='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Clears the allow-as-in occurrence number for an AS to be in the AS path
 
@@ -10640,6 +15406,8 @@ class ConfigRouterBgp(ContextManager):
         :param ip: <A.B.C.D> Neighbor IPv4 address
         :param val: <0 - 10> Number of times BGP can allow aninstance of AS to
             be in the AS_PATH
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -10653,16 +15421,27 @@ class ConfigRouterBgp(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def neighbor_remove_private_as(
-            self, ip):
+        self, ip,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes private AS numbers from the AS pathin outbound routing updates
 
@@ -10673,22 +15452,35 @@ class ConfigRouterBgp(ContextManager):
             # neighbor {ip} remove-private-AS
 
         :param ip: <A.B.C.D> Neighbor IPv4 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'neighbor {ip} remove-private-AS'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_neighbor_remove_private_as(
-            self, ip):
+        self, ip,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Resets to a cleared state (default)
 
@@ -10699,22 +15491,35 @@ class ConfigRouterBgp(ContextManager):
             # no neighbor {ip} remove-private-AS
 
         :param ip: <A.B.C.D> Neighbor IPv4 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no neighbor {ip} remove-private-AS'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def neighbor_soft_reconfiguration_inbound(
-            self, ip):
+        self, ip,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enables software-based reconfiguration to generate updates from a
         neighbor without clearing the BGP session
@@ -10726,22 +15531,35 @@ class ConfigRouterBgp(ContextManager):
             # neighbor {ip} soft-reconfiguration inbound
 
         :param ip: <A.B.C.D> Neighbor IPv4 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'neighbor {ip} soft-reconfiguration inbound'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_neighbor_soft_reconfiguration_inbound(
-            self, ip):
+        self, ip,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Resets to a cleared state (default)
 
@@ -10752,22 +15570,35 @@ class ConfigRouterBgp(ContextManager):
             # no neighbor {ip} soft-reconfiguration inbound
 
         :param ip: <A.B.C.D> Neighbor IPv4 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no neighbor {ip} soft-reconfiguration inbound'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def neighbor_shutdown(
-            self, ip):
+        self, ip,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Shuts down the neighbor. This disables the peer routerbut preserves
         neighbor configuration
@@ -10779,22 +15610,35 @@ class ConfigRouterBgp(ContextManager):
             # neighbor {ip} shutdown
 
         :param ip: <A.B.C.D> Neighbor IPv4 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'neighbor {ip} shutdown'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_neighbor_shutdown(
-            self, ip):
+        self, ip,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Re-enables the neighbor
 
@@ -10805,22 +15649,35 @@ class ConfigRouterBgp(ContextManager):
             # no neighbor {ip} shutdown
 
         :param ip: <A.B.C.D> Neighbor IPv4 address
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no neighbor {ip} shutdown'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def neighbor_peer_group(
-            self, ip_or_group, group=''):
+        self, ip_or_group, group='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Assigns a neighbor to a peer-group
 
@@ -10833,6 +15690,8 @@ class ConfigRouterBgp(ContextManager):
         :param ip_or_group: <A.B.C.D> Neighbor IPv4 address<X:X::X:X> Neighbor
             IPv6 address<WORD> Neighbor group
         :param group: ('Peer-group name.String of maximum length 80 chars',)
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -10846,16 +15705,27 @@ class ConfigRouterBgp(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def neighbor_update_source(
-            self, peer, update_source):
+        self, peer, update_source,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Applies an update source to the neighbor
 
@@ -10869,22 +15739,35 @@ class ConfigRouterBgp(ContextManager):
             neighbor tag
         :param update_source: <A.B.C.D|X:X::X:X|WORD> peer IPv4/IPv6 address
             or neighbor tag
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'neighbor {peer} update-source {update_source}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_neighbor_update_source(
-            self, peer):
+        self, peer,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove a an update source to the neighbor
 
@@ -10896,22 +15779,35 @@ class ConfigRouterBgp(ContextManager):
 
         :param peer: <A.B.C.D|X:X::X:X|WORD> peer IPv4/IPv6 address or
             neighbor tag
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no neighbor {peer} update-source'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_neighbor_peer_group(
-            self, ip_or_group, group=''):
+        self, ip_or_group, group='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes the neighbor from the peer-group
 
@@ -10924,6 +15820,8 @@ class ConfigRouterBgp(ContextManager):
         :param ip_or_group: <A.B.C.D> Neighbor IPv4 address<X:X::X:X> Neighbor
             IPv6 address<WORD> Neighbor group
         :param group: Peer-group name. String of maximum length 80 chars
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -10937,16 +15835,27 @@ class ConfigRouterBgp(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def redistribute(
-            self, type):
+        self, type,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Configures route redistribution of the specified protocol into BGP
 
@@ -10957,22 +15866,35 @@ class ConfigRouterBgp(ContextManager):
             # redistribute {type}
 
         :param type: <connected | static | ospf>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'redistribute {type}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_redistribute(
-            self, type):
+        self, type,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unconfigures route redistribution of the specified protocol into BGP
 
@@ -10983,16 +15905,21 @@ class ConfigRouterBgp(ContextManager):
             # no redistribute {type}
 
         :param type: <connected | static | ospf>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no redistribute {type}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
@@ -11006,14 +15933,14 @@ class ConfigVlan(ContextManager):
 
     ::
 
-            ['config terminal', 'vlan {vlan_id}']
+        ['config terminal', 'vlan {vlan_id}']
 
     post_commands:
 
     ::
 
-            ['end']
-    """
+        ['end']
+    """  # noqa
     def __init__(self, enode, vlan_id):
         self.enode = enode
         self.vlan_id = vlan_id
@@ -11044,7 +15971,15 @@ class ConfigVlan(ContextManager):
         )
 
     def shutdown(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enable the VLAN.
 
@@ -11054,22 +15989,35 @@ class ConfigVlan(ContextManager):
 
             # shutdown
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'shutdown'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_shutdown(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable the VLAN.
 
@@ -11079,22 +16027,35 @@ class ConfigVlan(ContextManager):
 
             # no shutdown
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no shutdown'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def description(
-            self, description):
+        self, description,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set VLAN description
 
@@ -11105,22 +16066,35 @@ class ConfigVlan(ContextManager):
             # description {description}
 
         :param description: VLAN description.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'description {description}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_description(
-            self, description):
+        self, description,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Un-set VLAN description
 
@@ -11131,16 +16105,21 @@ class ConfigVlan(ContextManager):
             # no description {description}
 
         :param description: VLAN description.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no description {description}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
@@ -11154,14 +16133,14 @@ class ConfigTftpServer(ContextManager):
 
     ::
 
-            ['config terminal', 'tftp-server']
+        ['config terminal', 'tftp-server']
 
     post_commands:
 
     ::
 
-            ['end']
-    """
+        ['end']
+    """  # noqa
     def __init__(self, enode):
         self.enode = enode
 
@@ -11191,7 +16170,15 @@ class ConfigTftpServer(ContextManager):
         )
 
     def enable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enable tftp server.
 
@@ -11201,6 +16188,8 @@ class ConfigTftpServer(ContextManager):
 
             # enable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         :return: A dictionary as returned by
          :func:`topology_lib_vtysh.parser.parse_config_tftp_server_enable`
         """
@@ -11209,15 +16198,26 @@ class ConfigTftpServer(ContextManager):
             'enable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         return parse_config_tftp_server_enable(result)
 
     def no_enable(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable tftp server.
 
@@ -11227,6 +16227,8 @@ class ConfigTftpServer(ContextManager):
 
             # no enable
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         :return: A dictionary as returned by
          :func:`topology_lib_vtysh.parser.parse_config_tftp_server_no_enable`
         """
@@ -11235,15 +16237,26 @@ class ConfigTftpServer(ContextManager):
             'no enable'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         return parse_config_tftp_server_no_enable(result)
 
     def path(
-            self, path):
+        self, path,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set Path of tftp-server
 
@@ -11254,6 +16267,8 @@ class ConfigTftpServer(ContextManager):
             # path {path}
 
         :param path: path of the directory
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         :return: A dictionary as returned by
          :func:`topology_lib_vtysh.parser.parse_config_tftp_server_path`
         """
@@ -11262,15 +16277,26 @@ class ConfigTftpServer(ContextManager):
             'path {path}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         return parse_config_tftp_server_path(result)
 
     def no_path(
-            self, path):
+        self, path,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset path to tftp server.
 
@@ -11281,6 +16307,8 @@ class ConfigTftpServer(ContextManager):
             # no path {path}
 
         :param path: path of the directory
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         :return: A dictionary as returned by
          :func:`topology_lib_vtysh.parser.parse_config_tftp_server_no_path`
         """
@@ -11289,15 +16317,26 @@ class ConfigTftpServer(ContextManager):
             'no path {path}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         return parse_config_tftp_server_no_path(result)
 
     def secure_mode(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Enable secure mode for tftp server.
 
@@ -11307,6 +16346,8 @@ class ConfigTftpServer(ContextManager):
 
             # secure-mode
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         :return: A dictionary as returned by
          :func:`topology_lib_vtysh.parser.parse_config_tftp_server_secure_mode`
         """
@@ -11315,15 +16356,26 @@ class ConfigTftpServer(ContextManager):
             'secure-mode'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         return parse_config_tftp_server_secure_mode(result)
 
     def no_secure_mode(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Disable secure mode for tftp server.
 
@@ -11333,6 +16385,8 @@ class ConfigTftpServer(ContextManager):
 
             # no secure-mode
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         :return: A dictionary as returned by
          :func:`topology_lib_vtysh.parser.parse_config_tftp_server_no_secure_mode`
         """
@@ -11341,10 +16395,13 @@ class ConfigTftpServer(ContextManager):
             'no secure-mode'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         return parse_config_tftp_server_no_secure_mode(result)
 
@@ -11357,14 +16414,14 @@ class ConfigDhcpServer(ContextManager):
 
     ::
 
-            ['config terminal', 'dhcp-server']
+        ['config terminal', 'dhcp-server']
 
     post_commands:
 
     ::
 
-            ['end']
-    """
+        ['end']
+    """  # noqa
     def __init__(self, enode):
         self.enode = enode
 
@@ -11394,9 +16451,17 @@ class ConfigDhcpServer(ContextManager):
         )
 
     def range_start_ip_address_end_ip_address(
-            self, range_name, start_ip, end_ip, subnet_mask='',
-            broadcast_address='', tag_name='', set_name='',
-            prefix_len_value='', lease_duration_value=''):
+        self, range_name, start_ip, end_ip, subnet_mask='',
+        broadcast_address='', tag_name='', set_name='',
+        prefix_len_value='', lease_duration_value='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets DHCP dynamic configuration.
 
@@ -11404,7 +16469,7 @@ class ConfigDhcpServer(ContextManager):
 
         ::
 
-            # range {range_name} start-ip-address {start_ip} end-ip-address {end_ip}  # noqa
+            # range {range_name} start-ip-address {start_ip} end-ip-address {end_ip} # noqa
 
         :param range_name: DHCP range name. String of maximum length 15 chars
         :param start_ip: <A.B.C.D> Start range IPv4 address or <X:X::X:X>
@@ -11420,6 +16485,8 @@ class ConfigDhcpServer(ContextManager):
             range.
         :param lease_duration_value: Range lease duration. Default value is 60
             min.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """  # noqa
 
         cmd = [
@@ -11468,18 +16535,29 @@ class ConfigDhcpServer(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_range_start_ip_address_end_ip_address(
-            self, range_name, start_ip, end_ip, subnet_mask='',
-            broadcast_address='', tag_name='', set_name='',
-            prefix_len_value='', lease_duration_value=''):
+        self, range_name, start_ip, end_ip, subnet_mask='',
+        broadcast_address='', tag_name='', set_name='',
+        prefix_len_value='', lease_duration_value='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes DHCP dynamic configuration.
 
@@ -11487,7 +16565,7 @@ class ConfigDhcpServer(ContextManager):
 
         ::
 
-            # no range {range_name} start-ip-address {start_ip} end-ip-address {end_ip}   # noqa
+            # no range {range_name} start-ip-address {start_ip} end-ip-address {end_ip}  # noqa
 
         :param range_name: DHCP range name. String of maximum length 15 chars
         :param start_ip: <A.B.C.D> Start range IPv4 address or <X:X::X:X>
@@ -11503,6 +16581,8 @@ class ConfigDhcpServer(ContextManager):
             range.
         :param lease_duration_value: Range lease duration. Default value is 60
             min.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """  # noqa
 
         cmd = [
@@ -11551,18 +16631,28 @@ class ConfigDhcpServer(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def static(
-            self, ip_address, mac_address='', hostname='',
-            client_id='', set_tag_names='',
-            lease_duration_value=''):
+        self, ip_address, mac_address='', hostname='',
+        client_id='', set_tag_names='', lease_duration_value='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets DHCP dynamic configuration.
 
@@ -11581,6 +16671,8 @@ class ConfigDhcpServer(ContextManager):
             than 15 chars.
         :param lease_duration_value: Range lease duration. Default value is 60
             min.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -11622,18 +16714,28 @@ class ConfigDhcpServer(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_static(
-            self, ip_address, mac_address='', hostname='',
-            client_id='', set_tag_names='',
-            lease_duration_value=''):
+        self, ip_address, mac_address='', hostname='',
+        client_id='', set_tag_names='', lease_duration_value='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes DHCP dynamic configuration.
 
@@ -11652,6 +16754,8 @@ class ConfigDhcpServer(ContextManager):
             than 15 chars.
         :param lease_duration_value: Range lease duration. Default value is 60
             min.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -11693,17 +16797,28 @@ class ConfigDhcpServer(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def option_set(
-            self, option_name='', option_number='', option_value='',
-            tag_name='', ipv6=''):
+        self, option_name='', option_number='', option_value='',
+        tag_name='', ipv6='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets DHCP configuration values using an option name.
 
@@ -11719,6 +16834,8 @@ class ConfigDhcpServer(ContextManager):
         :param tag_name: Match tags list. Each tag length must be less than 15
             chars.
         :param ipv6: Enable ipv6 for the set.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -11760,17 +16877,28 @@ class ConfigDhcpServer(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_option_set(
-            self, option_name='', option_number='', option_value='',
-            tag_name='', ipv6=''):
+        self, option_name='', option_number='', option_value='',
+        tag_name='', ipv6='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes DHCP configuration values using an option name.
 
@@ -11786,6 +16914,8 @@ class ConfigDhcpServer(ContextManager):
         :param tag_name: Match tags list. Each tag length must be less than 15
             chars.
         :param ipv6: Enable ipv6 for the set.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -11827,17 +16957,28 @@ class ConfigDhcpServer(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def match_set_tag(
-            self, tag_name, option_number='', option_name='',
-            option_value=''):
+        self, tag_name, option_number='', option_name='',
+        option_value='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets DHCP match configuration using an option name.
 
@@ -11853,6 +16994,8 @@ class ConfigDhcpServer(ContextManager):
         :param option_name: DHCP option name. Length must be less than 15
             chars.
         :param option_value: DHCP option value
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -11880,17 +17023,28 @@ class ConfigDhcpServer(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_match_set_tag(
-            self, tag_name, option_name='', option_number='',
-            option_value=''):
+        self, tag_name, option_name='', option_number='',
+        option_value='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes DHCP match configuration using an option name.
 
@@ -11906,6 +17060,8 @@ class ConfigDhcpServer(ContextManager):
         :param option_number: DHCP option number. <0 - 255> Configurable
             range.
         :param option_value: DHCP option value
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -11933,16 +17089,27 @@ class ConfigDhcpServer(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def boot_set_file(
-            self, file_name, tag_name=''):
+        self, file_name, tag_name='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Sets DHCP bootp options.
 
@@ -11955,6 +17122,8 @@ class ConfigDhcpServer(ContextManager):
         :param file_name: DHCP boot file name
         :param tag_name: DHCP match tag name. Length must be less than 15
             chars.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -11968,16 +17137,27 @@ class ConfigDhcpServer(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_boot_set_file(
-            self, file_name, tag_name=''):
+        self, file_name, tag_name='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Removes bootp options.
 
@@ -11990,6 +17170,8 @@ class ConfigDhcpServer(ContextManager):
         :param file_name: DHCP boot file name
         :param tag_name: DHCP match tag name. Length must be less than 15
             chars.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -12003,10 +17185,13 @@ class ConfigDhcpServer(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
@@ -12020,14 +17205,14 @@ class ConfigMirrorSession(ContextManager):
 
     ::
 
-            ['config terminal', 'mirror session {name}']
+        ['config terminal', 'mirror session {name}']
 
     post_commands:
 
     ::
 
-            ['end']
-    """
+        ['end']
+    """  # noqa
     def __init__(self, enode, name):
         self.enode = enode
         self.name = name
@@ -12058,7 +17243,15 @@ class ConfigMirrorSession(ContextManager):
         )
 
     def destination_interface(
-            self, portlbl):
+        self, portlbl,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set the destination interface.
 
@@ -12069,6 +17262,8 @@ class ConfigMirrorSession(ContextManager):
             # destination interface {port}
 
         :param portlbl: Label that identifies an interface or LAG
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -12077,16 +17272,27 @@ class ConfigMirrorSession(ContextManager):
 
         port = self.enode.ports.get(portlbl, portlbl)
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_destination_interface(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Un-set the destination interface and shutdown the session.
 
@@ -12096,6 +17302,8 @@ class ConfigMirrorSession(ContextManager):
 
             # no destination interface
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         :return: A dictionary as returned by
          :func:`topology_lib_vtysh.parser.parse_config_mirror_session_no_destination_interface`
         """
@@ -12104,15 +17312,26 @@ class ConfigMirrorSession(ContextManager):
             'no destination interface'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         return parse_config_mirror_session_no_destination_interface(result)
 
     def shutdown(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Shutdown the mirroring session.
 
@@ -12122,22 +17341,35 @@ class ConfigMirrorSession(ContextManager):
 
             # shutdown
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'shutdown'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_shutdown(
-            self):
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Activate the mirroring session.
 
@@ -12147,22 +17379,35 @@ class ConfigMirrorSession(ContextManager):
 
             # no shutdown
 
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no shutdown'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def source_interface(
-            self, portlbl, direction):
+        self, portlbl, direction,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Assign a source interface.
 
@@ -12174,6 +17419,8 @@ class ConfigMirrorSession(ContextManager):
 
         :param portlbl: Label that identifies an interface or LAG
         :param direction: <both | rx | tx>
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -12182,16 +17429,27 @@ class ConfigMirrorSession(ContextManager):
 
         port = self.enode.ports.get(portlbl, portlbl)
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_source_interface(
-            self, portlbl):
+        self, portlbl,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove a source interface from the session.
 
@@ -12202,6 +17460,8 @@ class ConfigMirrorSession(ContextManager):
             # no source interface {port}
 
         :param portlbl: Ethernet interface or LAG
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -12210,10 +17470,13 @@ class ConfigMirrorSession(ContextManager):
 
         port = self.enode.ports.get(portlbl, portlbl)
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
@@ -12227,14 +17490,14 @@ class ConfigQueueProfile(ContextManager):
 
     ::
 
-            ['config terminal', 'qos queue-profile {name}']
+        ['config terminal', 'qos queue-profile {name}']
 
     post_commands:
 
     ::
 
-            ['end']
-    """
+        ['end']
+    """  # noqa
     def __init__(self, enode, name):
         self.enode = enode
         self.name = name
@@ -12265,7 +17528,15 @@ class ConfigQueueProfile(ContextManager):
         )
 
     def map_queue_local_priority(
-            self, queue, local_priority):
+        self, queue, local_priority,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Map a local priority to a queue.
 
@@ -12277,22 +17548,35 @@ class ConfigQueueProfile(ContextManager):
 
         :param queue: The queue to configure.
         :param local_priority: The local priority to configure.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'map queue {queue} local-priority {local_priority}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_map_queue(
-            self, queue):
+        self, queue,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Clear the map for a queue.
 
@@ -12303,22 +17587,35 @@ class ConfigQueueProfile(ContextManager):
             # no map queue {queue}
 
         :param queue: The queue to clear.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no map queue {queue}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_map_queue_local_priority(
-            self, queue, local_priority):
+        self, queue, local_priority,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Clear a local priority from a queue.
 
@@ -12330,22 +17627,35 @@ class ConfigQueueProfile(ContextManager):
 
         :param queue: The queue to configure.
         :param local_priority: The local priority to configure.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no map queue {queue} local-priority {local_priority}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def name_queue(
-            self, queue, name):
+        self, queue, name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Name a queue.
 
@@ -12357,22 +17667,35 @@ class ConfigQueueProfile(ContextManager):
 
         :param queue: The queue to configure.
         :param name: The name to assign to the queue.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'name queue {queue} {name}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_name_queue(
-            self, queue):
+        self, queue,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Clears the name of a queue.
 
@@ -12383,16 +17706,21 @@ class ConfigQueueProfile(ContextManager):
             # no name queue {queue}
 
         :param queue: The queue to clear.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no name queue {queue}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
@@ -12406,14 +17734,14 @@ class ConfigScheduleProfile(ContextManager):
 
     ::
 
-            ['config terminal', 'qos schedule-profile {name}']
+        ['config terminal', 'qos schedule-profile {name}']
 
     post_commands:
 
     ::
 
-            ['end']
-    """
+        ['end']
+    """  # noqa
     def __init__(self, enode, name):
         self.enode = enode
         self.name = name
@@ -12444,7 +17772,15 @@ class ConfigScheduleProfile(ContextManager):
         )
 
     def strict_queue(
-            self, queue):
+        self, queue,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Assign the strict algorithm to a queue.
 
@@ -12455,22 +17791,35 @@ class ConfigScheduleProfile(ContextManager):
             # strict queue {queue}
 
         :param queue: The queue to configure.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'strict queue {queue}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_strict_queue(
-            self, queue):
+        self, queue,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Clear the strict algorithm from a queue.
 
@@ -12481,22 +17830,35 @@ class ConfigScheduleProfile(ContextManager):
             # no strict queue {queue}
 
         :param queue: The queue to clear.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no strict queue {queue}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def dwrr_queue_weight(
-            self, queue, weight):
+        self, queue, weight,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Assign the dwrr algorithm to a queue.
 
@@ -12508,22 +17870,35 @@ class ConfigScheduleProfile(ContextManager):
 
         :param queue: The queue to configure.
         :param weight: The weight for the queue.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'dwrr queue {queue} weight {weight}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_dwrr_queue(
-            self, queue):
+        self, queue,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Clears the dwrr algorithm for a queue.
 
@@ -12534,16 +17909,21 @@ class ConfigScheduleProfile(ContextManager):
             # no dwrr queue {queue}
 
         :param queue: The queue to clear.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no dwrr queue {queue}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
@@ -12557,14 +17937,14 @@ class ConfigAccessListIpTestname(ContextManager):
 
     ::
 
-            ['config terminal', 'access-list ip {acl_name}']
+        ['config terminal', 'access-list ip {acl_name}']
 
     post_commands:
 
     ::
 
-            ['end']
-    """
+        ['end']
+    """  # noqa
     def __init__(self, enode, acl_name):
         self.enode = enode
         self.acl_name = acl_name
@@ -12595,8 +17975,16 @@ class ConfigAccessListIpTestname(ContextManager):
         )
 
     def permit(
-            self, negate, sequence, protocol, ip1, port1, ip2,
-            port2, count='', log=''):
+        self, negate, sequence, protocol, ip1, port1, ip2,
+        port2, count='', log='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Permit access-list entry
 
@@ -12615,6 +18003,8 @@ class ConfigAccessListIpTestname(ContextManager):
         :param port2: Destination Port range <1-65535>.
         :param count: count the packets that match this entry.
         :param log: log and count the packets that match this entry.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -12635,17 +18025,28 @@ class ConfigAccessListIpTestname(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def deny(
-            self, negate, sequence, protocol, ip1, port1, ip2,
-            port2, count='', log=''):
+        self, negate, sequence, protocol, ip1, port1, ip2,
+        port2, count='', log='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Deny access-list entry
 
@@ -12664,6 +18065,8 @@ class ConfigAccessListIpTestname(ContextManager):
         :param port2: Destination Port range <1-65535>.
         :param count: count the packets that match this entry.
         :param log: log and count the packets that match this entry.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
@@ -12684,16 +18087,27 @@ class ConfigAccessListIpTestname(ContextManager):
                 )
             )
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no(
-            self, sequence):
+        self, sequence,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Remove access-list entry
 
@@ -12704,16 +18118,21 @@ class ConfigAccessListIpTestname(ContextManager):
             # no {sequence}
 
         :param sequence: sequence number of ACE.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no {sequence}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
@@ -12727,15 +18146,14 @@ class ConfigVrrpInterface(ContextManager):
 
     ::
 
-            ['config terminal', 'interface {port}',
-             'vrrp {grpid} address-family {af}']
+        ['config terminal', 'interface {port}', 'vrrp {grpid} address-family {af}']
 
     post_commands:
 
     ::
 
-            ['exit', 'end']
-    """
+        ['exit', 'end']
+    """  # noqa
     def __init__(self, enode, portlbl, grpid, af):
         self.enode = enode
         self.port = enode.ports.get(portlbl, portlbl)
@@ -12770,7 +18188,15 @@ class ConfigVrrpInterface(ContextManager):
         )
 
     def vrrp_version(
-            self, version):
+        self, version,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set VRRP version
 
@@ -12781,22 +18207,35 @@ class ConfigVrrpInterface(ContextManager):
             # vrrp version {version}
 
         :param version: VRRP version 2|3
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'vrrp version {version}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_vrrp_version(
-            self, version):
+        self, version,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset VRRP version
 
@@ -12807,22 +18246,35 @@ class ConfigVrrpInterface(ContextManager):
             # no vrrp version {version}
 
         :param version: VRRP version 2|3
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no vrrp version {version}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ip_address(
-            self, ipv4):
+        self, ipv4,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set VRRP primary IP address
 
@@ -12833,22 +18285,35 @@ class ConfigVrrpInterface(ContextManager):
             # ip address {ipv4}
 
         :param ipv4: A.B.C.D VRRP primary virtual IP address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip address {ipv4}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ip_address(
-            self, ipv4):
+        self, ipv4,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset VRRP primary IP address
 
@@ -12859,22 +18324,35 @@ class ConfigVrrpInterface(ContextManager):
             # no ip address {ipv4}
 
         :param ipv4: A.B.C.D VRRP primary virtual IP address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ip address {ipv4}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def ip_address_secondary(
-            self, ipv4):
+        self, ipv4,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set VRRP secondary IP address
 
@@ -12885,22 +18363,35 @@ class ConfigVrrpInterface(ContextManager):
             # ip address {ipv4} secondary
 
         :param ipv4: A.B.C.D VRRP secondary virtual IP address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'ip address {ipv4} secondary'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_ip_address_secondary(
-            self, ipv4):
+        self, ipv4,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset VRRP secondary IP address
 
@@ -12911,22 +18402,35 @@ class ConfigVrrpInterface(ContextManager):
             # no ip address {ipv4} secondary
 
         :param ipv4: A.B.C.D VRRP secondary virtual IP address.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no ip address {ipv4} secondary'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def priority(
-            self, prio):
+        self, prio,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Set VRRP virtual router priority
 
@@ -12937,22 +18441,35 @@ class ConfigVrrpInterface(ContextManager):
             # priority {prio}
 
         :param prio: [0-255] VRRP virtual router Priority Level
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'priority {prio}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
     def no_priority(
-            self, prio):
+        self, prio,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
         """
         Unset VRRP virtual router priority
 
@@ -12963,23 +18480,36 @@ class ConfigVrrpInterface(ContextManager):
             # no priority {prio}
 
         :param prio: [0-255] VRRP virtual router Priority Level
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
         """
 
         cmd = [
             'no priority {prio}'
         ]
 
-        result = self.enode(
-            (' '.join(cmd)).format(**locals()),
-            shell='vtysh'
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
         )
+
+        result = shell.get_response()
 
         if result:
             raise determine_exception(result)(result)
 
 
 def show_interface(
-        enode, portlbl):
+    enode, portlbl,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Interface infomation.
 
@@ -12989,7 +18519,11 @@ def show_interface(
 
         # show interface {port}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param portlbl: Label that identifies interface.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_interface`
     """
@@ -13000,16 +18534,27 @@ def show_interface(
 
     port = enode.ports.get(portlbl, portlbl)
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_interface(result)
 
 
 def show_interface_brief(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show all interfaces
 
@@ -13019,6 +18564,10 @@ def show_interface_brief(
 
         # show interface brief
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_interface_brief`
     """
@@ -13027,16 +18576,27 @@ def show_interface_brief(
         'show interface brief'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_interface_brief(result)
 
 
 def show_interface_mgmt(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Managment Interface infomation.
 
@@ -13046,6 +18606,10 @@ def show_interface_mgmt(
 
         # show interface mgmt
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_interface_mgmt`
     """
@@ -13054,16 +18618,27 @@ def show_interface_mgmt(
         'show interface mgmt'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_interface_mgmt(result)
 
 
 def show_interface_subinterface(
-        enode, portlbl):
+    enode, portlbl,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show subinterfaces configured on this interface
 
@@ -13073,7 +18648,11 @@ def show_interface_subinterface(
 
         # show interface {port} subinterface
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param portlbl: Label that identifies interface.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_interface_subinterface`
     """
@@ -13084,16 +18663,27 @@ def show_interface_subinterface(
 
     port = enode.ports.get(portlbl, portlbl)
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_interface_subinterface(result)
 
 
 def show_interface_subinterface_brief(
-        enode, portlbl):
+    enode, portlbl,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show subinterface summary on a physical port
 
@@ -13103,7 +18693,11 @@ def show_interface_subinterface_brief(
 
         # show interface {port} subinterface brief
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param portlbl: Label that identifies interface.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_interface_subinterface_brief`
     """
@@ -13114,16 +18708,27 @@ def show_interface_subinterface_brief(
 
     port = enode.ports.get(portlbl, portlbl)
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_interface_subinterface_brief(result)
 
 
 def show_interface_queues(
-        enode, portlbl=''):
+    enode, portlbl='',
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show queue statistics for this interface
 
@@ -13133,7 +18738,11 @@ def show_interface_queues(
 
         # show interface {port} queues
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param portlbl: Label that identifies interface.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_interface_queues`
     """
@@ -13144,16 +18753,27 @@ def show_interface_queues(
 
     port = enode.ports.get(portlbl, portlbl)
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_interface_queues(result)
 
 
 def show_vlan(
-        enode, vlanid=''):
+    enode, vlanid='',
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show VLAN configuration.
 
@@ -13163,7 +18783,11 @@ def show_vlan(
 
         # show vlan
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param vlanid: Vlan ID number.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_vlan`
     """
@@ -13179,16 +18803,27 @@ def show_vlan(
             )
         )
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_vlan(result)
 
 
 def show_lacp_interface(
-        enode, portlbl):
+    enode, portlbl,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show LACP interface.
 
@@ -13198,7 +18833,11 @@ def show_lacp_interface(
 
         # show lacp interface {port}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param portlbl: Label that identifies interface.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_lacp_interface`
     """
@@ -13209,16 +18848,27 @@ def show_lacp_interface(
 
     port = enode.ports.get(portlbl, portlbl)
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_lacp_interface(result)
 
 
 def show_lacp_aggregates(
-        enode, lag=''):
+    enode, lag='',
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show LACP aggregates.
 
@@ -13228,7 +18878,11 @@ def show_lacp_aggregates(
 
         # show lacp aggregates
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param lag: Link-aggregate name.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_lacp_aggregates`
     """
@@ -13244,16 +18898,27 @@ def show_lacp_aggregates(
             )
         )
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_lacp_aggregates(result)
 
 
 def show_lacp_configuration(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show LACP configuration.
 
@@ -13263,6 +18928,10 @@ def show_lacp_configuration(
 
         # show lacp configuration
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_lacp_configuration`
     """
@@ -13271,16 +18940,27 @@ def show_lacp_configuration(
         'show lacp configuration'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_lacp_configuration(result)
 
 
 def show_lldp_neighbor_info(
-        enode, portlbl):
+    enode, portlbl,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show global LLDP neighbor information.
 
@@ -13290,7 +18970,11 @@ def show_lldp_neighbor_info(
 
         # show lldp neighbor-info {port}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param portlbl: Label that identifies interface.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_lldp_neighbor_info`
     """
@@ -13301,16 +18985,27 @@ def show_lldp_neighbor_info(
 
     port = enode.ports.get(portlbl, portlbl)
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_lldp_neighbor_info(result)
 
 
 def show_lldp_statistics(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show LLDP statistics.
 
@@ -13320,6 +19015,10 @@ def show_lldp_statistics(
 
         # show lldp statistics
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_lldp_statistics`
     """
@@ -13328,16 +19027,27 @@ def show_lldp_statistics(
         'show lldp statistics'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_lldp_statistics(result)
 
 
 def show_sftp_server(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show sftp server configuration.
 
@@ -13347,6 +19057,10 @@ def show_sftp_server(
 
         # show sftp server
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_sftp_server`
     """
@@ -13355,16 +19069,27 @@ def show_sftp_server(
         'show sftp server'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_sftp_server(result)
 
 
 def show_ip_interface(
-        enode, portlbl):
+    enode, portlbl,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show ip interface information.
 
@@ -13374,7 +19099,11 @@ def show_ip_interface(
 
         # show ip interface {port}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param portlbl: Label that identifies interface.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_ip_interface`
     """
@@ -13385,16 +19114,27 @@ def show_ip_interface(
 
     port = enode.ports.get(portlbl, portlbl)
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_ip_interface(result)
 
 
 def show_ipv6_interface(
-        enode, portlbl):
+    enode, portlbl,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show ipv6 interface information.
 
@@ -13404,7 +19144,11 @@ def show_ipv6_interface(
 
         # show ipv6 interface {port}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param portlbl: Label that identifies interface.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_ipv6_interface`
     """
@@ -13415,16 +19159,27 @@ def show_ipv6_interface(
 
     port = enode.ports.get(portlbl, portlbl)
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_ipv6_interface(result)
 
 
 def show_ip_bgp_summary(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show bgp neighbors information summary.
 
@@ -13434,6 +19189,10 @@ def show_ip_bgp_summary(
 
         # show ip bgp summary
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_ip_bgp_summary`
     """
@@ -13442,16 +19201,27 @@ def show_ip_bgp_summary(
         'show ip bgp summary'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_ip_bgp_summary(result)
 
 
 def show_ip_bgp_neighbors(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show bgp neighbors information.
 
@@ -13461,6 +19231,10 @@ def show_ip_bgp_neighbors(
 
         # show ip bgp neighbors
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_ip_bgp_neighbors`
     """
@@ -13469,16 +19243,27 @@ def show_ip_bgp_neighbors(
         'show ip bgp neighbors'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_ip_bgp_neighbors(result)
 
 
 def show_ip_bgp(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show bgp routing information.
 
@@ -13488,6 +19273,10 @@ def show_ip_bgp(
 
         # show ip bgp
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_ip_bgp`
     """
@@ -13496,16 +19285,27 @@ def show_ip_bgp(
         'show ip bgp'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_ip_bgp(result)
 
 
 def show_ipv6_bgp(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show bgp routing information.
 
@@ -13515,6 +19315,10 @@ def show_ipv6_bgp(
 
         # show ipv6 bgp
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_ipv6_bgp`
     """
@@ -13523,16 +19327,27 @@ def show_ipv6_bgp(
         'show ipv6 bgp'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_ipv6_bgp(result)
 
 
 def show_ip_ospf_neighbor_detail(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show ospf neighbor detail information.
 
@@ -13542,6 +19357,10 @@ def show_ip_ospf_neighbor_detail(
 
         # show ip ospf neighbor detail
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_ip_ospf_neighbor_detail`
     """
@@ -13550,16 +19369,27 @@ def show_ip_ospf_neighbor_detail(
         'show ip ospf neighbor detail'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_ip_ospf_neighbor_detail(result)
 
 
 def show_ip_ospf_neighbor(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show ospf neighbor information.
 
@@ -13569,6 +19399,10 @@ def show_ip_ospf_neighbor(
 
         # show ip ospf neighbor
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_ip_ospf_neighbor`
     """
@@ -13577,16 +19411,27 @@ def show_ip_ospf_neighbor(
         'show ip ospf neighbor'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_ip_ospf_neighbor(result)
 
 
 def show_ip_ospf_interface(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show ospf interface detail.
 
@@ -13596,6 +19441,10 @@ def show_ip_ospf_interface(
 
         # show ip ospf interface
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_ip_ospf_interface`
     """
@@ -13604,16 +19453,27 @@ def show_ip_ospf_interface(
         'show ip ospf interface'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_ip_ospf_interface(result)
 
 
 def show_ip_ospf(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show ospf detail.
 
@@ -13623,6 +19483,10 @@ def show_ip_ospf(
 
         # show ip ospf
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_ip_ospf`
     """
@@ -13631,16 +19495,27 @@ def show_ip_ospf(
         'show ip ospf'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_ip_ospf(result)
 
 
 def show_ip_ospf_route(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show ospf detail.
 
@@ -13650,6 +19525,10 @@ def show_ip_ospf_route(
 
         # show ip ospf route
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_ip_ospf_route`
     """
@@ -13658,16 +19537,27 @@ def show_ip_ospf_route(
         'show ip ospf route'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_ip_ospf_route(result)
 
 
 def show_running_config(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show running-config information.
 
@@ -13677,6 +19567,10 @@ def show_running_config(
 
         # show running-config
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_running_config`
     """
@@ -13685,16 +19579,27 @@ def show_running_config(
         'show running-config'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_running_config(result)
 
 
 def show_running_config_interface(
-        enode, portlbl='', subint=''):
+    enode, portlbl='', subint='',
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show running-config for the interface.
 
@@ -13704,8 +19609,12 @@ def show_running_config_interface(
 
         # show running-config interface {port} {subint}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param portlbl: Label that identifies interface.
     :param subint: Subinterface ID
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_running_config_interface`
     """
@@ -13723,16 +19632,27 @@ def show_running_config_interface(
             )
         )
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_running_config_interface(result)
 
 
 def show_ip_route(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show Routing Table.
 
@@ -13742,6 +19662,10 @@ def show_ip_route(
 
         # show ip route
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_ip_route`
     """
@@ -13750,16 +19674,27 @@ def show_ip_route(
         'show ip route'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_ip_route(result)
 
 
 def show_ipv6_route(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display the routing table.
 
@@ -13769,6 +19704,10 @@ def show_ipv6_route(
 
         # show ipv6 route
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_ipv6_route`
     """
@@ -13777,16 +19716,27 @@ def show_ipv6_route(
         'show ipv6 route'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_ipv6_route(result)
 
 
 def show_sflow(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show sFlow information.
 
@@ -13796,6 +19746,10 @@ def show_sflow(
 
         # show sflow
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_sflow`
     """
@@ -13804,16 +19758,27 @@ def show_sflow(
         'show sflow'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_sflow(result)
 
 
 def show_sflow_interface(
-        enode, portlbl):
+    enode, portlbl,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show sFlow information for the interface.
 
@@ -13823,7 +19788,11 @@ def show_sflow_interface(
 
         # show sflow interface {port}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param portlbl: Label that identifies interface.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_sflow_interface`
     """
@@ -13834,16 +19803,27 @@ def show_sflow_interface(
 
     port = enode.ports.get(portlbl, portlbl)
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_sflow_interface(result)
 
 
 def show_udld_interface(
-        enode, portlbl):
+    enode, portlbl,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show UDLD information for the interface.
 
@@ -13853,7 +19833,11 @@ def show_udld_interface(
 
         # show udld interface {port}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param portlbl: Label that identifies interface.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_udld_interface`
     """
@@ -13864,16 +19848,27 @@ def show_udld_interface(
 
     port = enode.ports.get(portlbl, portlbl)
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_udld_interface(result)
 
 
 def show_rib(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show Routing Information Base.
 
@@ -13883,6 +19878,10 @@ def show_rib(
 
         # show rib
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_rib`
     """
@@ -13891,16 +19890,27 @@ def show_rib(
         'show rib'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_rib(result)
 
 
 def show_ip_ecmp(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show ECMP Configuration
 
@@ -13910,6 +19920,10 @@ def show_ip_ecmp(
 
         # show ip ecmp
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_ip_ecmp`
     """
@@ -13918,16 +19932,27 @@ def show_ip_ecmp(
         'show ip ecmp'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_ip_ecmp(result)
 
 
 def clear_bgp(
-        enode, peer, softreconfig):
+    enode, peer, softreconfig,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Clear bgp peer.
 
@@ -13937,25 +19962,40 @@ def clear_bgp(
 
         # clear bgp {peer} {softreconfig}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param peer: BGP peer to clear.
     :param softreconfig: <in | out | soft>
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     """
 
     cmd = [
         'clear bgp {peer} {softreconfig}'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     if result:
         raise determine_exception(result)(result)
 
 
 def clear_udld_statistics(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Clear UDLD statistics from all interfaces.
 
@@ -13965,23 +20005,38 @@ def clear_udld_statistics(
 
         # clear udld statistics
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     """
 
     cmd = [
         'clear udld statistics'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     if result:
         raise determine_exception(result)(result)
 
 
 def clear_udld_statistics_interface(
-        enode, portlbl):
+    enode, portlbl,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Clear UDLD statistics for the interface.
 
@@ -13991,7 +20046,11 @@ def clear_udld_statistics_interface(
 
         # clear udld statistics interface {port}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param portlbl: Label that identifies interface.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     """
 
     cmd = [
@@ -14000,17 +20059,28 @@ def clear_udld_statistics_interface(
 
     port = enode.ports.get(portlbl, portlbl)
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     if result:
         raise determine_exception(result)(result)
 
 
 def clear_access_list_hitcounts_all(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Clear all ACL stat values.
 
@@ -14020,23 +20090,38 @@ def clear_access_list_hitcounts_all(
 
         # clear access-list hitcounts all
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     """
 
     cmd = [
         'clear access-list hitcounts all'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     if result:
         raise determine_exception(result)(result)
 
 
 def clear_access_list_hitcounts_ip_interface(
-        enode, acl_name, port):
+    enode, acl_name, port,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Clear ACL state values per port.
 
@@ -14046,25 +20131,40 @@ def clear_access_list_hitcounts_ip_interface(
 
         # clear access-list hitcounts ip {acl_name} interface {port}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param acl_name: Access-list name.
     :param port: Label that identifies interface.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     """
 
     cmd = [
         'clear access-list hitcounts ip {acl_name} interface {port}'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     if result:
         raise determine_exception(result)(result)
 
 
 def ping_repetitions(
-        enode, destination, count):
+    enode, destination, count,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Send IPv4 ping
 
@@ -14074,8 +20174,12 @@ def ping_repetitions(
 
         # ping {destination} repetitions {count}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param destination: <A.B.C.D> IPv4 address.
     :param count: Number of packets to send.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_ping_repetitions`
     """
@@ -14084,16 +20188,27 @@ def ping_repetitions(
         'ping {destination} repetitions {count}'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_ping_repetitions(result)
 
 
 def ping6_repetitions(
-        enode, destination, count):
+    enode, destination, count,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Send IPv6 ping
 
@@ -14103,8 +20218,12 @@ def ping6_repetitions(
 
         # ping6 {destination} repetitions {count}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param destination: <X:X::X:X> IPv6 address.
     :param count: Number of packets to send.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_ping6_repetitions`
     """
@@ -14113,17 +20232,28 @@ def ping6_repetitions(
         'ping6 {destination} repetitions {count}'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_ping6_repetitions(result)
 
 
 def ping(
-        enode, destination, count='', size='', data='', interval='',
-        timeout='', tos='', ip_option=''):
+    enode, destination, count='', size='', data='', interval='',
+    timeout='', tos='', ip_option='',
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Send IPv4 ping
 
@@ -14133,6 +20263,8 @@ def ping(
 
         # ping {destination}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param destination: <A.B.C.D> IPv4 address.
     :param count: Number of packets to send.
     :param size: Size of packets to send.
@@ -14141,6 +20273,8 @@ def ping(
     :param timeout: Max time to wait for ping reply.
     :param tos: Type of service to be placed in each probe.
     :param ip_option: Ip-option.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_ping`
     """
@@ -14198,16 +20332,27 @@ def ping(
             )
         )
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_ping(result)
 
 
 def ping6(
-        enode, destination, count='', size='', data='', interval=''):
+    enode, destination, count='', size='', data='', interval='',
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Send IPv6 ping
 
@@ -14217,11 +20362,15 @@ def ping6(
 
         # ping6 {destination}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param destination: <X:X::X:X> IPv6 address.
     :param count: Number of packets to send.
     :param size: Size of packets to send.
     :param data: Data to be filled in each packet.
     :param interval: Time interval between ping requests.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_ping6`
     """
@@ -14258,17 +20407,28 @@ def ping6(
             )
         )
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_ping6(result)
 
 
 def copy_core_dump(
-        enode, daemonname, instance_id='', transport='', username='',
-        serveraddress='', filename=''):
+    enode, daemonname, instance_id='', transport='', username='',
+    serveraddress='', filename='',
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Copy Coredump to Server
 
@@ -14278,12 +20438,16 @@ def copy_core_dump(
 
         # copy core-dump {daemonname}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param daemonname: Name of the daemon name or kernel [Mandatory]
     :param instance_id: instance_id ONLY for daemon,NOT FOR Kernel
     :param transport: method for transport coredump [Mandatory]
     :param username: username of server,ONLY for sftp,NOT FOR TFTP
     :param serveraddress: IP address <A.B.C.D> of server [Mandatory]
     :param filename: name of core filei [Optional]
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_copy_core_dump`
     """
@@ -14327,17 +20491,28 @@ def copy_core_dump(
             )
         )
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_copy_core_dump(result)
 
 
 def traceroute(
-        enode, destination, min_ttl='', max_ttl='', dst_port='',
-        time_out='', probes='', ip_option_source=''):
+    enode, destination, min_ttl='', max_ttl='', dst_port='',
+    time_out='', probes='', ip_option_source='',
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Send IPv4 traceroute
 
@@ -14347,6 +20522,8 @@ def traceroute(
 
         # traceroute {destination}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param destination: <A.B.C.D> IPv4 address.
     :param min_ttl: Minimum number of hops to reach the destination <1-255>.
     :param max_ttl: Maximum number of hops to reach the destination <1-255>.
@@ -14354,6 +20531,8 @@ def traceroute(
     :param time_out: Traceroute timeout in seconds <1-60>.
     :param probes: Number of Probes <1-5>.
     :param ip_option_source: Source for loose source route record.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_traceroute`
     """
@@ -14404,17 +20583,28 @@ def traceroute(
             )
         )
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_traceroute(result)
 
 
 def traceroute6(
-        enode, destination, max_ttl='', dst_port='', time_out='',
-        probes=''):
+    enode, destination, max_ttl='', dst_port='', time_out='',
+    probes='',
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Send IPv6 traceroute
 
@@ -14424,11 +20614,15 @@ def traceroute6(
 
         # traceroute6 {destination}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param destination: <X:X::X:X> IPv6 address.
     :param max_ttl: Maximum number of hops to reach the destination <1-255>.
     :param dst_port: Destination port <1-34000>.
     :param time_out: Traceroute timeout in seconds <1-60>.
     :param probes: Number of Probes <1-5>.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_traceroute6`
     """
@@ -14465,16 +20659,27 @@ def traceroute6(
             )
         )
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_traceroute6(result)
 
 
 def show_ntp_associations(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show NTP Association summary.
 
@@ -14484,6 +20689,10 @@ def show_ntp_associations(
 
         # show ntp associations
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_ntp_associations`
     """
@@ -14492,16 +20701,27 @@ def show_ntp_associations(
         'show ntp associations'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_ntp_associations(result)
 
 
 def show_ntp_authentication_key(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show NTP Authentication Keys information.
 
@@ -14511,6 +20731,10 @@ def show_ntp_authentication_key(
 
         # show ntp authentication-key
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_ntp_authentication_key`
     """
@@ -14519,16 +20743,27 @@ def show_ntp_authentication_key(
         'show ntp authentication-key'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_ntp_authentication_key(result)
 
 
 def show_ntp_statistics(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show NTP Statistics information.
 
@@ -14538,6 +20773,10 @@ def show_ntp_statistics(
 
         # show ntp statistics
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_ntp_statistics`
     """
@@ -14546,16 +20785,27 @@ def show_ntp_statistics(
         'show ntp statistics'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_ntp_statistics(result)
 
 
 def show_ntp_status(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show NTP Status information.
 
@@ -14565,6 +20815,10 @@ def show_ntp_status(
 
         # show ntp status
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_ntp_status`
     """
@@ -14573,16 +20827,27 @@ def show_ntp_status(
         'show ntp status'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_ntp_status(result)
 
 
 def show_ntp_trusted_keys(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show NTP Trusted Keys information.
 
@@ -14592,6 +20857,10 @@ def show_ntp_trusted_keys(
 
         # show ntp trusted-keys
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_ntp_trusted_keys`
     """
@@ -14600,16 +20869,27 @@ def show_ntp_trusted_keys(
         'show ntp trusted-keys'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_ntp_trusted_keys(result)
 
 
 def show_dhcp_server_leases(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show DHCP server leases information.
 
@@ -14619,6 +20899,10 @@ def show_dhcp_server_leases(
 
         # show dhcp-server leases
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_dhcp_server_leases`
     """
@@ -14627,16 +20911,27 @@ def show_dhcp_server_leases(
         'show dhcp-server leases'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_dhcp_server_leases(result)
 
 
 def show_dhcp_server(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display DHCP server configuration.
 
@@ -14646,6 +20941,10 @@ def show_dhcp_server(
 
         # show dhcp-server
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_dhcp_server`
     """
@@ -14654,16 +20953,27 @@ def show_dhcp_server(
         'show dhcp-server'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_dhcp_server(result)
 
 
 def show_mac_address_table(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display L2 MAC address table information.
 
@@ -14673,6 +20983,10 @@ def show_mac_address_table(
 
         # show mac-address-table
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_mac_address_table`
     """
@@ -14681,16 +20995,27 @@ def show_mac_address_table(
         'show mac-address-table'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_mac_address_table(result)
 
 
 def show_vlog_config(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display vlog config.
 
@@ -14700,6 +21025,10 @@ def show_vlog_config(
 
         # show vlog config
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_vlog_config`
     """
@@ -14708,16 +21037,27 @@ def show_vlog_config(
         'show vlog config'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_vlog_config(result)
 
 
 def show_vlog(
-        enode, sub_command):
+    enode, sub_command,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show vlog sub command.
 
@@ -14727,7 +21067,11 @@ def show_vlog(
 
         # show vlog {sub_command}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param sub_command: sub command
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_vlog`
     """
@@ -14736,16 +21080,27 @@ def show_vlog(
         'show vlog {sub_command}'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_vlog(result)
 
 
 def show_interface_loopback(
-        enode, loopback_int=''):
+    enode, loopback_int='',
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show loopback interfaces on ops
 
@@ -14755,7 +21110,11 @@ def show_interface_loopback(
 
         # show interface loopback
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param loopback_int: Loopback interface id.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_interface_loopback`
     """
@@ -14771,16 +21130,27 @@ def show_interface_loopback(
             )
         )
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_interface_loopback(result)
 
 
 def show_interface_loopback_brief(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display information for L3 loopback interfaces
 
@@ -14790,6 +21160,10 @@ def show_interface_loopback_brief(
 
         # show interface loopback brief
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_interface_loopback_brief`
     """
@@ -14798,16 +21172,27 @@ def show_interface_loopback_brief(
         'show interface loopback brief'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_interface_loopback_brief(result)
 
 
 def show_vlog_config_daemon(
-        enode, daemon_name):
+    enode, daemon_name,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display vlog config for ops-daemons.
 
@@ -14817,7 +21202,11 @@ def show_vlog_config_daemon(
 
         # show vlog config daemon {daemon_name}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param daemon_name: daemon name
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_vlog_config_daemon`
     """
@@ -14826,16 +21215,27 @@ def show_vlog_config_daemon(
         'show vlog config daemon {daemon_name}'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_vlog_config_daemon(result)
 
 
 def show_vlog_config_feature(
-        enode, feature_name):
+    enode, feature_name,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display vlog config for feature
 
@@ -14845,7 +21245,11 @@ def show_vlog_config_feature(
 
         # show vlog config feature {feature_name}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param feature_name: feature name
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_vlog_config_feature`
     """
@@ -14854,16 +21258,27 @@ def show_vlog_config_feature(
         'show vlog config feature {feature_name}'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_vlog_config_feature(result)
 
 
 def show_vlog_config_list(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display vlog config for supported features list
 
@@ -14873,6 +21288,10 @@ def show_vlog_config_list(
 
         # show vlog config list
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_vlog_config_list`
     """
@@ -14881,16 +21300,27 @@ def show_vlog_config_list(
         'show vlog config list'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_vlog_config_list(result)
 
 
 def show_vlog_daemon(
-        enode, daemon_name):
+    enode, daemon_name,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display vlogs for ops-daemon
 
@@ -14900,7 +21330,11 @@ def show_vlog_daemon(
 
         # show vlog daemon {daemon_name}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param daemon_name: daemon name
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_vlog_daemon`
     """
@@ -14909,16 +21343,27 @@ def show_vlog_daemon(
         'show vlog daemon {daemon_name}'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_vlog_daemon(result)
 
 
 def show_vlog_severity(
-        enode, severity_level):
+    enode, severity_level,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display vlogs for severity level
 
@@ -14928,7 +21373,11 @@ def show_vlog_severity(
 
         # show vlog severity {severity_level}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param severity_level: severity level
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_vlog_severity`
     """
@@ -14937,16 +21386,27 @@ def show_vlog_severity(
         'show vlog severity {severity_level}'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_vlog_severity(result)
 
 
 def show_vlog_daemon_severity(
-        enode, daemonname, severity):
+    enode, daemonname, severity,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display vlogs for ops-daemon with severity
 
@@ -14956,8 +21416,12 @@ def show_vlog_daemon_severity(
 
         # show vlog daemon {daemonname} severity {severity}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param daemonname: daemon name
     :param severity: severity level
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_vlog_daemon_severity`
     """
@@ -14966,16 +21430,27 @@ def show_vlog_daemon_severity(
         'show vlog daemon {daemonname} severity {severity}'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_vlog_daemon_severity(result)
 
 
 def show_vlog_severity_daemon(
-        enode, severity, daemonname):
+    enode, severity, daemonname,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display vlogs for severity with ops-daemon
 
@@ -14985,8 +21460,12 @@ def show_vlog_severity_daemon(
 
         # show vlog severity {severity} daemon {daemonname}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param severity: severity level
     :param daemonname: daemon name
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_vlog_severity_daemon`
     """
@@ -14995,16 +21474,27 @@ def show_vlog_severity_daemon(
         'show vlog severity {severity} daemon {daemonname}'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_vlog_severity_daemon(result)
 
 
 def copy_running_config_startup_config(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     copies running config to startup config
 
@@ -15014,23 +21504,38 @@ def copy_running_config_startup_config(
 
         # copy running-config startup-config
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     """
 
     cmd = [
         'copy running-config startup-config'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     if result:
         raise determine_exception(result)(result)
 
 
 def copy_startup_config_running_config(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     copies startup config to running config
 
@@ -15040,23 +21545,38 @@ def copy_startup_config_running_config(
 
         # copy startup-config running-config
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     """
 
     cmd = [
         'copy startup-config running-config'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     if result:
         raise determine_exception(result)(result)
 
 
 def show_startup_config(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show startup-config information.
 
@@ -15066,6 +21586,10 @@ def show_startup_config(
 
         # show startup-config
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_startup_config`
     """
@@ -15074,16 +21598,27 @@ def show_startup_config(
         'show startup-config'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_startup_config(result)
 
 
 def erase_startup_config(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Erase startup-config information.
 
@@ -15093,6 +21628,10 @@ def erase_startup_config(
 
         # erase startup-config
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_erase_startup_config`
     """
@@ -15101,16 +21640,27 @@ def erase_startup_config(
         'erase startup-config'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_erase_startup_config(result)
 
 
 def show_tftp_server(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display TFTP-Server configuration.
 
@@ -15120,6 +21670,10 @@ def show_tftp_server(
 
         # show tftp-server
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_tftp_server`
     """
@@ -15128,16 +21682,27 @@ def show_tftp_server(
         'show tftp-server'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_tftp_server(result)
 
 
 def show_mirror(
-        enode, name=''):
+    enode, name='',
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show mirroring session information.
 
@@ -15147,7 +21712,11 @@ def show_mirror(
 
         # show mirror
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param name: Up to 64 letters, numbers, underscores, dashes, or periods.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_mirror`
     """
@@ -15163,16 +21732,27 @@ def show_mirror(
             )
         )
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_mirror(result)
 
 
 def show_qos_cos_map(
-        enode, default=''):
+    enode, default='',
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Shows the qos cos-map.
 
@@ -15182,7 +21762,11 @@ def show_qos_cos_map(
 
         # show qos cos-map
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param default: Show the default cos-map.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_qos_cos_map`
     """
@@ -15198,16 +21782,27 @@ def show_qos_cos_map(
             )
         )
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_qos_cos_map(result)
 
 
 def show_qos_dscp_map(
-        enode, default=''):
+    enode, default='',
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Shows the qos dscp-map.
 
@@ -15217,7 +21812,11 @@ def show_qos_dscp_map(
 
         # show qos dscp-map
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param default: Show the default dscp-map.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_qos_dscp_map`
     """
@@ -15233,16 +21832,27 @@ def show_qos_dscp_map(
             )
         )
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_qos_dscp_map(result)
 
 
 def show_qos_queue_profile(
-        enode, queue_profile_name=''):
+    enode, queue_profile_name='',
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Shows the qos queue profile.
 
@@ -15252,8 +21862,12 @@ def show_qos_queue_profile(
 
         # show qos queue-profile
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param queue_profile_name: Up to 64 letters, numbers, underscores, dashes,
      or periods.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_qos_queue_profile`
     """
@@ -15269,16 +21883,27 @@ def show_qos_queue_profile(
             )
         )
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_qos_queue_profile(result)
 
 
 def show_qos_schedule_profile(
-        enode, schedule_profile_name=''):
+    enode, schedule_profile_name='',
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Shows the qos schedule profile.
 
@@ -15288,8 +21913,12 @@ def show_qos_schedule_profile(
 
         # show qos schedule-profile
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param schedule_profile_name: Up to 64 letters, numbers, underscores,
      dashes, or periods.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_qos_schedule_profile`
     """
@@ -15305,16 +21934,27 @@ def show_qos_schedule_profile(
             )
         )
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_qos_schedule_profile(result)
 
 
 def show_qos_trust(
-        enode, default=''):
+    enode, default='',
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Shows the qos trust.
 
@@ -15324,7 +21964,11 @@ def show_qos_trust(
 
         # show qos trust
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param default: Show the default qos trust.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_qos_trust`
     """
@@ -15340,16 +21984,27 @@ def show_qos_trust(
             )
         )
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_qos_trust(result)
 
 
 def show_snmp_community(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display SNMP configured community names.
 
@@ -15359,6 +22014,10 @@ def show_snmp_community(
 
         # show snmp community
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_snmp_community`
     """
@@ -15367,16 +22026,27 @@ def show_snmp_community(
         'show snmp community'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_snmp_community(result)
 
 
 def show_snmp_system(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display SNMP system information.
 
@@ -15386,6 +22056,10 @@ def show_snmp_system(
 
         # show snmp system
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_snmp_system`
     """
@@ -15394,16 +22068,27 @@ def show_snmp_system(
         'show snmp system'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_snmp_system(result)
 
 
 def show_snmp_trap(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display SNMP host information of trap receivers.
 
@@ -15413,6 +22098,10 @@ def show_snmp_trap(
 
         # show snmp trap
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_snmp_trap`
     """
@@ -15421,16 +22110,27 @@ def show_snmp_trap(
         'show snmp trap'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_snmp_trap(result)
 
 
 def diag_dump_lacp_basic(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Displays diagnostic information for LACP
 
@@ -15440,6 +22140,10 @@ def diag_dump_lacp_basic(
 
         # diag-dump lacp basic
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_diag_dump_lacp_basic`
     """
@@ -15448,16 +22152,27 @@ def diag_dump_lacp_basic(
         'diag-dump lacp basic'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_diag_dump_lacp_basic(result)
 
 
 def show_snmpv3_users(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display SNMPV3 users.
 
@@ -15467,6 +22182,10 @@ def show_snmpv3_users(
 
         # show snmpv3 users
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_snmpv3_users`
     """
@@ -15475,16 +22194,27 @@ def show_snmpv3_users(
         'show snmpv3 users'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_snmpv3_users(result)
 
 
 def show_core_dump(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display core dumps present
 
@@ -15494,6 +22224,10 @@ def show_core_dump(
 
         # show core-dump
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_core_dump`
     """
@@ -15502,16 +22236,27 @@ def show_core_dump(
         'show core-dump'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_core_dump(result)
 
 
 def show_snmp_agent_port(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display SNMP agent port configuration.
 
@@ -15521,6 +22266,10 @@ def show_snmp_agent_port(
 
         # show snmp agent-port
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_snmp_agent_port`
     """
@@ -15529,16 +22278,27 @@ def show_snmp_agent_port(
         'show snmp agent-port'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_snmp_agent_port(result)
 
 
 def show_events(
-        enode, filter=''):
+    enode, filter='',
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show system related event logs.
 
@@ -15548,8 +22308,12 @@ def show_events(
 
         # show events
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param filter: Optional, filters by category, event-id or severity (filter
      value)
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_events`
     """
@@ -15565,16 +22329,27 @@ def show_events(
             )
         )
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_events(result)
 
 
 def show_aaa_authentication(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     AAA authentication infomation.
 
@@ -15584,6 +22359,10 @@ def show_aaa_authentication(
 
         # show aaa authentication
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_aaa_authentication`
     """
@@ -15592,16 +22371,27 @@ def show_aaa_authentication(
         'show aaa authentication'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_aaa_authentication(result)
 
 
 def show_radius_server(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Radius Server infomation.
 
@@ -15611,6 +22401,10 @@ def show_radius_server(
 
         # show radius-server
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_radius_server`
     """
@@ -15619,16 +22413,27 @@ def show_radius_server(
         'show radius-server'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_radius_server(result)
 
 
 def diag_dump(
-        enode, list='', daemon='', level='', file=''):
+    enode, list='', daemon='', level='', file='',
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display diagnostics dump that supports diag-dump.
 
@@ -15638,6 +22443,8 @@ def diag_dump(
 
         # diag-dump
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param list: Optional, display daemons list that are supporting the
      featured.
     :param daemon: Optional, supported daemon name whose diagnostics are to be
@@ -15645,6 +22452,8 @@ def diag_dump(
     :param level: Optional, takes the string values either basic or advanced.
     :param file: Optional, takes the string values either filename where the
      output get dumped.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_diag_dump`
     """
@@ -15681,16 +22490,27 @@ def diag_dump(
             )
         )
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_diag_dump(result)
 
 
 def show_spanning_tree(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Shows priority, address, Hello-time, Max-age, Forward-delay for bridge
     and root node.
@@ -15701,6 +22521,10 @@ def show_spanning_tree(
 
         # show spanning-tree
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_spanning_tree`
     """
@@ -15709,16 +22533,27 @@ def show_spanning_tree(
         'show spanning-tree'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_spanning_tree(result)
 
 
 def show_spanning_tree_mst(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Shows MSTP instance and corresponding VLANs.
 
@@ -15728,6 +22563,10 @@ def show_spanning_tree_mst(
 
         # show spanning-tree mst
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_spanning_tree_mst`
     """
@@ -15736,16 +22575,27 @@ def show_spanning_tree_mst(
         'show spanning-tree mst'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_spanning_tree_mst(result)
 
 
 def show_spanning_tree_mst_config(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Shows global MSTP configuration
 
@@ -15755,6 +22605,10 @@ def show_spanning_tree_mst_config(
 
         # show spanning-tree mst-config
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_spanning_tree_mst_config`
     """
@@ -15763,16 +22617,27 @@ def show_spanning_tree_mst_config(
         'show spanning-tree mst-config'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_spanning_tree_mst_config(result)
 
 
 def show_vlan_summary(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Shows VLAN summary information.
 
@@ -15782,6 +22647,10 @@ def show_vlan_summary(
 
         # show vlan summary
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_vlan_summary`
     """
@@ -15790,16 +22659,27 @@ def show_vlan_summary(
         'show vlan summary'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_vlan_summary(result)
 
 
 def show_vlan_internal(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Shows internal VLAN information.
 
@@ -15809,6 +22689,10 @@ def show_vlan_internal(
 
         # show vlan internal
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_vlan_internal`
     """
@@ -15817,16 +22701,27 @@ def show_vlan_internal(
         'show vlan internal'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_vlan_internal(result)
 
 
 def show_vrf(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show vrf information.
 
@@ -15836,6 +22731,10 @@ def show_vrf(
 
         # show vrf
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_vrf`
     """
@@ -15844,16 +22743,27 @@ def show_vrf(
         'show vrf'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_vrf(result)
 
 
 def show_access_list_hitcounts_ip_interface(
-        enode, acl_name, port):
+    enode, acl_name, port,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Show hit-counts per ACE aggregated across ports.
 
@@ -15863,8 +22773,12 @@ def show_access_list_hitcounts_ip_interface(
 
         # show access-list hitcounts ip {acl_name} interface {port}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param acl_name: Access-list name.
     :param port: Label that identifies interface.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_access_list_hitcounts_ip_interface`
     """
@@ -15873,16 +22787,27 @@ def show_access_list_hitcounts_ip_interface(
         'show access-list hitcounts ip {acl_name} interface {port}'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_access_list_hitcounts_ip_interface(result)
 
 
 def show_ip_prefix_list(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display IP prefix list information.
 
@@ -15892,6 +22817,10 @@ def show_ip_prefix_list(
 
         # show ip prefix-list
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_ip_prefix_list`
     """
@@ -15900,16 +22829,27 @@ def show_ip_prefix_list(
         'show ip prefix-list'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_ip_prefix_list(result)
 
 
 def show_ipv6_prefix_list(
-        enode):
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display IPv6 prefix list information
 
@@ -15919,6 +22859,10 @@ def show_ipv6_prefix_list(
 
         # show ipv6 prefix-list
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_ipv6_prefix_list`
     """
@@ -15927,16 +22871,27 @@ def show_ipv6_prefix_list(
         'show ipv6 prefix-list'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_ipv6_prefix_list(result)
 
 
 def show_ip_bgp_route_map(
-        enode, rmap):
+    enode, rmap,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
     """
     Display route-map information
 
@@ -15946,7 +22901,11 @@ def show_ip_bgp_route_map(
 
         # show ip bgp route-map {rmap}
 
+    :param dict kwargs: arguments to pass to the send_command of the
+    vtysh shell.
     :param rmap: Route-map name
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
      :func:`topology_lib_vtysh.parser.parse_show_ip_bgp_route_map`
     """
@@ -15955,10 +22914,13 @@ def show_ip_bgp_route_map(
         'show ip bgp route-map {rmap}'
     ]
 
-    result = enode(
-        (' '.join(cmd)).format(**locals()),
-        shell='vtysh'
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
     )
+
+    result = shell.get_response()
 
     return parse_show_ip_bgp_route_map(result)
 
