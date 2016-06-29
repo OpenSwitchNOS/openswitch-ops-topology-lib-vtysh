@@ -19221,7 +19221,7 @@ def show_vlan(
 
 
 def show_lacp_interface(
-    enode, portlbl,
+    enode, portlbl='',
     _shell='vtysh',
     _shell_args={
         'matches': None,

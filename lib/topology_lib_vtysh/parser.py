@@ -972,6 +972,171 @@ def parse_show_vlan(raw_result):
             return result
 
 
+def parse_show_lacp_interface_all(raw_result):
+    """
+    Parse the 'show lacp interface' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show lacp interface command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+            'actor': {
+                '1': {
+                    'intf': '1',
+                    'agg_name': 'lag10',
+                    'port_id': '18',
+                    'port_priority': '1',
+                    'key': '10',
+                    'state': {
+                        'active': True,
+                        'short_time': False,
+                        'collecting': True,
+                        'state_expired': False,
+                        'passive': False,
+                        'long_timeout': True,
+                        'distributing': True,
+                        'aggregable': True,
+                        'in_sync': True,
+                        'neighbor_state': False,
+                        'individual': False,
+                        'out_sync': False
+                    },
+                    'system_id': '70:72:cf:5b:3e:f0',
+                    'system_priority': '65534',
+                    'agg_key': '10'
+                },
+                '2': {
+                    'intf': '2',
+                    'agg_name': 'lag10',
+                    'port_id': '12',
+                    'port_priority': '1',
+                    'key': '10',
+                    'state': {
+                        'active': True,
+                        'short_time': False,
+                        'collecting': True,
+                        'state_expired': False,
+                        'passive': False,
+                        'long_timeout': True,
+                        'distributing': True,
+                        'aggregable': True,
+                        'in_sync': True,
+                        'neighbor_state': False,
+                        'individual': False,
+                        'out_sync': False
+                    },
+                    'system_id': '70:72:cf:5b:3e:f0',
+                    'system_priority': '65534',
+                    'agg_key': '10'
+                }
+            },
+            'partner': {
+                '1': {
+                    'intf': '1',
+                    'agg_name': 'lag10',
+                    'port_id': '18',
+                    'port_priority': '1',
+                    'key': '20',
+                    'state': {
+                        'active': True,
+                        'short_time': False,
+                        'collecting': True,
+                        'state_expired': False,
+                        'passive': False,
+                        'long_timeout': True,
+                        'distributing': True,
+                        'aggregable': True,
+                        'in_sync': True,
+                        'neighbor_state': False,
+                        'individual': False,
+                        'out_sync': False
+                    },
+                    'system_id': '70:72:cf:50:ce:b1',
+                    'system_priority': '65534',
+                    'agg_key': '10'
+                },
+                '2': {
+                    'intf': '2',
+                    'agg_name': 'lag10',
+                    'port_id': '12',
+                    'port_priority': '1',
+                    'key': '20',
+                    'state': {
+                        'active': True,
+                        'short_time': False,
+                        'collecting': True,
+                        'state_expired': False,
+                        'passive': False,
+                        'long_timeout': True,
+                        'distributing': True,
+                        'aggregable': True,
+                        'in_sync': True,
+                        'neighbor_state': False,
+                        'individual': False,
+                        'out_sync': False
+                    },
+                    'system_id': '70:72:cf:50:ce:b1',
+                    'system_priority': '65534',
+                    'agg_key': '10'
+                }
+            }
+        }
+    """
+
+    lacp_re = (
+        r'(?P<intf>\d*)?'
+        r'\s*(?P<agg_name>[lag]*\d*)?'
+        r'\s*(?P<port_id>\d*)?'
+        r'\s*(?P<port_priority>\d*)?'
+        r'\s*(?P<key>\d*)?'
+        r'\s*(?P<state>[APFISLNOCDXE]*)?'
+        r'\s*(?P<system_id>([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2})?'
+        r'\s*(?P<system_priority>\d*)?'
+        r'\s*(?P<agg_key>\d*)?'
+    )
+
+    result = {}
+    partial_partner = {}
+    partial_actor = {}
+
+    raw_splited = raw_result.split("details of all interfaces:")
+    for section in raw_splited:
+        for line in section.splitlines():
+            re_result = re.search(lacp_re, line)
+            if re_result:
+                partial = re_result.groupdict()
+                if partial['agg_name'] is not '':
+                    if partial['system_id'] is None:
+                        partial['system_id'] = ''
+                    tmp_dict = {
+                        'active': 'A' in partial['state'],
+                        'short_time': 'S' in partial['state'],
+                        'collecting': 'C' in partial['state'],
+                        'state_expired': 'X' in partial['state'],
+                        'passive': 'P' in partial['state'],
+                        'long_timeout': 'L' in partial['state'],
+                        'distributing': 'D' in partial['state'],
+                        'aggregable': 'F' in partial['state'],
+                        'in_sync': 'N' in partial['state'],
+                        'neighbor_state': 'E' in partial['state'],
+                        'individual': 'I' in partial['state'],
+                        'out_sync': 'O' in partial['state']
+                    }
+                    partial['state'] = tmp_dict
+                    if 'Partner Port' in section:
+                        partial_partner[partial['intf']] = partial
+                    else:
+                        partial_actor[partial['intf']] = partial
+
+    result['actor'] = partial_actor
+    result['partner'] = partial_partner
+    return result
+
+
 def parse_show_lacp_interface(raw_result):
     """
     Parse the 'show lacp interface' command raw output.
@@ -1042,6 +1207,9 @@ def parse_show_lacp_interface(raw_result):
         r'System-priority\s*\|\s*(?P<local_system_priority>\d*)?\s*\|'
         r'\s*(?P<remote_system_priority>\d*)?\s*'
     )
+
+    if "all interfaces" in raw_result:
+        return parse_show_lacp_interface_all(raw_result)
 
     re_result = re.search(lacp_re, raw_result)
     assert re_result
@@ -6785,6 +6953,7 @@ def parse_show_ip_bgp_route_map(raw_result):
 
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
+    'parse_show_lacp_interface_all',
     'parse_show_lacp_interface', 'parse_show_interface',
     'parse_show_interface_brief', 'parse_show_interface_vlan',
     'parse_show_interface_mgmt', 'parse_show_interface_subinterface',
