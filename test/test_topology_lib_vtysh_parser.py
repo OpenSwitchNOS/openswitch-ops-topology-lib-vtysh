@@ -4330,7 +4330,7 @@ def test_parse_show_mirror():
     ddiff = DeepDiff(result, expected)
     assert not ddiff
 
-    raw_result = """\
+    raw_result2 = """\
  Mirror Session: My_Session_1
  Status: active
  Source: interface 2 both
@@ -4340,8 +4340,8 @@ def test_parse_show_mirror():
  Output Bytes: 8912345678
 """
 
-    result = parse_show_mirror(raw_result)
-    expected = {
+    result2 = parse_show_mirror(raw_result2)
+    expected2 = {
         'name': 'My_Session_1',
         'status': 'active',
         'source': [
@@ -4363,7 +4363,44 @@ def test_parse_show_mirror():
         'output_bytes': 8912345678
     }
 
-    ddiff = DeepDiff(result, expected)
+    ddiff2 = DeepDiff(result2, expected2)
+    assert not ddiff2
+
+    raw_result3 = """\
+ Mirror Session: mrx
+ Status: active
+ Source: interface 9-1 rx
+ Source: interface tx none
+ Destination: interface lag1
+ Output Packets: 0
+ Output Bytes: 0
+"""
+
+    result3 = parse_show_mirror(raw_result3)
+    expected3 = {
+        'name': 'mrx',
+        'status': 'active',
+        'source': [
+            {
+                'type': 'interface',
+                'id': '9-1',
+                'direction': 'rx'
+            },
+            {
+                'type': 'interface',
+                'id': 'none',
+                'direction': 'tx'
+            }],
+        'destination': {
+            'type': 'interface',
+            'id': 'lag1'
+        },
+        'output_packets': 0,
+        'output_bytes': 0
+    }
+    print(expected3)
+    ddiff3 = DeepDiff(result3, expected3)
+    assert not ddiff3
 
 
 def test_parse_config_mirror_session_no_destination_interface():

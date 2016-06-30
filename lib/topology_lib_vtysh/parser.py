@@ -5029,7 +5029,10 @@ def parse_show_mirror(raw_result):
         r'\s*Output\sBytes:\s+(?P<output_bytes>\d+)'
     )
     mirror_sorce_re = (
-        r'Source:\s+(?P<type>\w+)\s+(?P<id>\w+)\s+(?P<direction>\w+)'
+        r'Source:\s+(?P<type>\w+)\s+(?P<id>\S+)\s+(?P<direction>(tx|rx|both))'
+    )
+    mirror_sorce_re2 = (
+        r'Source:\s+(?P<type>\w+)\s+(?P<direction>(tx|rx|both))\s+(?P<id>none)'
     )
     mirror_destination_re = (
         r'Destination:\s+(?P<type>\w+)\s+(?P<id>\S+)'
@@ -5054,6 +5057,10 @@ def parse_show_mirror(raw_result):
             result['source'] = []
             for line in raw_result.splitlines():
                 re_result = re.search(mirror_sorce_re, line)
+                if re_result:
+                    partial = re_result.groupdict()
+                    result['source'].append(partial)
+                re_result = re.search(mirror_sorce_re2, line)
                 if re_result:
                     partial = re_result.groupdict()
                     result['source'].append(partial)
