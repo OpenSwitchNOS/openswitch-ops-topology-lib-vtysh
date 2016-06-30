@@ -3171,10 +3171,12 @@ def parse_show_running_config_helper(raw_result):
     interface_mgmt_re = r'interface\smgmt'
     interface_lag_re = r'\s*interface\slag\s(\d+)'
     duplex_half_re = r'\s+duplex\shalf'
-    ipv4_re = r'\s+ip address\s(\d.+)'
+    ipv4_sec_re = r'\s+ip address\s([^\s]+)\ssecondary'
+    ipv4_re = r'\s+ip address\s([^\s]+)'
     stat_ip_re = r'\s+ip static\s(\S+)'
     nameserver_re = r'\s+nameserver\s(\S+)'
-    ipv6_re = r'\s+ipv6 address\s(\S+)'
+    ipv6_sec_re = r'\s+ipv6 address\s([^\s]+)\ssecondary'
+    ipv6_re = r'\s+ipv6 address\s([^\s]+)'
     lacp_re = r'\s+lacp\sport-(\w+)\s(\d+)'
     lag_re = r'\s+lag\s(\d+)'
     mtu_re = r'\s+mtu\s(\w+)'
@@ -3234,10 +3236,10 @@ def parse_show_running_config_helper(raw_result):
             elif re.match(interface_lag_re, line):
                 if 'lag' not in result['interface'].keys():
                     result['interface']['lag'] = {}
-                    re_result = re.match(interface_lag_re, line)
-                    port = re_result.group(1)
-                    if port not in result['interface']['lag'].keys():
-                        result['interface']['lag'][port] = {}
+                re_result = re.match(interface_lag_re, line)
+                port = re_result.group(1)
+                if port not in result['interface']['lag'].keys():
+                    result['interface']['lag'][port] = {}
 
             elif re.match(interface_mgmt_re, line):
                 if 'mgmt' not in result['interface'].keys():
@@ -3288,8 +3290,13 @@ def parse_show_running_config_helper(raw_result):
             if re_result:
                 if result['interface'].get('lag') and not\
                         result['interface'].get('subint'):
-                    result['interface']['lag'][port]['ipv4'] = \
-                        re_result.group(1)
+                    re_secondary = re.match(ipv4_sec_re, line)
+                    if re_secondary:
+                        result['interface']['lag'][port]['ipv4_secondary'] = \
+                            re_secondary.group(1)
+                    else:
+                        result['interface']['lag'][port]['ipv4'] = \
+                            re_result.group(1)
                 elif result['interface'].get('subint'):
                     if subintport in result['interface']['subint']\
                        and subint_flag:
@@ -3306,8 +3313,13 @@ def parse_show_running_config_helper(raw_result):
             if re_result:
                 if result['interface'].get('lag') and not\
                         result['interface'].get('subint'):
-                    result['interface']['lag'][port]['ipv6'] = \
-                        re_result.group(1)
+                    re_secondary = re.match(ipv6_sec_re, line)
+                    if re_secondary:
+                        result['interface']['lag'][port]['ipv6_secondary'] = \
+                            re_secondary.group(1)
+                    else:
+                        result['interface']['lag'][port]['ipv6'] = \
+                            re_result.group(1)
                 elif result['interface'].get('subint'):
                     if subintport in result['interface']['subint'] \
                        and subint_flag:
