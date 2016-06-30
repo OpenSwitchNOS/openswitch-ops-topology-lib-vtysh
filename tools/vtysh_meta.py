@@ -6524,6 +6524,16 @@ VTYSH_EXCEPTIONS_SPEC = OrderedDict([
             ' as primary.',
         ]
     ), (
+        'MaximumCommunitiesException',
+        [
+            'Config rejected : Maximum allowed communities are configured',
+        ]
+    ), (
+        'DuplicateCommunityException',
+        [
+            'This community is already configured',
+        ]
+    ), (
         'InvalidQnCommandException',
         [
             'name  acl name',

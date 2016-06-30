@@ -26,8 +26,6 @@ Vtysh auto-generated typed exceptions module.
 from __future__ import unicode_literals, absolute_import
 from __future__ import print_function, division
 
-from re import search
-from re import sub
 from collections import OrderedDict
 
 
