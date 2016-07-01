@@ -18520,7 +18520,7 @@ def show_interface(
         # show interface {port}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param portlbl: Label that identifies interface.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -18565,7 +18565,7 @@ def show_interface_brief(
         # show interface brief
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -18607,7 +18607,7 @@ def show_interface_mgmt(
         # show interface mgmt
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -18649,7 +18649,7 @@ def show_interface_subinterface(
         # show interface {port} subinterface
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param portlbl: Label that identifies interface.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -18694,7 +18694,7 @@ def show_interface_subinterface_brief(
         # show interface {port} subinterface brief
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param portlbl: Label that identifies interface.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -18739,7 +18739,7 @@ def show_interface_queues(
         # show interface {port} queues
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param portlbl: Label that identifies interface.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -18784,7 +18784,7 @@ def show_vlan(
         # show vlan
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param vlanid: Vlan ID number.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -18834,7 +18834,7 @@ def show_lacp_interface(
         # show lacp interface {port}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param portlbl: Label that identifies interface.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -18879,7 +18879,7 @@ def show_lacp_aggregates(
         # show lacp aggregates
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param lag: Link-aggregate name.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -18929,7 +18929,7 @@ def show_lacp_configuration(
         # show lacp configuration
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -18971,7 +18971,7 @@ def show_lldp_neighbor_info(
         # show lldp neighbor-info {port}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param portlbl: Label that identifies interface.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -19016,7 +19016,7 @@ def show_lldp_statistics(
         # show lldp statistics
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -19058,7 +19058,7 @@ def show_sftp_server(
         # show sftp server
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -19100,7 +19100,7 @@ def show_ip_interface(
         # show ip interface {port}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param portlbl: Label that identifies interface.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -19145,7 +19145,7 @@ def show_ipv6_interface(
         # show ipv6 interface {port}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param portlbl: Label that identifies interface.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -19190,7 +19190,7 @@ def show_ip_bgp_summary(
         # show ip bgp summary
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -19232,7 +19232,7 @@ def show_ip_bgp_neighbors(
         # show ip bgp neighbors
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -19274,7 +19274,7 @@ def show_ip_bgp(
         # show ip bgp
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -19316,7 +19316,7 @@ def show_ipv6_bgp(
         # show ipv6 bgp
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -19358,7 +19358,7 @@ def show_ip_ospf_neighbor_detail(
         # show ip ospf neighbor detail
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -19400,7 +19400,7 @@ def show_ip_ospf_neighbor(
         # show ip ospf neighbor
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -19442,7 +19442,7 @@ def show_ip_ospf_interface(
         # show ip ospf interface
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -19484,7 +19484,7 @@ def show_ip_ospf(
         # show ip ospf
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -19526,7 +19526,7 @@ def show_ip_ospf_route(
         # show ip ospf route
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -19568,7 +19568,7 @@ def show_running_config(
         # show running-config
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -19610,7 +19610,7 @@ def show_running_config_interface(
         # show running-config interface {port} {subint}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param portlbl: Label that identifies interface.
     :param subint: Subinterface ID
     :param str _shell: shell to be selected
@@ -19663,7 +19663,7 @@ def show_ip_route(
         # show ip route
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -19705,7 +19705,7 @@ def show_ipv6_route(
         # show ipv6 route
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -19747,7 +19747,7 @@ def show_sflow(
         # show sflow
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -19789,7 +19789,7 @@ def show_sflow_interface(
         # show sflow interface {port}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param portlbl: Label that identifies interface.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -19834,7 +19834,7 @@ def show_udld_interface(
         # show udld interface {port}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param portlbl: Label that identifies interface.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -19879,7 +19879,7 @@ def show_rib(
         # show rib
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -19921,7 +19921,7 @@ def show_ip_ecmp(
         # show ip ecmp
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -19963,7 +19963,7 @@ def clear_bgp(
         # clear bgp {peer} {softreconfig}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param peer: BGP peer to clear.
     :param softreconfig: <in | out | soft>
     :param str _shell: shell to be selected
@@ -20006,7 +20006,7 @@ def clear_udld_statistics(
         # clear udld statistics
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     """
@@ -20047,7 +20047,7 @@ def clear_udld_statistics_interface(
         # clear udld statistics interface {port}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param portlbl: Label that identifies interface.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -20091,7 +20091,7 @@ def clear_access_list_hitcounts_all(
         # clear access-list hitcounts all
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     """
@@ -20132,7 +20132,7 @@ def clear_access_list_hitcounts_ip_interface(
         # clear access-list hitcounts ip {acl_name} interface {port}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param acl_name: Access-list name.
     :param port: Label that identifies interface.
     :param str _shell: shell to be selected
@@ -20175,7 +20175,7 @@ def ping_repetitions(
         # ping {destination} repetitions {count}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param destination: <A.B.C.D> IPv4 address.
     :param count: Number of packets to send.
     :param str _shell: shell to be selected
@@ -20219,7 +20219,7 @@ def ping6_repetitions(
         # ping6 {destination} repetitions {count}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param destination: <X:X::X:X> IPv6 address.
     :param count: Number of packets to send.
     :param str _shell: shell to be selected
@@ -20264,7 +20264,7 @@ def ping(
         # ping {destination}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param destination: <A.B.C.D> IPv4 address.
     :param count: Number of packets to send.
     :param size: Size of packets to send.
@@ -20363,7 +20363,7 @@ def ping6(
         # ping6 {destination}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param destination: <X:X::X:X> IPv6 address.
     :param count: Number of packets to send.
     :param size: Size of packets to send.
@@ -20439,7 +20439,7 @@ def copy_core_dump(
         # copy core-dump {daemonname}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param daemonname: Name of the daemon name or kernel [Mandatory]
     :param instance_id: instance_id ONLY for daemon,NOT FOR Kernel
     :param transport: method for transport coredump [Mandatory]
@@ -20523,7 +20523,7 @@ def traceroute(
         # traceroute {destination}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param destination: <A.B.C.D> IPv4 address.
     :param min_ttl: Minimum number of hops to reach the destination <1-255>.
     :param max_ttl: Maximum number of hops to reach the destination <1-255>.
@@ -20615,7 +20615,7 @@ def traceroute6(
         # traceroute6 {destination}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param destination: <X:X::X:X> IPv6 address.
     :param max_ttl: Maximum number of hops to reach the destination <1-255>.
     :param dst_port: Destination port <1-34000>.
@@ -20690,7 +20690,7 @@ def show_ntp_associations(
         # show ntp associations
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -20732,7 +20732,7 @@ def show_ntp_authentication_key(
         # show ntp authentication-key
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -20774,7 +20774,7 @@ def show_ntp_statistics(
         # show ntp statistics
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -20816,7 +20816,7 @@ def show_ntp_status(
         # show ntp status
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -20858,7 +20858,7 @@ def show_ntp_trusted_keys(
         # show ntp trusted-keys
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -20900,7 +20900,7 @@ def show_dhcp_server_leases(
         # show dhcp-server leases
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -20942,7 +20942,7 @@ def show_dhcp_server(
         # show dhcp-server
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -20984,7 +20984,7 @@ def show_mac_address_table(
         # show mac-address-table
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -21026,7 +21026,7 @@ def show_vlog_config(
         # show vlog config
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -21068,7 +21068,7 @@ def show_vlog(
         # show vlog {sub_command}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param sub_command: sub command
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -21111,7 +21111,7 @@ def show_interface_loopback(
         # show interface loopback
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param loopback_int: Loopback interface id.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -21161,7 +21161,7 @@ def show_interface_loopback_brief(
         # show interface loopback brief
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -21203,7 +21203,7 @@ def show_vlog_config_daemon(
         # show vlog config daemon {daemon_name}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param daemon_name: daemon name
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -21246,7 +21246,7 @@ def show_vlog_config_feature(
         # show vlog config feature {feature_name}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param feature_name: feature name
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -21289,7 +21289,7 @@ def show_vlog_config_list(
         # show vlog config list
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -21331,7 +21331,7 @@ def show_vlog_daemon(
         # show vlog daemon {daemon_name}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param daemon_name: daemon name
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -21374,7 +21374,7 @@ def show_vlog_severity(
         # show vlog severity {severity_level}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param severity_level: severity level
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -21417,7 +21417,7 @@ def show_vlog_daemon_severity(
         # show vlog daemon {daemonname} severity {severity}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param daemonname: daemon name
     :param severity: severity level
     :param str _shell: shell to be selected
@@ -21461,7 +21461,7 @@ def show_vlog_severity_daemon(
         # show vlog severity {severity} daemon {daemonname}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param severity: severity level
     :param daemonname: daemon name
     :param str _shell: shell to be selected
@@ -21505,7 +21505,7 @@ def copy_running_config_startup_config(
         # copy running-config startup-config
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     """
@@ -21546,7 +21546,7 @@ def copy_startup_config_running_config(
         # copy startup-config running-config
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     """
@@ -21587,7 +21587,7 @@ def show_startup_config(
         # show startup-config
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -21629,7 +21629,7 @@ def erase_startup_config(
         # erase startup-config
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -21671,7 +21671,7 @@ def show_tftp_server(
         # show tftp-server
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -21713,7 +21713,7 @@ def show_mirror(
         # show mirror
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param name: Up to 64 letters, numbers, underscores, dashes, or periods.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -21763,7 +21763,7 @@ def show_qos_cos_map(
         # show qos cos-map
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param default: Show the default cos-map.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -21813,7 +21813,7 @@ def show_qos_dscp_map(
         # show qos dscp-map
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param default: Show the default dscp-map.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -21863,7 +21863,7 @@ def show_qos_queue_profile(
         # show qos queue-profile
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param queue_profile_name: Up to 64 letters, numbers, underscores, dashes,
      or periods.
     :param str _shell: shell to be selected
@@ -21914,7 +21914,7 @@ def show_qos_schedule_profile(
         # show qos schedule-profile
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param schedule_profile_name: Up to 64 letters, numbers, underscores,
      dashes, or periods.
     :param str _shell: shell to be selected
@@ -21965,7 +21965,7 @@ def show_qos_trust(
         # show qos trust
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param default: Show the default qos trust.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -22015,7 +22015,7 @@ def show_snmp_community(
         # show snmp community
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -22057,7 +22057,7 @@ def show_snmp_system(
         # show snmp system
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -22099,7 +22099,7 @@ def show_snmp_trap(
         # show snmp trap
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -22141,7 +22141,7 @@ def diag_dump_lacp_basic(
         # diag-dump lacp basic
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -22183,7 +22183,7 @@ def show_snmpv3_users(
         # show snmpv3 users
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -22225,7 +22225,7 @@ def show_core_dump(
         # show core-dump
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -22267,7 +22267,7 @@ def show_snmp_agent_port(
         # show snmp agent-port
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -22309,7 +22309,7 @@ def show_events(
         # show events
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param filter: Optional, filters by category, event-id or severity (filter
      value)
     :param str _shell: shell to be selected
@@ -22360,7 +22360,7 @@ def show_aaa_authentication(
         # show aaa authentication
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -22402,7 +22402,7 @@ def show_radius_server(
         # show radius-server
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -22444,7 +22444,7 @@ def diag_dump(
         # diag-dump
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param list: Optional, display daemons list that are supporting the
      featured.
     :param daemon: Optional, supported daemon name whose diagnostics are to be
@@ -22522,7 +22522,7 @@ def show_spanning_tree(
         # show spanning-tree
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -22564,7 +22564,7 @@ def show_spanning_tree_mst(
         # show spanning-tree mst
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -22606,7 +22606,7 @@ def show_spanning_tree_mst_config(
         # show spanning-tree mst-config
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -22648,7 +22648,7 @@ def show_vlan_summary(
         # show vlan summary
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -22690,7 +22690,7 @@ def show_vlan_internal(
         # show vlan internal
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -22732,7 +22732,7 @@ def show_vrf(
         # show vrf
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -22774,7 +22774,7 @@ def show_access_list_hitcounts_ip_interface(
         # show access-list hitcounts ip {acl_name} interface {port}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param acl_name: Access-list name.
     :param port: Label that identifies interface.
     :param str _shell: shell to be selected
@@ -22818,7 +22818,7 @@ def show_ip_prefix_list(
         # show ip prefix-list
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -22860,7 +22860,7 @@ def show_ipv6_prefix_list(
         # show ipv6 prefix-list
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
     :return: A dictionary as returned by
@@ -22902,7 +22902,7 @@ def show_ip_bgp_route_map(
         # show ip bgp route-map {rmap}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     :param rmap: Route-map name
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments

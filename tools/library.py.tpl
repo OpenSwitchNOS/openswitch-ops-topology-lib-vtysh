@@ -199,7 +199,7 @@ def {{ command.command|methodize }}(
         # {{ command.command }}{% if command.command|length > 68%}  # noqa{% endif %}
 
     :param dict kwargs: arguments to pass to the send_command of the
-    vtysh shell.
+     vtysh shell.
     {% for attr in command.arguments -%}
     {{ ':param %s: %s'|format(attr.name, attr.doc)|wordwrap(75)|indent(5) }}
     {% endfor -%}
