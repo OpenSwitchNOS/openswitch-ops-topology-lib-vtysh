@@ -5279,25 +5279,12 @@ VRF Name : vrf_default
     """
 
     expected_result = {
-        '10': {
-            'interface': '10',
-            'status': 'up'
-        },
-        '1': {
-            'interface': '1',
-            'status': 'up'
-        },
-        '10-1': {
-            'interface': '10-1',
-            'status': 'up'
-        },
-        '1.14': {
-            'interface': '1.14',
-            'status': 'up'
-        },
-        '9-1.200': {
-            'interface': '9-1.200',
-            'status': 'up'
+        'vrf_default': {
+            '10': 'up',
+            '1': 'up',
+            '10-1': 'up',
+            '1.14': 'up',
+            '9-1.200': 'up'
         }
     }
 

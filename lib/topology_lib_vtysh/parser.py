@@ -424,7 +424,7 @@ def parse_show_interface_subinterface(raw_result):
         r'Parent interface is (?P<parent_interface>\d+)\s*'
         r'Parent interface is (?P<parent_state_info>.*)\s*'
         r'(State information: (?P<state_information>\S+))?\s*'
-        r'Encapsulation dot1Q (?P<encapsulation_dot1q>\d+)\s*'
+        r'Encapsulation dot1Q (?P<encapsulation_dot1q>[\w\s]+)\n+\s*'
         r'Hardware: (?P<hardware>\S+), MAC Address: (?P<mac_address>\S+)\s+'
         r'(IPv4 address (?P<ipv4>\S+))?\s*'
         r'(IPv6 address (?P<ipv6>\S+))?\s*'
@@ -449,7 +449,7 @@ def parse_show_interface_subinterface(raw_result):
         r'\s*(?P<interface_state>\S+)\.(\s*)'
         r'Admin state is (?P<admin_state>\S+)\s+'
         r'Parent interface is (?P<parent_interface>\d+)\s*'
-        r'Encapsulation dot1Q (?P<encapsulation_dot1q>\d+)\s*'
+        r'Encapsulation dot1Q (?P<encapsulation_dot1q>[\w\s]+)\n+\s*'
         r'Hardware: (?P<hardware>\S+), MAC Address: (?P<mac_address>\S+)\s+'
         r'(IPv4 address (?P<ipv4>\S+))?\s*'
         r'(IPv6 address (?P<ipv6>\S+))?\s*'
@@ -481,6 +481,8 @@ def parse_show_interface_subinterface(raw_result):
             subint_result = re_result.groupdict()
             for key, value in subint_result.items():
                 if value is not None:
+                    value = value.strip()
+                    subint_result[key] = value
                     if value.isdigit():
                         subint_result[key] = int(value)
                     elif value == 'on':
@@ -6330,37 +6332,42 @@ def parse_show_vrf(raw_result):
     :param str raw_result: vtysh raw result string.
     :rtype: dict
     :return: The parsed result of the show vrf command in a \
-        dictionary of the form. Returns None if no vrf found or \
-        empty dictionary:
+        dictionary of the form:
 
      ::
 
         {
-             '10': { 'status': 'up',
-                    'interface': '10'
-             },
-             '1': {
-                    'status': 'up',
-                    'interface': '1'
-             }
+            'vrf_default' : {
+                '10': 'up',
+                '20': 'up'
+            },
+            'vrf_red' : {
+                '30': 'up',
+            }
         }
     """
 
-    show_re = (
-        r'\s+(?P<interface>\w+[.-]?\d*[.]?\d*)\s+(?P<status>\w+)'
-    )
+    interface_re = (
+        r'(.*)######\s+Interfaces\s+:\s+Status\s+:(.*)'
+     )
 
+    raw_result = re.sub(r'\n+\s+(--+\s*)+', '\n', raw_result)
+    raw_result = re.sub(r'\n+\s*\n+', '\n', raw_result)
+    vrf_split_output = raw_result.split('VRF Name : ')
     result = {}
-
-    for line in raw_result.splitlines():
-        re_result = re.search(show_re, line)
-        if re_result:
-            partial = re_result.groupdict()
-            result[partial['interface']] = partial
-    if result == {}:
-        return None
-    else:
-        return result
+    for i in range(1, len(vrf_split_output)):
+        vrf = vrf_split_output[i]
+        output = re.sub(r'\n', '######', vrf)
+        re_result = re.search(interface_re, output)
+        if re_result is None:
+            assert False, "Interface pattern is not available"
+        vrf_name = re_result.group(1)
+        vrf_interface_details = re.sub(r'######', '\n', re_result.group(2))
+        result[vrf_name] = {}
+        res = re.findall(r'(\S+)\s+(\S+)\s*\n*', vrf_interface_details)
+        for interface, status in res:
+            result[vrf_name][interface] = status
+    return result
 
 
 def parse_show_vlan_internal(raw_result):

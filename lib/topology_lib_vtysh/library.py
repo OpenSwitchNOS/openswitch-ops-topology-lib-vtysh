@@ -251,6 +251,84 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def vrf(
+        self, vrf_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Configure vrf
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # vrf {vrf_name}
+
+        :param vrf_name: VRF NAME
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'vrf {vrf_name}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_vrf(
+        self, vrf_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Delete  vrf
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no vrf {vrf_name}
+
+        :param vrf_name: VRF NAME
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no vrf {vrf_name}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
     def no_interface_loopback(
         self, loopback_id,
         _shell='vtysh',
@@ -372,7 +450,7 @@ class Configure(ContextManager):
             raise determine_exception(result)(result)
 
     def ip_route(
-        self, ipv4, next_hop, metric='',
+        self, ipv4, next_hop, metric='', vrf_name='',
         _shell='vtysh',
         _shell_args={
             'matches': None,
@@ -393,6 +471,7 @@ class Configure(ContextManager):
         :param ipv4: A.B.C.D/M IP destination prefix.
         :param next_hop: Can be an ip address or a interface.
         :param metric: Optional, route address to configure.
+        :param vrf_name: VRF based route address to configure.
         :param str _shell: shell to be selected
         :param dict _shell_args: low-level shell API arguments
         """
@@ -408,6 +487,13 @@ class Configure(ContextManager):
                 )
             )
 
+        if vrf_name:
+            cmd.append(
+                '{}{{vrf_name}}{}'.format(
+                    'vrf ', ''
+                )
+            )
+
         shell = self.enode.get_shell(_shell)
 
         shell.send_command(
@@ -420,7 +506,7 @@ class Configure(ContextManager):
             raise determine_exception(result)(result)
 
     def no_ip_route(
-        self, ipv4, next_hop, metric='',
+        self, ipv4, next_hop, metric='', vrf_name='',
         _shell='vtysh',
         _shell_args={
             'matches': None,
@@ -441,6 +527,7 @@ class Configure(ContextManager):
         :param ipv4: A.B.C.D/M IP destination prefix.
         :param next_hop: Can be an ip address or a interface.
         :param metric: Optional, route address to configure.
+        :param vrf_name: VRF based route address to configure.
         :param str _shell: shell to be selected
         :param dict _shell_args: low-level shell API arguments
         """
@@ -453,6 +540,13 @@ class Configure(ContextManager):
             cmd.append(
                 '{}{{metric}}{}'.format(
                     '', ''
+                )
+            )
+
+        if vrf_name:
+            cmd.append(
+                '{}{{vrf_name}}{}'.format(
+                    'vrf ', ''
                 )
             )
 
@@ -7067,6 +7161,84 @@ class ConfigInterface(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def vrf_attach(
+        self, vrf_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Mapping port to vrf
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # vrf attach {vrf_name}
+
+        :param vrf_name: Mapping the port to vrf.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'vrf attach {vrf_name}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_vrf_attach(
+        self, vrf_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Unmapping port from vrf
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no vrf attach {vrf_name}
+
+        :param vrf_name: Unmapping the port from vrf.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no vrf attach {vrf_name}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
     def ip_address_secondary(
         self, ipv4,
         _shell='vtysh',
@@ -10127,6 +10299,84 @@ class ConfigSubinterface(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def vrf_attach(
+        self, vrf_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Mapping port to vrf
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # vrf attach {vrf_name}
+
+        :param vrf_name: Mapping the port to vrf.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'vrf attach {vrf_name}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_vrf_attach(
+        self, vrf_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Unmapping port from vrf
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no vrf attach {vrf_name}
+
+        :param vrf_name: Unmapping the port from vrf.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no vrf attach {vrf_name}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
     def ipv6_address(
         self, ipv6,
         _shell='vtysh',
@@ -10917,6 +11167,84 @@ class ConfigInterfaceLoopback(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def vrf_attach(
+        self, vrf_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Mapping port to vrf
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # vrf attach {vrf_name}
+
+        :param vrf_name: Mapping the port to vrf.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'vrf attach {vrf_name}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_vrf_attach(
+        self, vrf_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Unmapping port from vrf
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no vrf attach {vrf_name}
+
+        :param vrf_name: Unmapping the port from vrf.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no vrf attach {vrf_name}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
     def ipv6_address(
         self, ipv6,
         _shell='vtysh',
@@ -11184,6 +11512,84 @@ class ConfigInterfaceLag(ContextManager):
 
         cmd = [
             'no ip address {ipv4} secondary'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def vrf_attach(
+        self, vrf_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Mapping port to vrf
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # vrf attach {vrf_name}
+
+        :param vrf_name: Mapping the port to vrf.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'vrf attach {vrf_name}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_vrf_attach(
+        self, vrf_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Unmapping port from vrf
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no vrf attach {vrf_name}
+
+        :param vrf_name: Unmapping the port from vrf.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no vrf attach {vrf_name}'
         ]
 
         shell = self.enode.get_shell(_shell)
@@ -20245,7 +20651,7 @@ def ping6_repetitions(
 
 def ping(
     enode, destination, count='', size='', data='', interval='',
-    timeout='', tos='', ip_option='',
+    timeout='', tos='', vrf='', ip_option='',
     _shell='vtysh',
     _shell_args={
         'matches': None,
@@ -20272,6 +20678,7 @@ def ping(
     :param interval: Time interval between ping requests.
     :param timeout: Max time to wait for ping reply.
     :param tos: Type of service to be placed in each probe.
+    :param vrf: Type of service to be placed in each probe.
     :param ip_option: Ip-option.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
@@ -20322,6 +20729,13 @@ def ping(
         cmd.append(
             '{}{{tos}}{}'.format(
                 'tos ', ''
+            )
+        )
+
+    if vrf:
+        cmd.append(
+            '{}{{vrf}}{}'.format(
+                'vrf ', ''
             )
         )
 
