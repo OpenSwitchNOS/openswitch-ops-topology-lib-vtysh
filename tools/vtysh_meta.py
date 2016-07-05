@@ -949,6 +949,24 @@ VTYSH_SPEC = OrderedDict([
                 'doc': 'Show vrf information.',
                 'arguments': [],
                 'returns': True
+            },
+            {
+                'command': 'show aaa port-access dot1x authenticator status',
+                'doc': 'Displays 802.1x authenticator information.',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show aaa port-access dot1x supplicant status',
+                'doc': 'Displays 802.1x supplicant information.',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show aaa port-access dot1x statistics',
+                'doc': 'Displays 802.1x counters and statistics.',
+                'arguments': [],
+                'returns': True
             }
         ]
     }),
@@ -2980,6 +2998,160 @@ local-priority {local_priority} name {name} color {color}',
                 'command': 'aaa authentication login fallback error local',
                 'doc': 'AAA authentication login fallback configuration',
                 'arguments': [],
+            },
+            {
+                'command': 'aaa port-access dot1x authenticator {intf} enable',
+                'doc': 'Manage 802.1x authenticator on switch interfaces',
+                'arguments': [
+                    {
+                        'name': 'intf',
+                        'doc': 'Enable 802.1x authenticator on switch interface.'
+                    },
+                ],
+            },
+            {
+                'command': 'aaa port-access dot1x authenticator {intf} reauthenticate',
+                'doc': 'Request reauthentication of all clients on switch interface',
+                'arguments': [
+                    {
+                        'name': 'intf',
+                        'doc': 'Enable 802.1x authenticator on switch interface.'
+                    },
+                ],
+            },
+            {
+                'command': 'aaa port-access dot1x authenticator {intf} disable',
+                'doc': 'Manage 802.1x authenticator on switch interfaces',
+                'arguments': [
+                    {
+                        'name': 'intf',
+                        'doc': 'Disable 802.1x authenticator on switch interface.'
+                    },
+                ],
+            },
+            {
+                'command': 'aaa port-access dot1x supplicant {intf} enable',
+                'doc': 'Manage 802.1x supplicant on switch interfaces.',
+                'arguments': [
+                    {
+                        'name': 'intf',
+                        'doc': 'Enable 802.1x supplicant on switch interface.'
+                    },
+                ],
+            },
+            {
+                'command': 'aaa port-access dot1x authenticator {intf} quite-period {value}',
+                'doc': 'Manage 802.1x authenticator on switch interfaces.',
+                'arguments': [
+                    {
+                        'name': 'intf',
+                        'doc': 'Enable 802.1x authenticator on switch interface.',
+                    },
+                    {
+                        'name': 'value',
+                        'doc': 'Configure quite-period on authenticator switch interface.',
+                    },
+                ],
+            },
+            {
+                'command': 'aaa port-access dot1x authenticator {intf} reauth-period {value}',
+                'doc': 'Manage 802.1x authenticator on switch interfaces.',
+                'arguments': [
+                    {
+                        'name': 'intf',
+                        'doc': 'Enable 802.1x authenticator on switch interface.',
+                    },
+                    {
+                        'name': 'value',
+                        'doc': 'Configure reauth-period on authenticator switch interface.',
+                    },
+                ],
+            },
+            {
+                'command': 'aaa port-access dot1x authenticator {intf} supplicant-timeout {value}',
+                'doc': 'Manage 802.1x authenticator on switch interfaces.',
+                'arguments': [
+                    {
+                        'name': 'intf',
+                        'doc': 'Enable 802.1x authenticator on switch interface.',
+                    },
+                    {
+                        'name': 'value',
+                        'doc': 'Configure supplicant-timeout on authenticator switch interface.',
+                    },
+                ],
+            },
+            {
+                'command': 'aaa port-access dot1x supplicant {intf} disable',
+                'doc': 'Manage 802.1x supplicant on switch interfaces.',
+                'arguments': [
+                    {
+                        'name': 'intf',
+                        'doc': 'Disable 802.1x authenticator on switch interface.'
+                    },
+                ],
+            },
+            {
+                'command': 'aaa port-access dot1x supplicant {intf} secret {key}',
+                'doc': 'Manage 802.1x supplicant on switch interfaces.',
+                'arguments': [
+                    {
+                        'name': 'intf',
+                        'doc': 'Enable 802.1x supplicant on switch interface.',
+                    },
+                    {
+                        'name': 'key',
+                        'doc': 'Secret for supplicant identity.',
+                    },
+                ],
+            },
+            {
+                'command': 'aaa port-access dot1x supplicant {intf} identity {user_name}',
+                'doc': 'Manage 802.1x supplicant on switch interfaces.',
+                'arguments': [
+                    {
+                        'name': 'intf',
+                        'doc': 'Enable 802.1x supplicant on switch interface.',
+                    },
+                    {
+                        'name': 'user_name',
+                        'doc': 'Configure supplicant identity.',
+                    },
+                ],
+            },
+            {
+                'command': 'aaa port-access dot1x supplicant {intf} held-period {value}',
+                'doc': 'Manage 802.1x supplicant on switch interfaces.',
+                'arguments': [
+                    {
+                        'name': 'intf',
+                        'doc': 'Enable 802.1x supplicant on switch interface.',
+                    },
+                    {
+                        'name': 'Value',
+                        'doc': 'Set held-period value for supplicant.',
+                    },
+                ],
+            },
+            {
+                'command': 'no aaa port-access dot1x supplicant {intf}',
+                'doc': 'Unconfigures supplicant configurations.',
+                'arguments': [
+                    {
+                        'name': 'intf',
+                        'doc': 'Manages 802.1x supplicant on switch interface.',
+                    },
+                ],
+            },
+            {
+                'command': 'no aaa port-access dot1x authenticator {intf}',
+                'doc': 'Unconfigures authenticator configurations.',
+                'arguments': [
+                    {
+                        'name': 'intf',
+                        'doc': 'Manages 802.1x authenticator on switch interface.',
+                    },
+                ],
             }
         ]
     }),

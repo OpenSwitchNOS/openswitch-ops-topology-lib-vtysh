@@ -6171,6 +6171,139 @@ def parse_show_vlan_internal(raw_result):
         return result
 
 
+def parse_show_aaa_port_access_dot1x_authenticator_status(raw_result):
+    """
+    Parse the 'show aaa port-access dot1x authenticator status' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show aaa port-access dot1x authenticator status command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+            'auth_clients': 0,
+            'unauth_clients': 0,
+            'untagged_vlans': None,
+            'tagged_vlan': None,
+            'authenticated_client_mac': '00:00:00:00:00:00',
+            'interface_id': 2
+
+        }
+    """
+
+    auth_re = (
+        r'(?P<interface_id>\d+)\s+(?P<auth_clients>\d)\s+(?P<unauth_clients>\d)\s+'
+        r'(?P<tagged_vlan>\S+)\s+(?P<untagged_vlan>\S+)\s+(?P<authenticated_client_mac>([0-9a-fA-F]{2}(?::[0-9a-fA-F]{2}){5}))'
+    )
+
+    result = {}
+
+    for line in raw_result.splitlines():
+        re_result = re.search(auth_re, line)
+        if re_result:
+            partial = re_result.groupdict()
+            result[partial['interface_id']] = partial
+
+    if result == {}:
+        return None
+    else:
+        return result
+
+def parse_show_aaa_port_access_dot1x_supplicant_status(raw_result):
+    """
+    Parse the 'show aaa port-access dot1x supplicant status' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show aaa port-access dot1x supplicant status command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+
+            'supp_state': 'Unauthenticated',
+            'interface_identity': ' ',
+            'held_period': 20,
+            'auth_timeout': 60,
+            'retry_max': 4,
+            'interface_id': 2
+
+        }
+    """
+
+    supp_re = (
+        r'(?P<interface_id>\d+)\s+(?P<supp_state>\S+)\s+(?P<held_period>\d+)\s+'
+        r'(?P<auth_timeout>\d+)\s+(?P<retry_max>\d)\s+(?P<interface_identity>\S+)'
+    )
+
+    result = {}
+
+    for line in raw_result.splitlines():
+        re_result = re.search(supp_re, line)
+        if re_result:
+            partial = re_result.groupdict()
+            result[partial['interface_id']] = partial
+
+
+    if result == {}:
+        return None
+    else:
+        return result
+
+
+def parse_show_aaa_port_access_dot1x_statistics(raw_result):
+    """
+    Parse the 'show aaa port-access dot1x statistics' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show aaa port-access dot1x statistics command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+
+            'lrx_source_mac': '-',
+            'lrx_ver': '0',
+            'rx_inavl': '0',
+            'rx_lenerr': '0',
+            'rx_start': '0',
+            'rx_eap': '0'
+            'rx_logoff': '0',
+            'tx_supp_eap': '0',
+            'tx_logoff': '0',
+            'tx_start': '0'
+            'tx_auth_eap': '0'
+        }
+    """
+
+    stat_re = (
+        r'(?P<interface_id>\d+)\s+(?P<lrx_source_mac>([0-9a-fA-F]{2}(?::[0-9a-fA-F]{2}){5}))\s+(?P<lrx_ver>\d+)\s+'
+        r'(?P<rx_inavl>\d+)\s+(?P<rx_lenerr>\d)\s+(?P<rx_start>\d)\s+(?P<rx_eap>\d+)\s+'
+        r'(?P<rx_logoff>\d+)\s+(?P<tx_supp_eap>\d)\s+(?P<tx_logoff>\d)\s+(?P<tx_start>\d+)\s+(?P<tx_auth_eap>\d+)'
+    )
+
+    result = {}
+
+    if re.match(no_vlan_re, raw_result, re.IGNORECASE):
+        return None
+    else:
+        for line in raw_result.splitlines():
+            re_result = re.search(stat_re, line)
+            if re_result:
+                partial = re_result.groupdict()
+                result[partial['interface_id']] = partial
+
+        if result == {}:
+            return None
+        else:
+            return result
+
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface', 'parse_show_interface',
@@ -6221,5 +6354,8 @@ __all__ = [
     'parse_diag_dump_lacp_basic', 'parse_show_snmpv3_users',
     'parse_show_snmp_agent_port', 'parse_diag_dump', 'parse_show_events',
     'parse_show_spanning_tree', 'parse_show_spanning_tree_mst_config',
-    'parse_show_spanning_tree_mst', 'parse_show_vlan_summary'
+    'parse_show_spanning_tree_mst', 'parse_show_vlan_summary',
+    'parse_show_aaa_port_access_dot1x_authenticator_status',
+    'parse_show_aaa_port_access_dot1x_supplicant_status',
+    'parse_show_aaa_port_access_dot1x_statistics'
 ]

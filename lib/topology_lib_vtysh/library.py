@@ -4493,6 +4493,353 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def aaa_port_access_dot1x_authenticator_enable(
+            self, intf):
+        """
+        Manage 802.1x authenticator on switch interfaces
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # aaa port-access dot1x authenticator {intf} enable
+
+        :param intf: Enable 802.1x authenticator on switch interface.
+        """
+
+        cmd = [
+            'aaa port-access dot1x authenticator {intf} enable'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def aaa_port_access_dot1x_authenticator_reauthenticate(
+            self, intf):
+        """
+        Request reauthentication of all clients on switch interface
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # aaa port-access dot1x authenticator {intf} reauthenticate
+
+        :param intf: Enable 802.1x authenticator on switch interface.
+        """
+
+        cmd = [
+            'aaa port-access dot1x authenticator {intf} reauthenticate'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def aaa_port_access_dot1x_authenticator_disable(
+            self, intf):
+        """
+        Manage 802.1x authenticator on switch interfaces
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # aaa port-access dot1x authenticator {intf} disable
+
+        :param intf: Disable 802.1x authenticator on switch interface.
+        """
+
+        cmd = [
+            'aaa port-access dot1x authenticator {intf} disable'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def aaa_port_access_dot1x_supplicant_enable(
+            self, intf):
+        """
+        Manage 802.1x supplicant on switch interfaces.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # aaa port-access dot1x supplicant {intf} enable
+
+        :param intf: Enable 802.1x supplicant on switch interface.
+        """
+
+        cmd = [
+            'aaa port-access dot1x supplicant {intf} enable'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def aaa_port_access_dot1x_authenticator_quite_period(
+            self, intf, value):
+        """
+        Manage 802.1x authenticator on switch interfaces.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # aaa port-access dot1x authenticator {intf} quite-period {value}
+
+        :param intf: Enable 802.1x authenticator on switch interface.
+        :param value: Configure quite-period on authenticator switch
+            interface.
+        """
+
+        cmd = [
+            'aaa port-access dot1x authenticator {intf} quite-period {value}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def aaa_port_access_dot1x_authenticator_reauth_period(
+            self, intf, value):
+        """
+        Manage 802.1x authenticator on switch interfaces.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # aaa port-access dot1x authenticator {intf} reauth-period {value}
+
+        :param intf: Enable 802.1x authenticator on switch interface.
+        :param value: Configure reauth-period on authenticator switch
+            interface.
+        """
+
+        cmd = [
+            'aaa port-access dot1x authenticator {intf} reauth-period {value}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def aaa_port_access_dot1x_authenticator_supplicant_timeout(
+            self, intf, value):
+        """
+        Manage 802.1x authenticator on switch interfaces.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # aaa port-access dot1x authenticator {intf} supplicant-timeout {value}  # noqa
+
+        :param intf: Enable 802.1x authenticator on switch interface.
+        :param value: Configure supplicant-timeout on authenticator switch
+            interface.
+        """  # noqa
+
+        cmd = [
+            'aaa port-access dot1x authenticator {intf} supplicant-timeout {value}'  # noqa
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def aaa_port_access_dot1x_supplicant_disable(
+            self, intf):
+        """
+        Manage 802.1x supplicant on switch interfaces.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # aaa port-access dot1x supplicant {intf} disable
+
+        :param intf: Disable 802.1x authenticator on switch interface.
+        """
+
+        cmd = [
+            'aaa port-access dot1x supplicant {intf} disable'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def aaa_port_access_dot1x_supplicant_secret(
+            self, intf, key):
+        """
+        Manage 802.1x supplicant on switch interfaces.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # aaa port-access dot1x supplicant {intf} secret {key}
+
+        :param intf: Enable 802.1x supplicant on switch interface.
+        :param key: Secret for supplicant identity.
+        """
+
+        cmd = [
+            'aaa port-access dot1x supplicant {intf} secret {key}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def aaa_port_access_dot1x_supplicant_identity(
+            self, intf, user_name):
+        """
+        Manage 802.1x supplicant on switch interfaces.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # aaa port-access dot1x supplicant {intf} identity {user_name}
+
+        :param intf: Enable 802.1x supplicant on switch interface.
+        :param user_name: Configure supplicant identity.
+        """
+
+        cmd = [
+            'aaa port-access dot1x supplicant {intf} identity {user_name}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def aaa_port_access_dot1x_supplicant_held_period(
+            self, intf, value):
+        """
+        Manage 802.1x supplicant on switch interfaces.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # aaa port-access dot1x supplicant {intf} held-period {value}
+
+        :param intf: Enable 802.1x supplicant on switch interface.
+        :param Value: Set held-period value for supplicant.
+        """
+
+        cmd = [
+            'aaa port-access dot1x supplicant {intf} held-period {value}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_aaa_port_access_dot1x_supplicant(
+            self, intf):
+        """
+        Unconfigures supplicant configurations.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no aaa port-access dot1x supplicant {intf}
+
+        :param intf: Manages 802.1x supplicant on switch interface.
+        """
+
+        cmd = [
+            'no aaa port-access dot1x supplicant {intf}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_aaa_port_access_dot1x_authenticator(
+            self, intf):
+        """
+        Unconfigures authenticator configurations.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no aaa port-access dot1x authenticator {intf}
+
+        :param intf: Manages 802.1x authenticator on switch interface.
+        """
+
+        cmd = [
+            'no aaa port-access dot1x authenticator {intf}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
 
 class RouteMap(ContextManager):
     """
@@ -12675,8 +13022,7 @@ class ConfigVrrpInterface(ContextManager):
 
     ::
 
-            ['config terminal', 'interface {port}', \
-             'vrrp {grpid} address-family {af}']
+            ['config terminal', 'interface {port}', 'vrrp {grpid} address-family {af}']
 
     post_commands:
 
@@ -15617,6 +15963,87 @@ def show_vrf(
     return parse_show_vrf(result)
 
 
+def show_aaa_port_access_dot1x_authenticator_status(
+        enode):
+    """
+    Displays 802.1x authenticator information.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show aaa port-access dot1x authenticator status
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_aaa_port_access_dot1x_authenticator_status`
+    """
+
+    cmd = [
+        'show aaa port-access dot1x authenticator status'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_aaa_port_access_dot1x_authenticator_status(result)
+
+
+def show_aaa_port_access_dot1x_supplicant_status(
+        enode):
+    """
+    Displays 802.1x supplicant information.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show aaa port-access dot1x supplicant status
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_aaa_port_access_dot1x_supplicant_status`
+    """
+
+    cmd = [
+        'show aaa port-access dot1x supplicant status'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_aaa_port_access_dot1x_supplicant_status(result)
+
+
+def show_aaa_port_access_dot1x_statistics(
+        enode):
+    """
+    Displays 802.1x counters and statistics.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show aaa port-access dot1x statistics
+
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_aaa_port_access_dot1x_statistics`
+    """
+
+    cmd = [
+        'show aaa port-access dot1x statistics'
+    ]
+
+    result = enode(
+        (' '.join(cmd)).format(**locals()),
+        shell='vtysh'
+    )
+
+    return parse_show_aaa_port_access_dot1x_statistics(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -15723,5 +16150,8 @@ __all__ = [
     'show_spanning_tree_mst_config',
     'show_vlan_summary',
     'show_vlan_internal',
-    'show_vrf'
+    'show_vrf',
+    'show_aaa_port_access_dot1x_authenticator_status',
+    'show_aaa_port_access_dot1x_supplicant_status',
+    'show_aaa_port_access_dot1x_statistics'
 ]
