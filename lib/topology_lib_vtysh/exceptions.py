@@ -71,6 +71,17 @@ class IncompleteCommandException(VtyshException):
     """
 
 
+class FailedCommandException(VtyshException):
+    """
+    This is a typed exception that will be raised when any of the following
+    regular expressions match the output of a command:
+
+    ::
+        'command failed'
+
+    """
+
+
 class NotValidLAG(VtyshException):
     """
     This is a typed exception that will be raised when any of the following
@@ -229,6 +240,12 @@ VTYSH_EXCEPTIONS = OrderedDict([
         ]
     ),
     (
+        FailedCommandException,
+        [
+            'command failed'
+        ]
+    ),
+    (
         NotValidLAG,
         [
             'specified lag port does not exist.'
@@ -332,6 +349,7 @@ __all__ = [
     'UnknownVtyshException',
     'UnknownCommandException',
     'IncompleteCommandException',
+    'FailedCommandException',
     'NotValidLAG',
     'DuplicateLoopbackIPException',
     'InvalidQnCommandException',

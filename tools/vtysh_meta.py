@@ -6702,6 +6702,11 @@ VTYSH_EXCEPTIONS_SPEC = OrderedDict([
             'command incomplete',
         ]
     ), (
+        'FailedCommandException',
+        [
+            'command failed',
+        ]
+    ), (
         'NotValidLAG',
         [
             'specified lag port does not exist.',
