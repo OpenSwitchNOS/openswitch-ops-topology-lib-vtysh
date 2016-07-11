@@ -3722,6 +3722,16 @@ local-priority {local_priority} name {name} color {color}',
                 'arguments': [],
             },
             {
+                'command': 'n',
+                'doc': 'Send \'n\' when waiting confirmation for split',
+                'arguments': [],
+            },
+            {
+                'command': 'y',
+                'doc': 'Send \'y\' when waiting confirmation for split',
+                'arguments': [],
+            },
+            {
                 'command': 'autonegotiation on',
                 'doc': 'Autonegotiation ON',
                 'arguments': [],

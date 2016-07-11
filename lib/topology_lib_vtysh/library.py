@@ -9129,6 +9129,82 @@ class ConfigInterface(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def n(
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Send 'n' when waiting confirmation for split
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # n
+
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'n'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def y(
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Send 'y' when waiting confirmation for split
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # y
+
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'y'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response()
+
+        if result:
+            raise determine_exception(result)(result)
+
     def autonegotiation_on(
         self,
         _shell='vtysh',
@@ -18706,8 +18782,7 @@ class ConfigVrrpInterface(ContextManager):
 
     ::
 
-        ['config terminal', 'interface {port}',
-         'vrrp {grpid} address-family {af}']
+        ['config terminal', 'interface {port}', 'vrrp {grpid} address-family {af}']
 
     post_commands:
 
@@ -18981,7 +19056,7 @@ class ConfigVrrpInterface(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
-    def vrrp_version(
+    def version(
         self, ver,
         _shell='vtysh',
         _shell_args={
@@ -19020,7 +19095,7 @@ class ConfigVrrpInterface(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
-    def no_vrrp_version(
+    def no_version(
         self,
         _shell='vtysh',
         _shell_args={
