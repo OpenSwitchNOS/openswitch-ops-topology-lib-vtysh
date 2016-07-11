@@ -2298,6 +2298,9 @@ def parse_ping_repetitions(raw_result):
     """
     Parse the 'ping' command raw output.
 
+    If all the results in the dictionary are None, it is because the
+    conectivity fails.
+
     :param str raw_result: ping raw result string.
     :rtype: dict
     :return: The parsed result of the ping command in a \
@@ -2322,7 +2325,12 @@ def parse_ping_repetitions(raw_result):
 
     result = {}
     if re.search('connect: Network is unreachable', raw_result):
+        # If all the results in the dictionary are None, it is because the
+        # conectivity fails.
         result['transmitted'] = None
+        result['received'] = None
+        result['errors'] = None
+        result['packet_loss'] = None
         return result
     for line in raw_result.splitlines():
         re_result = re.search(ping_re, line)
