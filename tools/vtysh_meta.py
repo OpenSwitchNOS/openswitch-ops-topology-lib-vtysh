@@ -4001,7 +4001,7 @@ local-priority {local_priority} name {name} color {color}',
             },
             {
                 'command': 'apply access-list ip {acl_name} in',
-                'doc': 'Apply ACL on interface',
+                'doc': 'Apply ACL on interface to ingress traffic',
                 'arguments': [
                     {
                         'name': 'acl_name',
@@ -4011,7 +4011,27 @@ local-priority {local_priority} name {name} color {color}',
             },
             {
                 'command': 'no apply access-list ip {acl_name} in',
-                'doc': 'Apply no ACL on interface',
+                'doc': 'Apply no ACL on interface to ingress traffic',
+                'arguments': [
+                    {
+                        'name': 'acl_name',
+                        'doc': 'Access-list name'
+                    }
+                ],
+            },
+            {
+                'command': 'apply access-list ip {acl_name} out',
+                'doc': 'Apply ACL on interface to egress traffic',
+                'arguments': [
+                    {
+                        'name': 'acl_name',
+                        'doc': 'Access-list name'
+                    }
+                ],
+            },
+            {
+                'command': 'no apply access-list ip {acl_name} out',
+                'doc': 'Apply no ACL on interface to egress traffic',
                 'arguments': [
                     {
                         'name': 'acl_name',
