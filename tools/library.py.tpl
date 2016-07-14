@@ -167,7 +167,9 @@ class {{ context_name|objectize }}(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         {% if 'returns' in command.keys() and command.returns -%}
         {{ 'return parse_%s_%s(result)'|format(context_name|methodize, command.command|methodize) }}
@@ -236,7 +238,9 @@ def {{ command.command|methodize }}(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     {% if 'returns' in command.keys() and command.returns -%}
     {{ 'return parse_%s(result)'|format(command.command|methodize) }}

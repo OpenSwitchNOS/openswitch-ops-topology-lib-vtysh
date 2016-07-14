@@ -126,7 +126,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -168,7 +170,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -207,7 +211,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -246,7 +252,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -285,7 +293,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -324,7 +334,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -363,7 +375,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -402,7 +416,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -444,7 +460,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -500,7 +518,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -556,7 +576,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -600,7 +622,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -644,7 +668,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -687,7 +713,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -730,7 +758,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -773,7 +803,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -821,7 +853,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -869,7 +903,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -909,7 +945,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -949,7 +987,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -990,7 +1030,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1031,7 +1073,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1073,7 +1117,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1115,7 +1161,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1154,7 +1202,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1194,7 +1244,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1235,7 +1287,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1276,7 +1330,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1318,7 +1374,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1360,7 +1418,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1399,7 +1459,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1439,7 +1501,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1479,7 +1543,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1519,7 +1585,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1559,7 +1627,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1598,7 +1668,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1636,7 +1708,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1675,7 +1749,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1713,7 +1789,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1751,7 +1829,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1791,7 +1871,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1830,7 +1912,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1869,7 +1953,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1908,7 +1994,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1947,7 +2035,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -1986,7 +2076,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2025,7 +2117,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2070,7 +2164,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2115,7 +2211,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2154,7 +2252,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2193,7 +2293,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2231,7 +2333,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2269,7 +2373,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2308,7 +2414,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2347,7 +2455,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2385,7 +2495,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2424,7 +2536,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2462,7 +2576,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2500,7 +2616,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2539,7 +2657,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2577,7 +2697,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2626,7 +2748,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2664,7 +2788,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2703,7 +2829,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2743,7 +2871,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2783,7 +2913,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2824,7 +2956,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2863,7 +2997,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2902,7 +3038,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2941,7 +3079,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -2979,7 +3119,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3017,7 +3159,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3055,7 +3199,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3093,7 +3239,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3131,7 +3279,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3169,7 +3319,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3207,7 +3359,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3245,7 +3399,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3283,7 +3439,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3321,7 +3479,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3359,7 +3519,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3397,7 +3559,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3435,7 +3599,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3473,7 +3639,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3511,7 +3679,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3549,7 +3719,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3587,7 +3759,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3626,7 +3800,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3665,7 +3841,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3704,7 +3882,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3744,7 +3924,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3784,7 +3966,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3822,7 +4006,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3860,7 +4046,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3900,7 +4088,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3939,7 +4129,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -3978,7 +4170,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -4017,7 +4211,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -4075,7 +4271,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -4133,7 +4331,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -4174,7 +4374,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -4215,7 +4417,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -4254,7 +4458,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -4293,7 +4499,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -4332,7 +4540,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -4371,7 +4581,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -4417,7 +4629,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -4456,7 +4670,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -4502,7 +4718,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -4541,7 +4759,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -4587,7 +4807,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -4626,7 +4848,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -4672,7 +4896,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -4747,7 +4973,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -4823,7 +5051,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -4898,7 +5128,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -4974,7 +5206,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5013,7 +5247,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5052,7 +5288,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5094,7 +5332,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5136,7 +5376,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5181,7 +5423,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5226,7 +5470,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5265,7 +5511,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5311,7 +5559,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5351,7 +5601,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5389,7 +5641,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5427,7 +5681,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5466,7 +5722,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5513,7 +5771,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5553,7 +5813,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5601,7 +5863,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5641,7 +5905,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5688,7 +5954,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5729,7 +5997,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5777,7 +6047,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5816,7 +6088,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5855,7 +6129,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5902,7 +6178,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5941,7 +6219,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -5988,7 +6268,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6027,7 +6309,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6074,7 +6358,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6113,7 +6399,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6160,7 +6448,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6199,7 +6489,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6245,7 +6537,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6284,7 +6578,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6330,7 +6626,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6369,7 +6667,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6408,7 +6708,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6449,7 +6751,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6488,7 +6792,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6528,7 +6834,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6568,7 +6876,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6608,7 +6918,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6648,7 +6960,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6687,7 +7001,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6726,7 +7042,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6765,7 +7083,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6803,7 +7123,9 @@ class Configure(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6890,7 +7212,9 @@ class RouteMap(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6929,7 +7253,9 @@ class RouteMap(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -6968,7 +7294,9 @@ class RouteMap(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7014,7 +7342,9 @@ class RouteMap(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7053,7 +7383,9 @@ class RouteMap(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7099,7 +7431,9 @@ class RouteMap(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7139,7 +7473,9 @@ class RouteMap(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7186,7 +7522,9 @@ class RouteMap(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7271,7 +7609,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7310,7 +7650,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7349,7 +7691,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7388,7 +7732,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7427,7 +7773,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7466,7 +7814,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7505,7 +7855,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7544,7 +7896,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7583,7 +7937,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7622,7 +7978,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7660,7 +8018,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7698,7 +8058,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7736,7 +8098,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7776,7 +8140,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7815,7 +8181,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7854,7 +8222,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7892,7 +8262,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7930,7 +8302,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -7968,7 +8342,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8006,7 +8382,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8044,7 +8422,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8083,7 +8463,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8122,7 +8504,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8161,7 +8545,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8200,7 +8586,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8238,7 +8626,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8276,7 +8666,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8315,7 +8707,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8354,7 +8748,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8393,7 +8789,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8432,7 +8830,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8471,7 +8871,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8510,7 +8912,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8549,7 +8953,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8588,7 +8994,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8627,7 +9035,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8665,7 +9075,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8703,7 +9115,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8741,7 +9155,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8779,7 +9195,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8817,7 +9235,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8855,7 +9275,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8894,7 +9316,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8933,7 +9357,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -8972,7 +9398,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9010,7 +9438,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9048,7 +9478,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9086,7 +9518,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9124,7 +9558,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9162,7 +9598,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9200,7 +9638,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9238,7 +9678,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9276,7 +9718,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9314,7 +9758,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9355,7 +9801,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9403,7 +9851,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9443,7 +9893,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9490,7 +9942,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9530,7 +9984,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9577,7 +10033,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9617,7 +10075,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9664,7 +10124,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9704,7 +10166,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9751,7 +10215,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9791,7 +10257,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9838,7 +10306,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9879,7 +10349,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9927,7 +10399,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -9966,7 +10440,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10012,7 +10488,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10051,7 +10529,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10089,7 +10569,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10128,7 +10610,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10166,7 +10650,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10205,7 +10691,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10244,7 +10732,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10283,7 +10773,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10322,7 +10814,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10361,7 +10855,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10400,7 +10896,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10439,7 +10937,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10477,7 +10977,9 @@ class ConfigInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10563,7 +11065,9 @@ class ConfigSubinterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10602,7 +11106,9 @@ class ConfigSubinterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10641,7 +11147,9 @@ class ConfigSubinterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10680,7 +11188,9 @@ class ConfigSubinterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10719,7 +11229,9 @@ class ConfigSubinterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10758,7 +11270,9 @@ class ConfigSubinterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10797,7 +11311,9 @@ class ConfigSubinterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10836,7 +11352,9 @@ class ConfigSubinterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10874,7 +11392,9 @@ class ConfigSubinterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10912,7 +11432,9 @@ class ConfigSubinterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -10997,7 +11519,9 @@ class ConfigInterfaceVlan(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11036,7 +11560,9 @@ class ConfigInterfaceVlan(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11075,7 +11601,9 @@ class ConfigInterfaceVlan(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11114,7 +11642,9 @@ class ConfigInterfaceVlan(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11153,7 +11683,9 @@ class ConfigInterfaceVlan(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11192,7 +11724,9 @@ class ConfigInterfaceVlan(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11231,7 +11765,9 @@ class ConfigInterfaceVlan(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11270,7 +11806,9 @@ class ConfigInterfaceVlan(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11308,7 +11846,9 @@ class ConfigInterfaceVlan(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11346,7 +11886,9 @@ class ConfigInterfaceVlan(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11431,7 +11973,9 @@ class ConfigInterfaceLoopback(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11470,7 +12014,9 @@ class ConfigInterfaceLoopback(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11509,7 +12055,9 @@ class ConfigInterfaceLoopback(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11548,7 +12096,9 @@ class ConfigInterfaceLoopback(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11587,7 +12137,9 @@ class ConfigInterfaceLoopback(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11626,7 +12178,9 @@ class ConfigInterfaceLoopback(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11711,7 +12265,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11750,7 +12306,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11789,7 +12347,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11828,7 +12388,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11867,7 +12429,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11906,7 +12470,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11945,7 +12511,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -11984,7 +12552,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12023,7 +12593,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12062,7 +12634,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12100,7 +12674,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12138,7 +12714,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12176,7 +12754,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12214,7 +12794,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12253,7 +12835,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12292,7 +12876,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12331,7 +12917,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12370,7 +12958,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12408,7 +12998,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12446,7 +13038,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12485,7 +13079,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12524,7 +13120,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12562,7 +13160,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12600,7 +13200,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12638,7 +13240,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12676,7 +13280,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12714,7 +13320,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12752,7 +13360,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12790,7 +13400,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12828,7 +13440,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12867,7 +13481,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12906,7 +13522,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12944,7 +13562,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -12982,7 +13602,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13020,7 +13642,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13058,7 +13682,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13096,7 +13722,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13135,7 +13763,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13181,7 +13811,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13220,7 +13852,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13258,7 +13892,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13297,7 +13933,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13335,7 +13973,9 @@ class ConfigInterfaceLag(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13419,7 +14059,9 @@ class ConfigInterfaceMgmt(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13458,7 +14100,9 @@ class ConfigInterfaceMgmt(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13497,7 +14141,9 @@ class ConfigInterfaceMgmt(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13536,7 +14182,9 @@ class ConfigInterfaceMgmt(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13584,7 +14232,9 @@ class ConfigInterfaceMgmt(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13632,7 +14282,9 @@ class ConfigInterfaceMgmt(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13670,7 +14322,9 @@ class ConfigInterfaceMgmt(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13754,7 +14408,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13792,7 +14448,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13830,7 +14488,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13868,7 +14528,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13906,7 +14568,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13944,7 +14608,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -13982,7 +14648,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14020,7 +14688,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14058,7 +14728,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14096,7 +14768,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14135,7 +14809,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14174,7 +14850,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14213,7 +14891,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14251,7 +14931,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14290,7 +14972,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14329,7 +15013,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14368,7 +15054,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14407,7 +15095,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14446,7 +15136,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14485,7 +15177,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14524,7 +15218,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14563,7 +15259,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14602,7 +15300,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14640,7 +15340,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14680,7 +15382,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14720,7 +15424,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14760,7 +15466,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14800,7 +15508,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14841,7 +15551,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14882,7 +15594,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14923,7 +15637,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -14964,7 +15680,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15006,7 +15724,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15046,7 +15766,9 @@ class ConfigRouterOspf(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15131,7 +15853,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15170,7 +15894,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15209,7 +15935,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15247,7 +15975,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15286,7 +16016,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15325,7 +16057,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15364,7 +16098,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15403,7 +16139,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15444,7 +16182,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15500,7 +16240,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15541,7 +16283,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15580,7 +16324,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15629,7 +16375,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15678,7 +16426,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15728,7 +16478,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15777,7 +16529,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15818,7 +16572,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15866,7 +16622,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15906,7 +16664,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15945,7 +16705,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -15987,7 +16749,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -16044,7 +16808,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -16093,7 +16859,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -16141,7 +16909,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -16180,7 +16950,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -16219,7 +16991,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -16259,7 +17033,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -16298,7 +17074,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -16338,7 +17116,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -16377,7 +17157,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -16425,7 +17207,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -16467,7 +17251,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -16507,7 +17293,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -16555,7 +17343,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -16594,7 +17384,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -16633,7 +17425,9 @@ class ConfigRouterBgp(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -16717,7 +17511,9 @@ class ConfigVlan(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -16755,7 +17551,9 @@ class ConfigVlan(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -16794,7 +17592,9 @@ class ConfigVlan(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -16833,7 +17633,9 @@ class ConfigVlan(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -16918,7 +17720,9 @@ class ConfigTftpServer(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         return parse_config_tftp_server_enable(result)
 
@@ -16957,7 +17761,9 @@ class ConfigTftpServer(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         return parse_config_tftp_server_no_enable(result)
 
@@ -16997,7 +17803,9 @@ class ConfigTftpServer(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         return parse_config_tftp_server_path(result)
 
@@ -17037,7 +17845,9 @@ class ConfigTftpServer(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         return parse_config_tftp_server_no_path(result)
 
@@ -17076,7 +17886,9 @@ class ConfigTftpServer(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         return parse_config_tftp_server_secure_mode(result)
 
@@ -17115,7 +17927,9 @@ class ConfigTftpServer(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         return parse_config_tftp_server_no_secure_mode(result)
 
@@ -17255,7 +18069,9 @@ class ConfigDhcpServer(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -17351,7 +18167,9 @@ class ConfigDhcpServer(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -17434,7 +18252,9 @@ class ConfigDhcpServer(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -17517,7 +18337,9 @@ class ConfigDhcpServer(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -17597,7 +18419,9 @@ class ConfigDhcpServer(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -17677,7 +18501,9 @@ class ConfigDhcpServer(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -17743,7 +18569,9 @@ class ConfigDhcpServer(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -17809,7 +18637,9 @@ class ConfigDhcpServer(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -17857,7 +18687,9 @@ class ConfigDhcpServer(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -17905,7 +18737,9 @@ class ConfigDhcpServer(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -17992,7 +18826,9 @@ class ConfigMirrorSession(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -18032,7 +18868,9 @@ class ConfigMirrorSession(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         return parse_config_mirror_session_no_destination_interface(result)
 
@@ -18069,7 +18907,9 @@ class ConfigMirrorSession(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -18107,7 +18947,9 @@ class ConfigMirrorSession(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -18149,7 +18991,9 @@ class ConfigMirrorSession(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -18190,7 +19034,9 @@ class ConfigMirrorSession(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -18276,7 +19122,9 @@ class ConfigQueueProfile(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -18315,7 +19163,9 @@ class ConfigQueueProfile(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -18355,7 +19205,9 @@ class ConfigQueueProfile(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -18395,7 +19247,9 @@ class ConfigQueueProfile(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -18434,7 +19288,9 @@ class ConfigQueueProfile(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -18519,7 +19375,9 @@ class ConfigScheduleProfile(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -18558,7 +19416,9 @@ class ConfigScheduleProfile(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -18598,7 +19458,9 @@ class ConfigScheduleProfile(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -18637,7 +19499,9 @@ class ConfigScheduleProfile(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -18745,7 +19609,9 @@ class ConfigAccessListIpTestname(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -18807,7 +19673,9 @@ class ConfigAccessListIpTestname(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -18846,7 +19714,9 @@ class ConfigAccessListIpTestname(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -18935,7 +19805,9 @@ class ConfigVrrpInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -18974,7 +19846,9 @@ class ConfigVrrpInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -19013,7 +19887,9 @@ class ConfigVrrpInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -19052,7 +19928,9 @@ class ConfigVrrpInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -19091,7 +19969,9 @@ class ConfigVrrpInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -19129,7 +20009,9 @@ class ConfigVrrpInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -19168,7 +20050,9 @@ class ConfigVrrpInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -19206,7 +20090,9 @@ class ConfigVrrpInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -19244,7 +20130,9 @@ class ConfigVrrpInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -19282,7 +20170,9 @@ class ConfigVrrpInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -19320,7 +20210,9 @@ class ConfigVrrpInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -19358,7 +20250,9 @@ class ConfigVrrpInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -19397,7 +20291,9 @@ class ConfigVrrpInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -19435,7 +20331,9 @@ class ConfigVrrpInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -19474,7 +20372,9 @@ class ConfigVrrpInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -19512,7 +20412,9 @@ class ConfigVrrpInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -19551,7 +20453,9 @@ class ConfigVrrpInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -19589,7 +20493,9 @@ class ConfigVrrpInterface(ContextManager):
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
 
-        result = shell.get_response(connection=_shell_args['connection'])
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
 
         if result:
             raise determine_exception(result)(result)
@@ -19635,7 +20541,9 @@ def show_interface(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_interface(result)
 
@@ -19677,7 +20585,9 @@ def show_interface_brief(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_interface_brief(result)
 
@@ -19719,7 +20629,9 @@ def show_interface_mgmt(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_interface_mgmt(result)
 
@@ -19764,7 +20676,9 @@ def show_interface_subinterface(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_interface_subinterface(result)
 
@@ -19809,7 +20723,9 @@ def show_interface_subinterface_brief(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_interface_subinterface_brief(result)
 
@@ -19854,7 +20770,9 @@ def show_interface_queues(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_interface_queues(result)
 
@@ -19904,7 +20822,9 @@ def show_vlan(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_vlan(result)
 
@@ -19949,7 +20869,9 @@ def show_lacp_interface(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_lacp_interface(result)
 
@@ -19999,7 +20921,9 @@ def show_lacp_aggregates(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_lacp_aggregates(result)
 
@@ -20041,7 +20965,9 @@ def show_lacp_configuration(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_lacp_configuration(result)
 
@@ -20086,7 +21012,9 @@ def show_lldp_neighbor_info(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_lldp_neighbor_info(result)
 
@@ -20128,7 +21056,9 @@ def show_lldp_statistics(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_lldp_statistics(result)
 
@@ -20170,7 +21100,9 @@ def show_sftp_server(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_sftp_server(result)
 
@@ -20215,7 +21147,9 @@ def show_ip_interface(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_ip_interface(result)
 
@@ -20260,7 +21194,9 @@ def show_ipv6_interface(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_ipv6_interface(result)
 
@@ -20302,7 +21238,9 @@ def show_ip_bgp_summary(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_ip_bgp_summary(result)
 
@@ -20344,7 +21282,9 @@ def show_ip_bgp_neighbors(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_ip_bgp_neighbors(result)
 
@@ -20386,7 +21326,9 @@ def show_ip_bgp(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_ip_bgp(result)
 
@@ -20428,7 +21370,9 @@ def show_ipv6_bgp(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_ipv6_bgp(result)
 
@@ -20470,7 +21414,9 @@ def show_ip_ospf_neighbor_detail(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_ip_ospf_neighbor_detail(result)
 
@@ -20512,7 +21458,9 @@ def show_ip_ospf_neighbor(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_ip_ospf_neighbor(result)
 
@@ -20554,7 +21502,9 @@ def show_ip_ospf_interface(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_ip_ospf_interface(result)
 
@@ -20596,7 +21546,9 @@ def show_ip_ospf(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_ip_ospf(result)
 
@@ -20638,7 +21590,9 @@ def show_ip_ospf_route(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_ip_ospf_route(result)
 
@@ -20680,7 +21634,9 @@ def show_running_config(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_running_config(result)
 
@@ -20733,7 +21689,9 @@ def show_running_config_interface(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_running_config_interface(result)
 
@@ -20775,7 +21733,9 @@ def show_ip_route(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_ip_route(result)
 
@@ -20817,7 +21777,9 @@ def show_ipv6_route(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_ipv6_route(result)
 
@@ -20859,7 +21821,9 @@ def show_sflow(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_sflow(result)
 
@@ -20904,7 +21868,9 @@ def show_sflow_interface(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_sflow_interface(result)
 
@@ -20949,7 +21915,9 @@ def show_udld_interface(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_udld_interface(result)
 
@@ -20991,7 +21959,9 @@ def show_rib(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_rib(result)
 
@@ -21033,7 +22003,9 @@ def show_ip_ecmp(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_ip_ecmp(result)
 
@@ -21075,7 +22047,9 @@ def clear_bgp(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     if result:
         raise determine_exception(result)(result)
@@ -21116,7 +22090,9 @@ def clear_udld_statistics(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     if result:
         raise determine_exception(result)(result)
@@ -21160,7 +22136,9 @@ def clear_udld_statistics_interface(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     if result:
         raise determine_exception(result)(result)
@@ -21201,7 +22179,9 @@ def clear_access_list_hitcounts_all(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     if result:
         raise determine_exception(result)(result)
@@ -21244,7 +22224,9 @@ def clear_access_list_hitcounts_ip_interface(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     if result:
         raise determine_exception(result)(result)
@@ -21289,7 +22271,9 @@ def ping_repetitions(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_ping_repetitions(result)
 
@@ -21333,7 +22317,9 @@ def ping6_repetitions(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_ping6_repetitions(result)
 
@@ -21441,7 +22427,9 @@ def ping(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_ping(result)
 
@@ -21516,7 +22504,9 @@ def ping6(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_ping6(result)
 
@@ -21600,7 +22590,9 @@ def copy_core_dump(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_copy_core_dump(result)
 
@@ -21692,7 +22684,9 @@ def traceroute(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_traceroute(result)
 
@@ -21768,7 +22762,9 @@ def traceroute6(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_traceroute6(result)
 
@@ -21810,7 +22806,9 @@ def show_ntp_associations(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_ntp_associations(result)
 
@@ -21852,7 +22850,9 @@ def show_ntp_authentication_key(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_ntp_authentication_key(result)
 
@@ -21894,7 +22894,9 @@ def show_ntp_statistics(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_ntp_statistics(result)
 
@@ -21936,7 +22938,9 @@ def show_ntp_status(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_ntp_status(result)
 
@@ -21978,7 +22982,9 @@ def show_ntp_trusted_keys(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_ntp_trusted_keys(result)
 
@@ -22020,7 +23026,9 @@ def show_dhcp_server_leases(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_dhcp_server_leases(result)
 
@@ -22062,7 +23070,9 @@ def show_dhcp_server(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_dhcp_server(result)
 
@@ -22104,7 +23114,9 @@ def show_mac_address_table(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_mac_address_table(result)
 
@@ -22146,7 +23158,9 @@ def show_vlog_config(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_vlog_config(result)
 
@@ -22189,7 +23203,9 @@ def show_vlog(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_vlog(result)
 
@@ -22239,7 +23255,9 @@ def show_interface_loopback(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_interface_loopback(result)
 
@@ -22281,7 +23299,9 @@ def show_interface_loopback_brief(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_interface_loopback_brief(result)
 
@@ -22324,7 +23344,9 @@ def show_vlog_config_daemon(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_vlog_config_daemon(result)
 
@@ -22367,7 +23389,9 @@ def show_vlog_config_feature(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_vlog_config_feature(result)
 
@@ -22409,7 +23433,9 @@ def show_vlog_config_list(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_vlog_config_list(result)
 
@@ -22452,7 +23478,9 @@ def show_vlog_daemon(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_vlog_daemon(result)
 
@@ -22495,7 +23523,9 @@ def show_vlog_severity(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_vlog_severity(result)
 
@@ -22539,7 +23569,9 @@ def show_vlog_daemon_severity(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_vlog_daemon_severity(result)
 
@@ -22583,7 +23615,9 @@ def show_vlog_severity_daemon(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_vlog_severity_daemon(result)
 
@@ -22623,7 +23657,9 @@ def copy_running_config_startup_config(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     if result:
         raise determine_exception(result)(result)
@@ -22664,7 +23700,9 @@ def copy_startup_config_running_config(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     if result:
         raise determine_exception(result)(result)
@@ -22707,7 +23745,9 @@ def show_startup_config(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_startup_config(result)
 
@@ -22749,7 +23789,9 @@ def erase_startup_config(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_erase_startup_config(result)
 
@@ -22791,7 +23833,9 @@ def show_tftp_server(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_tftp_server(result)
 
@@ -22841,7 +23885,9 @@ def show_mirror(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_mirror(result)
 
@@ -22891,7 +23937,9 @@ def show_qos_cos_map(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_qos_cos_map(result)
 
@@ -22941,7 +23989,9 @@ def show_qos_dscp_map(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_qos_dscp_map(result)
 
@@ -22992,7 +24042,9 @@ def show_qos_queue_profile(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_qos_queue_profile(result)
 
@@ -23043,7 +24095,9 @@ def show_qos_schedule_profile(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_qos_schedule_profile(result)
 
@@ -23093,7 +24147,9 @@ def show_qos_trust(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_qos_trust(result)
 
@@ -23135,7 +24191,9 @@ def show_snmp_community(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_snmp_community(result)
 
@@ -23177,7 +24235,9 @@ def show_snmp_system(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_snmp_system(result)
 
@@ -23219,7 +24279,9 @@ def show_snmp_trap(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_snmp_trap(result)
 
@@ -23261,7 +24323,9 @@ def diag_dump_lacp_basic(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_diag_dump_lacp_basic(result)
 
@@ -23303,7 +24367,9 @@ def show_snmpv3_users(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_snmpv3_users(result)
 
@@ -23345,7 +24411,9 @@ def show_core_dump(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_core_dump(result)
 
@@ -23387,7 +24455,9 @@ def show_snmp_agent_port(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_snmp_agent_port(result)
 
@@ -23438,7 +24508,9 @@ def show_events(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_events(result)
 
@@ -23480,7 +24552,9 @@ def show_aaa_authentication(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_aaa_authentication(result)
 
@@ -23522,7 +24596,9 @@ def show_radius_server(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_radius_server(result)
 
@@ -23599,7 +24675,9 @@ def diag_dump(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_diag_dump(result)
 
@@ -23642,7 +24720,9 @@ def show_spanning_tree(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_spanning_tree(result)
 
@@ -23684,7 +24764,9 @@ def show_spanning_tree_mst(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_spanning_tree_mst(result)
 
@@ -23726,7 +24808,9 @@ def show_spanning_tree_mst_config(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_spanning_tree_mst_config(result)
 
@@ -23768,7 +24852,9 @@ def show_vlan_summary(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_vlan_summary(result)
 
@@ -23810,7 +24896,9 @@ def show_vlan_internal(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_vlan_internal(result)
 
@@ -23852,7 +24940,9 @@ def show_vrf(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_vrf(result)
 
@@ -23896,7 +24986,9 @@ def show_access_list_hitcounts_ip_interface(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_access_list_hitcounts_ip_interface(result)
 
@@ -23938,7 +25030,9 @@ def show_ip_prefix_list(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_ip_prefix_list(result)
 
@@ -23980,7 +25074,9 @@ def show_ipv6_prefix_list(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_ipv6_prefix_list(result)
 
@@ -24023,7 +25119,9 @@ def show_ip_bgp_route_map(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
 
-    result = shell.get_response(connection=_shell_args['connection'])
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
 
     return parse_show_ip_bgp_route_map(result)
 
