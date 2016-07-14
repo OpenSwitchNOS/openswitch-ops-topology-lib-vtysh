@@ -13340,6 +13340,162 @@ class ConfigInterfaceLag(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def apply_access_list_ip_in(
+        self, acl_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Apply ACL on interface to ingress traffic
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # apply access-list ip {acl_name} in
+
+        :param acl_name: Access-list name
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'apply access-list ip {acl_name} in'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response(connection=_shell_args['connection'])
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_apply_access_list_ip_in(
+        self, acl_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Apply no ACL on interface to ingress traffic
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no apply access-list ip {acl_name} in
+
+        :param acl_name: Access-list name
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no apply access-list ip {acl_name} in'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response(connection=_shell_args['connection'])
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def apply_access_list_ip_out(
+        self, acl_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Apply ACL on interface to egress traffic
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # apply access-list ip {acl_name} out
+
+        :param acl_name: Access-list name
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'apply access-list ip {acl_name} out'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response(connection=_shell_args['connection'])
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_apply_access_list_ip_out(
+        self, acl_name,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Apply no ACL on interface to egress traffic
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no apply access-list ip {acl_name} out
+
+        :param acl_name: Access-list name
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no apply access-list ip {acl_name} out'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response(connection=_shell_args['connection'])
+
+        if result:
+            raise determine_exception(result)(result)
+
 
 class ConfigInterfaceMgmt(ContextManager):
     """
