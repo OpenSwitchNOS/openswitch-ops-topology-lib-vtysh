@@ -1077,7 +1077,6 @@ interface {port}',
                     }
                 ],
                 'returns': True
-            }
         ]
     }),
     ('configure', {

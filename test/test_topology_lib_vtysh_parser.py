@@ -5651,3 +5651,133 @@ Entry 3:
     ddiff = DeepDiff(result, expected_result)
 
     assert not ddiff
+
+
+def test_parse_show_spanning_tree_mst():
+    raw_result = """\
+#### MST0
+Vlans mapped:  1
+Bridge         Address:48:0f:cf:af:70:cf    priority:8
+Operational    Hello time(in seconds): 2  Forward delay(in seconds):15  \
+Max-age(in seconds):20  txHoldCount(in pps): 1
+Configured     Hello time(in seconds): 2  Forward delay(in seconds):15  \
+Max-age(in seconds):20  txHoldCount(in pps): 6
+
+Port           Role           State      Cost       Priority   Type
+-------------- -------------- ---------- ---------- ---------- ----------
+1              Root           Forwarding 0          8          point_to_point
+2              Alternate      Blocking   0          8          point_to_point
+"""
+
+    expected = {
+        "MST0": {
+            "vlan_mapped": "1",
+            "2": {
+                "role": "Alternate",
+                "priority": "8",
+                "type": "point_to_point",
+                "State": "Blocking",
+                "cost": "0"
+            },
+            "root": "no",
+            "1": {
+                "role": "Root",
+                "priority": "8",
+                "type": "point_to_point",
+                "State": "Forwarding",
+                "cost": "0"
+            },
+            "operational_forward_delay": "15",
+            "operational_hello": "2",
+            "Configuredl_forward_delay": "15",
+            "Configured_tx_holdcount": "6",
+            "bridge_address": "48:0f:cf:af:70:cf",
+            "operational_tx_holdcount": "1",
+            "operational_max_age": "20",
+            "Configured_max_age": "20",
+            "Configured_hello": "2",
+            "regional_root": "no",
+            "bridge_priority": "8"
+        }
+    }
+
+    result = parse_show_spanning_tree_mst(raw_result)
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_spanning_tree():
+    raw_result = """\
+MST0
+  Spanning tree status: Enabled
+  Root ID    Priority  : 8
+             MAC-Address: 32768.0.48:0f:cf:af:20:51
+             Hello time(in seconds):2  Max Age(in seconds):20  \
+Forward Delay(in seconds):15
+
+  Bridge ID  Priority  : 8
+             MAC-Address: 48:0f:cf:af:40:57
+             Hello time(in seconds):2  Max Age(in seconds):20  \
+Forward Delay(in seconds):15
+
+Port         Role           State      Cost    Priority   Type
+------------ -------------- ---------- ------- ---------- ----------
+2            Root           Forwarding 0       8          point_to_point
+1            Designated     Forwarding 0       8          point_to_point
+    """
+    expected = {
+        "root_hello": "2",
+        "2": {
+            "role": "Root",
+            "priority": "8",
+            "type": "point_to_point",
+            "State": "Forwarding",
+            "cost": "0"
+        },
+        "1": {
+            "role": "Designated",
+            "priority": "8",
+            "type": "point_to_point",
+            "State": "Forwarding",
+            "cost": "0"
+        },
+        "bridge_max_age": "20",
+        "root": "no",
+        "root_priority": "8",
+        "bridge_forward_delay": "15",
+        "bridge_hello": "2",
+        "bridge_priority": "8",
+        "root_forward_delay": "15",
+        "root_max_age": "20",
+        "root_mac_address": "32768.0.48:0f:cf:af:20:51",
+        "spanning_tree": "Enabled",
+        "bridge_mac_address": "48:0f:cf:af:40:57"
+    }
+    result = parse_show_spanning_tree(raw_result)
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_spanning_tree_mst_config():
+    raw_result = """ \
+MST configuration information
+   MST config ID        : Region-One
+   MST config revision  : 8
+   MST config digest    : AC36177F50283CD4B83821D8AB26DE62
+   Number of instances  : 0
+
+Instance ID     Member VLANs
+--------------- ----------------------------------
+    """
+    expected = {
+        "mst_config_revision": "8",
+        "no_instances": "0",
+        "instance_vlan": {},
+        "mst_config_id": "Region-One",
+        "mst_digest": "AC36177F50283CD4B83821D8AB26DE62"
+    }
+
+    result = parse_show_spanning_tree_mst_config(raw_result)
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
