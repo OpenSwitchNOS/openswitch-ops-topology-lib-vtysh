@@ -25128,6 +25128,50 @@ def show_ip_bgp_route_map(
     return parse_show_ip_bgp_route_map(result)
 
 
+def show_version(
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
+    """
+    Show version information.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show version
+
+    :param dict kwargs: arguments to pass to the send_command of the
+     vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_version`
+    """
+
+    cmd = [
+        'show version'
+    ]
+
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
+    )
+
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
+
+    return parse_show_version(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -25243,5 +25287,6 @@ __all__ = [
     'show_access_list_hitcounts_ip_interface',
     'show_ip_prefix_list',
     'show_ipv6_prefix_list',
-    'show_ip_bgp_route_map'
+    'show_ip_bgp_route_map',
+    'show_version'
 ]
