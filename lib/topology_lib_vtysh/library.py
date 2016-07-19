@@ -23645,6 +23645,8 @@ def copy_running_config_startup_config(
      vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_copy_running_config_startup_config`
     """
 
     cmd = [
@@ -23661,8 +23663,7 @@ def copy_running_config_startup_config(
         connection=_shell_args.get('connection', None)
     )
 
-    if result:
-        raise determine_exception(result)(result)
+    return parse_copy_running_config_startup_config(result)
 
 
 def copy_startup_config_running_config(
@@ -23688,6 +23689,8 @@ def copy_startup_config_running_config(
      vtysh shell.
     :param str _shell: shell to be selected
     :param dict _shell_args: low-level shell API arguments
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_copy_startup_config_running_config`
     """
 
     cmd = [
@@ -23704,8 +23707,7 @@ def copy_startup_config_running_config(
         connection=_shell_args.get('connection', None)
     )
 
-    if result:
-        raise determine_exception(result)(result)
+    return parse_copy_startup_config_running_config(result)
 
 
 def show_startup_config(

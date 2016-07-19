@@ -83,6 +83,8 @@ from topology_lib_vtysh.parser import (
     parse_show_tftp_server,
     parse_show_core_dump,
     parse_copy_core_dump,
+    parse_copy_startup_config_running_config,
+    parse_copy_running_config_startup_config,
     parse_config_tftp_server_enable,
     parse_config_tftp_server_no_enable,
     parse_config_tftp_server_path,
@@ -133,6 +135,36 @@ def test_parse_config_tftp_server_no_secure_mode():
     result = parse_config_tftp_server_no_secure_mode(raw_result)
     expected = {
         'result': True
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_copy_running_config_startup_config():
+    raw_result = """\
+    Copy in progress ....
+    Success
+    """
+    result = parse_copy_running_config_startup_config(raw_result)
+    expected = {
+        "status": "success",
+        "reason": "Copied running-config to startup-config"
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_copy_startup_config_running_config():
+    raw_result = """\
+    Copy in progress ....
+    Success
+    """
+    result = parse_copy_startup_config_running_config(raw_result)
+    expected = {
+        "status": "success",
+        "reason": "Copied startup-config to running-config"
     }
 
     ddiff = DeepDiff(result, expected)

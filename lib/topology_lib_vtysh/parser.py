@@ -2613,6 +2613,74 @@ def parse_copy_core_dump(raw_result):
         return {"status": "failed", "reason": "undefined error"}
 
 
+def parse_copy_startup_config_running_config(raw_result):
+    """
+    Parse the 'copy startup-config running-config' command raw output.
+    :param str raw_result: copy startup-config running-config
+    raw result string.
+    :rtype: dict
+    :return: The parsed result of the copy startup-config running-config:
+
+    ::
+
+       {
+        'status': 'success'
+        'reason': 'Copied startup-config to running-config'
+       }
+    """
+
+    if (
+        "Copy in progress " in raw_result and
+        "Success" in raw_result
+    ):
+        return {
+            "status": "success",
+            "reason": "Copied startup-config to running-config"
+        }
+    if (
+        "Copy in progress " in raw_result and
+        "ERROR: Copy failed" in raw_result
+    ):
+        return {
+            "status": "failed",
+            "reason": "Copy startup-config to running-config failed"
+        }
+
+
+def parse_copy_running_config_startup_config(raw_result):
+    """
+    Parse the 'copy running-config startup-config' command raw output.
+    :param str raw_result: copy running-config startup-config
+    raw result string.
+    :rtype: dict
+    :return: The parsed result of the copy running-config startup-config:
+
+    ::
+
+       {
+        'status': 'success'
+        'reason': 'Copied running-config to startup-config'
+       }
+    """
+
+    if (
+        "Copy in progress " in raw_result and
+        "Success" in raw_result
+    ):
+        return {
+            "status": "success",
+            "reason": "Copied running-config to startup-config"
+        }
+    if (
+        "Copy in progress " in raw_result and
+        "ERROR: Copy failed" in raw_result
+    ):
+        return {
+            "status": "failed",
+            "reason": "Copy running-config to startup-config failed"
+        }
+
+
 def parse_traceroute(raw_result):
     """
     Parse the 'traceroute' command raw output.
@@ -7014,5 +7082,7 @@ __all__ = [
     'parse_show_spanning_tree_mst', 'parse_show_vlan_summary',
     'parse_show_access_list_hitcounts_ip_interface',
     'parse_show_ip_prefix_list', 'parse_show_ipv6_prefix_list',
-    'parse_show_ip_bgp_route_map'
+    'parse_show_ip_bgp_route_map',
+    'parse_copy_running_config_startup_config',
+    'parse_copy_startup_config_running_config'
 ]

@@ -784,12 +784,14 @@ interface {port}',
             {
                 'command': 'copy running-config startup-config',
                 'doc': 'copies running config to startup config',
-                'arguments': []
+                'arguments': [],
+                'returns': True
             },
             {
                 'command': 'copy startup-config running-config',
                 'doc': 'copies startup config to running config',
-                'arguments': []
+                'arguments': [],
+                'returns': True
             },
             {
                 'command': 'show startup-config',
