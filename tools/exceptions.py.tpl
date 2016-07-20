@@ -53,15 +53,13 @@ class {{ exception }}(VtyshException):
     """
     This is a typed exception that will be raised when any of the following
     regular expressions match the output of a command:
-
     ::
-
+{# #}
         {%- for expression in matches %}
         {%- for part in range(0, ((expression|length)/65)|round(0, 'ceil')|int) %}
         '{{ expression[(part * 65):((part + 1) * 65)] }}'
         {%- endfor %}
         {%- endfor %}
-
     """
 
 {% endfor %}
