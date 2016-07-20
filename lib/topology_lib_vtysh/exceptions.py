@@ -55,6 +55,8 @@ class UnknownCommandException(VtyshException):
     regular expressions match the output of a command:
 
     ::
+
+
         'unknown command'
 
     """
@@ -66,6 +68,8 @@ class IncompleteCommandException(VtyshException):
     regular expressions match the output of a command:
 
     ::
+
+
         'command incomplete'
 
     """
@@ -77,6 +81,8 @@ class FailedCommandException(VtyshException):
     regular expressions match the output of a command:
 
     ::
+
+
         'command failed'
 
     """
@@ -88,6 +94,8 @@ class NotValidLAG(VtyshException):
     regular expressions match the output of a command:
 
     ::
+
+
         'specified lag port does not exist.'
 
     """
@@ -99,6 +107,8 @@ class DuplicateLoopbackIPException(VtyshException):
     regular expressions match the output of a command:
 
     ::
+
+
         'ip address is already assigned to interface as primary.'
 
     """
@@ -110,6 +120,8 @@ class InvalidQnCommandException(VtyshException):
     regular expressions match the output of a command:
 
     ::
+
+
         'name  acl name'
 
     """
@@ -121,6 +133,8 @@ class AclEmptyException(VtyshException):
     regular expressions match the output of a command:
 
     ::
+
+
         'acl is empty'
 
     """
@@ -132,6 +146,8 @@ class MaxACEsException(VtyshException):
     regular expressions match the output of a command:
 
     ::
+
+
         'unable to create acl entry. the maximum allowed number of entries'
         ' per acl has been reached'
 
@@ -144,6 +160,8 @@ class ResequenceNumberException(VtyshException):
     regular expressions match the output of a command:
 
     ::
+
+
         'sequence numbers would exceed maximum'
 
     """
@@ -155,6 +173,8 @@ class AmbiguousCommandException(VtyshException):
     regular expressions match the output of a command:
 
     ::
+
+
         'ambiguous command'
 
     """
@@ -166,6 +186,8 @@ class InvalidL4SourcePortRangeException(VtyshException):
     regular expressions match the output of a command:
 
     ::
+
+
         'invalid l4 source port range'
 
     """
@@ -177,6 +199,8 @@ class EchoCommandException(VtyshException):
     regular expressions match the output of a command:
 
     ::
+
+
         'range'
 
     """
@@ -188,6 +212,8 @@ class AceDoesNotExistException(VtyshException):
     regular expressions match the output of a command:
 
     ::
+
+
         'acl entry does not exist'
 
     """
@@ -199,6 +225,8 @@ class AclDoesNotExistException(VtyshException):
     regular expressions match the output of a command:
 
     ::
+
+
         'acl does not exist'
 
     """
@@ -210,6 +238,8 @@ class MaximumCommunitiesException(VtyshException):
     regular expressions match the output of a command:
 
     ::
+
+
         'config rejected : maximum allowed communities are configured'
 
     """
@@ -221,6 +251,8 @@ class DuplicateCommunityException(VtyshException):
     regular expressions match the output of a command:
 
     ::
+
+
         'this community is already configured'
 
     """

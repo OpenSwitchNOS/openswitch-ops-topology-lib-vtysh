@@ -56,7 +56,7 @@ class {{ exception }}(VtyshException):
 
     ::
 
-        {%- for expression in matches %}
+{% for expression in matches %}
         {%- for part in range(0, ((expression|length)/65)|round(0, 'ceil')|int) %}
         '{{ expression[(part * 65):((part + 1) * 65)] }}'
         {%- endfor %}
