@@ -309,6 +309,12 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
+                'command': 'show version',
+                'doc': 'Show version information.',
+                'arguments': [],
+                'returns': True
+            },
+            {
                 'command': 'clear bgp {peer} {softreconfig}',
                 'doc': 'Clear bgp peer.',
                 'arguments': [
