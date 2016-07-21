@@ -113,7 +113,8 @@ from topology_lib_vtysh.parser import (
     parse_show_access_list_hitcounts_ip_interface,
     parse_show_ip_prefix_list,
     parse_show_ipv6_prefix_list,
-    parse_show_ip_bgp_route_map
+    parse_show_ip_bgp_route_map,
+    parse_show_version
     )
 
 
@@ -5682,4 +5683,19 @@ Entry 3:
     result = parse_show_ip_bgp_route_map(raw_result)
     ddiff = DeepDiff(result, expected_result)
 
+    assert not ddiff
+
+
+def test_parse_show_version():
+    raw_result = """\
+OpenSwitch 0.3.0-rc0 (Build: as5712-ops-0.3.0-rc0-release+2016071100)
+"""
+    result = parse_show_version(raw_result)
+
+    expected = {
+        'version': '0.3.0-rc0',
+        'build': 'as5712-ops-0.3.0-rc0-release+2016071100'
+    }
+
+    ddiff = DeepDiff(result, expected)
     assert not ddiff

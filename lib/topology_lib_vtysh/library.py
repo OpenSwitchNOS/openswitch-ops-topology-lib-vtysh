@@ -22010,6 +22010,50 @@ def show_ip_ecmp(
     return parse_show_ip_ecmp(result)
 
 
+def show_version(
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
+    """
+    Show version information.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show version
+
+    :param dict kwargs: arguments to pass to the send_command of the
+     vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_version`
+    """
+
+    cmd = [
+        'show version'
+    ]
+
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
+    )
+
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
+
+    return parse_show_version(result)
+
+
 def clear_bgp(
     enode, peer, softreconfig,
     _shell='vtysh',
@@ -25181,6 +25225,7 @@ __all__ = [
     'show_udld_interface',
     'show_rib',
     'show_ip_ecmp',
+    'show_version',
     'clear_bgp',
     'clear_udld_statistics',
     'clear_udld_statistics_interface',

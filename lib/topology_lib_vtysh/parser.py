@@ -7027,6 +7027,36 @@ def parse_show_ip_bgp_route_map(raw_result):
     return result
 
 
+def parse_show_version(raw_result):
+    """
+    Parse the 'show version' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show version command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+            'version' : '',
+            'build' : ''
+        }
+    """
+
+    version_re = (
+        r'OpenSwitch\s+(\S+)\s+\(Build:\s+(\S+)\)'
+     )
+
+    result = {}
+    re_result = re.search(version_re, raw_result)
+    if re_result is None:
+        assert False, "Version pattern is not available"
+    result['version'] = re_result.group(1)
+    result['build'] = re_result.group(2)
+    return result
+
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface_all',
@@ -7084,5 +7114,6 @@ __all__ = [
     'parse_show_ip_prefix_list', 'parse_show_ipv6_prefix_list',
     'parse_show_ip_bgp_route_map',
     'parse_copy_running_config_startup_config',
-    'parse_copy_startup_config_running_config'
+    'parse_copy_startup_config_running_config',
+    'parse_show_version'
 ]
