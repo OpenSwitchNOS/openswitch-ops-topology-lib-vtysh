@@ -35,6 +35,7 @@ Vtysh auto-generated communication library module.
 from __future__ import unicode_literals, absolute_import
 from __future__ import print_function, division
 
+from datetime import datetime
 from .parser import *  # noqa
 from .exceptions import determine_exception
 
@@ -163,6 +164,10 @@ class {{ context_name|objectize }}(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -170,6 +175,7 @@ class {{ context_name|objectize }}(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         {% if 'returns' in command.keys() and command.returns -%}
         {{ 'return parse_%s_%s(result)'|format(context_name|methodize, command.command|methodize) }}
@@ -234,6 +240,10 @@ def {{ command.command|methodize }}(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -241,6 +251,7 @@ def {{ command.command|methodize }}(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     {% if 'returns' in command.keys() and command.returns -%}
     {{ 'return parse_%s(result)'|format(command.command|methodize) }}

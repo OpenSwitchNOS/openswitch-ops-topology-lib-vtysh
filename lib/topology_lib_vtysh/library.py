@@ -26,6 +26,7 @@ Vtysh auto-generated communication library module.
 from __future__ import unicode_literals, absolute_import
 from __future__ import print_function, division
 
+from datetime import datetime
 from .parser import *  # noqa
 from .exceptions import determine_exception
 
@@ -122,6 +123,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -129,6 +134,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -166,6 +172,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -173,6 +183,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -207,6 +218,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -214,6 +229,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -248,6 +264,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -255,6 +275,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -289,6 +310,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -296,6 +321,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -330,6 +356,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -337,6 +367,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -371,6 +402,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -378,6 +413,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -412,6 +448,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -419,6 +459,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -456,6 +497,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -463,6 +508,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -514,6 +560,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -521,6 +571,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -572,6 +623,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -579,6 +634,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -618,6 +674,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -625,6 +685,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -664,6 +725,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -671,6 +736,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -709,6 +775,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -716,6 +786,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -754,6 +825,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -761,6 +836,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -799,6 +875,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -806,6 +886,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -849,6 +930,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -856,6 +941,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -899,6 +985,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -906,6 +996,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -941,6 +1032,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -948,6 +1043,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -983,6 +1079,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -990,6 +1090,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1026,6 +1127,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1033,6 +1138,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1069,6 +1175,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1076,6 +1186,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1113,6 +1224,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1120,6 +1235,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1157,6 +1273,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1164,6 +1284,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1198,6 +1319,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1205,6 +1330,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1240,6 +1366,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1247,6 +1377,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1283,6 +1414,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1290,6 +1425,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1326,6 +1462,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1333,6 +1473,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1370,6 +1511,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1377,6 +1522,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1414,6 +1560,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1421,6 +1571,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1455,6 +1606,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1462,6 +1617,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1497,6 +1653,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1504,6 +1664,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1539,6 +1700,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1546,6 +1711,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1581,6 +1747,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1588,6 +1758,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1623,6 +1794,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1630,6 +1805,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1664,6 +1840,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1671,6 +1851,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1704,6 +1885,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1711,6 +1896,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1745,6 +1931,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1752,6 +1942,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1785,6 +1976,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1792,6 +1987,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1825,6 +2021,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1832,6 +2032,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1867,6 +2068,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1874,6 +2079,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1908,6 +2114,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1915,6 +2125,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1949,6 +2160,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1956,6 +2171,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -1990,6 +2206,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -1997,6 +2217,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2031,6 +2252,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2038,6 +2263,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2072,6 +2298,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2079,6 +2309,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2113,6 +2344,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2120,6 +2355,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2160,6 +2396,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2167,6 +2407,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2207,6 +2448,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2214,6 +2459,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2248,6 +2494,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2255,6 +2505,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2289,6 +2540,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2296,6 +2551,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2329,6 +2585,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2336,6 +2596,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2369,6 +2630,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2376,6 +2641,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2410,6 +2676,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2417,6 +2687,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2451,6 +2722,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2458,6 +2733,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2491,6 +2767,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2498,6 +2778,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2532,6 +2813,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2539,6 +2824,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2572,6 +2858,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2579,6 +2869,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2612,6 +2903,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2619,6 +2914,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2653,6 +2949,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2660,6 +2960,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2693,6 +2994,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2700,6 +3005,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2744,6 +3050,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2751,6 +3061,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2784,6 +3095,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2791,6 +3106,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2825,6 +3141,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2832,6 +3152,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2867,6 +3188,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2874,6 +3199,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2909,6 +3235,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2916,6 +3246,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2952,6 +3283,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -2959,6 +3294,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -2993,6 +3329,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3000,6 +3340,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3034,6 +3375,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3041,6 +3386,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3075,6 +3421,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3082,6 +3432,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3115,6 +3466,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3122,6 +3477,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3155,6 +3511,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3162,6 +3522,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3195,6 +3556,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3202,6 +3567,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3235,6 +3601,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3242,6 +3612,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3275,6 +3646,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3282,6 +3657,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3315,6 +3691,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3322,6 +3702,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3355,6 +3736,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3362,6 +3747,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3395,6 +3781,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3402,6 +3792,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3435,6 +3826,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3442,6 +3837,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3475,6 +3871,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3482,6 +3882,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3515,6 +3916,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3522,6 +3927,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3555,6 +3961,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3562,6 +3972,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3595,6 +4006,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3602,6 +4017,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3635,6 +4051,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3642,6 +4062,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3675,6 +4096,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3682,6 +4107,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3715,6 +4141,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3722,6 +4152,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3755,6 +4186,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3762,6 +4197,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3796,6 +4232,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3803,6 +4243,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3837,6 +4278,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3844,6 +4289,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3878,6 +4324,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3885,6 +4335,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3920,6 +4371,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3927,6 +4382,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -3962,6 +4418,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -3969,6 +4429,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -4002,6 +4463,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -4009,6 +4474,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -4042,6 +4508,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -4049,6 +4519,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -4084,6 +4555,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -4091,6 +4566,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -4125,6 +4601,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -4132,6 +4612,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -4166,6 +4647,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -4173,6 +4658,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -4207,6 +4693,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -4214,6 +4704,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -4267,6 +4758,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -4274,6 +4769,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -4327,6 +4823,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -4334,6 +4834,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -4370,6 +4871,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -4377,6 +4882,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -4413,6 +4919,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -4420,6 +4930,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -4454,6 +4965,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -4461,6 +4976,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -4495,6 +5011,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -4502,6 +5022,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -4536,6 +5057,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -4543,6 +5068,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -4577,6 +5103,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -4584,6 +5114,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -4625,6 +5156,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -4632,6 +5167,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -4666,6 +5202,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -4673,6 +5213,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -4714,6 +5255,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -4721,6 +5266,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -4755,6 +5301,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -4762,6 +5312,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -4803,6 +5354,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -4810,6 +5365,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -4844,6 +5400,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -4851,6 +5411,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -4892,6 +5453,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -4899,6 +5464,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -4969,6 +5535,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -4976,6 +5546,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -5047,6 +5618,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -5054,6 +5629,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -5124,6 +5700,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -5131,6 +5711,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -5202,6 +5783,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -5209,6 +5794,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -5243,6 +5829,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -5250,6 +5840,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -5284,6 +5875,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -5291,6 +5886,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -5328,6 +5924,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -5335,6 +5935,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -5372,6 +5973,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -5379,6 +5984,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -5419,6 +6025,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -5426,6 +6036,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -5466,6 +6077,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -5473,6 +6088,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -5507,6 +6123,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -5514,6 +6134,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -5555,6 +6176,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -5562,6 +6187,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -5597,6 +6223,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -5604,6 +6234,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -5637,6 +6268,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -5644,6 +6279,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -5677,6 +6313,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -5684,6 +6324,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -5718,6 +6359,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -5725,6 +6370,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -5767,6 +6413,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -5774,6 +6424,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -5809,6 +6460,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -5816,6 +6471,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -5859,6 +6515,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -5866,6 +6526,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -5901,6 +6562,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -5908,6 +6573,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -5950,6 +6616,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -5957,6 +6627,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -5993,6 +6664,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6000,6 +6675,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6043,6 +6719,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6050,6 +6730,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6084,6 +6765,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6091,6 +6776,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6125,6 +6811,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6132,6 +6822,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6174,6 +6865,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6181,6 +6876,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6215,6 +6911,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6222,6 +6922,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6264,6 +6965,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6271,6 +6976,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6305,6 +7011,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6312,6 +7022,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6354,6 +7065,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6361,6 +7076,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6395,6 +7111,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6402,6 +7122,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6444,6 +7165,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6451,6 +7176,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6485,6 +7211,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6492,6 +7222,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6533,6 +7264,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6540,6 +7275,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6574,6 +7310,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6581,6 +7321,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6622,6 +7363,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6629,6 +7374,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6663,6 +7409,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6670,6 +7420,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6704,6 +7455,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6711,6 +7466,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6747,6 +7503,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6754,6 +7514,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6788,6 +7549,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6795,6 +7560,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6830,6 +7596,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6837,6 +7607,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6872,6 +7643,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6879,6 +7654,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6914,6 +7690,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6921,6 +7701,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6956,6 +7737,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -6963,6 +7748,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -6997,6 +7783,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -7004,6 +7794,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -7038,6 +7829,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -7045,6 +7840,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -7079,6 +7875,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -7086,6 +7886,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -7119,6 +7920,10 @@ class Configure(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -7126,6 +7931,7 @@ class Configure(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -7208,6 +8014,10 @@ class RouteMap(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -7215,6 +8025,7 @@ class RouteMap(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -7249,6 +8060,10 @@ class RouteMap(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -7256,6 +8071,7 @@ class RouteMap(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -7290,6 +8106,10 @@ class RouteMap(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -7297,6 +8117,7 @@ class RouteMap(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -7338,6 +8159,10 @@ class RouteMap(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -7345,6 +8170,7 @@ class RouteMap(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -7379,6 +8205,10 @@ class RouteMap(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -7386,6 +8216,7 @@ class RouteMap(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -7427,6 +8258,10 @@ class RouteMap(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -7434,6 +8269,7 @@ class RouteMap(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -7469,6 +8305,10 @@ class RouteMap(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -7476,6 +8316,7 @@ class RouteMap(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -7518,6 +8359,10 @@ class RouteMap(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -7525,6 +8370,7 @@ class RouteMap(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -7605,6 +8451,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -7612,6 +8462,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -7646,6 +8497,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -7653,6 +8508,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -7687,6 +8543,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -7694,6 +8554,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -7728,6 +8589,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -7735,6 +8600,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -7769,6 +8635,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -7776,6 +8646,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -7810,6 +8681,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -7817,6 +8692,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -7851,6 +8727,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -7858,6 +8738,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -7892,6 +8773,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -7899,6 +8784,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -7933,6 +8819,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -7940,6 +8830,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -7974,6 +8865,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -7981,6 +8876,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8014,6 +8910,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8021,6 +8921,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8054,6 +8955,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8061,6 +8966,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8094,6 +9000,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8101,6 +9011,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8136,6 +9047,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8143,6 +9058,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8177,6 +9093,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8184,6 +9104,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8218,6 +9139,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8225,6 +9150,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8258,6 +9184,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8265,6 +9195,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8298,6 +9229,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8305,6 +9240,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8338,6 +9274,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8345,6 +9285,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8378,6 +9319,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8385,6 +9330,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8418,6 +9364,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8425,6 +9375,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8459,6 +9410,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8466,6 +9421,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8500,6 +9456,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8507,6 +9467,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8541,6 +9502,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8548,6 +9513,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8582,6 +9548,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8589,6 +9559,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8622,6 +9593,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8629,6 +9604,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8662,6 +9638,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8669,6 +9649,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8703,6 +9684,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8710,6 +9695,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8744,6 +9730,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8751,6 +9741,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8785,6 +9776,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8792,6 +9787,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8826,6 +9822,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8833,6 +9833,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8867,6 +9868,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8874,6 +9879,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8908,6 +9914,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8915,6 +9925,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8949,6 +9960,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8956,6 +9971,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -8990,6 +10006,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -8997,6 +10017,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9031,6 +10052,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9038,6 +10063,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9071,6 +10097,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9078,6 +10108,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9111,6 +10142,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9118,6 +10153,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9151,6 +10187,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9158,6 +10198,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9191,6 +10232,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9198,6 +10243,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9231,6 +10277,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9238,6 +10288,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9271,6 +10322,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9278,6 +10333,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9312,6 +10368,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9319,6 +10379,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9353,6 +10414,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9360,6 +10425,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9394,6 +10460,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9401,6 +10471,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9434,6 +10505,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9441,6 +10516,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9474,6 +10550,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9481,6 +10561,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9514,6 +10595,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9521,6 +10606,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9554,6 +10640,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9561,6 +10651,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9594,6 +10685,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9601,6 +10696,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9634,6 +10730,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9641,6 +10741,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9674,6 +10775,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9681,6 +10786,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9714,6 +10820,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9721,6 +10831,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9754,6 +10865,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9761,6 +10876,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9797,6 +10913,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9804,6 +10924,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9847,6 +10968,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9854,6 +10979,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9889,6 +11015,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9896,6 +11026,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9938,6 +11069,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9945,6 +11080,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -9980,6 +11116,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -9987,6 +11127,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10029,6 +11170,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10036,6 +11181,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10071,6 +11217,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10078,6 +11228,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10120,6 +11271,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10127,6 +11282,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10162,6 +11318,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10169,6 +11329,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10211,6 +11372,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10218,6 +11383,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10253,6 +11419,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10260,6 +11430,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10302,6 +11473,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10309,6 +11484,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10345,6 +11521,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10352,6 +11532,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10395,6 +11576,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10402,6 +11587,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10436,6 +11622,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10443,6 +11633,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10484,6 +11675,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10491,6 +11686,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10525,6 +11721,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10532,6 +11732,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10565,6 +11766,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10572,6 +11777,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10606,6 +11812,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10613,6 +11823,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10646,6 +11857,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10653,6 +11868,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10687,6 +11903,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10694,6 +11914,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10728,6 +11949,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10735,6 +11960,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10769,6 +11995,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10776,6 +12006,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10810,6 +12041,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10817,6 +12052,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10851,6 +12087,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10858,6 +12098,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10892,6 +12133,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10899,6 +12144,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10933,6 +12179,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10940,6 +12190,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -10973,6 +12224,10 @@ class ConfigInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -10980,6 +12235,7 @@ class ConfigInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -11061,6 +12317,10 @@ class ConfigSubinterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -11068,6 +12328,7 @@ class ConfigSubinterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -11102,6 +12363,10 @@ class ConfigSubinterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -11109,6 +12374,7 @@ class ConfigSubinterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -11143,6 +12409,10 @@ class ConfigSubinterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -11150,6 +12420,7 @@ class ConfigSubinterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -11184,6 +12455,10 @@ class ConfigSubinterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -11191,6 +12466,7 @@ class ConfigSubinterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -11225,6 +12501,10 @@ class ConfigSubinterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -11232,6 +12512,7 @@ class ConfigSubinterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -11266,6 +12547,10 @@ class ConfigSubinterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -11273,6 +12558,7 @@ class ConfigSubinterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -11307,6 +12593,10 @@ class ConfigSubinterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -11314,6 +12604,7 @@ class ConfigSubinterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -11348,6 +12639,10 @@ class ConfigSubinterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -11355,6 +12650,7 @@ class ConfigSubinterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -11388,6 +12684,10 @@ class ConfigSubinterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -11395,6 +12695,7 @@ class ConfigSubinterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -11428,6 +12729,10 @@ class ConfigSubinterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -11435,6 +12740,7 @@ class ConfigSubinterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -11515,6 +12821,10 @@ class ConfigInterfaceVlan(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -11522,6 +12832,7 @@ class ConfigInterfaceVlan(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -11556,6 +12867,10 @@ class ConfigInterfaceVlan(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -11563,6 +12878,7 @@ class ConfigInterfaceVlan(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -11597,6 +12913,10 @@ class ConfigInterfaceVlan(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -11604,6 +12924,7 @@ class ConfigInterfaceVlan(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -11638,6 +12959,10 @@ class ConfigInterfaceVlan(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -11645,6 +12970,7 @@ class ConfigInterfaceVlan(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -11679,6 +13005,10 @@ class ConfigInterfaceVlan(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -11686,6 +13016,7 @@ class ConfigInterfaceVlan(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -11720,6 +13051,10 @@ class ConfigInterfaceVlan(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -11727,6 +13062,7 @@ class ConfigInterfaceVlan(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -11761,6 +13097,10 @@ class ConfigInterfaceVlan(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -11768,6 +13108,7 @@ class ConfigInterfaceVlan(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -11802,6 +13143,10 @@ class ConfigInterfaceVlan(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -11809,6 +13154,7 @@ class ConfigInterfaceVlan(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -11842,6 +13188,10 @@ class ConfigInterfaceVlan(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -11849,6 +13199,7 @@ class ConfigInterfaceVlan(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -11882,6 +13233,10 @@ class ConfigInterfaceVlan(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -11889,6 +13244,7 @@ class ConfigInterfaceVlan(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -11969,6 +13325,10 @@ class ConfigInterfaceLoopback(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -11976,6 +13336,7 @@ class ConfigInterfaceLoopback(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12010,6 +13371,10 @@ class ConfigInterfaceLoopback(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12017,6 +13382,7 @@ class ConfigInterfaceLoopback(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12051,6 +13417,10 @@ class ConfigInterfaceLoopback(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12058,6 +13428,7 @@ class ConfigInterfaceLoopback(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12092,6 +13463,10 @@ class ConfigInterfaceLoopback(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12099,6 +13474,7 @@ class ConfigInterfaceLoopback(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12133,6 +13509,10 @@ class ConfigInterfaceLoopback(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12140,6 +13520,7 @@ class ConfigInterfaceLoopback(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12174,6 +13555,10 @@ class ConfigInterfaceLoopback(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12181,6 +13566,7 @@ class ConfigInterfaceLoopback(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12261,6 +13647,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12268,6 +13658,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12302,6 +13693,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12309,6 +13704,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12343,6 +13739,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12350,6 +13750,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12384,6 +13785,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12391,6 +13796,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12425,6 +13831,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12432,6 +13842,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12466,6 +13877,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12473,6 +13888,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12507,6 +13923,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12514,6 +13934,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12548,6 +13969,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12555,6 +13980,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12589,6 +14015,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12596,6 +14026,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12630,6 +14061,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12637,6 +14072,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12670,6 +14106,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12677,6 +14117,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12710,6 +14151,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12717,6 +14162,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12750,6 +14196,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12757,6 +14207,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12790,6 +14241,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12797,6 +14252,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12831,6 +14287,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12838,6 +14298,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12872,6 +14333,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12879,6 +14344,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12913,6 +14379,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12920,6 +14390,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12954,6 +14425,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -12961,6 +14436,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -12994,6 +14470,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13001,6 +14481,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13034,6 +14515,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13041,6 +14526,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13075,6 +14561,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13082,6 +14572,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13116,6 +14607,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13123,6 +14618,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13156,6 +14652,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13163,6 +14663,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13196,6 +14697,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13203,6 +14708,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13236,6 +14742,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13243,6 +14753,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13276,6 +14787,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13283,6 +14798,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13316,6 +14832,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13323,6 +14843,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13356,6 +14877,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13363,6 +14888,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13396,6 +14922,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13403,6 +14933,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13436,6 +14967,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13443,6 +14978,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13477,6 +15013,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13484,6 +15024,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13518,6 +15059,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13525,6 +15070,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13558,6 +15104,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13565,6 +15115,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13598,6 +15149,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13605,6 +15160,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13638,6 +15194,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13645,6 +15205,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13678,6 +15239,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13685,6 +15250,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13718,6 +15284,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13725,6 +15295,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13759,6 +15330,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13766,6 +15341,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13807,6 +15383,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13814,6 +15394,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13848,6 +15429,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13855,6 +15440,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13888,6 +15474,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13895,6 +15485,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13929,6 +15520,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13936,6 +15531,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -13969,6 +15565,10 @@ class ConfigInterfaceLag(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -13976,6 +15576,7 @@ class ConfigInterfaceLag(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -14055,6 +15656,10 @@ class ConfigInterfaceMgmt(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -14062,6 +15667,7 @@ class ConfigInterfaceMgmt(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -14096,6 +15702,10 @@ class ConfigInterfaceMgmt(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -14103,6 +15713,7 @@ class ConfigInterfaceMgmt(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -14137,6 +15748,10 @@ class ConfigInterfaceMgmt(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -14144,6 +15759,7 @@ class ConfigInterfaceMgmt(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -14178,6 +15794,10 @@ class ConfigInterfaceMgmt(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -14185,6 +15805,7 @@ class ConfigInterfaceMgmt(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -14228,6 +15849,10 @@ class ConfigInterfaceMgmt(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -14235,6 +15860,7 @@ class ConfigInterfaceMgmt(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -14278,6 +15904,10 @@ class ConfigInterfaceMgmt(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -14285,6 +15915,7 @@ class ConfigInterfaceMgmt(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -14318,6 +15949,10 @@ class ConfigInterfaceMgmt(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -14325,6 +15960,7 @@ class ConfigInterfaceMgmt(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -14404,6 +16040,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -14411,6 +16051,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -14444,6 +16085,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -14451,6 +16096,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -14484,6 +16130,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -14491,6 +16141,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -14524,6 +16175,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -14531,6 +16186,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -14564,6 +16220,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -14571,6 +16231,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -14604,6 +16265,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -14611,6 +16276,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -14644,6 +16310,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -14651,6 +16321,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -14684,6 +16355,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -14691,6 +16366,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -14724,6 +16400,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -14731,6 +16411,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -14764,6 +16445,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -14771,6 +16456,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -14805,6 +16491,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -14812,6 +16502,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -14846,6 +16537,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -14853,6 +16548,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -14887,6 +16583,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -14894,6 +16594,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -14927,6 +16628,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -14934,6 +16639,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -14968,6 +16674,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -14975,6 +16685,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15009,6 +16720,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15016,6 +16731,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15050,6 +16766,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15057,6 +16777,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15091,6 +16812,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15098,6 +16823,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15132,6 +16858,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15139,6 +16869,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15173,6 +16904,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15180,6 +16915,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15214,6 +16950,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15221,6 +16961,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15255,6 +16996,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15262,6 +17007,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15296,6 +17042,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15303,6 +17053,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15336,6 +17087,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15343,6 +17098,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15378,6 +17134,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15385,6 +17145,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15420,6 +17181,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15427,6 +17192,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15462,6 +17228,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15469,6 +17239,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15504,6 +17275,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15511,6 +17286,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15547,6 +17323,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15554,6 +17334,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15590,6 +17371,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15597,6 +17382,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15633,6 +17419,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15640,6 +17430,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15676,6 +17467,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15683,6 +17478,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15720,6 +17516,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15727,6 +17527,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15762,6 +17563,10 @@ class ConfigRouterOspf(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15769,6 +17574,7 @@ class ConfigRouterOspf(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15849,6 +17655,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15856,6 +17666,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15890,6 +17701,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15897,6 +17712,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15931,6 +17747,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15938,6 +17758,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -15971,6 +17792,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -15978,6 +17803,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -16012,6 +17838,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -16019,6 +17849,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -16053,6 +17884,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -16060,6 +17895,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -16094,6 +17930,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -16101,6 +17941,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -16135,6 +17976,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -16142,6 +17987,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -16178,6 +18024,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -16185,6 +18035,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -16236,6 +18087,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -16243,6 +18098,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -16279,6 +18135,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -16286,6 +18146,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -16320,6 +18181,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -16327,6 +18192,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -16371,6 +18237,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -16378,6 +18248,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -16422,6 +18293,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -16429,6 +18304,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -16474,6 +18350,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -16481,6 +18361,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -16525,6 +18406,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -16532,6 +18417,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -16568,6 +18454,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -16575,6 +18465,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -16618,6 +18509,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -16625,6 +18520,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -16660,6 +18556,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -16667,6 +18567,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -16701,6 +18602,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -16708,6 +18613,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -16745,6 +18651,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -16752,6 +18662,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -16804,6 +18715,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -16811,6 +18726,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -16855,6 +18771,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -16862,6 +18782,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -16905,6 +18826,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -16912,6 +18837,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -16946,6 +18872,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -16953,6 +18883,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -16987,6 +18918,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -16994,6 +18929,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -17029,6 +18965,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -17036,6 +18976,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -17070,6 +19011,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -17077,6 +19022,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -17112,6 +19058,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -17119,6 +19069,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -17153,6 +19104,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -17160,6 +19115,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -17203,6 +19159,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -17210,6 +19170,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -17247,6 +19208,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -17254,6 +19219,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -17289,6 +19255,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -17296,6 +19266,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -17339,6 +19310,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -17346,6 +19321,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -17380,6 +19356,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -17387,6 +19367,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -17421,6 +19402,10 @@ class ConfigRouterBgp(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -17428,6 +19413,7 @@ class ConfigRouterBgp(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -17507,6 +19493,10 @@ class ConfigVlan(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -17514,6 +19504,7 @@ class ConfigVlan(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -17547,6 +19538,10 @@ class ConfigVlan(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -17554,6 +19549,7 @@ class ConfigVlan(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -17588,6 +19584,10 @@ class ConfigVlan(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -17595,6 +19595,7 @@ class ConfigVlan(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -17629,6 +19630,10 @@ class ConfigVlan(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -17636,6 +19641,7 @@ class ConfigVlan(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -17716,6 +19722,10 @@ class ConfigTftpServer(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -17723,6 +19733,7 @@ class ConfigTftpServer(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         return parse_config_tftp_server_enable(result)
 
@@ -17757,6 +19768,10 @@ class ConfigTftpServer(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -17764,6 +19779,7 @@ class ConfigTftpServer(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         return parse_config_tftp_server_no_enable(result)
 
@@ -17799,6 +19815,10 @@ class ConfigTftpServer(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -17806,6 +19826,7 @@ class ConfigTftpServer(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         return parse_config_tftp_server_path(result)
 
@@ -17841,6 +19862,10 @@ class ConfigTftpServer(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -17848,6 +19873,7 @@ class ConfigTftpServer(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         return parse_config_tftp_server_no_path(result)
 
@@ -17882,6 +19908,10 @@ class ConfigTftpServer(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -17889,6 +19919,7 @@ class ConfigTftpServer(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         return parse_config_tftp_server_secure_mode(result)
 
@@ -17923,6 +19954,10 @@ class ConfigTftpServer(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -17930,6 +19965,7 @@ class ConfigTftpServer(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         return parse_config_tftp_server_no_secure_mode(result)
 
@@ -18065,6 +20101,10 @@ class ConfigDhcpServer(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -18072,6 +20112,7 @@ class ConfigDhcpServer(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -18163,6 +20204,10 @@ class ConfigDhcpServer(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -18170,6 +20215,7 @@ class ConfigDhcpServer(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -18248,6 +20294,10 @@ class ConfigDhcpServer(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -18255,6 +20305,7 @@ class ConfigDhcpServer(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -18333,6 +20384,10 @@ class ConfigDhcpServer(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -18340,6 +20395,7 @@ class ConfigDhcpServer(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -18415,6 +20471,10 @@ class ConfigDhcpServer(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -18422,6 +20482,7 @@ class ConfigDhcpServer(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -18497,6 +20558,10 @@ class ConfigDhcpServer(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -18504,6 +20569,7 @@ class ConfigDhcpServer(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -18565,6 +20631,10 @@ class ConfigDhcpServer(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -18572,6 +20642,7 @@ class ConfigDhcpServer(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -18633,6 +20704,10 @@ class ConfigDhcpServer(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -18640,6 +20715,7 @@ class ConfigDhcpServer(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -18683,6 +20759,10 @@ class ConfigDhcpServer(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -18690,6 +20770,7 @@ class ConfigDhcpServer(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -18733,6 +20814,10 @@ class ConfigDhcpServer(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -18740,6 +20825,7 @@ class ConfigDhcpServer(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -18822,6 +20908,10 @@ class ConfigMirrorSession(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -18829,6 +20919,7 @@ class ConfigMirrorSession(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -18864,6 +20955,10 @@ class ConfigMirrorSession(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -18871,6 +20966,7 @@ class ConfigMirrorSession(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         return parse_config_mirror_session_no_destination_interface(result)
 
@@ -18903,6 +20999,10 @@ class ConfigMirrorSession(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -18910,6 +21010,7 @@ class ConfigMirrorSession(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -18943,6 +21044,10 @@ class ConfigMirrorSession(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -18950,6 +21055,7 @@ class ConfigMirrorSession(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -18987,6 +21093,10 @@ class ConfigMirrorSession(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -18994,6 +21104,7 @@ class ConfigMirrorSession(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -19030,6 +21141,10 @@ class ConfigMirrorSession(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -19037,6 +21152,7 @@ class ConfigMirrorSession(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -19118,6 +21234,10 @@ class ConfigQueueProfile(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -19125,6 +21245,7 @@ class ConfigQueueProfile(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -19159,6 +21280,10 @@ class ConfigQueueProfile(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -19166,6 +21291,7 @@ class ConfigQueueProfile(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -19201,6 +21327,10 @@ class ConfigQueueProfile(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -19208,6 +21338,7 @@ class ConfigQueueProfile(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -19243,6 +21374,10 @@ class ConfigQueueProfile(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -19250,6 +21385,7 @@ class ConfigQueueProfile(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -19284,6 +21420,10 @@ class ConfigQueueProfile(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -19291,6 +21431,7 @@ class ConfigQueueProfile(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -19371,6 +21512,10 @@ class ConfigScheduleProfile(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -19378,6 +21523,7 @@ class ConfigScheduleProfile(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -19412,6 +21558,10 @@ class ConfigScheduleProfile(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -19419,6 +21569,7 @@ class ConfigScheduleProfile(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -19454,6 +21605,10 @@ class ConfigScheduleProfile(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -19461,6 +21616,7 @@ class ConfigScheduleProfile(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -19495,6 +21651,10 @@ class ConfigScheduleProfile(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -19502,6 +21662,7 @@ class ConfigScheduleProfile(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -19605,6 +21766,10 @@ class ConfigAccessListIpTestname(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -19612,6 +21777,7 @@ class ConfigAccessListIpTestname(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -19669,6 +21835,10 @@ class ConfigAccessListIpTestname(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -19676,6 +21846,7 @@ class ConfigAccessListIpTestname(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -19710,6 +21881,10 @@ class ConfigAccessListIpTestname(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -19717,6 +21892,7 @@ class ConfigAccessListIpTestname(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -19801,6 +21977,10 @@ class ConfigVrrpInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -19808,6 +21988,7 @@ class ConfigVrrpInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -19842,6 +22023,10 @@ class ConfigVrrpInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -19849,6 +22034,7 @@ class ConfigVrrpInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -19883,6 +22069,10 @@ class ConfigVrrpInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -19890,6 +22080,7 @@ class ConfigVrrpInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -19924,6 +22115,10 @@ class ConfigVrrpInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -19931,6 +22126,7 @@ class ConfigVrrpInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -19965,6 +22161,10 @@ class ConfigVrrpInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -19972,6 +22172,7 @@ class ConfigVrrpInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -20005,6 +22206,10 @@ class ConfigVrrpInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -20012,6 +22217,7 @@ class ConfigVrrpInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -20046,6 +22252,10 @@ class ConfigVrrpInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -20053,6 +22263,7 @@ class ConfigVrrpInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -20086,6 +22297,10 @@ class ConfigVrrpInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -20093,6 +22308,7 @@ class ConfigVrrpInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -20126,6 +22342,10 @@ class ConfigVrrpInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -20133,6 +22353,7 @@ class ConfigVrrpInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -20166,6 +22387,10 @@ class ConfigVrrpInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -20173,6 +22398,7 @@ class ConfigVrrpInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -20206,6 +22432,10 @@ class ConfigVrrpInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -20213,6 +22443,7 @@ class ConfigVrrpInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -20246,6 +22477,10 @@ class ConfigVrrpInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -20253,6 +22488,7 @@ class ConfigVrrpInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -20287,6 +22523,10 @@ class ConfigVrrpInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -20294,6 +22534,7 @@ class ConfigVrrpInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -20327,6 +22568,10 @@ class ConfigVrrpInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -20334,6 +22579,7 @@ class ConfigVrrpInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -20368,6 +22614,10 @@ class ConfigVrrpInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -20375,6 +22625,7 @@ class ConfigVrrpInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -20408,6 +22659,10 @@ class ConfigVrrpInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -20415,6 +22670,7 @@ class ConfigVrrpInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -20449,6 +22705,10 @@ class ConfigVrrpInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -20456,6 +22716,7 @@ class ConfigVrrpInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -20489,6 +22750,10 @@ class ConfigVrrpInterface(ContextManager):
 
         shell = self.enode.get_shell(_shell)
 
+        print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), self.enode.identifier, cmd, shell
+        ))
+
         shell.send_command(
             (' '.join(cmd)).format(**locals()), **_shell_args
         )
@@ -20496,6 +22761,7 @@ class ConfigVrrpInterface(ContextManager):
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
         )
+        print(result)
 
         if result:
             raise determine_exception(result)(result)
@@ -20537,6 +22803,10 @@ def show_interface(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -20544,6 +22814,7 @@ def show_interface(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_interface(result)
 
@@ -20581,6 +22852,10 @@ def show_interface_brief(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -20588,6 +22863,7 @@ def show_interface_brief(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_interface_brief(result)
 
@@ -20625,6 +22901,10 @@ def show_interface_mgmt(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -20632,6 +22912,7 @@ def show_interface_mgmt(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_interface_mgmt(result)
 
@@ -20672,6 +22953,10 @@ def show_interface_subinterface(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -20679,6 +22964,7 @@ def show_interface_subinterface(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_interface_subinterface(result)
 
@@ -20719,6 +23005,10 @@ def show_interface_subinterface_brief(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -20726,6 +23016,7 @@ def show_interface_subinterface_brief(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_interface_subinterface_brief(result)
 
@@ -20766,6 +23057,10 @@ def show_interface_queues(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -20773,6 +23068,7 @@ def show_interface_queues(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_interface_queues(result)
 
@@ -20818,6 +23114,10 @@ def show_vlan(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -20825,6 +23125,7 @@ def show_vlan(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_vlan(result)
 
@@ -20865,6 +23166,10 @@ def show_lacp_interface(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -20872,6 +23177,7 @@ def show_lacp_interface(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_lacp_interface(result)
 
@@ -20917,6 +23223,10 @@ def show_lacp_aggregates(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -20924,6 +23234,7 @@ def show_lacp_aggregates(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_lacp_aggregates(result)
 
@@ -20961,6 +23272,10 @@ def show_lacp_configuration(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -20968,6 +23283,7 @@ def show_lacp_configuration(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_lacp_configuration(result)
 
@@ -21008,6 +23324,10 @@ def show_lldp_neighbor_info(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -21015,6 +23335,7 @@ def show_lldp_neighbor_info(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_lldp_neighbor_info(result)
 
@@ -21052,6 +23373,10 @@ def show_lldp_statistics(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -21059,6 +23384,7 @@ def show_lldp_statistics(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_lldp_statistics(result)
 
@@ -21096,6 +23422,10 @@ def show_sftp_server(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -21103,6 +23433,7 @@ def show_sftp_server(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_sftp_server(result)
 
@@ -21143,6 +23474,10 @@ def show_ip_interface(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -21150,6 +23485,7 @@ def show_ip_interface(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_ip_interface(result)
 
@@ -21190,6 +23526,10 @@ def show_ipv6_interface(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -21197,6 +23537,7 @@ def show_ipv6_interface(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_ipv6_interface(result)
 
@@ -21234,6 +23575,10 @@ def show_ip_bgp_summary(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -21241,6 +23586,7 @@ def show_ip_bgp_summary(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_ip_bgp_summary(result)
 
@@ -21278,6 +23624,10 @@ def show_ip_bgp_neighbors(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -21285,6 +23635,7 @@ def show_ip_bgp_neighbors(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_ip_bgp_neighbors(result)
 
@@ -21322,6 +23673,10 @@ def show_ip_bgp(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -21329,6 +23684,7 @@ def show_ip_bgp(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_ip_bgp(result)
 
@@ -21366,6 +23722,10 @@ def show_ipv6_bgp(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -21373,6 +23733,7 @@ def show_ipv6_bgp(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_ipv6_bgp(result)
 
@@ -21410,6 +23771,10 @@ def show_ip_ospf_neighbor_detail(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -21417,6 +23782,7 @@ def show_ip_ospf_neighbor_detail(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_ip_ospf_neighbor_detail(result)
 
@@ -21454,6 +23820,10 @@ def show_ip_ospf_neighbor(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -21461,6 +23831,7 @@ def show_ip_ospf_neighbor(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_ip_ospf_neighbor(result)
 
@@ -21498,6 +23869,10 @@ def show_ip_ospf_interface(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -21505,6 +23880,7 @@ def show_ip_ospf_interface(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_ip_ospf_interface(result)
 
@@ -21542,6 +23918,10 @@ def show_ip_ospf(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -21549,6 +23929,7 @@ def show_ip_ospf(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_ip_ospf(result)
 
@@ -21586,6 +23967,10 @@ def show_ip_ospf_route(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -21593,6 +23978,7 @@ def show_ip_ospf_route(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_ip_ospf_route(result)
 
@@ -21630,6 +24016,10 @@ def show_running_config(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -21637,6 +24027,7 @@ def show_running_config(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_running_config(result)
 
@@ -21685,6 +24076,10 @@ def show_running_config_interface(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -21692,6 +24087,7 @@ def show_running_config_interface(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_running_config_interface(result)
 
@@ -21729,6 +24125,10 @@ def show_ip_route(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -21736,6 +24136,7 @@ def show_ip_route(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_ip_route(result)
 
@@ -21773,6 +24174,10 @@ def show_ipv6_route(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -21780,6 +24185,7 @@ def show_ipv6_route(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_ipv6_route(result)
 
@@ -21817,6 +24223,10 @@ def show_sflow(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -21824,6 +24234,7 @@ def show_sflow(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_sflow(result)
 
@@ -21864,6 +24275,10 @@ def show_sflow_interface(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -21871,6 +24286,7 @@ def show_sflow_interface(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_sflow_interface(result)
 
@@ -21911,6 +24327,10 @@ def show_udld_interface(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -21918,6 +24338,7 @@ def show_udld_interface(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_udld_interface(result)
 
@@ -21955,6 +24376,10 @@ def show_rib(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -21962,6 +24387,7 @@ def show_rib(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_rib(result)
 
@@ -21999,6 +24425,10 @@ def show_ip_ecmp(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -22006,6 +24436,7 @@ def show_ip_ecmp(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_ip_ecmp(result)
 
@@ -22043,6 +24474,10 @@ def clear_bgp(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -22050,6 +24485,7 @@ def clear_bgp(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     if result:
         raise determine_exception(result)(result)
@@ -22086,6 +24522,10 @@ def clear_udld_statistics(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -22093,6 +24533,7 @@ def clear_udld_statistics(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     if result:
         raise determine_exception(result)(result)
@@ -22132,6 +24573,10 @@ def clear_udld_statistics_interface(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -22139,6 +24584,7 @@ def clear_udld_statistics_interface(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     if result:
         raise determine_exception(result)(result)
@@ -22175,6 +24621,10 @@ def clear_access_list_hitcounts_all(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -22182,6 +24632,7 @@ def clear_access_list_hitcounts_all(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     if result:
         raise determine_exception(result)(result)
@@ -22220,6 +24671,10 @@ def clear_access_list_hitcounts_ip_interface(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -22227,6 +24682,7 @@ def clear_access_list_hitcounts_ip_interface(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     if result:
         raise determine_exception(result)(result)
@@ -22267,6 +24723,10 @@ def ping_repetitions(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -22274,6 +24734,7 @@ def ping_repetitions(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_ping_repetitions(result)
 
@@ -22313,6 +24774,10 @@ def ping6_repetitions(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -22320,6 +24785,7 @@ def ping6_repetitions(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_ping6_repetitions(result)
 
@@ -22423,6 +24889,10 @@ def ping(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -22430,6 +24900,7 @@ def ping(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_ping(result)
 
@@ -22500,6 +24971,10 @@ def ping6(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -22507,6 +24982,7 @@ def ping6(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_ping6(result)
 
@@ -22586,6 +25062,10 @@ def copy_core_dump(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -22593,6 +25073,7 @@ def copy_core_dump(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_copy_core_dump(result)
 
@@ -22680,6 +25161,10 @@ def traceroute(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -22687,6 +25172,7 @@ def traceroute(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_traceroute(result)
 
@@ -22758,6 +25244,10 @@ def traceroute6(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -22765,6 +25255,7 @@ def traceroute6(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_traceroute6(result)
 
@@ -22802,6 +25293,10 @@ def show_ntp_associations(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -22809,6 +25304,7 @@ def show_ntp_associations(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_ntp_associations(result)
 
@@ -22846,6 +25342,10 @@ def show_ntp_authentication_key(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -22853,6 +25353,7 @@ def show_ntp_authentication_key(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_ntp_authentication_key(result)
 
@@ -22890,6 +25391,10 @@ def show_ntp_statistics(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -22897,6 +25402,7 @@ def show_ntp_statistics(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_ntp_statistics(result)
 
@@ -22934,6 +25440,10 @@ def show_ntp_status(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -22941,6 +25451,7 @@ def show_ntp_status(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_ntp_status(result)
 
@@ -22978,6 +25489,10 @@ def show_ntp_trusted_keys(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -22985,6 +25500,7 @@ def show_ntp_trusted_keys(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_ntp_trusted_keys(result)
 
@@ -23022,6 +25538,10 @@ def show_dhcp_server_leases(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -23029,6 +25549,7 @@ def show_dhcp_server_leases(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_dhcp_server_leases(result)
 
@@ -23066,6 +25587,10 @@ def show_dhcp_server(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -23073,6 +25598,7 @@ def show_dhcp_server(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_dhcp_server(result)
 
@@ -23110,6 +25636,10 @@ def show_mac_address_table(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -23117,6 +25647,7 @@ def show_mac_address_table(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_mac_address_table(result)
 
@@ -23154,6 +25685,10 @@ def show_vlog_config(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -23161,6 +25696,7 @@ def show_vlog_config(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_vlog_config(result)
 
@@ -23199,6 +25735,10 @@ def show_vlog(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -23206,6 +25746,7 @@ def show_vlog(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_vlog(result)
 
@@ -23251,6 +25792,10 @@ def show_interface_loopback(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -23258,6 +25803,7 @@ def show_interface_loopback(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_interface_loopback(result)
 
@@ -23295,6 +25841,10 @@ def show_interface_loopback_brief(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -23302,6 +25852,7 @@ def show_interface_loopback_brief(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_interface_loopback_brief(result)
 
@@ -23340,6 +25891,10 @@ def show_vlog_config_daemon(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -23347,6 +25902,7 @@ def show_vlog_config_daemon(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_vlog_config_daemon(result)
 
@@ -23385,6 +25941,10 @@ def show_vlog_config_feature(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -23392,6 +25952,7 @@ def show_vlog_config_feature(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_vlog_config_feature(result)
 
@@ -23429,6 +25990,10 @@ def show_vlog_config_list(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -23436,6 +26001,7 @@ def show_vlog_config_list(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_vlog_config_list(result)
 
@@ -23474,6 +26040,10 @@ def show_vlog_daemon(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -23481,6 +26051,7 @@ def show_vlog_daemon(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_vlog_daemon(result)
 
@@ -23519,6 +26090,10 @@ def show_vlog_severity(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -23526,6 +26101,7 @@ def show_vlog_severity(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_vlog_severity(result)
 
@@ -23565,6 +26141,10 @@ def show_vlog_daemon_severity(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -23572,6 +26152,7 @@ def show_vlog_daemon_severity(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_vlog_daemon_severity(result)
 
@@ -23611,6 +26192,10 @@ def show_vlog_severity_daemon(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -23618,6 +26203,7 @@ def show_vlog_severity_daemon(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_vlog_severity_daemon(result)
 
@@ -23655,6 +26241,10 @@ def copy_running_config_startup_config(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -23662,6 +26252,7 @@ def copy_running_config_startup_config(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_copy_running_config_startup_config(result)
 
@@ -23699,6 +26290,10 @@ def copy_startup_config_running_config(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -23706,6 +26301,7 @@ def copy_startup_config_running_config(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_copy_startup_config_running_config(result)
 
@@ -23743,6 +26339,10 @@ def show_startup_config(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -23750,6 +26350,7 @@ def show_startup_config(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_startup_config(result)
 
@@ -23787,6 +26388,10 @@ def erase_startup_config(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -23794,6 +26399,7 @@ def erase_startup_config(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_erase_startup_config(result)
 
@@ -23831,6 +26437,10 @@ def show_tftp_server(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -23838,6 +26448,7 @@ def show_tftp_server(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_tftp_server(result)
 
@@ -23883,6 +26494,10 @@ def show_mirror(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -23890,6 +26505,7 @@ def show_mirror(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_mirror(result)
 
@@ -23935,6 +26551,10 @@ def show_qos_cos_map(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -23942,6 +26562,7 @@ def show_qos_cos_map(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_qos_cos_map(result)
 
@@ -23987,6 +26608,10 @@ def show_qos_dscp_map(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -23994,6 +26619,7 @@ def show_qos_dscp_map(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_qos_dscp_map(result)
 
@@ -24040,6 +26666,10 @@ def show_qos_queue_profile(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -24047,6 +26677,7 @@ def show_qos_queue_profile(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_qos_queue_profile(result)
 
@@ -24093,6 +26724,10 @@ def show_qos_schedule_profile(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -24100,6 +26735,7 @@ def show_qos_schedule_profile(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_qos_schedule_profile(result)
 
@@ -24145,6 +26781,10 @@ def show_qos_trust(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -24152,6 +26792,7 @@ def show_qos_trust(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_qos_trust(result)
 
@@ -24189,6 +26830,10 @@ def show_snmp_community(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -24196,6 +26841,7 @@ def show_snmp_community(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_snmp_community(result)
 
@@ -24233,6 +26879,10 @@ def show_snmp_system(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -24240,6 +26890,7 @@ def show_snmp_system(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_snmp_system(result)
 
@@ -24277,6 +26928,10 @@ def show_snmp_trap(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -24284,6 +26939,7 @@ def show_snmp_trap(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_snmp_trap(result)
 
@@ -24321,6 +26977,10 @@ def diag_dump_lacp_basic(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -24328,6 +26988,7 @@ def diag_dump_lacp_basic(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_diag_dump_lacp_basic(result)
 
@@ -24365,6 +27026,10 @@ def show_snmpv3_users(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -24372,6 +27037,7 @@ def show_snmpv3_users(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_snmpv3_users(result)
 
@@ -24409,6 +27075,10 @@ def show_core_dump(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -24416,6 +27086,7 @@ def show_core_dump(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_core_dump(result)
 
@@ -24453,6 +27124,10 @@ def show_snmp_agent_port(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -24460,6 +27135,7 @@ def show_snmp_agent_port(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_snmp_agent_port(result)
 
@@ -24506,6 +27182,10 @@ def show_events(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -24513,6 +27193,7 @@ def show_events(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_events(result)
 
@@ -24550,6 +27231,10 @@ def show_aaa_authentication(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -24557,6 +27242,7 @@ def show_aaa_authentication(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_aaa_authentication(result)
 
@@ -24594,6 +27280,10 @@ def show_radius_server(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -24601,6 +27291,7 @@ def show_radius_server(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_radius_server(result)
 
@@ -24673,6 +27364,10 @@ def diag_dump(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -24680,6 +27375,7 @@ def diag_dump(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_diag_dump(result)
 
@@ -24718,6 +27414,10 @@ def show_spanning_tree(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -24725,6 +27425,7 @@ def show_spanning_tree(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_spanning_tree(result)
 
@@ -24762,6 +27463,10 @@ def show_spanning_tree_mst(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -24769,6 +27474,7 @@ def show_spanning_tree_mst(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_spanning_tree_mst(result)
 
@@ -24806,6 +27512,10 @@ def show_spanning_tree_mst_config(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -24813,6 +27523,7 @@ def show_spanning_tree_mst_config(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_spanning_tree_mst_config(result)
 
@@ -24850,6 +27561,10 @@ def show_vlan_summary(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -24857,6 +27572,7 @@ def show_vlan_summary(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_vlan_summary(result)
 
@@ -24894,6 +27610,10 @@ def show_vlan_internal(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -24901,6 +27621,7 @@ def show_vlan_internal(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_vlan_internal(result)
 
@@ -24938,6 +27659,10 @@ def show_vrf(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -24945,6 +27670,7 @@ def show_vrf(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_vrf(result)
 
@@ -24984,6 +27710,10 @@ def show_access_list_hitcounts_ip_interface(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -24991,6 +27721,7 @@ def show_access_list_hitcounts_ip_interface(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_access_list_hitcounts_ip_interface(result)
 
@@ -25028,6 +27759,10 @@ def show_ip_prefix_list(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -25035,6 +27770,7 @@ def show_ip_prefix_list(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_ip_prefix_list(result)
 
@@ -25072,6 +27808,10 @@ def show_ipv6_prefix_list(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -25079,6 +27819,7 @@ def show_ipv6_prefix_list(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_ipv6_prefix_list(result)
 
@@ -25117,6 +27858,10 @@ def show_ip_bgp_route_map(
 
     shell = enode.get_shell(_shell)
 
+    print('{} [{}].send_command(\'{}\', shell=\'{}\') ::'.format(
+                datetime.now().isoformat(), enode.identifier, cmd, shell
+        ))
+
     shell.send_command(
         (' '.join(cmd)).format(**locals()), **_shell_args
     )
@@ -25124,6 +27869,7 @@ def show_ip_bgp_route_map(
     result = shell.get_response(
         connection=_shell_args.get('connection', None)
     )
+    print(result)
 
     return parse_show_ip_bgp_route_map(result)
 
