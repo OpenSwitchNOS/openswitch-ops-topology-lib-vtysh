@@ -2827,6 +2827,9 @@ logging 20.20.20.1 udp severity info
 logging 2001::1 severity warning
 logging syserver
 logging 10.10.10.10 tcp 400 severity debug
+vrf vrf_red
+vrf vrf_green
+vrf vrf_blue
 !
 !
 !
@@ -2912,6 +2915,7 @@ mirror session foo
 ipv6 route 2020::3/128 1
 ip route 140.1.1.10/32 1
 ip route 140.1.1.30/32 1
+ip route 10.0.3.0/24 10.0.10.2 vrf vrf_red
 ipv6 route 2020::2/128 1
 """
 
@@ -3039,24 +3043,39 @@ ipv6 route 2020::2/128 1
             '2020::2': {
                 'via': '1',
                 'prefix': '128',
+                'vrf_name': 'vrf_default',
                 'network': '2020::2',
             },
             '2020::3': {
                 'via': '1',
                 'prefix': '128',
+                'vrf_name': 'vrf_default',
                 'network': '2020::3',
             },
             '140.1.1.10': {
                 'via': '1',
                 'prefix': '32',
+                'vrf_name': 'vrf_default',
                 'network': '140.1.1.10',
             },
             '140.1.1.30': {
                 'via': '1',
                 'prefix': '32',
+                'vrf_name': 'vrf_default',
                 'network': '140.1.1.30',
+            },
+            '10.0.3.0': {
+                'via': '10.0.10.2',
+                'prefix': '24',
+                'vrf_name': 'vrf_red',
+                'network': '10.0.3.0',
             }
         },
+        'vrf': [
+                'vrf_red',
+                'vrf_green',
+                'vrf_blue'
+        ],
         'mirror_session':
         {
             'foo': 'foo'
@@ -5482,24 +5501,30 @@ def test_parse_show_vrf():
     raw_result = """
 VRF Configuration:
 ------------------
-VRF Name : vrf_default
-
-        Interfaces :     Status :
-        -------------------------
-        10                  up
-        1                   up
-        10-1                up
-        1.14                up
-        9-1.200             up
+VRF Name   : vrf_default
+VRF Status : UP
+table_id   : 0
+        Interfaces             Status
+        -----------------------------
+        10                       up
+        1                        up
+        10-1                     up
+        1.14                     up
+        9-1.200                  up
+        loopback1                up
     """
 
     expected_result = {
         'vrf_default': {
+            'VRF_Status': 'UP',
+            'table_id': '0',
+            'VRF_Name': 'vrf_default',
             '10': 'up',
             '1': 'up',
             '10-1': 'up',
             '1.14': 'up',
-            '9-1.200': 'up'
+            '9-1.200': 'up',
+            'loopback1': 'up'
         }
     }
 
