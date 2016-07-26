@@ -3761,7 +3761,12 @@ def parse_show_running_config_helper(raw_result):
             # Match vrf
             re_result = re.match(vrf_re, line)
             if re_result:
-                result['interface'][port]['vrf'] = re_result.group(1)
+                if subint_flag:
+                    result['interface']['subint'][subintport]['vrf'] = \
+                        re_result.group(1)
+                    subint_flag = None
+                else:
+                    result['interface'][port]['vrf'] = re_result.group(1)
 
             # Match vlan trunk
             re_result = re.match(vlan_trunk_re, line)
@@ -3844,14 +3849,23 @@ def parse_show_running_config_helper(raw_result):
         ip_route_re = (
             r'ipv?6? route\s(?P<network>.*)'
             r'/(?P<prefix>\d+)\s'
-            r'(?P<via>(?:.*))'
+            r'(?P<via>(:?\S+))\s*'
+            r'(vrf\s(?P<vrf_name>\S+))?'
         )
         for line in re_ip_routes_section[0].splitlines():
             re_result = re.match(ip_route_re, line)
             partial = re_result.groupdict()
             for key, value in partial.items():
                 partial[key] = value
+                if partial['vrf_name'] is None:
+                    partial['vrf_name'] = 'vrf_default'
             result['ip_routes'][partial['network']] = partial
+
+    # VRF configuration
+    vrf_selection_re = r'\nvrf\s+(\S+)'
+    vrf = re.findall(vrf_selection_re, raw_result, re.DOTALL)
+    if vrf:
+        result['vrf'] = vrf
 
     # Syslog Remote configuration
     result['syslog_remotes'] = {}
@@ -6674,32 +6688,51 @@ def parse_show_vrf(raw_result):
 
         {
             'vrf_default' : {
+                'VRF_Status': 'UP',
+                'table_id': '0',
+                'VRF_Name': 'vrf_default',
                 '10': 'up',
                 '20': 'up'
             },
             'vrf_red' : {
+                'VRF_Status': 'UP',
+                'table_id': '1',
+                'VRF_Name': 'vrf_red',
                 '30': 'up',
             }
         }
     """
 
     interface_re = (
-        r'(.*)######\s+Interfaces\s+:\s+Status\s+:(.*)'
+        r'(.*)######\s+Interfaces\s+Status######(.*)'
      )
-
+    print(raw_result)
     raw_result = re.sub(r'\n+\s+(--+\s*)+', '\n', raw_result)
     raw_result = re.sub(r'\n+\s*\n+', '\n', raw_result)
-    vrf_split_output = raw_result.split('VRF Name : ')
+    vrf_split_output = raw_result.split('VRF Name   : ')
     result = {}
+    vrfs = re.findall(r'VRF\s+Name\s+:\s+(.*)\n+', raw_result)
+    for vrf_name in vrfs:
+        result[vrf_name] = {}
     for i in range(1, len(vrf_split_output)):
-        vrf = vrf_split_output[i]
+        vrf = 'VRF Name   : ' + vrf_split_output[i]
+        for vrf_name in result.keys():
+            if vrf_name in vrf:
+                break
         output = re.sub(r'\n', '######', vrf)
         re_result = re.search(interface_re, output)
         if re_result is None:
             assert False, "Interface pattern is not available"
-        vrf_name = re_result.group(1)
+        vrf_details = re.sub(r'######', '\n', re_result.group(1))
+        vrf_details = vrf_details.split('\n')
+        for line in vrf_details:
+            if line.strip() is '':
+                continue
+            line = line.split(':')
+            key = '_'.join(line[0].strip().split())
+            value = line[1].strip()
+            result[vrf_name][key] = value
         vrf_interface_details = re.sub(r'######', '\n', re_result.group(2))
-        result[vrf_name] = {}
         res = re.findall(r'(\S+)\s+(\S+)\s*\n*', vrf_interface_details)
         for interface, status in res:
             result[vrf_name][interface] = status

@@ -3043,24 +3043,317 @@ ipv6 route 2020::2/128 1
             '2020::2': {
                 'via': '1',
                 'prefix': '128',
+                'vrf_name': 'vrf_default',
                 'network': '2020::2',
             },
             '2020::3': {
                 'via': '1',
                 'prefix': '128',
+                'vrf_name': 'vrf_default',
                 'network': '2020::3',
             },
             '140.1.1.10': {
                 'via': '1',
                 'prefix': '32',
+                'vrf_name': 'vrf_default',
                 'network': '140.1.1.10',
             },
             '140.1.1.30': {
                 'via': '1',
                 'prefix': '32',
+                'vrf_name': 'vrf_default',
                 'network': '140.1.1.30',
             }
         },
+        'mirror_session':
+        {
+            'foo': 'foo'
+        },
+        'qos_trust':
+        {
+        },
+        'qos_cos_map':
+        {
+        },
+        'qos_dscp_map':
+        {
+        },
+        'qos_schedule_profile':
+        {
+        },
+        'qos_queue_profile':
+        {
+        },
+        'apply_qos':
+        {
+        },
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+    # Startup Config and Running config are similar, hence using same test
+    # case to test both
+    ddiff = DeepDiff(result_startup, expected)
+    assert not ddiff
+
+
+def test_vrf_parse_show_running_config():
+    raw_result = """\
+Current configuration:
+!
+logging 20.20.20.1 udp severity info
+logging 2001::1 severity warning
+logging syserver
+logging 10.10.10.10 tcp 400 severity debug
+vrf vrf_red
+vrf vrf_green
+vrf vrf_blue
+!
+!
+!
+!
+router bgp 6400
+     bgp router-id 7.7.7.7
+     network 10.1.0.0/24
+     network 10.1.1.0/24
+     timers bgp 90 30
+     neighbor 10.1.11.100 remote-as 11
+     neighbor 10.1.12.100 remote-as 12
+!
+router ospf
+    router-id 7.7.7.7
+    network 10.1.11.100/24 area 10.1.0.0
+    network 10.1.12.100/24 area 10.1.0.0
+vlan 1
+    no shutdown
+vlan 8
+    no shutdown
+vlan 10
+    no shutdown
+vlan 11
+    no shutdown
+vlan 12
+    no shutdown
+interface vlan10
+    no shutdown
+    ip address 10.1.10.1/24
+interface vlan12
+    no shutdown
+    ip address 10.1.12.1/24
+interface vlan11
+    no shutdown
+    ip address 10.1.11.1/24
+interface 1
+    no shutdown
+    no routing
+    vlan access 8
+interface 2
+    no shutdown
+    no routing
+    vlan access 8
+interface 7
+    no shutdown
+    ip address 100.1.1.100/24
+interface 35
+    no shutdown
+    speed 1000
+    mtu 1518
+    flowcontrol receive on
+    flowcontrol send on
+    autonegotiation off
+    lacp port-id 2
+    lacp port-priority 3
+    no routing
+    vlan trunk native 8
+    vlan trunk allowed 12
+interface 50
+    no shutdown
+    mtu 1518
+    flowcontrol receive on
+    flowcontrol send on
+    autonegotiation off
+    no routing
+    vlan trunk allowed 10
+    vlan trunk allowed 11
+    vlan trunk allowed 12
+interface loopback 2
+    ip address 10.0.0.1/24
+    ipv6 address 2001::2/64
+interface mgmt
+    ip static 1.1.1.1/24
+    nameserver 2.2.2.2
+interface lag 1
+    lacp mode passive
+interface 4.2
+    no shutdown
+    encapsulation dot1Q 20
+    ip address 20.0.0.1/24
+sftp server enable
+mirror session foo
+ipv6 route 2020::3/128 1
+ip route 140.1.1.10/32 1
+ip route 140.1.1.30/32 1
+ip route 10.0.3.0/24 10.0.10.2 vrf vrf_red
+ipv6 route 2020::2/128 1
+"""
+
+    result = parse_show_running_config(raw_result)
+    result_startup = parse_show_startup_config(raw_result)
+
+    expected = {
+        'syslog_remotes': {
+            '0': {
+                'remote_host': '20.20.20.1',
+                'transport': 'udp',
+                'severity': 'info'
+            },
+            '1': {
+                'remote_host': '2001::1',
+                'severity': 'warning'
+            },
+            '2': {
+                'remote_host': 'syserver',
+            },
+            '3': {
+                'remote_host': '10.10.10.10',
+                'port': '400',
+                'transport': 'tcp',
+                'severity': 'debug'
+            }
+        },
+        'interface': {
+            '50': {
+                'admin': 'up',
+                'routing': 'no',
+                'vlan': [
+                    {'mode': 'trunk', 'type': 'allowed', 'vlanid': '10'},
+                    {'mode': 'trunk', 'type': 'allowed', 'vlanid': '11'},
+                    {'mode': 'trunk', 'type': 'allowed', 'vlanid': '12'}
+                ],
+                'autonegotiation': 'off',
+                'flowcontrol': {'receive': 'on', 'send': 'on'},
+                'mtu': '1518'
+            },
+            'subint': {'4.2': {
+                'dot1q': '20',
+                'admin': 'up',
+                'ipv4': '20.0.0.1/24'}
+            },
+            'vlan10': {
+                'admin': 'up',
+                'ipv4': '10.1.10.1/24'
+            },
+            '2': {
+                'admin': 'up',
+                'routing': 'no',
+                'vlan': [{'mode': 'access', 'vlanid': '8'}]
+            },
+            'mgmt': {'static': '1.1.1.1/24', 'nameserver': '2.2.2.2'},
+            'vlan11': {
+                'admin': 'up',
+                'ipv4': '10.1.11.1/24'
+            },
+
+            'vlan12': {
+                'admin': 'up',
+                'ipv4': '10.1.12.1/24'
+            },
+            '35': {
+                'admin': 'up',
+                'routing': 'no',
+                'lacp': {'priority': '3', 'port-id': '2'},
+                'vlan': [
+                    {'mode': 'trunk', 'type': 'native', 'vlanid': '8'},
+                    {'mode': 'trunk', 'type': 'allowed', 'vlanid': '12'}
+                ],
+                'autonegotiation': 'off',
+                'speed': '1000',
+                'flowcontrol': {'receive': 'on', 'send': 'on'},
+                'mtu': '1518'
+            },
+            '1': {
+                'admin': 'up',
+                'routing': 'no',
+                'vlan': [{'mode': 'access', 'vlanid': '8'}]
+            },
+            '7': {'admin': 'up', 'ipv4': '100.1.1.100/24'},
+            'loopback 2': {
+                'ipv4': '10.0.0.1/24',
+                'ipv6': '2001::2/64'
+            },
+            'lag': {'1': {'lacp_mode': 'passive'}}
+        },
+        'ospf': {
+            'router-id': '7.7.7.7',
+            'networks': [
+                {'network': '10.1.11.100/24', 'area': '10.1.0.0'},
+                {'network': '10.1.12.100/24', 'area': '10.1.0.0'}
+            ]
+        },
+        'vlan': {
+            '8': {'admin': 'up', 'vlanid': '8'},
+            '10': {'admin': 'up', 'vlanid': '10'},
+            '12': {'admin': 'up', 'vlanid': '12'},
+            '1': {'admin': 'up', 'vlanid': '1'},
+            '11': {'admin': 'up', 'vlanid': '11'}
+        },
+        'bgp': {
+            '6400': {
+                'router_id': '7.7.7.7',
+                'neighbors': [
+                    {'remote-as': '11', 'ip': '10.1.11.100'},
+                    {'remote-as': '12', 'ip': '10.1.12.100'}
+                ],
+                'networks': ['10.1.0.0/24', '10.1.1.0/24'],
+                'timers_bgp': [' 90', ' 30']
+            }
+        },
+        'loopback': {
+            'interface loopback 2': {
+                'ipv4_address': '10.0.0.1/24',
+                'ipv6_address': '2001::2/64'
+            }
+        },
+        'sftp-server': {
+            'status': 'True'
+        },
+        'ip_routes': {
+            '2020::2': {
+                'via': '1',
+                'prefix': '128',
+                'vrf_name': 'vrf_default',
+                'network': '2020::2',
+            },
+            '2020::3': {
+                'via': '1',
+                'prefix': '128',
+                'vrf_name': 'vrf_default',
+                'network': '2020::3',
+            },
+            '140.1.1.10': {
+                'via': '1',
+                'prefix': '32',
+                'vrf_name': 'vrf_default',
+                'network': '140.1.1.10',
+            },
+            '140.1.1.30': {
+                'via': '1',
+                'prefix': '32',
+                'vrf_name': 'vrf_default',
+                'network': '140.1.1.30',
+            },
+            '10.0.3.0': {
+                'via': '10.0.10.2',
+                'prefix': '24',
+                'vrf_name': 'vrf_red',
+                'network': '10.0.3.0',
+            }
+        },
+        'vrf': [
+                'vrf_red',
+                'vrf_green',
+                'vrf_blue'
+        ],
         'mirror_session':
         {
             'foo': 'foo'
@@ -5486,24 +5779,30 @@ def test_parse_show_vrf():
     raw_result = """
 VRF Configuration:
 ------------------
-VRF Name : vrf_default
-
-        Interfaces :     Status :
-        -------------------------
-        10                  up
-        1                   up
-        10-1                up
-        1.14                up
-        9-1.200             up
+VRF Name   : vrf_default
+VRF Status : UP
+table_id   : 0
+        Interfaces             Status
+        -----------------------------
+        10                       up
+        1                        up
+        10-1                     up
+        1.14                     up
+        9-1.200                  up
+        loopback1                up
     """
 
     expected_result = {
         'vrf_default': {
+            'VRF_Status': 'UP',
+            'table_id': '0',
+            'VRF_Name': 'vrf_default',
             '10': 'up',
             '1': 'up',
             '10-1': 'up',
             '1.14': 'up',
-            '9-1.200': 'up'
+            '9-1.200': 'up',
+            'loopback1': 'up'
         }
     }
 
