@@ -4708,6 +4708,46 @@ local-priority {local_priority} name {name} color {color}',
                 'doc': 'Remove the qos trust mode for the port.',
                 'arguments': [],
             },
+            {
+                'command': 'apply access-list ip {acl_name} in',
+                'doc': 'Apply ACL on interface to ingress traffic',
+                'arguments': [
+                    {
+                        'name': 'acl_name',
+                        'doc': 'Access-list name'
+                    }
+                ],
+            },
+            {
+                'command': 'no apply access-list ip {acl_name} in',
+                'doc': 'Apply no ACL on interface to ingress traffic',
+                'arguments': [
+                    {
+                        'name': 'acl_name',
+                        'doc': 'Access-list name'
+                    }
+                ],
+            },
+            {
+                'command': 'apply access-list ip {acl_name} out',
+                'doc': 'Apply ACL on interface to egress traffic',
+                'arguments': [
+                    {
+                        'name': 'acl_name',
+                        'doc': 'Access-list name'
+                    }
+                ],
+            },
+            {
+                'command': 'no apply access-list ip {acl_name} out',
+                'doc': 'Apply no ACL on interface to egress traffic',
+                'arguments': [
+                    {
+                        'name': 'acl_name',
+                        'doc': 'Access-list name'
+                    }
+                ],
+            },
         ]
     }),
     ('config_interface_mgmt', {
