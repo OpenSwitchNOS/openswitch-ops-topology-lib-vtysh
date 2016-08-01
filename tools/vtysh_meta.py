@@ -4048,9 +4048,11 @@ local-priority {local_priority} name {name} color {color}',
                     {
                         'name': 'grpid',
                         'doc': 'Virtual router id <1-255>',
+                    },
+                    {
                         'name': 'af',
                         'doc': 'Address family <ipv4|ipv6>'
-                    }
+                    },
                 ],
             },
             {
@@ -4060,9 +4062,11 @@ local-priority {local_priority} name {name} color {color}',
                     {
                         'name': 'grpid',
                         'doc': 'Virtual router id <1-255>',
+                    },
+                    {
                         'name': 'af',
                         'doc': 'Address family <ipv4|ipv6>'
-                    }
+                    },
                 ],
             },
             {

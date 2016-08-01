@@ -10822,7 +10822,7 @@ class ConfigInterface(ContextManager):
             raise determine_exception(result)(result)
 
     def vrrp_address_family(
-        self, af,
+        self, grpid, af,
         _shell='vtysh',
         _shell_args={
             'matches': None,
@@ -10840,6 +10840,7 @@ class ConfigInterface(ContextManager):
 
             # vrrp {grpid} address-family {af}
 
+        :param grpid: Virtual router id <1-255>
         :param af: Address family <ipv4|ipv6>
         :param str _shell: shell to be selected
         :param dict _shell_args: low-level shell API arguments
@@ -10863,7 +10864,7 @@ class ConfigInterface(ContextManager):
             raise determine_exception(result)(result)
 
     def no_vrrp_address_family(
-        self, af,
+        self, grpid, af,
         _shell='vtysh',
         _shell_args={
             'matches': None,
@@ -10881,6 +10882,7 @@ class ConfigInterface(ContextManager):
 
             # no vrrp {grpid} address-family {af}
 
+        :param grpid: Virtual router id <1-255>
         :param af: Address family <ipv4|ipv6>
         :param str _shell: shell to be selected
         :param dict _shell_args: low-level shell API arguments
@@ -19894,7 +19896,8 @@ class ConfigVrrpInterface(ContextManager):
 
     ::
 
-        ['config terminal', 'interface {port}', 'vrrp {grpid} address-family {af}']
+        ['config terminal', 'interface {port}',
+         'vrrp {grpid} address-family {af}']
 
     post_commands:
 
