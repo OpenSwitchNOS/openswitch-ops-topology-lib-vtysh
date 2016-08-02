@@ -10874,7 +10874,7 @@ class ConfigInterface(ContextManager):
         }
     ):
         """
-        Unset VRRP virtual router id and address-family
+        Remove VRRP virtual router id and address-family
 
         This function runs the following vtysh command:
 
@@ -19896,8 +19896,7 @@ class ConfigVrrpInterface(ContextManager):
 
     ::
 
-        ['config terminal', 'interface {port}',
-         'vrrp {grpid} address-family {af}']
+        ['config terminal', 'interface {port}', 'vrrp {grpid} address-family {af}']
 
     post_commands:
 
@@ -25295,6 +25294,94 @@ def show_ip_bgp_route_map(
     return parse_show_ip_bgp_route_map(result)
 
 
+def show_vrrp(
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
+    """
+    Display vrrp information
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show vrrp
+
+    :param dict kwargs: arguments to pass to the send_command of the
+     vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_vrrp`
+    """
+
+    cmd = [
+        'show vrrp'
+    ]
+
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
+    )
+
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
+
+    return parse_show_vrrp(result)
+
+
+def show_vrrp_brief(
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
+    """
+    Display vrrp brief information
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show vrrp brief
+
+    :param dict kwargs: arguments to pass to the send_command of the
+     vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_vrrp_brief`
+    """
+
+    cmd = [
+        'show vrrp brief'
+    ]
+
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
+    )
+
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
+
+    return parse_show_vrrp_brief(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -25410,5 +25497,7 @@ __all__ = [
     'show_access_list_hitcounts_ip_interface',
     'show_ip_prefix_list',
     'show_ipv6_prefix_list',
-    'show_ip_bgp_route_map'
+    'show_ip_bgp_route_map',
+    'show_vrrp',
+    'show_vrrp_brief'
 ]
