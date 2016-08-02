@@ -1085,6 +1085,18 @@ interface {port}',
                     }
                 ],
                 'returns': True
+            },
+            {
+                'command': 'show vrrp',
+                'doc': 'Display vrrp information',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show vrrp brief',
+                'doc': 'Display vrrp brief information',
+                'arguments': [],
+                'returns': True
             }
         ]
     }),
@@ -4063,7 +4075,7 @@ local-priority {local_priority} name {name} color {color}',
             },
             {
                 'command': 'no vrrp {grpid} address-family {af}',
-                'doc': 'Unset VRRP virtual router id and address-family',
+                'doc': 'Remove VRRP virtual router id and address-family',
                 'arguments': [
                     {
                         'name': 'grpid',

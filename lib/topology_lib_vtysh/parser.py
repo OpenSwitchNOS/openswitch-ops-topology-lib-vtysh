@@ -7057,6 +7057,93 @@ def parse_show_version(raw_result):
     return result
 
 
+def parse_show_vrrp(raw_result):
+    """
+    Parse the 'show vrrp' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show vrrp command in a \
+        dictionary of the form:
+
+     ::
+
+       {
+            'status': 'INIT (Interface Down)',
+            'premption': 'enabled',
+            'group': '15',
+            'master_router': 'unknown',
+            'state_duration': '0',
+            'interval': '0.000',
+            'priority': '255',
+            'interface': '2',
+            'advertisement_interval': '1000',
+            'virtual_ip_address': '100.100.100.100',
+            'down_interval': 'unknown',
+            'master_adv_interval': 'unknown',
+            'iaddress_family': 'IPv4'
+
+       }
+
+    """
+
+    show_re = (
+     r'Interface (?P<interface>\d+) - Group (?P<group>' +
+     '\d+) - Address-Family (?P<iaddress_family>\S+)'
+     r'\s*State is (?P<status>.*)\n'
+     r'\s*State duration (?P<state_duration>' +
+     '\d+) mins (?P<interval>[\d.]+) secs'
+     r'\s*Virtual IP address is (?P<virtual_ip_address>[0-9.]+)?\s*'
+     r'\s*Advertisement interval is (?P<advertisement_interval>\d+) msec'
+     r'\s*Preemption (?P<premption>\S+)'
+     r'\s*Priority is (?P<priority>\d+)'
+     r'\s*Master Router is (?P<master_router>\S+)'
+     r'\s*Master Advertisement interval is (?P<master_adv_interval>\S+)'
+     r'\s*Master Down interval is (?P<down_interval>\S+)'
+    )
+    re_result = re.search(show_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    return result
+
+
+def parse_show_vrrp_brief(raw_result):
+    """
+    Parse the 'show vrrp brief' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show vrrp brief command in a \
+        dictionary of the form:
+
+     ::
+
+       {
+            'group': '1',
+            'address_family': 'IPv4',
+            'preempt': 'Y',
+            'priority': '100',
+            'interface': '1',
+            'state': 'MASTER',
+            'time': '0',
+            'owner': 'N',
+            'master_address': '10.0.0.2(local) 10.0.0.1'
+       }
+
+    """
+
+    show_re = (
+        r'(?P<interface>\d+)\s+(?P<group>\S+)\s+(?P<address_family>\S+)\s+'
+        r'(?P<priority>\d+)\s+(?P<time>\d+)\s+(?P<owner>\S+)\s+'
+        r'(?P<preempt>\S+)\s+(?P<state>\S+)\s+(?P<master_address>[\w ()-.]*)'
+    )
+    re_result = re.search(show_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    return result
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface_all',
@@ -7115,5 +7202,6 @@ __all__ = [
     'parse_show_ip_bgp_route_map',
     'parse_copy_running_config_startup_config',
     'parse_copy_startup_config_running_config',
-    'parse_show_version'
+    'parse_show_version', 'parse_show_vrrp',
+    'parse_show_vrrp_brief'
 ]
