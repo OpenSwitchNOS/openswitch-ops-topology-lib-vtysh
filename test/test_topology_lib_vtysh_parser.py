@@ -21,7 +21,6 @@ OpenSwitch Test for vtysh related commands.
 
 from __future__ import unicode_literals
 from deepdiff import DeepDiff
-
 from topology_lib_vtysh.parser import (
     parse_show_interface,
     parse_show_interface_brief,
@@ -113,7 +112,9 @@ from topology_lib_vtysh.parser import (
     parse_show_access_list_hitcounts_ip_interface,
     parse_show_ip_prefix_list,
     parse_show_ipv6_prefix_list,
-    parse_show_ip_bgp_route_map
+    parse_show_ip_bgp_route_map,
+    parse_show_vrrp,
+    parse_show_vrrp_brief
     )
 
 
@@ -5680,6 +5681,67 @@ Entry 3:
             }
     }
     result = parse_show_ip_bgp_route_map(raw_result)
+    ddiff = DeepDiff(result, expected_result)
+
+    assert not ddiff
+
+
+def test_parse_show_vrrp():
+    raw_result = """
+
+Interface 2 - Group 15 - Address-Family IPv4
+  State is INIT (Interface Down)
+  State duration 0 mins 0.000 secs
+  Virtual IP address is 100.100.100.100
+  Advertisement interval is 1000 msec
+  Preemption enabled
+  Priority is 255
+  Master Router is unknown
+  Master Advertisement interval is unknown
+  Master Down interval is unknown
+
+    """
+
+    expected_result = {
+        'status': 'INIT (Interface Down)',
+        'premption': 'enabled',
+        'group': '15',
+        'master_router': 'unknown',
+        'state_duration': '0',
+        'interval': '0.000',
+        'priority': '255',
+        'interface': '2',
+        'advertisement_interval': '1000',
+        'virtual_ip_address': '100.100.100.100',
+        'down_interval': 'unknown',
+        'master_adv_interval': 'unknown',
+        'iaddress_family': 'IPv4'
+    }
+    result = parse_show_vrrp(raw_result)
+    ddiff = DeepDiff(result, expected_result)
+
+    assert not ddiff
+
+
+def test_parse_show_vrrp_brief():
+    raw_result = """
+
+Interface   Grp  A-F   Pri   Time Owner Pre State   Master addr/Group addr
+ 1           1   IPv4  100    0    N    Y   MASTER  10.0.0.2(local) 10.0.0.1
+    """
+
+    expected_result = {
+            'group': '1',
+            'address_family': 'IPv4',
+            'preempt': 'Y',
+            'priority': '100',
+            'interface': '1',
+            'state': 'MASTER',
+            'time': '0',
+            'owner': 'N',
+            'master_address': '10.0.0.2(local) 10.0.0.1'
+    }
+    result = parse_show_vrrp_brief(raw_result)
     ddiff = DeepDiff(result, expected_result)
 
     assert not ddiff
