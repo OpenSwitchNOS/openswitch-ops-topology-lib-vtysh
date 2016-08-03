@@ -1097,7 +1097,19 @@ interface {port}',
                 'doc': 'Display vrrp brief information',
                 'arguments': [],
                 'returns': True
-            }
+            },
+            {
+                'command': 'show date',
+                'doc': 'Display system date information',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show system timezone',
+                'doc': 'Display system timezone information',
+                'arguments': [],
+                'returns': True
+            },
         ]
     }),
     ('configure', {
@@ -3211,6 +3223,26 @@ local-priority {local_priority} name {name} color {color}',
                 'command': 'aaa authentication login fallback error local',
                 'doc': 'AAA authentication login fallback configuration',
                 'arguments': [],
+            },
+            {
+                'command': 'timezone set {timezone}',
+                'doc': 'Set the system timezone',
+                'arguments': [
+                    {
+                        'name': 'timezone',
+                        'doc': 'Available timezone from list',
+                    },
+                ],
+            },
+            {
+                'command': 'no timezone set {timezone}',
+                'doc': 'Remove the system timezone',
+                'arguments': [
+                    {
+                        'name': 'timezone',
+                        'doc': 'Available timezone from list',
+                    },
+                ],
             }
         ]
     }),

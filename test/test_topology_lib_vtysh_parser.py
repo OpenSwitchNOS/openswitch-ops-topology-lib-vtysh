@@ -115,7 +115,9 @@ from topology_lib_vtysh.parser import (
     parse_show_ip_bgp_route_map,
     parse_show_version,
     parse_show_vrrp,
-    parse_show_vrrp_brief
+    parse_show_vrrp_brief,
+    parse_show_date,
+    parse_show_system_timezone
     )
 
 
@@ -5757,6 +5759,113 @@ OpenSwitch 0.3.0-rc0 (Build: as5712-ops-0.3.0-rc0-release+2016071100)
     expected = {
         'version': '0.3.0-rc0',
         'build': 'as5712-ops-0.3.0-rc0-release+2016071100'
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_date():
+    raw_result = """
+Tue Jul 12 14:17:38 CST 2016
+    """
+
+    result = parse_show_date(raw_result)
+
+    expected = {
+        'day_of_week': 'Tue',
+        'month': 'Jul',
+        'day_of_month': 12,
+        'hour': 14,
+        'minutes': 17,
+        'seconds': 38,
+        'timezone': 'CST',
+        'year': 2016
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_system_timezone_no_dst():
+    raw_result = """
+System is configured for timezone : UTC
+      DST active: n/a
+    """
+
+    result = parse_show_system_timezone(raw_result)
+
+    expected = {
+        'timezone': 'UTC',
+        'dst_active': 'n/a'
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_system_timezone():
+    raw_result = """
+System is configured for timezone : US/Alaska
+      DST active: yes
+ Last DST change: DST began at
+                  Sun 2016-03-13 01:59:59 AKST
+                  Sun 2016-03-13 03:00:00 AKDT
+ Next DST change: DST ends (the clock jumps one hour backwards) at
+                  Sun 2016-11-06 01:59:59 AKDT
+                  Sun 2016-11-06 01:00:00 AKST
+
+    """
+
+    result = parse_show_system_timezone(raw_result)
+
+    expected = {
+        'timezone': 'US/Alaska',
+        'dst_active': 'yes',
+        'last_dst': {
+                    'start_date': {
+                        'day_of_week': 'Sun',
+                        'year': '2016',
+                        'month': '03',
+                        'day_of_month': '13',
+                        'hour': '01',
+                        'minutes': '59',
+                        'seconds': '59',
+                        'timezone': 'AKST'
+                    },
+                    'end_date': {
+                        'day_of_week': 'Sun',
+                        'year': '2016',
+                        'month': '03',
+                        'day_of_month': '13',
+                        'hour': '03',
+                        'minutes': '00',
+                        'seconds': '00',
+                        'timezone': 'AKDT'
+                    }
+        },
+        'next_dst': {
+                    'start_date': {
+                        'day_of_week': 'Sun',
+                        'year': '2016',
+                        'month': '11',
+                        'day_of_month': '06',
+                        'hour': '01',
+                        'minutes': '59',
+                        'seconds': '59',
+                        'timezone': 'AKDT'
+                    },
+                    'end_date': {
+                        'day_of_week': 'Sun',
+                        'year': '2016',
+                        'month': '11',
+                        'day_of_month': '06',
+                        'hour': '01',
+                        'minutes': '00',
+                        'seconds': '00',
+                        'timezone': 'AKST'
+                    }
+        }
     }
 
     ddiff = DeepDiff(result, expected)

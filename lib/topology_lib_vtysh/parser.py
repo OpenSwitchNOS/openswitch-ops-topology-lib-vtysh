@@ -7144,6 +7144,154 @@ def parse_show_vrrp_brief(raw_result):
     result = re_result.groupdict()
     return result
 
+
+def parse_show_date(raw_result):
+    """
+    Parse the 'show date' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show system clock command in a \
+        dictionary of the form:
+
+     ::
+
+        {
+            'day_of_week': 'Tue',
+            'month': 'Jul',
+            'day_of_month': 12,
+            'hour': 14,
+            'minutes': 01,
+            'seconds': 22,
+            'timezone': 'CST',
+            'year': 2016
+        }
+    """
+
+    date_re = (
+        r'(?P<day_of_week>\S+)\s+'
+        r'(?P<month>\S+)\s+'
+        r'(?P<day_of_month>\d+)\s+'
+        r'(?P<hour>\d+):'
+        r'(?P<minutes>\d+):'
+        r'(?P<seconds>\d+)\s+'
+        r'(?P<timezone>\S+)\s+'
+        r'(?P<year>\d+)'
+    )
+
+    re_result = re.search(date_re, raw_result)
+
+    result = re_result.groupdict()
+    for key, value in result.items():
+        if value.isdigit():
+            result[key] = int(value)
+        else:
+            result[key] = value
+
+    return result
+
+
+def parse_show_system_timezone(raw_result):
+    """
+    Parse the 'show system timezone' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show system clock command in a \
+        dictionary of the form:
+        ::
+
+            {
+                'timezone': 'US/Alaska',
+                'dst_active': 'yes',
+                'last_dst': {
+                            'start_date': {
+                                'day_of_week': 'Sun',
+                                'year': '2016',
+                                'month': '03',
+                                'day_of_month': '13',
+                                'hour': '01',
+                                'minutes': '59',
+                                'seconds': '59',
+                                'timezone': 'AKST'
+                            },
+                            'end_date': {
+                                'day_of_week': 'Sun',
+                                'year': '2016',
+                                'month': '03',
+                                'day_of_month': '13',
+                                'hour': '03',
+                                'minutes': '00',
+                                'seconds': '00',
+                                'timezone': 'AKDT'
+                            }
+                },
+                'next_dst': {
+                            'start_date': {
+                                'day_of_week': 'Sun',
+                                'year': '2016',
+                                'month': '11',
+                                'day_of_month': '06',
+                                'hour': '01',
+                                'minutes': '59',
+                                'seconds': '59',
+                                'timezone': 'AKDT'
+                            },
+                            'end_date': {
+                                'day_of_week': 'Sun',
+                                'year': '2016',
+                                'month': '11',
+                                'day_of_month': '06',
+                                'hour': '01',
+                                'minutes': '00',
+                                'seconds': '00',
+                                'timezone': 'AKST'
+                            }
+                }
+            }
+    """
+    system_timezone_re = (
+        r'timezone\s:\s(?P<timezone>\S+)\s+'
+        r'DST\sactive:\s(?P<dst_active>\S+)'
+    )
+
+    system_timezone_dst_re = (
+        r'\s(?P<day_of_week>\S+)\s+'
+        r'(?P<year>\d+)-'
+        r'(?P<month>\S+)-'
+        r'(?P<day_of_month>\d+)\s+'
+        r'(?P<hour>\d+):'
+        r'(?P<minutes>\d+):'
+        r'(?P<seconds>\d+)\s+'
+        r'(?P<timezone>\S+)'
+    )
+
+    result = {}
+    re_result = re.search(system_timezone_re, raw_result)
+    result = re_result.groupdict()
+
+    if re.search(system_timezone_dst_re, raw_result) is not None:
+        last_dst = {}
+        next_dst = {}
+        counter = 0
+        for line in raw_result.splitlines():
+            re_result = re.search(system_timezone_dst_re, line)
+            if re_result:
+                if counter == 0:
+                    last_dst['start_date'] = re_result.groupdict()
+                elif counter == 1:
+                    last_dst['end_date'] = re_result.groupdict()
+                elif counter == 2:
+                    next_dst['start_date'] = re_result.groupdict()
+                elif counter == 3:
+                    next_dst['end_date'] = re_result.groupdict()
+                counter = counter + 1
+        result['last_dst'] = last_dst
+        result['next_dst'] = next_dst
+
+    return result
+
+
 __all__ = [
     'parse_show_vlan', 'parse_show_lacp_aggregates',
     'parse_show_lacp_interface_all',
@@ -7203,5 +7351,6 @@ __all__ = [
     'parse_copy_running_config_startup_config',
     'parse_copy_startup_config_running_config',
     'parse_show_version', 'parse_show_vrrp',
-    'parse_show_vrrp_brief'
+    'parse_show_vrrp_brief', 'parse_show_date',
+    'parse_show_system_timezone'
 ]

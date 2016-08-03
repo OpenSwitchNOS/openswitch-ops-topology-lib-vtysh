@@ -7130,6 +7130,88 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def timezone_set(
+        self, timezone,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Set the system timezone
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # timezone set {timezone}
+
+        :param timezone: Available timezone from list
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'timezone set {timezone}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_timezone_set(
+        self, timezone,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Remove the system timezone
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no timezone set {timezone}
+
+        :param timezone: Available timezone from list
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no timezone set {timezone}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
 
 class RouteMap(ContextManager):
     """
@@ -25426,6 +25508,94 @@ def show_vrrp_brief(
     return parse_show_vrrp_brief(result)
 
 
+def show_date(
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
+    """
+    Display system date information
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show date
+
+    :param dict kwargs: arguments to pass to the send_command of the
+     vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_date`
+    """
+
+    cmd = [
+        'show date'
+    ]
+
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
+    )
+
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
+
+    return parse_show_date(result)
+
+
+def show_system_timezone(
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
+    """
+    Display system timezone information
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show system timezone
+
+    :param dict kwargs: arguments to pass to the send_command of the
+     vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_system_timezone`
+    """
+
+    cmd = [
+        'show system timezone'
+    ]
+
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
+    )
+
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
+
+    return parse_show_system_timezone(result)
+
+
 __all__ = [
     'ContextManager',
     'Configure',
@@ -25544,5 +25714,7 @@ __all__ = [
     'show_ipv6_prefix_list',
     'show_ip_bgp_route_map',
     'show_vrrp',
-    'show_vrrp_brief'
+    'show_vrrp_brief',
+    'show_date',
+    'show_system_timezone'
 ]
