@@ -633,38 +633,39 @@ def parse_show_mac_address_table(raw_result):
             '00:00:00:00:00:01': { 'vlan_id': '1',
                                     'from': 'dynamic',
                                     'port': '1'
-        },
-        '00:00:00:00:00:02': { 'vlan_id': '2',
-                                'from': 'dynamic',
-                                'port': '2'
-        },
-        'vlans': {
-            '1': {
-                '00:00:00:00:00:01': {
-                    'vlan_id': '1',
-                    'from': 'dynamic',
-                    'port': '1'
-                },
             },
-            '2': {
-                '00:00:00:00:00:02': {
-                    'vlan_id': '2',
-                    'from': 'dynamic',
-                    'port': '2'
-                },
+            '00:00:00:00:00:02': { 'vlan_id': '2',
+                                    'from': 'dynamic',
+                                    'port': '2'
             },
-            '3': {
-                '00:00:00:00:00:02': {
-                    'vlan_id': '3',
-                    'from': 'dynamic',
-                    'port': '5'
+            'vlans': {
+                '1': {
+                    '00:00:00:00:00:01': {
+                        'vlan_id': '1',
+                        'from': 'dynamic',
+                        'port': '1'
+                    },
                 },
-                '00:00:00:00:00:03': {
-                    'vlan_id': '3',
-                    'from': 'dynamic',
-                    'port': '3-1'
+                '2': {
+                    '00:00:00:00:00:02': {
+                        'vlan_id': '2',
+                        'from': 'dynamic',
+                        'port': '2'
+                    },
                 },
-            },
+                '3': {
+                    '00:00:00:00:00:02': {
+                        'vlan_id': '3',
+                        'from': 'dynamic',
+                        'port': '5'
+                    },
+                    '00:00:00:00:00:03': {
+                        'vlan_id': '3',
+                        'from': 'dynamic',
+                        'port': '3-1'
+                    },
+                }
+            }
         }
     """
     table_global = (
@@ -726,16 +727,18 @@ def parse_show_udld_interface(raw_result):
 
     This is the current output of "show udld interface 1":
 
-    switch# show udld interface 1
+    ::
 
-    Interface 1
-     Status: Not running
-     Mode: Verify then forward
-     Interval: 5000 milliseconds
-     Retries: 4
-     Port transitions: 0
-     RX: 0 valid packets, 0 discarded packets
-     TX: 0 packets
+        switch# show udld interface 1
+
+        Interface 1
+         Status: Not running
+         Mode: Verify then forward
+         Interval: 5000 milliseconds
+         Retries: 4
+         Port transitions: 0
+         RX: 0 valid packets, 0 discarded packets
+         TX: 0 packets
     """
 
     show_re = (
@@ -829,19 +832,18 @@ def parse_show_interface_loopback_brief(raw_result):
         command in a list of dictionaries of the form:
      ::
 
-      [
-       {
-         'loopback_int': 'lo2',
-         'loopback_ip' : '192.168.2.1/24',
-         'status': 'up'
-       },
-       {
-         'loopback_int': 'lo1024',
-         'loopback_ip' : '192.168.1.1/24',
-         'status': 'up'
-       }
-      ]
-
+        [
+            {
+                'loopback_int': 'lo2',
+                'loopback_ip' : '192.168.2.1/24',
+                'status': 'up'
+            },
+            {
+                'loopback_int': 'lo1024',
+                'loopback_ip' : '192.168.1.1/24',
+                'status': 'up'
+            }
+        ]
     """
     result = {}
     loopback_re = (
@@ -869,31 +871,31 @@ def parse_show_interface_subinterface_brief(raw_result):
     :rtype: dict
     :return: The parsed result of the show interface subinterface brief \
         command in a list of dictionaries of the form:
+
      ::
 
-      [
-        {
-            'vlan_id': 40,
-            'subinterface': '4.1',
-            'type': 'eth',
-            'mode': 'routed',
-            'status': 'down',
-            'reason': 'Administratively down    ',
-            'speed': 'auto',
-            'port_ch': '--'
-        },
-        {
-            'vlan_id': 20,
-            'subinterface': '4.2',
-            'type': 'eth',
-            'mode': 'routed',
-            'status': 'down',
-            'reason': 'Administratively down    ',
-            'speed': 'auto',
-            'port_ch': '--'
-        }
-      ]
-
+        [
+            {
+                'vlan_id': 40,
+                'subinterface': '4.1',
+                'type': 'eth',
+                'mode': 'routed',
+                'status': 'down',
+                'reason': 'Administratively down    ',
+                'speed': 'auto',
+                'port_ch': '--'
+            },
+            {
+                'vlan_id': 20,
+                'subinterface': '4.2',
+                'type': 'eth',
+                'mode': 'routed',
+                'status': 'down',
+                'reason': 'Administratively down    ',
+                'speed': 'auto',
+                'port_ch': '--'
+            }
+        ]
     """
     result = {}
 
@@ -1935,7 +1937,6 @@ def parse_show_ip_ospf_neighbor_detail(raw_result):
                 'link_retrans_list': 0,
                 'DR': '0.0.0.0',
                 'options': 0
-
             }
         }
     """
@@ -2050,7 +2051,6 @@ def parse_show_ip_ospf_interface(raw_result):
            'network_type': '<BROADCAST>',
            'transmit_delay': '1',
            'DR_Interface_address': '10.10.10.1'
-
         }
     """
 
@@ -2576,11 +2576,12 @@ def parse_ping6(raw_result):
 def parse_copy_core_dump(raw_result):
     """
     Parse the 'parse_copy_core_dump' command raw output.
+
     :param str raw_result: copy core-dump raw result string.
     :rtype: dict
     :return: The parsed result of the copy core-dump to server:
 
-    ::
+     ::
 
        {
            0:{
@@ -2616,17 +2617,18 @@ def parse_copy_core_dump(raw_result):
 def parse_copy_startup_config_running_config(raw_result):
     """
     Parse the 'copy startup-config running-config' command raw output.
+
     :param str raw_result: copy startup-config running-config
-    raw result string.
+        raw result string.
     :rtype: dict
     :return: The parsed result of the copy startup-config running-config:
 
-    ::
+     ::
 
-       {
-        'status': 'success'
-        'reason': 'Copied startup-config to running-config'
-       }
+        {
+            'status': 'success'
+            'reason': 'Copied startup-config to running-config'
+        }
     """
 
     if (
@@ -2650,17 +2652,18 @@ def parse_copy_startup_config_running_config(raw_result):
 def parse_copy_running_config_startup_config(raw_result):
     """
     Parse the 'copy running-config startup-config' command raw output.
+
     :param str raw_result: copy running-config startup-config
-    raw result string.
+        raw result string.
     :rtype: dict
     :return: The parsed result of the copy running-config startup-config:
 
-    ::
+     ::
 
-       {
-        'status': 'success'
-        'reason': 'Copied running-config to startup-config'
-       }
+        {
+            'status': 'success'
+            'reason': 'Copied running-config to startup-config'
+        }
     """
 
     if (
@@ -4269,7 +4272,7 @@ def parse_show_ip_ecmp(raw_result):
     :return: The parsed result of the show ip ecmp in a \
         dictionary of the form:
 
-    ::
+     ::
 
         {
             'global_status': True,
@@ -4817,7 +4820,7 @@ def parse_show_vlog_config_feature(raw_result):
 
     :param str raw_result: vtysh raw result string.
     :return: The parsed result of the show vlog config feature command.
-            : True on success or False on Failure.
+        True on success or False on Failure.
     """
     show_config_feature_re = (
         r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
@@ -4839,7 +4842,7 @@ def parse_show_vlog_config_list(raw_result):
 
     :param str raw_result: vtysh raw result string.
     :return: The parsed result of the show vlog config list command.
-            : True on success or False on Failure.
+        True on success or False on Failure.
     """
     show_config_list_re = (
         r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
@@ -4861,7 +4864,7 @@ def parse_show_vlog_daemon(raw_result):
 
     :param str raw_result: vtysh raw result string.
     :return: The parsed result of the show vlog daemon command.
-            : True on success or False on Failure.
+        True on success or False on Failure.
     """
     show_daemon_re = (
         r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
@@ -4886,7 +4889,7 @@ def parse_show_vlog_severity(raw_result):
 
     :param str raw_result: vtysh raw result string.
     :return: The parsed result of the show vlog severity command.
-            : True on success or False on Failure.
+        True on success or False on Failure.
     """
     show_severity_re = (
         r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
@@ -4911,8 +4914,7 @@ def parse_show_vlog_daemon_severity(raw_result):
 
     :param str raw_result: vtysh raw result string.
     :return: The parsed result of the show vlog daemon {daemon} severity \
-            {severity} command.
-            : True on success or False on Failure.
+        {severity} command. True on success or False on Failure.
     """
     daemon_severity_re = (
         r'([-\w_]+)\s*([-\w_]+)*\s*([-\w_]+)\s*([-\w_]+)'
@@ -4937,8 +4939,7 @@ def parse_show_vlog_severity_daemon(raw_result):
 
     :param str raw_result: vtysh raw result string.
     :return: The parsed result of the show vlog severity {severity} daemon \
-            {daemon} command.
-            : True on success or False on Failure.
+        {daemon} command. True on success or False on Failure.
     """
     return parse_show_vlog_daemon_severity(raw_result)
 
@@ -4976,13 +4977,14 @@ def parse_show_startup_config(raw_result):
 
     :param str raw_result: vtysh raw result string.
     :rtype: dict
-    :return: The parsed result of the show running-config
+    :return: The parsed result of the show running-config \
         command in a dictionary of the form:
 
      ::
+
         {
-        'sftp-server': {
-        'status':'enable'}
+            'sftp-server': {
+            'status':'enable'}
         }
     """
     result = {}
@@ -4997,15 +4999,16 @@ def parse_show_startup_config(raw_result):
 def parse_erase_startup_config(raw_result):
     """
     Parse the 'erase startup-config' command raw output.
+
     :param str raw_result: vtysh raw result string.
     :rtype: dict
-    :return: The parsed result of the erase startup-config\
+    :return: The parsed result of the erase startup-config \
         in a dictionary of the form:
 
-    ::
+     ::
 
         {
-        'erase_startup_config_status': 'success'
+            'erase_startup_config_status': 'success'
         }
     """
     erase_startup_re = (r'Delete.*\s+:\s+(?P<erase_startup_config_status>\S+)')
@@ -5025,12 +5028,13 @@ def parse_erase_startup_config(raw_result):
 def parse_show_tftp_server(raw_result):
     """
     Parse the 'show tftp-server' command raw output.
+
     :param str raw_result: vtysh raw result string.
     :rtype: dict
     :return: The parsed result of the show tftp-server\
         in a dictionary of the form:
 
-    ::
+     ::
 
         {
             'tftp_server' : 'Enabled',
@@ -5063,13 +5067,14 @@ def parse_show_tftp_server(raw_result):
 
 def parse_show_core_dump(raw_result):
     """
-    Parse the show core-dump output
+    Parse the show core-dump output.
+
     :param str raw_result: vtysh raw result string.
     :rtype: dict
-    :return: The parsed result of the show core-dump\
+    :return: The parsed result of the show core-dump \
         in a dictionary of the form:
 
-    ::
+     ::
 
         {
             0:{
@@ -5130,13 +5135,14 @@ def parse_show_core_dump(raw_result):
 
 def parse_config_tftp_server_enable(raw_result):
     """
-    Parse the 'enable' command raw output in tftp-server context
+    Parse the 'enable' command raw output in tftp-server context.
+
     :param str raw_result: vtysh raw result string.
     :rtype: dict
     :return: The parsed result of the 'enable' in tftp-server\
         context:
 
-    ::
+     ::
 
         {
             '\s*TFTP server is enabled successfully\s*-*\s*'
@@ -5164,13 +5170,14 @@ def parse_config_tftp_server_enable(raw_result):
 
 def parse_config_tftp_server_no_enable(raw_result):
     """
-    Parse the 'no enable' command raw output in tftp-server context
+    Parse the 'no enable' command raw output in tftp-server context.
+
     :param str raw_result: vtysh raw result string.
     :rtype: dict
-    :return: The parsed result of the 'no enable' in tftp-server\
+    :return: The parsed result of the 'no enable' in tftp-server \
         context:
 
-    ::
+     ::
 
         {
             '\s*TFTP server is enabled successfully\s*-*\s*'
@@ -5198,13 +5205,14 @@ def parse_config_tftp_server_no_enable(raw_result):
 
 def parse_config_tftp_server_secure_mode(raw_result):
     """
-    Parse the 'secure-mode' command raw output in tftp-server context
+    Parse the 'secure-mode' command raw output in tftp-server context.
+
     :param str raw_result: vtysh raw result string.
     :rtype: dict
     :return: The parsed result of the 'secure-mode' in tftp-server\
         context:
 
-    ::
+     ::
 
         {
             '\s*TFTP server secure mode is enabled successfully\s*-*\s*'
@@ -5232,13 +5240,14 @@ def parse_config_tftp_server_secure_mode(raw_result):
 
 def parse_config_tftp_server_no_secure_mode(raw_result):
     """
-    Parse the 'no secure-mode' command raw output in tftp-server context
+    Parse the 'no secure-mode' command raw output in tftp-server context.
+
     :param str raw_result: vtysh raw result string.
     :rtype: dict
-    :return: The parsed result of the 'no secure-mode' in tftp-server\
+    :return: The parsed result of the 'no secure-mode' in tftp-server \
         context:
 
-    ::
+     ::
 
         {
             '\s*TFTP server secure mode is disabled successfully\s*-*\s*'
@@ -5266,13 +5275,14 @@ def parse_config_tftp_server_no_secure_mode(raw_result):
 
 def parse_config_tftp_server_path(raw_result):
     """
-    Parse the 'path {path}' command raw output in tftp-server context
+    Parse the 'path {path}' command raw output in tftp-server context.
+
     :param str raw_result: vtysh raw result string.
     :rtype: dict
-    :return: The parsed result of the 'no enable' in tftp-server\
+    :return: The parsed result of the 'no enable' in tftp-server \
         context:
 
-    ::
+     ::
 
         {
             'TFTP server path is added successfully'
@@ -5300,13 +5310,14 @@ def parse_config_tftp_server_path(raw_result):
 
 def parse_config_tftp_server_no_path(raw_result):
     """
-    Parse the 'no path {path}' command raw output in tftp-server context
+    Parse the 'no path {path}' command raw output in tftp-server context.
+
     :param str raw_result: vtysh raw result string.
     :rtype: dict
-    :return: The parsed result of the 'no enable' in tftp-server\
+    :return: The parsed result of the 'no enable' in tftp-server \
         context:
 
-    ::
+     ::
 
         {
             'TFTP server path is deleted successfully'
@@ -5713,14 +5724,13 @@ def parse_show_snmp_community(raw_result):
     :return: The parsed result of the show snmp community\
        command in a list of strings
 
-    ::
+     ::
 
         [
             'public',
             'private',
             'community1',
             'community2'
-
         ]
     """
     pattern_found = 0
@@ -5748,7 +5758,7 @@ def parse_show_snmp_system(raw_result):
     :return: The parsed result of the show snmp system\
        command in a dictionary of the form
 
-    ::
+     ::
 
         {
              'System description' : 'OpenSwitchsystem
@@ -5781,7 +5791,7 @@ def parse_show_snmp_trap(raw_result):
     :return: The parsed result of the show snmp trap\
        command in a dictionary of the form
 
-    ::
+     ::
 
         {
             '20.2.2.2':{'Port':'455',
@@ -5823,8 +5833,8 @@ def parse_diag_dump_lacp_basic(raw_result):
 
     :param str raw_result: vtysh raw result string.
     :rtype: dict
-    :return: The parsed result of the getlacpinterfaces in a dictionary of the
-       form:
+    :return: The parsed result of the `getlacpinterfaces` in a dictionary of \
+        the form:
 
      ::
 
@@ -6075,7 +6085,7 @@ def parse_show_snmpv3_users(raw_result):
     :return: The parsed result of the show snmpv3 users\
        command in a dictionary of the form
 
-    ::
+     ::
 
         {
             'user1':{'AuthMode':'md5',
@@ -6117,7 +6127,7 @@ def parse_show_snmp_agent_port(raw_result):
     :rtype: dict
     :return: The parsed result of the show snmp agent-port
 
-    ::
+     ::
 
         {
             'SNMP agent port': '677'
@@ -6786,8 +6796,8 @@ def parse_show_access_list_hitcounts_ip_interface(raw_result):
 
     :param str raw_result: vtysh raw result string.
     :rtype: dict
-    :return: The parsed result of the show access-list command
-     in a dictionary of the form. Returns None if empty dictionary:
+    :return: The parsed result of the show access-list command \
+        in a dictionary of the form. Returns None if empty dictionary:
 
      ::
 
@@ -7115,9 +7125,7 @@ def parse_show_vrrp(raw_result):
             'down_interval': 'unknown',
             'master_adv_interval': 'unknown',
             'iaddress_family': 'IPv4'
-
        }
-
     """
 
     show_re = (
@@ -7163,7 +7171,6 @@ def parse_show_vrrp_brief(raw_result):
             'owner': 'N',
             'master_address': '10.0.0.2(local) 10.0.0.1'
        }
-
     """
 
     show_re = (
@@ -7232,56 +7239,57 @@ def parse_show_system_timezone(raw_result):
     :rtype: dict
     :return: The parsed result of the show system clock command in a \
         dictionary of the form:
-        ::
 
-            {
-                'timezone': 'US/Alaska',
-                'dst_active': 'yes',
-                'last_dst': {
-                            'start_date': {
-                                'day_of_week': 'Sun',
-                                'year': '2016',
-                                'month': '03',
-                                'day_of_month': '13',
-                                'hour': '01',
-                                'minutes': '59',
-                                'seconds': '59',
-                                'timezone': 'AKST'
-                            },
-                            'end_date': {
-                                'day_of_week': 'Sun',
-                                'year': '2016',
-                                'month': '03',
-                                'day_of_month': '13',
-                                'hour': '03',
-                                'minutes': '00',
-                                'seconds': '00',
-                                'timezone': 'AKDT'
-                            }
-                },
-                'next_dst': {
-                            'start_date': {
-                                'day_of_week': 'Sun',
-                                'year': '2016',
-                                'month': '11',
-                                'day_of_month': '06',
-                                'hour': '01',
-                                'minutes': '59',
-                                'seconds': '59',
-                                'timezone': 'AKDT'
-                            },
-                            'end_date': {
-                                'day_of_week': 'Sun',
-                                'year': '2016',
-                                'month': '11',
-                                'day_of_month': '06',
-                                'hour': '01',
-                                'minutes': '00',
-                                'seconds': '00',
-                                'timezone': 'AKST'
-                            }
-                }
+     ::
+
+        {
+            'timezone': 'US/Alaska',
+            'dst_active': 'yes',
+            'last_dst': {
+                        'start_date': {
+                            'day_of_week': 'Sun',
+                            'year': '2016',
+                            'month': '03',
+                            'day_of_month': '13',
+                            'hour': '01',
+                            'minutes': '59',
+                            'seconds': '59',
+                            'timezone': 'AKST'
+                        },
+                        'end_date': {
+                            'day_of_week': 'Sun',
+                            'year': '2016',
+                            'month': '03',
+                            'day_of_month': '13',
+                            'hour': '03',
+                            'minutes': '00',
+                            'seconds': '00',
+                            'timezone': 'AKDT'
+                        }
+            },
+            'next_dst': {
+                        'start_date': {
+                            'day_of_week': 'Sun',
+                            'year': '2016',
+                            'month': '11',
+                            'day_of_month': '06',
+                            'hour': '01',
+                            'minutes': '59',
+                            'seconds': '59',
+                            'timezone': 'AKDT'
+                        },
+                        'end_date': {
+                            'day_of_week': 'Sun',
+                            'year': '2016',
+                            'month': '11',
+                            'day_of_month': '06',
+                            'hour': '01',
+                            'minutes': '00',
+                            'seconds': '00',
+                            'timezone': 'AKST'
+                        }
             }
+        }
     """
     system_timezone_re = (
         r'timezone\s:\s(?P<timezone>\S+)\s+'
@@ -7358,7 +7366,7 @@ __all__ = [
     'parse_show_ip_ospf', 'parse_show_ip_ospf_neighbor',
     'parse_show_startup_config',
     'parse_show_ip_ospf_route',
-    'parse_show_startup_config', 'parse_show_interface_subinterface_brief',
+    'parse_show_interface_subinterface_brief',
     'parse_show_mac_address_table',
     'parse_show_tftp_server', 'parse_show_core_dump', 'parse_copy_core_dump',
     'parse_config_tftp_server_enable',
