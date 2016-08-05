@@ -3005,7 +3005,7 @@ class Configure(ContextManager):
             raise determine_exception(result)(result)
 
     def track_interface(
-        self, interface,
+        self, track_id, interface,
         _shell='vtysh',
         _shell_args={
             'matches': None,
@@ -3023,6 +3023,7 @@ class Configure(ContextManager):
 
             # track {track_id} interface {interface}
 
+        :param track_id: [1-500] Track object ID
         :param interface: Interface name to be tracked
         :param str _shell: shell to be selected
         :param dict _shell_args: low-level shell API arguments

@@ -2082,9 +2082,11 @@ local-priority {local_priority} name {name} color {color}',
                     {
                         'name': 'track_id',
                         'doc': '[1-500] Track object ID',
+                    },
+                    {
                         'name': 'interface',
                         'doc': 'Interface name to be tracked',
-                    }
+                    },
                 ],
             },
             {
