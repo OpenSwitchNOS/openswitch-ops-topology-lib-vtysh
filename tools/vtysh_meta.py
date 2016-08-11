@@ -315,6 +315,12 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
+                'command': 'show arp',
+                'doc': 'Show arp table.',
+                'arguments': [],
+                'returns': True
+            },
+            {
                 'command': 'clear bgp {peer} {softreconfig}',
                 'doc': 'Clear bgp peer.',
                 'arguments': [

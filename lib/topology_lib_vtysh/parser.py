@@ -7070,6 +7070,51 @@ def parse_show_ip_bgp_route_map(raw_result):
     return result
 
 
+def parse_show_arp(raw_result):
+    """
+    Parse the 'show arp' command raw output.
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show arp command in a \
+        dictionary of the form. Returns None if no arp found or \
+        empty dictionary:
+     ::
+
+       {
+           '100.1.2.2': {'mac_address': '00:50:56:96:1e:39',
+                         'state': 'reachable',
+                         'port': 'vlan20'
+           },
+           '100.1.1.2': {'mac_address': '00:50:56:96:24:5f',
+                         'state': 'reachable',
+                         'port': 'vlan10'
+           }
+       }
+    """
+    arp_re = (
+        r'(?P<ipv4_addr>\d[{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$]+)\s*'
+        r'(?P<mac_address>\S+)\s*(?P<port>[0-9a-zA-Z]+)\s*(?P<state>[a-z]+)'
+    )
+    result = {}
+    no_arp_re = (r'\s*No\s+ARP\s+entries\s+found.\s*')
+    re_result = re.match(arp_re, raw_result)
+    if re.match(no_arp_re, raw_result, re.IGNORECASE):
+        return None
+    else:
+        for line in raw_result.splitlines():
+            line = line.strip()
+            re_result = re.search(arp_re, line)
+            if re_result:
+                partial = re_result.groupdict()
+                ipv4 = partial['ipv4_addr']
+                del partial['ipv4_addr']
+                result[ipv4] = partial
+    if result == {}:
+        return None
+    else:
+        return result
+
+
 def parse_show_version(raw_result):
     """
     Parse the 'show version' command raw output.
@@ -7392,6 +7437,7 @@ __all__ = [
     'parse_copy_running_config_startup_config',
     'parse_copy_startup_config_running_config',
     'parse_show_version', 'parse_show_vrrp',
+    'parse_show_arp',
     'parse_show_vrrp_brief', 'parse_show_date',
     'parse_show_system_timezone'
 ]
