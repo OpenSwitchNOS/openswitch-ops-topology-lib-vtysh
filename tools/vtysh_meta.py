@@ -3396,6 +3396,27 @@ local-priority {local_priority} name {name} color {color}',
                     },
                 ],
             },
+            {
+                'command': 'set as-path exclude {as_path}',
+                'doc': 'Set as-path exclude',
+                'arguments': [
+                    {
+                        'name': 'as_path',
+                        'doc': '<1-4294967295>  AS number',
+                    },
+                ],
+            },
+            {
+                'command': 'no set as-path exclude',
+                'doc': 'Unset set as-path exclude',
+                'arguments': [
+                    {
+                        'name': 'as_path',
+                        'doc': '<1-4294967295>  AS number',
+                        'optional': True,
+                    },
+                ],
+            },
         ],
     }),
     ('config_interface', {

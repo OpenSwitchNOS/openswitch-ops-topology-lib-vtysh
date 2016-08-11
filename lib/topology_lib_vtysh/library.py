@@ -7703,6 +7703,95 @@ class RouteMap(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def set_as_path_exclude(
+        self, as_path,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Set as-path exclude
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # set as-path exclude {as_path}
+
+        :param as_path: <1-4294967295>  AS number
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'set as-path exclude {as_path}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_set_as_path_exclude(
+        self, as_path='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Unset set as-path exclude
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no set as-path exclude
+
+        :param as_path: <1-4294967295>  AS number
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no set as-path exclude'
+        ]
+
+        if as_path:
+            cmd.append(
+                '{}{{as_path}}{}'.format(
+                    '', ''
+                )
+            )
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
 
 class ConfigInterface(ContextManager):
     """
