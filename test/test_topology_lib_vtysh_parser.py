@@ -114,6 +114,7 @@ from topology_lib_vtysh.parser import (
     parse_show_ipv6_prefix_list,
     parse_show_ip_bgp_route_map,
     parse_show_version,
+    parse_show_arp,
     parse_show_vrrp,
     parse_show_vrrp_brief,
     parse_show_date,
@@ -6058,6 +6059,33 @@ OpenSwitch 0.3.0-rc0 (Build: as5712-ops-0.3.0-rc0-release+2016071100)
     expected = {
         'version': '0.3.0-rc0',
         'build': 'as5712-ops-0.3.0-rc0-release+2016071100'
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_arp():
+    raw_result = """
+ARP IPv4 Entries:
+------------------
+IPv4 Address     MAC                Port             State
+100.1.2.2      00:50:56:96:58:ed  vlan20           reachable
+100.1.1.2      00:50:56:96:b2:28  vlan10           reachable
+"""
+    result = parse_show_arp(raw_result)
+
+    expected = {
+        '100.1.2.2': {
+            'mac_address': '00:50:56:96:58:ed',
+            'state': 'reachable',
+            'port': 'vlan20'
+        },
+        '100.1.1.2': {
+            'mac_address': '00:50:56:96:b2:28',
+            'state': 'reachable',
+            'port': 'vlan10'
+        }
     }
 
     ddiff = DeepDiff(result, expected)

@@ -315,6 +315,12 @@ VTYSH_SPEC = OrderedDict([
                 'returns': True
             },
             {
+                'command': 'show arp',
+                'doc': 'Show arp table.',
+                'arguments': [],
+                'returns': True
+            },
+            {
                 'command': 'clear bgp {peer} {softreconfig}',
                 'doc': 'Clear bgp peer.',
                 'arguments': [
@@ -1118,6 +1124,29 @@ interface {port}',
         'pre_commands': ['configure terminal'],
         'post_commands': ['end'],
         'commands': [
+            {
+                'command': 'hostname {hostname}',
+                'doc': 'Configure hostname',
+                'arguments': [
+                    {
+                        'name': 'hostname',
+                        'doc': 'Hostname string(Max Length 32), '
+                               'first letter must be alphabet',
+                    },
+                ],
+            },
+            {
+                'command': 'no hostname',
+                'doc': 'Delete  name of the host',
+                'arguments': [
+                    {
+                        'name': 'hostname',
+                        'doc': 'Hostname string(Max Length 32), '
+                               'first letter must be alphabet',
+                        'optional': True
+                    },
+                ],
+            },
             {
                 'command': 'no vlan {vlan_id}',
                 'doc': 'Delete a VLAN',

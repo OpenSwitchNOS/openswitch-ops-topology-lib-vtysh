@@ -92,6 +92,97 @@ class Configure(ContextManager):
             shell='vtysh'
         )
 
+    def hostname(
+        self, hostname,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Configure hostname
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # hostname {hostname}
+
+        :param hostname: Hostname string(Max Length 32), first letter must be
+            alphabet
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'hostname {hostname}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_hostname(
+        self, hostname='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Delete  name of the host
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no hostname
+
+        :param hostname: Hostname string(Max Length 32), first letter must be
+            alphabet
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no hostname'
+        ]
+
+        if hostname:
+            cmd.append(
+                '{}{{hostname}}{}'.format(
+                    '', ''
+                )
+            )
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def no_vlan(
         self, vlan_id,
         _shell='vtysh',
@@ -22303,6 +22394,50 @@ def show_version(
     return parse_show_version(result)
 
 
+def show_arp(
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
+    """
+    Show arp table.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show arp
+
+    :param dict kwargs: arguments to pass to the send_command of the
+     vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_arp`
+    """
+
+    cmd = [
+        'show arp'
+    ]
+
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
+    )
+
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
+
+    return parse_show_arp(result)
+
+
 def clear_bgp(
     enode, peer, softreconfig,
     _shell='vtysh',
@@ -25651,6 +25786,7 @@ __all__ = [
     'show_rib',
     'show_ip_ecmp',
     'show_version',
+    'show_arp',
     'clear_bgp',
     'clear_udld_statistics',
     'clear_udld_statistics_interface',
