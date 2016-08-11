@@ -2655,7 +2655,7 @@ Displaying ipv4 rib entries
 *140.0.0.0/30,  1 unicast next-hops
     *via  10.10.0.2,  [20/0],  BGP
 *140.0.0.4/30,  1 unicast next-hops
-    *via  10.10.0.2,  [20/0],  BGP
+    *via  vlan10,  [0/0],  connected
 *193.0.0.2/32,  2 unicast next-hops
     *via  50.0.0.2,  [1/0],  static
     *via  56.0.0.3,  [1/0],  static
@@ -2702,9 +2702,9 @@ Displaying ipv6 rib entries
                 'next_hops': [
                     {
                         'selected': True,
-                        'via': '10.10.0.2',
-                        'distance': '20',
-                        'from': 'BGP',
+                        'via': 'vlan10',
+                        'distance': '0',
+                        'from': 'connected',
                         'metric': '0'
                     }
                 ]

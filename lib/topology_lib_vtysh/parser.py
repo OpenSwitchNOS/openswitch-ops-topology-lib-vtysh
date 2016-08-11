@@ -3078,7 +3078,7 @@ def parse_show_rib(raw_result):
 
     ipv4_nexthop_re = (
         r'(?P<selected>\*?)via\s+'
-        r'(?P<via>((?:\d+\.\d+\.\d+\.\d+|\d+)|(?:\d+\.\d+))),\s+'
+        r'(?P<via>\d+\.\d+\.\d+\.\d+|\d+|\d+\.\d+|vlan\d+),\s+'
         r'\[(?P<distance>\d+)/(?P<metric>\d+)\],\s+(?P<from>\S+)'
     )
 
