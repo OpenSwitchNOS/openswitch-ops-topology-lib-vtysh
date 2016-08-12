@@ -1054,6 +1054,17 @@ interface {port}',
                 'returns': True
             },
             {
+                'command': 'show access-list {type} commands',
+                'doc': 'Show access list command detail for any type of ACL.',
+                'arguments': [
+                    {
+                        'name': 'type',
+                        'doc': 'ACL type: ip or ipv6.',
+                    },
+                ],
+                'returns': True
+            },
+            {
                 'command': 'show access-list hitcounts ip {acl_name}'
                            ' interface {port}',
                 'doc': 'Show hit-counts per ACE aggregated across ports.',
@@ -3113,6 +3124,57 @@ local-priority {local_priority} name {name} color {color}',
                 ],
             },
             {
+                'command': 'access-list {type} {access_list}',
+                'doc': 'Configure access list.',
+                'arguments': [
+                    {
+                        'name': 'type',
+                        'doc': 'ACL type: ip or ipv6.',
+                    },
+                    {
+                        'name': 'access_list',
+                        'doc': 'access list name.',
+                    },
+                ],
+            },
+            {
+                'command': 'access-list {type} {access_list} resequence'
+                           ' {start} {increment}',
+                'doc': 'Resequence ACL Lists.',
+                'arguments': [
+                    {
+                        'name': 'type',
+                        'doc': 'Access List Type (ip or ipv6).',
+                    },
+                    {
+                        'name': 'access_list',
+                        'doc': 'Access List Name.',
+                    },
+                    {
+                        'name': 'start',
+                        'doc': 'beginning index of entry in access list',
+                    },
+                    {
+                        'name': 'increment',
+                        'doc': 'increment factor of subsequent ACE in ACL',
+                    },
+                ],
+            },
+            {
+                'command': 'no access-list {type} {access_list}',
+                'doc': 'Unconfigure access list.',
+                'arguments': [
+                    {
+                        'name': 'type',
+                        'doc': 'ACL type: ip, ipv6.',
+                    },
+                    {
+                        'name': 'access_list',
+                        'doc': 'access List Name.',
+                    },
+                ],
+            },
+            {
                 'command': 'access-list ip {access_list}',
                 'doc': 'Configure access list.',
                 'arguments': [
@@ -4104,6 +4166,44 @@ local-priority {local_priority} name {name} color {color}',
                 'arguments': [],
             },
             {
+                'command': 'apply access-list {type} {access_list} '
+                           '{direction}',
+                'doc': 'Apply ACL on interface',
+                'arguments': [
+                    {
+                        'name': 'type',
+                        'doc': 'Access-list type (e.g., ip or ipv6).'
+                    },
+                    {
+                        'name': 'access_list',
+                        'doc': 'Access-list name.'
+                    },
+                    {
+                        'name': 'direction',
+                        'doc': 'Apply to this traffic direction (in | out).'
+                    }
+                ],
+            },
+            {
+                'command': 'no apply access-list {type} {access_list} '
+                           '{direction}',
+                'doc': 'Remove ACL from interface',
+                'arguments': [
+                    {
+                        'name': 'type',
+                        'doc': 'Access-list type (e.g., ip or ipv6).'
+                    },
+                    {
+                        'name': 'access_list',
+                        'doc': 'Access-list name.'
+                    },
+                    {
+                        'name': 'direction',
+                        'doc': 'Apply to this traffic direction (in | out).'
+                    }
+                ],
+            },
+            {
                 'command': 'apply access-list ip {acl_name} in',
                 'doc': 'Apply ACL on interface to ingress traffic',
                 'arguments': [
@@ -4813,6 +4913,44 @@ local-priority {local_priority} name {name} color {color}',
                 'command': 'no qos trust',
                 'doc': 'Remove the qos trust mode for the port.',
                 'arguments': [],
+            },
+            {
+                'command': 'apply access-list {type} {access_list} '
+                           '{direction}',
+                'doc': 'Apply ACL on interface',
+                'arguments': [
+                    {
+                        'name': 'type',
+                        'doc': 'Access-list type (e.g., ip or ipv6).'
+                    },
+                    {
+                        'name': 'access_list',
+                        'doc': 'Access-list name.'
+                    },
+                    {
+                        'name': 'direction',
+                        'doc': 'Apply to this traffic direction (in | out).'
+                    }
+                ],
+            },
+            {
+                'command': 'no apply access-list {type} {access_list} '
+                           '{direction}',
+                'doc': 'Remove ACL from interface',
+                'arguments': [
+                    {
+                        'name': 'type',
+                        'doc': 'Access-list type (e.g., ip or ipv6).'
+                    },
+                    {
+                        'name': 'access_list',
+                        'doc': 'Access-list name.'
+                    },
+                    {
+                        'name': 'direction',
+                        'doc': 'Apply to this traffic direction (in | out).'
+                    }
+                ],
             },
             {
                 'command': 'apply access-list ip {acl_name} in',
@@ -6667,7 +6805,7 @@ local-priority {local_priority}',
         ]
     },
     ),
-    ('config_access_list_ip_testname', {
+    ('config_access_list_ip', {
         'doc': 'ACE permission.',
         'arguments': [
             {
