@@ -3205,6 +3205,125 @@ def parse_show_rib(raw_result):
     return result
 
 
+# ACL section
+#
+#   parses "access-list" lines
+#
+#   acl_type, acl_name are "global" temporary variables that are set
+#       when the access-list line is parsed, then used when each ace
+#       is parsed
+#
+#   returned 'result' is structured:
+#       result['access-list'][acl_type] -- list of dictionaries
+#                               by access-list type [ip or ipv6]
+#           - dictionary key: ACL name
+#           - value: list of ACE dictionaries
+#
+def parse_access_list_section(raw_result, result):
+    print("parse_access_list_section")
+    print(repr(raw_result))
+    result['access-list'] = {}
+
+    # regex that will parse access-list line into named variables
+    acl_re = (r'^access-list'
+              r'\s+(?P<type>\S+)'
+              r'\s+(?P<name>\S+)'
+              )
+
+    # regex that will parse IPv4 ace line into named variables
+    ipv4_ace_re = (r'\s+(?P<seq>\d+)'
+                   r'\s+(?P<action>permit|deny)'
+                   r'\s+(?P<protocol>\S+)'
+                   r'\s+(?P<src>[\.\w]+)(\/(?P<src_mask>[\.\w]+))?(\x7f)?'
+                   r'(\s+(?P<src_op>((range\s(?P<src_range>\d+\s\d+))'
+                   r'|(neq\s(?P<src_neq>\d+))'
+                   r'|(eq\s(?P<src_eq>\d+))'
+                   r'|(lt\s(?P<src_lt>\d+))'
+                   r'|(gt\s(?P<src_gt>\d+)))))?'
+                   r'\s+(?P<dst>[\.\w]+)(\/(?P<dst_mask>[\.\w]+))?(\x7f)?'
+                   r'(\s+(?P<dst_op>((range\s(?P<dst_range>\d+\s\d+))'
+                   r'|(neq\s(?P<dst_neq>\d+))'
+                   r'|(eq\s(?P<dst_eq>\d+))'
+                   r'|(lt\s(?P<dst_lt>\d+))'
+                   r'|(gt\s(?P<dst_gt>\d+)))))?'
+                   r'(\s+(?P<log_count>(log|count)))?'
+                   )
+
+    # regex that will parse interface line into named variable
+    interface_re = (r'^interface\s+(?P<name>\S+)')
+
+    # regex that will parse apply line into a named variables
+    apply_re = (r'\s+apply access-list'
+                r'\s+(?P<type>\S+)'
+                r'\s+(?P<name>\S+)'
+                r'\s+(?P<direction>\S+)'
+                )
+
+    # intialize acl-type dictionaries
+    result['access-list']['ip'] = {}
+    # need to map ip to ipv4 or vv.
+    # result['access-list']['ipv4'] = {}
+    result['access-list']['ipv6'] = {}
+
+    acl_type = ''
+    acl_name = ''
+
+    parsing_state = 'search'
+    for line in raw_result.splitlines():
+        print("line (" + parsing_state + ") <" + line + ">")
+
+        if parsing_state == 'aces':
+            if acl_type == 'ip' or acl_type == 'ipv4':
+                re_result = re.search(ipv4_ace_re, line)
+                if re_result:
+                    # print("ACE")
+                    print(re_result.groupdict())
+                    result['access-list']['ip'][acl_name]['aces'].append(
+                                                    re_result.groupdict())
+                else:
+                    parsing_state = 'search'
+        elif parsing_state == 'apply':
+            re_result = re.search(apply_re, line)
+            if re_result:
+                # print("APPLY")
+                # print(re_result.groupdict())
+                data = re_result.groupdict()
+                acl_type = data['type']
+                acl_name = data['name']
+                # sometimes, 'interface' section precedes 'access-list'
+                # need to initialize the [acl_name] dictionary in this case
+                # otherwise, leave it intact & just add 'applied' key
+                if acl_name not in result['access-list'][acl_type]:
+                    result['access-list'][acl_type][acl_name] = {}
+                    result['access-list'][acl_type][acl_name]['direction'] = []
+                acl = result['access-list'][acl_type][acl_name]
+                acl['applied'] = 'yes'
+                acl['direction'].append(data['direction'])
+            else:
+                parsing_state = 'search'
+
+        if parsing_state == 'search':
+            re_result = re.search(acl_re, line)
+            if re_result:
+                # print("start of ACL")
+                data = re_result.groupdict()
+                acl_type = data['type']
+                acl_name = data['name']
+                # initialize as a list (of dictionaries)
+                if acl_name not in result['access-list'][acl_type]:
+                    result['access-list'][acl_type][acl_name] = {}
+                    result['access-list'][acl_type][acl_name]['direction'] = []
+                result['access-list'][acl_type][acl_name]['aces'] = []
+                parsing_state = 'aces'
+
+            re_result = re.search(interface_re, line)
+            if re_result:
+                # print("start of interface")
+                parsing_state = 'apply'
+
+    return(result)
+
+
 def parse_show_running_config(raw_result):
     """
     Delegates to parse_show_running_config_helper.
@@ -4043,6 +4162,9 @@ def parse_show_running_config_helper(raw_result):
                     'dwrr'
                 result['qos_schedule_profile'][spn][s]['weight'] = \
                     pairs['weight']
+
+    # parse any ACLs
+    result = parse_access_list_section(raw_result, result)
 
     return result
 
@@ -6788,6 +6910,22 @@ def parse_show_vlan_internal(raw_result):
         return result
 
 
+def parse_show_access_list_commands(raw_result):
+    result = {}
+    # print("show access-list command raw output")
+    # print(raw_result)
+    # print(repr(raw_result))
+    # print("==========================")
+
+    result = {}
+    result = parse_access_list_section(raw_result, result)
+
+    if result == {}:
+        return None
+    else:
+        return result
+
+
 def parse_show_access_list_hitcounts_ip_interface(raw_result):
     """
     Parse the 'show access-list hitcounts ip test12 interface 1'
@@ -7433,6 +7571,7 @@ __all__ = [
     'parse_show_spanning_tree', 'parse_show_spanning_tree_mst_config',
     'parse_show_spanning_tree_mst', 'parse_show_vlan_summary',
     'parse_show_access_list_hitcounts_ip_interface',
+    'parse_show_access_list_commands',
     'parse_show_ip_prefix_list', 'parse_show_ipv6_prefix_list',
     'parse_show_ip_bgp_route_map',
     'parse_copy_running_config_startup_config',
