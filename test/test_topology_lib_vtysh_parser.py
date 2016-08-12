@@ -109,6 +109,7 @@ from topology_lib_vtysh.parser import (
     parse_show_vlan_summary,
     parse_show_vlan_internal,
     parse_show_vrf,
+    parse_show_access_list_commands,
     parse_show_access_list_hitcounts_ip_interface,
     parse_show_ip_prefix_list,
     parse_show_ipv6_prefix_list,
@@ -3088,6 +3089,13 @@ ipv6 route 2020::2/128 1
         'apply_qos':
         {
         },
+        'access-list':
+        {
+            'ip': {
+                },
+            'ipv6': {
+                }
+        },
     }
 
     ddiff = DeepDiff(result, expected)
@@ -3376,6 +3384,13 @@ ipv6 route 2020::2/128 1
         },
         'apply_qos':
         {
+        },
+        'access-list':
+        {
+            'ip': {
+                },
+            'ipv6': {
+                }
         },
     }
 
@@ -5753,6 +5768,108 @@ Assigned Interfaces:
     }
 
     result = parse_show_vlan_internal(raw_result)
+    ddiff = DeepDiff(result, expected_result)
+
+    assert not ddiff
+
+
+def test_parse_show_access_list_commands():
+    raw_result = """\
+access-list ip ip_acl
+    10 permit tcp 1.2.3.4/255.255.255.0 4.3.2.1/255.255.255.0 log
+    20 deny tcp 1.2.3.4/255.255.255.0 4.3.2.1/255.255.255.0 count
+    40 deny udp any neq 10 any range 10 100
+interface 1
+    apply access-list ip ip_acl in
+    """
+
+    expected_result = {
+        'access-list': {
+            'ip': {
+                'ip_acl': {
+                    'aces': [
+                        {
+                            'seq': '10',
+                            'action': 'permit',
+                            'protocol': 'tcp',
+                            'src': '1.2.3.4',
+                            'src_mask': '255.255.255.0',
+                            'src_lt': None,
+                            'src_neq': None,
+                            'src_range': None,
+                            'src_gt': None,
+                            'src_op': None,
+                            'src_eq': None,
+                            'dst': '4.3.2.1',
+                            'dst_mask': '255.255.255.0',
+                            'dst_eq': None,
+                            'dst_lt': None,
+                            'dst_op': None,
+                            'dst_range': None,
+                            'dst_gt': None,
+                            'dst_neq': None,
+                            'log_count': 'log'
+                        },
+                        {
+                            'src': '1.2.3.4',
+                            'dst_range': None,
+                            'protocol': 'tcp',
+                            'seq': '20',
+                            'src_lt': None,
+                            'src_neq': None,
+                            'src_range': None,
+                            'dst': '4.3.2.1',
+                            'dst_eq': None,
+                            'src_mask': '255.255.255.0',
+                            'dst_lt': None,
+                            'log_count': 'count',
+                            'src_gt': None,
+                            'action': 'deny',
+                            'src_op': None,
+                            'dst_op': None,
+                            'dst_mask': '255.255.255.0',
+                            'src_eq': None,
+                            'dst_gt': None,
+                            'dst_neq': None
+                        },
+                        {
+                            'src': 'any',
+                            'dst_range': '10 100',
+                            'protocol': 'udp',
+                            'seq': '40',
+                            'src_lt': None,
+                            'src_neq': '10',
+                            'src_range': None,
+                            'dst': 'any',
+                            'dst_eq': None,
+                            'src_mask': None,
+                            'dst_lt': None,
+                            'log_count': None,
+                            'src_gt': None,
+                            'action': 'deny',
+                            'src_op': 'neq 10',
+                            'dst_op': 'range 10 100',
+                            'dst_mask': None,
+                            'src_eq': None,
+                            'dst_gt': None,
+                            'dst_neq': None
+                        }
+                    ],
+                    'applied': 'yes',
+                    'direction': [
+                        'in'
+                    ]
+                }
+            },
+            'ipv6': {
+            }
+        }
+    }
+
+    result = parse_show_access_list_commands(raw_result)
+    print("==============================")
+    print(result)
+    print("==============================")
     ddiff = DeepDiff(result, expected_result)
 
     assert not ddiff
