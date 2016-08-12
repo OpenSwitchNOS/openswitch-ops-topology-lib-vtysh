@@ -109,6 +109,7 @@ from topology_lib_vtysh.parser import (
     parse_show_vlan_summary,
     parse_show_vlan_internal,
     parse_show_vrf,
+    parse_show_access_list_commands,
     parse_show_access_list_hitcounts_ip_interface,
     parse_show_ip_prefix_list,
     parse_show_ipv6_prefix_list,

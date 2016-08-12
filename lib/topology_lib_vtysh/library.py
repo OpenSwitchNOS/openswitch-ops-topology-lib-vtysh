@@ -6725,6 +6725,134 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def access_list(
+        self, type, access_list,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Configure access list.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # access-list {type} {access_list}
+
+        :param type: ACL type: ip or ipv6.
+        :param access_list: access list name.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'access-list {type} {access_list}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def access_list_resequence(
+        self, type, access_list, start, increment,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Resequence ACL Lists.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # access-list {type} {access_list} resequence {start} {increment}
+
+        :param type: Access List Type (ip or ipv6).
+        :param access_list: Access List Name.
+        :param start: beginning index of entry in access list
+        :param increment: increment factor of subsequent ACE in ACL
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'access-list {type} {access_list} resequence {start} {increment}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_access_list(
+        self, type, access_list,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Unconfigure access list.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no access-list {type} {access_list}
+
+        :param type: ACL type: ip, ipv6.
+        :param access_list: access List Name.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no access-list {type} {access_list}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def access_list_ip(
         self, access_list,
         _shell='vtysh',
@@ -10920,6 +11048,92 @@ class ConfigInterface(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def apply_access_list(
+        self, type, name, direction,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Apply ACL on interface
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # apply access-list {type} {name} {direction}
+
+        :param type: Access-list type (e.g., ip or ipv6).
+        :param name: Access-list name.
+        :param direction: Apply to this traffic direction (in | out).
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'apply access-list {type} {name} {direction}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_apply_access_list(
+        self, type, name, direction,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Remove ACL from interface
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no apply access-list {type} {name} {direction}
+
+        :param type: Access-list type (e.g., ip or ipv6).
+        :param name: Access-list name.
+        :param direction: Apply to this traffic direction (in | out).
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no apply access-list {type} {name} {direction}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def apply_access_list_ip_in(
         self, acl_name,
         _shell='vtysh',
@@ -14230,6 +14444,92 @@ class ConfigInterfaceLag(ContextManager):
 
         cmd = [
             'no qos trust'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def apply_access_list(
+        self, type, name, direction,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Apply ACL on interface
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # apply access-list {type} {name} {direction}
+
+        :param type: Access-list type (e.g., ip or ipv6).
+        :param name: Access-list name.
+        :param direction: Apply to this traffic direction (in | out).
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'apply access-list {type} {name} {direction}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_apply_access_list(
+        self, type, name, direction,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Remove ACL from interface
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no apply access-list {type} {name} {direction}
+
+        :param type: Access-list type (e.g., ip or ipv6).
+        :param name: Access-list name.
+        :param direction: Apply to this traffic direction (in | out).
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no apply access-list {type} {name} {direction}'
         ]
 
         shell = self.enode.get_shell(_shell)
@@ -19936,7 +20236,7 @@ class ConfigScheduleProfile(ContextManager):
             raise determine_exception(result)(result)
 
 
-class ConfigAccessListIpTestname(ContextManager):
+class ConfigAccessListIp(ContextManager):
     """
     ACE permission.
 
@@ -25466,6 +25766,51 @@ def show_vrf(
     return parse_show_vrf(result)
 
 
+def show_access_list_commands(
+    enode, type,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
+    """
+    Show access list command detail for any type of ACL.
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show access-list {type} commands
+
+    :param dict kwargs: arguments to pass to the send_command of the
+     vtysh shell.
+    :param type: ACL type: ip or ipv6.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_access_list_commands`
+    """
+
+    cmd = [
+        'show access-list {type} commands'
+    ]
+
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
+    )
+
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
+
+    return parse_show_access_list_commands(result)
+
+
 def show_access_list_hitcounts_ip_interface(
     enode, acl_name, port,
     _shell='vtysh',
@@ -25839,7 +26184,7 @@ __all__ = [
     'ConfigMirrorSession',
     'ConfigQueueProfile',
     'ConfigScheduleProfile',
-    'ConfigAccessListIpTestname',
+    'ConfigAccessListIp',
     'ConfigVrrpInterface',
     'show_interface',
     'show_interface_brief',
@@ -25935,6 +26280,7 @@ __all__ = [
     'show_vlan_summary',
     'show_vlan_internal',
     'show_vrf',
+    'show_access_list_commands',
     'show_access_list_hitcounts_ip_interface',
     'show_ip_prefix_list',
     'show_ipv6_prefix_list',
