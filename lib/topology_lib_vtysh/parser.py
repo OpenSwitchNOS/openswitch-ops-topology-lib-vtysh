@@ -7094,7 +7094,8 @@ def parse_show_arp(raw_result):
     """
     arp_re = (
         r'(?P<ipv4_addr>\d[{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$]+)\s*'
-        r'(?P<mac_address>\S+)\s*(?P<port>[0-9a-zA-Z]+)\s*(?P<state>[a-z]+)'
+        r'(?P<mac_address>\s*(([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2})?)\s*'
+        r'(?P<port>|\d+|\d+\.\d+|vlan\d+)\s+(?P<state>[a-z]+)'
     )
     result = {}
     no_arp_re = (r'\s*No\s+ARP\s+entries\s+found.\s*')

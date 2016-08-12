@@ -6071,7 +6071,8 @@ ARP IPv4 Entries:
 ------------------
 IPv4 Address     MAC                Port             State
 100.1.2.2      00:50:56:96:58:ed  vlan20           reachable
-100.1.1.2      00:50:56:96:b2:28  vlan10           reachable
+100.1.1.2                         1.2              failed
+100.1.3.2      00:50:56:96:b2:28  10               stale
 """
     result = parse_show_arp(raw_result)
 
@@ -6082,9 +6083,14 @@ IPv4 Address     MAC                Port             State
             'port': 'vlan20'
         },
         '100.1.1.2': {
+            'mac_address': '',
+            'state': 'failed',
+            'port': '1.2'
+        },
+        '100.1.3.2': {
             'mac_address': '00:50:56:96:b2:28',
-            'state': 'reachable',
-            'port': 'vlan10'
+            'state': 'stale',
+            'port': '10'
         }
     }
 
