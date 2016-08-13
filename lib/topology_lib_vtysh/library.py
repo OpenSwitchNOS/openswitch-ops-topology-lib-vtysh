@@ -13592,6 +13592,46 @@ class ConfigInterfaceLag(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def no_lacp_fallback(
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Disable LACP fallback mode.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no lacp fallback
+
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no lacp fallback'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def lacp_fallback_mode_priority(
         self,
         _shell='vtysh',

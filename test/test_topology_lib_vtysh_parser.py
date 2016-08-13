@@ -5026,6 +5026,7 @@ distributing:0 defaulted:0 expired:0
     lacp_control
        begin:0 actor_churn:0 partner_churn:0 ready_n:0 selected:0 \
 port_moved:0 ntt:0 port_enabled:0
+    fallback timeout remaining: 60 seconds
   Interface: 2
     actor_oper_port_state \n\
        lacp_activity:1 time_out:1 aggregation:1 sync:0 collecting:0 \
@@ -5162,7 +5163,8 @@ Diagnostic dump captured for feature lacp
                         'ntt': 0,
                         'begin': 0,
                         'port_moved': 0
-                    }
+                    },
+                    'timeout_remaining': 60
                 },
                 3-1: {
                     'partner_oper_port_state': {

@@ -4701,6 +4701,11 @@ local-priority {local_priority} name {name} color {color}',
                 'arguments': [],
             },
             {
+                'command': 'no lacp fallback',
+                'doc': 'Disable LACP fallback mode.',
+                'arguments': [],
+            },
+            {
                 'command': 'lacp fallback mode priority',
                 'doc': 'Set fallback mode to priority.',
                 'arguments': [],

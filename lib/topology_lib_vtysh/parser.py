@@ -3535,6 +3535,7 @@ def parse_show_running_config_helper(raw_result):
     autoneg_re = r'\s+autonego\w+\s(\w+)'
     int_loopback_re = r'interface loopback\s+([0-9]+)'
     lacp_mode_re = r'lacp\s+mode\s+(\w+)'
+    lacp_fallback_re = r'\s+lacp fallback'
     lacp_fallback_mode_re = r'lacp\s+fallback\s+mode\s+(\w+)'
     lacp_fallback_timeout_re = r'lacp\s+fallback\s+timeout\s+(\w+)'
 
@@ -3821,6 +3822,13 @@ def parse_show_running_config_helper(raw_result):
                 if result['interface'].get('lag'):
                     result['interface']['lag'][port]['lacp_mode'] = \
                         re_result.group(1)
+
+            # Match lacp fallback
+            re_result = re.search(lacp_fallback_re, line)
+            if re_result:
+                if result['interface'].get('lag'):
+                    result['interface']['lag'][port]['lacp_fallback'] = \
+                        True
 
             # Match lacp fallback mode
             re_result = re.search(lacp_fallback_mode_re, line)
@@ -5988,7 +5996,9 @@ def parse_diag_dump_lacp_basic_state(raw_result):
         r'begin:(?P<begin>\S+) actor_churn:(?P<actor_churn>\S+) ' +
         'partner_churn:(?P<partner_churn>\S+) ready_n:(?P<ready_n>\S+) ' +
         'selected:(?P<selected>\S+) port_moved:(?P<port_moved>\S+) ' +
-        'ntt:(?P<ntt>\S+) port_enabled:(?P<port_enabled>\S+)\s'
+        'ntt:(?P<ntt>\S+) port_enabled:(?P<port_enabled>\S+)\s+'
+        r'(fallback timeout remaining: (?P<timeout_remaining>\w+))?\s*'
+
     )
     actor_data_keys = ['a_lacp_activity', 'a_time_out', 'a_aggregation',
                        'a_sync', 'a_collecting', 'a_distributing',
@@ -6012,7 +6022,7 @@ def parse_diag_dump_lacp_basic_state(raw_result):
             for re_partial in re.finditer(getlacpstate_actor_re, block):
                 interface_data = re_partial.groupdict()
                 for key, value in interface_data.items():
-                    if value.isdigit():
+                    if value is not None and value.isdigit():
                         interface_data[key] = int(value)
                 for key_actor, key_partner, key_lacp_control in\
                         zip(actor_data_keys, partner_data_keys,
@@ -6025,6 +6035,9 @@ def parse_diag_dump_lacp_basic_state(raw_result):
                 interface_data_dict['actor_oper_port_state'] = actor_dict
                 interface_data_dict['partner_oper_port_state'] = partner_dict
                 interface_data_dict['lacp_control'] = lacp_control_dict
+                if interface_data['timeout_remaining'] is not None:
+                    interface_data_dict['timeout_remaining'] =\
+                        interface_data['timeout_remaining']
                 actor_dict = {}
                 partner_dict = {}
                 lacp_control_dict = {}
