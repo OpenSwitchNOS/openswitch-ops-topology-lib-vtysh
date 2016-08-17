@@ -421,6 +421,7 @@ MAC Address          VLAN     Type       Port
 00:00:00:00:00:02   3        dynamic    5
 00:00:00:00:00:03   3        dynamic    3-1
 00:00:00:00:00:04   4        dynamic    4-4
+00:00:00:00:00:05   4        dynamic    lag1
     """
 
     result = parse_show_mac_address_table(raw_result)
@@ -447,6 +448,11 @@ MAC Address          VLAN     Type       Port
             'vlan_id': '4',
             'from': 'dynamic',
             'port': '4-4'
+        },
+        '00:00:00:00:00:05': {
+            'vlan_id': '4',
+            'from': 'dynamic',
+            'port': 'lag1'
         },
         'vlans': {
             '1': {
@@ -480,6 +486,11 @@ MAC Address          VLAN     Type       Port
                     'vlan_id': '4',
                     'from': 'dynamic',
                     'port': '4-4'
+                },
+                '00:00:00:00:00:05': {
+                    'vlan_id': '4',
+                    'from': 'dynamic',
+                    'port': 'lag1'
                 },
             }
         }

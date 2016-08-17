@@ -636,7 +636,7 @@ def parse_show_mac_address_table(raw_result):
             },
             '00:00:00:00:00:02': { 'vlan_id': '2',
                                     'from': 'dynamic',
-                                    'port': '2'
+                                    'port': '5'
             },
             'vlans': {
                 '1': {
@@ -650,7 +650,7 @@ def parse_show_mac_address_table(raw_result):
                     '00:00:00:00:00:02': {
                         'vlan_id': '2',
                         'from': 'dynamic',
-                        'port': '2'
+                        'port': 'lag1'
                     },
                 },
                 '3': {
@@ -677,7 +677,7 @@ def parse_show_mac_address_table(raw_result):
     mac_entry = (
         r'(?P<mac>\s*([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2})\s*'
         r'(?P<vlan_id>[0-9]+)\s*'
-        r'(?P<from>[- a-zA-Z]+)\s*(?P<port>\d+[-.]?\d*)'
+        r'(?P<from>[- a-zA-Z]+)\s+(?P<port>([lag]+)?\d+[-.]?\d*)'
     )
 
     result = {}
