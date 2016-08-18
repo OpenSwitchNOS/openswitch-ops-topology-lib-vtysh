@@ -6992,6 +6992,132 @@ local-priority {local_priority}',
             },
         ]
     }),
+    # following command is DEPRECATED use config_access_list_ip
+    ('config_access_list_ip_testname', {
+        'doc': 'ACE permission.',
+        'arguments': [
+            {
+                'name': 'acl_name',
+                'doc': 'access-list name'
+            }
+        ],
+        'pre_commands': ['config terminal', 'access-list ip {acl_name}'],
+        'post_commands': ['end'],
+        'commands': [
+            {
+                'command': '{negate} {sequence} permit {protocol} '
+                           '{ip1} {port1} {ip2} {port2}',
+                'doc': 'Permit access-list entry',
+                'arguments': [
+                    {
+                        'name': 'negate',
+                        'doc': 'remove access-list entry.',
+                    },
+                    {
+                        'name': 'sequence',
+                        'doc': 'sequence number of ACE.',
+                    },
+                    {
+                        'name': 'protocol',
+                        'doc': 'Protocol (number) type.',
+                    },
+                    {
+                        'name': 'ip1',
+                        'doc': '<A.B.C.D/M> Source IPv4 address.',
+                    },
+                    {
+                        'name': 'port1',
+                        'doc': 'Source Port range <1-65535>.',
+                    },
+                    {
+                        'name': 'ip2',
+                        'doc': '<A.B.C.D/M> Destination IPv4 address.',
+                    },
+                    {
+                        'name': 'port2',
+                        'doc': 'Destination Port range <1-65535>.',
+                    },
+                    {
+                        'name': 'count',
+                        'doc': (
+                            'count the packets that'
+                            ' match this entry.'
+                        ),
+                        'optional': True
+                    },
+                    {
+                        'name': 'log',
+                        'doc': (
+                            'log and count the packets'
+                            ' that match this entry.'
+                        ),
+                        'optional': True
+                    },
+                ],
+            },
+            {
+                'command': '{negate} {sequence} deny {protocol} '
+                           '{ip1} {port1} {ip2} {port2}',
+                'doc': 'Deny access-list entry',
+                'arguments': [
+                    {
+                        'name': 'negate',
+                        'doc': 'remove access-list entry.',
+                    },
+                    {
+                        'name': 'sequence',
+                        'doc': 'sequence number of ACE.',
+                    },
+                    {
+                        'name': 'protocol',
+                        'doc': 'Protocol type for entry.',
+                    },
+                    {
+                        'name': 'ip1',
+                        'doc': '<A.B.C.D/M> Source IPv4 address.',
+                    },
+                    {
+                        'name': 'port1',
+                        'doc': 'Source Port range <1-65535>.',
+                    },
+                    {
+                        'name': 'ip2',
+                        'doc': '<A.B.C.D/M> Destination IPv4 address.',
+                    },
+                    {
+                        'name': 'port2',
+                        'doc': 'Destination Port range <1-65535>.',
+                    },
+                    {
+                        'name': 'count',
+                        'doc': (
+                            'count the packets that'
+                            ' match this entry.'
+                        ),
+                        'optional': True
+                    },
+                    {
+                        'name': 'log',
+                        'doc': (
+                            'log and count the packets'
+                            ' that match this entry.'
+                        ),
+                        'optional': True
+                    },
+                ],
+            },
+            {
+                'command': 'no {sequence}',
+                'doc': 'Remove access-list entry',
+                'arguments': [
+                    {
+                        'name': 'sequence',
+                        'doc': 'sequence number of ACE.',
+                    },
+                ],
+            },
+        ]
+    }),
     ('config_vrrp_interface', {
         'doc': 'VRRP-Interface configuration.',
         'arguments': [
