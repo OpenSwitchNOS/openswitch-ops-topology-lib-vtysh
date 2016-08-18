@@ -20491,6 +20491,221 @@ class ConfigAccessListIp(ContextManager):
             raise determine_exception(result)(result)
 
 
+class ConfigAccessListIpTestname(ContextManager):
+    """
+    ACE permission.
+
+    pre_commands:
+
+    ::
+
+        ['config terminal', 'access-list ip {acl_name}']
+
+    post_commands:
+
+    ::
+
+        ['end']
+    """  # noqa
+    def __init__(self, enode, acl_name):
+        self.enode = enode
+        self.acl_name = acl_name
+
+    def __enter__(self):
+        commands = """\
+            config terminal
+            access-list ip {acl_name}
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+        return self
+
+    def __exit__(self, type, value, traceback):
+        commands = """\
+            end
+        """
+
+        self.enode.libs.common.assert_batch(
+            commands,
+            replace=self.__dict__,
+            shell='vtysh'
+        )
+
+    def permit(
+        self, negate, sequence, protocol, ip1, port1, ip2,
+        port2, count='', log='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Permit access-list entry
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # {negate} {sequence} permit {protocol} {ip1} {port1} {ip2} {port2}
+
+        :param negate: remove access-list entry.
+        :param sequence: sequence number of ACE.
+        :param protocol: Protocol (number) type.
+        :param ip1: <A.B.C.D/M> Source IPv4 address.
+        :param port1: Source Port range <1-65535>.
+        :param ip2: <A.B.C.D/M> Destination IPv4 address.
+        :param port2: Destination Port range <1-65535>.
+        :param count: count the packets that match this entry.
+        :param log: log and count the packets that match this entry.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            '{negate} {sequence} permit {protocol} {ip1} {port1} {ip2} {port2}'
+        ]
+
+        if count:
+            cmd.append(
+                '{}{{count}}{}'.format(
+                    '', ''
+                )
+            )
+
+        if log:
+            cmd.append(
+                '{}{{log}}{}'.format(
+                    '', ''
+                )
+            )
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def deny(
+        self, negate, sequence, protocol, ip1, port1, ip2,
+        port2, count='', log='',
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Deny access-list entry
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # {negate} {sequence} deny {protocol} {ip1} {port1} {ip2} {port2}
+
+        :param negate: remove access-list entry.
+        :param sequence: sequence number of ACE.
+        :param protocol: Protocol type for entry.
+        :param ip1: <A.B.C.D/M> Source IPv4 address.
+        :param port1: Source Port range <1-65535>.
+        :param ip2: <A.B.C.D/M> Destination IPv4 address.
+        :param port2: Destination Port range <1-65535>.
+        :param count: count the packets that match this entry.
+        :param log: log and count the packets that match this entry.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            '{negate} {sequence} deny {protocol} {ip1} {port1} {ip2} {port2}'
+        ]
+
+        if count:
+            cmd.append(
+                '{}{{count}}{}'.format(
+                    '', ''
+                )
+            )
+
+        if log:
+            cmd.append(
+                '{}{{log}}{}'.format(
+                    '', ''
+                )
+            )
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no(
+        self, sequence,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Remove access-list entry
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no {sequence}
+
+        :param sequence: sequence number of ACE.
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'no {sequence}'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+
 class ConfigVrrpInterface(ContextManager):
     """
     VRRP-Interface configuration.
@@ -26225,6 +26440,7 @@ __all__ = [
     'ConfigQueueProfile',
     'ConfigScheduleProfile',
     'ConfigAccessListIp',
+    'ConfigAccessListIpTestname',
     'ConfigVrrpInterface',
     'show_interface',
     'show_interface_brief',
