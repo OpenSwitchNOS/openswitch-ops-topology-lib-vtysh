@@ -7312,35 +7312,45 @@ def parse_show_vrrp(raw_result):
      ::
 
        {
-            'status': 'INIT (Interface Down)',
-            'premption': 'enabled',
-            'group': '15',
-            'master_router': 'unknown',
-            'state_duration': '0',
-            'interval': '0.000',
-            'priority': '255',
-            'interface': '2',
-            'advertisement_interval': '1000',
-            'virtual_ip_address': '100.100.100.100',
+            'master_adv_interval': '1000 msec (expires in 631 msec)',
+            'group': '1',
+            'address_family': 'IPv4',
+            'track_obj': '1, and state Down',
+            'master_router': '10.0.0.2 (local), priority is 100',
+            'priority': '100',
             'down_interval': 'unknown',
-            'master_adv_interval': 'unknown',
-            'iaddress_family': 'IPv4'
+            'state': 'MASTER',
+            'advertisement_interval': '1000 msec',
+            'virtual_secondary_ip_address': None,
+            'Virtual MAC address is 0000.5e00.0101',
+            'version': None,
+            'mac_address': None,
+            'virtual_ip_address': '10.0.0.1',
+            'state_dur': '56 mins 57.826 secs',
+            'premption': 'enabled',
+            'interface': '1'
        }
     """
 
     show_re = (
-     r'Interface (?P<interface>\d+) - Group (?P<group>' +
-     '\d+) - Address-Family (?P<iaddress_family>\S+)'
-     r'\s*State is (?P<status>.*)\n'
-     r'\s*State duration (?P<state_duration>' +
-     '\d+) mins (?P<interval>[\d.]+) secs'
-     r'\s*Virtual IP address is (?P<virtual_ip_address>[0-9.]+)?\s*'
-     r'\s*Advertisement interval is (?P<advertisement_interval>\d+) msec'
-     r'\s*Preemption (?P<premption>\S+)'
-     r'\s*Priority is (?P<priority>\d+)'
-     r'\s*Master Router is (?P<master_router>\S+)'
-     r'\s*Master Advertisement interval is (?P<master_adv_interval>\S+)'
-     r'\s*Master Down interval is (?P<down_interval>\S+)'
+
+     r'Interface (?P<interface>.*) - Group (?P<group>\d+) -' +
+     ' Address-Family (?P<address_family>\S+)\s*'
+     r'State is (?P<state>.*)\n+\s*'
+     r'State duration (?P<state_dur>.*)\n+\s*'
+     r'Virtual IP address is (?P<virtual_ip_address>.*)\n+\s*'
+     r'(Virtual secondary IP addresses:)?\s*'
+     r'((?P<virtual_secondary_ip_address>[0-9a-f:]+)?)?\s*'
+     r'(Virtual MAC address is (?P<mac_address>.*)\n+)?\s*'
+     r'(Advertisement interval is (?P<advertisement_interval>.*)\n+)?\s*'
+     r'(Version(?P<version>.*))?\s*'
+     r'Preemption (?P<premption>\S+)\s*'
+     r'Priority is (?P<priority>\d+)\s*'
+     r'(Master Router is (?P<master_router>.*))?\s*'
+     r'(Master Advertisement interval is (?P<master_adv_interval>.*))\s*'
+     r'(Master Down interval is (?P<down_interval>.*)\n+)?\s*'
+     r'(Tracked object id is (?P<track_obj>.*)\n+)?\s*'
+
     )
     re_result = re.search(show_re, raw_result)
     assert re_result
@@ -7377,6 +7387,346 @@ def parse_show_vrrp_brief(raw_result):
         r'(?P<interface>\d+)\s+(?P<group>\S+)\s+(?P<address_family>\S+)\s+'
         r'(?P<priority>\d+)\s+(?P<time>\d+)\s+(?P<owner>\S+)\s+'
         r'(?P<preempt>\S+)\s+(?P<state>\S+)\s+(?P<master_address>[\w ()-.]*)'
+    )
+    re_result = re.search(show_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    return result
+
+
+def parse_show_vrrp_detail(raw_result):
+    """
+    Parse the 'show vrrp detail' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show vrrp detail command in a \
+        dictionary of the form:
+
+     ::
+
+       {
+            'mast_to_backup': '0',
+            'version': ' 3',
+            'track_obj': '1, and state Down',
+            'virtual_ip_address': '10.0.0.1',
+            'virtual_secondary_ip_address': None,
+            'group': '1',
+            'address_family': 'IPv4',
+            'priority': '100',
+            'state': 'MASTER',
+            'advertisement_interval': '1000 msec',
+            'adv_intv_err': '0',
+            'mac_address': '0000.5e00.0101',
+            'state_dur': '1 mins 35.486 secs',
+            'master_adv_interval': '1000 msec (expires in 268 msec)',
+            'backup_to_mast': '2 (Last change Mon Jun 16 11:19:39.926 UTC)',
+            'mast_to_init': '1 (Last change Mon Jun 16 11:17:49.978 UTC)',
+            'master_router': '10.0.0.2 (local), priority is 100',
+            'init_to_backup': '2 (Last change Mon Jun 16 11:19:36.316 UTC)',
+            'interface': '1',
+            'vrrpv2_incompat': None,
+            'invalid_grp_oth_reason': '0',
+            'backup_to_init': '0',
+            'adv_recv_in_init': '0',
+            'down_interval': 'unknown',
+            'ip_addr_own_conflicts': '0',
+            'grp_discard_pkts': '3537',
+            'init_to_mast': '0',
+            'ip_conf_mismatch': '3537',
+            'premption': 'enabled',
+            'vrrp_v2_adv': 'sent 0 (errors 0) - rcvd 0',
+            'vrrp_v3_adv': 'sent 3931 (errors 0) - rcvd 0'
+       }
+    """
+    show_re = (
+
+     r'Interface (?P<interface>.*) - Group (?P<group>\d+) -' +
+     ' Address-Family (?P<address_family>\S+)\s*'
+     r'State is (?P<state>.*)\n+\s*'
+     r'State duration (?P<state_dur>.*)\n+\s*'
+     r'Virtual IP address is (?P<virtual_ip_address>.*)\n+\s*'
+     r'(Virtual secondary IP addresses:)?\s*'
+     r'((?P<virtual_secondary_ip_address>[0-9a-f:]+)?)?\s*'
+     r'(Virtual MAC address is (?P<mac_address>.*)\n+)?\s*'
+     r'(Advertisement interval is (?P<advertisement_interval>.*)\n+)?\s*'
+     r'(Version(?P<version>.*))?\s*'
+     r'Preemption (?P<premption>\S+)\s*'
+     r'Priority is (?P<priority>\d+)\s*'
+     r'(Master Router is (?P<master_router>.*))?\s*'
+     r'(Master Advertisement interval is (?P<master_adv_interval>.*))\s*'
+     r'(Master Down interval is (?P<down_interval>.*)\n+)?\s*'
+     r'(Tracked object id is (?P<track_obj>.*)\n+)?\s*'
+     r'(VRRPv3 Advertisements: (?P<vrrp_v3_adv>.*))?\s*'
+     r'(VRRPv2 Advertisements: (?P<vrrp_v2_adv>.*))?\s*'
+     r'(Group Discarded Packets: (?P<grp_discard_pkts>\d+))?\s*'
+     r'(\s*VRRPv2 incompatibility: (?P<vrrpv2_incompat>\d+))?\s*'
+     r'(\s*IP Address Owner conflicts: (?P<ip_addr_own_conflicts>\d+))?\s*'
+     r'(\s*IP address configuration mismatch : (?P<ip_conf_mismatch>\d+))?\s*'
+     r'(\s*Advert Interval errors : (?P<adv_intv_err>\d+))?\s*'
+     r'(\s*Adverts received in Init state: (?P<adv_recv_in_init>\d+))?\s*'
+     r'(\s*Invalid group other reason: (?P<invalid_grp_oth_reason>\d+))?\s*'
+     r'(Group State transition:)?\s*'
+     r'(\s*Init to master: (?P<init_to_mast>.*))?\s*'
+     r'(\s*Init to backup: (?P<init_to_backup>.*))?\s*'
+     r'(\s*Backup to master: (?P<backup_to_mast>.*))?\s*'
+     r'(\s*Master to backup: (?P<mast_to_backup>.*))?\s*'
+     r'(\s*Master to init: (?P<mast_to_init>.*))?\s*'
+     r'(\s*Backup to init: (?P<backup_to_init>.*))?\s*'
+
+    )
+
+    re_result = re.search(show_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    return result
+
+
+def parse_show_vrrp_interface(raw_result):
+    """
+    Parse the 'show vrrp interface' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show vrrp interface command in a \
+        dictionary of the form:
+
+     ::
+
+       {
+            'master_adv_interval': '1000 msec (expires in 11 msec)',
+            'group': '1',
+            'address_family': 'IPv4',
+            'track_obj': None,
+            'master_router': '10.0.0.2 (local), priority is 100',
+            'priority': '100',
+            'down_interval': 'unknown',
+            'state': 'MASTER',
+            'advertisement_interval': '1000 msec',
+            'virtual_secondary_ip_address': None,
+            'version': ' 3',
+            'mac_address': '0000.5e00.0101',
+            'virtual_ip_address': '10.0.0.1',
+            'state_dur': '11 mins 21.617 secs',
+            'premption': 'enabled',
+            'interface': '1'
+       }
+    """
+
+    show_re = (
+
+     r'Interface (?P<interface>.*) - Group (?P<group>\d+) -' +
+     ' Address-Family (?P<address_family>\S+)\s*'
+     r'State is (?P<state>.*)\n+\s*'
+     r'State duration (?P<state_dur>.*)\n+\s*'
+     r'Virtual IP address is (?P<virtual_ip_address>.*)\n+\s*'
+     r'(Virtual secondary IP addresses:)?\s*'
+     r'((?P<virtual_secondary_ip_address>[0-9a-f:]+)?)?\s*'
+     r'(Virtual MAC address is (?P<mac_address>.*)\n+)?\s*'
+     r'(Advertisement interval is (?P<advertisement_interval>.*)\n+)?\s*'
+     r'(Version(?P<version>.*))?\s*'
+     r'Preemption (?P<premption>\S+)\s*'
+     r'Priority is (?P<priority>\d+)\s*'
+     r'(Master Router is (?P<master_router>.*))?\s*'
+     r'(Master Advertisement interval is (?P<master_adv_interval>.*))\s*'
+     r'(Master Down interval is (?P<down_interval>.*)\n+)?\s*'
+     r'(Tracked object id is (?P<track_obj>.*)\n+)?\s*'
+
+    )
+    re_result = re.search(show_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    return result
+
+
+def parse_show_vrrp_statistics(raw_result):
+    """
+    Parse the 'show vrrp statistics' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show vrrp statistics command in a \
+        dictionary of the form:
+
+     ::
+
+       {
+            'invalid_grp_oth_reason': '0',
+            'mast_to_backup': '0',
+            'backup_to_init': '0',
+            'group': '1',
+            'address_family': 'IPv4',
+            'grp_discard_pkts': '3856',
+            'vrrp_v2_adv': 'sent 0 (errors 0) - rcvd 0',
+            'ip_addr_own_conflicts': '0',
+            'init_to_backup': '2 (Last change Mon Jun 16 11:19:36.316 UTC)',
+            'state': 'MASTER',
+            'adv_intv_err': '0',
+            'init_to_mast': '0',
+            'ip_conf_mismatch': '0',
+            'adv_recv_in_init': '0',
+            'interface': '1',
+            'state_dur': '6 mins 55.006 secs',
+            'backup_to_mast': '2 (Last change Mon Jun 16 11:19:39.926 UTC)',
+            'vrrp_v3_adv': 'sent 4288 (errors 0) - rcvd 0',
+            'mast_to_init': '1 (Last change Mon Jun 16 11:17:49.978 UTC)',
+            'vrrpv2_incompat': None
+       }
+    """
+
+    show_re = (
+
+     r'VRRP Statistics for interface (?P<interface>.*) -' +
+     ' Group (?P<group>\d+) - Address-Family (?P<address_family>\S+)\s*'
+     r'State is (?P<state>.*)\n+\s*'
+     r'State duration (?P<state_dur>.*)\n+\s*'
+     r'(VRRPv3 Advertisements: (?P<vrrp_v3_adv>.*))?\s*'
+     r'(VRRPv2 Advertisements: (?P<vrrp_v2_adv>.*))?\s*'
+     r'(Group Discarded Packets: (?P<grp_discard_pkts>\d+))?\s*'
+     r'(\s*VRRPv2 incompatibility: (?P<vrrpv2_incompat>\d+))?\s*'
+     r'(\s*IP Address Owner conflicts: (?P<ip_addr_own_conflicts>\d+))?\s*'
+     r'(\s*IP address configuration mismatch : (?P<ip_conf_mismatch>\d+))?\s*'
+     r'(\s*Advert Interval errors : (?P<adv_intv_err>\d+))?\s*'
+     r'(\s*Adverts received in Init state: (?P<adv_recv_in_init>\d+))?\s*'
+     r'(\s*Invalid group other reason: (?P<invalid_grp_oth_reason>\d+))?\s*'
+     r'(Group State transition:)?\s*'
+     r'(\s*Init to master: (?P<init_to_mast>.*))?\s*'
+     r'(\s*Init to backup: (?P<init_to_backup>.*))?\s*'
+     r'(\s*Backup to master: (?P<backup_to_mast>.*))?\s*'
+     r'(\s*Master to backup: (?P<mast_to_backup>.*))?\s*'
+     r'(\s*Master to init: (?P<mast_to_init>.*))?\s*'
+     r'(\s*Backup to init: (?P<backup_to_init>.*))?\s*'
+
+    )
+    re_result = re.search(show_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    return result
+
+
+def parse_show_vrrp_statistics_interface(raw_result):
+    """
+    Parse the 'show vrrp statistics interface' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show vrrp statistics interface \
+        command in a dictionary of the form:
+
+     ::
+
+       {
+            'invalid_grp_oth_reason': '0',
+            'mast_to_backup': '0',
+            'backup_to_init': '0',
+            'group': '1',
+            'address_family': 'IPv4',
+            'grp_discard_pkts': '3856',
+            'vrrp_v2_adv': 'sent 0 (errors 0) - rcvd 0',
+            'ip_addr_own_conflicts': '0',
+            'init_to_backup': '2 (Last change Mon Jun 16 11:19:36.316 UTC)',
+            'state': 'MASTER',
+            'adv_intv_err': '0',
+            'init_to_mast': '0',
+            'ip_conf_mismatch': '0',
+            'adv_recv_in_init': '0',
+            'interface': '1',
+            'state_dur': '6 mins 55.006 secs',
+            'backup_to_mast': '2 (Last change Mon Jun 16 11:19:39.926 UTC)',
+            'vrrp_v3_adv': 'sent 4288 (errors 0) - rcvd 0',
+            'mast_to_init': '1 (Last change Mon Jun 16 11:17:49.978 UTC)',
+            'vrrpv2_incompat': None
+       }
+    """
+
+    show_re = (
+
+     r'VRRP Statistics for interface (?P<interface>.*) -' +
+     ' Group (?P<group>\d+) - Address-Family (?P<address_family>\S+)\s*'
+     r'State is (?P<state>.*)\n+\s*'
+     r'State duration (?P<state_dur>.*)\n+\s*'
+     r'(VRRPv3 Advertisements: (?P<vrrp_v3_adv>.*))?\s*'
+     r'(VRRPv2 Advertisements: (?P<vrrp_v2_adv>.*))?\s*'
+     r'(Group Discarded Packets: (?P<grp_discard_pkts>\d+))?\s*'
+     r'(\s*VRRPv2 incompatibility: (?P<vrrpv2_incompat>\d+))?\s*'
+     r'(\s*IP Address Owner conflicts: (?P<ip_addr_own_conflicts>\d+))?\s*'
+     r'(\s*IP address configuration mismatch : (?P<ip_conf_mismatch>\d+))?\s*'
+     r'(\s*Advert Interval errors : (?P<adv_intv_err>\d+))?\s*'
+     r'(\s*Adverts received in Init state: (?P<adv_recv_in_init>\d+))?\s*'
+     r'(\s*Invalid group other reason: (?P<invalid_grp_oth_reason>\d+))?\s*'
+     r'(Group State transition:)?\s*'
+     r'(\s*Init to master: (?P<init_to_mast>.*))?\s*'
+     r'(\s*Init to backup: (?P<init_to_backup>.*))?\s*'
+     r'(\s*Backup to master: (?P<backup_to_mast>.*))?\s*'
+     r'(\s*Master to backup: (?P<mast_to_backup>.*))?\s*'
+     r'(\s*Master to init: (?P<mast_to_init>.*))?\s*'
+     r'(\s*Backup to init: (?P<backup_to_init>.*))?\s*'
+
+    )
+    re_result = re.search(show_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    return result
+
+
+def parse_show_track(raw_result):
+    """
+    Parse the 'show track <obj>' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show track command in a \
+        dictionary of the form:
+
+     ::
+
+       {
+
+            'track': '1',
+            'interface': '1',
+            'interface_state': ' DOWN'
+       }
+    """
+
+    show_re = (
+
+     r'Track (?P<track>\d+)\s*'
+     r'(Interface (?P<interface>.*))\s*'
+     r'(Interface is(?P<interface_state>.*))\s*'
+    )
+    re_result = re.search(show_re, raw_result)
+    assert re_result
+
+    result = re_result.groupdict()
+    return result
+
+
+def parse_show_track_brief(raw_result):
+    """
+    Parse the 'show track brief' command raw output.
+
+    :param str raw_result: vtysh raw result string.
+    :rtype: dict
+    :return: The parsed result of the show track brief command in a \
+        dictionary of the form:
+
+     ::
+
+       {
+            'track': '1',
+            'interface': '1',
+            'state': 'DOWN'
+
+       }
+    """
+
+    show_re = (
+     r'(?P<track>\d+)\s+(?P<interface>\S+)\s+(?P<state>\S+)'
     )
     re_result = re.search(show_re, raw_result)
     assert re_result
@@ -7594,6 +7944,9 @@ __all__ = [
     'parse_copy_startup_config_running_config',
     'parse_show_version', 'parse_show_vrrp',
     'parse_show_arp',
-    'parse_show_vrrp_brief', 'parse_show_date',
-    'parse_show_system_timezone'
+    'parse_show_vrrp_brief', 'parse_show_vrrp_detail',
+    'parse_show_vrrp_interface', 'parse_show_vrrp_statistics',
+    'parse_show_vrrp_statistics_interface',
+    'parse_show_track', 'parse_show_track_brief',
+    'parse_show_date', 'parse_show_system_timezone'
 ]

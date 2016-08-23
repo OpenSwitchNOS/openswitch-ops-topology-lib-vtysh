@@ -118,6 +118,12 @@ from topology_lib_vtysh.parser import (
     parse_show_arp,
     parse_show_vrrp,
     parse_show_vrrp_brief,
+    parse_show_vrrp_detail,
+    parse_show_vrrp_interface,
+    parse_show_vrrp_statistics,
+    parse_show_vrrp_statistics_interface,
+    parse_show_track,
+    parse_show_track_brief,
     parse_show_date,
     parse_show_system_timezone
     )
@@ -6122,36 +6128,128 @@ Entry 3:
 def test_parse_show_vrrp():
     raw_result = """
 
-Interface 2 - Group 15 - Address-Family IPv4
-  State is INIT (Interface Down)
-  State duration 0 mins 0.000 secs
-  Virtual IP address is 100.100.100.100
+Interface 1 - Group 1 - Address-Family IPv4
+  State is MASTER
+  State duration 56 mins 57.826 secs
+  Virtual IP address is 10.0.0.1
+  Virtual MAC address is 0000.5e00.0101
   Advertisement interval is 1000 msec
   Preemption enabled
-  Priority is 255
-  Master Router is unknown
+  Priority is 100
+  Master Router is 10.0.0.2 (local), priority is 100
+  Master Advertisement interval is 1000 msec (expires in 631 msec)
+  Master Down interval is unknown
+  Tracked object id is 1, and state Down
+
+    """
+
+    expected_result = {
+
+            'master_adv_interval': '1000 msec (expires in 631 msec)',
+            'group': '1',
+            'address_family': 'IPv4',
+            'track_obj': '1, and state Down',
+            'master_router': '10.0.0.2 (local), priority is 100',
+            'priority': '100',
+            'down_interval': 'unknown',
+            'state': 'MASTER',
+            'advertisement_interval': '1000 msec',
+            'virtual_secondary_ip_address': None,
+            'mac_address': '0000.5e00.0101',
+            'version': None,
+            'virtual_ip_address': '10.0.0.1',
+            'state_dur': '56 mins 57.826 secs',
+            'premption': 'enabled',
+            'interface': '1'
+
+
+    }
+    result = parse_show_vrrp(raw_result)
+    ddiff = DeepDiff(result, expected_result)
+
+    assert not ddiff
+
+    raw_result = """
+
+Interface 2 - Group 1 - Address-Family IPv4
+  State is INIT (Interface Down)
+  State duration 45 mins 28.313 secs
+  Virtual IP address is no address
+  Virtual MAC address is 0000.5e00.0101
+  Advertisement interval is 1000 msec
+  Preemption enabled
+  Priority is 100
+  Master Router is unknown, priority is unknown
   Master Advertisement interval is unknown
   Master Down interval is unknown
 
     """
 
-    expected_result = {
-        'status': 'INIT (Interface Down)',
-        'premption': 'enabled',
-        'group': '15',
-        'master_router': 'unknown',
-        'state_duration': '0',
-        'interval': '0.000',
-        'priority': '255',
-        'interface': '2',
-        'advertisement_interval': '1000',
-        'virtual_ip_address': '100.100.100.100',
-        'down_interval': 'unknown',
+    expected_result2 = {
+
         'master_adv_interval': 'unknown',
-        'iaddress_family': 'IPv4'
+        'group': '1',
+        'address_family': 'IPv4',
+        'track_obj': None,
+        'master_router': 'unknown, priority is unknown',
+        'priority': '100',
+        'down_interval': 'unknown',
+        'state': 'INIT (Interface Down)',
+        'advertisement_interval': '1000 msec',
+        'virtual_secondary_ip_address': None,
+        'version': None,
+        'mac_address': '0000.5e00.0101',
+        'virtual_ip_address': 'no address',
+        'state_dur': '45 mins 28.313 secs',
+        'premption': 'enabled',
+        'interface': '2'
+
     }
     result = parse_show_vrrp(raw_result)
-    ddiff = DeepDiff(result, expected_result)
+    ddiff = DeepDiff(result, expected_result2)
+
+    assert not ddiff
+
+    raw_result = """
+
+Interface 2 - Group 1 - Address-Family IPv6
+  State is INIT (Interface Down)
+  State duration 20 mins 19.794 secs
+  Virtual IP address is no address
+  Virtual secondary IP addresses:
+    2201:13::110:4
+  Virtual MAC address is 0000.5e00.0201
+  Advertisement interval is 1000 msec
+  Preemption enabled
+  Priority is 100
+  Master Router is unknown, priority is unknown
+  Master Advertisement interval is unknown
+  Master Down interval is unknown
+
+    """
+
+    expected_result3 = {
+
+        'master_adv_interval': 'unknown',
+        'group': '1',
+        'address_family': 'IPv6',
+        'track_obj': None,
+        'master_router': 'unknown, priority is unknown',
+        'priority': '100',
+        'down_interval': 'unknown',
+        'state': 'INIT (Interface Down)',
+        'advertisement_interval': '1000 msec',
+        'virtual_secondary_ip_address': '2201:13::110:4',
+        'version': None,
+        'mac_address': '0000.5e00.0201',
+        'virtual_ip_address': 'no address',
+        'state_dur': '20 mins 19.794 secs',
+        'premption': 'enabled',
+        'interface': '2'
+
+    }
+    result = parse_show_vrrp(raw_result)
+    ddiff = DeepDiff(result, expected_result3)
 
     assert not ddiff
 
@@ -6177,6 +6275,413 @@ Interface   Grp  A-F   Pri   Time Owner Pre State   Master addr/Group addr
     result = parse_show_vrrp_brief(raw_result)
     ddiff = DeepDiff(result, expected_result)
 
+    assert not ddiff
+
+
+def test_parse_show_vrrp_detail():
+    raw_result = """
+
+Interface 1 - Group 1 - Address-Family IPv4
+  State is MASTER
+  State duration 1 mins 35.486 secs
+  Virtual IP address is 10.0.0.1
+  Virtual MAC address is 0000.5e00.0101
+  Advertisement interval is 1000 msec
+  Version 3
+  Preemption enabled
+  Priority is 100
+  Master Router is 10.0.0.2 (local), priority is 100
+  Master Advertisement interval is 1000 msec (expires in 268 msec)
+  Master Down interval is unknown
+  Tracked object id is 1, and state Down
+  VRRPv3 Advertisements: sent 3931 (errors 0) - rcvd 0
+  VRRPv2 Advertisements: sent 0 (errors 0) - rcvd 0
+  Group Discarded Packets: 3537
+    IP Address Owner conflicts: 0
+    IP address configuration mismatch : 3537
+    Advert Interval errors : 0
+    Adverts received in Init state: 0
+    Invalid group other reason: 0
+  Group State transition:
+    Init to master: 0
+    Init to backup: 2 (Last change Mon Jun 16 11:19:36.316 UTC)
+    Backup to master: 2 (Last change Mon Jun 16 11:19:39.926 UTC)
+    Master to backup: 0
+    Master to init: 1 (Last change Mon Jun 16 11:17:49.978 UTC)
+    Backup to init: 0
+
+    """
+
+    expected_result = {
+
+            'mast_to_backup': '0',
+            'version': ' 3',
+            'track_obj': '1, and state Down',
+            'virtual_ip_address': '10.0.0.1',
+            'virtual_secondary_ip_address': None,
+            'group': '1',
+            'address_family': 'IPv4',
+            'priority': '100',
+            'state': 'MASTER',
+            'advertisement_interval': '1000 msec',
+            'adv_intv_err': '0',
+            'mac_address': '0000.5e00.0101',
+            'state_dur': '1 mins 35.486 secs',
+            'master_adv_interval': '1000 msec (expires in 268 msec)',
+            'backup_to_mast': '2 (Last change Mon Jun 16 11:19:39.926 UTC)',
+            'mast_to_init': '1 (Last change Mon Jun 16 11:17:49.978 UTC)',
+            'master_router': '10.0.0.2 (local), priority is 100',
+            'init_to_backup': '2 (Last change Mon Jun 16 11:19:36.316 UTC)',
+            'interface': '1',
+            'vrrpv2_incompat': None,
+            'invalid_grp_oth_reason': '0',
+            'backup_to_init': '0',
+            'adv_recv_in_init': '0',
+            'down_interval': 'unknown',
+            'ip_addr_own_conflicts': '0',
+            'grp_discard_pkts': '3537',
+            'init_to_mast': '0',
+            'ip_conf_mismatch': '3537',
+            'premption': 'enabled',
+            'vrrp_v2_adv': 'sent 0 (errors 0) - rcvd 0',
+            'vrrp_v3_adv': 'sent 3931 (errors 0) - rcvd 0'
+
+    }
+    result = parse_show_vrrp_detail(raw_result)
+    ddiff = DeepDiff(result, expected_result)
+
+    assert not ddiff
+
+    raw_result = """
+
+Interface 2 - Group 1 - Address-Family IPv4
+  State is INIT (Interface Down)
+  State duration 49 mins 23.507 secs
+  Virtual IP address is no address
+  Virtual MAC address is 0000.5e00.0101
+  Advertisement interval is 1000 msec
+  Version 3
+  Preemption enabled
+  Priority is 100
+  Master Router is unknown, priority is unknown
+  Master Advertisement interval is unknown
+  Master Down interval is unknown
+  VRRPv3 Advertisements: sent 0 (errors 0) - rcvd 0
+  VRRPv2 Advertisements: sent 0 (errors 0) - rcvd 0
+  Group Discarded Packets: 0
+    IP Address Owner conflicts: 0
+    IP address configuration mismatch : 0
+    Advert Interval errors: 0
+    Adverts received in Init state: 0
+    Invalid group other reason: 0
+  Group State transition:
+    Init to master: 0
+    Init to backup: 0
+    Backup to master: 0
+    Master to backup: 0
+    Master to init: 0
+    Backup to init: 0
+
+    """
+
+    expected_result2 = {
+
+            'mast_to_backup': None,
+            'version': ' 3',
+            'track_obj': None,
+            'virtual_ip_address': 'no address',
+            'virtual_secondary_ip_address': None,
+            'group': '1',
+            'address_family': 'IPv4',
+            'priority': '100',
+            'state': 'INIT (Interface Down)',
+            'advertisement_interval': '1000 msec',
+            'adv_intv_err': None,
+            'mac_address': '0000.5e00.0101',
+            'state_dur': '49 mins 23.507 secs',
+            'master_adv_interval': 'unknown',
+            'backup_to_mast': None,
+            'mast_to_init': None,
+            'master_router': 'unknown, priority is unknown',
+            'init_to_backup': None,
+            'interface': '2',
+            'vrrpv2_incompat': None,
+            'invalid_grp_oth_reason': None,
+            'backup_to_init': None,
+            'adv_recv_in_init': None,
+            'down_interval': 'unknown',
+            'ip_addr_own_conflicts': '0',
+            'grp_discard_pkts': '0',
+            'init_to_mast': None,
+            'ip_conf_mismatch': '0',
+            'premption': 'enabled',
+            'vrrp_v2_adv': 'sent 0 (errors 0) - rcvd 0',
+            'vrrp_v3_adv': 'sent 0 (errors 0) - rcvd 0'
+
+    }
+    result = parse_show_vrrp_detail(raw_result)
+    ddiff = DeepDiff(result, expected_result2)
+
+    assert not ddiff
+
+    raw_result = """
+
+Interface 2 - Group 1 - Address-Family IPv6
+  State is INIT (Interface Down)
+  State duration 24 mins 14.988 secs
+  Virtual IP address is no address
+  Virtual secondary IP addresses:
+    2201:13::110:4
+  Virtual MAC address is 0000.5e00.0201
+  Advertisement interval is 1000 msec
+  Preemption enabled
+  Priority is 100
+  Master Router is unknown, priority is unknown
+  Master Advertisement interval is unknown
+  Master Down interval is unknown
+  VRRPv3 Advertisements: sent 0 (errors 0) - rcvd 0
+  VRRPv2 Advertisements: sent 0 (errors 0) - rcvd 0
+  Group Discarded Packets: 0
+    VRRPv2 incompatibility: 0
+    IP Address Owner conflicts: 0
+    IP address configuration mismatch : 0
+    Advert Interval errors : 0
+    Adverts received in Init state: 0
+    Invalid group other reason: 0
+  Group State transition:
+    Init to master: 0
+    Init to backup: 0
+    Backup to master: 0
+    Master to backup: 0
+    Master to init: 0
+    Backup to init: 0
+
+    """
+
+    expected_result3 = {
+
+            'mast_to_backup': '0',
+            'version': None,
+            'track_obj': None,
+            'virtual_ip_address': 'no address',
+            'virtual_secondary_ip_address': '2201:13::110:4',
+            'group': '1',
+            'address_family': 'IPv6',
+            'priority': '100',
+            'state': 'INIT (Interface Down)',
+            'advertisement_interval': '1000 msec',
+            'adv_intv_err': '0',
+            'mac_address': '0000.5e00.0201',
+            'state_dur': '24 mins 14.988 secs',
+            'master_adv_interval': 'unknown',
+            'backup_to_mast': '0',
+            'mast_to_init': '0',
+            'master_router': 'unknown, priority is unknown',
+            'init_to_backup': '0',
+            'interface': '2',
+            'vrrpv2_incompat': '0',
+            'invalid_grp_oth_reason': '0',
+            'backup_to_init': '0',
+            'adv_recv_in_init': '0',
+            'down_interval': 'unknown',
+            'ip_addr_own_conflicts': '0',
+            'grp_discard_pkts': '0',
+            'init_to_mast': '0',
+            'ip_conf_mismatch': '0',
+            'premption': 'enabled',
+            'vrrp_v2_adv': 'sent 0 (errors 0) - rcvd 0',
+            'vrrp_v3_adv': 'sent 0 (errors 0) - rcvd 0'
+
+    }
+    result = parse_show_vrrp_detail(raw_result)
+    ddiff = DeepDiff(result, expected_result3)
+
+    assert not ddiff
+
+
+def test_parse_show_vrrp_interface():
+    raw_result = """
+
+Interface 1 - Group 1 - Address-Family IPv4
+  State is MASTER
+  State duration 11 mins 21.617 secs
+  Virtual IP address is 10.0.0.1
+  Virtual MAC address is 0000.5e00.0101
+  Advertisement interval is 1000 msec
+  Version 3
+  Preemption enabled
+  Priority is 100
+  Master Router is 10.0.0.2 (local), priority is 100
+  Master Advertisement interval is 1000 msec (expires in 11 msec)
+  Master Down interval is unknown
+
+    """
+
+    expected_result = {
+
+            'master_adv_interval': '1000 msec (expires in 11 msec)',
+            'group': '1',
+            'address_family': 'IPv4',
+            'track_obj': None,
+            'master_router': '10.0.0.2 (local), priority is 100',
+            'priority': '100',
+            'down_interval': 'unknown',
+            'state': 'MASTER',
+            'advertisement_interval': '1000 msec',
+            'virtual_secondary_ip_address': None,
+            'version': ' 3',
+            'mac_address': '0000.5e00.0101',
+            'virtual_ip_address': '10.0.0.1',
+            'state_dur': '11 mins 21.617 secs',
+            'premption': 'enabled',
+            'interface': '1'
+
+    }
+    result = parse_show_vrrp_interface(raw_result)
+    ddiff = DeepDiff(result, expected_result)
+
+    assert not ddiff
+
+
+def test_parse_show_vrrp_statistics():
+    raw_result = """
+
+VRRP Statistics for interface 1 - Group 1 - Address-Family IPv4
+  State is MASTER
+  State duration 6 mins 55.006 secs
+  VRRPv3 Advertisements: sent 4288 (errors 0) - rcvd 0
+  VRRPv2 Advertisements: sent 0 (errors 0) - rcvd 0
+  Group Discarded Packets: 3856
+    IP Address Owner conflicts: 0
+    IP address configuration mismatch : 0
+    Advert Interval errors : 0
+    Adverts received in Init state: 0
+    Invalid group other reason: 0
+  Group State transition:
+    Init to master: 0
+    Init to backup: 2 (Last change Mon Jun 16 11:19:36.316 UTC)
+    Backup to master: 2 (Last change Mon Jun 16 11:19:39.926 UTC)
+    Master to backup: 0
+    Master to init: 1 (Last change Mon Jun 16 11:17:49.978 UTC)
+    Backup to init: 0
+
+    """
+
+    expected_result = {
+
+            'invalid_grp_oth_reason': '0',
+            'mast_to_backup': '0',
+            'backup_to_init': '0',
+            'group': '1',
+            'address_family': 'IPv4',
+            'grp_discard_pkts': '3856',
+            'vrrp_v2_adv': 'sent 0 (errors 0) - rcvd 0',
+            'ip_addr_own_conflicts': '0',
+            'init_to_backup': '2 (Last change Mon Jun 16 11:19:36.316 UTC)',
+            'state': 'MASTER',
+            'adv_intv_err': '0',
+            'init_to_mast': '0',
+            'ip_conf_mismatch': '0',
+            'adv_recv_in_init': '0',
+            'interface': '1',
+            'state_dur': '6 mins 55.006 secs',
+            'backup_to_mast': '2 (Last change Mon Jun 16 11:19:39.926 UTC)',
+            'vrrp_v3_adv': 'sent 4288 (errors 0) - rcvd 0',
+            'mast_to_init': '1 (Last change Mon Jun 16 11:17:49.978 UTC)',
+            'vrrpv2_incompat': None
+    }
+    result = parse_show_vrrp_statistics(raw_result)
+    ddiff = DeepDiff(result, expected_result)
+
+    assert not ddiff
+
+
+def test_parse_show_vrrp_statistics_interface():
+    raw_result = """
+
+VRRP Statistics for interface 1 - Group 1 - Address-Family IPv4
+  State is MASTER
+  State duration 6 mins 55.006 secs
+  VRRPv3 Advertisements: sent 4288 (errors 0) - rcvd 0
+  VRRPv2 Advertisements: sent 0 (errors 0) - rcvd 0
+  Group Discarded Packets: 3856
+    IP Address Owner conflicts: 0
+    IP address configuration mismatch : 0
+    Advert Interval errors : 0
+    Adverts received in Init state: 0
+    Invalid group other reason: 0
+  Group State transition:
+    Init to master: 0
+    Init to backup: 2 (Last change Mon Jun 16 11:19:36.316 UTC)
+    Backup to master: 2 (Last change Mon Jun 16 11:19:39.926 UTC)
+    Master to backup: 0
+    Master to init: 1 (Last change Mon Jun 16 11:17:49.978 UTC)
+    Backup to init: 0
+
+    """
+
+    expected_result = {
+
+            'invalid_grp_oth_reason': '0',
+            'mast_to_backup': '0',
+            'backup_to_init': '0',
+            'group': '1',
+            'address_family': 'IPv4',
+            'grp_discard_pkts': '3856',
+            'vrrp_v2_adv': 'sent 0 (errors 0) - rcvd 0',
+            'ip_addr_own_conflicts': '0',
+            'init_to_backup': '2 (Last change Mon Jun 16 11:19:36.316 UTC)',
+            'state': 'MASTER',
+            'adv_intv_err': '0',
+            'init_to_mast': '0',
+            'ip_conf_mismatch': '0',
+            'adv_recv_in_init': '0',
+            'interface': '1',
+            'state_dur': '6 mins 55.006 secs',
+            'backup_to_mast': '2 (Last change Mon Jun 16 11:19:39.926 UTC)',
+            'vrrp_v3_adv': 'sent 4288 (errors 0) - rcvd 0',
+            'mast_to_init': '1 (Last change Mon Jun 16 11:17:49.978 UTC)',
+            'vrrpv2_incompat': None
+    }
+    result = parse_show_vrrp_statistics_interface(raw_result)
+    ddiff = DeepDiff(result, expected_result)
+
+    assert not ddiff
+
+
+def test_parse_show_track():
+    raw_result = """\
+Track 1
+  Interface 1
+  Interface is DOWN
+"""
+    result = parse_show_track(raw_result)
+
+    expected = {
+        'track': '1',
+        'interface': '1',
+        'interface_state': ' DOWN'
+    }
+
+    ddiff = DeepDiff(result, expected)
+    assert not ddiff
+
+
+def test_parse_show_track_brief():
+    raw_result = """\
+Track  Interface       State
+
+1        1              DOWN
+"""
+    result = parse_show_track_brief(raw_result)
+
+    expected = {
+        'track': '1',
+        'interface': '1',
+        'state': 'DOWN'
+    }
+
+    ddiff = DeepDiff(result, expected)
     assert not ddiff
 
 

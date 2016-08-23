@@ -26118,6 +26118,317 @@ def show_vrrp_brief(
     return parse_show_vrrp_brief(result)
 
 
+def show_vrrp_detail(
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
+    """
+    Display vrrp brief information
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show vrrp detail
+
+    :param dict kwargs: arguments to pass to the send_command of the
+     vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_vrrp_detail`
+    """
+
+    cmd = [
+        'show vrrp detail'
+    ]
+
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
+    )
+
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
+
+    return parse_show_vrrp_detail(result)
+
+
+def show_vrrp_interface(
+    enode, intf,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
+    """
+    Display vrrp interface information
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show vrrp interface {intf}
+
+    :param dict kwargs: arguments to pass to the send_command of the
+     vtysh shell.
+    :param intf: interface name
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_vrrp_interface`
+    """
+
+    cmd = [
+        'show vrrp interface {intf}'
+    ]
+
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
+    )
+
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
+
+    return parse_show_vrrp_interface(result)
+
+
+def show_vrrp_statistics(
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
+    """
+    Display vrrp statistics information
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show vrrp statistics
+
+    :param dict kwargs: arguments to pass to the send_command of the
+     vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_vrrp_statistics`
+    """
+
+    cmd = [
+        'show vrrp statistics'
+    ]
+
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
+    )
+
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
+
+    return parse_show_vrrp_statistics(result)
+
+
+def show_vrrp_statistics_interface(
+    enode, intf,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
+    """
+    Display vrrp statistics interface information
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show vrrp statistics interface {intf}
+
+    :param dict kwargs: arguments to pass to the send_command of the
+     vtysh shell.
+    :param intf: interface name
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_vrrp_statistics_interface`
+    """
+
+    cmd = [
+        'show vrrp statistics interface {intf}'
+    ]
+
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
+    )
+
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
+
+    return parse_show_vrrp_statistics_interface(result)
+
+
+def show_running_config_vrrp(
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
+    """
+    Display vrrp config information
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show running-config vrrp
+
+    :param dict kwargs: arguments to pass to the send_command of the
+     vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_running_config_vrrp`
+    """
+
+    cmd = [
+        'show running-config vrrp'
+    ]
+
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
+    )
+
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
+
+    return parse_show_running_config_vrrp(result)
+
+
+def show_track(
+    enode, obj,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
+    """
+    Display vrrp track obj information
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show track {obj}
+
+    :param dict kwargs: arguments to pass to the send_command of the
+     vtysh shell.
+    :param obj: obj name
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_track`
+    """
+
+    cmd = [
+        'show track {obj}'
+    ]
+
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
+    )
+
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
+
+    return parse_show_track(result)
+
+
+def show_track_brief(
+    enode,
+    _shell='vtysh',
+    _shell_args={
+        'matches': None,
+        'newline': True,
+        'timeout': None,
+        'connection': None
+    }
+):
+    """
+    Display vrrp track brief information
+
+    This function runs the following vtysh command:
+
+    ::
+
+        # show track brief
+
+    :param dict kwargs: arguments to pass to the send_command of the
+     vtysh shell.
+    :param str _shell: shell to be selected
+    :param dict _shell_args: low-level shell API arguments
+    :return: A dictionary as returned by
+     :func:`topology_lib_vtysh.parser.parse_show_track_brief`
+    """
+
+    cmd = [
+        'show track brief'
+    ]
+
+    shell = enode.get_shell(_shell)
+
+    shell.send_command(
+        (' '.join(cmd)).format(**locals()), **_shell_args
+    )
+
+    result = shell.get_response(
+        connection=_shell_args.get('connection', None)
+    )
+
+    return parse_show_track_brief(result)
+
+
 def show_date(
     enode,
     _shell='vtysh',
@@ -26327,6 +26638,13 @@ __all__ = [
     'show_ip_bgp_route_map',
     'show_vrrp',
     'show_vrrp_brief',
+    'show_vrrp_detail',
+    'show_vrrp_interface',
+    'show_vrrp_statistics',
+    'show_vrrp_statistics_interface',
+    'show_running_config_vrrp',
+    'show_track',
+    'show_track_brief',
     'show_date',
     'show_system_timezone'
 ]

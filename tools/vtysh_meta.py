@@ -1116,6 +1116,63 @@ interface {port}',
                 'returns': True
             },
             {
+                'command': 'show vrrp detail',
+                'doc': 'Display vrrp brief information',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show vrrp interface {intf}',
+                'doc': 'Display vrrp interface information ',
+                'arguments': [
+                    {
+                        'name': 'intf',
+                        'doc': 'interface name'
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show vrrp statistics',
+                'doc': 'Display vrrp statistics information',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show vrrp statistics interface {intf}',
+                'doc': 'Display vrrp statistics interface information ',
+                'arguments': [
+                    {
+                        'name': 'intf',
+                        'doc': 'interface name'
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show running-config vrrp',
+                'doc': 'Display vrrp config information',
+                'arguments': [],
+                'returns': True
+            },
+            {
+                'command': 'show track {obj}',
+                'doc': 'Display vrrp track obj information',
+                'arguments': [
+                    {
+                        'name': 'obj',
+                        'doc': 'obj name'
+                    }
+                ],
+                'returns': True
+            },
+            {
+                'command': 'show track brief',
+                'doc': 'Display vrrp track brief information',
+                'arguments': [],
+                'returns': True
+            },
+            {
                 'command': 'show date',
                 'doc': 'Display system date information',
                 'arguments': [],
