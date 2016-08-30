@@ -19113,6 +19113,46 @@ class ConfigDhcpServer(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def clear_dhcp_server_leases(
+        self,
+        _shell='vtysh',
+        _shell_args={
+            'matches': None,
+            'newline': True,
+            'timeout': None,
+            'connection': None
+        }
+    ):
+        """
+        Clears assigned leases.
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # clear dhcp-server leases
+
+        :param str _shell: shell to be selected
+        :param dict _shell_args: low-level shell API arguments
+        """
+
+        cmd = [
+            'clear dhcp-server leases'
+        ]
+
+        shell = self.enode.get_shell(_shell)
+
+        shell.send_command(
+            (' '.join(cmd)).format(**locals()), **_shell_args
+        )
+
+        result = shell.get_response(
+            connection=_shell_args.get('connection', None)
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
     def option_set(
         self, option_name='', option_number='', option_value='',
         tag_name='', ipv6='',

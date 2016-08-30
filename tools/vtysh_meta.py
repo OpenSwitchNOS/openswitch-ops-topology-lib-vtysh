@@ -6436,6 +6436,11 @@ local-priority {local_priority} name {name} color {color}',
                     ],
                 },
                 {
+                    'command': 'clear dhcp-server leases',
+                    'doc': 'Clears assigned leases.',
+                    'arguments': [],
+                },
+                {
                     'command': (
                         'option set'
                     ),
