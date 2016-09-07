@@ -232,15 +232,14 @@ class AclDoesNotExistException(VtyshException):
     """
 
 
+
 class MaximumCommunitiesException(VtyshException):
     """
     This is a typed exception that will be raised when any of the following
     regular expressions match the output of a command:
 
     ::
-
-
-        'config rejected : maximum allowed communities are configured'
+        Config rejected : Maximum allowed communities are configured
 
     """
 
@@ -251,9 +250,7 @@ class DuplicateCommunityException(VtyshException):
     regular expressions match the output of a command:
 
     ::
-
-
-        'this community is already configured'
+        This community is already configured
 
     """
 
@@ -354,6 +351,18 @@ VTYSH_EXCEPTIONS = OrderedDict([
         DuplicateCommunityException,
         [
             'this community is already configured'
+        ]
+    ),
+    (
+        MaximumCommunitiesException,
+        [
+            'Config rejected : Maximum allowed communities are configured',
+        ]
+    ),
+    (
+        DuplicateCommunityException,
+        [
+            'This community is already configured',
         ]
     ),
 ])
