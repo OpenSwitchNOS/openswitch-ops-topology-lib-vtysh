@@ -7432,6 +7432,686 @@ class Configure(ContextManager):
         if result:
             raise determine_exception(result)(result)
 
+    def spanning_tree(
+            self):
+        """
+        Enables MSTP feature for all the instances
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # spanning-tree
+
+        """
+
+        cmd = [
+            'spanning-tree'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_spanning_tree(
+            self):
+        """
+        Disables MSTP feature for all the instances
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no spanning-tree
+
+        """
+
+        cmd = [
+            'no spanning-tree'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def spanning_tree_config_name(
+            self, configuration_name):
+        """
+        Sets config name for MSTP
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # spanning-tree config-name {configuration_name}
+
+        :param configuration_name: Specifies the MSTP configuration name
+        """
+
+        cmd = [
+            'spanning-tree config-name {configuration_name}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_spanning_tree_config_name(
+            self, configuration_name=''):
+        """
+        Sets the default config name for all the instances, default is system
+        MAC-Address
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no spanning-tree config-name
+
+        :param configuration_name: Specifies the MSTP configuration name
+        """
+
+        cmd = [
+            'no spanning-tree config-name'
+        ]
+
+        if configuration_name:
+            cmd.append(
+                '{}{{configuration_name}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def spanning_tree_config_revision(
+            self, revision_number):
+        """
+        Sets config revision number for the all the instances
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # spanning-tree config-revision {revision_number}
+
+        :param revision_number: Specifies the MSTP configuration revision
+            number value <1-40>
+        """
+
+        cmd = [
+            'spanning-tree config-revision {revision_number}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_spanning_tree_config_revision(
+            self, revision_number=''):
+        """
+        Sets default config revision number for the all the instances, default
+        value is 0
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no spanning-tree config-revision
+
+        :param revision_number: Specifies the MSTP configuration revision
+            number value <1-40>
+        """
+
+        cmd = [
+            'no spanning-tree config-revision'
+        ]
+
+        if revision_number:
+            cmd.append(
+                '{}{{revision_number}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def spanning_tree_instance_vlan(
+            self, instance_id, vlan_id):
+        """
+        Maps the VLAN-ID to corresponding instance
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # spanning-tree instance {instance_id} vlan {vlan_id}
+
+        :param instance_id: Specifies the MSTP instance number <1-64>
+        :param vlan_id: Specifies the VLAN-ID number <1-4094>
+        """
+
+        cmd = [
+            'spanning-tree instance {instance_id} vlan {vlan_id}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_spanning_tree_instance_vlan(
+            self, instance_id, vlan_id=''):
+        """
+        Removes the VLAN-ID from the MSTP instance
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no spanning-tree instance {instance_id} vlan
+
+        :param instance_id: Specifies the MSTP instance number <1-64>
+        :param vlan_id: Specifies the VLAN-ID number <1-4094>
+        """
+
+        cmd = [
+            'no spanning-tree instance {instance_id} vlan'
+        ]
+
+        if vlan_id:
+            cmd.append(
+                '{}{{vlan_id}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def spanning_tree_instance_priority(
+            self, instance_id, priority):
+        """
+        Maps the priority to corresponding instance
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # spanning-tree instance {instance_id} priority {priority}
+
+        :param instance_id: Specifies the MSTP instance number <1-64>
+        :param priority: The device priority multiplier for the MST instance
+            <0-15>
+        """
+
+        cmd = [
+            'spanning-tree instance {instance_id} priority {priority}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_spanning_tree_instance_priority(
+            self, instance_id, priority=''):
+        """
+        Removes the priority from the MSTP instance
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no spanning-tree instance {instance_id} priority
+
+        :param instance_id: Specifies the MSTP instance number <1-64>
+        :param priority: The device priority multiplier for the MST instance
+            <0-15>
+        """
+
+        cmd = [
+            'no spanning-tree instance {instance_id} priority'
+        ]
+
+        if priority:
+            cmd.append(
+                '{}{{priority}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_spanning_tree_instance(
+            self, instance_id):
+        """
+        Removes the MSTP instance
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no spanning-tree instance {instance_id}
+
+        :param instance_id: Specifies the MSTP instance number <1-64>
+        """
+
+        cmd = [
+            'no spanning-tree instance {instance_id}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def spanning_tree_forward_delay(
+            self, delay_in_secs):
+        """
+        Sets the forward-delay for all the MSTP instances
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # spanning-tree forward-delay {delay_in_secs}
+
+        :param delay_in_secs: Specifies the forward delay in seconds <4-30>
+        """
+
+        cmd = [
+            'spanning-tree forward-delay {delay_in_secs}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_spanning_tree_forward_delay(
+            self, delay_in_secs=''):
+        """
+        Sets the default forward-delay for all the MSTP instances, default
+        value is 15 seconds
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no spanning-tree forward-delay
+
+        :param delay_in_secs: Specifies the forward delay in seconds <4-30>
+        """
+
+        cmd = [
+            'no spanning-tree forward-delay'
+        ]
+
+        if delay_in_secs:
+            cmd.append(
+                '{}{{delay_in_secs}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def spanning_tree_hello_time(
+            self, hello_in_secs):
+        """
+        Sets the hello interval for all the MSTP instances
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # spanning-tree hello-time {hello_in_secs}
+
+        :param hello_in_secs: Specifies the hello interval in seconds <2-10>
+        """
+
+        cmd = [
+            'spanning-tree hello-time {hello_in_secs}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_spanning_tree_hello_time(
+            self, hello_in_secs=''):
+        """
+        Sets the default hello interval for all the MSTP instances, default
+        value is 2 seconds
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no spanning-tree hello-time
+
+        :param hello_in_secs: Specifies the hello interval in seconds <2-10>
+        """
+
+        cmd = [
+            'no spanning-tree hello-time'
+        ]
+
+        if hello_in_secs:
+            cmd.append(
+                '{}{{hello_in_secs}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def spanning_tree_max_age(
+            self, age_in_secs):
+        """
+        Sets the maximum age for all the MSTP instances
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # spanning-tree max-age {age_in_secs}
+
+        :param age_in_secs: Specifies the maximum age in seconds <6-30>
+        """
+
+        cmd = [
+            'spanning-tree max-age {age_in_secs}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_spanning_tree_max_age(
+            self, age_in_secs=''):
+        """
+        Sets the default max age for all the MSTP instances, default value is
+        20 seconds
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no spanning-tree max-age
+
+        :param age_in_secs: Specifies the maximum age in seconds <6-30>
+        """
+
+        cmd = [
+            'no spanning-tree max-age'
+        ]
+
+        if age_in_secs:
+            cmd.append(
+                '{}{{age_in_secs}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def spanning_tree_max_hops(
+            self, hop_count):
+        """
+        Sets the hop count for all the MSTP instances
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # spanning-tree max-hops {hop_count}
+
+        :param hop_count: Specifies the maximum number of hops <1-40>
+        """
+
+        cmd = [
+            'spanning-tree max-hops {hop_count}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_spanning_tree_max_hops(
+            self, hop_count=''):
+        """
+        Sets the default hop count for all the MSTP instances, default value is
+        20
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no spanning-tree max-hops
+
+        :param hop_count: Specifies the maximum number of hops <1-40>
+        """
+
+        cmd = [
+            'no spanning-tree max-hops'
+        ]
+
+        if hop_count:
+            cmd.append(
+                '{}{{hop_count}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def spanning_tree_priority(
+            self, priority):
+        """
+        Set the device priority multiplier
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # spanning-tree priority {priority}
+
+        :param priority: Device priority multiplier <0-15>
+        """
+
+        cmd = [
+            'spanning-tree priority {priority}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_spanning_tree_priority(
+            self, priority=''):
+        """
+        Set the device priority multiplier
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no spanning-tree priority
+
+        :param priority: Device priority multiplier <0-15>
+        """
+
+        cmd = [
+            'no spanning-tree priority'
+        ]
+
+        if priority:
+            cmd.append(
+                '{}{{priority}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def spanning_tree_transmit_hold_count(
+            self, count):
+        """
+        Sets the transmit hold count performance parameter in pps
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # spanning-tree transmit-hold-count {count}
+
+        :param count: Transmit hold count <1-10>
+        """
+
+        cmd = [
+            'spanning-tree transmit-hold-count {count}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_spanning_tree_transmit_hold_count(
+            self, count=''):
+        """
+        Sets the transmit hold count performance parameter in pps
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no spanning-tree transmit-hold-count
+
+        :param count: Transmit hold count <1-10>
+        """
+
+        cmd = [
+            'no spanning-tree transmit-hold-count'
+        ]
+
+        if count:
+            cmd.append(
+                '{}{{count}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
 
 class RouteMap(ContextManager):
     """
@@ -11458,6 +12138,437 @@ class ConfigInterface(ContextManager):
 
         result = shell.get_response(
             connection=_shell_args.get('connection', None)
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def spanning_tree_port_type(
+            self, admin_type):
+        """
+        Sets the port-type for all the MSTP instances
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # spanning-tree port-type {admin_type}
+
+        :param admin_type: admin-edge Specifies the port as admin-edge
+            admin-
+            network Specifies the port as admin-network
+        """
+
+        cmd = [
+            'spanning-tree port-type {admin_type}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_spanning_tree_port_type(
+            self, admin_type=''):
+        """
+        Sets the port-type for all the MSTP instances
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no spanning-tree port-type {admin_type}
+
+        :param admin_type: admin-edge Specifies the port as admin-edge
+            admin-
+            network Specifies the port as admin-network
+        """
+
+        cmd = [
+            'no spanning-tree port-type {admin_type}'
+        ]
+
+        if admin_type:
+            cmd.append(
+                '{}{{admin_type}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def spanning_tree_bpdu_guard(
+            self, action):
+        """
+        Enable/Disable the bpdu guard on the interfaces
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # spanning-tree bpdu-guard {action}
+
+        :param action: enable Enable the bpdu guard on the interfacesdisable
+            Disable the bpdu guard on the interfaces
+        """
+
+        cmd = [
+            'spanning-tree bpdu-guard {action}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_spanning_tree_bpdu_guard(
+            self, action=''):
+        """
+        Enable/Disable the bpdu guard on the interfaces
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no spanning-tree bpdu-guard {action}
+
+        :param action: enable Enable the bpdu guard on the interfacesdisable
+            Disable the bpdu guard on the interfaces
+        """
+
+        cmd = [
+            'no spanning-tree bpdu-guard {action}'
+        ]
+
+        if action:
+            cmd.append(
+                '{}{{action}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def spanning_tree_root_guard(
+            self, action):
+        """
+        Enable/Disable the root guard on the interfaces
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # spanning-tree root-guard {action}
+
+        :param action: enable Enable the root guard on the interfacesdisable
+            Disable the root guard on the interfaces
+        """
+
+        cmd = [
+            'spanning-tree root-guard {action}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_spanning_tree_root_guard(
+            self, action=''):
+        """
+        Enable/Disable the root guard on the interfaces
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no spanning-tree root-guard {action}
+
+        :param action: enable Enable the root guard on the interfacesdisable
+            Disable the root guard on the interfaces
+        """
+
+        cmd = [
+            'no spanning-tree root-guard {action}'
+        ]
+
+        if action:
+            cmd.append(
+                '{}{{action}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def spanning_tree_loop_guard(
+            self, action):
+        """
+        Enable/Disable the loop guard on the interfaces
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # spanning-tree loop-guard {action}
+
+        :param action: enable Enable the loop guard on the interfacesdisable
+            Disable the loop guard on the interfaces
+        """
+
+        cmd = [
+            'spanning-tree loop-guard {action}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_spanning_tree_loop_guard(
+            self, action=''):
+        """
+        Enable/Disable the loop guard on the interfaces
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no spanning-tree loop-guard {action}
+
+        :param action: enable Enable the loop guard on the interfacesdisable
+            Disable the loop guard on the interfaces
+        """
+
+        cmd = [
+            'no spanning-tree loop-guard {action}'
+        ]
+
+        if action:
+            cmd.append(
+                '{}{{action}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def spanning_tree_bpdu_filter(
+            self, action):
+        """
+        Enable/Disable the bpdu filter on the interfaces
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # spanning-tree bpdu-filter {action}
+
+        :param action: enable Enable the bpdu filter on the interfacesdisable
+            Disable the bpdu filter on the interfaces
+        """
+
+        cmd = [
+            'spanning-tree bpdu-filter {action}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_spanning_tree_bpdu_filter(
+            self, action=''):
+        """
+        Enable/Disable the bpdu filter on the interfaces
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no spanning-tree bpdu-filter {action}
+
+        :param action: enable Enable the bpdu filter on the interfacesdisable
+            Disable the bpdu filter on the interfaces
+        """
+
+        cmd = [
+            'no spanning-tree bpdu-filter {action}'
+        ]
+
+        if action:
+            cmd.append(
+                '{}{{action}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def spanning_tree_instance_cost(
+            self, instance_id, cost):
+        """
+        Specify a standard to use when calculating the default pathcost
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # spanning-tree instance {instance_id} cost {cost}
+
+        :param instance_id: Specifies the MSTP instance number <1-64>
+        :param cost: Path cost range <1-200000000>
+        """
+
+        cmd = [
+            'spanning-tree instance {instance_id} cost {cost}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_spanning_tree_instance_cost(
+            self, instance_id, cost=''):
+        """
+        Specify a standard to use when calculating the default pathcost
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no spanning-tree instance {instance_id} cost {cost}
+
+        :param instance_id: Specifies the MSTP instance number <1-64>
+        :param cost: Path cost range <1-200000000>
+        """
+
+        cmd = [
+            'no spanning-tree instance {instance_id} cost {cost}'
+        ]
+
+        if cost:
+            cmd.append(
+                '{}{{cost}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def spanning_tree_instance_port_priority(
+            self, instance_id, priority):
+        """
+        Maps the priority to corresponding instance
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # spanning-tree instance {instance_id} port-priority {priority}
+
+        :param instance_id: Specifies the MSTP instance number <1-64>
+        :param priority: The device priority multiplier for the MST instance
+            <0-15>
+        """
+
+        cmd = [
+            'spanning-tree instance {instance_id} port-priority {priority}'
+        ]
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
+        )
+
+        if result:
+            raise determine_exception(result)(result)
+
+    def no_spanning_tree_instance_port_priority(
+            self, instance_id, priority=''):
+        """
+        Removes the port-priority from the MSTP instance
+
+        This function runs the following vtysh command:
+
+        ::
+
+            # no spanning-tree instance {instance_id} port-priority {priority}
+
+        :param instance_id: Specifies the MSTP instance number <1-64>
+        :param priority: The device priority multiplier for the MST instance
+            <0-15>
+        """
+
+        cmd = [
+            'no spanning-tree instance {instance_id} port-priority {priority}'
+        ]
+
+        if priority:
+            cmd.append(
+                '{}{{priority}}{}'.format(
+                    '', ''
+                )
+            )
+
+        result = self.enode(
+            (' '.join(cmd)).format(**locals()),
+            shell='vtysh'
         )
 
         if result:
